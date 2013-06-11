@@ -1,0 +1,21 @@
+/* 
+  Localizable.strings
+  EncoreDev2
+
+  Created by Shimmy on 2013-06-02.
+  Copyright (c) 2013 Encore. All rights reserved.
+*/
+
+
+//MENU
+"PROFILE" = "Profile";
+"SETTINGS" = "Settings";
+"LOGOUT" = "Logout";
+"CONCERTS" = "Concerts";
+"ADD_CONCERT" = "Add Concert";
+"Encore_app_name" = "Encore";
+
+
+"entity_user" = "User";
+"entity_concert" = "Concert";
+"entity_photo" = "Photo";

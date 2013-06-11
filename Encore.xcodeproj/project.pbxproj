@@ -26,6 +26,7 @@
 		D4AA4D311766BA8C009B0635 /* ECLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4AA4D2F1766BA8C009B0635 /* ECLoginViewController.xib */; };
 		D4AA4D361766BB03009B0635 /* ECProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AA4D341766BB03009B0635 /* ECProfileViewController.m */; };
 		D4AA4D371766BB03009B0635 /* ECProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4AA4D351766BB03009B0635 /* ECProfileViewController.xib */; };
+		D4AA4D391766F3D0009B0635 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D4AA4D381766F3D0009B0635 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,7 @@
 		D4AA4D331766BB03009B0635 /* ECProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECProfileViewController.h; sourceTree = "<group>"; };
 		D4AA4D341766BB03009B0635 /* ECProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECProfileViewController.m; sourceTree = "<group>"; };
 		D4AA4D351766BB03009B0635 /* ECProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECProfileViewController.xib; sourceTree = "<group>"; };
+		D4AA4D381766F3D0009B0635 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +142,7 @@
 		D4AA4CF91766B374009B0635 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D4AA4D381766F3D0009B0635 /* Localizable.strings */,
 				D4AA4CFA1766B374009B0635 /* Encore-Info.plist */,
 				D4AA4CFB1766B374009B0635 /* InfoPlist.strings */,
 				D4AA4CFE1766B374009B0635 /* main.m */,
@@ -270,6 +273,7 @@
 				D4AA4D091766B374009B0635 /* Default-568h@2x.png in Resources */,
 				D4AA4D311766BA8C009B0635 /* ECLoginViewController.xib in Resources */,
 				D4AA4D371766BB03009B0635 /* ECProfileViewController.xib in Resources */,
+				D4AA4D391766F3D0009B0635 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
