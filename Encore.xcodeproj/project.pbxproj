@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		255A9AF4A1C64F71B97704C8 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 918A85E0EEDE48F3BEFD223A /* libPods.a */; };
 		D4AA4CF31766B374009B0635 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4AA4CF21766B374009B0635 /* UIKit.framework */; };
 		D4AA4CF51766B374009B0635 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4AA4CF41766B374009B0635 /* Foundation.framework */; };
 		D4AA4CF71766B374009B0635 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4AA4CF61766B374009B0635 /* CoreGraphics.framework */; };
@@ -21,6 +22,10 @@
 		D4AA4D131766B374009B0635 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4AA4CF41766B374009B0635 /* Foundation.framework */; };
 		D4AA4D1B1766B374009B0635 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D4AA4D191766B374009B0635 /* InfoPlist.strings */; };
 		D4AA4D1E1766B374009B0635 /* EncoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AA4D1D1766B374009B0635 /* EncoreTests.m */; };
+		D4AA4D301766BA8C009B0635 /* ECLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AA4D2E1766BA8C009B0635 /* ECLoginViewController.m */; };
+		D4AA4D311766BA8C009B0635 /* ECLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4AA4D2F1766BA8C009B0635 /* ECLoginViewController.xib */; };
+		D4AA4D361766BB03009B0635 /* ECProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AA4D341766BB03009B0635 /* ECProfileViewController.m */; };
+		D4AA4D371766BB03009B0635 /* ECProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4AA4D351766BB03009B0635 /* ECProfileViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +39,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		918A85E0EEDE48F3BEFD223A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B56B831D22E04C90BC664348 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		D4AA4CEF1766B374009B0635 /* Encore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Encore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4AA4CF21766B374009B0635 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D4AA4CF41766B374009B0635 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -53,6 +60,12 @@
 		D4AA4D1A1766B374009B0635 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D4AA4D1C1766B374009B0635 /* EncoreTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EncoreTests.h; sourceTree = "<group>"; };
 		D4AA4D1D1766B374009B0635 /* EncoreTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EncoreTests.m; sourceTree = "<group>"; };
+		D4AA4D2D1766BA8C009B0635 /* ECLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECLoginViewController.h; sourceTree = "<group>"; };
+		D4AA4D2E1766BA8C009B0635 /* ECLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECLoginViewController.m; sourceTree = "<group>"; };
+		D4AA4D2F1766BA8C009B0635 /* ECLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECLoginViewController.xib; sourceTree = "<group>"; };
+		D4AA4D331766BB03009B0635 /* ECProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECProfileViewController.h; sourceTree = "<group>"; };
+		D4AA4D341766BB03009B0635 /* ECProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECProfileViewController.m; sourceTree = "<group>"; };
+		D4AA4D351766BB03009B0635 /* ECProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECProfileViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +76,7 @@
 				D4AA4CF31766B374009B0635 /* UIKit.framework in Frameworks */,
 				D4AA4CF51766B374009B0635 /* Foundation.framework in Frameworks */,
 				D4AA4CF71766B374009B0635 /* CoreGraphics.framework in Frameworks */,
+				255A9AF4A1C64F71B97704C8 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,6 +100,7 @@
 				D4AA4D161766B374009B0635 /* EncoreTests */,
 				D4AA4CF11766B374009B0635 /* Frameworks */,
 				D4AA4CF01766B374009B0635 /* Products */,
+				B56B831D22E04C90BC664348 /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -105,6 +120,7 @@
 				D4AA4CF41766B374009B0635 /* Foundation.framework */,
 				D4AA4CF61766B374009B0635 /* CoreGraphics.framework */,
 				D4AA4D101766B374009B0635 /* SenTestingKit.framework */,
+				918A85E0EEDE48F3BEFD223A /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -114,6 +130,8 @@
 			children = (
 				D4AA4D011766B374009B0635 /* ECAppDelegate.h */,
 				D4AA4D021766B374009B0635 /* ECAppDelegate.m */,
+				D4AA4D2C1766B9B0009B0635 /* Profile */,
+				D4AA4D321766BA8F009B0635 /* Login */,
 				D4AA4CF91766B374009B0635 /* Supporting Files */,
 			);
 			path = Encore;
@@ -152,6 +170,26 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		D4AA4D2C1766B9B0009B0635 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				D4AA4D331766BB03009B0635 /* ECProfileViewController.h */,
+				D4AA4D341766BB03009B0635 /* ECProfileViewController.m */,
+				D4AA4D351766BB03009B0635 /* ECProfileViewController.xib */,
+			);
+			name = Profile;
+			sourceTree = "<group>";
+		};
+		D4AA4D321766BA8F009B0635 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				D4AA4D2D1766BA8C009B0635 /* ECLoginViewController.h */,
+				D4AA4D2E1766BA8C009B0635 /* ECLoginViewController.m */,
+				D4AA4D2F1766BA8C009B0635 /* ECLoginViewController.xib */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -159,9 +197,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D4AA4D211766B374009B0635 /* Build configuration list for PBXNativeTarget "Encore" */;
 			buildPhases = (
+				7F48833E90A8476FABBA2047 /* Check Pods Manifest.lock */,
 				D4AA4CEB1766B374009B0635 /* Sources */,
 				D4AA4CEC1766B374009B0635 /* Frameworks */,
 				D4AA4CED1766B374009B0635 /* Resources */,
+				6ED2426A9A5940A7960A5FC6 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -228,6 +268,8 @@
 				D4AA4D051766B374009B0635 /* Default.png in Resources */,
 				D4AA4D071766B374009B0635 /* Default@2x.png in Resources */,
 				D4AA4D091766B374009B0635 /* Default-568h@2x.png in Resources */,
+				D4AA4D311766BA8C009B0635 /* ECLoginViewController.xib in Resources */,
+				D4AA4D371766BB03009B0635 /* ECProfileViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -242,6 +284,34 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		6ED2426A9A5940A7960A5FC6 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+		};
+		7F48833E90A8476FABBA2047 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+		};
 		D4AA4D0D1766B374009B0635 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -264,6 +334,8 @@
 			files = (
 				D4AA4CFF1766B374009B0635 /* main.m in Sources */,
 				D4AA4D031766B374009B0635 /* ECAppDelegate.m in Sources */,
+				D4AA4D301766BA8C009B0635 /* ECLoginViewController.m in Sources */,
+				D4AA4D361766BB03009B0635 /* ECProfileViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -363,6 +435,7 @@
 		};
 		D4AA4D221766B374009B0635 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B56B831D22E04C90BC664348 /* Pods.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Encore/Encore-Prefix.pch";
@@ -375,6 +448,7 @@
 		};
 		D4AA4D231766B374009B0635 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B56B831D22E04C90BC664348 /* Pods.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Encore/Encore-Prefix.pch";
@@ -438,6 +512,7 @@
 				D4AA4D231766B374009B0635 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D4AA4D241766B374009B0635 /* Build configuration list for PBXNativeTarget "EncoreTests" */ = {
 			isa = XCConfigurationList;
@@ -446,6 +521,7 @@
 				D4AA4D261766B374009B0635 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

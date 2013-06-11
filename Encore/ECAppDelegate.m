@@ -7,15 +7,21 @@
 //
 
 #import "ECAppDelegate.h"
-
+#import "ECProfileViewController.h"
 @implementation ECAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
+    ECProfileViewController * viewController = [[ECProfileViewController alloc] init];
+    viewController.title = @"Encore";
+    UINavigationController * navControl = [[UINavigationController alloc] initWithRootViewController:viewController];
+    
+    self.window.rootViewController = navControl;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+    
     return YES;
 }
 
