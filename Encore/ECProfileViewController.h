@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <FacebookSDK/FacebookSDK.h>
 
-@interface ECProfileViewController : UIViewController
+@interface ECProfileViewController : UIViewController <FBUserSettingsDelegate>
 
+
+@property (strong, nonatomic) FBUserSettingsViewController *settingsViewController;
 @end

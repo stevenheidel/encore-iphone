@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <FacebookSDK/FacebookSDK.h>
 
-@interface ECLoginViewController : UIViewController
+@interface ECLoginViewController : UIViewController<FBLoginViewDelegate>
 
+@property (unsafe_unretained, nonatomic) IBOutlet FBLoginView *FBLoginView;
 @end
