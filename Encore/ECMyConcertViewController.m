@@ -55,11 +55,20 @@
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
         
     }
+    
     NSDictionary * concertDic = [self.concertList objectAtIndex:indexPath.row];
+    if (!concertDic) {
+        return nil;
+    }
     cell.textLabel.text = [concertDic artistName];
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%@, %@", [concertDic venueName] ,[concertDic niceDate]];
-    NSLog(@"%@",[concertDic niceDate]);
     return cell;
+}
+
+#pragma mark - json fetcher delegate
+-(void) fetchedConcerts: (NSArray *) concerts {
+    self.concertList = concerts;
+    [self.tableView reloadData];
 }
 
 /*

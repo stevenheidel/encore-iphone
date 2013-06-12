@@ -28,6 +28,8 @@
 		D4AA4D361766BB03009B0635 /* ECProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AA4D341766BB03009B0635 /* ECProfileViewController.m */; };
 		D4AA4D371766BB03009B0635 /* ECProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4AA4D351766BB03009B0635 /* ECProfileViewController.xib */; };
 		D4AA4D391766F3D0009B0635 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D4AA4D381766F3D0009B0635 /* Localizable.strings */; };
+		D4AC35F91768C5850087B1E9 /* NSDictionary+ConcertList.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AC35F81768C5850087B1E9 /* NSDictionary+ConcertList.m */; };
+		D4AC35FC1768C8B20087B1E9 /* ECJSONFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AC35FB1768C8B20087B1E9 /* ECJSONFetcher.m */; };
 		D4B502B117680CB700E0C52B /* ECMyConcertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4B502B017680CB700E0C52B /* ECMyConcertViewController.m */; };
 		D4B502B3176823E600E0C52B /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D4B502B2176823E600E0C52B /* Icon.png */; };
 		D4B502B5176823EA00E0C52B /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4B502B4176823EA00E0C52B /* Icon@2x.png */; };
@@ -75,6 +77,10 @@
 		D4AA4D341766BB03009B0635 /* ECProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECProfileViewController.m; sourceTree = "<group>"; };
 		D4AA4D351766BB03009B0635 /* ECProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECProfileViewController.xib; sourceTree = "<group>"; };
 		D4AA4D381766F3D0009B0635 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		D4AC35F71768C5850087B1E9 /* NSDictionary+ConcertList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+ConcertList.h"; sourceTree = "<group>"; };
+		D4AC35F81768C5850087B1E9 /* NSDictionary+ConcertList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+ConcertList.m"; sourceTree = "<group>"; };
+		D4AC35FA1768C8B20087B1E9 /* ECJSONFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECJSONFetcher.h; sourceTree = "<group>"; };
+		D4AC35FB1768C8B20087B1E9 /* ECJSONFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECJSONFetcher.m; sourceTree = "<group>"; };
 		D4B502AF17680CB700E0C52B /* ECMyConcertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECMyConcertViewController.h; sourceTree = "<group>"; };
 		D4B502B017680CB700E0C52B /* ECMyConcertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECMyConcertViewController.m; sourceTree = "<group>"; };
 		D4B502B2176823E600E0C52B /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
@@ -157,6 +163,8 @@
 		D4AA4CF91766B374009B0635 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D4AC35F71768C5850087B1E9 /* NSDictionary+ConcertList.h */,
+				D4AC35F81768C5850087B1E9 /* NSDictionary+ConcertList.m */,
 				D4AA4D381766F3D0009B0635 /* Localizable.strings */,
 				D4AA4CFA1766B374009B0635 /* Encore-Info.plist */,
 				D4AA4CFB1766B374009B0635 /* InfoPlist.strings */,
@@ -196,6 +204,8 @@
 				D458D6E61768359E00098C18 /* ECMyConcertViewController.xib */,
 				D4AA4D331766BB03009B0635 /* ECProfileViewController.h */,
 				D4AA4D341766BB03009B0635 /* ECProfileViewController.m */,
+				D4AC35FA1768C8B20087B1E9 /* ECJSONFetcher.h */,
+				D4AC35FB1768C8B20087B1E9 /* ECJSONFetcher.m */,
 				D4AA4D351766BB03009B0635 /* ECProfileViewController.xib */,
 			);
 			name = Profile;
@@ -358,7 +368,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4AA4CFF1766B374009B0635 /* main.m in Sources */,
+				D4AC35F91768C5850087B1E9 /* NSDictionary+ConcertList.m in Sources */,
 				D4AA4D031766B374009B0635 /* ECAppDelegate.m in Sources */,
+				D4AC35FC1768C8B20087B1E9 /* ECJSONFetcher.m in Sources */,
 				D4AA4D301766BA8C009B0635 /* ECLoginViewController.m in Sources */,
 				D4AA4D361766BB03009B0635 /* ECProfileViewController.m in Sources */,
 				D4B502B117680CB700E0C52B /* ECMyConcertViewController.m in Sources */,

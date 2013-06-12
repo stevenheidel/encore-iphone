@@ -8,8 +8,7 @@
 
 #import "ECProfileViewController.h"
 #import "ECMyConcertViewController.h"
-#import "UIImageView+AFNetworking.h"
-
+#import "ECJSONFetcher.h"
 static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users";
 
 @interface ECProfileViewController ()
@@ -65,20 +64,10 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
 
 -(IBAction)viewConcerts:(id)sender{
     ECMyConcertViewController * concertsVC = [[ECMyConcertViewController alloc] init];
-    NSString *  concertsUrl = [NSString stringWithFormat:@"%@/%@/concerts",BaseURLString,self.facebook_id];
-    NSURL * url = [NSURL URLWithString:concertsUrl];
-    NSURLRequest * request = [NSURLRequest requestWithURL:url];
-    AFJSONRequestOperation * operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-        concertsVC.concertList = (NSArray*) [(NSDictionary*)JSON objectForKey:@"concerts"];
-        NSLog(@"%@",concertsVC.concertList);
-        [self.navigationController pushViewController:concertsVC animated:YES];
-    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-        NSLog(@"ERROR:%@",[error description]);
-    }];
-    
-    
-    
-    [operation start];
+    ECJSONFetcher * jsonFetcher = [[ECJSONFetcher alloc] init];
+    jsonFetcher.delegate = concertsVC;
+    [jsonFetcher fetchConcertsForUserId:self.facebook_id];
+    [self.navigationController pushViewController:concertsVC animated:YES];
     
 }
 - (void)didReceiveMemoryWarning
