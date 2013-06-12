@@ -7,7 +7,7 @@
 //
 
 #import "ECMyConcertViewController.h"
-
+#import "NSDictionary+ConcertList.h"
 @interface ECMyConcertViewController ()
 
 @end
@@ -55,8 +55,10 @@
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
         
     }
-    cell.textLabel.text = [[self.concertList objectAtIndex:indexPath.row] objectForKey:@"name"];
-    
+    NSDictionary * concertDic = [self.concertList objectAtIndex:indexPath.row];
+    cell.textLabel.text = [concertDic artistName];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@, %@", [concertDic venueName] ,[concertDic niceDate]];
+    NSLog(@"%@",[concertDic niceDate]);
     return cell;
 }
 

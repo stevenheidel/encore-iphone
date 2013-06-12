@@ -70,6 +70,7 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
     NSURLRequest * request = [NSURLRequest requestWithURL:url];
     AFJSONRequestOperation * operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         concertsVC.concertList = (NSArray*) [(NSDictionary*)JSON objectForKey:@"concerts"];
+        NSLog(@"%@",concertsVC.concertList);
         [self.navigationController pushViewController:concertsVC animated:YES];
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         NSLog(@"ERROR:%@",[error description]);
