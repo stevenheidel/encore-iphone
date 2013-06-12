@@ -15,4 +15,5 @@
 @property (strong, nonatomic) FBUserSettingsViewController *settingsViewController;
 @property (strong, nonatomic) NSString * facebook_id;
 @property (strong, nonatomic) NSString * userName;
+@property (strong) NSDictionary * concerts;
 @end

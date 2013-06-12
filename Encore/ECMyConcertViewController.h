@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ECMyConcertViewController : UITableViewController
-
+@interface ECMyConcertViewController : UIViewController <UITableViewDataSource,UITableViewDelegate>
+@property (nonatomic,strong) NSArray * concertList;
+@property (nonatomic,strong) NSDictionary * concerts;
+@property (nonatomic,strong) IBOutlet UITableView *tableView;
 @end
