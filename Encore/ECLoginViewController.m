@@ -56,7 +56,8 @@
 - (void)loginViewShowingLoggedInUser:(FBLoginView *)loginView {
     // Upon login, transition to the main UI by pushing it onto the navigation stack.
     ECAppDelegate *appDelegate = (ECAppDelegate *)[UIApplication sharedApplication].delegate;
-    [self.navigationController pushViewController:((UIViewController *)appDelegate.profileViewController) animated:YES];
+    [appDelegate loginCompleted];
+    //[self.navigationController pushViewController:((UIViewController *)appDelegate.profileViewController) animated:YES];
    //[self.navigationController.navigationBar.bac]
 }
 

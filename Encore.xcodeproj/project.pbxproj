@@ -27,6 +27,9 @@
 		D4AA4D361766BB03009B0635 /* ECProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AA4D341766BB03009B0635 /* ECProfileViewController.m */; };
 		D4AA4D371766BB03009B0635 /* ECProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4AA4D351766BB03009B0635 /* ECProfileViewController.xib */; };
 		D4AA4D391766F3D0009B0635 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D4AA4D381766F3D0009B0635 /* Localizable.strings */; };
+		D4B502B117680CB700E0C52B /* ECMyConcertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4B502B017680CB700E0C52B /* ECMyConcertViewController.m */; };
+		D4B502B3176823E600E0C52B /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D4B502B2176823E600E0C52B /* Icon.png */; };
+		D4B502B5176823EA00E0C52B /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4B502B4176823EA00E0C52B /* Icon@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +45,8 @@
 /* Begin PBXFileReference section */
 		918A85E0EEDE48F3BEFD223A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B56B831D22E04C90BC664348 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
+		D458D6E417682D2700098C18 /* my_basename-29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "my_basename-29.png"; sourceTree = "<group>"; };
+		D458D6E517682D3E00098C18 /* my_basename-58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "my_basename-58.png"; sourceTree = "<group>"; };
 		D4AA4CEF1766B374009B0635 /* Encore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Encore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4AA4CF21766B374009B0635 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D4AA4CF41766B374009B0635 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -68,6 +73,10 @@
 		D4AA4D341766BB03009B0635 /* ECProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECProfileViewController.m; sourceTree = "<group>"; };
 		D4AA4D351766BB03009B0635 /* ECProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECProfileViewController.xib; sourceTree = "<group>"; };
 		D4AA4D381766F3D0009B0635 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		D4B502AF17680CB700E0C52B /* ECMyConcertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECMyConcertViewController.h; sourceTree = "<group>"; };
+		D4B502B017680CB700E0C52B /* ECMyConcertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECMyConcertViewController.m; sourceTree = "<group>"; };
+		D4B502B2176823E600E0C52B /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		D4B502B4176823EA00E0C52B /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +107,10 @@
 		D4AA4CE61766B373009B0635 = {
 			isa = PBXGroup;
 			children = (
+				D458D6E517682D3E00098C18 /* my_basename-58.png */,
+				D458D6E417682D2700098C18 /* my_basename-29.png */,
+				D4B502B4176823EA00E0C52B /* Icon@2x.png */,
+				D4B502B2176823E600E0C52B /* Icon.png */,
 				D4AA4CF81766B374009B0635 /* Encore */,
 				D4AA4D161766B374009B0635 /* EncoreTests */,
 				D4AA4CF11766B374009B0635 /* Frameworks */,
@@ -176,6 +189,8 @@
 		D4AA4D2C1766B9B0009B0635 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				D4B502AF17680CB700E0C52B /* ECMyConcertViewController.h */,
+				D4B502B017680CB700E0C52B /* ECMyConcertViewController.m */,
 				D4AA4D331766BB03009B0635 /* ECProfileViewController.h */,
 				D4AA4D341766BB03009B0635 /* ECProfileViewController.m */,
 				D4AA4D351766BB03009B0635 /* ECProfileViewController.xib */,
@@ -274,6 +289,8 @@
 				D4AA4D311766BA8C009B0635 /* ECLoginViewController.xib in Resources */,
 				D4AA4D371766BB03009B0635 /* ECProfileViewController.xib in Resources */,
 				D4AA4D391766F3D0009B0635 /* Localizable.strings in Resources */,
+				D4B502B3176823E600E0C52B /* Icon.png in Resources */,
+				D4B502B5176823EA00E0C52B /* Icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,6 +357,7 @@
 				D4AA4D031766B374009B0635 /* ECAppDelegate.m in Sources */,
 				D4AA4D301766BA8C009B0635 /* ECLoginViewController.m in Sources */,
 				D4AA4D361766BB03009B0635 /* ECProfileViewController.m in Sources */,
+				D4B502B117680CB700E0C52B /* ECMyConcertViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

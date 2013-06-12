@@ -7,9 +7,12 @@
 //
 
 #import "ECProfileViewController.h"
+#import "ECMyConcertViewController.h"
+static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users";
 
 @interface ECProfileViewController ()
-
+@property (strong, nonatomic) IBOutlet UILabel *userNameLabel;
+-(IBAction)viewConcerts:(id)sender;
 @end
 
 @implementation ECProfileViewController
@@ -33,6 +36,21 @@
                                               target:self
                                               action:@selector(settingsButtonWasPressed:)];
 }
+-(void) viewWillAppear:(BOOL)animated {
+    if (FBSession.activeSession.isOpen){
+        [self populateUserDetails];
+    }
+}
+-(void) populateUserDetails {
+                 self.userNameLabel.text = self.userName;
+                // self.userProfileImage.profileID = [user objectForKey:@"id"];
+}
+
+-(void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    
+}
 
 -(void)settingsButtonWasPressed:(id)sender {
     if (self.settingsViewController == nil) {
@@ -43,6 +61,11 @@
     [self.navigationController pushViewController:self.settingsViewController animated:YES];
 }
 
+-(IBAction)viewConcerts:(id)sender{
+    ECMyConcertViewController * concertsVC = [[ECMyConcertViewController alloc] init];
+    [self.navigationController pushViewController:concertsVC animated:YES];
+    
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

@@ -9,8 +9,10 @@
 #import <UIKit/UIKit.h>
 @class ECLoginViewController;
 @class ECProfileViewController;
+
 @interface ECAppDelegate : UIResponder <UIApplicationDelegate,UINavigationControllerDelegate>
 
+-(void) loginCompleted;
 @property (strong, nonatomic) UIWindow *window;
 @property (strong,nonatomic) ECLoginViewController * loginViewController;
 

@@ -72,6 +72,17 @@
                           }];
 }
 
+-(void) loginCompleted {
+    [[FBRequest requestForMe] startWithCompletionHandler:
+     ^(FBRequestConnection *connection, NSDictionary<FBGraphUser> *user, NSError *error) {
+         if (!error) {
+             self.profileViewController.facebook_id = user.id;
+             self.profileViewController.userName = user.name;
+            [self.navigationController pushViewController:self.profileViewController animated:YES];
+         }
+     }];
+
+}
 #pragma mark - UINavigationControllerDelegate
 
 - (void)navigationController:(UINavigationController *)navigationController
