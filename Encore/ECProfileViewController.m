@@ -14,6 +14,7 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
 @interface ECProfileViewController ()
 @property (strong, nonatomic) IBOutlet UILabel *userNameLabel;
 -(IBAction)viewConcerts:(id)sender;
+-(IBAction)viewFriends:(id)sender;
 @end
 
 @implementation ECProfileViewController
@@ -62,13 +63,24 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
     [self.navigationController pushViewController:self.settingsViewController animated:YES];
 }
 
+#pragma mark - button actions
 -(IBAction)viewConcerts:(id)sender{
     ECMyConcertViewController * concertsVC = [[ECMyConcertViewController alloc] init];
     ECJSONFetcher * jsonFetcher = [[ECJSONFetcher alloc] init];
     jsonFetcher.delegate = concertsVC;
     [jsonFetcher fetchConcertsForUserId:self.facebook_id];
     [self.navigationController pushViewController:concertsVC animated:YES];
-    
+}
+
+-(IBAction)viewFriends:(id)sender{
+    FBRequest * friendsRequest = [FBRequest requestForMyFriends];
+    [friendsRequest startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+        NSArray * friends = [result objectForKey:@"data"];
+        NSLog(@"Found: %i friends", friends.count);
+        for (NSDictionary<FBGraphUser>* friend in friends) {
+            NSLog(@"I have a friend named %@ with id %@", friend.name, friend.id);
+        }
+    }];
 }
 - (void)didReceiveMemoryWarning
 {
