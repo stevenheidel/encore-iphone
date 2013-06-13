@@ -13,5 +13,6 @@
 @interface ECMyConcertViewController : UIViewController <UITableViewDataSource,UITableViewDelegate,ECJSONFetcherDelegate>
 @property (nonatomic,strong) NSArray * concertList;
 @property (nonatomic,strong) NSDictionary * concerts;
+
 @property (nonatomic,strong) IBOutlet UITableView *tableView;
 @end

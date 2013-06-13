@@ -8,6 +8,8 @@
 
 #import "ECMyConcertViewController.h"
 #import "NSDictionary+ConcertList.h"
+#import "ECConcertDetailViewController.h"
+
 @interface ECMyConcertViewController ()
 
 @end
@@ -42,7 +44,6 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-
     return [[self concertList] count];
 }
 
@@ -63,6 +64,16 @@
     cell.textLabel.text = [concertDic artistName];
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%@, %@", [concertDic venueName] ,[concertDic niceDate]];
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    ECConcertDetailViewController * concertDetail = [[ECConcertDetailViewController alloc] init];
+    
+    concertDetail.concert = [self.concertList objectAtIndex:indexPath.row];
+    [self.navigationController pushViewController:concertDetail animated:YES];
+    
 }
 
 #pragma mark - json fetcher delegate
@@ -110,11 +121,6 @@
 }
 */
 
-#pragma mark - Table view delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-}
 
 @end
