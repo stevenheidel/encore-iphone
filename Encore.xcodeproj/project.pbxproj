@@ -18,7 +18,6 @@
 		D4A8DDBE176A133B005E9847 /* CustomCellBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A8DDB7176A133B005E9847 /* CustomCellBackground.m */; };
 		D4A8DDC1176A13DB005E9847 /* ECMyConcertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4A8DDC0176A13DB005E9847 /* ECMyConcertViewController.xib */; };
 		D4A8DDC4176A20D2005E9847 /* ECJSONPoster.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A8DDC3176A20D2005E9847 /* ECJSONPoster.m */; };
-		D4A8DDC7176A3941005E9847 /* GlobalFunctionsLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A8DDC6176A3941005E9847 /* GlobalFunctionsLibrary.m */; };
 		D4A8DDCA176A39BA005E9847 /* NSDate+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A8DDC9176A39B9005E9847 /* NSDate+JSON.m */; };
 		D4A8DDCE176A405D005E9847 /* ECPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A8DDCC176A405D005E9847 /* ECPostViewController.m */; };
 		D4A8DDCF176A405D005E9847 /* ECPostViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4A8DDCD176A405D005E9847 /* ECPostViewController.xib */; };
@@ -77,8 +76,6 @@
 		D4A8DDC0176A13DB005E9847 /* ECMyConcertViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECMyConcertViewController.xib; sourceTree = "<group>"; };
 		D4A8DDC2176A20D2005E9847 /* ECJSONPoster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECJSONPoster.h; sourceTree = "<group>"; };
 		D4A8DDC3176A20D2005E9847 /* ECJSONPoster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECJSONPoster.m; sourceTree = "<group>"; };
-		D4A8DDC5176A3941005E9847 /* GlobalFunctionsLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalFunctionsLibrary.h; sourceTree = "<group>"; };
-		D4A8DDC6176A3941005E9847 /* GlobalFunctionsLibrary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlobalFunctionsLibrary.m; sourceTree = "<group>"; };
 		D4A8DDC8176A39B9005E9847 /* NSDate+JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+JSON.h"; sourceTree = "<group>"; };
 		D4A8DDC9176A39B9005E9847 /* NSDate+JSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+JSON.m"; sourceTree = "<group>"; };
 		D4A8DDCB176A405D005E9847 /* ECPostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECPostViewController.h; sourceTree = "<group>"; };
@@ -224,8 +221,6 @@
 		D4AA4CF91766B374009B0635 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				D4A8DDC5176A3941005E9847 /* GlobalFunctionsLibrary.h */,
-				D4A8DDC6176A3941005E9847 /* GlobalFunctionsLibrary.m */,
 				D458D6E517682D3E00098C18 /* my_basename-58.png */,
 				D458D6E417682D2700098C18 /* my_basename-29.png */,
 				D4B502B4176823EA00E0C52B /* Icon@2x.png */,
@@ -451,7 +446,6 @@
 				D4A8DDBA176A133B005E9847 /* Cell.m in Sources */,
 				D4A8DDBE176A133B005E9847 /* CustomCellBackground.m in Sources */,
 				D4A8DDC4176A20D2005E9847 /* ECJSONPoster.m in Sources */,
-				D4A8DDC7176A3941005E9847 /* GlobalFunctionsLibrary.m in Sources */,
 				D4A8DDCA176A39BA005E9847 /* NSDate+JSON.m in Sources */,
 				D4A8DDCE176A405D005E9847 /* ECPostViewController.m in Sources */,
 			);
