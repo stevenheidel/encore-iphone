@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		255A9AF4A1C64F71B97704C8 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 918A85E0EEDE48F3BEFD223A /* libPods.a */; };
-		D458D6E71768359E00098C18 /* ECMyConcertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D458D6E61768359E00098C18 /* ECMyConcertViewController.xib */; };
+		D4A2F6CD176959BD00A9E3BF /* ECProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4A2F6CC176959BD00A9E3BF /* ECProfileViewController.xib */; };
 		D4AA4CF31766B374009B0635 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4AA4CF21766B374009B0635 /* UIKit.framework */; };
 		D4AA4CF51766B374009B0635 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4AA4CF41766B374009B0635 /* Foundation.framework */; };
 		D4AA4CF71766B374009B0635 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4AA4CF61766B374009B0635 /* CoreGraphics.framework */; };
@@ -26,7 +26,6 @@
 		D4AA4D301766BA8C009B0635 /* ECLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AA4D2E1766BA8C009B0635 /* ECLoginViewController.m */; };
 		D4AA4D311766BA8C009B0635 /* ECLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4AA4D2F1766BA8C009B0635 /* ECLoginViewController.xib */; };
 		D4AA4D361766BB03009B0635 /* ECProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AA4D341766BB03009B0635 /* ECProfileViewController.m */; };
-		D4AA4D371766BB03009B0635 /* ECProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4AA4D351766BB03009B0635 /* ECProfileViewController.xib */; };
 		D4AA4D391766F3D0009B0635 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D4AA4D381766F3D0009B0635 /* Localizable.strings */; };
 		D4AC35F91768C5850087B1E9 /* NSDictionary+ConcertList.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AC35F81768C5850087B1E9 /* NSDictionary+ConcertList.m */; };
 		D4AC35FC1768C8B20087B1E9 /* ECJSONFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AC35FB1768C8B20087B1E9 /* ECJSONFetcher.m */; };
@@ -50,7 +49,7 @@
 		B56B831D22E04C90BC664348 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		D458D6E417682D2700098C18 /* my_basename-29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "my_basename-29.png"; path = "../my_basename-29.png"; sourceTree = "<group>"; };
 		D458D6E517682D3E00098C18 /* my_basename-58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "my_basename-58.png"; path = "../my_basename-58.png"; sourceTree = "<group>"; };
-		D458D6E61768359E00098C18 /* ECMyConcertViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECMyConcertViewController.xib; sourceTree = "<group>"; };
+		D4A2F6CC176959BD00A9E3BF /* ECProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECProfileViewController.xib; sourceTree = "<group>"; };
 		D4AA4CEF1766B374009B0635 /* Encore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Encore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4AA4CF21766B374009B0635 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D4AA4CF41766B374009B0635 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -75,7 +74,6 @@
 		D4AA4D2F1766BA8C009B0635 /* ECLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECLoginViewController.xib; sourceTree = "<group>"; };
 		D4AA4D331766BB03009B0635 /* ECProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECProfileViewController.h; sourceTree = "<group>"; };
 		D4AA4D341766BB03009B0635 /* ECProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECProfileViewController.m; sourceTree = "<group>"; };
-		D4AA4D351766BB03009B0635 /* ECProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECProfileViewController.xib; sourceTree = "<group>"; };
 		D4AA4D381766F3D0009B0635 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		D4AC35F71768C5850087B1E9 /* NSDictionary+ConcertList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+ConcertList.h"; sourceTree = "<group>"; };
 		D4AC35F81768C5850087B1E9 /* NSDictionary+ConcertList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+ConcertList.m"; sourceTree = "<group>"; };
@@ -201,10 +199,9 @@
 			children = (
 				D4B502AF17680CB700E0C52B /* ECMyConcertViewController.h */,
 				D4B502B017680CB700E0C52B /* ECMyConcertViewController.m */,
-				D458D6E61768359E00098C18 /* ECMyConcertViewController.xib */,
+				D4A2F6CC176959BD00A9E3BF /* ECProfileViewController.xib */,
 				D4AA4D331766BB03009B0635 /* ECProfileViewController.h */,
 				D4AA4D341766BB03009B0635 /* ECProfileViewController.m */,
-				D4AA4D351766BB03009B0635 /* ECProfileViewController.xib */,
 				D4AC35FA1768C8B20087B1E9 /* ECJSONFetcher.h */,
 				D4AC35FB1768C8B20087B1E9 /* ECJSONFetcher.m */,
 			);
@@ -298,13 +295,12 @@
 				D4AA4CFD1766B374009B0635 /* InfoPlist.strings in Resources */,
 				D4AA4D051766B374009B0635 /* Default.png in Resources */,
 				D4AA4D071766B374009B0635 /* Default@2x.png in Resources */,
-				D458D6E71768359E00098C18 /* ECMyConcertViewController.xib in Resources */,
 				D4AA4D091766B374009B0635 /* Default-568h@2x.png in Resources */,
 				D4AA4D311766BA8C009B0635 /* ECLoginViewController.xib in Resources */,
-				D4AA4D371766BB03009B0635 /* ECProfileViewController.xib in Resources */,
 				D4AA4D391766F3D0009B0635 /* Localizable.strings in Resources */,
 				D4B502B3176823E600E0C52B /* Icon.png in Resources */,
 				D4B502B5176823EA00E0C52B /* Icon@2x.png in Resources */,
+				D4A2F6CD176959BD00A9E3BF /* ECProfileViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
