@@ -10,4 +10,10 @@
 
 @interface ECPostViewController : UIViewController
 
+@property (nonatomic,strong) NSDictionary * post;
+@property (nonatomic,strong) IBOutlet UIImageView * postImage;
+@property (nonatomic,strong) IBOutlet UIImageView * profilePicture;
+@property (nonatomic,strong) IBOutlet UILabel * captionLabel;
+@property (nonatomic,strong) IBOutlet UILabel * userNameLabel;
+
 @end

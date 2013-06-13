@@ -4,9 +4,11 @@
 //
 //  Created by Shimmy on 2013-06-13.
 //  Copyright (c) 2013 Encore. All rights reserved.
-//
+// Displays post in full view with caption etc underneath
 
 #import "ECPostViewController.h"
+#import "NSDictionary+Posts.h"
+#import "UIImageView+AFNetworking.h"
 
 @interface ECPostViewController ()
 
@@ -27,8 +29,20 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.userNameLabel.text = [self.post userName];
+    self.captionLabel.text = [self.post caption];
+    [self.postImage setImageWithURL:[self.post imageURL]];
+    [self.profilePicture setImageWithURL:[self.post profilePictureURL]];
+    self.title = self.userNameLabel.text;
+    
+    UIBarButtonItem * shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(shareTapped)];
+    self.navigationItem.rightBarButtonItem = shareButton;
 }
 
+-(void) shareTapped {
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Share" message:@"NO SHARING FOR YOU! FUK YOUUUUU" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    [alert show];
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
