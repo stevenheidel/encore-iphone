@@ -77,12 +77,11 @@
     [[FBRequest requestForMe] startWithCompletionHandler:
      ^(FBRequestConnection *connection, NSDictionary<FBGraphUser> *user, NSError *error) {
          if (!error) {
-             self.profileViewController.facebook_id = user.id;
+             NSString * userid = user.id;
+             self.profileViewController.facebook_id = userid;
              self.profileViewController.userName = user.name;
             [self.navigationController pushViewController:self.profileViewController animated:NO];
-             ECJSONPoster * poster = [[ECJSONPoster alloc] init];
-             [poster postUserID:user.id];
-             
+             [ECJSONPoster postUserID:userid];
          }
      }];
 

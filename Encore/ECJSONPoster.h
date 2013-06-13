@@ -9,6 +9,5 @@
 #import <Foundation/Foundation.h>
 
 @interface ECJSONPoster : NSObject
--(void) postUserID: (NSString*) facebookID;
-
++(void) postUserID:(NSString*) facebookID;
 @end
