@@ -9,6 +9,7 @@
 #import "ECLoginViewController.h"
 #import "ECAppDelegate.h"
 #import "ECProfileViewController.h"
+#import "ECJSONPoster.h"
 @interface ECLoginViewController ()
 
 @end
