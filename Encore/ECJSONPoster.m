@@ -17,18 +17,23 @@
     NSDate * expiryDate = FBSession.activeSession.accessTokenData.expirationDate;
     NSString * jsonExpiryDateString = [expiryDate jsonString];
     
-    NSString * baseURLString = NSLocalizedString(@"BaseURL",nil);
+    NSString * baseURLString = [NSString stringWithFormat:@"%@/",NSLocalizedString(@"BaseURL",nil)];
     NSString * usersURL = NSLocalizedString(@"UsersURL",nil );
     NSDictionary * parameters = [NSDictionary dictionaryWithObjectsAndKeys:oauth, @"oauth",jsonExpiryDateString,@"expiration_date",facebookID, @"facebook_id",nil];
     
-    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",baseURLString,usersURL]];
-    NSURLRequest * request = [NSURLRequest requestWithURL:url];
+    NSURL * url = [NSURL URLWithString:baseURLString];
 
     AFHTTPClient * client = [[AFHTTPClient alloc] initWithBaseURL:url];
     [client registerHTTPOperationClass:[AFJSONRequestOperation class]];
     [client setDefaultHeader:@"Accept" value:@"application/json"];
 
-//    [client postPath: parameters:<#(NSDictionary *)#> success:<#^(AFHTTPRequestOperation *operation, id responseObject)success#> failure:<#^(AFHTTPRequestOperation *operation, NSError *error)failure#>]
+    [client postPath:usersURL parameters:parameters
+             success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                 NSLog(@"%@",[responseObject description]);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"ERROR: %@",[error description]);
+    }];
+    
 }
 
 @end
