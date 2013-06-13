@@ -17,6 +17,11 @@
 		D4A8DDBD176A133B005E9847 /* ECCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4A8DDB5176A133B005E9847 /* ECCollectionCell.xib */; };
 		D4A8DDBE176A133B005E9847 /* CustomCellBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A8DDB7176A133B005E9847 /* CustomCellBackground.m */; };
 		D4A8DDC1176A13DB005E9847 /* ECMyConcertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4A8DDC0176A13DB005E9847 /* ECMyConcertViewController.xib */; };
+		D4A8DDC4176A20D2005E9847 /* ECJSONPoster.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A8DDC3176A20D2005E9847 /* ECJSONPoster.m */; };
+		D4A8DDC7176A3941005E9847 /* GlobalFunctionsLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A8DDC6176A3941005E9847 /* GlobalFunctionsLibrary.m */; };
+		D4A8DDCA176A39BA005E9847 /* NSDate+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A8DDC9176A39B9005E9847 /* NSDate+JSON.m */; };
+		D4A8DDCE176A405D005E9847 /* ECPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A8DDCC176A405D005E9847 /* ECPostViewController.m */; };
+		D4A8DDCF176A405D005E9847 /* ECPostViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4A8DDCD176A405D005E9847 /* ECPostViewController.xib */; };
 		D4AA4CF31766B374009B0635 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4AA4CF21766B374009B0635 /* UIKit.framework */; };
 		D4AA4CF51766B374009B0635 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4AA4CF41766B374009B0635 /* Foundation.framework */; };
 		D4AA4CF71766B374009B0635 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4AA4CF61766B374009B0635 /* CoreGraphics.framework */; };
@@ -70,6 +75,15 @@
 		D4A8DDB6176A133B005E9847 /* CustomCellBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCellBackground.h; sourceTree = "<group>"; };
 		D4A8DDB7176A133B005E9847 /* CustomCellBackground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCellBackground.m; sourceTree = "<group>"; };
 		D4A8DDC0176A13DB005E9847 /* ECMyConcertViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECMyConcertViewController.xib; sourceTree = "<group>"; };
+		D4A8DDC2176A20D2005E9847 /* ECJSONPoster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECJSONPoster.h; sourceTree = "<group>"; };
+		D4A8DDC3176A20D2005E9847 /* ECJSONPoster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECJSONPoster.m; sourceTree = "<group>"; };
+		D4A8DDC5176A3941005E9847 /* GlobalFunctionsLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalFunctionsLibrary.h; sourceTree = "<group>"; };
+		D4A8DDC6176A3941005E9847 /* GlobalFunctionsLibrary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlobalFunctionsLibrary.m; sourceTree = "<group>"; };
+		D4A8DDC8176A39B9005E9847 /* NSDate+JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+JSON.h"; sourceTree = "<group>"; };
+		D4A8DDC9176A39B9005E9847 /* NSDate+JSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+JSON.m"; sourceTree = "<group>"; };
+		D4A8DDCB176A405D005E9847 /* ECPostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECPostViewController.h; sourceTree = "<group>"; };
+		D4A8DDCC176A405D005E9847 /* ECPostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECPostViewController.m; sourceTree = "<group>"; };
+		D4A8DDCD176A405D005E9847 /* ECPostViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECPostViewController.xib; sourceTree = "<group>"; };
 		D4AA4CEF1766B374009B0635 /* Encore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Encore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4AA4CF21766B374009B0635 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D4AA4CF41766B374009B0635 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -151,6 +165,9 @@
 				D4A8DDAF176A133B005E9847 /* Cell.m */,
 				D4A8DDB0176A133B005E9847 /* Cell.h */,
 				D4A8DDB1176A133B005E9847 /* ECConcertDetailViewController.xib */,
+				D4A8DDCB176A405D005E9847 /* ECPostViewController.h */,
+				D4A8DDCC176A405D005E9847 /* ECPostViewController.m */,
+				D4A8DDCD176A405D005E9847 /* ECPostViewController.xib */,
 			);
 			name = Concert;
 			sourceTree = "<group>";
@@ -192,6 +209,8 @@
 			children = (
 				D4AC35FA1768C8B20087B1E9 /* ECJSONFetcher.h */,
 				D4AC35FB1768C8B20087B1E9 /* ECJSONFetcher.m */,
+				D4A8DDC8176A39B9005E9847 /* NSDate+JSON.h */,
+				D4A8DDC9176A39B9005E9847 /* NSDate+JSON.m */,
 				D4AA4D011766B374009B0635 /* ECAppDelegate.h */,
 				D4AA4D021766B374009B0635 /* ECAppDelegate.m */,
 				D4AA4D2C1766B9B0009B0635 /* Profile */,
@@ -205,6 +224,8 @@
 		D4AA4CF91766B374009B0635 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D4A8DDC5176A3941005E9847 /* GlobalFunctionsLibrary.h */,
+				D4A8DDC6176A3941005E9847 /* GlobalFunctionsLibrary.m */,
 				D458D6E517682D3E00098C18 /* my_basename-58.png */,
 				D458D6E417682D2700098C18 /* my_basename-29.png */,
 				D4B502B4176823EA00E0C52B /* Icon@2x.png */,
@@ -261,6 +282,8 @@
 			children = (
 				D4AA4D2D1766BA8C009B0635 /* ECLoginViewController.h */,
 				D4AA4D2E1766BA8C009B0635 /* ECLoginViewController.m */,
+				D4A8DDC2176A20D2005E9847 /* ECJSONPoster.h */,
+				D4A8DDC3176A20D2005E9847 /* ECJSONPoster.m */,
 				D4AA4D2F1766BA8C009B0635 /* ECLoginViewController.xib */,
 			);
 			name = Login;
@@ -353,6 +376,7 @@
 				D4A8DDBC176A133B005E9847 /* InfoPlist.strings in Resources */,
 				D4A8DDBD176A133B005E9847 /* ECCollectionCell.xib in Resources */,
 				D4A8DDC1176A13DB005E9847 /* ECMyConcertViewController.xib in Resources */,
+				D4A8DDCF176A405D005E9847 /* ECPostViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -426,6 +450,10 @@
 				D4A8DDB9176A133B005E9847 /* ECConcertDetailViewController.m in Sources */,
 				D4A8DDBA176A133B005E9847 /* Cell.m in Sources */,
 				D4A8DDBE176A133B005E9847 /* CustomCellBackground.m in Sources */,
+				D4A8DDC4176A20D2005E9847 /* ECJSONPoster.m in Sources */,
+				D4A8DDC7176A3941005E9847 /* GlobalFunctionsLibrary.m in Sources */,
+				D4A8DDCA176A39BA005E9847 /* NSDate+JSON.m in Sources */,
+				D4A8DDCE176A405D005E9847 /* ECPostViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
