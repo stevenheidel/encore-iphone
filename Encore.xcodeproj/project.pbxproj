@@ -9,6 +9,14 @@
 /* Begin PBXBuildFile section */
 		255A9AF4A1C64F71B97704C8 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 918A85E0EEDE48F3BEFD223A /* libPods.a */; };
 		D4A2F6CD176959BD00A9E3BF /* ECProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4A2F6CC176959BD00A9E3BF /* ECProfileViewController.xib */; };
+		D4A8DDB8176A133B005E9847 /* NSDictionary+Posts.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A8DDAC176A133B005E9847 /* NSDictionary+Posts.m */; };
+		D4A8DDB9176A133B005E9847 /* ECConcertDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A8DDAD176A133B005E9847 /* ECConcertDetailViewController.m */; };
+		D4A8DDBA176A133B005E9847 /* Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A8DDAF176A133B005E9847 /* Cell.m */; };
+		D4A8DDBB176A133B005E9847 /* ECConcertDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4A8DDB1176A133B005E9847 /* ECConcertDetailViewController.xib */; };
+		D4A8DDBC176A133B005E9847 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D4A8DDB3176A133B005E9847 /* InfoPlist.strings */; };
+		D4A8DDBD176A133B005E9847 /* ECCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4A8DDB5176A133B005E9847 /* ECCollectionCell.xib */; };
+		D4A8DDBE176A133B005E9847 /* CustomCellBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A8DDB7176A133B005E9847 /* CustomCellBackground.m */; };
+		D4A8DDC1176A13DB005E9847 /* ECMyConcertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4A8DDC0176A13DB005E9847 /* ECMyConcertViewController.xib */; };
 		D4AA4CF31766B374009B0635 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4AA4CF21766B374009B0635 /* UIKit.framework */; };
 		D4AA4CF51766B374009B0635 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4AA4CF41766B374009B0635 /* Foundation.framework */; };
 		D4AA4CF71766B374009B0635 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4AA4CF61766B374009B0635 /* CoreGraphics.framework */; };
@@ -50,6 +58,18 @@
 		D458D6E417682D2700098C18 /* my_basename-29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "my_basename-29.png"; path = "../my_basename-29.png"; sourceTree = "<group>"; };
 		D458D6E517682D3E00098C18 /* my_basename-58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "my_basename-58.png"; path = "../my_basename-58.png"; sourceTree = "<group>"; };
 		D4A2F6CC176959BD00A9E3BF /* ECProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECProfileViewController.xib; sourceTree = "<group>"; };
+		D4A8DDAB176A133B005E9847 /* NSDictionary+Posts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Posts.h"; sourceTree = "<group>"; };
+		D4A8DDAC176A133B005E9847 /* NSDictionary+Posts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Posts.m"; sourceTree = "<group>"; };
+		D4A8DDAD176A133B005E9847 /* ECConcertDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECConcertDetailViewController.m; sourceTree = "<group>"; };
+		D4A8DDAE176A133B005E9847 /* ECConcertDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECConcertDetailViewController.h; sourceTree = "<group>"; };
+		D4A8DDAF176A133B005E9847 /* Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cell.m; sourceTree = "<group>"; };
+		D4A8DDB0176A133B005E9847 /* Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cell.h; sourceTree = "<group>"; };
+		D4A8DDB1176A133B005E9847 /* ECConcertDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECConcertDetailViewController.xib; sourceTree = "<group>"; };
+		D4A8DDB4176A133B005E9847 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = InfoPlist.strings; sourceTree = "<group>"; };
+		D4A8DDB5176A133B005E9847 /* ECCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECCollectionCell.xib; sourceTree = "<group>"; };
+		D4A8DDB6176A133B005E9847 /* CustomCellBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCellBackground.h; sourceTree = "<group>"; };
+		D4A8DDB7176A133B005E9847 /* CustomCellBackground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCellBackground.m; sourceTree = "<group>"; };
+		D4A8DDC0176A13DB005E9847 /* ECMyConcertViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECMyConcertViewController.xib; sourceTree = "<group>"; };
 		D4AA4CEF1766B374009B0635 /* Encore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Encore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4AA4CF21766B374009B0635 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D4AA4CF41766B374009B0635 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -110,6 +130,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D4A8DDB2176A133B005E9847 /* en.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				D4A8DDB3176A133B005E9847 /* InfoPlist.strings */,
+			);
+			path = en.lproj;
+			sourceTree = "<group>";
+		};
+		D4A8DDBF176A134B005E9847 /* Concert */ = {
+			isa = PBXGroup;
+			children = (
+				D4A8DDB5176A133B005E9847 /* ECCollectionCell.xib */,
+				D4A8DDB6176A133B005E9847 /* CustomCellBackground.h */,
+				D4A8DDB7176A133B005E9847 /* CustomCellBackground.m */,
+				D4A8DDAB176A133B005E9847 /* NSDictionary+Posts.h */,
+				D4A8DDAC176A133B005E9847 /* NSDictionary+Posts.m */,
+				D4A8DDAE176A133B005E9847 /* ECConcertDetailViewController.h */,
+				D4A8DDAD176A133B005E9847 /* ECConcertDetailViewController.m */,
+				D4A8DDAF176A133B005E9847 /* Cell.m */,
+				D4A8DDB0176A133B005E9847 /* Cell.h */,
+				D4A8DDB1176A133B005E9847 /* ECConcertDetailViewController.xib */,
+			);
+			name = Concert;
+			sourceTree = "<group>";
+		};
 		D4AA4CE61766B373009B0635 = {
 			isa = PBXGroup;
 			children = (
@@ -145,9 +190,12 @@
 		D4AA4CF81766B374009B0635 /* Encore */ = {
 			isa = PBXGroup;
 			children = (
+				D4AC35FA1768C8B20087B1E9 /* ECJSONFetcher.h */,
+				D4AC35FB1768C8B20087B1E9 /* ECJSONFetcher.m */,
 				D4AA4D011766B374009B0635 /* ECAppDelegate.h */,
 				D4AA4D021766B374009B0635 /* ECAppDelegate.m */,
 				D4AA4D2C1766B9B0009B0635 /* Profile */,
+				D4A8DDBF176A134B005E9847 /* Concert */,
 				D4AA4D321766BA8F009B0635 /* Login */,
 				D4AA4CF91766B374009B0635 /* Supporting Files */,
 			);
@@ -197,13 +245,13 @@
 		D4AA4D2C1766B9B0009B0635 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				D4A8DDC0176A13DB005E9847 /* ECMyConcertViewController.xib */,
 				D4B502AF17680CB700E0C52B /* ECMyConcertViewController.h */,
 				D4B502B017680CB700E0C52B /* ECMyConcertViewController.m */,
 				D4A2F6CC176959BD00A9E3BF /* ECProfileViewController.xib */,
 				D4AA4D331766BB03009B0635 /* ECProfileViewController.h */,
 				D4AA4D341766BB03009B0635 /* ECProfileViewController.m */,
-				D4AC35FA1768C8B20087B1E9 /* ECJSONFetcher.h */,
-				D4AC35FB1768C8B20087B1E9 /* ECJSONFetcher.m */,
+				D4A8DDB2176A133B005E9847 /* en.lproj */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -301,6 +349,10 @@
 				D4B502B3176823E600E0C52B /* Icon.png in Resources */,
 				D4B502B5176823EA00E0C52B /* Icon@2x.png in Resources */,
 				D4A2F6CD176959BD00A9E3BF /* ECProfileViewController.xib in Resources */,
+				D4A8DDBB176A133B005E9847 /* ECConcertDetailViewController.xib in Resources */,
+				D4A8DDBC176A133B005E9847 /* InfoPlist.strings in Resources */,
+				D4A8DDBD176A133B005E9847 /* ECCollectionCell.xib in Resources */,
+				D4A8DDC1176A13DB005E9847 /* ECMyConcertViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -370,6 +422,10 @@
 				D4AA4D301766BA8C009B0635 /* ECLoginViewController.m in Sources */,
 				D4AA4D361766BB03009B0635 /* ECProfileViewController.m in Sources */,
 				D4B502B117680CB700E0C52B /* ECMyConcertViewController.m in Sources */,
+				D4A8DDB8176A133B005E9847 /* NSDictionary+Posts.m in Sources */,
+				D4A8DDB9176A133B005E9847 /* ECConcertDetailViewController.m in Sources */,
+				D4A8DDBA176A133B005E9847 /* Cell.m in Sources */,
+				D4A8DDBE176A133B005E9847 /* CustomCellBackground.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -392,6 +448,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		D4A8DDB3176A133B005E9847 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D4A8DDB4176A133B005E9847 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		D4AA4CFB1766B374009B0635 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
