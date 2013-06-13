@@ -9,8 +9,9 @@
 #import "ECAppDelegate.h"
 #import "ECProfileViewController.h"
 #import "ECLoginViewController.h"
-#import <FacebookSDK/FBSessionTokenCachingStrategy.h>
+//#import <FacebookSDK/FBSessionTokenCachingStrategy.h>
 #import <FacebookSDK/FacebookSDK.h>
+#import "ECJSONPoster.h"
 
 @implementation ECAppDelegate
 
@@ -78,7 +79,10 @@
          if (!error) {
              self.profileViewController.facebook_id = user.id;
              self.profileViewController.userName = user.name;
-            [self.navigationController pushViewController:self.profileViewController animated:YES];
+            [self.navigationController pushViewController:self.profileViewController animated:NO];
+             ECJSONPoster * poster = [[ECJSONPoster alloc] init];
+             [poster postUserID:user.id];
+             
          }
      }];
 
