@@ -21,6 +21,7 @@
 		D4A8DDCA176A39BA005E9847 /* NSDate+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A8DDC9176A39B9005E9847 /* NSDate+JSON.m */; };
 		D4A8DDCE176A405D005E9847 /* ECPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A8DDCC176A405D005E9847 /* ECPostViewController.m */; };
 		D4A8DDCF176A405D005E9847 /* ECPostViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4A8DDCD176A405D005E9847 /* ECPostViewController.xib */; };
+		D4A8DDD3176A8885005E9847 /* placeholder.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D4A8DDD2176A8885005E9847 /* placeholder.jpg */; };
 		D4AA4CF31766B374009B0635 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4AA4CF21766B374009B0635 /* UIKit.framework */; };
 		D4AA4CF51766B374009B0635 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4AA4CF41766B374009B0635 /* Foundation.framework */; };
 		D4AA4CF71766B374009B0635 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4AA4CF61766B374009B0635 /* CoreGraphics.framework */; };
@@ -81,6 +82,7 @@
 		D4A8DDCB176A405D005E9847 /* ECPostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECPostViewController.h; sourceTree = "<group>"; };
 		D4A8DDCC176A405D005E9847 /* ECPostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECPostViewController.m; sourceTree = "<group>"; };
 		D4A8DDCD176A405D005E9847 /* ECPostViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECPostViewController.xib; sourceTree = "<group>"; };
+		D4A8DDD2176A8885005E9847 /* placeholder.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = placeholder.jpg; sourceTree = "<group>"; };
 		D4AA4CEF1766B374009B0635 /* Encore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Encore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4AA4CF21766B374009B0635 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D4AA4CF41766B374009B0635 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -178,6 +180,7 @@
 		D4A8DDD1176A44A0005E9847 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				D4A8DDD2176A8885005E9847 /* placeholder.jpg */,
 				D4AA4D041766B374009B0635 /* Default.png */,
 				D4AA4D061766B374009B0635 /* Default@2x.png */,
 				D4AA4D081766B374009B0635 /* Default-568h@2x.png */,
@@ -388,6 +391,7 @@
 				D4A8DDBD176A133B005E9847 /* ECCollectionCell.xib in Resources */,
 				D4A8DDC1176A13DB005E9847 /* ECMyConcertViewController.xib in Resources */,
 				D4A8DDCF176A405D005E9847 /* ECPostViewController.xib in Resources */,
+				D4A8DDD3176A8885005E9847 /* placeholder.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

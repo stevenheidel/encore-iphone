@@ -9,7 +9,7 @@
 #import "ECPostViewController.h"
 #import "NSDictionary+Posts.h"
 #import "UIImageView+AFNetworking.h"
-
+#import <QuartzCore/QuartzCore.h>
 @interface ECPostViewController ()
 
 @end
@@ -32,7 +32,10 @@
     self.userNameLabel.text = [self.post userName];
     self.captionLabel.text = [self.post caption];
     [self.postImage setImageWithURL:[self.post imageURL]];
-    [self.profilePicture setImageWithURL:[self.post profilePictureURL]];
+    //[self.profilePicture setImageWithURL:[self.post profilePictureURL]];
+    [self.profilePicture setImageWithURL:[self.post profilePictureURL] placeholderImage:[UIImage imageNamed:@"placeholder.jpg"]];
+    [self.profilePicture.layer setBorderColor:[[UIColor blackColor] CGColor]];
+    [self.profilePicture.layer setBorderWidth:1.0];
     self.title = self.userNameLabel.text;
     
     UIBarButtonItem * shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(shareTapped)];
@@ -40,7 +43,7 @@
 }
 
 -(void) shareTapped {
-    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Share" message:@"NO SHARING FOR YOU! FUK YOUUUUU" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Share" message:@"NO SHARING FOR YOU!!!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
     [alert show];
 }
 - (void)didReceiveMemoryWarning
