@@ -27,4 +27,8 @@
 -(NSString*) venueName {
    return [self objectForKey:@"venue_name"];
 }
+
+-(NSString*) serverID {
+    return [self objectForKey:@"server_id"];
+}
 @end

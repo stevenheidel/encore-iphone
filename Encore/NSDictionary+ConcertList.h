@@ -13,5 +13,6 @@
 -(NSString *) niceDate;
 -(NSString *) artistName;
 -(NSString *) venueName;
+-(NSString *) serverID;
 
 @end
