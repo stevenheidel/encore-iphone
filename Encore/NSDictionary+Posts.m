@@ -12,4 +12,16 @@
 -(NSURL *) imageURL {
     return [NSURL URLWithString:[self objectForKey:@"image_url"] ];
 }
+
+-(NSString *) userName {
+    return [self objectForKey:@"user_name"];
+}
+
+-(NSURL *) profilePictureURL {
+    return [NSURL URLWithString:[self objectForKey:@"user_profile_picture"]];
+}
+
+-(NSString *) caption {
+    return [self objectForKey:@"caption"];
+}
 @end

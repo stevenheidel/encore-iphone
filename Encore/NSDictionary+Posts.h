@@ -10,4 +10,7 @@
 
 @interface NSDictionary (Posts)
 -(NSURL *) imageURL;
+-(NSString *) userName;
+-(NSURL *) profilePictureURL;
+-(NSString *) caption;
 @end
