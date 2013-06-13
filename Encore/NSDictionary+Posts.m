@@ -1,0 +1,15 @@
+//
+//  NSDictionary+Posts.m
+//  Encore
+//
+//  Created by Shimmy on 2013-06-13.
+//  Copyright (c) 2013 Encore. All rights reserved.
+//
+
+#import "NSDictionary+Posts.h"
+
+@implementation NSDictionary (Posts)
+-(NSURL *) imageURL {
+    return [NSURL URLWithString:[self objectForKey:@"image_url"] ];
+}
+@end
