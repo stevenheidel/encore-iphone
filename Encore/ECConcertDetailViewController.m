@@ -11,6 +11,7 @@
 #import "Cell.h"
 #import "UIImageView+AFNetworking.h"
 #import "NSDictionary+Posts.h"
+#import "ECPostViewController.h"
 NSString *kCellID = @"cellID";
 
 @interface ECConcertDetailViewController ()
@@ -36,7 +37,7 @@ NSString *kCellID = @"cellID";
     self.artistNameLabel.text = [self.concert artistName];
     self.dateLabel.text = [self.concert niceDate];
     self.venueNameLabel.text = [self.concert venueName];
-    
+    self.title = self.artistNameLabel.text;
     [self loadImages];
 }
 
@@ -84,6 +85,9 @@ NSString *kCellID = @"cellID";
 
 -(void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [self.collectionView deselectItemAtIndexPath:indexPath animated:YES];
+    ECPostViewController * postVC = [[ECPostViewController alloc] init];
+    postVC.post = [self.posts objectAtIndex:indexPath.row];
+    [self.navigationController pushViewController:postVC animated:YES];
 }
 
 #pragma mark - json fetcher delegate
