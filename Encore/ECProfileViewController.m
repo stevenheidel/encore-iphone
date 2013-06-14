@@ -8,6 +8,7 @@
 
 #import "ECProfileViewController.h"
 #import "ECMyConcertViewController.h"
+#import "ECConcertChildViewController.h"
 #import "ECJSONFetcher.h"
 static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users";
 
@@ -32,16 +33,30 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
 {
     [super viewDidLoad];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
-                                              initWithTitle:@"Settings"
-                                              style:UIBarButtonItemStyleBordered
-                                              target:self
-                                              action:@selector(settingsButtonWasPressed:)];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
+//                                              initWithTitle:@"Settings"
+//                                              style:UIBarButtonItemStyleBordered
+//                                              target:self
+//                                              action:@selector(settingsButtonWasPressed:)];
+    
+
+    //Initialize the informtion to feed the control
+    NSString* plistPath = [[NSBundle mainBundle] pathForResource: @"SectionData"
+                                                          ofType: @"plist"];
+    // Build the array from the plist
+    NSArray* controlData = [[NSArray alloc] initWithContentsOfFile:plistPath];
+    
+    // Do any additional setup after loading the view, typically from a nib.
+    self.horizontalSelect = [[KLHorizontalSelect alloc] initWithFrame: self.view.bounds];
+    self.horizontalSelect.delegate = self;
+    [self.horizontalSelect setTableData: controlData];
+    [self.view addSubview: self.horizontalSelect];
 }
 -(void) viewWillAppear:(BOOL)animated {
     if (FBSession.activeSession.isOpen){
         [self populateUserDetails];
     }
+        [self.navigationController setNavigationBarHidden:YES];
 }
 -(void) populateUserDetails {
                  self.userNameLabel.text = self.userName;
@@ -112,5 +127,17 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
     }
 }
 
-
+#pragma mark - slider
+- (void) horizontalSelect:(id)horizontalSelect didSelectCell:(KLHorizontalSelectCell *)cell {
+    NSLog(@"Selected Cell: %@", cell.label.text);
+  
+    ECConcertChildViewController * childVC = [[ECConcertChildViewController alloc] init];
+    childVC.view.frame = CGRectMake(self.horizontalSelect.frame.origin.x,self.horizontalSelect.frame.origin.y+self.horizontalSelect.frame.size.height, self.horizontalSelect.frame.size.width, self.view.frame.size.height-self.horizontalSelect.frame.size.height);
+    [self addChildViewController:childVC];
+    [self.view addSubview:childVC.view];
+    [self.view bringSubviewToFront:self.horizontalSelect.viewForBaselineLayout];
+    
+//    ECConcertDetailViewController * concert = [[ECConcertDetailViewController alloc] init];
+//    [self.navigationController pushViewController:concert animated:NO];
+}
 @end
