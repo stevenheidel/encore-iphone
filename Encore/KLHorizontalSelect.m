@@ -4,7 +4,7 @@
 //
 //  Created by Kieran Lafferty on 2012-12-08.
 //  Copyright (c) 2012 Kieran Lafferty. All rights reserved.
-//
+//  Modified extensively 2013 Simon Bromberg
 
 
 
@@ -136,8 +136,9 @@
     [self.tableView scrollToRowAtIndexPath:currentIndex
                           atScrollPosition:UITableViewScrollPositionNone
                                   animated:YES];
-    if ([self.delegate respondsToSelector:@selector(horizontalSelect:didSelectCell:)]) {
-        [self.delegate horizontalSelect:self didSelectCell:(KLHorizontalSelectCell*)[self.tableView cellForRowAtIndexPath:currentIndex]];
+    if ([self.delegate respondsToSelector:@selector(horizontalSelect:didSelectCell:atIndexPath:)]) {
+        //[self.delegate horizontalSelect:self didSelectCell:(KLHorizontalSelectCell*)[self.tableView cellForRowAtIndexPath:currentIndex]];  //Changed by Shimmy on June 14 2013
+        [self.delegate horizontalSelect:self didSelectCell:(KLHorizontalSelectCell*)[self.tableView cellForRowAtIndexPath:currentIndex] atIndexPath:currentIndex];
     }
 }
 #pragma mark - UITableViewDelegate implementation
@@ -154,16 +155,17 @@
     return [self.tableData count];
 }
 -(UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath  {
-        static NSString* reuseIdentifier = @"HorizontalCell";
-        [self.tableView registerClass:[KLHorizontalSelectCell class] forCellReuseIdentifier:reuseIdentifier];
-        KLHorizontalSelectCell* cell = (KLHorizontalSelectCell*)[self.tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
-        
-        NSDictionary* cellData = [self.tableData objectAtIndex: indexPath.row];
-        [cell.image setImage:[UIImage imageNamed: [cellData objectForKey:@"image"]]];
-        [cell.label setText: [cellData objectForKey:@"text"]];
-        [cell setSelectionStyle:UITableViewCellEditingStyleNone];
-
-        return cell;
+    static NSString* reuseIdentifier = @"HorizontalCell";
+    [self.tableView registerClass:[KLHorizontalSelectCell class] forCellReuseIdentifier:reuseIdentifier];
+    KLHorizontalSelectCell* cell = (KLHorizontalSelectCell*)[self.tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
+    
+    NSDictionary* cellData = [self.tableData objectAtIndex: indexPath.row];
+    //[cell.image setImage:[UIImage imageNamed: [cellData objectForKey:@"image"]]];
+    [cell.label setText: [cellData objectForKey:@"text"]];
+    [cell.dateNumberLabel setText:[cellData objectForKey:@"dateNumber"]];
+    [cell setSelectionStyle:UITableViewCellEditingStyleNone];
+    
+    return cell;
 }
 
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -179,17 +181,24 @@
         UIView* containingView = [[UIView alloc] initWithFrame:CGRectMake(0, -5, kDefaultCellWidth, kDefaultCellHeight)];
         
         //Allocate and initialize the image view
-        self.image = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kDefaultImageHeight, kDefaultImageHeight)];
-        [self.image setCenter: CGPointMake(containingView.frame.size.width/2.0, kDefaultImageHeight/2.0)];
+        //self.image = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kDefaultImageHeight, kDefaultImageHeight)];
+        //[self.image setCenter: CGPointMake(containingView.frame.size.width/2.0, kDefaultImageHeight/2.0)];
+        self.dateNumberLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kDefaultImageHeight, kDefaultImageHeight)];
+        [self.dateNumberLabel setTextAlignment:NSTextAlignmentCenter];
+        [self.dateNumberLabel setCenter: CGPointMake(containingView.frame.size.width/2.0, kDefaultImageHeight/2.0)];
+        [self.dateNumberLabel setBackgroundColor:[UIColor clearColor]];
+        [self.dateNumberLabel setFont: [UIFont boldSystemFontOfSize: 30.0]];
+        [self.dateNumberLabel setTextColor:[UIColor darkGrayColor]];
+        
         //Allocate and initialize the label
         self.label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, containingView.frame.size.width, kDefaultLabelHeight)];
         [self.label setTextAlignment:NSTextAlignmentCenter];
         [self.label setCenter: CGPointMake(containingView.frame.size.width/2.0, kDefaultImageHeight + kDefaultLabelHeight/2.0)];
         [self.label setBackgroundColor:[UIColor clearColor]];
         [self.label setTextColor:[UIColor darkGrayColor]];
-        [self.label setFont: [UIFont boldSystemFontOfSize: 12.0]];
+        [self.label setFont: [UIFont boldSystemFontOfSize: 18.0]];
 
-        [containingView addSubview: self.image];
+        [containingView addSubview: self.dateNumberLabel];
         [containingView addSubview: self.label];
         
         [containingView setTransform:CGAffineTransformMakeRotation(M_PI_2)];

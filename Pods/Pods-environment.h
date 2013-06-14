@@ -18,9 +18,3 @@
 #define COCOAPODS_VERSION_MINOR_Facebook_iOS_SDK 5
 #define COCOAPODS_VERSION_PATCH_Facebook_iOS_SDK 1
 
-// KLHorizontalSelect
-#define COCOAPODS_POD_AVAILABLE_KLHorizontalSelect
-#define COCOAPODS_VERSION_MAJOR_KLHorizontalSelect 0
-#define COCOAPODS_VERSION_MINOR_KLHorizontalSelect 0
-#define COCOAPODS_VERSION_PATCH_KLHorizontalSelect 1
-

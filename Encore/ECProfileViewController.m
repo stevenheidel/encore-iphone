@@ -14,6 +14,8 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
 
 @interface ECProfileViewController ()
 @property (strong, nonatomic) IBOutlet UILabel *userNameLabel;
+@property (strong,nonatomic) NSMutableArray * concerts;
+@property (strong,nonatomic) ECConcertChildViewController * concertChildVC;
 -(IBAction)viewConcerts:(id)sender;
 -(IBAction)viewFriends:(id)sender;
 @end
@@ -51,6 +53,8 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
     self.horizontalSelect.delegate = self;
     [self.horizontalSelect setTableData: controlData];
     [self.view addSubview: self.horizontalSelect];
+    //[self.horizontalSelect.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
+
 }
 -(void) viewWillAppear:(BOOL)animated {
     if (FBSession.activeSession.isOpen){
@@ -61,6 +65,7 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
 -(void) populateUserDetails {
                  self.userNameLabel.text = self.userName;
                 // self.userProfileImage.profileID = [user objectForKey:@"id"];
+    [self fetchConcerts];
 }
 
 -(void) viewDidAppear:(BOOL)animated {
@@ -85,6 +90,11 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
     jsonFetcher.delegate = concertsVC;
     [jsonFetcher fetchConcertsForUserId:self.facebook_id];
     [self.navigationController pushViewController:concertsVC animated:YES];
+}
+-(void) fetchConcerts {
+    ECJSONFetcher * jsonFetcher = [[ECJSONFetcher alloc] init];
+    jsonFetcher.delegate = self;
+    [jsonFetcher fetchConcertsForUserId:self.facebook_id];
 }
 
 -(IBAction)viewFriends:(id)sender{
@@ -127,17 +137,23 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
     }
 }
 
-#pragma mark - slider
-- (void) horizontalSelect:(id)horizontalSelect didSelectCell:(KLHorizontalSelectCell *)cell {
-    NSLog(@"Selected Cell: %@", cell.label.text);
-  
-    ECConcertChildViewController * childVC = [[ECConcertChildViewController alloc] init];
-    childVC.view.frame = CGRectMake(self.horizontalSelect.frame.origin.x,self.horizontalSelect.frame.origin.y+self.horizontalSelect.frame.size.height, self.horizontalSelect.frame.size.width, self.view.frame.size.height-self.horizontalSelect.frame.size.height);
-    [self addChildViewController:childVC];
-    [self.view addSubview:childVC.view];
-    [self.view bringSubviewToFront:self.horizontalSelect.viewForBaselineLayout];
-    
-//    ECConcertDetailViewController * concert = [[ECConcertDetailViewController alloc] init];
-//    [self.navigationController pushViewController:concert animated:NO];
+#pragma mark - json fetcher delegate
+-(void) fetchedConcerts: (NSArray *) concerts {
+    self.concerts = [NSMutableArray arrayWithArray:concerts];
+    NSLog(@"fetched %@",[self.concerts description]);
 }
+
+#pragma mark - horizontal slider
+- (void) horizontalSelect:(id)horizontalSelect didSelectCell:(KLHorizontalSelectCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+    if(self.concertChildVC == nil){
+        self.concertChildVC = [[ECConcertChildViewController alloc] init];
+     self.concertChildVC.view.frame = CGRectMake(self.horizontalSelect.frame.origin.x,self.horizontalSelect.frame.origin.y+self.horizontalSelect.frame.size.height, self.horizontalSelect.frame.size.width, self.view.frame.size.height-self.horizontalSelect.frame.size.height);
+    [self addChildViewController: self.concertChildVC];
+    [self.view addSubview: self.concertChildVC.view];
+    [self.view bringSubviewToFront:self.horizontalSelect.viewForBaselineLayout];
+    }
+    self.concertChildVC.concert = [self.concerts objectAtIndex:indexPath.row];
+    [self.concertChildVC updateView];
+}
+
 @end

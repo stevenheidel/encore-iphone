@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface ECConcertChildViewController : UIViewController
-
+-(void) updateView;
+@property (nonatomic,strong) IBOutlet UILabel * artistLabel;
+@property (nonatomic,strong) NSDictionary * concert;
 @end

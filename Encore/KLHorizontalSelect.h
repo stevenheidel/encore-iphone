@@ -4,7 +4,7 @@
 //
 //  Created by Kieran Lafferty on 2012-12-08.
 //  Copyright (c) 2012 Kieran Lafferty. All rights reserved.
-//
+//  Modified extensively 2013 Simon Bromberg
 
 //Control Properties
 #define kDefaultCellWidth 80.0      //The width of each of the items
@@ -28,6 +28,7 @@
 @interface KLHorizontalSelectCell : UITableViewCell
 @property (nonatomic, strong) UIImageView* image;
 @property (nonatomic, strong) UILabel* label;
+@property (nonatomic, strong) UILabel* dateNumberLabel;
 @end
 
 @interface KLHorizontalSelectArrow : UIView
@@ -40,6 +41,7 @@
 @protocol KLHorizontalSelectDelegate <NSObject>
 @optional
 -(void) horizontalSelect:(id)horizontalSelect didSelectCell:(KLHorizontalSelectCell*) cell;
+-(void) horizontalSelect:(id)horizontalSelect didSelectCell:(KLHorizontalSelectCell*) cell atIndexPath: (NSIndexPath*) indexPath;
 @end
 
 @interface KLHorizontalSelect : UIView <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>

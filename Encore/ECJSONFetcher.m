@@ -12,7 +12,7 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1";
 static NSString *const UsersURL = @"users";
 static NSString *const ConcertsURL = @"concerts";
 static NSString *const PostsURL = @"posts";
-
+//TODO could change to use blocks instead of delegates to return sucess
 @implementation ECJSONFetcher
 -(void) fetchConcertsForUserId: (NSString *) fb_id {
     __block NSArray * concertList;
@@ -28,6 +28,10 @@ static NSString *const PostsURL = @"posts";
     
     [operation start];
 }
+
+//-(void) fetchConcertsForId:(NSString *) id completion: (void (^)()){
+//    
+//}
 
 -(void) fetchPostsForConcertWithID: (NSString *) serverID {
     __block NSArray * posts;

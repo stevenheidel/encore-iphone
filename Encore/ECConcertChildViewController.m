@@ -7,7 +7,7 @@
 //
 
 #import "ECConcertChildViewController.h"
-
+#import "NSDictionary+ConcertList.h"
 @interface ECConcertChildViewController ()
 
 @end
@@ -27,6 +27,16 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    }
+
+-(void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+        
+}
+
+-(void) updateView {
+    self.artistLabel.text = [self.concert artistName];
 }
 
 - (void)didReceiveMemoryWarning
