@@ -14,5 +14,7 @@
 -(NSString *) artistName;
 -(NSString *) venueName;
 -(NSString *) serverID;
+-(NSString *) month;
+-(NSString *) day;
 
 @end

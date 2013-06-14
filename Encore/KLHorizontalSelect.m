@@ -9,6 +9,7 @@
 
 
 #import "KLHorizontalSelect.h"
+#import "NSDictionary+ConcertList.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface KLHorizontalSelect ()
@@ -39,6 +40,24 @@
         self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.height, self.frame.size.width)];
         [self.tableView setDelegate:self];
         [self.tableView setDataSource:self];
+
+        
+        //TODO: clean this shit up
+        UILabel * header = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width+10, 40)];
+        header.backgroundColor = [UIColor clearColor];
+        header.text = @"Past Shows";
+        header.textAlignment = NSTextAlignmentLeft;
+        [header setTransform:CGAffineTransformMakeRotation(M_PI_2)];
+        [self.tableView setTableHeaderView:header];
+        
+        //TODO: why does the above one centre automatically but the footer doesn't?
+        UILabel * footer = [[UILabel alloc] initWithFrame:CGRectMake(-30, 0, self.tableView.frame.size.width, 30)];
+        footer.backgroundColor = [UIColor clearColor];
+        footer.textAlignment = NSTextAlignmentRight;
+        footer.text = @"Upcoming";
+        [footer setTransform:CGAffineTransformMakeRotation(M_PI_2)];
+        [self.tableView setTableFooterView:footer];
+        
         // Rotate the tableview by 90 degrees so that it is side scrollable
         [self.tableView setTransform:CGAffineTransformMakeRotation(-M_PI_2)];
         [self.tableView setCenter: self.center];
@@ -57,7 +76,7 @@
         [self.layer setShadowOpacity: kDefaultShadowOpacity];
         
         self.backgroundColor = [UIColor whiteColor];
-
+        
     }
     return self;
 }
@@ -161,10 +180,9 @@
     
     NSDictionary* cellData = [self.tableData objectAtIndex: indexPath.row];
     //[cell.image setImage:[UIImage imageNamed: [cellData objectForKey:@"image"]]];
-    [cell.label setText: [cellData objectForKey:@"text"]];
-    [cell.dateNumberLabel setText:[cellData objectForKey:@"dateNumber"]];
-    [cell setSelectionStyle:UITableViewCellEditingStyleNone];
-    
+    [cell.label setText: [cellData month]];
+    [cell.dateNumberLabel setText:[cellData day]];
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     return cell;
 }
 
@@ -172,13 +190,14 @@
     return kDefaultCellWidth;
 }
 
+
 @end
 
 @implementation KLHorizontalSelectCell
 
 -(id) initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]){
-        UIView* containingView = [[UIView alloc] initWithFrame:CGRectMake(0, -5, kDefaultCellWidth, kDefaultCellHeight)];
+        UIView* containingView = [[UIView alloc] initWithFrame:CGRectMake(0, -5, kDefaultCellWidth, kDefaultCellHeight)]; //TODO: figure out what the -5 is for and how to get rid of the space at the top of the bar
         
         //Allocate and initialize the image view
         //self.image = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kDefaultImageHeight, kDefaultImageHeight)];
@@ -202,6 +221,8 @@
         [containingView addSubview: self.label];
         
         [containingView setTransform:CGAffineTransformMakeRotation(M_PI_2)];
+        containingView.layer.borderColor = [UIColor blackColor].CGColor;
+        containingView.layer.borderWidth = 1.0f;
         [self addSubview:containingView];
     }
     return self;

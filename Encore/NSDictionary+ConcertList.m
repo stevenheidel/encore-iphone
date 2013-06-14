@@ -7,6 +7,7 @@
 //
 
 #import "NSDictionary+ConcertList.h"
+static NSString * const kDateFormat = @"yyyy-MM-dd";
 
 @implementation NSDictionary (ConcertList)
 -(NSString *) niceDate {
@@ -30,5 +31,23 @@
 
 -(NSString*) serverID {
     return [self objectForKey:@"server_id"];
+}
+
+-(NSString *) month {
+    NSString * dateStr = [self objectForKey:@"date"];
+    NSDateFormatter * dateFormat =  [NSDateFormatter new];
+    [dateFormat setDateFormat:kDateFormat];
+    NSDate * date = [dateFormat dateFromString:dateStr];
+    [dateFormat setDateFormat:@"MMM"]; //returns abbreviated month string e.g. Jan, Feb, Mar, etc.
+    return [dateFormat stringFromDate:date];
+}
+
+-(NSString *) day {
+    NSString * dateStr = [self objectForKey:@"date"];
+    NSDateFormatter * dateFormat =  [NSDateFormatter new];
+    [dateFormat setDateFormat:kDateFormat];
+    NSDate * date = [dateFormat dateFromString:dateStr];
+    [dateFormat setDateFormat:@"dd"]; 
+    return [dateFormat stringFromDate:date];
 }
 @end

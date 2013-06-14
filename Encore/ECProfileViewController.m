@@ -46,12 +46,13 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
     NSString* plistPath = [[NSBundle mainBundle] pathForResource: @"SectionData"
                                                           ofType: @"plist"];
     // Build the array from the plist
-    NSArray* controlData = [[NSArray alloc] initWithContentsOfFile:plistPath];
+    
+    [self fetchConcerts];
     
     // Do any additional setup after loading the view, typically from a nib.
     self.horizontalSelect = [[KLHorizontalSelect alloc] initWithFrame: self.view.bounds];
     self.horizontalSelect.delegate = self;
-    [self.horizontalSelect setTableData: controlData];
+    [self.horizontalSelect setTableData: self.concerts];
     [self.view addSubview: self.horizontalSelect];
     //[self.horizontalSelect.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
 
@@ -65,7 +66,6 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
 -(void) populateUserDetails {
                  self.userNameLabel.text = self.userName;
                 // self.userProfileImage.profileID = [user objectForKey:@"id"];
-    [self fetchConcerts];
 }
 
 -(void) viewDidAppear:(BOOL)animated {
@@ -139,8 +139,10 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
 
 #pragma mark - json fetcher delegate
 -(void) fetchedConcerts: (NSArray *) concerts {
+    NSLog(@"Successfully fetched %d concerts", [concerts count]);
     self.concerts = [NSMutableArray arrayWithArray:concerts];
-    NSLog(@"fetched %@",[self.concerts description]);
+    self.horizontalSelect.tableData = concerts;
+    [self.horizontalSelect.tableView reloadData];
 }
 
 #pragma mark - horizontal slider
