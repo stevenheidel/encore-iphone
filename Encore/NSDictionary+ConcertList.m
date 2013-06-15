@@ -39,7 +39,7 @@ static NSString * const kDateFormat = @"yyyy-MM-dd";
     [dateFormat setDateFormat:kDateFormat];
     NSDate * date = [dateFormat dateFromString:dateStr];
     [dateFormat setDateFormat:@"MMM"]; //returns abbreviated month string e.g. Jan, Feb, Mar, etc.
-    return [dateFormat stringFromDate:date];
+    return [[dateFormat stringFromDate:date] uppercaseString];
 }
 
 -(NSString *) day {
@@ -49,5 +49,14 @@ static NSString * const kDateFormat = @"yyyy-MM-dd";
     NSDate * date = [dateFormat dateFromString:dateStr];
     [dateFormat setDateFormat:@"dd"]; 
     return [dateFormat stringFromDate:date];
+}
+
+-(NSString *) weekday {
+    NSString * dateStr = [self objectForKey:@"date"];
+    NSDateFormatter * dateFormat =  [NSDateFormatter new];
+    [dateFormat setDateFormat:kDateFormat];
+    NSDate * date = [dateFormat dateFromString:dateStr];
+    [dateFormat setDateFormat:@"ccc"];
+    return [[dateFormat stringFromDate:date] substringToIndex:3];
 }
 @end

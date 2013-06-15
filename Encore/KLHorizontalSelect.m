@@ -40,23 +40,6 @@
         self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.height, self.frame.size.width)];
         [self.tableView setDelegate:self];
         [self.tableView setDataSource:self];
-
-        
-        //TODO: clean this shit up
-        UILabel * header = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width+10, 40)];
-        header.backgroundColor = [UIColor clearColor];
-        header.text = @"Past Shows";
-        header.textAlignment = NSTextAlignmentLeft;
-        [header setTransform:CGAffineTransformMakeRotation(M_PI_2)];
-        [self.tableView setTableHeaderView:header];
-        
-        //TODO: why does the above one centre automatically but the footer doesn't?
-        UILabel * footer = [[UILabel alloc] initWithFrame:CGRectMake(-30, 0, self.tableView.frame.size.width, 30)];
-        footer.backgroundColor = [UIColor clearColor];
-        footer.textAlignment = NSTextAlignmentRight;
-        footer.text = @"Upcoming";
-        [footer setTransform:CGAffineTransformMakeRotation(M_PI_2)];
-        [self.tableView setTableFooterView:footer];
         
         // Rotate the tableview by 90 degrees so that it is side scrollable
         [self.tableView setTransform:CGAffineTransformMakeRotation(-M_PI_2)];
@@ -67,7 +50,7 @@
         [self.tableView setContentInset: UIEdgeInsetsMake(self.defaultMargin, 0, self.defaultMargin, 0)];
         [self.tableView setShowsVerticalScrollIndicator:NO];
         [self.tableView setDecelerationRate: UIScrollViewDecelerationRateFast];
-        
+
         [self addSubview: self.tableView];
 
 
@@ -76,10 +59,10 @@
         [self.layer setShadowOpacity: kDefaultShadowOpacity];
         
         self.backgroundColor = [UIColor whiteColor];
-        
     }
     return self;
 }
+
 -(void) setFrame:(CGRect)frame {
     [super setFrame:CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, kDefaultCellHeight)];
 }
@@ -114,6 +97,8 @@
     CGGradientRelease(myGradient);
 
 }
+
+
 #pragma mark - UIScrollViewDelegate implementation
 
 -(void) scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
@@ -175,14 +160,17 @@
 }
 -(UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath  {
     static NSString* reuseIdentifier = @"HorizontalCell";
-    [self.tableView registerClass:[KLHorizontalSelectCell class] forCellReuseIdentifier:reuseIdentifier];
-    KLHorizontalSelectCell* cell = (KLHorizontalSelectCell*)[self.tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
-    
-    NSDictionary* cellData = [self.tableData objectAtIndex: indexPath.row];
+//    [self.tableView registerClass:[KLHorizontalSelectCell class] forCellReuseIdentifier:reuseIdentifier];
+//    KLHorizontalSelectCell* cell = (KLHorizontalSelectCell*)[self.tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
+    KLHorizontalSelectCell * cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
+    if (cell==nil) {
+        cell = [[KLHorizontalSelectCell alloc]initWithCellData:[self.tableData objectAtIndex: indexPath.row]];
+    }
+//    cell.cellData = [self.tableData objectAtIndex: indexPath.row];
     //[cell.image setImage:[UIImage imageNamed: [cellData objectForKey:@"image"]]];
-    [cell.label setText: [cellData month]];
-    [cell.dateNumberLabel setText:[cellData day]];
-    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+//    [cell.label setText: [cellData month]];
+//    [cell.dateNumberLabel setText:[cellData day]];
+//    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     return cell;
 }
 
@@ -193,41 +181,63 @@
 
 @end
 
+#pragma mark - Table View Cell Subclasses
+#import "ECHorizontalCellView.h"
 @implementation KLHorizontalSelectCell
 
--(id) initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
-    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]){
-        UIView* containingView = [[UIView alloc] initWithFrame:CGRectMake(0, -5, kDefaultCellWidth, kDefaultCellHeight)]; //TODO: figure out what the -5 is for and how to get rid of the space at the top of the bar
-        
-        //Allocate and initialize the image view
-        //self.image = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kDefaultImageHeight, kDefaultImageHeight)];
-        //[self.image setCenter: CGPointMake(containingView.frame.size.width/2.0, kDefaultImageHeight/2.0)];
-        self.dateNumberLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kDefaultImageHeight, kDefaultImageHeight)];
-        [self.dateNumberLabel setTextAlignment:NSTextAlignmentCenter];
-        [self.dateNumberLabel setCenter: CGPointMake(containingView.frame.size.width/2.0, kDefaultImageHeight/2.0)];
-        [self.dateNumberLabel setBackgroundColor:[UIColor clearColor]];
-        [self.dateNumberLabel setFont: [UIFont boldSystemFontOfSize: 30.0]];
-        [self.dateNumberLabel setTextColor:[UIColor darkGrayColor]];
-        
-        //Allocate and initialize the label
-        self.label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, containingView.frame.size.width, kDefaultLabelHeight)];
-        [self.label setTextAlignment:NSTextAlignmentCenter];
-        [self.label setCenter: CGPointMake(containingView.frame.size.width/2.0, kDefaultImageHeight + kDefaultLabelHeight/2.0)];
-        [self.label setBackgroundColor:[UIColor clearColor]];
-        [self.label setTextColor:[UIColor darkGrayColor]];
-        [self.label setFont: [UIFont boldSystemFontOfSize: 18.0]];
-
-        [containingView addSubview: self.dateNumberLabel];
-        [containingView addSubview: self.label];
-        
-        [containingView setTransform:CGAffineTransformMakeRotation(M_PI_2)];
-        containingView.layer.borderColor = [UIColor blackColor].CGColor;
-        containingView.layer.borderWidth = 1.0f;
-        [self addSubview:containingView];
+-(id) initWithCellData: (NSDictionary *) cellData {
+    if (self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"HorizontalCell"]){
+        ECHorizontalCellView * cellView = [[ECHorizontalCellView alloc] initWithFrame:CGRectMake(0, 0, kDefaultCellWidth, kDefaultCellHeight)];
+        cellView.weekdayLabel.text = [cellData weekday];
+        cellView.monthLabel.text = [cellData month];
+        cellView.dayNumberLabel.text = [cellData day];
+        [cellView setTransform:CGAffineTransformMakeRotation(M_PI_2)];
+        [self addSubview:cellView];
     }
     return self;
 }
+//
+//-(id) initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+//    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]){
+//        ECHorizontalCellView * cellView = [[ECHorizontalCellView alloc] initWithFrame:CGRectMake(0, -5, kDefaultCellWidth, kDefaultCellHeight)];
+//        
+//        //[[UIView alloc] initWithFrame:CGRectMake(0, -5, kDefaultCellWidth, kDefaultCellHeight)]; //TODO: figure out what the -5 is for and how to get rid of the space at the top of the bar
+//        
+//        //Allocate and initialize the image view
+//        //self.image = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kDefaultImageHeight, kDefaultImageHeight)];
+//        //[self.image setCenter: CGPointMake(containingView.frame.size.width/2.0, kDefaultImageHeight/2.0)];
+//        //        [cellView.dayNumberLabel setTextAlignment:NSTextAlignmentCenter];
+//        //        [cellView.dayNumberLabel setCenter: CGPointMake(containingView.frame.size.width/2.0, kDefaultImageHeight/2.0)];
+//        //        [cellView.dayNumberLabel setBackgroundColor:[UIColor clearColor]];
+//        //        [self.dateNumberLabel setFont: [UIFont boldSystemFontOfSize: 30.0]];
+//        //        [self.dateNumberLabel setTextColor:[UIColor darkGrayColor]];
+//        
+//        //Allocate and initialize the label
+//        //        self.label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, containingView.frame.size.width, kDefaultLabelHeight)];
+//        //        [self.label setTextAlignment:NSTextAlignmentCenter];
+//        //        [self.label setCenter: CGPointMake(containingView.frame.size.width/2.0, kDefaultImageHeight + kDefaultLabelHeight/2.0)];
+//        //        [self.label setBackgroundColor:[UIColor clearColor]];
+//        //        [self.label setTextColor:[UIColor darkGrayColor]];
+//        //        [self.label setFont: [UIFont boldSystemFontOfSize: 18.0]];
+//
+//        
+//        //allocated and initialize the weekday label eg. Tues
+//        //        [containingView addSubview: self.dateNumberLabel];
+//        //        [containingView addSubview: self.label];
+//        //        [containingView addSubview:self.weekDayLabel];
+//        //        cellView.layer.borderColor = [UIColor blackColor].CGColor;
+//        //        cellView.layer.borderWidth = 1.0f;
+//        //Rotate the view 90 degrees
+//        [cellView setTransform:CGAffineTransformMakeRotation(M_PI_2)];
+//        self.cellView = cellView;
+//        [self addSubview:cellView];
+//    }
+//    return self;
+//}
+
 @end
+
+#pragma mark - Arrow upon selection
 
 @implementation KLHorizontalSelectArrow
 - (float) hypotenuse {
@@ -247,7 +257,7 @@
 
         CAShapeLayer *shapeLayer = [CAShapeLayer layer];
         [shapeLayer setPath:path];
-        [shapeLayer setFillColor:[kDefaultGradientBottomColor CGColor]];
+        [shapeLayer setFillColor:[[UIColor blueColor] CGColor]]; //TODO Change colouring
         
         
         
@@ -263,7 +273,7 @@
 -(void) show:(BOOL) animated {
     if (!self.isShowing) {
         if (animated) {
-            [UIView animateWithDuration:0.3 animations:^{
+            [UIView animateWithDuration:0.1 animations:^{
                 [self.layer setTransform: CATransform3DRotate(self.layer.transform, (1/4.0)*M_PI, 1.0, 0.0, 0.0)];
             }];
         }
@@ -298,7 +308,7 @@
 -(void) hide:(BOOL) animated {
     if (self.isShowing) {
         if (animated) {
-            [UIView animateWithDuration:0.3 animations:^{
+            [UIView animateWithDuration:0.1 animations:^{
                 [self.layer setTransform: CATransform3DRotate(self.layer.transform, -(1/4.0)*M_PI,1.0, 0.0, 0.0)];
                 
             }];

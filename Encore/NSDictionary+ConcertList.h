@@ -16,5 +16,5 @@
 -(NSString *) serverID;
 -(NSString *) month;
 -(NSString *) day;
-
+-(NSString *) weekday;
 @end
