@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		255A9AF4A1C64F71B97704C8 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 918A85E0EEDE48F3BEFD223A /* libPods.a */; };
 		A0848C0B176D1F0D009BBB38 /* ECLoginPageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0848C0A176D1F0D009BBB38 /* ECLoginPageView.xib */; };
+		A0848C11176D25D5009BBB38 /* ECLoginPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0848C10176D25D5009BBB38 /* ECLoginPageView.m */; };
 		A0FF1C53176CC88000433768 /* LoginInfoPages.plist in Resources */ = {isa = PBXBuildFile; fileRef = A0FF1C52176CC88000433768 /* LoginInfoPages.plist */; };
 		D4A22253176B7FC1005AB205 /* KLHorizontalSelect.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A22252176B7FC1005AB205 /* KLHorizontalSelect.m */; };
 		D4A2F6CD176959BD00A9E3BF /* ECProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4A2F6CC176959BD00A9E3BF /* ECProfileViewController.xib */; };
@@ -89,6 +90,8 @@
 /* Begin PBXFileReference section */
 		918A85E0EEDE48F3BEFD223A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0848C0A176D1F0D009BBB38 /* ECLoginPageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECLoginPageView.xib; sourceTree = "<group>"; };
+		A0848C0F176D25D5009BBB38 /* ECLoginPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECLoginPageView.h; sourceTree = "<group>"; };
+		A0848C10176D25D5009BBB38 /* ECLoginPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECLoginPageView.m; sourceTree = "<group>"; };
 		A0FF1C52176CC88000433768 /* LoginInfoPages.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = LoginInfoPages.plist; sourceTree = "<group>"; };
 		B56B831D22E04C90BC664348 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		D458D6E417682D2700098C18 /* my_basename-29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "my_basename-29.png"; path = "../my_basename-29.png"; sourceTree = "<group>"; };
@@ -405,9 +408,11 @@
 			children = (
 				D4AA4D2D1766BA8C009B0635 /* ECLoginViewController.h */,
 				D4AA4D2E1766BA8C009B0635 /* ECLoginViewController.m */,
+				D4AA4D2F1766BA8C009B0635 /* ECLoginViewController.xib */,
 				D4A8DDC2176A20D2005E9847 /* ECJSONPoster.h */,
 				D4A8DDC3176A20D2005E9847 /* ECJSONPoster.m */,
-				D4AA4D2F1766BA8C009B0635 /* ECLoginViewController.xib */,
+				A0848C0F176D25D5009BBB38 /* ECLoginPageView.h */,
+				A0848C10176D25D5009BBB38 /* ECLoginPageView.m */,
 				A0848C0A176D1F0D009BBB38 /* ECLoginPageView.xib */,
 			);
 			name = Login;
@@ -606,6 +611,7 @@
 				D4A8DE09176ACEDB005E9847 /* ECConcertChildViewController.m in Sources */,
 				D4A22253176B7FC1005AB205 /* KLHorizontalSelect.m in Sources */,
 				D4A4D816176CC9AA00EFCBF7 /* ECHorizontalCellView.m in Sources */,
+				A0848C11176D25D5009BBB38 /* ECLoginPageView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
