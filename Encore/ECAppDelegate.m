@@ -44,12 +44,13 @@
     self.loginViewController = [[ECLoginViewController alloc] init];
     
     self.profileViewController.title = @"Encore";
+    
     self.navigationController   = [[UINavigationController alloc] initWithRootViewController:self.loginViewController];
     
     self.window.rootViewController = self.navigationController;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-      [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
+    [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
     
     return YES;
 }

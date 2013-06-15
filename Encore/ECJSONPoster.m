@@ -28,7 +28,7 @@
     
     [client postPath:usersURL parameters:parameters
              success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                 NSLog(@"%@",[responseObject description]);
+                 NSLog(@"%@: %@",NSStringFromClass([self class]),[responseObject description]);
              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                  NSLog(@"ERROR: %@",[error description]);
              }];
