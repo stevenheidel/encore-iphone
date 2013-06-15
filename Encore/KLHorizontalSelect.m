@@ -40,23 +40,6 @@
         self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.height, self.frame.size.width)];
         [self.tableView setDelegate:self];
         [self.tableView setDataSource:self];
-
-        
-        //TODO: clean this shit up
-//        UILabel * header = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width+10, 40)];
-//        header.backgroundColor = [UIColor clearColor];
-//        header.text = @"Past Shows";
-//        header.textAlignment = NSTextAlignmentLeft;
-//        [header setTransform:CGAffineTransformMakeRotation(M_PI_2)];
-//        [self.tableView setTableHeaderView:header];
-//        
-//        //TODO: why does the above one centre automatically but the footer doesn't?
-//        UILabel * footer = [[UILabel alloc] initWithFrame:CGRectMake(-30, 0, self.tableView.frame.size.width, 30)];
-//        footer.backgroundColor = [UIColor clearColor];
-//        footer.textAlignment = NSTextAlignmentRight;
-//        footer.text = @"Upcoming";
-//        [footer setTransform:CGAffineTransformMakeRotation(M_PI_2)];
-//        [self.tableView setTableFooterView:footer];
         
         // Rotate the tableview by 90 degrees so that it is side scrollable
         [self.tableView setTransform:CGAffineTransformMakeRotation(-M_PI_2)];
@@ -76,9 +59,11 @@
         [self.layer setShadowOpacity: kDefaultShadowOpacity];
         
         self.backgroundColor = [UIColor whiteColor];
-        
     }
     return self;
+}
+-(void) viewDidAppear: (BOOL) animated{
+    NSLog(@"test");
 }
 -(void) setFrame:(CGRect)frame {
     [super setFrame:CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, kDefaultCellHeight)];
@@ -114,6 +99,8 @@
     CGGradientRelease(myGradient);
 
 }
+
+
 #pragma mark - UIScrollViewDelegate implementation
 
 -(void) scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
@@ -272,7 +259,7 @@
 
         CAShapeLayer *shapeLayer = [CAShapeLayer layer];
         [shapeLayer setPath:path];
-        [shapeLayer setFillColor:[kDefaultGradientBottomColor CGColor]]; //TODO Change colouring
+        [shapeLayer setFillColor:[[UIColor blueColor] CGColor]]; //TODO Change colouring
         
         
         

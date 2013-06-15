@@ -35,11 +35,11 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
 {
     [super viewDidLoad];
     
-//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
-//                                              initWithTitle:@"Settings"
-//                                              style:UIBarButtonItemStyleBordered
-//                                              target:self
-//                                              action:@selector(settingsButtonWasPressed:)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
+                                              initWithTitle:@"Settings"
+                                              style:UIBarButtonItemStyleBordered
+                                              target:self
+                                              action:@selector(settingsButtonWasPressed:)];
     
 
     //Initialize the informtion to feed the control
@@ -54,14 +54,14 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
     self.horizontalSelect.delegate = self;
     [self.horizontalSelect setTableData: self.concerts];
     [self.view addSubview: self.horizontalSelect];
-    //[self.horizontalSelect.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
+
 
 }
 -(void) viewWillAppear:(BOOL)animated {
     if (FBSession.activeSession.isOpen){
         [self populateUserDetails];
     }
-        [self.navigationController setNavigationBarHidden:YES];
+      //  [self.navigationController setNavigationBarHidden:YES];
 }
 -(void) populateUserDetails {
                  self.userNameLabel.text = self.userName;
