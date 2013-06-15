@@ -7,8 +7,8 @@
 //  Modified extensively 2013 Simon Bromberg
 
 //Control Properties
-#define kDefaultCellWidth 80.0      //The width of each of the items
-#define kDefaultCellHeight 90       //Height of the items/control
+#define kDefaultCellWidth 60.0      //The width of each of the items
+#define kDefaultCellHeight 70.0       //Height of the items/control
 #define kDefaultGradientTopColor  [UIColor colorWithRed: 242/255.0 green: 243/255.0 blue: 246/255.0 alpha: 1]   //Top Gradient Color
 #define kDefaultGradientBottomColor  [UIColor colorWithRed: 197/255.0 green: 201/255.0 blue: 204/255.0 alpha: 1]    //Bottom Gradient Color
 #define kDefaultLabelHeight 20.0    //Adjusts the height of the label
@@ -24,11 +24,19 @@
 #define kDefaultShadowOpacity 0.96
 
 #import <UIKit/UIKit.h>
-
+@class  ECHorizontalCellView;
 @interface KLHorizontalSelectCell : UITableViewCell
+-(id) initWithCellData: (NSDictionary *) cellData;
 @property (nonatomic, strong) UIImageView* image;
 @property (nonatomic, strong) UILabel* label;
 @property (nonatomic, strong) UILabel* dateNumberLabel;
+@property (nonatomic, strong) UILabel* weekDayLabel;
+@property (nonatomic, strong) NSDictionary * cellData;
+@property (nonatomic, strong) ECHorizontalCellView * cellView;
+@end
+
+@interface ECHorizontalEndCell : UITableViewCell
+@property (nonatomic, strong) UILabel * label;
 @end
 
 @interface KLHorizontalSelectArrow : UIView

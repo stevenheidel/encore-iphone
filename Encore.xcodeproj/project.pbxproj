@@ -10,6 +10,8 @@
 		255A9AF4A1C64F71B97704C8 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 918A85E0EEDE48F3BEFD223A /* libPods.a */; };
 		D4A22253176B7FC1005AB205 /* KLHorizontalSelect.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A22252176B7FC1005AB205 /* KLHorizontalSelect.m */; };
 		D4A2F6CD176959BD00A9E3BF /* ECProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4A2F6CC176959BD00A9E3BF /* ECProfileViewController.xib */; };
+		D4A4D813176CC81600EFCBF7 /* ECHorizontalCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4A4D812176CC81600EFCBF7 /* ECHorizontalCellView.xib */; };
+		D4A4D816176CC9AA00EFCBF7 /* ECHorizontalCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A4D815176CC9AA00EFCBF7 /* ECHorizontalCellView.m */; };
 		D4A8DDB8176A133B005E9847 /* NSDictionary+Posts.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A8DDAC176A133B005E9847 /* NSDictionary+Posts.m */; };
 		D4A8DDB9176A133B005E9847 /* ECConcertDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A8DDAD176A133B005E9847 /* ECConcertDetailViewController.m */; };
 		D4A8DDBA176A133B005E9847 /* Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A8DDAF176A133B005E9847 /* Cell.m */; };
@@ -90,6 +92,9 @@
 		D4A22251176B7FC1005AB205 /* KLHorizontalSelect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KLHorizontalSelect.h; sourceTree = "<group>"; };
 		D4A22252176B7FC1005AB205 /* KLHorizontalSelect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KLHorizontalSelect.m; sourceTree = "<group>"; };
 		D4A2F6CC176959BD00A9E3BF /* ECProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECProfileViewController.xib; sourceTree = "<group>"; };
+		D4A4D812176CC81600EFCBF7 /* ECHorizontalCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECHorizontalCellView.xib; sourceTree = "<group>"; };
+		D4A4D814176CC9A900EFCBF7 /* ECHorizontalCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECHorizontalCellView.h; sourceTree = "<group>"; };
+		D4A4D815176CC9AA00EFCBF7 /* ECHorizontalCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECHorizontalCellView.m; sourceTree = "<group>"; };
 		D4A8DDAB176A133B005E9847 /* NSDictionary+Posts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Posts.h"; sourceTree = "<group>"; };
 		D4A8DDAC176A133B005E9847 /* NSDictionary+Posts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Posts.m"; sourceTree = "<group>"; };
 		D4A8DDAD176A133B005E9847 /* ECConcertDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECConcertDetailViewController.m; sourceTree = "<group>"; };
@@ -201,6 +206,9 @@
 			children = (
 				D4A22251176B7FC1005AB205 /* KLHorizontalSelect.h */,
 				D4A22252176B7FC1005AB205 /* KLHorizontalSelect.m */,
+				D4A4D814176CC9A900EFCBF7 /* ECHorizontalCellView.h */,
+				D4A4D815176CC9AA00EFCBF7 /* ECHorizontalCellView.m */,
+				D4A4D812176CC81600EFCBF7 /* ECHorizontalCellView.xib */,
 			);
 			name = "Horizontal Select";
 			sourceTree = "<group>";
@@ -510,6 +518,7 @@
 				D4A8DDFF176AB650005E9847 /* home_icon_trending.png in Resources */,
 				D4A8DE00176AB650005E9847 /* home_icon_trending@2x.png in Resources */,
 				D4A8DE0A176ACEDB005E9847 /* ECConcertChildViewController.xib in Resources */,
+				D4A4D813176CC81600EFCBF7 /* ECHorizontalCellView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -588,6 +597,7 @@
 				D4A8DDCE176A405D005E9847 /* ECPostViewController.m in Sources */,
 				D4A8DE09176ACEDB005E9847 /* ECConcertChildViewController.m in Sources */,
 				D4A22253176B7FC1005AB205 /* KLHorizontalSelect.m in Sources */,
+				D4A4D816176CC9AA00EFCBF7 /* ECHorizontalCellView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
