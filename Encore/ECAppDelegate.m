@@ -9,7 +9,6 @@
 #import "ECAppDelegate.h"
 #import "ECProfileViewController.h"
 #import "ECLoginViewController.h"
-//#import <FacebookSDK/FBSessionTokenCachingStrategy.h>
 #import <FacebookSDK/FacebookSDK.h>
 #import "ECJSONPoster.h"
 
@@ -50,6 +49,7 @@
     self.window.rootViewController = self.navigationController;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+      [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
     
     return YES;
 }
