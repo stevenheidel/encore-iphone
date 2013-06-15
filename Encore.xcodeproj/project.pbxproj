@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		255A9AF4A1C64F71B97704C8 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 918A85E0EEDE48F3BEFD223A /* libPods.a */; };
+		A0FF1C53176CC88000433768 /* LoginInfoPages.plist in Resources */ = {isa = PBXBuildFile; fileRef = A0FF1C52176CC88000433768 /* LoginInfoPages.plist */; };
 		D4A22253176B7FC1005AB205 /* KLHorizontalSelect.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A22252176B7FC1005AB205 /* KLHorizontalSelect.m */; };
 		D4A2F6CD176959BD00A9E3BF /* ECProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4A2F6CC176959BD00A9E3BF /* ECProfileViewController.xib */; };
 		D4A8DDB8176A133B005E9847 /* NSDictionary+Posts.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A8DDAC176A133B005E9847 /* NSDictionary+Posts.m */; };
@@ -84,6 +85,7 @@
 
 /* Begin PBXFileReference section */
 		918A85E0EEDE48F3BEFD223A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A0FF1C52176CC88000433768 /* LoginInfoPages.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = LoginInfoPages.plist; sourceTree = "<group>"; };
 		B56B831D22E04C90BC664348 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		D458D6E417682D2700098C18 /* my_basename-29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "my_basename-29.png"; path = "../my_basename-29.png"; sourceTree = "<group>"; };
 		D458D6E517682D3E00098C18 /* my_basename-58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "my_basename-58.png"; path = "../my_basename-58.png"; sourceTree = "<group>"; };
@@ -334,6 +336,7 @@
 			isa = PBXGroup;
 			children = (
 				D4A8DDD6176AB62E005E9847 /* SectionData.plist */,
+				A0FF1C52176CC88000433768 /* LoginInfoPages.plist */,
 				D4AC35FA1768C8B20087B1E9 /* ECJSONFetcher.h */,
 				D4AC35FB1768C8B20087B1E9 /* ECJSONFetcher.m */,
 				D4A8DDC8176A39B9005E9847 /* NSDate+JSON.h */,
@@ -510,6 +513,7 @@
 				D4A8DDFF176AB650005E9847 /* home_icon_trending.png in Resources */,
 				D4A8DE00176AB650005E9847 /* home_icon_trending@2x.png in Resources */,
 				D4A8DE0A176ACEDB005E9847 /* ECConcertChildViewController.xib in Resources */,
+				A0FF1C53176CC88000433768 /* LoginInfoPages.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

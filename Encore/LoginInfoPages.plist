@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>header</key>
+		<string>Introducing Encore!</string>
+		<key>text</key>
+		<string>Discover concerts to go to with friends, see what everyone is already sharing, show your night out to your friends, and keep it for yourself on your profile.</string>
+		<key>image</key>
+		<string>Icon@2x.png</string>
+	</dict>
+	<dict>
+		<key>header</key>
+		<string>Header 1</string>
+		<key>text</key>
+		<string>Description text 1</string>
+		<key>image</key>
+		<string>Icon@2x.png</string>
+	</dict>
+	<dict>
+		<key>header</key>
+		<string>Header 2</string>
+		<key>text</key>
+		<string>Description Text 2</string>
+		<key>image</key>
+		<string>Icon@2x.png</string>
+	</dict>
+</array>
+</plist>
