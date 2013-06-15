@@ -187,7 +187,7 @@
 
 -(id) initWithCellData: (NSDictionary *) cellData {
     if (self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"HorizontalCell"]){
-        ECHorizontalCellView * cellView = [[ECHorizontalCellView alloc] initWithFrame:CGRectMake(0, 0, kDefaultCellWidth, kDefaultCellHeight)];
+        ECHorizontalCellView * cellView = [[ECHorizontalCellView alloc] initWithFrame: CGRectMake(0, 0, kDefaultCellWidth, kDefaultCellHeight)];
         cellView.weekdayLabel.text = [cellData weekday];
         cellView.monthLabel.text = [cellData month];
         cellView.dayNumberLabel.text = [cellData day];
@@ -246,7 +246,6 @@
 -(id) initWithFrame:(CGRect)frame color:(UIColor*) color {
     if (self = [super initWithFrame:frame]) {
         self.isShowing = YES;
-        
         [self setBackgroundColor:[UIColor clearColor]];
         
         CGMutablePathRef path = CGPathCreateMutable();

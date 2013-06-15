@@ -15,7 +15,7 @@
 #define kDefaultImageHeight 60.0    //Adjusts the height of the image
 
 //Arrow properties
-#define kHeaderArrowWidth 40.0      //Adjusts the width of the selection arrow
+#define kHeaderArrowWidth 60.0      //Adjusts the width of the selection arrow
 #define kHeaderArrowHeight 15.0     //Adjusts the width of the selection arrow
 
 //Shadow properties

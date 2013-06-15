@@ -41,12 +41,6 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
                                               target:self
                                               action:@selector(settingsButtonWasPressed:)];
     
-
-    //Initialize the informtion to feed the control
-    NSString* plistPath = [[NSBundle mainBundle] pathForResource: @"SectionData"
-                                                          ofType: @"plist"];
-    // Build the array from the plist
-    
     [self fetchConcerts];
     
     // Do any additional setup after loading the view, typically from a nib.
@@ -143,6 +137,7 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
     self.concerts = [NSMutableArray arrayWithArray:concerts];
     self.horizontalSelect.tableData = concerts;
     [self.horizontalSelect.tableView reloadData];
+    //TODO: get it to load first view for "Today"
     [self.horizontalSelect.tableView selectRowAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
 }
 
