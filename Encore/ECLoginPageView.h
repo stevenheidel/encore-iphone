@@ -8,6 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ECLoginPageView : UIViewController
+@interface ECLoginPageView : UIViewController {
+    
+    UIImageView *image;
+    UILabel *lblHeader;
+    UILabel *lblText;
+    
+}
+
+@property (nonatomic, retain) IBOutlet UIImageView *image;
+@property (nonatomic, retain) IBOutlet UILabel *lblHeader;
+@property (nonatomic, retain) IBOutlet UILabel *lblText;
 
 @end

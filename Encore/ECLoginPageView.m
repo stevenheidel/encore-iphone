@@ -14,6 +14,9 @@
 
 @implementation ECLoginPageView
 
+@synthesize image;
+@synthesize lblHeader, lblText;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
