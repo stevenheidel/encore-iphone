@@ -22,6 +22,7 @@
 }
 
 -(NSString *) caption {
-    return [self objectForKey:@"caption"];
+    id returnString = [self objectForKey:@"caption"];
+    return returnString == [NSNull null] ? @"" : returnString;
 }
 @end
