@@ -242,8 +242,7 @@
 //    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]){
 //        ECHorizontalCellView * cellView = [[ECHorizontalCellView alloc] initWithFrame:CGRectMake(0, -5, kDefaultCellWidth, kDefaultCellHeight)];
 //        
-//        //[[UIView alloc] initWithFrame:CGRectMake(0, -5, kDefaultCellWidth, kDefaultCellHeight)]; //TODO: figure out what the -5 is for and how to get rid of the space at the top of the bar
-//        
+//        //[[UIView alloc] initWithFrame:CGRectMake(0, -5, kDefaultCellWidth, kDefaultCellHeight)];//        
 //        //Allocate and initialize the image view
 //        //self.image = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kDefaultImageHeight, kDefaultImageHeight)];
 //        //[self.image setCenter: CGPointMake(containingView.frame.size.width/2.0, kDefaultImageHeight/2.0)];
