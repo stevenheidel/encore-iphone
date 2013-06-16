@@ -11,9 +11,16 @@
 static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1";
 static NSString *const UsersURL = @"users";
 static NSString *const ConcertsURL = @"concerts";
+static NSString *const ArtistsURL = @"artists";
+static NSString *const SearchURL = @"search?term=";
+static NSString *const PastURL = @"past";
+static NSString *const FutureURL = @"future";
+static NSString *const LocationURL = @"location=";
 static NSString *const PostsURL = @"posts";
-//TODO could change to use blocks instead of delegates to return sucess
+
+//TODO could change to use blocks instead of delegates to return success
 @implementation ECJSONFetcher
+
 -(void) fetchConcertsForUserId: (NSString *) fb_id {
     __block NSArray * concertList;
     NSString *  fullConcertsUrl = [NSString stringWithFormat:@"%@/%@/%@/%@",BaseURLString,UsersURL,fb_id,ConcertsURL];
@@ -22,6 +29,41 @@ static NSString *const PostsURL = @"posts";
     AFJSONRequestOperation * operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         concertList = (NSArray*) [(NSDictionary*)JSON objectForKey:@"concerts"];
         [self.delegate fetchedConcerts: concertList];
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        NSLog(@"ERROR:%@",[error description]);
+    }];
+    
+    [operation start];
+}
+
+-(void)fetchArtistsForString:(NSString *)searchStr {
+    __block NSArray * artistList;
+    NSString *  artistSearchUrl = [NSString stringWithFormat:@"%@/%@/%@%@", BaseURLString, ArtistsURL, SearchURL, searchStr];
+    NSURL * url = [NSURL URLWithString:artistSearchUrl];
+    NSURLRequest * request = [NSURLRequest requestWithURL:url];
+    AFJSONRequestOperation * operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        NSLog(@"JSON: %@", [JSON description]);
+        artistList = (NSArray*) [(NSDictionary*)JSON objectForKey:@"artists"];
+        [self.delegate fetchedArtists:artistList];
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        NSLog(@"ERROR:%@",[error description]);
+    }];
+    
+    [operation start];
+}
+
+// GET /artists/:uuid/concerts/past?location=Toronto
+
+-(void)fetchConcertsForArtistId:(NSString *)artistId {
+    __block NSArray * concertList;
+    NSString *userLocation = @"Toronto"; //TODO: Get location dynamically from app delegate
+    NSString *  artistConcertsUrl = [NSString stringWithFormat:@"%@/%@/:%@/%@/%@?%@%@", BaseURLString, ArtistsURL, artistId, ConcertsURL, PastURL, LocationURL, userLocation];
+    NSURL * url = [NSURL URLWithString:artistConcertsUrl];
+    NSURLRequest * request = [NSURLRequest requestWithURL:url];
+    AFJSONRequestOperation * operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        NSLog(@"JSON: %@", [JSON description]);
+        concertList = (NSArray*) [(NSDictionary*)JSON objectForKey:@"concerts"];
+        [self.delegate fetchedArtistConcerts: concertList];
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         NSLog(@"ERROR:%@",[error description]);
     }];

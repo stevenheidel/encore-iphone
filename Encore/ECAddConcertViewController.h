@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ECJSONFetcher.h"
 
-@interface ECAddConcertViewController : UIViewController
+@interface ECAddConcertViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, ECJSONFetcherDelegate>
+
+@property (strong, nonatomic) NSArray *arrData;
+@property (strong, nonatomic) ECJSONFetcher * JSONFetcher;
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @end
