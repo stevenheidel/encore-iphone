@@ -10,6 +10,8 @@
 #import "ECMyConcertViewController.h"
 #import "ECConcertChildViewController.h"
 #import "ECJSONFetcher.h"
+#import "ECCellType.h"
+#import "ECAddConcertViewController.h"
 static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users";
 
 @interface ECProfileViewController ()
@@ -149,15 +151,31 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
 
 #pragma mark - horizontal slider
 - (void) horizontalSelect:(id)horizontalSelect didSelectCell:(KLHorizontalSelectCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    if(self.concertChildVC == nil){
-        self.concertChildVC = [[ECConcertChildViewController alloc] init];
-     self.concertChildVC.view.frame = CGRectMake(self.horizontalSelect.frame.origin.x,self.horizontalSelect.frame.origin.y+self.horizontalSelect.frame.size.height, self.horizontalSelect.frame.size.width, self.view.frame.size.height-self.horizontalSelect.frame.size.height);
-    [self addChildViewController: self.concertChildVC];
-    [self.view addSubview: self.concertChildVC.view];
-    [self.view bringSubviewToFront:self.horizontalSelect.viewForBaselineLayout];
+    ECCellType cellType = indexPath.section;
+    if (cellType == ECCellTypeFutureShows || cellType == ECCellTypePastShows){
+        if(self.concertChildVC == nil){
+            self.concertChildVC = [[ECConcertChildViewController alloc] init];
+            self.concertChildVC.view.frame = CGRectMake(self.horizontalSelect.frame.origin.x,self.horizontalSelect.frame.origin.y+self.horizontalSelect.frame.size.height, self.horizontalSelect.frame.size.width, self.view.frame.size.height-self.horizontalSelect.frame.size.height);
+        }
+        [self.addConcertVC removeFromParentViewController];
+        [self.addConcertVC.view removeFromSuperview];
+        [self addChildViewController: self.concertChildVC];
+        [self.view addSubview: self.concertChildVC.view];
+        self.concertChildVC.concert = [self.concerts objectAtIndex:indexPath.row];
+        [self.concertChildVC updateView];
     }
-    self.concertChildVC.concert = [self.concerts objectAtIndex:indexPath.row];
-    [self.concertChildVC updateView];
+    
+    else {
+        if(self.addConcertVC == nil) {
+            self.addConcertVC = [[ECAddConcertViewController alloc] init];
+            self.addConcertVC.view.frame = CGRectMake(self.horizontalSelect.frame.origin.x,self.horizontalSelect.frame.origin.y+self.horizontalSelect.frame.size.height, self.horizontalSelect.frame.size.width, self.view.frame.size.height-self.horizontalSelect.frame.size.height);
+        }
+        [self.concertChildVC removeFromParentViewController];
+        [self.concertChildVC.view removeFromSuperview];
+        [self addChildViewController: self.addConcertVC];
+        [self.view addSubview:self.addConcertVC.view];
+    }
+    [self.view bringSubviewToFront:self.horizontalSelect.viewForBaselineLayout];
 }
 
 @end

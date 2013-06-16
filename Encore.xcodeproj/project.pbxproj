@@ -75,6 +75,8 @@
 		D4AA4D391766F3D0009B0635 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D4AA4D381766F3D0009B0635 /* Localizable.strings */; };
 		D4AC35F91768C5850087B1E9 /* NSDictionary+ConcertList.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AC35F81768C5850087B1E9 /* NSDictionary+ConcertList.m */; };
 		D4AC35FC1768C8B20087B1E9 /* ECJSONFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AC35FB1768C8B20087B1E9 /* ECJSONFetcher.m */; };
+		D4B1A247176E4C6900A95568 /* ECAddConcertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4B1A245176E4C6900A95568 /* ECAddConcertViewController.m */; };
+		D4B1A248176E4C6900A95568 /* ECAddConcertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4B1A246176E4C6900A95568 /* ECAddConcertViewController.xib */; };
 		D4B502B117680CB700E0C52B /* ECMyConcertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4B502B017680CB700E0C52B /* ECMyConcertViewController.m */; };
 		D4B502B3176823E600E0C52B /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D4B502B2176823E600E0C52B /* Icon.png */; };
 		D4B502B5176823EA00E0C52B /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4B502B4176823EA00E0C52B /* Icon@2x.png */; };
@@ -184,6 +186,9 @@
 		D4AC35F81768C5850087B1E9 /* NSDictionary+ConcertList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+ConcertList.m"; sourceTree = "<group>"; };
 		D4AC35FA1768C8B20087B1E9 /* ECJSONFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECJSONFetcher.h; sourceTree = "<group>"; };
 		D4AC35FB1768C8B20087B1E9 /* ECJSONFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECJSONFetcher.m; sourceTree = "<group>"; };
+		D4B1A244176E4C6800A95568 /* ECAddConcertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECAddConcertViewController.h; sourceTree = "<group>"; };
+		D4B1A245176E4C6900A95568 /* ECAddConcertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECAddConcertViewController.m; sourceTree = "<group>"; };
+		D4B1A246176E4C6900A95568 /* ECAddConcertViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECAddConcertViewController.xib; sourceTree = "<group>"; };
 		D4B502AF17680CB700E0C52B /* ECMyConcertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECMyConcertViewController.h; sourceTree = "<group>"; };
 		D4B502B017680CB700E0C52B /* ECMyConcertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECMyConcertViewController.m; sourceTree = "<group>"; };
 		D4B502B2176823E600E0C52B /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = ../Icon.png; sourceTree = "<group>"; };
@@ -349,6 +354,7 @@
 				D4AA4D011766B374009B0635 /* ECAppDelegate.h */,
 				D4AA4D021766B374009B0635 /* ECAppDelegate.m */,
 				D4AA4D2C1766B9B0009B0635 /* Profile */,
+				D4B1A249176E4C6F00A95568 /* Add Concert */,
 				D4A22254176B7FFC005AB205 /* Horizontal Select */,
 				D4A8DDBF176A134B005E9847 /* Concert */,
 				D4AA4D321766BA8F009B0635 /* Login */,
@@ -429,6 +435,16 @@
 				A0848C0A176D1F0D009BBB38 /* ECLoginPageView.xib */,
 			);
 			name = Login;
+			sourceTree = "<group>";
+		};
+		D4B1A249176E4C6F00A95568 /* Add Concert */ = {
+			isa = PBXGroup;
+			children = (
+				D4B1A244176E4C6800A95568 /* ECAddConcertViewController.h */,
+				D4B1A245176E4C6900A95568 /* ECAddConcertViewController.m */,
+				D4B1A246176E4C6900A95568 /* ECAddConcertViewController.xib */,
+			);
+			name = "Add Concert";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -546,6 +562,7 @@
 				D4A4D813176CC81600EFCBF7 /* ECHorizontalCellView.xib in Resources */,
 				A0848C0B176D1F0D009BBB38 /* ECLoginPageView.xib in Resources */,
 				D43ACD81176D3B7F00E2282A /* ECEndCellView.xib in Resources */,
+				D4B1A248176E4C6900A95568 /* ECAddConcertViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -628,6 +645,7 @@
 				A0848C11176D25D5009BBB38 /* ECLoginPageView.m in Sources */,
 				D43ACD7F176D2EA700E2282A /* ECCellType.m in Sources */,
 				D43ACD84176D3BF400E2282A /* ECEndCellView.m in Sources */,
+				D4B1A247176E4C6900A95568 /* ECAddConcertViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -143,16 +143,15 @@
     [self.tableView scrollToRowAtIndexPath:currentIndex
                           atScrollPosition:UITableViewScrollPositionNone
                                   animated:YES];
-    if ([self.delegate respondsToSelector:@selector(horizontalSelect:didSelectCell:atIndexPath:)]) {
-        //[self.delegate horizontalSelect:self didSelectCell:(KLHorizontalSelectCell*)[self.tableView cellForRowAtIndexPath:currentIndex]];  //Changed by Shimmy on June 14 2013
-        [self.delegate horizontalSelect:self didSelectCell:(KLHorizontalSelectCell*)[self.tableView cellForRowAtIndexPath:currentIndex] atIndexPath:currentIndex];
-    }
 }
 #pragma mark - UITableViewDelegate implementation
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row != self.currentIndex.row ) {
+    if (indexPath.row != self.currentIndex.row || indexPath.section != self.currentIndex.section) {
         //Hide the arrow when scrolling
         [self setCurrentIndex:indexPath];
+    }
+    if ([self.delegate respondsToSelector:@selector(horizontalSelect:didSelectCell:atIndexPath:)]) {
+        [self.delegate horizontalSelect:self didSelectCell:(KLHorizontalSelectCell*)[self.tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
     }
 }
 #pragma mark - UITableViewDataSource implementation
@@ -282,15 +281,16 @@
 
 -(id) initWithType:(ECCellType)type {
     if (self=[super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifierForCellType(type)]) {
-        //ECEndCellView * cellView = [[ECEndCellView alloc] initWithFrame: CGRectMake(0, 0, kEndCellWidth, kEndCellHeight)];
-        UILabel * cellView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kEndCellWidth, kEndCellHeight)];
+        ECEndCellView * cellView = [[ECEndCellView alloc] initWithFrame: CGRectMake(0, -5, kEndCellWidth, kEndCellHeight)];
+        //UILabel * cellView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kEndCellWidth, kEndCellHeight)];
         cellView.backgroundColor = [UIColor clearColor];
         NSString * text = type == ECCellTypeAddPast ? @"Add Past" : @"Add Upcoming";
-        cellView.text = text;
-        cellView.textAlignment = type == ECCellTypeAddPast ? NSTextAlignmentRight : NSTextAlignmentLeft;
+        cellView.textLabel.text = text;//.text = text;
+        cellView.textLabel.textAlignment = type == ECCellTypeAddPast ? NSTextAlignmentRight : NSTextAlignmentLeft;
         [self setTransform:CGAffineTransformMakeRotation(M_PI_2)];
         
         [self addSubview:cellView];
+        [self setSelectionStyle:UITableViewCellSelectionStyleGray];
     }
     return self;
 }

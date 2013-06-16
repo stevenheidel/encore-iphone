@@ -10,6 +10,8 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import "KLHorizontalSelect.h"
 #import "ECJSONFetcher.h"
+@class ECAddConcertViewController;
+
 @interface ECProfileViewController : UIViewController <FBUserSettingsDelegate,KLHorizontalSelectDelegate,ECJSONFetcherDelegate>
 
 -(void) fetchConcerts;
@@ -18,5 +20,5 @@
 @property (strong, nonatomic) NSString * userName;
 //@property (strong) NSDictionary * concerts;
 @property (nonatomic, strong) KLHorizontalSelect* horizontalSelect;
-
+@property (nonatomic, strong) ECAddConcertViewController * addConcertVC;
 @end
