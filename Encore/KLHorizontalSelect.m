@@ -228,7 +228,8 @@
     if (self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"HorizontalCell"]){
         
         ECHorizontalCellView * cellView = [[ECHorizontalCellView alloc] initWithFrame: CGRectMake(0, 0, kDefaultCellWidth, kDefaultCellHeight)];
-        cellView.weekdayLabel.text = [cellData weekday];
+        //cellView.weekdayLabel.text = [cellData weekday];
+        cellView.yearLabel.text = [cellData year];
         cellView.monthLabel.text = [cellData month];
         cellView.dayNumberLabel.text = [cellData day];
         [cellView setTransform:CGAffineTransformMakeRotation(M_PI_2)];

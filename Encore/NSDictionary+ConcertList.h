@@ -17,4 +17,5 @@
 -(NSString *) month;
 -(NSString *) day;
 -(NSString *) weekday;
+-(NSString *) year;
 @end

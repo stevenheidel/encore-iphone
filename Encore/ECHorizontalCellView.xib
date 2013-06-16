@@ -77,7 +77,6 @@
 						<string key="NSFrame">{{16, 15}, {19, 40}}</string>
 						<reference key="NSSuperview" ref="345684109"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -165,11 +164,11 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">weekdayLabel</string>
+						<string key="label">yearLabel</string>
 						<reference key="source" ref="841351856"/>
 						<reference key="destination" ref="498388438"/>
 					</object>
-					<int key="connectionID">111</int>
+					<int key="connectionID">210</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -379,7 +378,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">209</int>
+			<int key="maxID">210</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -390,6 +389,7 @@
 						<string key="dayNumberLabel">UILabel</string>
 						<string key="monthLabel">UILabel</string>
 						<string key="weekdayLabel">UILabel</string>
+						<string key="yearLabel">UILabel</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
 						<object class="IBToOneOutletInfo" key="dayNumberLabel">
@@ -402,6 +402,10 @@
 						</object>
 						<object class="IBToOneOutletInfo" key="weekdayLabel">
 							<string key="name">weekdayLabel</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="yearLabel">
+							<string key="name">yearLabel</string>
 							<string key="candidateClassName">UILabel</string>
 						</object>
 					</dictionary>

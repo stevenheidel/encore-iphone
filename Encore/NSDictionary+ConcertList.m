@@ -59,4 +59,13 @@ static NSString * const kDateFormat = @"yyyy-MM-dd";
     [dateFormat setDateFormat:@"ccc"];
     return [[dateFormat stringFromDate:date] substringToIndex:3];
 }
+
+-(NSString *) year {
+    NSString * dateStr = [self objectForKey:@"date"];
+    NSDateFormatter * dateFormat =  [NSDateFormatter new];
+    [dateFormat setDateFormat:kDateFormat];
+    NSDate * date = [dateFormat dateFromString:dateStr];
+    [dateFormat setDateFormat:@"yyyy"];
+    return [dateFormat stringFromDate:date];
+}
 @end

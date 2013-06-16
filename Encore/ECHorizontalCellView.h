@@ -12,4 +12,6 @@
 @property (nonatomic, strong) IBOutlet UILabel * monthLabel;
 @property (nonatomic, strong) IBOutlet UILabel * dayNumberLabel;
 @property (nonatomic, strong) IBOutlet UILabel * weekdayLabel;
+@property (nonatomic, strong) IBOutlet UILabel * yearLabel;
+
 @end
