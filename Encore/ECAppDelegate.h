@@ -7,12 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+
 @class ECLoginViewController;
 @class ECProfileViewController;
+@protocol FBGraphUser;
 
 @interface ECAppDelegate : UIResponder <UIApplicationDelegate,UINavigationControllerDelegate>
 
--(void) loginCompleted;
+-(void) loginCompletedWithUser: (NSDictionary <FBGraphUser> *) user;
+-(void) openSession;
+
 @property (strong, nonatomic) UIWindow *window;
 @property (strong,nonatomic) ECLoginViewController * loginViewController;
 

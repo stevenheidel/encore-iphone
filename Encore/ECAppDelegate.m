@@ -11,6 +11,7 @@
 #import "ECLoginViewController.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import "ECJSONPoster.h"
+NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:ECSessionStateChangedNotification";
 
 @implementation ECAppDelegate
 
@@ -45,14 +46,107 @@
     
     self.profileViewController.title = @"Encore";
     
-    self.navigationController   = [[UINavigationController alloc] initWithRootViewController:self.loginViewController];
+    //self.navigationController   = [[UINavigationController alloc] initWithRootViewController:self.loginViewController];
+    self.navigationController   = [[UINavigationController alloc] initWithRootViewController:self.profileViewController];
     
     self.window.rootViewController = self.navigationController;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
+    [FBLoginView class];
+    
+    // See if the app has a valid token for the current state.
+    if (FBSession.activeSession.state == FBSessionStateCreatedTokenLoaded) {
+        [self openSession];
+    } else {
+        // No, display the login page.
+        [self showLoginView];
+    }
+    
     
     return YES;
+}
+
+
+-(void) openSession {
+    
+    [FBSession openActiveSessionWithReadPermissions:nil
+                                       allowLoginUI:YES
+                                  completionHandler:
+     ^(FBSession *session,
+       FBSessionState state, NSError *error) {
+         [self sessionStateChanged:session state:state error:error];
+     }];
+}
+
+
+- (void)sessionStateChanged:(FBSession *)session
+                      state:(FBSessionState) state
+                      error:(NSError *)error {
+    
+    UIViewController *topViewController;
+    
+    switch (state) {
+        case FBSessionStateOpen: {
+            [FBRequestConnection startForMeWithCompletionHandler:^(FBRequestConnection *connection,NSDictionary<FBGraphUser> *user,NSError *error){
+                if(!error){
+                    [self loginCompletedWithUser:user];
+                }
+            }];
+            topViewController = [self.navigationController topViewController];
+            if ([[topViewController presentedViewController] isKindOfClass:[ECLoginViewController class]]) {
+                [topViewController dismissViewControllerAnimated:YES completion:nil];
+            }
+            if (![topViewController isKindOfClass:[ECProfileViewController class]]) {
+            }
+            break;
+        }
+        case FBSessionStateClosed: //no break on purpose
+        case FBSessionStateClosedLoginFailed: {
+            // Once the user has logged in, we want them to
+            // be looking at the root view.
+            [self.navigationController popToRootViewControllerAnimated:NO];
+            
+            [FBSession.activeSession closeAndClearTokenInformation];
+            
+            [self showLoginView];
+            break;
+        }
+        default:{
+            break;
+        }
+    }
+    [[NSNotificationCenter defaultCenter] postNotificationName:ECSessionStateChangedNotification object:session];
+    
+    if (error) {
+        UIAlertView *alertView = [[UIAlertView alloc]
+                                  initWithTitle:@"Error"
+                                  message:error.localizedDescription
+                                  delegate:nil
+                                  cancelButtonTitle:@"OK"
+                                  otherButtonTitles:nil];
+        [alertView show];
+    }
+}
+
+-(void) showLoginView {
+    UIViewController *topViewController = [self.navigationController topViewController];
+    
+    UIViewController *modalViewController = [topViewController presentedViewController];
+    
+    // If the login screen is not already displayed, display it. If the login screen is
+    // displayed, then getting back here means the login in progress did not successfully
+    // complete. In that case, notify the login view so it can update its UI appropriately.
+    if (![modalViewController isKindOfClass:[ECLoginViewController class]]) {
+        ECLoginViewController* loginViewController = [[ECLoginViewController alloc]
+                                                      initWithNibName:@"ECLoginViewController"
+                                                      bundle:nil];
+        
+        [topViewController presentViewController:loginViewController animated:NO completion:nil];
+    } else {
+        ECLoginViewController* loginViewController = (ECLoginViewController*)modalViewController;
+        [loginViewController loginFailed];
+    }
 }
 
 // Helper method to wrap logic for handling app links.
@@ -74,19 +168,22 @@
                           }];
 }
 
--(void) loginCompleted {
-    [[FBRequest requestForMe] startWithCompletionHandler:
-     ^(FBRequestConnection *connection, NSDictionary<FBGraphUser> *user, NSError *error) {
-         if (!error) {
-             NSString * userid = user.id;
-             self.profileViewController.facebook_id = userid;
-             self.profileViewController.userName = user.name;
-            [self.navigationController pushViewController:self.profileViewController animated:NO];
-             [ECJSONPoster postUserID:userid];
-         }
-     }];
-
+-(void) loginCompletedWithUser:(NSDictionary <FBGraphUser>*) user {
+//    [[FBRequest requestForMe] startWithCompletionHandler:
+//     ^(FBRequestConnection *connection, NSDictionary<FBGraphUser> *user, NSError *error) {
+//         if (!error) {
+    
+    NSString * userid = user.id;
+    NSLog(@"Logged in user with id: %@",userid);
+    self.profileViewController.facebook_id = userid;
+    self.profileViewController.userName = user.name;
+    //[self.navigationController pushViewController:self.profileViewController animated:NO];
+    [ECJSONPoster postUserID:userid];
+    [self.profileViewController fetchConcerts];
+         //}
+   //  }];
 }
+
 #pragma mark - UINavigationControllerDelegate
 
 - (void)navigationController:(UINavigationController *)navigationController

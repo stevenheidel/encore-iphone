@@ -81,11 +81,7 @@
 #pragma mark - FBLoginView delegate
 
 - (void)loginViewShowingLoggedInUser:(FBLoginView *)loginView {
-    // Upon login, transition to the main UI by pushing it onto the navigation stack.
-    ECAppDelegate *appDelegate = (ECAppDelegate *)[UIApplication sharedApplication].delegate;
-    [appDelegate loginCompleted];
-    //[self.navigationController pushViewController:((UIViewController *)appDelegate.profileViewController) animated:YES];
-   //[self.navigationController.navigationBar.bac]
+    NSLog(@"Completed login successfully");
 }
 
 
@@ -149,6 +145,20 @@
 
 - (void)logOut {
     [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
+
+-(IBAction)performLogin:(id)sender{
+   // [self.spinner startAnimating];  //TODO: Spinner
+    
+    ECAppDelegate* appDelegate = (ECAppDelegate*)[UIApplication sharedApplication].delegate;
+    [appDelegate openSession];
+}
+
+- (void)loginFailed {
+    // User switched back to the app without authorizing. Stay here, but
+    // stop the spinner.
+   // [self.spinner stopAnimating];  //TODO: Add spinner?
 }
 
 #pragma mark - UIScrollView and UIPageControl methods

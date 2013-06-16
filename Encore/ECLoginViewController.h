@@ -14,7 +14,7 @@
     UIPageControl *pageControl;
     NSArray *arrPages;
 }
-
+- (void)loginFailed;
 @property (nonatomic, retain) IBOutlet UIScrollView *descScrollView;
 @property (nonatomic, retain) IBOutlet UIPageControl *pageControl;
 @property (unsafe_unretained, nonatomic) IBOutlet FBLoginView *FBLoginView;

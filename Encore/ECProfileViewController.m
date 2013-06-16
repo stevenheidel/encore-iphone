@@ -41,7 +41,7 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
                                               target:self
                                               action:@selector(settingsButtonWasPressed:)];
     
-    [self fetchConcerts];
+    //[self fetchConcerts];
     
     // Do any additional setup after loading the view, typically from a nib.
     self.horizontalSelect = [[KLHorizontalSelect alloc] initWithFrame: self.view.bounds];
