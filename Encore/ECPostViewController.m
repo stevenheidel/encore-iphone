@@ -30,6 +30,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.userNameLabel.text = [self.post userName];
+    NSLog(@"%@",[self.post description]);
     self.captionLabel.text = [self.post caption];
     [self.postImage setImageWithURL:[self.post imageURL]];
     //[self.profilePicture setImageWithURL:[self.post profilePictureURL]];

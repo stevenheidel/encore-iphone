@@ -41,6 +41,12 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
                                               target:self
                                               action:@selector(settingsButtonWasPressed:)];
     
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
+                                              initWithTitle:@"TEST"
+                                              style:UIBarButtonItemStyleBordered
+                                              target:self
+                                              action:@selector(viewConcerts:)];
+    
     //[self fetchConcerts];
     
     // Do any additional setup after loading the view, typically from a nib.
