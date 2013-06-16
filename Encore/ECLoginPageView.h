@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ECLoginPageView : UIViewController {
+@interface ECLoginPageView : UIView {
     
     UIImageView *image;
     UILabel *lblHeader;
@@ -19,5 +19,7 @@
 @property (nonatomic, retain) IBOutlet UIImageView *image;
 @property (nonatomic, retain) IBOutlet UILabel *lblHeader;
 @property (nonatomic, retain) IBOutlet UILabel *lblText;
+
+- (void)SetUpPageforItem:(NSDictionary *)currPageItem;
 
 @end

@@ -10,6 +10,7 @@
 #import "ECAppDelegate.h"
 #import "ECProfileViewController.h"
 #import "ECJSONPoster.h"
+#import "ECLoginPageView.h"
 @interface ECLoginViewController ()
 
 @end
@@ -43,7 +44,8 @@
         frame.origin.y = 0.0f;
         frame.size = descScrollView.frame.size;
         
-        UIView *subview = [self subviewForItem:currPageItem withFrame:frame];
+        ECLoginPageView *subview = [[ECLoginPageView alloc] initWithFrame:frame];
+        [subview SetUpPageforItem:currPageItem];
         
         [descScrollView addSubview:subview];
     }
@@ -167,47 +169,5 @@
     [self.descScrollView scrollRectToVisible:frame animated:YES];
 }
 
-- (UIView *)subviewForItem:(NSDictionary *)currPageItem withFrame:(CGRect)frame {
-    UIView *subview = [[UIView alloc] initWithFrame:frame];
-    subview.backgroundColor = [UIColor blackColor];
-    
-    UIImageView *image = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[currPageItem objectForKey:@"image"]]];
-    CGFloat imageX = subview.frame.size.width/2 - image.frame.size.width/2;
-    CGFloat imageY = subview.frame.size.height/2 - image.frame.size.height;
-    [image setFrame:CGRectMake(imageX, imageY, image.frame.size.width, image.frame.size.height)];
-    //image.center = subview.center;
-    [subview addSubview:image];
-    
-    UILabel *lblHeader = [[UILabel alloc] initWithFrame:CGRectMake(40.0f, (image.frame.origin.y + image.frame.size.height + 20.0f), 260.0f, 20.0f)];
-    lblHeader.backgroundColor = subview.backgroundColor;
-    lblHeader.textColor = [UIColor whiteColor];
-    lblHeader.text = [currPageItem objectForKey:@"header"];
-    lblHeader.textAlignment = NSTextAlignmentCenter;
-    [subview addSubview:lblHeader];
-    
-    UILabel *lblText = [[UILabel alloc] initWithFrame:CGRectMake(40.0f, (lblHeader.frame.origin.y + lblHeader.frame.size.height + 25.0f), 260.0f, 50.0f)];
-    lblText.backgroundColor = subview.backgroundColor;
-    lblText.textColor = [UIColor whiteColor];
-    
-    UIFont *font = lblText.font;
-    for(int i = 14; i > 10; i--)
-    {
-        // Set the new font size.
-        font = [lblText.font fontWithSize:i];
-        CGSize constraintSize = CGSizeMake(260.0f, MAXFLOAT);
-        CGSize labelSize = [[currPageItem objectForKey:@"text"] sizeWithFont:font constrainedToSize:constraintSize lineBreakMode:NSLineBreakByWordWrapping];
-        if(labelSize.height <= 50.0f)
-            break;
-    }
-    lblText.text = [currPageItem objectForKey:@"text"];
-    lblText.textAlignment = NSTextAlignmentCenter;
-    lblText.numberOfLines = 0;
-    lblText.font = font;
-    //lblText.minimumScaleFactor = 0.1f;
-    lblText.adjustsFontSizeToFitWidth = YES;
-    [subview addSubview:lblText];
-    
-    return subview;
-}
 
 @end
