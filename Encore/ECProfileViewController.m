@@ -58,7 +58,7 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
       //  [self.navigationController setNavigationBarHidden:YES];
 }
 -(void) populateUserDetails {
-                 self.userNameLabel.text = self.userName;
+    self.userNameLabel.text = self.userName;
                 // self.userProfileImage.profileID = [user objectForKey:@"id"];
 }
 

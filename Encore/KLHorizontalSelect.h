@@ -7,8 +7,11 @@
 //  Modified extensively 2013 Simon Bromberg
 
 //Control Properties
-#define kDefaultCellWidth 60.0      //The width of each of the items
+#define kDefaultCellWidth 60.0 //The width of each of the items
+#define kEndCellWidth 120.0
 #define kDefaultCellHeight 70.0       //Height of the items/control
+#define kEndCellHeight 70.0       //Height of the items/control
+
 #define kDefaultGradientTopColor  [UIColor colorWithRed: 242/255.0 green: 243/255.0 blue: 246/255.0 alpha: 1]   //Top Gradient Color
 #define kDefaultGradientBottomColor  [UIColor colorWithRed: 197/255.0 green: 201/255.0 blue: 204/255.0 alpha: 1]    //Bottom Gradient Color
 #define kDefaultLabelHeight 20.0    //Adjusts the height of the label
@@ -23,6 +26,7 @@
 #define kDefaultShadowOffset CGSizeMake(0.0, 3.0)
 #define kDefaultShadowOpacity 0.96
 
+#import "ECCellType.h"
 #import <UIKit/UIKit.h>
 @class  ECHorizontalCellView;
 @interface KLHorizontalSelectCell : UITableViewCell
@@ -36,6 +40,7 @@
 @end
 
 @interface ECHorizontalEndCell : UITableViewCell
+-(id) initWithType: (ECCellType) type;
 @property (nonatomic, strong) UILabel * label;
 @end
 
@@ -46,6 +51,7 @@
 -(void) toggle:(BOOL) animated;
 -(id) initWithFrame:(CGRect)frame color:(UIColor*) color;
 @end
+
 @protocol KLHorizontalSelectDelegate <NSObject>
 @optional
 -(void) horizontalSelect:(id)horizontalSelect didSelectCell:(KLHorizontalSelectCell*) cell;

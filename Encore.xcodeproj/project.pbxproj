@@ -11,6 +11,9 @@
 		A0848C0B176D1F0D009BBB38 /* ECLoginPageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0848C0A176D1F0D009BBB38 /* ECLoginPageView.xib */; };
 		A0848C11176D25D5009BBB38 /* ECLoginPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0848C10176D25D5009BBB38 /* ECLoginPageView.m */; };
 		A0FF1C53176CC88000433768 /* LoginInfoPages.plist in Resources */ = {isa = PBXBuildFile; fileRef = A0FF1C52176CC88000433768 /* LoginInfoPages.plist */; };
+		D43ACD7F176D2EA700E2282A /* ECCellType.m in Sources */ = {isa = PBXBuildFile; fileRef = D43ACD7E176D2EA700E2282A /* ECCellType.m */; };
+		D43ACD81176D3B7F00E2282A /* ECEndCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D43ACD80176D3B7F00E2282A /* ECEndCellView.xib */; };
+		D43ACD84176D3BF400E2282A /* ECEndCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = D43ACD83176D3BF400E2282A /* ECEndCellView.m */; };
 		D4A22253176B7FC1005AB205 /* KLHorizontalSelect.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A22252176B7FC1005AB205 /* KLHorizontalSelect.m */; };
 		D4A2F6CD176959BD00A9E3BF /* ECProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4A2F6CC176959BD00A9E3BF /* ECProfileViewController.xib */; };
 		D4A4D813176CC81600EFCBF7 /* ECHorizontalCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4A4D812176CC81600EFCBF7 /* ECHorizontalCellView.xib */; };
@@ -94,6 +97,11 @@
 		A0848C10176D25D5009BBB38 /* ECLoginPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECLoginPageView.m; sourceTree = "<group>"; };
 		A0FF1C52176CC88000433768 /* LoginInfoPages.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = LoginInfoPages.plist; sourceTree = "<group>"; };
 		B56B831D22E04C90BC664348 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
+		D43ACD7D176D2BA400E2282A /* ECCellType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECCellType.h; sourceTree = "<group>"; };
+		D43ACD7E176D2EA700E2282A /* ECCellType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECCellType.m; sourceTree = "<group>"; };
+		D43ACD80176D3B7F00E2282A /* ECEndCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECEndCellView.xib; sourceTree = "<group>"; };
+		D43ACD82176D3BF400E2282A /* ECEndCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECEndCellView.h; sourceTree = "<group>"; };
+		D43ACD83176D3BF400E2282A /* ECEndCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECEndCellView.m; sourceTree = "<group>"; };
 		D458D6E417682D2700098C18 /* my_basename-29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "my_basename-29.png"; path = "../my_basename-29.png"; sourceTree = "<group>"; };
 		D458D6E517682D3E00098C18 /* my_basename-58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "my_basename-58.png"; path = "../my_basename-58.png"; sourceTree = "<group>"; };
 		D4A22251176B7FC1005AB205 /* KLHorizontalSelect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KLHorizontalSelect.h; sourceTree = "<group>"; };
@@ -213,9 +221,14 @@
 			children = (
 				D4A22251176B7FC1005AB205 /* KLHorizontalSelect.h */,
 				D4A22252176B7FC1005AB205 /* KLHorizontalSelect.m */,
+				D43ACD7D176D2BA400E2282A /* ECCellType.h */,
+				D43ACD7E176D2EA700E2282A /* ECCellType.m */,
 				D4A4D814176CC9A900EFCBF7 /* ECHorizontalCellView.h */,
 				D4A4D815176CC9AA00EFCBF7 /* ECHorizontalCellView.m */,
 				D4A4D812176CC81600EFCBF7 /* ECHorizontalCellView.xib */,
+				D43ACD80176D3B7F00E2282A /* ECEndCellView.xib */,
+				D43ACD82176D3BF400E2282A /* ECEndCellView.h */,
+				D43ACD83176D3BF400E2282A /* ECEndCellView.m */,
 			);
 			name = "Horizontal Select";
 			sourceTree = "<group>";
@@ -532,6 +545,7 @@
 				A0FF1C53176CC88000433768 /* LoginInfoPages.plist in Resources */,
 				D4A4D813176CC81600EFCBF7 /* ECHorizontalCellView.xib in Resources */,
 				A0848C0B176D1F0D009BBB38 /* ECLoginPageView.xib in Resources */,
+				D43ACD81176D3B7F00E2282A /* ECEndCellView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -612,6 +626,8 @@
 				D4A22253176B7FC1005AB205 /* KLHorizontalSelect.m in Sources */,
 				D4A4D816176CC9AA00EFCBF7 /* ECHorizontalCellView.m in Sources */,
 				A0848C11176D25D5009BBB38 /* ECLoginPageView.m in Sources */,
+				D43ACD7F176D2EA700E2282A /* ECCellType.m in Sources */,
+				D43ACD84176D3BF400E2282A /* ECEndCellView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

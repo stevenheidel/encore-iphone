@@ -11,6 +11,7 @@
 #import "KLHorizontalSelect.h"
 #import "NSDictionary+ConcertList.h"
 #import <QuartzCore/QuartzCore.h>
+#define NUM_ENDS 2
 
 @interface KLHorizontalSelect ()
 -(CGFloat) defaultMargin;
@@ -131,8 +132,10 @@
         //Hide the arrow when scrolling
         [self setCurrentIndex:centerIndexPath];
     }
-    [self.arrow show:YES];
-    
+    if (centerIndexPath.section == ECCellTypeAddFuture || centerIndexPath.section == ECCellTypeAddPast) {
+        [self.arrow hide:YES];  //TODO: this doesn't work reliably!
+    }
+    else [self.arrow show:YES];
 }
 -(void) setCurrentIndex:(NSIndexPath *)currentIndex {
     self->_currentIndex = currentIndex;
@@ -154,27 +157,63 @@
 }
 #pragma mark - UITableViewDataSource implementation
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
-    //Add an blank cell with spacing for 
+    if (section == ECCellTypeAddFuture || section == ECCellTypeAddPast) {
+        return 1;
+    }
+    if  (section == ECCellTypeFutureShows)
+        return 0; //TODO: change
     return [self.tableData count];
 }
--(UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath  {
-    static NSString* reuseIdentifier = @"HorizontalCell";
-//    [self.tableView registerClass:[KLHorizontalSelectCell class] forCellReuseIdentifier:reuseIdentifier];
-//    KLHorizontalSelectCell* cell = (KLHorizontalSelectCell*)[self.tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
-    KLHorizontalSelectCell * cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
-    if (cell==nil) {
-        cell = [[KLHorizontalSelectCell alloc]initWithCellData:[self.tableData objectAtIndex: indexPath.row]];
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    // Return the number of sections.
+    return ECNumberOfSections;
+}
+
+//-(ECCellType) cellTypeForRow: (NSUInteger) row {
+//    if (row == 0) {
+//        return ECCellTypeAddPast;
+//    }
+////    if (row == [self.tableData count]-1){
+////        NSLog(@"TABLE data count: %d",[self.tableData count]);
+////        return ECCellTypeAddFuture;
+////    }
+//    return ECCellTypeFutureShows;// | ECCellTypePastShows; //TODO: fix
+//}
+
+-(id) initCellAtIndexPath: (NSIndexPath *) indexPath {
+    ECCellType cellType = indexPath.section;
+    switch (cellType) {
+        case ECCellTypeAddFuture:
+            NSLog(@"added future cell");
+            return (id)[[ECHorizontalEndCell alloc] initWithType:ECCellTypeAddFuture];
+        case ECCellTypeAddPast:
+              NSLog(@"added past cell");
+            return (id)[[ECHorizontalEndCell alloc] initWithType:ECCellTypeAddPast];
+        case ECCellTypeFutureShows:
+        case ECCellTypePastShows:
+            return (id)[[KLHorizontalSelectCell alloc] initWithCellData:[self.tableData objectAtIndex:indexPath.row]];
+        default:
+            return nil;
     }
-//    cell.cellData = [self.tableData objectAtIndex: indexPath.row];
-    //[cell.image setImage:[UIImage imageNamed: [cellData objectForKey:@"image"]]];
-//    [cell.label setText: [cellData month]];
-//    [cell.dateNumberLabel setText:[cellData day]];
-//    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+}
+-(UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath  {
+    ECCellType cellType = indexPath.section;
+    NSString* reuseIdentifier = reuseIdentifierForCellType(cellType);
+
+    id cell = (id)[tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
+    if (cell==nil) {
+        cell = [self initCellAtIndexPath:indexPath];
+    }
     return cell;
 }
 
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    ECCellType type = indexPath.section;
+    if (type == ECCellTypeAddPast || type == ECCellTypeAddFuture) {
+        return kEndCellWidth;
+    }
     return kDefaultCellWidth;
 }
 
@@ -187,6 +226,7 @@
 
 -(id) initWithCellData: (NSDictionary *) cellData {
     if (self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"HorizontalCell"]){
+        
         ECHorizontalCellView * cellView = [[ECHorizontalCellView alloc] initWithFrame: CGRectMake(0, 0, kDefaultCellWidth, kDefaultCellHeight)];
         cellView.weekdayLabel.text = [cellData weekday];
         cellView.monthLabel.text = [cellData month];
@@ -234,6 +274,26 @@
 //    }
 //    return self;
 //}
+
+@end
+
+#import "ECEndCellView.h"
+@implementation ECHorizontalEndCell
+
+-(id) initWithType:(ECCellType)type {
+    if (self=[super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifierForCellType(type)]) {
+        //ECEndCellView * cellView = [[ECEndCellView alloc] initWithFrame: CGRectMake(0, 0, kEndCellWidth, kEndCellHeight)];
+        UILabel * cellView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kEndCellWidth, kEndCellHeight)];
+        cellView.backgroundColor = [UIColor clearColor];
+        NSString * text = type == ECCellTypeAddPast ? @"Add Past" : @"Add Upcoming";
+        cellView.text = text;
+        cellView.textAlignment = type == ECCellTypeAddPast ? NSTextAlignmentRight : NSTextAlignmentLeft;
+        [self setTransform:CGAffineTransformMakeRotation(M_PI_2)];
+        
+        [self addSubview:cellView];
+    }
+    return self;
+}
 
 @end
 

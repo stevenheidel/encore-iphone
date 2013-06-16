@@ -60,7 +60,7 @@
     
     NSString *myListPath = [[NSBundle mainBundle] pathForResource:@"LoginInfoPages" ofType:@"plist"];
     arrPages = [[NSArray alloc]initWithContentsOfFile:myListPath];
-    NSLog(@"%@",arrPages);
+   // NSLog(@"%@",arrPages);
     
     descScrollView.contentSize = CGSizeMake(descScrollView.frame.size.width * arrPages.count, descScrollView.frame.size.height);
 }
