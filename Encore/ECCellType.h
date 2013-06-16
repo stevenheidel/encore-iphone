@@ -12,6 +12,7 @@
 typedef enum {
     ECCellTypeAddPast,
     ECCellTypePastShows,
+    ECCellTypeToday,
     ECCellTypeFutureShows,
     ECCellTypeAddFuture,
     ECNumberOfSections

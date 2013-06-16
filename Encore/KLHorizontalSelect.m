@@ -26,16 +26,13 @@
     return  [self initWithFrame:frame];
 }
 
-- (id)initWithFrame:(CGRect)frame
-{
-    
+- (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         //Configure the arrow
         self.arrow = [[KLHorizontalSelectArrow alloc] initWithFrame:CGRectMake(0, kDefaultCellHeight, kHeaderArrowWidth, kHeaderArrowHeight)color:kDefaultGradientBottomColor];
         [self.arrow setCenter:CGPointMake(self.frame.size.width/2.0, self.arrow.center.y)];
         [self addSubview:self.arrow];
-        
         
         // Make the UITableView's height the width, and width the height so that when we rotate it it will fit exactly
         self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.height, self.frame.size.width)];
@@ -54,12 +51,12 @@
 
         [self addSubview: self.tableView];
 
-
         [self.layer setShadowColor: [kDefaultShadowColor CGColor]];
         [self.layer setShadowOffset: kDefaultShadowOffset];
         [self.layer setShadowOpacity: kDefaultShadowOpacity];
         
         self.backgroundColor = [UIColor whiteColor];
+        
     }
     return self;
 }
@@ -103,36 +100,47 @@
 #pragma mark - UIScrollViewDelegate implementation
 
 -(void) scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
-    [self.arrow show:YES];
+    CGPoint point = [self convertPoint:CGPointMake(self.frame.size.width/2.0, kDefaultCellHeight/2.0) toView:self.tableView];
+     NSIndexPath* centerIndexPath = [self.tableView indexPathForRowAtPoint:point];
+    
+    if ([self shouldHideArrowForSelectedCellType:centerIndexPath.section]) {
+        [self.arrow hide:YES];  //TODO: this doesn't work reliably!
+    }
+
+    else [self.arrow show:YES];
 }
+
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if (scrollView.isDragging) {
         [self.arrow hide:YES];
     }
 }
+
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    [self scrollViewDidFinishScrolling:scrollView];    
+    [self scrollViewDidFinishScrolling:scrollView];
 }
--(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
-{
+
+-(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
     if(!decelerate) {
         [self scrollViewDidFinishScrolling:scrollView];
     }
-    
 }
+
 -(void) scrollViewDidFinishScrolling: (UIScrollView*) scrollView {
     CGPoint point = [self convertPoint:CGPointMake(self.frame.size.width/2.0, kDefaultCellHeight/2.0) toView:self.tableView];
+    NSLog(@"%@", NSStringFromCGPoint(point));
     NSIndexPath* centerIndexPath = [self.tableView indexPathForRowAtPoint:point];
     
     [self.tableView selectRowAtIndexPath: centerIndexPath
                                 animated: YES
                           scrollPosition: UITableViewScrollPositionTop];
     
-    if (centerIndexPath.row != self.currentIndex.row) {
+    NSLog(@"%@", [centerIndexPath description]);
+    if (centerIndexPath.row != self.currentIndex.row || centerIndexPath.section != self.currentIndex.section) {
         //Hide the arrow when scrolling
         [self setCurrentIndex:centerIndexPath];
     }
-    if (centerIndexPath.section == ECCellTypeAddFuture || centerIndexPath.section == ECCellTypeAddPast) {
+    if ([self shouldHideArrowForSelectedCellType:centerIndexPath.section]) {
         [self.arrow hide:YES];  //TODO: this doesn't work reliably!
     }
     else [self.arrow show:YES];
@@ -146,17 +154,31 @@
 }
 #pragma mark - UITableViewDelegate implementation
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+        NSLog(@"%@",[indexPath description]);
+    if ([self shouldHideArrowForSelectedCellType: indexPath.section]) {
+        [self.arrow hide:YES];
+    }
+    
     if (indexPath.row != self.currentIndex.row || indexPath.section != self.currentIndex.section) {
-        //Hide the arrow when scrolling
+        //Hide the arrow when scrolling but don't hide it when clicking on already active cell
         [self setCurrentIndex:indexPath];
     }
+
     if ([self.delegate respondsToSelector:@selector(horizontalSelect:didSelectCell:atIndexPath:)]) {
         [self.delegate horizontalSelect:self didSelectCell:(KLHorizontalSelectCell*)[self.tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
     }
 }
+
+-(BOOL) shouldHideArrowForSelectedCellType: (ECCellType) type {
+    return type == ECCellTypeAddFuture || type == ECCellTypeAddPast;
+}
+
 #pragma mark - UITableViewDataSource implementation
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == ECCellTypeAddFuture || section == ECCellTypeAddPast) {
+        return 1;
+    }
+    if (section == ECCellTypeToday) {
         return 1;
     }
     if  (section == ECCellTypeFutureShows)
@@ -164,22 +186,9 @@
     return [self.tableData count];
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    // Return the number of sections.
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return ECNumberOfSections;
 }
-
-//-(ECCellType) cellTypeForRow: (NSUInteger) row {
-//    if (row == 0) {
-//        return ECCellTypeAddPast;
-//    }
-////    if (row == [self.tableData count]-1){
-////        NSLog(@"TABLE data count: %d",[self.tableData count]);
-////        return ECCellTypeAddFuture;
-////    }
-//    return ECCellTypeFutureShows;// | ECCellTypePastShows; //TODO: fix
-//}
 
 -(id) initCellAtIndexPath: (NSIndexPath *) indexPath {
     ECCellType cellType = indexPath.section;
@@ -190,15 +199,18 @@
         case ECCellTypeAddPast:
               NSLog(@"added past cell");
             return (id)[[ECHorizontalEndCell alloc] initWithType:ECCellTypeAddPast];
+        case ECCellTypeToday:
+            return (id) [[ECTodayCell alloc] init];
         case ECCellTypeFutureShows:
         case ECCellTypePastShows:
-            return (id)[[KLHorizontalSelectCell alloc] initWithCellData:[self.tableData objectAtIndex:indexPath.row]];
+            return (id)[[KLHorizontalSelectCell alloc] initWithCellData:[self.tableData objectAtIndex:indexPath.row] forType:ECCellTypePastShows];
         default:
             return nil;
     }
 }
 -(UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath  {
     ECCellType cellType = indexPath.section;
+
     NSString* reuseIdentifier = reuseIdentifierForCellType(cellType);
 
     id cell = (id)[tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
@@ -216,15 +228,13 @@
     return kDefaultCellWidth;
 }
 
-
 @end
 
 #pragma mark - Table View Cell Subclasses
 #import "ECHorizontalCellView.h"
 @implementation KLHorizontalSelectCell
-
--(id) initWithCellData: (NSDictionary *) cellData {
-    if (self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"HorizontalCell"]){
+-(id) initWithCellData: (NSDictionary *) cellData forType: (ECCellType) cellType {
+    if (self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifierForCellType(cellType)]){
         
         ECHorizontalCellView * cellView = [[ECHorizontalCellView alloc] initWithFrame: CGRectMake(0, 0, kDefaultCellWidth, kDefaultCellHeight)];
         //cellView.weekdayLabel.text = [cellData weekday];
@@ -236,44 +246,27 @@
     }
     return self;
 }
-//
-//-(id) initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
-//    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]){
-//        ECHorizontalCellView * cellView = [[ECHorizontalCellView alloc] initWithFrame:CGRectMake(0, -5, kDefaultCellWidth, kDefaultCellHeight)];
-//        
-//        //[[UIView alloc] initWithFrame:CGRectMake(0, -5, kDefaultCellWidth, kDefaultCellHeight)];//        
-//        //Allocate and initialize the image view
-//        //self.image = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kDefaultImageHeight, kDefaultImageHeight)];
-//        //[self.image setCenter: CGPointMake(containingView.frame.size.width/2.0, kDefaultImageHeight/2.0)];
-//        //        [cellView.dayNumberLabel setTextAlignment:NSTextAlignmentCenter];
-//        //        [cellView.dayNumberLabel setCenter: CGPointMake(containingView.frame.size.width/2.0, kDefaultImageHeight/2.0)];
-//        //        [cellView.dayNumberLabel setBackgroundColor:[UIColor clearColor]];
-//        //        [self.dateNumberLabel setFont: [UIFont boldSystemFontOfSize: 30.0]];
-//        //        [self.dateNumberLabel setTextColor:[UIColor darkGrayColor]];
-//        
-//        //Allocate and initialize the label
-//        //        self.label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, containingView.frame.size.width, kDefaultLabelHeight)];
-//        //        [self.label setTextAlignment:NSTextAlignmentCenter];
-//        //        [self.label setCenter: CGPointMake(containingView.frame.size.width/2.0, kDefaultImageHeight + kDefaultLabelHeight/2.0)];
-//        //        [self.label setBackgroundColor:[UIColor clearColor]];
-//        //        [self.label setTextColor:[UIColor darkGrayColor]];
-//        //        [self.label setFont: [UIFont boldSystemFontOfSize: 18.0]];
-//
-//        
-//        //allocated and initialize the weekday label eg. Tues
-//        //        [containingView addSubview: self.dateNumberLabel];
-//        //        [containingView addSubview: self.label];
-//        //        [containingView addSubview:self.weekDayLabel];
-//        //        cellView.layer.borderColor = [UIColor blackColor].CGColor;
-//        //        cellView.layer.borderWidth = 1.0f;
-//        //Rotate the view 90 degrees
-//        [cellView setTransform:CGAffineTransformMakeRotation(M_PI_2)];
-//        self.cellView = cellView;
-//        [self addSubview:cellView];
-//    }
-//    return self;
-//}
+@end
 
+@implementation ECTodayCell
+-(id) init {
+    if (self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifierForCellType(ECCellTypeToday)]){
+
+        UILabel * cellView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kDefaultCellWidth, kDefaultCellHeight)];
+        cellView.text = @"TODAY";
+        
+//TODO: figure out why this didn't work
+//        NSArray * arr = [[NSBundle mainBundle] loadNibNamed:@"ECTodayCellView" owner:self options:nil];
+        //UIView * view = [arr objectAtIndex:0];
+        [cellView setTransform:CGAffineTransformMakeRotation(M_PI_2)];
+         cellView.backgroundColor = [UIColor clearColor];
+        cellView.font = [UIFont boldSystemFontOfSize:14.0];
+        [self addSubview:cellView];
+       
+    }
+    
+    return self;
+}
 @end
 
 #import "ECEndCellView.h"

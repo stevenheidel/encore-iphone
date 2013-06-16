@@ -7,10 +7,12 @@ NSString* reuseIdentifierForCellType(ECCellType type)
             return @"AddFutureCell";
         case ECCellTypeAddPast:
             return @"AddPastCell";
+        case ECCellTypeToday:
+            return @"TodayCell";
         case ECCellTypeFutureShows: //purposely left blank so goes to next one
         case ECCellTypePastShows:
             return @"HorizontalCell";
         default:
-            break;
+            return @"Cell";
     }
 }

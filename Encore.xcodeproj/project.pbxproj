@@ -77,6 +77,7 @@
 		D4AC35FC1768C8B20087B1E9 /* ECJSONFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AC35FB1768C8B20087B1E9 /* ECJSONFetcher.m */; };
 		D4B1A247176E4C6900A95568 /* ECAddConcertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4B1A245176E4C6900A95568 /* ECAddConcertViewController.m */; };
 		D4B1A248176E4C6900A95568 /* ECAddConcertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4B1A246176E4C6900A95568 /* ECAddConcertViewController.xib */; };
+		D4B1A24B176E704A00A95568 /* ECTodayCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4B1A24A176E704A00A95568 /* ECTodayCellView.xib */; };
 		D4B502B117680CB700E0C52B /* ECMyConcertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4B502B017680CB700E0C52B /* ECMyConcertViewController.m */; };
 		D4B502B3176823E600E0C52B /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D4B502B2176823E600E0C52B /* Icon.png */; };
 		D4B502B5176823EA00E0C52B /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4B502B4176823EA00E0C52B /* Icon@2x.png */; };
@@ -189,6 +190,7 @@
 		D4B1A244176E4C6800A95568 /* ECAddConcertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECAddConcertViewController.h; sourceTree = "<group>"; };
 		D4B1A245176E4C6900A95568 /* ECAddConcertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECAddConcertViewController.m; sourceTree = "<group>"; };
 		D4B1A246176E4C6900A95568 /* ECAddConcertViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECAddConcertViewController.xib; sourceTree = "<group>"; };
+		D4B1A24A176E704A00A95568 /* ECTodayCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECTodayCellView.xib; sourceTree = "<group>"; };
 		D4B502AF17680CB700E0C52B /* ECMyConcertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECMyConcertViewController.h; sourceTree = "<group>"; };
 		D4B502B017680CB700E0C52B /* ECMyConcertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECMyConcertViewController.m; sourceTree = "<group>"; };
 		D4B502B2176823E600E0C52B /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = ../Icon.png; sourceTree = "<group>"; };
@@ -231,6 +233,7 @@
 				D4A4D814176CC9A900EFCBF7 /* ECHorizontalCellView.h */,
 				D4A4D815176CC9AA00EFCBF7 /* ECHorizontalCellView.m */,
 				D4A4D812176CC81600EFCBF7 /* ECHorizontalCellView.xib */,
+				D4B1A24A176E704A00A95568 /* ECTodayCellView.xib */,
 				D43ACD80176D3B7F00E2282A /* ECEndCellView.xib */,
 				D43ACD82176D3BF400E2282A /* ECEndCellView.h */,
 				D43ACD83176D3BF400E2282A /* ECEndCellView.m */,
@@ -563,6 +566,7 @@
 				A0848C0B176D1F0D009BBB38 /* ECLoginPageView.xib in Resources */,
 				D43ACD81176D3B7F00E2282A /* ECEndCellView.xib in Resources */,
 				D4B1A248176E4C6900A95568 /* ECAddConcertViewController.xib in Resources */,
+				D4B1A24B176E704A00A95568 /* ECTodayCellView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

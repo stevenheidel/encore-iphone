@@ -30,7 +30,7 @@
 #import <UIKit/UIKit.h>
 @class  ECHorizontalCellView;
 @interface KLHorizontalSelectCell : UITableViewCell
--(id) initWithCellData: (NSDictionary *) cellData;
+-(id) initWithCellData: (NSDictionary *) cellData forType: (ECCellType) cellType;
 @property (nonatomic, strong) UIImageView* image;
 @property (nonatomic, strong) UILabel* label;
 @property (nonatomic, strong) UILabel* dateNumberLabel;
@@ -42,6 +42,9 @@
 @interface ECHorizontalEndCell : UITableViewCell
 -(id) initWithType: (ECCellType) type;
 @property (nonatomic, strong) UILabel * label;
+@end
+
+@interface ECTodayCell : UITableViewCell
 @end
 
 @interface KLHorizontalSelectArrow : UIView

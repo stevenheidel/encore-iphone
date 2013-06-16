@@ -48,14 +48,6 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
                                               style:UIBarButtonItemStyleBordered
                                               target:self
                                               action:@selector(viewConcerts:)];
-    
-    //[self fetchConcerts];
-    
-    // Do any additional setup after loading the view, typically from a nib.
-    self.horizontalSelect = [[KLHorizontalSelect alloc] initWithFrame: self.view.bounds];
-    self.horizontalSelect.delegate = self;
-    [self.horizontalSelect setTableData: self.concerts];
-    [self.view addSubview: self.horizontalSelect];
 
 
 }
@@ -143,10 +135,24 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
 -(void) fetchedConcerts: (NSArray *) concerts {
     NSLog(@"Successfully fetched %d concerts", [concerts count]);
     self.concerts = [NSMutableArray arrayWithArray:concerts];
+    
+    
+    self.horizontalSelect = [[KLHorizontalSelect alloc] initWithFrame: self.view.bounds];
+    self.horizontalSelect.delegate = self;
+    [self.horizontalSelect setTableData: self.concerts];
+    [self.view addSubview: self.horizontalSelect];
+    
     self.horizontalSelect.tableData = concerts;
     [self.horizontalSelect.tableView reloadData];
+    
     //TODO: get it to load first view for "Today"
-    [self.horizontalSelect.tableView selectRowAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
+    NSIndexPath * startIndexPath = [NSIndexPath indexPathForItem:[self.concerts count]-1 inSection:ECCellTypePastShows];
+    UITableView * tableView = self.horizontalSelect.tableView;
+    
+    [tableView selectRowAtIndexPath:startIndexPath animated:YES scrollPosition:UITableViewScrollPositionTop];
+    if([tableView.delegate respondsToSelector:@selector(tableView: didSelectRowAtIndexPath:)]){
+        [tableView.delegate tableView:tableView didSelectRowAtIndexPath:startIndexPath];
+    }
 }
 
 #pragma mark - horizontal slider
