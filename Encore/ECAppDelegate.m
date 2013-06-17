@@ -62,8 +62,6 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
         // No, display the login page.
         [self showLoginView];
     }
-    
-    
     return YES;
 }
 

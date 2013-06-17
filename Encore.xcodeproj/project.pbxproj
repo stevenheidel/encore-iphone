@@ -81,6 +81,8 @@
 		D4B502B117680CB700E0C52B /* ECMyConcertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4B502B017680CB700E0C52B /* ECMyConcertViewController.m */; };
 		D4B502B3176823E600E0C52B /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D4B502B2176823E600E0C52B /* Icon.png */; };
 		D4B502B5176823EA00E0C52B /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4B502B4176823EA00E0C52B /* Icon@2x.png */; };
+		D4B6707A176F57E000A80BA3 /* ECTodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4B67078176F57E000A80BA3 /* ECTodayViewController.m */; };
+		D4B6707B176F57E000A80BA3 /* ECTodayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4B67079176F57E000A80BA3 /* ECTodayViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -195,6 +197,9 @@
 		D4B502B017680CB700E0C52B /* ECMyConcertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECMyConcertViewController.m; sourceTree = "<group>"; };
 		D4B502B2176823E600E0C52B /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = ../Icon.png; sourceTree = "<group>"; };
 		D4B502B4176823EA00E0C52B /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "../Icon@2x.png"; sourceTree = "<group>"; };
+		D4B67077176F57E000A80BA3 /* ECTodayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECTodayViewController.h; sourceTree = "<group>"; };
+		D4B67078176F57E000A80BA3 /* ECTodayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECTodayViewController.m; sourceTree = "<group>"; };
+		D4B67079176F57E000A80BA3 /* ECTodayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECTodayViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -357,8 +362,8 @@
 				D4AA4D011766B374009B0635 /* ECAppDelegate.h */,
 				D4AA4D021766B374009B0635 /* ECAppDelegate.m */,
 				D4AA4D2C1766B9B0009B0635 /* Profile */,
-				D4B1A249176E4C6F00A95568 /* Add Concert */,
 				D4A22254176B7FFC005AB205 /* Horizontal Select */,
+				D4B1A249176E4C6F00A95568 /* Add Concert */,
 				D4A8DDBF176A134B005E9847 /* Concert */,
 				D4AA4D321766BA8F009B0635 /* Login */,
 				D4A8DDB2176A133B005E9847 /* en.lproj */,
@@ -421,6 +426,9 @@
 				D4A8DE06176ACEDA005E9847 /* ECConcertChildViewController.h */,
 				D4A8DE07176ACEDA005E9847 /* ECConcertChildViewController.m */,
 				D4A8DE08176ACEDA005E9847 /* ECConcertChildViewController.xib */,
+				D4B67077176F57E000A80BA3 /* ECTodayViewController.h */,
+				D4B67078176F57E000A80BA3 /* ECTodayViewController.m */,
+				D4B67079176F57E000A80BA3 /* ECTodayViewController.xib */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -567,6 +575,7 @@
 				D43ACD81176D3B7F00E2282A /* ECEndCellView.xib in Resources */,
 				D4B1A248176E4C6900A95568 /* ECAddConcertViewController.xib in Resources */,
 				D4B1A24B176E704A00A95568 /* ECTodayCellView.xib in Resources */,
+				D4B6707B176F57E000A80BA3 /* ECTodayViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -650,6 +659,7 @@
 				D43ACD7F176D2EA700E2282A /* ECCellType.m in Sources */,
 				D43ACD84176D3BF400E2282A /* ECEndCellView.m in Sources */,
 				D4B1A247176E4C6900A95568 /* ECAddConcertViewController.m in Sources */,
+				D4B6707A176F57E000A80BA3 /* ECTodayViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

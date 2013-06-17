@@ -52,6 +52,7 @@
 -(void) show:(BOOL) animated;
 -(void) hide:(BOOL) animated;
 -(void) toggle:(BOOL) animated;
+-(void) lock: (CGPoint) point;
 -(id) initWithFrame:(CGRect)frame color:(UIColor*) color;
 @end
 

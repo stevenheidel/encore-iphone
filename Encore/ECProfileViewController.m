@@ -12,6 +12,7 @@
 #import "ECJSONFetcher.h"
 #import "ECCellType.h"
 #import "ECAddConcertViewController.h"
+#import "ECTodayViewController.h"
 static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users";
 
 @interface ECProfileViewController ()
@@ -158,30 +159,79 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
 #pragma mark - horizontal slider
 - (void) horizontalSelect:(id)horizontalSelect didSelectCell:(KLHorizontalSelectCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     ECCellType cellType = indexPath.section;
-    if (cellType == ECCellTypeFutureShows || cellType == ECCellTypePastShows){
-        if(self.concertChildVC == nil){
-            self.concertChildVC = [[ECConcertChildViewController alloc] init];
-            self.concertChildVC.view.frame = CGRectMake(self.horizontalSelect.frame.origin.x,self.horizontalSelect.frame.origin.y+self.horizontalSelect.frame.size.height, self.horizontalSelect.frame.size.width, self.view.frame.size.height-self.horizontalSelect.frame.size.height);
-        }
-        [self.addConcertVC removeFromParentViewController];
-        [self.addConcertVC.view removeFromSuperview];
-        [self addChildViewController: self.concertChildVC];
-        [self.view addSubview: self.concertChildVC.view];
+    
+    [self addChildViewForCellType:cellType];
+    [self removeFromViewForCurrentCellType:cellType];
+    [self.view bringSubviewToFront:self.horizontalSelect.viewForBaselineLayout];
+    
+    if (cellType == ECCellTypeFutureShows || cellType == ECCellTypePastShows) {
         self.concertChildVC.concert = [self.concerts objectAtIndex:indexPath.row];
         [self.concertChildVC updateView];
     }
-    
-    else {
-        if(self.addConcertVC == nil) {
-            self.addConcertVC = [[ECAddConcertViewController alloc] init];
-            self.addConcertVC.view.frame = CGRectMake(self.horizontalSelect.frame.origin.x,self.horizontalSelect.frame.origin.y+self.horizontalSelect.frame.size.height, self.horizontalSelect.frame.size.width, self.view.frame.size.height-self.horizontalSelect.frame.size.height);
-        }
-        [self.concertChildVC removeFromParentViewController];
-        [self.concertChildVC.view removeFromSuperview];
-        [self addChildViewController: self.addConcertVC];
-        [self.view addSubview:self.addConcertVC.view];
-    }
-    [self.view bringSubviewToFront:self.horizontalSelect.viewForBaselineLayout];
 }
 
+-(void) addChildViewForCellType:(ECCellType) cellType {
+    UIViewController * child = [self childViewControllerForCellType: cellType];
+    if ([self childViewControllerForCellType: cellType] == nil) {
+        [self allocateChildViewControllerForCellType: cellType];
+        child = [self childViewControllerForCellType:cellType];
+        child.view.frame = [self childViewControllerRect];
+        [self addChildViewController:child];
+    }
+    [self.view addSubview:child.view];
+}
+
+-(UIViewController *) childViewControllerForCellType: (ECCellType) cellType {
+    switch (cellType) {
+        case ECCellTypeAddPast:
+        case ECCellTypeAddFuture:
+            return self.addConcertVC;
+        case ECCellTypeFutureShows:
+        case ECCellTypePastShows:
+            return self.concertChildVC;
+        case ECCellTypeToday:
+            return self.todayVC;
+        default:
+            return nil;
+    }
+    return nil;
+}
+
+-(void) allocateChildViewControllerForCellType: (ECCellType) cellType {
+    switch (cellType) {
+        case ECCellTypeToday:
+            self.todayVC = [ECTodayViewController new];
+            break;
+        case ECCellTypePastShows:
+        case ECCellTypeFutureShows:
+            self.concertChildVC =[ECConcertChildViewController new];
+            break;
+        case ECCellTypeAddFuture:
+        case ECCellTypeAddPast:
+            self.addConcertVC = [ECAddConcertViewController new];
+            break;
+        default:
+            break;
+    }
+}
+
+-(void) removeFromViewForCurrentCellType: (ECCellType) cellType {
+    if (cellType != ECCellTypeAddPast && cellType != ECCellTypeAddFuture) {
+       // [self.addConcertVC removeFromParentViewController]; Doesn't seem to be necessary? //TODO: doublecheck
+        [self.addConcertVC.view removeFromSuperview];
+    }
+    
+    if (cellType != ECCellTypeFutureShows && cellType != ECCellTypePastShows) {
+        //[self.concertChildVC removeFromParentViewController];
+        [self.concertChildVC.view removeFromSuperview];
+    }
+    
+    if (cellType != ECCellTypeToday) {
+        //[self.todayVC removeFromParentViewController];
+        [self.todayVC.view removeFromSuperview];
+    }
+}
+-(CGRect) childViewControllerRect{
+    return CGRectMake(self.horizontalSelect.frame.origin.x, self.horizontalSelect.frame.origin.y+self.horizontalSelect.frame.size.height, self.horizontalSelect.frame.size.width, self.view.frame.size.height-self.horizontalSelect.frame.size.height);
+}
 @end
