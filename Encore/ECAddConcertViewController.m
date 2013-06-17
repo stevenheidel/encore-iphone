@@ -113,6 +113,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
 -(void) clearSearchResultsTable {
     self.arrData = nil;
     [self.tableView reloadData];
+    selectionStage = ECSelectArtist;
 }
 #pragma mark - UISearchBarDelegate Methods
 
@@ -121,14 +122,15 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     [self.JSONFetcher fetchArtistsForString:[searchBar text]];
     [searchBar resignFirstResponder];
     [searchBar setShowsCancelButton:NO animated:YES];
+    
+  //  [self.tableView]
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
     [searchBar resignFirstResponder];
     [searchBar setShowsCancelButton:NO animated:YES];
     searchBar.text = @"";
-    self.arrData = nil;
-    [self.tableView reloadData];
+    [self clearSearchResultsTable];
 }
 
 -(void)searchBar:(UISearchBar *) searchBar textDidChange: (NSString*) searchText {
