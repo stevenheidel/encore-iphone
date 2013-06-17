@@ -8,7 +8,7 @@
 
 #import "ECAddConcertViewController.h"
 #import "ECConcertDetailViewController.h"
-
+#import "NSDictionary+ConcertList.h"
 static NSString *const ArtistCellIdentifier = @"artistCell";
 static NSString *const ConcertCellIdentifier = @"concertCell";
 
@@ -89,16 +89,18 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    NSDictionary* data = (NSDictionary*)[self.arrData objectAtIndex:indexPath.row];
     switch (selectionStage) {
         case ECSelectArtist: {
             selectionStage = ECSelectConcert;
-            NSString *artistId = [(NSDictionary *)[self.arrData objectAtIndex:[indexPath row]] objectForKey:@"server_id"];
-            [self.JSONFetcher fetchConcertsForArtistId:artistId];
+            NSString *artistID = [data serverID];
+            [self.JSONFetcher fetchConcertsForArtistId:artistID];
             break;
         }
         case ECSelectConcert: {
-            ECConcertDetailViewController * concertDetail = [[ECConcertDetailViewController alloc] init];
-            concertDetail.concert = [self.arrData objectAtIndex:indexPath.row];
+            ECConcertDetailViewController * concertDetail = [ECConcertDetailViewController new];
+            concertDetail.concert = data;
             [self.navigationController pushViewController:concertDetail animated:YES];
         }
             break;
@@ -107,9 +109,14 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     }
 }
 
+-(void) clearSearchResultsTable {
+    self.arrData = nil;
+    [self.tableView reloadData];
+}
 #pragma mark - UISearchBarDelegate Methods
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    [self clearSearchResultsTable];
     [self.JSONFetcher fetchArtistsForString:[searchBar text]];
     [searchBar resignFirstResponder];
     [searchBar setShowsCancelButton:NO animated:YES];
@@ -125,9 +132,10 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
 
 -(void)searchBar:(UISearchBar *) searchBar textDidChange: (NSString*) searchText {
 //can automatically send a search each time a character is typed / group of characters
-    if ([searchText length] == 0) {
-        self.arrData = nil;
-        [self.tableView reloadData];
+    
+    
+    if ([searchText length] == 0) { //if user clicks clear button, clear the table
+        [self clearSearchResultsTable];
     }
 }
 
@@ -139,6 +147,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     [searchBar setShowsCancelButton:YES animated:YES];
 }
 
+#pragma mark - Did Receive Memory Warning
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
