@@ -7,6 +7,7 @@
 //
 
 #import "ECAddConcertViewController.h"
+#import "ECConcertDetailViewController.h"
 
 static NSString *const ArtistCellIdentifier = @"artistCell";
 static NSString *const ConcertCellIdentifier = @"concertCell";
@@ -33,6 +34,8 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     
     self.JSONFetcher = [[ECJSONFetcher alloc] init];
     self.JSONFetcher.delegate = self;
+    
+    selectionStage = ECSelectArtist; //TODO: Change to popular concerts once API is set up
 }
 
 
@@ -48,21 +51,59 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     [self.tableView reloadData];
 }
 
+#pragma mark - UITableView methods
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:ConcertCellIdentifier];
                              
     if (cell == nil)
     {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ConcertCellIdentifier];
+        //TODO: initilize cells from nib files, once we have the designs
+        switch (selectionStage) {
+            case ECSelectPopular: {
+
+                break;
+            }
+            case ECSelectArtist: {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ArtistCellIdentifier];
+                NSDictionary *artistDic = (NSDictionary *)[self.arrData objectAtIndex:indexPath.row];
+                cell.textLabel.text = [artistDic objectForKey:@"name"];
+                break;
+            }
+            case ECSelectConcert: {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ConcertCellIdentifier];
+                NSDictionary *ConcertDic = (NSDictionary *)[self.arrData objectAtIndex:indexPath.row];
+                cell.textLabel.text = [ConcertDic objectForKey:@"name"];
+                break;
+            }
+            default:
+                break;
+        }
     }
-    NSDictionary *artistDic = (NSDictionary *)[self.arrData objectAtIndex:indexPath.row];
-    cell.textLabel.text = [artistDic objectForKey:@"name"];
     return cell;
-                                                       
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.arrData.count;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    switch (selectionStage) {
+        case ECSelectArtist: {
+            selectionStage = ECSelectConcert;
+            NSString *artistId = [(NSDictionary *)[self.arrData objectAtIndex:[indexPath row]] objectForKey:@"server_id"];
+            [self.JSONFetcher fetchConcertsForArtistId:artistId];
+            break;
+        }
+        case ECSelectConcert: {
+            ECConcertDetailViewController * concertDetail = [[ECConcertDetailViewController alloc] init];
+            concertDetail.concert = [self.arrData objectAtIndex:indexPath.row];
+            [self.navigationController pushViewController:concertDetail animated:YES];
+        }
+            break;
+        default:
+            break;
+    }
 }
 
 #pragma mark - UISearchBarDelegate Methods
@@ -70,6 +111,16 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     [self.JSONFetcher fetchArtistsForString:[searchBar text]];
     [searchBar resignFirstResponder];
+    [searchBar setShowsCancelButton:NO animated:YES];
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    [searchBar resignFirstResponder];
+    [searchBar setShowsCancelButton:NO animated:YES];
+}
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    [searchBar setShowsCancelButton:YES animated:YES];
 }
 
 - (void)didReceiveMemoryWarning
