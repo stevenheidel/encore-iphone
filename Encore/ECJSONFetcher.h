@@ -12,7 +12,7 @@
 @interface ECJSONFetcher : NSObject
 -(void) fetchConcertsForUserId: (NSString *) id;
 -(void)fetchArtistsForString:(NSString *)searchStr;
--(void)fetchConcertsForArtistId:(NSString *)artistId;
+-(void)fetchConcertsForArtistID:(NSString *)artistID;
 -(void) fetchPostsForConcertWithID: (NSString *) serverID;
 @property (nonatomic,unsafe_unretained) id <ECJSONFetcherDelegate> delegate;
 @end
