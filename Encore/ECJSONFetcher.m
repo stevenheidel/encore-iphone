@@ -15,7 +15,7 @@ static NSString *const ArtistsURL = @"artists";
 static NSString *const SearchURL = @"search?term=";
 static NSString *const PastURL = @"past";
 static NSString *const FutureURL = @"future";
-static NSString *const LocationURL = @"location=";
+static NSString *const CityURL = @"city=";
 static NSString *const PostsURL = @"posts";
 
 //TODO could change to use blocks instead of delegates to return success
@@ -53,12 +53,12 @@ static NSString *const PostsURL = @"posts";
     [operation start];
 }
 
-// GET /artists/:uuid/concerts/past?location=Toronto
+
 
 -(void)fetchConcertsForArtistId:(NSString *)artistId {
     __block NSArray * concertList;
     NSString *userLocation = @"Toronto"; //TODO: Get location dynamically from app delegate
-    NSString *  artistConcertsUrl = [NSString stringWithFormat:@"%@/%@/:%@/%@/%@?%@%@", BaseURLString, ArtistsURL, artistId, ConcertsURL, PastURL, LocationURL, userLocation];
+    NSString *  artistConcertsUrl = [NSString stringWithFormat:@"%@/%@/%@/%@/%@?%@%@", BaseURLString, ArtistsURL, artistId, ConcertsURL, PastURL, CityURL, userLocation];
     NSURL * url = [NSURL URLWithString:artistConcertsUrl];
     NSURLRequest * request = [NSURLRequest requestWithURL:url];
     AFJSONRequestOperation * operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
