@@ -93,14 +93,15 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     NSDictionary* data = (NSDictionary*)[self.arrData objectAtIndex:indexPath.row];
     switch (selectionStage) {
         case ECSelectArtist: {
-            selectionStage = ECSelectConcert;
+            selectionStage = ECSelectConcert;  //set up next selection stage
             NSString *artistID = [data serverID];
-            [self.JSONFetcher fetchConcertsForArtistId:artistID];
+            [self.JSONFetcher fetchConcertsForArtistID:artistID];
             break;
         }
         case ECSelectConcert: {
             ECConcertDetailViewController * concertDetail = [ECConcertDetailViewController new];
             concertDetail.concert = data;
+            NSLog(@"%@",[data description]);
             [self.navigationController pushViewController:concertDetail animated:YES];
         }
             break;

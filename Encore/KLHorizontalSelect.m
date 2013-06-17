@@ -156,7 +156,6 @@
 }
 #pragma mark - UITableViewDelegate implementation
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-        NSLog(@"%@",[indexPath description]);
     if ([self shouldHideArrowForSelectedCellType: indexPath.section]) {
         [self.arrow hide:YES];
     }

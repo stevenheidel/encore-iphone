@@ -13,6 +13,7 @@
 #import "ECJSONFetcher.h"
 #import "ECCellType.h"
 #import "ECAddConcertViewController.h"
+#import "NSDictionary+ConcertList.h"
 #import "ECTodayViewController.h"
 static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users";
 
@@ -138,23 +139,23 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
 
 #pragma mark - json fetcher delegate
 -(void) fetchedConcerts: (NSDictionary *) concerts {
-    NSLog(@"Successfully fetched %d concerts", [concerts count]);
+    NSLog(@"Successfully fetched %d past concerts and %d future concerts", [[concerts past] count],[[concerts future]count]);
     self.concerts = [NSMutableDictionary dictionaryWithDictionary: concerts];
-//    self.pastConcerts = [concerts objectForKey:@"past"];  //TODO: fix to use category
-//    self.futureConcerts = [concerts objectForKey:@"future"];
-    
+    [self setUpHorizontalSelect];
+    [self selectTodayCell];
+}
+
+-(void) setUpHorizontalSelect {
     self.horizontalSelect = [[KLHorizontalSelect alloc] initWithFrame: self.view.bounds];
     self.horizontalSelect.delegate = self;
     [self.horizontalSelect setTableData: self.concerts];
     [self.view addSubview: self.horizontalSelect];
-
-    [self.horizontalSelect.tableView reloadData];
-    
-    //TODO: get it to load first view for "Today"
-    NSIndexPath * startIndexPath = [NSIndexPath indexPathForItem:[self.concerts count]-1 inSection:ECCellTypePastShows];
+}
+-(void) selectTodayCell {
+    NSIndexPath * startIndexPath = [NSIndexPath indexPathForItem:0 inSection:ECCellTypeToday];
     UITableView * tableView = self.horizontalSelect.tableView;
     
-    [tableView selectRowAtIndexPath:startIndexPath animated:YES scrollPosition:UITableViewScrollPositionTop];
+    [tableView selectRowAtIndexPath:startIndexPath animated:NO scrollPosition:UITableViewScrollPositionTop];
     if([tableView.delegate respondsToSelector:@selector(tableView: didSelectRowAtIndexPath:)]){
         [tableView.delegate tableView:tableView didSelectRowAtIndexPath:startIndexPath];
     }
