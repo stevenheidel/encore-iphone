@@ -18,4 +18,9 @@
 -(NSString *) day;
 -(NSString *) weekday;
 -(NSString *) year;
+
+-(NSArray *) past;
+-(NSArray *) future;
+
+-(BOOL) beforeToday;
 @end

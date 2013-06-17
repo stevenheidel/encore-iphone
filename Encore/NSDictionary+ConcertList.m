@@ -68,4 +68,20 @@ static NSString * const kDateFormat = @"yyyy-MM-dd";
     [dateFormat setDateFormat:@"yyyy"];
     return [dateFormat stringFromDate:date];
 }
+
+-(BOOL) beforeToday {
+    NSLog(@"beforeToday doesn't work yet");
+    //The date is stored without time and it's annoying to fix so left as is
+    return FALSE;
+}
+
+#pragma mark -
+
+-(NSArray *) past {
+    return [self objectForKey:@"past"];
+}
+
+-(NSArray *) future {
+    return [self objectForKey:@"future"];
+}
 @end
