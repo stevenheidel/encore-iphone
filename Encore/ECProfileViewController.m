@@ -160,8 +160,8 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
     ECCellType cellType = indexPath.section;
     if (cellType == ECCellTypeFutureShows || cellType == ECCellTypePastShows){
         if(self.concertChildVC == nil){
-            self.concertChildVC = [[ECConcertChildViewController alloc] init];
-            self.concertChildVC.view.frame = CGRectMake(self.horizontalSelect.frame.origin.x,self.horizontalSelect.frame.origin.y+self.horizontalSelect.frame.size.height, self.horizontalSelect.frame.size.width, self.view.frame.size.height-self.horizontalSelect.frame.size.height);
+            self.concertChildVC = [ECConcertChildViewController new];
+            self.concertChildVC.view.frame = [self childViewControllerRect];
         }
         [self.addConcertVC removeFromParentViewController];
         [self.addConcertVC.view removeFromSuperview];
@@ -171,17 +171,24 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
         [self.concertChildVC updateView];
     }
     
-    else {
+    else if (cellType == ECCellTypeAddFuture || cellType == ECCellTypeAddPast) {
         if(self.addConcertVC == nil) {
-            self.addConcertVC = [[ECAddConcertViewController alloc] init];
-            self.addConcertVC.view.frame = CGRectMake(self.horizontalSelect.frame.origin.x,self.horizontalSelect.frame.origin.y+self.horizontalSelect.frame.size.height, self.horizontalSelect.frame.size.width, self.view.frame.size.height-self.horizontalSelect.frame.size.height);
+            self.addConcertVC = [ECAddConcertViewController new];
+            self.addConcertVC.view.frame = [self childViewControllerRect];
         }
         [self.concertChildVC removeFromParentViewController];
         [self.concertChildVC.view removeFromSuperview];
         [self addChildViewController: self.addConcertVC];
         [self.view addSubview:self.addConcertVC.view];
     }
+    
+    else if (cellType == ECCellTypeToday){
+
+    }
     [self.view bringSubviewToFront:self.horizontalSelect.viewForBaselineLayout];
 }
 
+-(CGRect) childViewControllerRect{
+    return CGRectMake(self.horizontalSelect.frame.origin.x, self.horizontalSelect.frame.origin.y+self.horizontalSelect.frame.size.height, self.horizontalSelect.frame.size.width, self.view.frame.size.height-self.horizontalSelect.frame.size.height);
+}
 @end
