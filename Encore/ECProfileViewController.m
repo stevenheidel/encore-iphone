@@ -7,6 +7,7 @@
 //
 
 #import "ECProfileViewController.h"
+#import "ECAppDelegate.h"
 #import "ECMyConcertViewController.h"
 #import "ECConcertChildViewController.h"
 #import "ECJSONFetcher.h"
@@ -51,8 +52,9 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
                                               style:UIBarButtonItemStyleBordered
                                               target:self
                                               action:@selector(viewConcerts:)];
-
-
+    
+    ECAppDelegate *appDelegate = (ECAppDelegate *)[[UIApplication sharedApplication] delegate];
+    [appDelegate performSelectorInBackground:@selector(getUserLocation) withObject:nil];
 }
 -(void) viewWillAppear:(BOOL)animated {
     if (FBSession.activeSession.isOpen){

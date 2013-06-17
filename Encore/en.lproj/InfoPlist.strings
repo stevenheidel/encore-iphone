@@ -1,2 +1,2 @@
 /* Localized versions of Info.plist keys */
-
+NSLocationUsageDescription = "Encore will use your location to find concerts in your area";

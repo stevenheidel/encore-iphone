@@ -18,6 +18,7 @@
 @property (strong, nonatomic) FBUserSettingsViewController *settingsViewController;
 @property (strong, nonatomic) NSString * facebook_id;
 @property (strong, nonatomic) NSString * userName;
+@property (strong, nonatomic) NSString * userCity;
 //@property (strong) NSDictionary * concerts;
 @property (nonatomic, strong) KLHorizontalSelect* horizontalSelect;
 @property (nonatomic, strong) ECAddConcertViewController * addConcertVC;

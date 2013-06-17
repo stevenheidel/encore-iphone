@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
 
 @class ECLoginViewController;
 @class ECProfileViewController;
 @protocol FBGraphUser;
 
-@interface ECAppDelegate : UIResponder <UIApplicationDelegate,UINavigationControllerDelegate>
+@interface ECAppDelegate : UIResponder <UIApplicationDelegate,UINavigationControllerDelegate, CLLocationManagerDelegate>
 
 -(void) loginCompletedWithUser: (NSDictionary <FBGraphUser> *) user;
 -(void) openSession;
@@ -23,6 +24,8 @@
 @property (strong, nonatomic) UINavigationController *navigationController;
 
 @property (strong, nonatomic) ECProfileViewController *profileViewController;
+
+@property (strong, nonatomic) CLLocationManager *locationManager;
 
 @property BOOL isNavigating;
 @end

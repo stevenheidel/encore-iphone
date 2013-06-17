@@ -44,6 +44,15 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
     self.profileViewController = [[ECProfileViewController alloc] init];
     self.loginViewController = [[ECLoginViewController alloc] init];
     
+    if(self.locationManager==nil){
+        _locationManager = [[CLLocationManager alloc] init];
+    
+        _locationManager.delegate = self;
+        _locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers;
+        _locationManager.distanceFilter = 5000;
+        self.locationManager=_locationManager;
+    }
+    
     self.profileViewController.title = @"Encore";
     
     //self.navigationController   = [[UINavigationController alloc] initWithRootViewController:self.loginViewController];
@@ -180,6 +189,27 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
     [self.profileViewController fetchConcerts];
          //}
    //  }];
+}
+
+- (void)getUserLocation {
+    [self.locationManager startUpdatingLocation];
+}
+
+-(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
+    //Ensure location update is recent
+    NSDate* eventDate = newLocation.timestamp;
+    NSTimeInterval howRecent = [eventDate timeIntervalSinceNow];
+    if (abs(howRecent) < 15.0)
+    {
+        if(newLocation.horizontalAccuracy < 1000.0){
+            //Ensure location is accurate to the nearest kilometer
+            NSLog(@"latitude %+.6f, longitude %+.6f\n", newLocation.coordinate.latitude, newLocation.coordinate.longitude);
+            NSLog(@"Horizontal Accuracy:%f", newLocation.horizontalAccuracy);
+            //turn off location services once we've gotten a good location
+            [manager stopUpdatingLocation];
+            //TODO: add code for getting the user's city from the server using coordinates
+        }
+    }
 }
 
 #pragma mark - UINavigationControllerDelegate

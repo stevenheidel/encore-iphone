@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		255A9AF4A1C64F71B97704C8 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 918A85E0EEDE48F3BEFD223A /* libPods.a */; };
+		A04C4333176F85F9003B4299 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A04C4332176F85F9003B4299 /* CoreLocation.framework */; };
 		A0848C0B176D1F0D009BBB38 /* ECLoginPageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0848C0A176D1F0D009BBB38 /* ECLoginPageView.xib */; };
 		A0848C11176D25D5009BBB38 /* ECLoginPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0848C10176D25D5009BBB38 /* ECLoginPageView.m */; };
 		A0FF1C53176CC88000433768 /* LoginInfoPages.plist in Resources */ = {isa = PBXBuildFile; fileRef = A0FF1C52176CC88000433768 /* LoginInfoPages.plist */; };
@@ -97,6 +98,7 @@
 
 /* Begin PBXFileReference section */
 		918A85E0EEDE48F3BEFD223A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A04C4332176F85F9003B4299 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		A0848C0A176D1F0D009BBB38 /* ECLoginPageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECLoginPageView.xib; sourceTree = "<group>"; };
 		A0848C0F176D25D5009BBB38 /* ECLoginPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECLoginPageView.h; sourceTree = "<group>"; };
 		A0848C10176D25D5009BBB38 /* ECLoginPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECLoginPageView.m; sourceTree = "<group>"; };
@@ -207,6 +209,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A04C4333176F85F9003B4299 /* CoreLocation.framework in Frameworks */,
 				D4A8DDD5176AAA99005E9847 /* QuartzCore.framework in Frameworks */,
 				D4AA4CF31766B374009B0635 /* UIKit.framework in Frameworks */,
 				D4AA4CF51766B374009B0635 /* Foundation.framework in Frameworks */,
@@ -346,6 +349,7 @@
 		D4AA4CF11766B374009B0635 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A04C4332176F85F9003B4299 /* CoreLocation.framework */,
 				D4A8DDD4176AAA98005E9847 /* QuartzCore.framework */,
 				D4AA4CF21766B374009B0635 /* UIKit.framework */,
 				D4AA4CF41766B374009B0635 /* Foundation.framework */,
