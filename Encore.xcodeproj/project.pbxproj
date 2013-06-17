@@ -772,6 +772,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B56B831D22E04C90BC664348 /* Pods.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Encore/Encore-Prefix.pch";
 				INFOPLIST_FILE = "Encore/Encore-Info.plist";
