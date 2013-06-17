@@ -27,6 +27,7 @@ static NSString *const PostsURL = @"posts";
     NSURL * url = [NSURL URLWithString:fullConcertsUrl];
     NSURLRequest * request = [NSURLRequest requestWithURL:url];
     AFJSONRequestOperation * operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+//        NSLog(@"FetchConcertsForUserId: %@", [JSON description]);
         concertList = (NSArray*) [(NSDictionary*)JSON objectForKey:@"concerts"];
         [self.delegate fetchedConcerts: concertList];
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {

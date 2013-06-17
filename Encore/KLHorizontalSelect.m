@@ -30,9 +30,9 @@
     self = [super initWithFrame:frame];
     if (self) {
         //Configure the arrow
-        self.arrow = [[KLHorizontalSelectArrow alloc] initWithFrame:CGRectMake(0, kDefaultCellHeight, kHeaderArrowWidth, kHeaderArrowHeight)color:kDefaultGradientBottomColor];
-        [self.arrow setCenter:CGPointMake(self.frame.size.width/2.0, self.arrow.center.y)];
-        [self addSubview:self.arrow];
+//        self.arrow = [[KLHorizontalSelectArrow alloc] initWithFrame:CGRectMake(0, kDefaultCellHeight, kHeaderArrowWidth, kHeaderArrowHeight)color:kDefaultGradientBottomColor];
+//        [self.arrow setCenter:CGPointMake(self.frame.size.width/2.0, self.arrow.center.y)];
+//        [self addSubview:self.arrow];
         
         // Make the UITableView's height the width, and width the height so that when we rotate it it will fit exactly
         self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.height, self.frame.size.width)];
@@ -104,7 +104,7 @@
      NSIndexPath* centerIndexPath = [self.tableView indexPathForRowAtPoint:point];
     
     if ([self shouldHideArrowForSelectedCellType:centerIndexPath.section]) {
-        [self.arrow hide:YES];  //TODO: this doesn't work reliably!
+        [self.arrow hide:YES];  
     }
 
     else [self.arrow show:YES];
@@ -112,7 +112,9 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if (scrollView.isDragging) {
-        [self.arrow hide:YES];
+     //   [self.arrow hide:YES];
+            CGPoint point = [self convertPoint:CGPointMake(self.frame.size.width/2.0, kDefaultCellHeight/2.0) toView:self.tableView];
+        [self.arrow lock: point];
     }
 }
 
@@ -127,23 +129,23 @@
 }
 
 -(void) scrollViewDidFinishScrolling: (UIScrollView*) scrollView {
-    CGPoint point = [self convertPoint:CGPointMake(self.frame.size.width/2.0, kDefaultCellHeight/2.0) toView:self.tableView];
-    NSLog(@"%@", NSStringFromCGPoint(point));
-    NSIndexPath* centerIndexPath = [self.tableView indexPathForRowAtPoint:point];
-    
-    [self.tableView selectRowAtIndexPath: centerIndexPath
-                                animated: YES
-                          scrollPosition: UITableViewScrollPositionTop];
-    
-    NSLog(@"%@", [centerIndexPath description]);
-    if (centerIndexPath.row != self.currentIndex.row || centerIndexPath.section != self.currentIndex.section) {
-        //Hide the arrow when scrolling
-        [self setCurrentIndex:centerIndexPath];
-    }
-    if ([self shouldHideArrowForSelectedCellType:centerIndexPath.section]) {
-        [self.arrow hide:YES];  //TODO: this doesn't work reliably!
-    }
-    else [self.arrow show:YES];
+//    CGPoint point = [self convertPoint:CGPointMake(self.frame.size.width/2.0, kDefaultCellHeight/2.0) toView:self.tableView];
+//    NSLog(@"%@", NSStringFromCGPoint(point));
+//    NSIndexPath* centerIndexPath = [self.tableView indexPathForRowAtPoint:point];
+//    
+//    [self.tableView selectRowAtIndexPath: centerIndexPath
+//                                animated: YES
+//                          scrollPosition: UITableViewScrollPositionTop];
+//    
+//    NSLog(@"%@", [centerIndexPath description]);
+//    if (centerIndexPath.row != self.currentIndex.row || centerIndexPath.section != self.currentIndex.section) {
+//        //Hide the arrow when scrolling
+//        [self setCurrentIndex:centerIndexPath];
+//    }
+//    if ([self shouldHideArrowForSelectedCellType:centerIndexPath.section]) {
+//        [self.arrow hide:YES];  //TODO: this doesn't work reliably!
+//    }
+//    else [self.arrow show:YES];
 }
 -(void) setCurrentIndex:(NSIndexPath *)currentIndex {
     self->_currentIndex = currentIndex;
@@ -336,7 +338,10 @@
 
     self.isShowing = YES;
 }
-
+-(void) lock:(CGPoint)point {
+//    self.frame = CGRectMake(point.x, point.y, self.frame.size.width, self.frame.size.height);
+//    [self.layer setTransform: CATransform3DRotate(self.layer.transform, -(1/4.0)*M_PI,1.0, 0.0, 0.0)];
+}
 //Allows setting of the anchor point for animations without moving the sublayers (i.e the drawn arrow) to the origin of the anchor
 -(void)setAnchorPoint:(CGPoint)anchorPoint forView:(UIView *)view
 {
