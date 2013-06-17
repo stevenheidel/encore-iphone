@@ -88,6 +88,7 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
     ECMyConcertViewController * concertsVC = [[ECMyConcertViewController alloc] init];
     ECJSONFetcher * jsonFetcher = [[ECJSONFetcher alloc] init];
     jsonFetcher.delegate = concertsVC;
+    concertsVC.title = @"My Concerts";
     [jsonFetcher fetchConcertsForUserId:self.facebook_id];
     [self.navigationController pushViewController:concertsVC animated:YES];
 }

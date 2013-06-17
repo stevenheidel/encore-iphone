@@ -8,6 +8,7 @@
 
 #import "ECAddConcertViewController.h"
 #import "ECConcertDetailViewController.h"
+#import "ECMyConcertViewController.h"
 #import "NSDictionary+ConcertList.h"
 static NSString *const ArtistCellIdentifier = @"artistCell";
 static NSString *const ConcertCellIdentifier = @"concertCell";
@@ -39,6 +40,9 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
 
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [self.activityIndicator stopAnimating];
+}
 
 #pragma mark - ECJSONFetcherDelegate Methods
 
@@ -48,8 +52,12 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
 }
 
 - (void)fetchedArtistConcerts:(NSArray *)concerts {
-    self.arrData = concerts;
-    [self.tableView reloadData];
+    
+    ECMyConcertViewController *concertsVC = [ECMyConcertViewController new];
+    concertsVC.concertList = concerts;
+    concertsVC.title = @"Concerts";
+    [self.activityIndicator stopAnimating];
+    [self.navigationController pushViewController:concertsVC animated:YES];
 }
 
 #pragma mark - UITableView methods
@@ -59,7 +67,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
                              
     if (cell == nil)
     {
-        //TODO: initilize cells from nib files, once we have the designs
+        //TODO: initilize cells from nib file, once we have the designs
         switch (selectionStage) {
             case ECSelectPopular: {
 
@@ -71,12 +79,12 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
                 cell.textLabel.text = [artistDic objectForKey:@"name"];
                 break;
             }
-            case ECSelectConcert: {
+            /*case ECSelectConcert: {
                 cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ConcertCellIdentifier];
                 NSDictionary *ConcertDic = (NSDictionary *)[self.arrData objectAtIndex:indexPath.row];
                 cell.textLabel.text = [ConcertDic objectForKey:@"name"];
                 break;
-            }
+            }*/
             default:
                 break;
         }
@@ -93,9 +101,10 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     NSDictionary* data = (NSDictionary*)[self.arrData objectAtIndex:indexPath.row];
     switch (selectionStage) {
         case ECSelectArtist: {
-            selectionStage = ECSelectConcert;  //set up next selection stage
+            //selectionStage = ECSelectConcert;  //set up next selection stage
             NSString *artistID = [data serverID];
             [self.JSONFetcher fetchConcertsForArtistID:artistID];
+            [self.activityIndicator startAnimating];
             break;
         }
         case ECSelectConcert: {

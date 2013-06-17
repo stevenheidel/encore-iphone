@@ -30,7 +30,7 @@ static NSString * const kDateFormat = @"yyyy-MM-dd";
 }
 
 -(NSString*) serverID {
-    return [self objectForKey:@"server_id"];
+    return [self objectForKey:@"songkick_id"];
 }
 
 -(NSString *) month {

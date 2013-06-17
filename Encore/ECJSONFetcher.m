@@ -45,7 +45,7 @@ static NSString *const PostsURL = @"posts";
     NSURL * url = [NSURL URLWithString:escapedDataString];
     NSURLRequest * request = [NSURLRequest requestWithURL:url];
     AFJSONRequestOperation * operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-        //NSLog(@"JSON: %@", [JSON description]);
+        NSLog(@"JSON: %@", [JSON description]);
         artistList = (NSArray*) [(NSDictionary*)JSON objectForKey:@"artists"];
         [self.delegate fetchedArtists:artistList];
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
@@ -61,7 +61,8 @@ static NSString *const PostsURL = @"posts";
     __block NSArray * concertList;
     NSString *userLocation = @"Toronto"; //TODO: Get location dynamically from app delegate
     NSString *  artistConcertsUrl = [NSString stringWithFormat:@"%@/%@/%@/%@/%@?%@%@", BaseURLString, ArtistsURL, artistID, ConcertsURL, PastURL, CityURL, userLocation];
-    NSURL * url = [NSURL URLWithString:artistConcertsUrl];
+    NSString *escapedDataString = [artistConcertsUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSURL * url = [NSURL URLWithString:escapedDataString];
     NSURLRequest * request = [NSURLRequest requestWithURL:url];
     AFJSONRequestOperation * operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         NSLog(@"JSON: %@", [JSON description]);

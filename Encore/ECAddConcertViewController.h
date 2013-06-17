@@ -23,5 +23,6 @@ typedef enum {
 @property (strong, nonatomic) NSArray *arrData;
 @property (strong, nonatomic) ECJSONFetcher * JSONFetcher;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 @end

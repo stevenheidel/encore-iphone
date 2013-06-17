@@ -19,7 +19,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title = @"My Concerts";
+    //self.title = @"My Concerts";
     [self.navigationController setNavigationBarHidden:NO];
     self.tableView.tableFooterView = [UIView new];
     // Uncomment the following line to preserve selection between presentations.
