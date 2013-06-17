@@ -78,7 +78,7 @@
 }
 
 #pragma mark - json fetcher delegate
--(void) fetchedConcerts: (NSArray *) concerts {
+-(void) fetchedConcerts: (NSDictionary *) concerts {
     self.concertList = concerts;
     [self.tableView reloadData];
 }

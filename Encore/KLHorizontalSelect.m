@@ -184,8 +184,10 @@
         return 1;
     }
     if  (section == ECCellTypeFutureShows)
-        return 0; //TODO: change
-    return [self.tableData count];
+        return [[self.tableData objectForKey:@"future"] count];
+    if  (section == ECCellTypePastShows)
+         return [[self.tableData objectForKey:@"past"] count];
+    return 0;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -204,8 +206,9 @@
         case ECCellTypeToday:
             return (id) [[ECTodayCell alloc] init];
         case ECCellTypeFutureShows:
+            return (id)[[KLHorizontalSelectCell alloc] initWithCellData:[[self.tableData objectForKey:@"future"] objectAtIndex:indexPath.row] forType:ECCellTypePastShows];
         case ECCellTypePastShows:
-            return (id)[[KLHorizontalSelectCell alloc] initWithCellData:[self.tableData objectAtIndex:indexPath.row] forType:ECCellTypePastShows];
+            return (id)[[KLHorizontalSelectCell alloc] initWithCellData:[[self.tableData objectForKey:@"past"] objectAtIndex:indexPath.row] forType:ECCellTypePastShows];
         default:
             return nil;
     }

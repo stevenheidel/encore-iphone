@@ -65,7 +65,7 @@
 @interface KLHorizontalSelect : UIView <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 @property (nonatomic, strong) NSIndexPath* currentIndex;
 @property (nonatomic, strong) UITableView* tableView;
-@property (nonatomic, strong) NSArray* tableData;
+@property (nonatomic, strong) NSDictionary* tableData;
 @property (nonatomic, strong) KLHorizontalSelectArrow* arrow;
 @property (nonatomic, strong) id<KLHorizontalSelectDelegate> delegate;
 

@@ -22,13 +22,13 @@ static NSString *const PostsURL = @"posts";
 @implementation ECJSONFetcher
 
 -(void) fetchConcertsForUserId: (NSString *) fb_id {
-    __block NSArray * concertList;
+    __block NSDictionary * concertList;
     NSString *  fullConcertsUrl = [NSString stringWithFormat:@"%@/%@/%@/%@",BaseURLString,UsersURL,fb_id,ConcertsURL];
     NSURL * url = [NSURL URLWithString:fullConcertsUrl];
     NSURLRequest * request = [NSURLRequest requestWithURL:url];
     AFJSONRequestOperation * operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
 //        NSLog(@"FetchConcertsForUserId: %@", [JSON description]);
-        concertList = (NSArray*) [(NSDictionary*)JSON objectForKey:@"concerts"];
+        concertList = (NSDictionary*) [(NSDictionary*)JSON objectForKey:@"concerts"];
         [self.delegate fetchedConcerts: concertList];
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         NSLog(@"ERROR:%@",[error description]);

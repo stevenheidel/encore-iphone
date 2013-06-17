@@ -17,7 +17,9 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
 
 @interface ECProfileViewController ()
 @property (strong, nonatomic) IBOutlet UILabel *userNameLabel;
-@property (strong,nonatomic) NSMutableArray * concerts;
+@property (strong,nonatomic) NSMutableArray * pastConcerts;
+@property (strong,nonatomic) NSMutableArray * futureConcerts;
+@property (strong, nonatomic) NSMutableDictionary * concerts;
 @property (strong,nonatomic) ECConcertChildViewController * concertChildVC;
 -(IBAction)viewConcerts:(id)sender;
 -(IBAction)viewFriends:(id)sender;
@@ -133,17 +135,17 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
 }
 
 #pragma mark - json fetcher delegate
--(void) fetchedConcerts: (NSArray *) concerts {
+-(void) fetchedConcerts: (NSDictionary *) concerts {
     NSLog(@"Successfully fetched %d concerts", [concerts count]);
-    self.concerts = [NSMutableArray arrayWithArray:concerts];
-    
+    self.concerts = [NSMutableDictionary dictionaryWithDictionary: concerts];
+//    self.pastConcerts = [concerts objectForKey:@"past"];  //TODO: fix to use category
+//    self.futureConcerts = [concerts objectForKey:@"future"];
     
     self.horizontalSelect = [[KLHorizontalSelect alloc] initWithFrame: self.view.bounds];
     self.horizontalSelect.delegate = self;
     [self.horizontalSelect setTableData: self.concerts];
     [self.view addSubview: self.horizontalSelect];
-    
-    self.horizontalSelect.tableData = concerts;
+
     [self.horizontalSelect.tableView reloadData];
     
     //TODO: get it to load first view for "Today"
@@ -164,8 +166,10 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
     [self removeFromViewForCurrentCellType:cellType];
     [self.view bringSubviewToFront:self.horizontalSelect.viewForBaselineLayout];
     
+    
     if (cellType == ECCellTypeFutureShows || cellType == ECCellTypePastShows) {
-        self.concertChildVC.concert = [self.concerts objectAtIndex:indexPath.row];
+        NSString * key = cellType == ECCellTypePastShows ? @"past" : @"future";
+        self.concertChildVC.concert = [[self.concerts objectForKey: key]objectAtIndex:indexPath.row];
         [self.concertChildVC updateView];
     }
 }

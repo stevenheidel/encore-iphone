@@ -20,7 +20,7 @@
 @protocol ECJSONFetcherDelegate <NSObject>
 
 @optional
--(void) fetchedConcerts: (NSArray *) concerts;
+-(void) fetchedConcerts: (NSDictionary *) concerts;
 -(void) fetchedArtists:(NSArray *)artists;
 -(void) fetchedArtistConcerts:(NSArray *)concerts;
 -(void) fetchedPosts: (NSArray *) posts;
