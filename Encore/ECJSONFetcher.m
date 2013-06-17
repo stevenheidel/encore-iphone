@@ -40,10 +40,12 @@ static NSString *const PostsURL = @"posts";
 -(void)fetchArtistsForString:(NSString *)searchStr {
     __block NSArray * artistList;
     NSString *  artistSearchUrl = [NSString stringWithFormat:@"%@/%@/%@%@", BaseURLString, ArtistsURL, SearchURL, searchStr];
-    NSURL * url = [NSURL URLWithString:artistSearchUrl];
+    NSString *escapedDataString = [artistSearchUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    
+    NSURL * url = [NSURL URLWithString:escapedDataString];
     NSURLRequest * request = [NSURLRequest requestWithURL:url];
     AFJSONRequestOperation * operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-        NSLog(@"JSON: %@", [JSON description]);
+        //NSLog(@"JSON: %@", [JSON description]);
         artistList = (NSArray*) [(NSDictionary*)JSON objectForKey:@"artists"];
         [self.delegate fetchedArtists:artistList];
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
