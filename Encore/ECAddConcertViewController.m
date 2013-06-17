@@ -36,6 +36,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     self.JSONFetcher.delegate = self;
     
     selectionStage = ECSelectArtist; //TODO: Change to popular concerts once API is set up
+
 }
 
 
@@ -117,6 +118,21 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
     [searchBar resignFirstResponder];
     [searchBar setShowsCancelButton:NO animated:YES];
+    searchBar.text = @"";
+    self.arrData = nil;
+    [self.tableView reloadData];
+}
+
+-(void)searchBar:(UISearchBar *) searchBar textDidChange: (NSString*) searchText {
+//can automatically send a search each time a character is typed / group of characters
+    if ([searchText length] == 0) {
+        self.arrData = nil;
+        [self.tableView reloadData];
+    }
+}
+
+-(void)searchBarTextDidEndEditing:(UISearchBar *) searchBar {
+    [searchBar resignFirstResponder];
 }
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
