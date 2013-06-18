@@ -260,11 +260,11 @@
 		D4A8DDBF176A134B005E9847 /* Concert */ = {
 			isa = PBXGroup;
 			children = (
+				D4A8DDAE176A133B005E9847 /* ECConcertDetailViewController.h */,
+				D4A8DDAD176A133B005E9847 /* ECConcertDetailViewController.m */,
 				D4A8DDB5176A133B005E9847 /* ECCollectionCell.xib */,
 				D4A8DDB6176A133B005E9847 /* CustomCellBackground.h */,
 				D4A8DDB7176A133B005E9847 /* CustomCellBackground.m */,
-				D4A8DDAE176A133B005E9847 /* ECConcertDetailViewController.h */,
-				D4A8DDAD176A133B005E9847 /* ECConcertDetailViewController.m */,
 				D4A8DDAF176A133B005E9847 /* Cell.m */,
 				D4A8DDB0176A133B005E9847 /* Cell.h */,
 				D4A8DDB1176A133B005E9847 /* ECConcertDetailViewController.xib */,
