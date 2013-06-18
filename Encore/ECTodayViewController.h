@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ECJSONFetcher.h"
 
-@interface ECTodayViewController : UIViewController
+@interface ECTodayViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, ECJSONFetcherDelegate>
+
+@property(nonatomic, strong) IBOutlet UITableView *tableView;
+@property(nonatomic, strong) NSArray *arrTodaysConcerts;
 
 @end

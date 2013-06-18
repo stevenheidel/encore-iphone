@@ -77,7 +77,7 @@ static NSString *const PostsURL = @"posts";
         NSDictionary * concert1 = [NSDictionary dictionaryWithObjectsAndKeys:@"Test Venue Name 1", @"venue_name", @"1989-02-16", @"date",@"Simon and the Destroyers", @"name",@"99", @"server_id", nil];
         NSDictionary * concert2 = [NSDictionary dictionaryWithObjectsAndKeys:@"Test Venue Name 2", @"venue_name", @"1999-03-26", @"date",@"Simon and the Destroyers", @"name",@"55", @"server_id", nil];
         NSArray * testConcertList = [NSArray arrayWithObjects:concert1,concert2, nil];
-        [self.delegate fetchedArtistConcerts:testConcertList];
+        [self.delegate fetchedPopularConcerts:testConcertList];
     }];
     
     [operation start];
