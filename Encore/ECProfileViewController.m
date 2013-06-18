@@ -176,7 +176,7 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
     if (cellType == ECCellTypeFutureShows || cellType == ECCellTypePastShows) {
         NSString * key = cellType == ECCellTypePastShows ? @"past" : @"future";
         self.concertChildVC.concert = [[self.concerts objectForKey: key]objectAtIndex:indexPath.row];
-        //[self.concertChildVC updateView];
+        [self.concertChildVC updateView];
     }
 }
 

@@ -26,4 +26,6 @@
 @property (nonatomic,strong) UIBarButtonItem * addButton;
 
 @property (nonatomic, assign) BOOL isOnProfile;
+
+-(void) updateView;
 @end

@@ -46,6 +46,14 @@ NSString *kCellID = @"cellID";
     [self setUpRightBarButton];
 }
 
+-(void) updateView {
+    self.artistNameLabel.text = [self.concert artistName];
+    self.dateLabel.text = [self.concert niceDate];
+    self.venueNameLabel.text = [self.concert venueName];
+    self.title = self.artistNameLabel.text;
+    [self loadImages];
+}
+
 -(void) setUpRightBarButton {
     self.addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addConcert)];
     self.removeButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(removeConcert)];
