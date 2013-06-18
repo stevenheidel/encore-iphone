@@ -32,6 +32,16 @@ static NSString *const PostsURL = @"posts";
         [self.delegate fetchedConcerts: concertList];
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         NSLog(@"ERROR:%@",[error description]);
+        
+        NSDictionary * past1 = [NSDictionary dictionaryWithObjectsAndKeys:@"2013-06-12", @"date", @"Test Venue 1", @"venue_name", @"My Artist", @"name", @"11", @"server_id", nil];
+        NSDictionary * past2 = [NSDictionary dictionaryWithObjectsAndKeys:@"2012-05-11", @"date", @"Test Venue 2", @"venue_name", @"Go Artist", @"name", @"22", @"server_id", nil];
+        NSDictionary * future1 = [NSDictionary dictionaryWithObjectsAndKeys:@"2013-09-11", @"date", @"Test Venue 3", @"venue_name", @"Artist2013", @"name", @"33", @"server_id", nil];
+        NSDictionary * future2 = [NSDictionary dictionaryWithObjectsAndKeys:@"2013-12-22", @"date", @"Test Venue 4", @"venue_name", @"Cool Artist", @"name", @"44", @"server_id", nil];
+
+        NSArray * past = [NSArray arrayWithObjects: past1, past2, nil];
+        NSArray * future = [NSArray arrayWithObjects: future1, future2, nil];
+        NSDictionary * concertList = [NSDictionary dictionaryWithObjectsAndKeys:past,@"past",future,@"future", nil];
+        [self.delegate fetchedConcerts:concertList];
     }];
     
     [operation start];
@@ -50,6 +60,10 @@ static NSString *const PostsURL = @"posts";
         [self.delegate fetchedArtists:artistList];
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         NSLog(@"ERROR:%@",[error description]);
+        
+        NSDictionary * artist1 = [NSDictionary dictionaryWithObjectsAndKeys:@"Test Artist 1",@"name", @"1234", @"songkick_id", nil];
+        NSDictionary * artist2 = [NSDictionary dictionaryWithObjectsAndKeys:@"Test Artist 2",@"name", @"4321", @"songkick_id", nil];
+        [self.delegate fetchedArtists:[NSArray arrayWithObjects:artist1,artist2, nil]];
     }];
     
     [operation start];
@@ -71,9 +85,11 @@ static NSString *const PostsURL = @"posts";
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         NSLog(@"ERROR:%@",[error description]);
         
-        NSDictionary * concert1 = [NSDictionary dictionaryWithObjectsAndKeys:<#(id), ...#>, nil];
-        NSDictionary * concert2 = [NSDictionary dictionaryWithObjectsAndKeys:<#(id), ...#>, nil];
-        NSArray * testConcertList = [self.delegate fetchedArtistConcerts:testConcertList];
+        //TODO: replace so it loads in cached objects
+        NSDictionary * concert1 = [NSDictionary dictionaryWithObjectsAndKeys:@"Test Venue Name 1", @"venue_name", @"1989-02-16", @"date",@"Simon and the Destroyers", @"name",@"99", @"server_id", nil];
+        NSDictionary * concert2 = [NSDictionary dictionaryWithObjectsAndKeys:@"Test Venue Name 2", @"venue_name", @"1999-03-26", @"date",@"Simon and the Destroyers", @"name",@"55", @"server_id", nil];
+        NSArray * testConcertList = [NSArray arrayWithObjects:concert1,concert2, nil];
+        [self.delegate fetchedArtistConcerts:testConcertList];
     }];
     
     [operation start];
