@@ -42,10 +42,14 @@ NSString *kCellID = @"cellID";
 }
 
 -(void) loadImages {
-    NSString* server_id = [self.concert serverID];
-    ECJSONFetcher * fetcher = [[ECJSONFetcher alloc] init];
-    fetcher.delegate = self;
-    [fetcher fetchPostsForConcertWithID:server_id];
+    NSNumber* serverID = [self.concert serverID];
+    if (serverID) {
+        ECJSONFetcher * fetcher = [[ECJSONFetcher alloc] init];
+        fetcher.delegate = self;
+        [fetcher fetchPostsForConcertWithID:serverID];
+    }
+    
+    else NSLog(@"%@: Can't load images, object doesn't have a server_id", NSStringFromClass([self class]));
 }
 
 - (void)didReceiveMemoryWarning

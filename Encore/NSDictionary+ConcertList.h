@@ -13,7 +13,7 @@
 -(NSString *) niceDate;
 -(NSString *) artistName;
 -(NSString *) venueName;
--(NSString *) serverID;
+-(NSNumber *) serverID;
 -(NSString *) songkickID;
 
 -(NSString *) month;

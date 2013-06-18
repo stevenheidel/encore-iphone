@@ -13,7 +13,7 @@
 -(void) fetchConcertsForUserId: (NSString *) id;
 -(void)fetchArtistsForString:(NSString *)searchStr;
 -(void)fetchConcertsForArtistID:(NSString *)artistID;
--(void) fetchPostsForConcertWithID: (NSString *) serverID;
+-(void) fetchPostsForConcertWithID: (NSNumber *) serverID;
 @property (nonatomic,unsafe_unretained) id <ECJSONFetcherDelegate> delegate;
 @end
 

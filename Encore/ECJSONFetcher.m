@@ -99,9 +99,9 @@ static NSString *const PostsURL = @"posts";
 //    
 //}
 
--(void) fetchPostsForConcertWithID: (NSString *) serverID {
+-(void) fetchPostsForConcertWithID: (NSNumber *) serverID {
     __block NSArray * posts;
-    NSString * fullPostsUrl = [NSString stringWithFormat:@"%@/%@/%@/%@",BaseURLString,ConcertsURL,serverID,PostsURL];
+    NSString * fullPostsUrl = [NSString stringWithFormat:@"%@/%@/%@/%@",BaseURLString,ConcertsURL,[serverID stringValue],PostsURL];
     NSURL * url = [NSURL URLWithString:fullPostsUrl];
     NSURLRequest * request = [NSURLRequest requestWithURL:url];
     AFJSONRequestOperation * operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
