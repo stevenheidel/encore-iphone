@@ -19,5 +19,4 @@ typedef enum {
 } ECCellType;
 
 NSString* reuseIdentifierForCellType(ECCellType type);
-
 #endif

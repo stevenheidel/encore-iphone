@@ -21,6 +21,7 @@
 @property (strong, nonatomic) NSString * userCity;
 //@property (strong) NSDictionary * concerts;
 @property (nonatomic, strong) KLHorizontalSelect* horizontalSelect;
-@property (nonatomic, strong) ECAddConcertViewController * addConcertVC;
+@property (nonatomic, strong) ECAddConcertViewController * addPastConcertVC;
+@property (nonatomic, strong) ECAddConcertViewController * addFutureConcertVC;
 @property (nonatomic, strong) ECTodayViewController * todayVC;
 @end

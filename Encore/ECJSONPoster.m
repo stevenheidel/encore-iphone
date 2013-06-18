@@ -37,12 +37,13 @@
 
 +(void) addConcert: (NSNumber *) concertID toUser: (NSString *) userID {
 
-    NSString * baseURLString = NSLocalizedString(@"BaseURL", nil);
+    NSString * baseURLString = [NSString stringWithFormat:@"%@/", NSLocalizedString(@"BaseURL", nil)];
+    NSLog(@"%@", baseURLString);
     NSString * kUsers = NSLocalizedString(@"UsersURL", nil);
     NSString * kConcerts = NSLocalizedString(@"ConcertsURL", nil);
     
     //POST /users/:uuid/concerts     {'songkick_id': '1234578'}
-    NSString * urlString = [NSString stringWithFormat:@"/%@/%@/%@",kUsers,userID,kConcerts];
+    NSString * urlString = [NSString stringWithFormat:@"%@/%@/%@",kUsers,userID,kConcerts];
     NSDictionary * parameters = [NSDictionary dictionaryWithObject:[concertID stringValue] forKey:@"songkick_id"];
     AFHTTPClient * client = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:baseURLString]];
     

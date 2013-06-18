@@ -160,6 +160,7 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
     if([tableView.delegate respondsToSelector:@selector(tableView: didSelectRowAtIndexPath:)]){
         [tableView.delegate tableView:tableView didSelectRowAtIndexPath:startIndexPath];
     }
+    
 }
 
 #pragma mark - horizontal slider
@@ -190,9 +191,10 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
 
 -(UIViewController *) childViewControllerForCellType: (ECCellType) cellType {
     switch (cellType) {
-        case ECCellTypeAddPast:
         case ECCellTypeAddFuture:
-            return self.addConcertVC;
+            return self.addFutureConcertVC;
+        case ECCellTypeAddPast:
+            return self.addPastConcertVC;
         case ECCellTypeFutureShows:
         case ECCellTypePastShows:
             return self.concertChildVC;
@@ -214,12 +216,12 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
             self.concertChildVC =[ECConcertChildViewController new];
             break;
         case ECCellTypeAddFuture:
-            self.addConcertVC = [ECAddConcertViewController new];
-            self.addConcertVC.searchType = ECSearchTypeFuture;
+            self.addFutureConcertVC = [ECAddConcertViewController new];
+            self.addFutureConcertVC.searchType = ECSearchTypeFuture;
             break;
         case ECCellTypeAddPast:
-            self.addConcertVC = [ECAddConcertViewController new];
-            self.addConcertVC.searchType = ECSearchTypePast;
+            self.addPastConcertVC = [ECAddConcertViewController new];
+            self.addPastConcertVC.searchType = ECSearchTypePast;
             break;
         default:
             break;
@@ -227,9 +229,13 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
 }
 
 -(void) removeFromViewForCurrentCellType: (ECCellType) cellType {
-    if (cellType != ECCellTypeAddPast && cellType != ECCellTypeAddFuture) {
+    if (cellType != ECCellTypeAddPast) {
        // [self.addConcertVC removeFromParentViewController]; Doesn't seem to be necessary? //TODO: doublecheck
-        [self.addConcertVC.view removeFromSuperview];
+        [self.addPastConcertVC.view removeFromSuperview];
+    }
+    
+    if (cellType !=  ECCellTypeAddFuture) {
+        [self.addFutureConcertVC.view removeFromSuperview];
     }
     
     if (cellType != ECCellTypeFutureShows && cellType != ECCellTypePastShows) {

@@ -254,7 +254,8 @@
 			children = (
 				D4A8DDB3176A133B005E9847 /* InfoPlist.strings */,
 			);
-			path = en.lproj;
+			name = en.lproj;
+			path = Encore/en.lproj;
 			sourceTree = "<group>";
 		};
 		D4A8DDBF176A134B005E9847 /* Concert */ = {
@@ -330,6 +331,7 @@
 			isa = PBXGroup;
 			children = (
 				D4AA4CF81766B374009B0635 /* Encore */,
+				D4A8DDB2176A133B005E9847 /* en.lproj */,
 				D4AA4D161766B374009B0635 /* EncoreTests */,
 				D4AA4CF11766B374009B0635 /* Frameworks */,
 				D4AA4CF01766B374009B0635 /* Products */,
@@ -370,7 +372,6 @@
 				D4B1A249176E4C6F00A95568 /* Add Concert */,
 				D4A8DDBF176A134B005E9847 /* Concert */,
 				D4AA4D321766BA8F009B0635 /* Login */,
-				D4A8DDB2176A133B005E9847 /* en.lproj */,
 				D4AA4CF91766B374009B0635 /* Supporting Files */,
 			);
 			path = Encore;

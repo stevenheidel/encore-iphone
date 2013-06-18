@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "ECJSONFetcher.h"
 
-
 @interface ECAddConcertViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, ECJSONFetcherDelegate> {
     bool hasSearched;
 }
