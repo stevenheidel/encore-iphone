@@ -42,25 +42,67 @@ NSString *kCellID = @"cellID";
     self.title = self.artistNameLabel.text;
     [self loadImages];
     
-    //TODO: Check if concert is on profile
-    UIBarButtonItem * addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addConcert)];
-    [self.navigationItem setRightBarButtonItem:addButton];
+    self.isOnProfile = FALSE;
+    [self setUpRightBarButton];
+}
+
+-(void) setUpRightBarButton {
+    self.addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addConcert)];
+    self.removeButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(removeConcert)];
+    
+    NSString * userID = self.userID;
+    [ECJSONFetcher checkIfConcert:[self.concert songkickID] isOnProfile:userID completion:^(BOOL isOnProfile) {
+        if (!isOnProfile) {
+            [self.navigationItem setRightBarButtonItem:self.addButton];
+            self.isOnProfile = FALSE;
+        }
+        else {
+            [self.navigationItem setRightBarButtonItem:self.removeButton];
+            self.isOnProfile = TRUE;
+        }
+    }];
+}
+-(NSNumber*) songkickID {
+    return [self.concert songkickID];
+}
+
+-(NSString*) userID {
+    return [[NSUserDefaults standardUserDefaults] stringForKey:NSLocalizedString(@"user_id", nil)];
 }
 
 -(void) addConcert {
-    NSLog(@"ADDING A CONCERT");
-    NSNumber * concertID = [self.concert songkickID];
+    NSString * userID = self.userID;
+    NSLog(@"%@: Adding concert %@ to profile %@",NSStringFromClass(self.class),self.songkickID.stringValue,userID);
+    [ECJSONPoster addConcert:self.songkickID toUser:userID completion:^{
+        [self completedAddingConcert];
+    }];
+}
+
+-(void) removeConcert {
+    NSString * userID = self.userID;
+    NSNumber * songkickID = self.songkickID;
+    NSLog(@"%@: Removing a concert %@ from profile %@",NSStringFromClass(self.class),songkickID,userID);
+    [ECJSONPoster removeConcert:songkickID toUser:userID completion:^{
+        [self completedRemovingConcert];
+    }];
+}
+
+-(void) completedAddingConcert {
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Woohoo!" message:@"You added a concert" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    [alert show];
+    [self toggleOnProfileState];
     
-    [self addConcertToProfileWithID: concertID];
 }
 
--(void) addConcertToProfileWithID: (NSNumber *) concertID {
-    NSString * userID = [self userIDFromDefaults]; //Or could just request user ID again...?
-    [ECJSONPoster addConcert:concertID toUser:userID];
+-(void) completedRemovingConcert {
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Woohoo!" message:@"You removed a concert" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    [alert show];
+    [self toggleOnProfileState];
 }
 
--(NSString *) userIDFromDefaults {
-    return [[NSUserDefaults standardUserDefaults] stringForKey:@"user_id"];
+-(void) toggleOnProfileState {
+    self.isOnProfile = !self.isOnProfile;
+    self.navigationItem.rightBarButtonItem = self.isOnProfile ? self.removeButton : self.addButton;
 }
 
 -(void) loadImages {

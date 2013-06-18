@@ -18,4 +18,12 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (nonatomic, strong) NSArray * posts;
 
+@property (nonatomic, readonly) NSNumber * songkickID;
+@property (nonatomic, readonly) NSString * userID;
+
+
+@property (nonatomic,strong) UIBarButtonItem * removeButton;
+@property (nonatomic,strong) UIBarButtonItem * addButton;
+
+@property (nonatomic, assign) BOOL isOnProfile;
 @end
