@@ -81,6 +81,13 @@
     concertDetail.concert = [self.concertList objectAtIndex:indexPath.row];
     [self.navigationController pushViewController:concertDetail animated:YES];
     
+    UIBarButtonItem *btnBack = [[UIBarButtonItem alloc]
+                                initWithTitle:@"Back"
+                                style:UIBarButtonItemStyleBordered
+                                target:nil
+                                action:nil];
+    self.navigationItem.backBarButtonItem = btnBack;
+    
 }
 
 #pragma mark - json fetcher delegate
