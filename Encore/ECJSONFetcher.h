@@ -7,12 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
+
+typedef enum {
+    ECSearchTypePast,
+    ECSearchTypeFuture
+} ECSearchType;
+
 @protocol ECJSONFetcherDelegate;
 
 @interface ECJSONFetcher : NSObject
 -(void) fetchConcertsForUserId: (NSString *) id;
 -(void)fetchArtistsForString:(NSString *)searchStr;
--(void)fetchConcertsForArtistID:(NSString *)artistID;
+-(void)fetchConcertsForArtistID:(NSString *)artistID withSearchType:(ECSearchType)searchType;
 -(void) fetchPostsForConcertWithID: (NSString *) serverID;
 @property (nonatomic,unsafe_unretained) id <ECJSONFetcherDelegate> delegate;
 @end

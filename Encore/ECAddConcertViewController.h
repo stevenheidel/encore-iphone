@@ -9,15 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "ECJSONFetcher.h"
 
-typedef enum {
-    ECSelectPopular,
-    ECSelectArtist,
-    ECSelectConcert
-} ECSelectionStage;
-
 
 @interface ECAddConcertViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, ECJSONFetcherDelegate> {
-    ECSelectionStage selectionStage;
+    ECSearchType searchType;
 }
 
 @property (strong, nonatomic) NSArray *arrData;

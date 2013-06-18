@@ -36,7 +36,6 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     self.JSONFetcher = [[ECJSONFetcher alloc] init];
     self.JSONFetcher.delegate = self;
     
-    selectionStage = ECSelectArtist; //TODO: Change to popular concerts once API is set up
     self.lastSelectedArtist = nil;
 }
 
@@ -68,26 +67,10 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     if (cell == nil)
     {
         //TODO: initilize cells from nib file, once we have the designs
-        switch (selectionStage) {
-            case ECSelectPopular: {
-
-                break;
-            }
-            case ECSelectArtist: {
-                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ArtistCellIdentifier];
-                NSDictionary *artistDic = (NSDictionary *)[self.arrData objectAtIndex:indexPath.row];
-                cell.textLabel.text = [artistDic artistName];
-                break;
-            }
-            /*case ECSelectConcert: {
-                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ConcertCellIdentifier];
-                NSDictionary *ConcertDic = (NSDictionary *)[self.arrData objectAtIndex:indexPath.row];
-                cell.textLabel.text = [ConcertDic objectForKey:@"name"];
-                break;
-            }*/
-            default:
-                break;
-        }
+        
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ArtistCellIdentifier];
+        NSDictionary *artistDic = (NSDictionary *)[self.arrData objectAtIndex:indexPath.row];
+        cell.textLabel.text = [artistDic artistName];
     }
     return cell;
 }
@@ -99,31 +82,23 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     NSDictionary* data = (NSDictionary*)[self.arrData objectAtIndex:indexPath.row];
-    switch (selectionStage) {
-        case ECSelectArtist: {
-            //selectionStage = ECSelectConcert;  //set up next selection stage
-            NSString *artistID = [data songkickID];
-            [self.JSONFetcher fetchConcertsForArtistID:artistID];
-            [self.activityIndicator startAnimating];
-            self.lastSelectedArtist = [data artistName];
-            break;
-        }
-        case ECSelectConcert: {
-            ECConcertDetailViewController * concertDetail = [ECConcertDetailViewController new];
-            concertDetail.concert = data;
-            NSLog(@"%@",[data description]);
-            [self.navigationController pushViewController:concertDetail animated:YES];
-        }
-            break;
-        default:
-            break;
+    
+    //selectionStage = ECSelectConcert;  //set up next selection stage
+    NSString *artistID = [data songkickID];
+    if (searchType == ECSearchTypePast) {
+        [self.JSONFetcher fetchConcertsForArtistID:artistID withSearchType:ECSearchTypePast];
+    } else {
+        [self.JSONFetcher fetchConcertsForArtistID:artistID withSearchType:ECSearchTypeFuture];
     }
+    
+    [self.activityIndicator startAnimating];
+    self.lastSelectedArtist = [data artistName];
+    
 }
 
 -(void) clearSearchResultsTable {
     self.arrData = nil;
     [self.tableView reloadData];
-    selectionStage = ECSelectArtist;
 }
 #pragma mark - UISearchBarDelegate Methods
 

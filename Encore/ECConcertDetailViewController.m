@@ -42,7 +42,7 @@ NSString *kCellID = @"cellID";
 }
 
 -(void) loadImages {
-    NSString* server_id = [self.concert songkickID];
+    NSString* server_id = [self.concert serverID];
     ECJSONFetcher * fetcher = [[ECJSONFetcher alloc] init];
     fetcher.delegate = self;
     [fetcher fetchPostsForConcertWithID:server_id];
