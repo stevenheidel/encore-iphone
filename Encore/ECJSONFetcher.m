@@ -67,11 +67,11 @@ static NSString *const PostsURL = @"posts";
     NSURL * url = [NSURL URLWithString:escapedDataString];
     NSURLRequest * request = [NSURLRequest requestWithURL:url];
     AFJSONRequestOperation * operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-        NSLog(@"JSON: %@", [JSON description]);
         concertList = (NSArray*) [(NSDictionary*)JSON objectForKey:@"concerts"];
+        NSLog(@"Successfully fetched %d popular concerts", [concertList count]);
         [self.delegate fetchedPopularConcerts:concertList];
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-        NSLog(@"ERROR:%@",[error description]);
+        NSLog(@"ERROR fetching popular concerts: %@",[error description]);
         
         //TODO: replace so it loads in cached objects
         NSDictionary * concert1 = [NSDictionary dictionaryWithObjectsAndKeys:@"Test Venue Name 1", @"venue_name", @"1989-02-16", @"date",@"Simon and the Destroyers", @"name",@"99", @"server_id", nil];
