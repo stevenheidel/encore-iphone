@@ -20,7 +20,14 @@
 "entity_concert" = "Concert";
 "entity_photo" = "Photo";
 
+//URLs
 "BaseURL" = "http://192.168.11.15:9283/api/v1";
 "UsersURL" = "users";
 "ConcertsURL" = "concerts";
 "PostsURL" = "posts";
+
+//Add Concert View
+"PopularConcerts" = "%@ Concerts in Your Area";
+"ArtistSearch" = "Search Results for %@";
+"Past" = "Recent";
+"Upcoming" = "Upcoming";

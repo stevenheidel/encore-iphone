@@ -13,7 +13,7 @@ static NSString * const kDateFormat = @"yyyy-MM-dd";
 -(NSString *) niceDate {
     NSString * dateStr = [self objectForKey:@"date"];
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"yyyy-MM-DD"];
+    [dateFormat setDateFormat:kDateFormat];
     NSDate *date = [dateFormat dateFromString:dateStr];
     
     [dateFormat setDateStyle:NSDateFormatterMediumStyle];
