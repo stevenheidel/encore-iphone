@@ -37,7 +37,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     self.JSONFetcher.delegate = self;
     
     selectionStage = ECSelectArtist; //TODO: Change to popular concerts once API is set up
-
+    self.lastSelectedArtist = nil;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -55,7 +55,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     
     ECMyConcertViewController *concertsVC = [ECMyConcertViewController new];
     concertsVC.concertList = concerts;
-    concertsVC.title = @"Concerts";
+    concertsVC.title = self.lastSelectedArtist;//@"Concerts";
     [self.activityIndicator stopAnimating];
     [self.navigationController pushViewController:concertsVC animated:YES];
 }
@@ -105,6 +105,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
             NSString *artistID = [data songkickID];
             [self.JSONFetcher fetchConcertsForArtistID:artistID];
             [self.activityIndicator startAnimating];
+            self.lastSelectedArtist = [data artistName];
             break;
         }
         case ECSelectConcert: {

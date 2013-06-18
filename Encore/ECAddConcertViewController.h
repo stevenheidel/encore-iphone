@@ -24,5 +24,5 @@ typedef enum {
 @property (strong, nonatomic) ECJSONFetcher * JSONFetcher;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
-
+@property (nonatomic, assign) NSString * lastSelectedArtist;
 @end
