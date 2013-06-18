@@ -49,14 +49,43 @@
     [client setDefaultHeader:@"Accept" value:@"application/json"];
 
     [client postPath:urlString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"%@: Success adding to profile %@", NSStringFromClass([self class]),[responseObject description]);
+        NSLog(@"%@: Success adding concert %@ to profile %@. Response: %@", NSStringFromClass([self class]),concertID,userID, [responseObject description]);
         if (completion) {
             completion();
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"ERROR: %@",[error description]);
+        NSLog(@"%@: ERROR removing concert %@ from profile %@: %@",NSStringFromClass([self class]), concertID.stringValue, userID,[error description]);
     }];
 }
 
+//TODO: implement (need the URL)
++(void) removeConcert: (NSNumber *) concertID toUser: (NSString *) userID completion: (void (^)()) completion{
+//    NSString * baseURLString = [NSString stringWithFormat:@"%@/", NSLocalizedString(@"BaseURL", nil)];
+//    NSLog(@"%@", baseURLString);
+//    NSString * kUsers = NSLocalizedString(@"UsersURL", nil);
+//    NSString * kConcerts = NSLocalizedString(@"ConcertsURL", nil);
+//    
+//    //POST /users/:uuid/concerts     {'songkick_id': '1234578'}
+//    NSString * urlString = [NSString stringWithFormat:@"%@/%@/%@",kUsers,userID,kConcerts];
+//    NSDictionary * parameters = [NSDictionary dictionaryWithObject:[concertID stringValue] forKey:@"songkick_id"];
+//    AFHTTPClient * client = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:baseURLString]];
+//    
+//    [client registerHTTPOperationClass:[AFJSONRequestOperation class]];
+//    [client setDefaultHeader:@"Accept" value:@"application/json"];
+//    
+//    [client postPath:urlString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        NSLog(@"%@: Success removing concert %@ from profile %@. Response: %@", NSStringFromClass([self class]),concertID.stringValue,userID,[responseObject description]);
+//        if (completion) {
+//            completion();
+//        }
+//        
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        NSLog(@"%@: ERROR removing concert %@ from profile %@: %@",NSStringFromClass([self class]), concertID.stringValue, userID,[error description]);
+//    }];
+    
+    if (completion) {
+        completion();
+    }
+}
 @end

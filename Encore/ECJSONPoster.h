@@ -11,4 +11,5 @@
 @interface ECJSONPoster : NSObject
 +(void) postUserID:(NSString*) facebookID;
 +(void) addConcert: (NSNumber *) concertID toUser: (NSString *) userID completion: (void (^)()) completion;
++(void) removeConcert: (NSNumber *) concertID toUser: (NSString *) userID completion: (void (^)()) completion;
 @end
