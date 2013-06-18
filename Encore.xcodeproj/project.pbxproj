@@ -262,12 +262,12 @@
 			children = (
 				D4A8DDAE176A133B005E9847 /* ECConcertDetailViewController.h */,
 				D4A8DDAD176A133B005E9847 /* ECConcertDetailViewController.m */,
+				D4A8DDB1176A133B005E9847 /* ECConcertDetailViewController.xib */,
 				D4A8DDB5176A133B005E9847 /* ECCollectionCell.xib */,
 				D4A8DDB6176A133B005E9847 /* CustomCellBackground.h */,
 				D4A8DDB7176A133B005E9847 /* CustomCellBackground.m */,
 				D4A8DDAF176A133B005E9847 /* Cell.m */,
 				D4A8DDB0176A133B005E9847 /* Cell.h */,
-				D4A8DDB1176A133B005E9847 /* ECConcertDetailViewController.xib */,
 				D4A8DDD0176A4272005E9847 /* Post detail */,
 			);
 			name = Concert;
@@ -379,17 +379,19 @@
 		D4AA4CF91766B374009B0635 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D4A8DDD1176A44A0005E9847 /* Images */,
 				D4A8DDD6176AB62E005E9847 /* SectionData.plist */,
 				A0FF1C52176CC88000433768 /* LoginInfoPages.plist */,
 				D4AC35FA1768C8B20087B1E9 /* ECJSONFetcher.h */,
 				D4AC35FB1768C8B20087B1E9 /* ECJSONFetcher.m */,
+				D4A8DDC2176A20D2005E9847 /* ECJSONPoster.h */,
+				D4A8DDC3176A20D2005E9847 /* ECJSONPoster.m */,
 				D4A8DDC8176A39B9005E9847 /* NSDate+JSON.h */,
 				D4A8DDC9176A39B9005E9847 /* NSDate+JSON.m */,
 				D4A8DDAB176A133B005E9847 /* NSDictionary+Posts.h */,
 				D4A8DDAC176A133B005E9847 /* NSDictionary+Posts.m */,
 				D4AC35F71768C5850087B1E9 /* NSDictionary+ConcertList.h */,
 				D4AC35F81768C5850087B1E9 /* NSDictionary+ConcertList.m */,
-				D4A8DDD1176A44A0005E9847 /* Images */,
 				D4AA4D381766F3D0009B0635 /* Localizable.strings */,
 				D4AA4CFA1766B374009B0635 /* Encore-Info.plist */,
 				D4AA4CFB1766B374009B0635 /* InfoPlist.strings */,
@@ -443,8 +445,6 @@
 				D4AA4D2D1766BA8C009B0635 /* ECLoginViewController.h */,
 				D4AA4D2E1766BA8C009B0635 /* ECLoginViewController.m */,
 				D4AA4D2F1766BA8C009B0635 /* ECLoginViewController.xib */,
-				D4A8DDC2176A20D2005E9847 /* ECJSONPoster.h */,
-				D4A8DDC3176A20D2005E9847 /* ECJSONPoster.m */,
 				A0848C0F176D25D5009BBB38 /* ECLoginPageView.h */,
 				A0848C10176D25D5009BBB38 /* ECLoginPageView.m */,
 				A0848C0A176D1F0D009BBB38 /* ECLoginPageView.xib */,
