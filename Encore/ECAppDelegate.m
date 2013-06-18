@@ -69,7 +69,7 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
         [self openSession];
     } else {
         // No, display the login page.
-        [self showLoginView];
+        [self showLoginView: NO];
     }
     return YES;
 }
@@ -116,7 +116,7 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
             
             [FBSession.activeSession closeAndClearTokenInformation];
             
-            [self showLoginView];
+            [self showLoginView: YES];
             break;
         }
         default:{
@@ -136,7 +136,7 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
     }
 }
 
--(void) showLoginView {
+-(void) showLoginView: (BOOL) animated {
     UIViewController *topViewController = [self.navigationController topViewController];
     
     UIViewController *modalViewController = [topViewController presentedViewController];
@@ -149,7 +149,7 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
                                                       initWithNibName:@"ECLoginViewController"
                                                       bundle:nil];
         
-        [topViewController presentViewController:loginViewController animated:NO completion:nil];
+        [topViewController presentViewController:loginViewController animated:animated completion:nil];
     } else {
         ECLoginViewController* loginViewController = (ECLoginViewController*)modalViewController;
         [loginViewController loginFailed];
