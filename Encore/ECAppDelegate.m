@@ -188,9 +188,10 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
 
 -(void) saveUserIDToDefaults: (NSString *) userID {
     NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
-    NSString * defaultID = [defaults stringForKey:@"user_id"];
+    NSString * userIDKey = NSLocalizedString(@"user_id", nil);
+    NSString * defaultID = [defaults stringForKey:userIDKey];
     if (!defaultID || ![defaultID isEqualToString:userID]) {
-        [defaults setObject:userID forKey:@"user_id"];
+        [defaults setObject:userID forKey:userIDKey];
         [defaults synchronize];
     }
     else defaultID ? NSLog(@"No default ID saved") : NSLog(@"No change in User ID. Defaults not changed");

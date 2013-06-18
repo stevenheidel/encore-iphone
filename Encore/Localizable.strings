@@ -31,3 +31,6 @@
 "ArtistSearch" = "Search Results for %@";
 "Past" = "Recent";
 "Upcoming" = "Upcoming";
+
+//user defaults
+"user_id" = "user_id";
