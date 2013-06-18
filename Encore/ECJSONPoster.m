@@ -34,9 +34,7 @@
              }];
 }
 
-
-+(void) addConcert: (NSNumber *) concertID toUser: (NSString *) userID {
-
++(void) addConcert: (NSNumber *) concertID toUser: (NSString *) userID completion: (void (^)()) completion{
     NSString * baseURLString = [NSString stringWithFormat:@"%@/", NSLocalizedString(@"BaseURL", nil)];
     NSLog(@"%@", baseURLString);
     NSString * kUsers = NSLocalizedString(@"UsersURL", nil);
@@ -49,11 +47,16 @@
     
     [client registerHTTPOperationClass:[AFJSONRequestOperation class]];
     [client setDefaultHeader:@"Accept" value:@"application/json"];
-    
+
     [client postPath:urlString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"%@: Success adding to profile %@", NSStringFromClass([self class]),[responseObject description]);
+        if (completion) {
+            completion();
+        }
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"ERROR: %@",[error description]);
     }];
 }
+
 @end
