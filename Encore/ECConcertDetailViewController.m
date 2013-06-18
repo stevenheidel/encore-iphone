@@ -11,7 +11,9 @@
 #import "Cell.h"
 #import "UIImageView+AFNetworking.h"
 #import "NSDictionary+Posts.h"
+#import "ECJSONPoster.h"
 #import "ECPostViewController.h"
+
 NSString *kCellID = @"cellID";
 
 @interface ECConcertDetailViewController ()
@@ -39,6 +41,26 @@ NSString *kCellID = @"cellID";
     self.venueNameLabel.text = [self.concert venueName];
     self.title = self.artistNameLabel.text;
     [self loadImages];
+    
+    //TODO: Check if concert is on profile
+    UIBarButtonItem * addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addConcert)];
+    [self.navigationItem setRightBarButtonItem:addButton];
+}
+
+-(void) addConcert {
+    NSLog(@"ADDING A CONCERT");
+    NSNumber * concertID = [self.concert songkickID];
+    
+    [self addConcertToProfileWithID: concertID];
+}
+
+-(void) addConcertToProfileWithID: (NSNumber *) concertID {
+    NSString * userID = [self userIDFromDefaults]; //Or could just request user ID again...?
+    [ECJSONPoster addConcert:concertID toUser:userID];
+}
+
+-(NSString *) userIDFromDefaults {
+    return [[NSUserDefaults standardUserDefaults] stringForKey:@"user_id"];
 }
 
 -(void) loadImages {
