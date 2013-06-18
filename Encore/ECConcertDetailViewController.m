@@ -70,7 +70,6 @@ NSString *kCellID = @"cellID";
         fetcher.delegate = self;
         [fetcher fetchPostsForConcertWithID:serverID];
     }
-    
     else NSLog(@"%@: Can't load images, object doesn't have a server_id", NSStringFromClass([self class]));
 }
 

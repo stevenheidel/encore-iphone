@@ -15,6 +15,7 @@ static NSString *const ArtistsURL = @"artists";
 static NSString *const SearchURL = @"search?term=";
 static NSString *const PastURL = @"past";
 static NSString *const FutureURL = @"future";
+static NSString *const TodayURL = @"today";
 static NSString *const CityURL = @"city=";
 static NSString *const PostsURL = @"posts";
 
@@ -47,6 +48,41 @@ static NSString *const PostsURL = @"posts";
     [operation start];
 }
 
+//GET /concerts/future?city=Toronto
+
+-(void)fetchPopularConcertsWithSearchType:(ECSearchType)searchType {
+    __block NSArray * concertList;
+    NSString *userLocation = @"Toronto"; //TODO: Get location dynamically from app delegate
+    
+    NSString *  artistConcertsUrl;
+    if (searchType == ECSearchTypePast) {
+        artistConcertsUrl = [NSString stringWithFormat:@"%@/%@/%@?%@%@", BaseURLString, ConcertsURL, PastURL, CityURL, userLocation];
+    } else if (searchType == ECSearchTypeFuture) {
+        artistConcertsUrl = [NSString stringWithFormat:@"%@/%@/%@?%@%@", BaseURLString, ConcertsURL, FutureURL, CityURL, userLocation];
+    } else {
+        artistConcertsUrl = [NSString stringWithFormat:@"%@/%@/%@?%@%@", BaseURLString, ConcertsURL, TodayURL, CityURL, userLocation];
+    }
+    
+    NSString *escapedDataString = [artistConcertsUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSURL * url = [NSURL URLWithString:escapedDataString];
+    NSURLRequest * request = [NSURLRequest requestWithURL:url];
+    AFJSONRequestOperation * operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        NSLog(@"JSON: %@", [JSON description]);
+        concertList = (NSArray*) [(NSDictionary*)JSON objectForKey:@"concerts"];
+        [self.delegate fetchedPopularConcerts:concertList];
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        NSLog(@"ERROR:%@",[error description]);
+        
+        //TODO: replace so it loads in cached objects
+        NSDictionary * concert1 = [NSDictionary dictionaryWithObjectsAndKeys:@"Test Venue Name 1", @"venue_name", @"1989-02-16", @"date",@"Simon and the Destroyers", @"name",@"99", @"server_id", nil];
+        NSDictionary * concert2 = [NSDictionary dictionaryWithObjectsAndKeys:@"Test Venue Name 2", @"venue_name", @"1999-03-26", @"date",@"Simon and the Destroyers", @"name",@"55", @"server_id", nil];
+        NSArray * testConcertList = [NSArray arrayWithObjects:concert1,concert2, nil];
+        [self.delegate fetchedArtistConcerts:testConcertList];
+    }];
+    
+    [operation start];
+}
+
 -(void)fetchArtistsForString:(NSString *)searchStr {
     __block NSArray * artistList;
     NSString *  artistSearchUrl = [NSString stringWithFormat:@"%@/%@/%@%@", BaseURLString, ArtistsURL, SearchURL, searchStr];
@@ -69,12 +105,17 @@ static NSString *const PostsURL = @"posts";
     [operation start];
 }
 
-
-
--(void)fetchConcertsForArtistID:(NSNumber *)artistID {
+-(void)fetchConcertsForArtistID:(NSNumber *)artistID withSearchType:(ECSearchType)searchType {
     __block NSArray * concertList;
     NSString *userLocation = @"Toronto"; //TODO: Get location dynamically from app delegate
-    NSString *  artistConcertsUrl = [NSString stringWithFormat:@"%@/%@/%@/%@/%@?%@%@", BaseURLString, ArtistsURL, [artistID stringValue], ConcertsURL, PastURL, CityURL, userLocation];
+    
+    NSString *  artistConcertsUrl;
+    if (searchType == ECSearchTypePast) {
+        artistConcertsUrl = [NSString stringWithFormat:@"%@/%@/%@/%@/%@?%@%@", BaseURLString, ArtistsURL, [artistID stringValue], ConcertsURL, PastURL, CityURL, userLocation];
+    } else {
+        artistConcertsUrl = [NSString stringWithFormat:@"%@/%@/%@/%@/%@?%@%@", BaseURLString, ArtistsURL, [artistID stringValue], ConcertsURL, FutureURL, CityURL, userLocation];
+    }
+    
     NSString *escapedDataString = [artistConcertsUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSURL * url = [NSURL URLWithString:escapedDataString];
     NSURLRequest * request = [NSURLRequest requestWithURL:url];

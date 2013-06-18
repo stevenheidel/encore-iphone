@@ -9,20 +9,17 @@
 #import <UIKit/UIKit.h>
 #import "ECJSONFetcher.h"
 
-typedef enum {
-    ECSelectPopular,
-    ECSelectArtist,
-    ECSelectConcert
-} ECSelectionStage;
-
 
 @interface ECAddConcertViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, ECJSONFetcherDelegate> {
-    ECSelectionStage selectionStage;
+    bool hasSearched;
 }
 
-@property (strong, nonatomic) NSArray *arrData;
+@property (nonatomic, assign) ECSearchType searchType;
+@property (strong, nonatomic) NSArray *arrArtistData;
+@property (strong, nonatomic) NSArray *arrPopularData;
 @property (strong, nonatomic) ECJSONFetcher * JSONFetcher;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (nonatomic, assign) NSString * lastSelectedArtist;
 @end
