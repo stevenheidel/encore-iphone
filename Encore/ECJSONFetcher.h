@@ -18,8 +18,9 @@ typedef enum {
 @interface ECJSONFetcher : NSObject
 -(void) fetchConcertsForUserId: (NSString *) id;
 -(void)fetchArtistsForString:(NSString *)searchStr;
--(void)fetchConcertsForArtistID:(NSString *)artistID withSearchType:(ECSearchType)searchType;
--(void) fetchPostsForConcertWithID: (NSString *) serverID;
+-(void)fetchConcertsForArtistID:(NSNumber *)artistID withSearchType:(ECSearchType)searchType;
+-(void) fetchPostsForConcertWithID: (NSNumber *) serverID;
+
 @property (nonatomic,unsafe_unretained) id <ECJSONFetcherDelegate> delegate;
 @end
 

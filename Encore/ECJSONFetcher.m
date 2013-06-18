@@ -69,17 +69,15 @@ static NSString *const PostsURL = @"posts";
     [operation start];
 }
 
-
-
--(void)fetchConcertsForArtistID:(NSString *)artistID withSearchType:(ECSearchType)searchType {
+-(void)fetchConcertsForArtistID:(NSNumber *)artistID withSearchType:(ECSearchType)searchType {
     __block NSArray * concertList;
     NSString *userLocation = @"Toronto"; //TODO: Get location dynamically from app delegate
     
     NSString *  artistConcertsUrl;
     if (searchType == ECSearchTypePast) {
-        artistConcertsUrl = [NSString stringWithFormat:@"%@/%@/%@/%@/%@?%@%@", BaseURLString, ArtistsURL, artistID, ConcertsURL, PastURL, CityURL, userLocation];
+        artistConcertsUrl = [NSString stringWithFormat:@"%@/%@/%@/%@/%@?%@%@", BaseURLString, ArtistsURL, [artistID stringValue], ConcertsURL, PastURL, CityURL, userLocation];
     } else {
-        artistConcertsUrl = [NSString stringWithFormat:@"%@/%@/%@/%@/%@?%@%@", BaseURLString, ArtistsURL, artistID, ConcertsURL, FutureURL, CityURL, userLocation];
+        artistConcertsUrl = [NSString stringWithFormat:@"%@/%@/%@/%@/%@?%@%@", BaseURLString, ArtistsURL, [artistID stringValue], ConcertsURL, FutureURL, CityURL, userLocation];
     }
     
     NSString *escapedDataString = [artistConcertsUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
@@ -106,9 +104,9 @@ static NSString *const PostsURL = @"posts";
 //    
 //}
 
--(void) fetchPostsForConcertWithID: (NSString *) serverID {
+-(void) fetchPostsForConcertWithID: (NSNumber *) serverID {
     __block NSArray * posts;
-    NSString * fullPostsUrl = [NSString stringWithFormat:@"%@/%@/%@/%@",BaseURLString,ConcertsURL,serverID,PostsURL];
+    NSString * fullPostsUrl = [NSString stringWithFormat:@"%@/%@/%@/%@",BaseURLString,ConcertsURL,[serverID stringValue],PostsURL];
     NSURL * url = [NSURL URLWithString:fullPostsUrl];
     NSURLRequest * request = [NSURLRequest requestWithURL:url];
     AFJSONRequestOperation * operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {

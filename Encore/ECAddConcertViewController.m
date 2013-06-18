@@ -79,12 +79,12 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     return self.arrData.count;
 }
 
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     NSDictionary* data = (NSDictionary*)[self.arrData objectAtIndex:indexPath.row];
+    NSNumber *artistID = [data songkickID];
     
-    //selectionStage = ECSelectConcert;  //set up next selection stage
-    NSString *artistID = [data songkickID];
     if (searchType == ECSearchTypePast) {
         [self.JSONFetcher fetchConcertsForArtistID:artistID withSearchType:ECSearchTypePast];
     } else {

@@ -13,8 +13,9 @@
 -(NSString *) niceDate;
 -(NSString *) artistName;
 -(NSString *) venueName;
--(NSString *) serverID;
--(NSString *) songkickID;
+
+-(NSNumber *) serverID;
+-(NSNumber *) songkickID;
 
 -(NSString *) month;
 -(NSString *) day;

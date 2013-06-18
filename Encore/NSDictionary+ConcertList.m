@@ -29,11 +29,11 @@ static NSString * const kDateFormat = @"yyyy-MM-dd";
    return [self objectForKey:@"venue_name"];
 }
 
--(NSString*) serverID {
+-(NSNumber*) serverID {
     return [self objectForKey:@"server_id"];
 }
 
--(NSString*) songkickID {
+-(NSNumber*) songkickID {
     return [self objectForKey:@"songkick_id"];
 }
 -(NSString *) month {
