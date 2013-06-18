@@ -74,7 +74,7 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
     return YES;
 }
 
-
+#pragma mark - Login management
 -(void) openSession {
     
     [FBSession openActiveSessionWithReadPermissions:nil
@@ -176,21 +176,27 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
 }
 
 -(void) loginCompletedWithUser:(NSDictionary <FBGraphUser>*) user {
-//    [[FBRequest requestForMe] startWithCompletionHandler:
-//     ^(FBRequestConnection *connection, NSDictionary<FBGraphUser> *user, NSError *error) {
-//         if (!error) {
-    
     NSString * userid = user.id;
     NSLog(@"Logged in user with id: %@",userid);
     self.profileViewController.facebook_id = userid;
-    self.profileViewController.userName = user.name;
-    //[self.navigationController pushViewController:self.profileViewController animated:NO];
+    self.profileViewController.userName = user.name; //TODO: remove if not needed
+    
     [ECJSONPoster postUserID:userid];
     [self.profileViewController fetchConcerts];
-         //}
-   //  }];
+    [self saveUserIDToDefaults: userid];
 }
 
+-(void) saveUserIDToDefaults: (NSString *) userID {
+    NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
+    NSString * defaultID = [defaults stringForKey:@"user_id"];
+    if (!defaultID || ![defaultID isEqualToString:userID]) {
+        [defaults setObject:userID forKey:@"user_id"];
+        [defaults synchronize];
+    }
+    else defaultID ? NSLog(@"No default ID saved") : NSLog(@"No change in User ID. Defaults not changed");
+}
+
+#pragma mark - location
 - (void)getUserLocation {
     [self.locationManager startUpdatingLocation];
 }
