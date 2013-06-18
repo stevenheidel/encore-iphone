@@ -31,12 +31,14 @@
 @class  ECHorizontalCellView;
 @interface KLHorizontalSelectCell : UITableViewCell
 -(id) initWithCellData: (NSDictionary *) cellData forType: (ECCellType) cellType;
+-(void) updateWithCellData: (NSDictionary *) cellData;
 @property (nonatomic, strong) UIImageView* image;
 @property (nonatomic, strong) UILabel* label;
 @property (nonatomic, strong) UILabel* dateNumberLabel;
 @property (nonatomic, strong) UILabel* weekDayLabel;
 @property (nonatomic, strong) NSDictionary * cellData;
 @property (nonatomic, strong) ECHorizontalCellView * cellView;
+@property (nonatomic, assign) ECCellType cellType;
 @end
 
 @interface ECHorizontalEndCell : UITableViewCell

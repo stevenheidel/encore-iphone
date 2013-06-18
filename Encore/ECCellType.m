@@ -16,3 +16,7 @@ NSString* reuseIdentifierForCellType(ECCellType type)
             return @"Cell";
     }
 }
+
+BOOL cellTypeNeedsUpdating (ECCellType type) {
+    return type == ECCellTypeFutureShows || type == ECCellTypePastShows;
+}

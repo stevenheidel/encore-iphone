@@ -204,8 +204,8 @@
             return (id)[[ECHorizontalEndCell alloc] initWithType:ECCellTypeAddPast];
         case ECCellTypeToday:
             return (id) [[ECTodayCell alloc] init];
-        case ECCellTypeFutureShows:
-            return (id)[[KLHorizontalSelectCell alloc] initWithCellData:[[self.tableData objectForKey:@"future"] objectAtIndex:indexPath.row] forType:ECCellTypePastShows];
+        case ECCellTypeFutureShows: //TODO: clean up past and future thing
+            return (id)[[KLHorizontalSelectCell alloc] initWithCellData:[[self.tableData objectForKey:@"future"] objectAtIndex:indexPath.row] forType:ECCellTypeFutureShows];
         case ECCellTypePastShows:
             return (id)[[KLHorizontalSelectCell alloc] initWithCellData:[[self.tableData objectForKey:@"past"] objectAtIndex:indexPath.row] forType:ECCellTypePastShows];
         default:
@@ -220,6 +220,13 @@
     id cell = (id)[tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
     if (cell==nil) {
         cell = [self initCellAtIndexPath:indexPath];
+    }
+    else if (cellTypeNeedsUpdating(cellType)){
+        NSString * key = cellType == ECCellTypePastShows ? @"past" : @"future";
+        NSDictionary * cellData = [[self.tableData objectForKey:key] objectAtIndex:indexPath.row];
+        ((KLHorizontalSelectCell*)cell).cellType = cellType;
+        [(KLHorizontalSelectCell*) cell updateWithCellData:cellData];
+        
     }
     return cell;
 }
@@ -239,17 +246,33 @@
 @implementation KLHorizontalSelectCell
 -(id) initWithCellData: (NSDictionary *) cellData forType: (ECCellType) cellType {
     if (self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifierForCellType(cellType)]){
-        
-        ECHorizontalCellView * cellView = [[ECHorizontalCellView alloc] initWithFrame: CGRectMake(0, 0, kDefaultCellWidth, kDefaultCellHeight)];
-        //cellView.weekdayLabel.text = [cellData weekday];
-        cellView.yearLabel.text = [cellData year];
-        cellView.monthLabel.text = [cellData month];
-        cellView.dayNumberLabel.text = [cellData day];
-        [cellView setTransform:CGAffineTransformMakeRotation(M_PI_2)];
-        [self addSubview:cellView];
+        self.cellType = cellType;
+        if(!self.cellView) {
+            self.cellView = [[ECHorizontalCellView alloc] initWithFrame: CGRectMake(0, 0, kDefaultCellWidth, kDefaultCellHeight)];
+            [self.cellView  setTransform:CGAffineTransformMakeRotation(M_PI_2)];
+            [self addSubview:self.cellView ];
+        }
+        [self updateWithCellData:cellData];
     }
     return self;
 }
+
+//Method is publically accessible, currently called by cellForRowAtIndexPath if cell is being reused.
+-(void) updateWithCellData: (NSDictionary *) cellData {
+    self.cellData = cellData;
+    [self updateCellView];
+}
+
+-(void) updateCellView {
+    self.contentView.backgroundColor = self.cellType == ECCellTypePastShows ? [UIColor colorWithRed:240.0/255.0 green:1.0 blue:240.0/255.0 alpha:1.0] : [UIColor clearColor];
+    ECHorizontalCellView * view =  self.cellView;
+    NSDictionary * data = self.cellData;
+    view.yearLabel.text = [data year];
+    view.monthLabel.text = [data month];
+    view.dayNumberLabel.text = [data day];
+}
+
+
 @end
 
 @implementation ECTodayCell

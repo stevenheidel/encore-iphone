@@ -19,4 +19,6 @@ typedef enum {
 } ECCellType;
 
 NSString* reuseIdentifierForCellType(ECCellType type);
+BOOL cellTypeNeedsUpdating(ECCellType type);
+
 #endif
