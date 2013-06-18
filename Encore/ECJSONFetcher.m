@@ -31,7 +31,7 @@ static NSString *const PostsURL = @"posts";
         concertList = (NSDictionary*) [(NSDictionary*)JSON objectForKey:@"concerts"];
         [self.delegate fetchedConcerts: concertList];
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-        NSLog(@"ERROR:%@",[error description]);
+        NSLog(@"ERROR fetching concerts for userID %@: %@",fb_id,[error description]);
         
         NSDictionary * past1 = [NSDictionary dictionaryWithObjectsAndKeys:@"2013-06-12", @"date", @"Test Venue 1", @"venue_name", @"My Artist", @"name", @"11", @"server_id", nil];
         NSDictionary * past2 = [NSDictionary dictionaryWithObjectsAndKeys:@"2012-05-11", @"date", @"Test Venue 2", @"venue_name", @"Go Artist", @"name", @"22", @"server_id", nil];
@@ -55,11 +55,11 @@ static NSString *const PostsURL = @"posts";
     NSURL * url = [NSURL URLWithString:escapedDataString];
     NSURLRequest * request = [NSURLRequest requestWithURL:url];
     AFJSONRequestOperation * operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-        NSLog(@"JSON: %@", [JSON description]);
+        NSLog(@"Successfully fetched Artists for string. %@", searchStr);
         artistList = (NSArray*) [(NSDictionary*)JSON objectForKey:@"artists"];
         [self.delegate fetchedArtists:artistList];
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-        NSLog(@"ERROR:%@",[error description]);
+        NSLog(@"ERROR fetching artists for string %@: %@",searchStr,[error description]);
         
         NSDictionary * artist1 = [NSDictionary dictionaryWithObjectsAndKeys:@"Test Artist 1",@"name", @"1234", @"songkick_id", nil];
         NSDictionary * artist2 = [NSDictionary dictionaryWithObjectsAndKeys:@"Test Artist 2",@"name", @"4321", @"songkick_id", nil];
@@ -79,11 +79,11 @@ static NSString *const PostsURL = @"posts";
     NSURL * url = [NSURL URLWithString:escapedDataString];
     NSURLRequest * request = [NSURLRequest requestWithURL:url];
     AFJSONRequestOperation * operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-        NSLog(@"JSON: %@", [JSON description]);
+        NSLog(@"Successfully fetched concerts for artist with id: %@", [artistID description]);
         concertList = (NSArray*) [(NSDictionary*)JSON objectForKey:@"concerts"];
         [self.delegate fetchedArtistConcerts: concertList];
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-        NSLog(@"ERROR:%@",[error description]);
+        NSLog(@"ERROR fetching concerts for artist with ID %@: %@",[artistID description],[error description]);
         
         //TODO: replace so it loads in cached objects
         NSDictionary * concert1 = [NSDictionary dictionaryWithObjectsAndKeys:@"Test Venue Name 1", @"venue_name", @"1989-02-16", @"date",@"Simon and the Destroyers", @"name",@"99", @"server_id", nil];
@@ -95,10 +95,6 @@ static NSString *const PostsURL = @"posts";
     [operation start];
 }
 
-//-(void) fetchConcertsForId:(NSString *) id completion: (void (^)()){
-//    
-//}
-
 -(void) fetchPostsForConcertWithID: (NSNumber *) serverID {
     __block NSArray * posts;
     NSString * fullPostsUrl = [NSString stringWithFormat:@"%@/%@/%@/%@",BaseURLString,ConcertsURL,[serverID stringValue],PostsURL];
@@ -108,7 +104,7 @@ static NSString *const PostsURL = @"posts";
             posts = (NSArray*) [(NSDictionary*)JSON objectForKey:@"posts"];
             [self.delegate fetchedPosts: posts];
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-        NSLog(@"ERROR:%@",[error description]);
+        NSLog(@"ERROR fetching posts for concert with id %@: %@",[serverID description],[error description]);
     }];
     [operation start];
 }
