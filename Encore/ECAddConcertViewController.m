@@ -85,7 +85,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     NSDictionary* data = (NSDictionary*)[self.arrData objectAtIndex:indexPath.row];
     NSNumber *artistID = [data songkickID];
     
-    if (searchType == ECSearchTypePast) {
+    if (self.searchType == ECSearchTypePast) {
         [self.JSONFetcher fetchConcertsForArtistID:artistID withSearchType:ECSearchTypePast];
     } else {
         [self.JSONFetcher fetchConcertsForArtistID:artistID withSearchType:ECSearchTypeFuture];

@@ -214,8 +214,12 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
             self.concertChildVC =[ECConcertChildViewController new];
             break;
         case ECCellTypeAddFuture:
+            self.addConcertVC = [ECAddConcertViewController new];
+            self.addConcertVC.searchType = ECSearchTypeFuture;
+            break;
         case ECCellTypeAddPast:
             self.addConcertVC = [ECAddConcertViewController new];
+            self.addConcertVC.searchType = ECSearchTypePast;
             break;
         default:
             break;

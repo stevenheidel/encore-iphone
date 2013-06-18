@@ -11,9 +11,10 @@
 
 
 @interface ECAddConcertViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, ECJSONFetcherDelegate> {
-    ECSearchType searchType;
+    
 }
 
+@property (nonatomic, assign) ECSearchType searchType;
 @property (strong, nonatomic) NSArray *arrData;
 @property (strong, nonatomic) ECJSONFetcher * JSONFetcher;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
