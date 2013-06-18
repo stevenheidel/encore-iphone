@@ -71,10 +71,10 @@ static NSString *const PostsURL = @"posts";
 
 
 
--(void)fetchConcertsForArtistID:(NSString *)artistID {
+-(void)fetchConcertsForArtistID:(NSNumber *)artistID {
     __block NSArray * concertList;
     NSString *userLocation = @"Toronto"; //TODO: Get location dynamically from app delegate
-    NSString *  artistConcertsUrl = [NSString stringWithFormat:@"%@/%@/%@/%@/%@?%@%@", BaseURLString, ArtistsURL, artistID, ConcertsURL, PastURL, CityURL, userLocation];
+    NSString *  artistConcertsUrl = [NSString stringWithFormat:@"%@/%@/%@/%@/%@?%@%@", BaseURLString, ArtistsURL, [artistID stringValue], ConcertsURL, PastURL, CityURL, userLocation];
     NSString *escapedDataString = [artistConcertsUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSURL * url = [NSURL URLWithString:escapedDataString];
     NSURLRequest * request = [NSURLRequest requestWithURL:url];

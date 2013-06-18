@@ -102,7 +102,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     switch (selectionStage) {
         case ECSelectArtist: {
             //selectionStage = ECSelectConcert;  //set up next selection stage
-            NSString *artistID = [data songkickID];
+            NSNumber *artistID = [data songkickID];
             [self.JSONFetcher fetchConcertsForArtistID:artistID];
             [self.activityIndicator startAnimating];
             self.lastSelectedArtist = [data artistName];
