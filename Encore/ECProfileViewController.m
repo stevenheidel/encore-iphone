@@ -10,6 +10,7 @@
 #import "ECAppDelegate.h"
 #import "ECMyConcertViewController.h"
 #import "ECConcertChildViewController.h"
+#import "ECConcertDetailViewController.h"
 #import "ECJSONFetcher.h"
 #import "ECCellType.h"
 #import "ECAddConcertViewController.h"
@@ -22,7 +23,8 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
 @property (strong,nonatomic) NSMutableArray * pastConcerts;
 @property (strong,nonatomic) NSMutableArray * futureConcerts;
 @property (strong, nonatomic) NSMutableDictionary * concerts;
-@property (strong,nonatomic) ECConcertChildViewController * concertChildVC;
+//@property (strong,nonatomic) ECConcertChildViewController * concertChildVC;
+@property (strong,nonatomic) ECConcertDetailViewController * concertChildVC;
 -(IBAction)viewConcerts:(id)sender;
 -(IBAction)viewFriends:(id)sender;
 @end
@@ -174,7 +176,7 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
     if (cellType == ECCellTypeFutureShows || cellType == ECCellTypePastShows) {
         NSString * key = cellType == ECCellTypePastShows ? @"past" : @"future";
         self.concertChildVC.concert = [[self.concerts objectForKey: key]objectAtIndex:indexPath.row];
-        [self.concertChildVC updateView];
+        //[self.concertChildVC updateView];
     }
 }
 
@@ -213,7 +215,8 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
             break;
         case ECCellTypePastShows:
         case ECCellTypeFutureShows:
-            self.concertChildVC =[ECConcertChildViewController new];
+            //self.concertChildVC =[ECConcertChildViewController new];
+            self.concertChildVC = [ECConcertDetailViewController new];
             break;
         case ECCellTypeAddFuture:
             self.addFutureConcertVC = [ECAddConcertViewController new];
