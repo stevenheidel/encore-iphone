@@ -76,7 +76,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
             case ECSelectArtist: {
                 cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ArtistCellIdentifier];
                 NSDictionary *artistDic = (NSDictionary *)[self.arrData objectAtIndex:indexPath.row];
-                cell.textLabel.text = [artistDic objectForKey:@"name"];
+                cell.textLabel.text = [artistDic artistName];
                 break;
             }
             /*case ECSelectConcert: {
@@ -102,7 +102,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     switch (selectionStage) {
         case ECSelectArtist: {
             //selectionStage = ECSelectConcert;  //set up next selection stage
-            NSString *artistID = [data serverID];
+            NSString *artistID = [data songkickID];
             [self.JSONFetcher fetchConcertsForArtistID:artistID];
             [self.activityIndicator startAnimating];
             break;
@@ -131,8 +131,6 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     [self.JSONFetcher fetchArtistsForString:[searchBar text]];
     [searchBar resignFirstResponder];
     [searchBar setShowsCancelButton:NO animated:YES];
-    
-  //  [self.tableView]
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {

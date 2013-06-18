@@ -14,6 +14,8 @@
 -(NSString *) artistName;
 -(NSString *) venueName;
 -(NSString *) serverID;
+-(NSString *) songkickID;
+
 -(NSString *) month;
 -(NSString *) day;
 -(NSString *) weekday;
