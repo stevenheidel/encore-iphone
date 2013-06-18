@@ -23,6 +23,8 @@ typedef enum {
 -(void)fetchConcertsForArtistID:(NSNumber *)artistID withSearchType:(ECSearchType)searchType;
 -(void) fetchPostsForConcertWithID: (NSNumber *) serverID;
 
++(void) checkIfConcert: (NSNumber*) concertID isOnProfile: (NSString *) userID completion: (void (^)(BOOL isOnProfile)) completion;
+
 @property (nonatomic,unsafe_unretained) id <ECJSONFetcherDelegate> delegate;
 @end
 
@@ -34,4 +36,5 @@ typedef enum {
 -(void) fetchedArtists:(NSArray *)artists;
 -(void) fetchedArtistConcerts:(NSArray *)concerts;
 -(void) fetchedPosts: (NSArray *) posts;
+
 @end

@@ -150,5 +150,25 @@ static NSString *const PostsURL = @"posts";
     [operation start];
 }
 
++(void) checkIfConcert: (NSNumber*) concertID isOnProfile: (NSString *) userID completion: (void (^)(BOOL isOnProfile)) completion  {
+    
+    //TODO: Implement this
+//   NSString * fullCheckURL = [NSString stringWithFormat:@"%@/%@/%@/%@???%@",BaseURLString, UsersURL,userID, ConcertsURL,concertID];
+//    NSURL * url = [NSURL URLWithString:fullCheckURL];
+//    NSURLRequest * reuqest = [NSURLRequest requestWithURL:url];
+//    AFJSONRequestOperation * operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:reuqest success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+//        NSLog(@"Successfully polled server for if concert %@ is on profile %@", concertID, userID);
+//        BOOL result = FALSE;
+//        result = [(NSDictionary*) JSON objectForKey:@"response"];
+//        if(completion)
+//            completion(result);
+//    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+//        NSLog(@"");
+//    }];
+//    [operation start];
+    NSLog(@"%@: Checking if concert %@ is on profile %@ is not implemented yet",NSStringFromClass([self class]),concertID.stringValue, userID);
+    if(completion)
+        completion(FALSE);
+}
 
 @end
