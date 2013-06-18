@@ -70,6 +70,10 @@ static NSString *const PostsURL = @"posts";
         [self.delegate fetchedArtistConcerts: concertList];
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         NSLog(@"ERROR:%@",[error description]);
+        
+        NSDictionary * concert1 = [NSDictionary dictionaryWithObjectsAndKeys:<#(id), ...#>, nil];
+        NSDictionary * concert2 = [NSDictionary dictionaryWithObjectsAndKeys:<#(id), ...#>, nil];
+        NSArray * testConcertList = [self.delegate fetchedArtistConcerts:testConcertList];
     }];
     
     [operation start];

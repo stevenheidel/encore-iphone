@@ -64,12 +64,7 @@ NSString *kCellID = @"cellID";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath;
 {
-    // we're going to use a custom UICollectionViewCell, which will hold an image and its label
-    //
     Cell *cell = [cv dequeueReusableCellWithReuseIdentifier:kCellID forIndexPath:indexPath];
-    
-    // make the cell's title the actual NSIndexPath value
-    cell.label.text = [NSString stringWithFormat:@"{%ld,%ld}", (long)indexPath.row, (long)indexPath.section];
     
     if(!self.posts){
         cell.image.image = [UIImage imageNamed:nil]; //TODO replace with blank?
