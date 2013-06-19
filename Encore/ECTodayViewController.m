@@ -31,6 +31,8 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    UIView * headerSpace = [[UIView alloc] initWithFrame: CGRectMake(self.tableView.frame.origin.x, self.tableView.frame.origin.y, self.tableView.frame.size.width, 3.0)]; //Added so shadow of horizontal bar doesn't overlap with view. Remove/change once designs in
+    self.tableView.tableHeaderView = headerSpace;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -62,6 +64,12 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     
     concertDetail.concert = [self.arrTodaysConcerts objectAtIndex:indexPath.row];
     [self.navigationController pushViewController:concertDetail animated:YES];
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    if (section == 0)
+        return NSLocalizedString(@"TodayTableTitle",nil);
+    return nil;
 }
 
 #pragma mark - ECJSONFetcher methods

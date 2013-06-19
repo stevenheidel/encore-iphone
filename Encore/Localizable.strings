@@ -32,5 +32,8 @@
 "Past" = "Recent";
 "Upcoming" = "Upcoming";
 
+//Today table
+"TodayTableTitle" = "Today's Concerts in Your Area";
+
 //user defaults
 "user_id" = "user_id";

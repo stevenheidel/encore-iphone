@@ -44,14 +44,7 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
     self.profileViewController = [[ECProfileViewController alloc] init];
     self.loginViewController = [[ECLoginViewController alloc] init];
     
-    if(self.locationManager==nil){
-        _locationManager = [[CLLocationManager alloc] init];
-    
-        _locationManager.delegate = self;
-        _locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers;
-        _locationManager.distanceFilter = 5000;
-        self.locationManager=_locationManager;
-    }
+    [self setUpLocationManager];
     
     self.profileViewController.title = @"Encore";
     
@@ -198,6 +191,18 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
 }
 
 #pragma mark - location
+
+-(void) setUpLocationManager {
+    if(self.locationManager==nil){
+        
+        _locationManager = [CLLocationManager new];
+        
+        _locationManager.delegate = self;
+        _locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers;
+        _locationManager.distanceFilter = 5000;
+        self.locationManager=_locationManager;
+    }
+}
 - (void)getUserLocation {
     [self.locationManager startUpdatingLocation];
 }
@@ -215,8 +220,16 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
             //turn off location services once we've gotten a good location
             [manager stopUpdatingLocation];
             //TODO: add code for getting the user's city from the server using coordinates
+            
+            [self saveLocationToUserDefaults:newLocation];
         }
     }
+}
+
+-(void) saveLocationToUserDefaults: (CLLocation *) location {
+    NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setDouble:location.coordinate.latitude forKey:@"latitude"];
+    [defaults setDouble:location.coordinate.longitude forKey:@"longitude"];
 }
 
 #pragma mark - UINavigationControllerDelegate
