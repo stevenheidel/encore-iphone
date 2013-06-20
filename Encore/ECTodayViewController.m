@@ -60,6 +60,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     ECConcertDetailViewController * concertDetail = [[ECConcertDetailViewController alloc] init];
     
     concertDetail.concert = [self.arrTodaysConcerts objectAtIndex:indexPath.row];
