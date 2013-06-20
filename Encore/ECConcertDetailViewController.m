@@ -120,7 +120,10 @@ NSString *kCellID = @"cellID";
         fetcher.delegate = self;
         [fetcher fetchPostsForConcertWithID:serverID];
     }
-    else NSLog(@"%@: Can't load images, object doesn't have a server_id", NSStringFromClass([self class]));
+    else {
+        NSLog(@"%@: Can't load images, object doesn't have a server_id", NSStringFromClass([self class]));
+        [self setUpPlaceholderView];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -159,10 +162,27 @@ NSString *kCellID = @"cellID";
     [self.navigationController pushViewController:postVC animated:YES];
 }
 
+-(void) setUpPlaceholderView {
+    if(!self.placeholderView){
+        NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"ECPostPlaceholder" owner:nil options:nil];
+        self.placeholderView = [subviewArray objectAtIndex:0];
+        self.placeholderView.frame = self.collectionView.frame;
+    }
+    if(!self.placeholderView.superview) {
+        [self.view addSubview:self.placeholderView];
+    }
+}
+
 #pragma mark - json fetcher delegate
 -(void) fetchedPosts: (NSArray *) posts {
     self.posts = posts;
-    [self.collectionView reloadData];
+    if ([self.posts count] > 0) {
+        [self.collectionView reloadData];
+        [self.placeholderView removeFromSuperview];
+    }
+    else {
+        [self setUpPlaceholderView];
+    }
 }
 
 @end

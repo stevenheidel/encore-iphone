@@ -27,5 +27,6 @@
 
 @property (nonatomic, assign) BOOL isOnProfile;
 
+@property (nonatomic,strong) UIView * placeholderView;
 -(void) updateView;
 @end
