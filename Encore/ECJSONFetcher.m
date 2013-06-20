@@ -151,24 +151,22 @@ static NSString *const PostsURL = @"posts";
 }
 
 +(void) checkIfConcert: (NSNumber*) concertID isOnProfile: (NSString *) userID completion: (void (^)(BOOL isOnProfile)) completion  {
+   NSString * fullCheckURL = [NSString stringWithFormat:@"%@/%@/%@/%@?songkick_id=%@",BaseURLString, UsersURL,userID, ConcertsURL,concertID.stringValue];
     
-    //TODO: Implement this
-//   NSString * fullCheckURL = [NSString stringWithFormat:@"%@/%@/%@/%@???%@",BaseURLString, UsersURL,userID, ConcertsURL,concertID];
-//    NSURL * url = [NSURL URLWithString:fullCheckURL];
-//    NSURLRequest * reuqest = [NSURLRequest requestWithURL:url];
-//    AFJSONRequestOperation * operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:reuqest success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-//        NSLog(@"Successfully polled server for if concert %@ is on profile %@", concertID, userID);
-//        BOOL result = FALSE;
-//        result = [(NSDictionary*) JSON objectForKey:@"response"];
-//        if(completion)
-//            completion(result);
-//    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-//        NSLog(@"");
-//    }];
-//    [operation start];
-    NSLog(@"%@: Checking if concert %@ is on profile %@ is not implemented yet",NSStringFromClass([self class]),concertID.stringValue, userID);
-    if(completion)
-        completion(FALSE);
+    NSURL * url = [NSURL URLWithString:fullCheckURL];
+    NSURLRequest * request = [NSURLRequest requestWithURL:url];
+    AFJSONRequestOperation * operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        NSLog(@"Successfully polled server for if concert %@ is on profile %@", concertID, userID);
+        BOOL result = FALSE;
+        NSLog(@"%@",[JSON description]);
+        result = [(NSNumber*)[(NSDictionary*) JSON objectForKey:@"response"] boolValue];
+        if(completion)
+            completion(result);
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        NSLog(@"%@: ERROR checking if concert %@ is on profile %@", NSStringFromClass([self class]),concertID.stringValue,userID);
+    }];
+    [operation start];
 }
+
 
 @end
