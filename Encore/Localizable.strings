@@ -14,11 +14,8 @@
 "CONCERTS" = "Concerts";
 "ADD_CONCERT" = "Add Concert";
 "Encore_app_name" = "Encore";
-
-
-"entity_user" = "User";
-"entity_concert" = "Concert";
-"entity_photo" = "Photo";
+"AddPast" = "Add Past";
+"AddFuture" = "Add Upcoming";
 
 //URLs
 "BaseURL" = "http://192.168.11.15:9283/api/v1/";
@@ -34,6 +31,7 @@
 "loading" = "Loading";
 //Today table
 "TodayTableTitle" = "Today's Concerts in Your Area";
+"today" = "TODAY";
 
 //user defaults
 "user_id" = "user_id";
