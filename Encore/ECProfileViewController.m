@@ -59,11 +59,58 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
     ECAppDelegate *appDelegate = (ECAppDelegate *)[[UIApplication sharedApplication] delegate];
     [appDelegate performSelectorInBackground:@selector(getUserLocation) withObject:nil];
 }
+
+-(void) updateViewWithNewConcert: (NSNumber *) concertID {
+    [ECJSONFetcher fetchConcertsForUserID:self.facebook_id completion:^(NSDictionary *concerts) {
+        NSLog(@"%@",[self.concerts description]);
+        [self.concerts setDictionary:concerts];
+        NSLog(@"%@",[self.concerts description]);
+        [self.horizontalSelect setTableData: self.concerts];
+        [self.horizontalSelect.tableView reloadData];
+    }];
+ //TODO: scroll to the new concert
+    [self scrollToConcertWithID: concertID];
+}
+
+-(void) scrollToConcertWithID: (NSNumber*) concertID{
+    [self selectIndexPath:[self indexPathForConcert: concertID]];
+}
+
+-(NSIndexPath *) indexPathForConcert: (NSNumber*) concertID{
+    NSArray * pastConcerts = [self.concerts objectForKey:@"past"];
+    NSArray * futureConcerts = [self.concerts objectForKey:@"future"];
+    
+    NSUInteger row = [self rowForConcertID: concertID forArray: pastConcerts];
+    NSUInteger section = ECCellTypePastShows;
+    if (row == -1) {
+            row = [self rowForConcertID: concertID forArray: futureConcerts];
+        section = ECCellTypeFutureShows;
+    }
+    if (row == -1) {
+        NSLog(@"Error: %@ not found",concertID.stringValue);
+    }
+    
+    //If error, just send it back to the Today cell]
+    return row == -1  ? [NSIndexPath indexPathForItem:0 inSection:ECCellTypeToday] : [NSIndexPath indexPathForItem:row inSection:section];
+}
+
+-(NSUInteger) rowForConcertID: (NSNumber*) concertID forArray: (NSArray*) arr {
+    NSUInteger index;
+    for (index = 0; index < [arr count]; index++){
+        if ([[arr objectAtIndex:index] songkickID] == concertID) {
+            return index;
+        }
+    }
+    return -1;
+}
+
 -(void) viewWillAppear:(BOOL)animated {
     if (FBSession.activeSession.isOpen){
         [self populateUserDetails];
     }
-      //  [self.navigationController setNavigationBarHidden:YES];
+    //  [self.navigationController setNavigationBarHidden:YES];
+    
+    
 }
 -(void) populateUserDetails {
 //    self.userNameLabel.text = self.userName;
@@ -72,8 +119,6 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
 
 -(void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
-    
 }
 
 -(void)settingsButtonWasPressed:(id)sender {
@@ -144,28 +189,35 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
 -(void) fetchedConcerts: (NSDictionary *) concerts {
     NSLog(@"Successfully fetched %d past concerts and %d future concerts", [[concerts past] count],[[concerts future]count]);
     self.concerts = [NSMutableDictionary dictionaryWithDictionary: concerts];
-    [self setUpHorizontalSelect];
+    [self setUpHorizontalSelect]; //only setting up horizontal select once the concert data is received
     [self selectTodayCell];
 }
 
+#pragma mark - horizontal slider
 -(void) setUpHorizontalSelect {
-    self.horizontalSelect = [[KLHorizontalSelect alloc] initWithFrame: self.view.bounds];
-    self.horizontalSelect.delegate = self;
-    [self.horizontalSelect setTableData: self.concerts];
-    [self.view addSubview: self.horizontalSelect];
-}
--(void) selectTodayCell {
-    NSIndexPath * startIndexPath = [NSIndexPath indexPathForItem:0 inSection:ECCellTypeToday];
-    UITableView * tableView = self.horizontalSelect.tableView;
-    
-    [tableView selectRowAtIndexPath:startIndexPath animated:NO scrollPosition:UITableViewScrollPositionTop];
-    if([tableView.delegate respondsToSelector:@selector(tableView: didSelectRowAtIndexPath:)]){
-        [tableView.delegate tableView:tableView didSelectRowAtIndexPath:startIndexPath];
+    if (!self.horizontalSelect) {
+        self.horizontalSelect = [[KLHorizontalSelect alloc] initWithFrame: self.view.bounds];
+        self.horizontalSelect.delegate = self;
+        [self.view addSubview: self.horizontalSelect];
     }
-    
+    [self.horizontalSelect setTableData: self.concerts];
+    [self.horizontalSelect.tableView reloadData];
 }
 
-#pragma mark - horizontal slider
+-(void) selectTodayCell {
+    NSIndexPath * startIndexPath = [NSIndexPath indexPathForItem:0 inSection:ECCellTypeToday];
+    
+    [self selectIndexPath:startIndexPath];
+}
+
+-(void) selectIndexPath: (NSIndexPath*) indexPath {
+    UITableView * tableView = self.horizontalSelect.tableView;
+    [tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionTop];
+    if([tableView.delegate respondsToSelector:@selector(tableView: didSelectRowAtIndexPath:)]){
+        [tableView.delegate tableView:tableView didSelectRowAtIndexPath:indexPath];
+    }
+}
+
 - (void) horizontalSelect:(id)horizontalSelect didSelectCell:(KLHorizontalSelectCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     ECCellType cellType = indexPath.section;
     

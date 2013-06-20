@@ -15,6 +15,7 @@
 @interface ECProfileViewController : UIViewController <FBUserSettingsDelegate,KLHorizontalSelectDelegate,ECJSONFetcherDelegate>
 
 -(void) fetchConcerts;
+-(void) updateViewWithNewConcert: (NSNumber *) concertID;
 @property (strong, nonatomic) FBUserSettingsViewController *settingsViewController;
 @property (strong, nonatomic) NSString * facebook_id;
 @property (strong, nonatomic) NSString * userName;
