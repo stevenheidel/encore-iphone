@@ -74,8 +74,8 @@ static NSString *const PostsURL = @"posts";
         NSLog(@"ERROR fetching popular concerts: %@",[error description]);
         
         //TODO: replace so it loads in cached objects
-        NSDictionary * concert1 = [NSDictionary dictionaryWithObjectsAndKeys:@"Test Venue Name 1", @"venue_name", @"1989-02-16", @"date",@"Simon and the Destroyers", @"name",@"99", @"server_id", nil];
-        NSDictionary * concert2 = [NSDictionary dictionaryWithObjectsAndKeys:@"Test Venue Name 2", @"venue_name", @"1999-03-26", @"date",@"Simon and the Destroyers", @"name",@"55", @"server_id", nil];
+        NSDictionary * concert1 = [NSDictionary dictionaryWithObjectsAndKeys:@"Test Venue Name 1", @"venue_name", @"1989-02-16", @"date",@"Simon and the Destroyers", @"name",[NSNumber numberWithInt:99], @"server_id", nil];
+        NSDictionary * concert2 = [NSDictionary dictionaryWithObjectsAndKeys:@"Test Venue Name 2", @"venue_name", @"1999-03-26", @"date",@"Simon and the Destroyers", @"name",[NSNumber numberWithInt:55], @"server_id", nil];
         NSArray * testConcertList = [NSArray arrayWithObjects:concert1,concert2, nil];
         [self.delegate fetchedPopularConcerts:testConcertList];
     }];
@@ -127,8 +127,8 @@ static NSString *const PostsURL = @"posts";
         NSLog(@"ERROR fetching concerts for artist with ID %@: %@",[artistID description],[error description]);
         
         //TODO: replace so it loads in cached objects
-        NSDictionary * concert1 = [NSDictionary dictionaryWithObjectsAndKeys:@"Test Venue Name 1", @"venue_name", @"1989-02-16", @"date",@"Simon and the Destroyers", @"name",@"99", @"server_id", nil];
-        NSDictionary * concert2 = [NSDictionary dictionaryWithObjectsAndKeys:@"Test Venue Name 2", @"venue_name", @"1999-03-26", @"date",@"Simon and the Destroyers", @"name",@"55", @"server_id", nil];
+        NSDictionary * concert1 = [NSDictionary dictionaryWithObjectsAndKeys:@"Test Venue Name 1", @"venue_name", @"1989-02-16", @"date",@"Simon and the Destroyers", @"name",[NSNumber numberWithInt:99], @"server_id", nil];
+        NSDictionary * concert2 = [NSDictionary dictionaryWithObjectsAndKeys:@"Test Venue Name 2", @"venue_name", @"1999-03-26", @"date",@"Simon and the Destroyers", @"name",[NSNumber numberWithInt:55], @"server_id", nil];
         NSArray * testConcertList = [NSArray arrayWithObjects:concert1,concert2, nil];
         [self.delegate fetchedArtistConcerts:testConcertList];
     }];
