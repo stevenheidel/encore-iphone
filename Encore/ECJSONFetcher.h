@@ -17,6 +17,7 @@ typedef enum {
 @protocol ECJSONFetcherDelegate;
 
 @interface ECJSONFetcher : NSObject
++(void) fetchConcertsForUserID: (NSString *) fbID  completion: (void (^)(NSDictionary* concerts)) completion;
 -(void) fetchConcertsForUserId: (NSString *) id;
 -(void)fetchArtistsForString:(NSString *)searchStr;
 -(void)fetchPopularConcertsWithSearchType:(ECSearchType)searchType;

@@ -21,7 +21,34 @@ static NSString *const PostsURL = @"posts";
 
 //TODO could change to use blocks instead of delegates to return success
 @implementation ECJSONFetcher
-
++(void) fetchConcertsForUserID: (NSString *) fbID  completion: (void (^)(NSDictionary* concerts)) completion {
+    __block NSDictionary * concertList;
+    NSString *  fullConcertsUrl = [NSString stringWithFormat:@"%@/%@/%@/%@",BaseURLString,UsersURL,fbID,ConcertsURL];
+    NSURL * url = [NSURL URLWithString:fullConcertsUrl];
+    NSURLRequest * request = [NSURLRequest requestWithURL:url];
+    AFJSONRequestOperation * operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        concertList = (NSDictionary*) [(NSDictionary*)JSON objectForKey:@"concerts"];
+        if (completion) {
+            completion(concertList);
+        }
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        NSLog(@"ERROR fetching concerts for userID %@: %@",fbID,[error description]);
+        
+        NSDictionary * past1 = [NSDictionary dictionaryWithObjectsAndKeys:@"2013-06-12", @"date", @"Test Venue 1", @"venue_name", @"My Artist", @"name", @"11", @"server_id", nil];
+        NSDictionary * past2 = [NSDictionary dictionaryWithObjectsAndKeys:@"2012-05-11", @"date", @"Test Venue 2", @"venue_name", @"Go Artist", @"name", @"22", @"server_id", nil];
+        NSDictionary * future1 = [NSDictionary dictionaryWithObjectsAndKeys:@"2013-09-11", @"date", @"Test Venue 3", @"venue_name", @"Artist2013", @"name", @"33", @"server_id", nil];
+        NSDictionary * future2 = [NSDictionary dictionaryWithObjectsAndKeys:@"2013-12-22", @"date", @"Test Venue 4", @"venue_name", @"Cool Artist", @"name", @"44", @"server_id", nil];
+        
+        NSArray * past = [NSArray arrayWithObjects: past1, past2, nil];
+        NSArray * future = [NSArray arrayWithObjects: future1, future2, nil];
+        NSDictionary * concertList = [NSDictionary dictionaryWithObjectsAndKeys:past,@"past",future,@"future", nil];
+        if (completion) {
+            completion(concertList);
+        }
+    }];
+    
+    [operation start];
+}
 -(void) fetchConcertsForUserId: (NSString *) fb_id {
     __block NSDictionary * concertList;
     NSString *  fullConcertsUrl = [NSString stringWithFormat:@"%@/%@/%@/%@",BaseURLString,UsersURL,fb_id,ConcertsURL];
