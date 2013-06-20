@@ -13,6 +13,7 @@
 #import "NSDictionary+Posts.h"
 #import "ECJSONPoster.h"
 #import "ECPostViewController.h"
+#import "ECProfileViewController.h"
 
 NSString *kCellID = @"cellID";
 
@@ -99,6 +100,10 @@ NSString *kCellID = @"cellID";
     UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Woohoo!" message:@"You added a concert" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
     [alert show];
     [self toggleOnProfileState];
+    
+   #warning [Simon]: probably shouldn't do it this way (ie. popping to root)
+    [(ECProfileViewController*)[self.navigationController.viewControllers objectAtIndex:0] updateViewWithNewConcert:self.songkickID];
+    [self.navigationController popToRootViewControllerAnimated:YES]; 
 }
 
 -(void) completedRemovingConcert {
