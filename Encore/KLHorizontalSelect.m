@@ -6,8 +6,6 @@
 //  Copyright (c) 2012 Kieran Lafferty. All rights reserved.
 //  Modified extensively 2013 Simon Bromberg
 
-
-
 #import "KLHorizontalSelect.h"
 #import "NSDictionary+ConcertList.h"
 #import <QuartzCore/QuartzCore.h>
@@ -93,9 +91,7 @@
     myEndPoint.y = self.frame.size.height;
     CGContextDrawLinearGradient (context, myGradient, myStartPoint, myEndPoint, 0);
     CGGradientRelease(myGradient);
-
 }
-
 
 #pragma mark - UIScrollViewDelegate implementation
 
@@ -272,7 +268,6 @@
     view.dayNumberLabel.text = [data day];
 }
 
-
 @end
 
 @implementation ECTodayCell
@@ -280,11 +275,7 @@
     if (self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifierForCellType(ECCellTypeToday)]){
 
         UILabel * cellView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kDefaultCellWidth, kDefaultCellHeight)];
-        cellView.text = @"TODAY";
-        
-//TODO: figure out why this didn't work
-//        NSArray * arr = [[NSBundle mainBundle] loadNibNamed:@"ECTodayCellView" owner:self options:nil];
-        //UIView * view = [arr objectAtIndex:0];
+        cellView.text = NSLocalizedString(@"today", nil);
         [cellView setTransform:CGAffineTransformMakeRotation(M_PI_2)];
          cellView.backgroundColor = [UIColor clearColor];
         cellView.font = [UIFont boldSystemFontOfSize:14.0];
@@ -304,7 +295,7 @@
         ECEndCellView * cellView = [[ECEndCellView alloc] initWithFrame: CGRectMake(0, -5, kEndCellWidth, kEndCellHeight)];
         //UILabel * cellView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kEndCellWidth, kEndCellHeight)];
         cellView.backgroundColor = [UIColor clearColor];
-        NSString * text = type == ECCellTypeAddPast ? @"Add Past" : @"Add Upcoming";
+        NSString * text = type == ECCellTypeAddPast ? NSLocalizedString(@"AddPast", nil): NSLocalizedString(@"AddFuture", nil);
         cellView.textLabel.text = text;//.text = text;
         cellView.textLabel.textAlignment = type == ECCellTypeAddPast ? NSTextAlignmentRight : NSTextAlignmentLeft;
         [self setTransform:CGAffineTransformMakeRotation(M_PI_2)];
