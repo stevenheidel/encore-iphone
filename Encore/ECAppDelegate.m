@@ -169,7 +169,7 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
 }
 
 -(void) loginCompletedWithUser:(NSDictionary <FBGraphUser>*) user {
-    NSString * userid = user.id;
+    NSString* userid = user.id;
     NSLog(@"Logged in user with id: %@",userid);
     self.profileViewController.facebook_id = userid;
     self.profileViewController.userName = user.name; //TODO: remove if not needed
@@ -180,14 +180,15 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
 }
 
 -(void) saveUserIDToDefaults: (NSString *) userID {
-    NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
-    NSString * userIDKey = NSLocalizedString(@"user_id", nil);
-    NSString * defaultID = [defaults stringForKey:userIDKey];
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    NSString* userIDKey = NSLocalizedString(@"user_id", nil);
+    NSString* defaultID = [defaults stringForKey:userIDKey];
     if (!defaultID || ![defaultID isEqualToString:userID]) {
         [defaults setObject:userID forKey:userIDKey];
         [defaults synchronize];
     }
-    else defaultID ? NSLog(@"No default ID saved") : NSLog(@"No change in User ID. Defaults not changed");
+    else !defaultID ? NSLog(@"No default ID saved") : NSLog(@"No change in User ID. Defaults not changed");
+    NSLog(@"%@",defaultID);
 }
 
 #pragma mark - location
