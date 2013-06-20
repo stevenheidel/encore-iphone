@@ -10,6 +10,8 @@
 #import "ECConcertDetailViewController.h"
 #import "ECMyConcertViewController.h"
 #import "NSDictionary+ConcertList.h"
+#import "MBProgressHUD.h"
+
 static NSString *const ArtistCellIdentifier = @"artistCell";
 static NSString *const ConcertCellIdentifier = @"concertCell";
 
@@ -37,6 +39,9 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     self.JSONFetcher.delegate = self;
     hasSearched = FALSE;
     self.lastSelectedArtist = nil;
+    self.hud = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.view addSubview:self.hud];
+    self.hud.labelText = NSLocalizedString(@"loading", nil);
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -46,12 +51,12 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
         } else {
             [self.JSONFetcher fetchPopularConcertsWithSearchType:ECSearchTypeFuture];
         }
-        [self.activityIndicator startAnimating];
+        [self.hud show:YES];
     }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-    [self.activityIndicator stopAnimating];
+    [self.hud hide:NO];
 }
 
 #pragma mark - ECJSONFetcherDelegate Methods
@@ -59,14 +64,15 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
 -(void) fetchedPopularConcerts:(NSArray *)concerts {
     self.arrPopularData = concerts;
     [self.tableView reloadData];
-    [self.activityIndicator stopAnimating];
+    [self.hud hide:YES];
 }
 
 -(void)fetchedArtists:(NSArray *)artists {
     self.arrArtistData = artists;
     hasSearched = TRUE;
     [self.tableView reloadData];
-    [self.activityIndicator stopAnimating];
+    //[self.activityIndicator stopAnimating];
+    [self.hud hide: YES];
 }
 
 - (void)fetchedArtistConcerts:(NSArray *)concerts {
@@ -74,7 +80,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     ECMyConcertViewController *concertsVC = [ECMyConcertViewController new];
     concertsVC.concertList = concerts;
     concertsVC.title = self.lastSelectedArtist;
-    [self.activityIndicator stopAnimating];
+    [self.hud hide:YES];
     [self.navigationController pushViewController:concertsVC animated:YES];
 }
 
@@ -139,7 +145,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
             [self.JSONFetcher fetchConcertsForArtistID:artistID withSearchType:ECSearchTypeFuture];
         }
         self.lastSelectedArtist = [data artistName];
-        [self.activityIndicator startAnimating];
+        [self.hud show:YES];
     } else {
         //User clicked on a popular concert
         ECConcertDetailViewController * concertDetail = [[ECConcertDetailViewController alloc] init];
@@ -161,7 +167,9 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     [self.JSONFetcher fetchArtistsForString:[searchBar text]];
     [searchBar resignFirstResponder];
     [searchBar setShowsCancelButton:NO animated:YES];
-    [self.activityIndicator startAnimating];
+    //[self.activityIndicator startAnimating];
+	
+	[self.hud show: YES];
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {

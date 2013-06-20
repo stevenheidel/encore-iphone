@@ -31,7 +31,7 @@
 "ArtistSearch" = "Search Results for %@";
 "Past" = "Recent";
 "Upcoming" = "Upcoming";
-
+"loading" = "Loading";
 //Today table
 "TodayTableTitle" = "Today's Concerts in Your Area";
 
