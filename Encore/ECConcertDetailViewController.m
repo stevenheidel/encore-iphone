@@ -99,7 +99,6 @@ NSString *kCellID = @"cellID";
     UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Woohoo!" message:@"You added a concert" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
     [alert show];
     [self toggleOnProfileState];
-    
 }
 
 -(void) completedRemovingConcert {
