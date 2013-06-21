@@ -110,7 +110,7 @@ NSString *kCellID = @"cellID";
     UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Woohoo!" message:@"You removed a concert" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
     [alert show];
     [self toggleOnProfileState];
-}
+}   
 
 -(void) toggleOnProfileState {
     self.isOnProfile = !self.isOnProfile;
