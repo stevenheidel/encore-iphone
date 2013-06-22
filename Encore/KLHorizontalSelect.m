@@ -297,6 +297,7 @@
         cellView.backgroundColor = [UIColor clearColor];
         NSString * text = type == ECCellTypeAddPast ? NSLocalizedString(@"AddPast", nil): NSLocalizedString(@"AddFuture", nil);
         cellView.textLabel.text = text;//.text = text;
+        cellView.textLabel.font = [UIFont fontWithName:@"Hero" size:16.0];
         cellView.textLabel.textAlignment = type == ECCellTypeAddPast ? NSTextAlignmentRight : NSTextAlignmentLeft;
         [self setTransform:CGAffineTransformMakeRotation(M_PI_2)];
         
