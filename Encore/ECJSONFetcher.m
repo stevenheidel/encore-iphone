@@ -8,7 +8,7 @@
 
 #import "ECJSONFetcher.h"
 
-static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1";
+//static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1";
 static NSString *const UsersURL = @"users";
 static NSString *const ConcertsURL = @"concerts";
 static NSString *const ArtistsURL = @"artists";
@@ -23,6 +23,7 @@ static NSString *const PostsURL = @"posts";
 @implementation ECJSONFetcher
 +(void) fetchConcertsForUserID: (NSString *) fbID  completion: (void (^)(NSDictionary* concerts)) completion {
     __block NSDictionary * concertList;
+    NSString* BaseURLString = NSLocalizedString(@"BaseURL", nil);
     NSString *  fullConcertsUrl = [NSString stringWithFormat:@"%@/%@/%@/%@",BaseURLString,UsersURL,fbID,ConcertsURL];
     NSURL * url = [NSURL URLWithString:fullConcertsUrl];
     NSURLRequest * request = [NSURLRequest requestWithURL:url];
@@ -51,6 +52,7 @@ static NSString *const PostsURL = @"posts";
 }
 -(void) fetchConcertsForUserId: (NSString *) fb_id {
     __block NSDictionary * concertList;
+    NSString* BaseURLString = NSLocalizedString(@"BaseURL", nil);
     NSString *  fullConcertsUrl = [NSString stringWithFormat:@"%@/%@/%@/%@",BaseURLString,UsersURL,fb_id,ConcertsURL];
     NSURL * url = [NSURL URLWithString:fullConcertsUrl];
     NSURLRequest * request = [NSURLRequest requestWithURL:url];
@@ -80,7 +82,7 @@ static NSString *const PostsURL = @"posts";
 -(void)fetchPopularConcertsWithSearchType:(ECSearchType)searchType {
     __block NSArray * concertList;
     NSString *userLocation = @"Toronto"; //TODO: Get location dynamically from app delegate
-    
+    NSString* BaseURLString = NSLocalizedString(@"BaseURL", nil);
     NSString *  artistConcertsUrl;
     if (searchType == ECSearchTypePast) {
         artistConcertsUrl = [NSString stringWithFormat:@"%@/%@/%@?%@%@", BaseURLString, ConcertsURL, PastURL, CityURL, userLocation];
@@ -112,6 +114,7 @@ static NSString *const PostsURL = @"posts";
 
 -(void)fetchArtistsForString:(NSString *)searchStr {
     __block NSArray * artistList;
+    NSString* BaseURLString = NSLocalizedString(@"BaseURL", nil);
     NSString *  artistSearchUrl = [NSString stringWithFormat:@"%@/%@/%@%@", BaseURLString, ArtistsURL, SearchURL, searchStr];
     NSString *escapedDataString = [artistSearchUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
@@ -135,7 +138,7 @@ static NSString *const PostsURL = @"posts";
 -(void)fetchConcertsForArtistID:(NSNumber *)artistID withSearchType:(ECSearchType)searchType {
     __block NSArray * concertList;
     NSString *userLocation = @"Toronto"; //TODO: Get location dynamically from app delegate
-    
+    NSString* BaseURLString = NSLocalizedString(@"BaseURL", nil);
     NSString *  artistConcertsUrl;
     if (searchType == ECSearchTypePast) {
         artistConcertsUrl = [NSString stringWithFormat:@"%@/%@/%@/%@/%@?%@%@", BaseURLString, ArtistsURL, [artistID stringValue], ConcertsURL, PastURL, CityURL, userLocation];
@@ -165,6 +168,7 @@ static NSString *const PostsURL = @"posts";
 
 -(void) fetchPostsForConcertWithID: (NSNumber *) serverID {
     __block NSArray * posts;
+    NSString* BaseURLString = NSLocalizedString(@"BaseURL", nil);
     NSString * fullPostsUrl = [NSString stringWithFormat:@"%@/%@/%@/%@",BaseURLString,ConcertsURL,[serverID stringValue],PostsURL];
     NSURL * url = [NSURL URLWithString:fullPostsUrl];
     NSURLRequest * request = [NSURLRequest requestWithURL:url];
@@ -178,6 +182,7 @@ static NSString *const PostsURL = @"posts";
 }
 
 +(void) checkIfConcert: (NSNumber*) concertID isOnProfile: (NSString *) userID completion: (void (^)(BOOL isOnProfile)) completion  {
+   NSString* BaseURLString = NSLocalizedString(@"BaseURL", nil);
    NSString * fullCheckURL = [NSString stringWithFormat:@"%@/%@/%@/%@?songkick_id=%@",BaseURLString, UsersURL,userID, ConcertsURL,concertID.stringValue];
     
     NSURL * url = [NSURL URLWithString:fullCheckURL];
