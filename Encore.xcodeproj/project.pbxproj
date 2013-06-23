@@ -10,6 +10,10 @@
 		255A9AF4A1C64F71B97704C8 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 918A85E0EEDE48F3BEFD223A /* libPods.a */; };
 		A022AAA2177605900009244C /* Hero Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = A022AAA0177605900009244C /* Hero Light.otf */; };
 		A022AAA3177605900009244C /* Hero.otf in Resources */ = {isa = PBXBuildFile; fileRef = A022AAA1177605900009244C /* Hero.otf */; };
+		A022AAA617779BB50009244C /* ECConcertCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = A022AAA517779BB50009244C /* ECConcertCellView.m */; };
+		A022AAA817779BDF0009244C /* ECConcertCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A022AAA717779BDF0009244C /* ECConcertCellView.xib */; };
+		A022AAAA1777A9230009244C /* locationmarker.png in Resources */ = {isa = PBXBuildFile; fileRef = A022AAA91777A9230009244C /* locationmarker.png */; };
+		A022AAAC1777BEB90009244C /* topheader.png in Resources */ = {isa = PBXBuildFile; fileRef = A022AAAB1777BEB80009244C /* topheader.png */; };
 		A04C4333176F85F9003B4299 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A04C4332176F85F9003B4299 /* CoreLocation.framework */; };
 		A0848C0B176D1F0D009BBB38 /* ECLoginPageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0848C0A176D1F0D009BBB38 /* ECLoginPageView.xib */; };
 		A0848C11176D25D5009BBB38 /* ECLoginPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0848C10176D25D5009BBB38 /* ECLoginPageView.m */; };
@@ -103,6 +107,11 @@
 		918A85E0EEDE48F3BEFD223A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A022AAA0177605900009244C /* Hero Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Hero Light.otf"; sourceTree = "<group>"; };
 		A022AAA1177605900009244C /* Hero.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Hero.otf; sourceTree = "<group>"; };
+		A022AAA417779BB50009244C /* ECConcertCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECConcertCellView.h; sourceTree = "<group>"; };
+		A022AAA517779BB50009244C /* ECConcertCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECConcertCellView.m; sourceTree = "<group>"; };
+		A022AAA717779BDF0009244C /* ECConcertCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECConcertCellView.xib; sourceTree = "<group>"; };
+		A022AAA91777A9230009244C /* locationmarker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = locationmarker.png; sourceTree = "<group>"; };
+		A022AAAB1777BEB80009244C /* topheader.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topheader.png; sourceTree = "<group>"; };
 		A04C4332176F85F9003B4299 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		A0848C0A176D1F0D009BBB38 /* ECLoginPageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECLoginPageView.xib; sourceTree = "<group>"; };
 		A0848C0F176D25D5009BBB38 /* ECLoginPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECLoginPageView.h; sourceTree = "<group>"; };
@@ -294,6 +303,8 @@
 		D4A8DDD1176A44A0005E9847 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				A022AAAB1777BEB80009244C /* topheader.png */,
+				A022AAA91777A9230009244C /* locationmarker.png */,
 				D4A8DDD8176AB645005E9847 /* KLSelect */,
 				D4A8DDD2176A8885005E9847 /* placeholder.jpg */,
 				D4AA4D041766B374009B0635 /* Default.png */,
@@ -445,6 +456,9 @@
 				D4B67077176F57E000A80BA3 /* ECTodayViewController.h */,
 				D4B67078176F57E000A80BA3 /* ECTodayViewController.m */,
 				D4B67079176F57E000A80BA3 /* ECTodayViewController.xib */,
+				A022AAA417779BB50009244C /* ECConcertCellView.h */,
+				A022AAA517779BB50009244C /* ECConcertCellView.m */,
+				A022AAA717779BDF0009244C /* ECConcertCellView.xib */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -593,6 +607,9 @@
 				D4B0AC4717727FDA00DC4DD2 /* ECPostPlaceholder.xib in Resources */,
 				A022AAA2177605900009244C /* Hero Light.otf in Resources */,
 				A022AAA3177605900009244C /* Hero.otf in Resources */,
+				A022AAA817779BDF0009244C /* ECConcertCellView.xib in Resources */,
+				A022AAAA1777A9230009244C /* locationmarker.png in Resources */,
+				A022AAAC1777BEB90009244C /* topheader.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -677,6 +694,7 @@
 				D43ACD84176D3BF400E2282A /* ECEndCellView.m in Sources */,
 				D4B1A247176E4C6900A95568 /* ECAddConcertViewController.m in Sources */,
 				D4B6707A176F57E000A80BA3 /* ECTodayViewController.m in Sources */,
+				A022AAA617779BB50009244C /* ECConcertCellView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

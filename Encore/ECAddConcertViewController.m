@@ -6,11 +6,13 @@
 //  Copyright (c) 2013 Encore. All rights reserved.
 //
 
+#import <QuartzCore/QuartzCore.h>
 #import "ECAddConcertViewController.h"
 #import "ECConcertDetailViewController.h"
 #import "ECMyConcertViewController.h"
 #import "NSDictionary+ConcertList.h"
 #import "MBProgressHUD.h"
+#import "ECConcertCellView.h"
 
 static NSString *const ArtistCellIdentifier = @"artistCell";
 static NSString *const ConcertCellIdentifier = @"concertCell";
@@ -42,6 +44,10 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     self.hud = [[MBProgressHUD alloc] initWithView:self.view];
     [self.view addSubview:self.hud];
     self.hud.labelText = NSLocalizedString(@"loading", nil);
+    
+    NSString *myIdentifier = @"ECConcertCellView";
+    [self.tableView registerNib:[UINib nibWithNibName:@"ECConcertCellView" bundle:nil]
+         forCellReuseIdentifier:myIdentifier];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -87,28 +93,46 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
 #pragma mark - UITableView methods
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    UITableViewCell *cell;
 
-    //TODO: initilize cells from nib file, once we have the designs
     if (hasSearched) {
-        cell = [self.tableView dequeueReusableCellWithIdentifier:ArtistCellIdentifier];
+        UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:ArtistCellIdentifier];
         if (cell == nil) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ArtistCellIdentifier];
         }
         NSDictionary *artistDic = (NSDictionary *)[self.arrArtistData objectAtIndex:indexPath.row];
         cell.textLabel.text = [artistDic artistName];
+        return cell;
     } else {
-        cell = [self.tableView dequeueReusableCellWithIdentifier:ConcertCellIdentifier];
-        if (cell == nil) {
-            cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:ConcertCellIdentifier];
-        }
+        static NSString *myIdentifier = @"ECConcertCellView";
+        
+        ECConcertCellView *cell = [tableView dequeueReusableCellWithIdentifier:myIdentifier forIndexPath:indexPath];
         NSDictionary * concertDic = [self.arrPopularData objectAtIndex:indexPath.row];
-        cell.textLabel.text = [concertDic artistName];
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@, %@", [concertDic venueName] ,[concertDic niceDate]];
+        
+        ((ECConcertCellView *)cell).lblDate.text = [concertDic niceDate];
+        ((ECConcertCellView *)cell).lblDate.font = [UIFont fontWithName:@"Hero" size:15.0];
+        ((ECConcertCellView *)cell).lblName.text = [concertDic artistName];
+        ((ECConcertCellView *)cell).lblName.font = [UIFont fontWithName:@"Hero" size:21.0];
+        ((ECConcertCellView *)cell).lblLocation.text = [NSString stringWithFormat:@"at %@",[concertDic venueName]];
+        ((ECConcertCellView *)cell).lblLocation.font = [UIFont fontWithName:@"Hero" size:16.0];
+        
+        ((ECConcertCellView *)cell).imageArtist.image = [UIImage imageNamed:@"placeholder.jpg"];
+        ((ECConcertCellView *)cell).imageArtist.layer.cornerRadius = 35.0;
+        ((ECConcertCellView *)cell).imageArtist.layer.masksToBounds = YES;
+        ((ECConcertCellView *)cell).imageArtist.layer.borderColor = [UIColor grayColor].CGColor;
+        ((ECConcertCellView *)cell).imageArtist.layer.borderWidth = 3.0;
+        
+        ((ECConcertCellView *)cell).imageBackground.image = [UIImage imageNamed:@"Default.png"];
+        return cell;
     }
+}
 
-    return cell;
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (hasSearched) {
+        return 40;
+    } else {
+        return CONCERT_CELL_HEIGHT;
+    }
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {

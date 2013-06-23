@@ -9,6 +9,8 @@
 #import "ECMyConcertViewController.h"
 #import "NSDictionary+ConcertList.h"
 #import "ECConcertDetailViewController.h"
+#import <QuartzCore/QuartzCore.h>
+#import "ECConcertCellView.h"
 
 @interface ECMyConcertViewController ()
 
@@ -27,6 +29,10 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    NSString *myIdentifier = @"ECConcertCellView";
+    [self.tableView registerNib:[UINib nibWithNibName:@"ECConcertCellView" bundle:nil]
+         forCellReuseIdentifier:myIdentifier];
 }
 
 - (void)didReceiveMemoryWarning
@@ -51,26 +57,37 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell==nil) {
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-        
-    }
+    static NSString *myIdentifier = @"ECConcertCellView";
+    
+    ECConcertCellView *cell = [tableView dequeueReusableCellWithIdentifier:myIdentifier forIndexPath:indexPath];
     NSDictionary * concertDic = [self.concertList objectAtIndex:indexPath.row];
-    if (!concertDic) {
-        return nil;
-    }
-    cell.textLabel.text = [concertDic artistName];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@, %@", [concertDic venueName] ,[concertDic niceDate]];
+    cell.lblDate.text = [concertDic niceDate];
+    cell.lblDate.font = [UIFont fontWithName:@"Hero" size:15.0];
+    cell.lblName.text = [concertDic artistName];
+    cell.lblName.font = [UIFont fontWithName:@"Hero" size:21.0];
+    cell.lblLocation.text = [NSString stringWithFormat:@"at %@",[concertDic venueName]];
+    cell.lblLocation.font = [UIFont fontWithName:@"Hero" size:16.0];
+    
+    cell.imageArtist.image = [UIImage imageNamed:@"placeholder.jpg"];
+    cell.imageArtist.layer.cornerRadius = 35.0;
+    cell.imageArtist.layer.masksToBounds = YES;
+    cell.imageArtist.layer.borderColor = [UIColor grayColor].CGColor;
+    cell.imageArtist.layer.borderWidth = 3.0;
+    
+    cell.imageBackground.image = [UIImage imageNamed:@"Default.png"];
+    
+    return cell;
+
 //    if ([concertDic beforeToday]) {
 //        cell.contentView.backgroundColor = [UIColor colorWithRed:240.0/255.0 green:1.0 blue:1.0 alpha:1.0];
 //        cell.textLabel.backgroundColor = [UIColor clearColor];
 //        cell.detailTextLabel.backgroundColor = [UIColor clearColor];
 //    }
 //    else cell.contentView.backgroundColor = [UIColor clearColor];
-    return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return CONCERT_CELL_HEIGHT;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

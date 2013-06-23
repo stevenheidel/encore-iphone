@@ -19,7 +19,7 @@
 
 //URLs
 "BaseURL_TESTSERVER" = "http://192.168.11.15:9283/api/v1/";
-"BaseURL" = "http://staging.encoretheapp.com/";
+"BaseURL" = "http://staging.encoretheapp.com/api/v1/";
 "UsersURL" = "users";
 "ConcertsURL" = "concerts";
 "PostsURL" = "posts";

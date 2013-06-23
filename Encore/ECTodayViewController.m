@@ -5,10 +5,11 @@
 //  Created by Shimmy on 2013-06-17.
 //  Copyright (c) 2013 Encore. All rights reserved.
 //
-
+#import <QuartzCore/QuartzCore.h>
 #import "ECTodayViewController.h"
 #import "ECConcertDetailViewController.h"
 #import "NSDictionary+ConcertList.h"
+#import "ECConcertCellView.h"
 
 static NSString *const ConcertCellIdentifier = @"concertCell";
 
@@ -33,6 +34,10 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     // Do any additional setup after loading the view from its nib.
     UIView * headerSpace = [[UIView alloc] initWithFrame: CGRectMake(self.tableView.frame.origin.x, self.tableView.frame.origin.y, self.tableView.frame.size.width, 3.0)]; //Added so shadow of horizontal bar doesn't overlap with view. Remove/change once designs in
     self.tableView.tableHeaderView = headerSpace;
+    
+    NSString *myIdentifier = @"ECConcertCellView";
+    [self.tableView registerNib:[UINib nibWithNibName:@"ECConcertCellView" bundle:nil]
+                  forCellReuseIdentifier:myIdentifier];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -45,14 +50,31 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
 
 #pragma mark - UITableView methods
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:ConcertCellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:ConcertCellIdentifier];
-    }
+    static NSString *myIdentifier = @"ECConcertCellView";
+    
+    ECConcertCellView *cell = [tableView dequeueReusableCellWithIdentifier:myIdentifier forIndexPath:indexPath];
     NSDictionary * concertDic = [self.arrTodaysConcerts objectAtIndex:indexPath.row];
-    cell.textLabel.text = [concertDic artistName];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", [concertDic venueName]];
+    cell.lblDate.text = [concertDic niceDate];
+    cell.lblDate.font = [UIFont fontWithName:@"Hero" size:15.0];
+    cell.lblName.text = [concertDic artistName];
+    cell.lblName.font = [UIFont fontWithName:@"Hero" size:21.0];
+    cell.lblLocation.text = [NSString stringWithFormat:@"at %@",[concertDic venueName]];
+    cell.lblLocation.font = [UIFont fontWithName:@"Hero" size:16.0];
+    
+    cell.imageArtist.image = [UIImage imageNamed:@"placeholder.jpg"];
+    cell.imageArtist.layer.cornerRadius = 35.0;
+    cell.imageArtist.layer.masksToBounds = YES;
+    cell.imageArtist.layer.borderColor = [UIColor grayColor].CGColor;
+    cell.imageArtist.layer.borderWidth = 3.0;
+    
+    cell.imageBackground.image = [UIImage imageNamed:@"Default.png"];
+    //cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", [concertDic venueName]];
+    
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return CONCERT_CELL_HEIGHT;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
