@@ -107,7 +107,7 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
 -(NSUInteger) rowForConcertID: (NSNumber*) concertID forArray: (NSArray*) arr {
     NSUInteger index;
     for (index = 0; index < [arr count]; index++){
-        if ([[arr objectAtIndex:index] songkickID] == concertID) {
+        if ([[[arr objectAtIndex:index] songkickID] isEqualToNumber: concertID]) {
             return index;
         }
     }
