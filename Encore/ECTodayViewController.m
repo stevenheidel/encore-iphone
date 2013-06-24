@@ -97,7 +97,6 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end
