@@ -16,6 +16,8 @@
 
 -(void) fetchConcerts;
 -(void) updateViewWithNewConcert: (NSNumber *) concertID;
+- (void)showGestureForSwipeRecognizer:(UISwipeGestureRecognizer *)recognizer;
+
 @property (strong, nonatomic) FBUserSettingsViewController *settingsViewController;
 @property (strong, nonatomic) NSString * facebook_id;
 @property (strong, nonatomic) NSString * userName;
@@ -25,4 +27,6 @@
 @property (nonatomic, strong) ECAddConcertViewController * addPastConcertVC;
 @property (nonatomic, strong) ECAddConcertViewController * addFutureConcertVC;
 @property (nonatomic, strong) ECTodayViewController * todayVC;
+
+
 @end

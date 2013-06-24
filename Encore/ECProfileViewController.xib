@@ -115,7 +115,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">35</int>
+			<int key="maxID">44</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -123,10 +123,15 @@
 					<string key="className">ECProfileViewController</string>
 					<string key="superclassName">UIViewController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="showGestureForSwipeRecognizer:">UISwipeGestureRecognizer</string>
 						<string key="viewConcerts:">id</string>
 						<string key="viewFriends:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="showGestureForSwipeRecognizer:">
+							<string key="name">showGestureForSwipeRecognizer:</string>
+							<string key="candidateClassName">UISwipeGestureRecognizer</string>
+						</object>
 						<object class="IBActionInfo" key="viewConcerts:">
 							<string key="name">viewConcerts:</string>
 							<string key="candidateClassName">id</string>

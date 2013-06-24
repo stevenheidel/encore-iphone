@@ -59,6 +59,17 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
     [[UITableView appearance] setBackgroundColor:[UIColor blackColor]];
     ECAppDelegate *appDelegate = (ECAppDelegate *)[[UIApplication sharedApplication] delegate];
     [appDelegate performSelectorInBackground:@selector(getUserLocation) withObject:nil];
+    
+
+    UISwipeGestureRecognizer * recognizerLeft = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(showGestureForSwipeRecognizer:)];
+    recognizerLeft.numberOfTouchesRequired = 1;
+    recognizerLeft.direction = UISwipeGestureRecognizerDirectionLeft;
+    
+    UISwipeGestureRecognizer * recognizerRight = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(showGestureForSwipeRecognizer:)];
+    recognizerRight.numberOfTouchesRequired = 1;
+    recognizerRight.direction = UISwipeGestureRecognizerDirectionRight;
+    [self.view addGestureRecognizer:recognizerRight];
+    [self.view addGestureRecognizer:recognizerLeft];
 }
 
 -(void) updateViewWithNewConcert: (NSNumber *) concertID {
@@ -305,4 +316,133 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
 -(CGRect) childViewControllerRect{
     return CGRectMake(self.horizontalSelect.frame.origin.x, self.horizontalSelect.frame.origin.y+self.horizontalSelect.frame.size.height, self.horizontalSelect.frame.size.width, self.view.frame.size.height-self.horizontalSelect.frame.size.height);
 }
+
+#pragma mark - gestures
+- (void)showGestureForSwipeRecognizer:(UISwipeGestureRecognizer *)recognizer {
+	//CGPoint location = [recognizer locationInView:self.view];
+    if (recognizer.direction == UISwipeGestureRecognizerDirectionLeft) {
+        [self gesture:+1];
+    }
+    else {
+        NSLog(@"SWIPED right!"); //right back left forward
+        [self gesture: -1];
+    }
+}
+
+-(void) gesture: (NSInteger) direction {
+    NSIndexPath * selected = self.horizontalSelect.tableView.indexPathForSelectedRow;
+    NSIndexPath * newIndexPath = [self newIndexPathForStart: selected direction: direction];
+    [self selectIndexPath:newIndexPath];
+}
+
+
+//TODO: CLEAN UP
+-(NSIndexPath*) newIndexPathForStart: (NSIndexPath*) start direction: (NSInteger) direction {
+    NSInteger newRow = start.row;
+    NSInteger newSection = start.section;
+    NSUInteger futureCount = [[self.concerts future] count];
+    NSUInteger pastCount = [[self.concerts past] count];
+    
+    switch (start.section) {
+        case ECCellTypeAddFuture: {
+            if (direction == -1) {
+                if (futureCount > 0) {
+                    newSection = ECCellTypeFutureShows;
+                    newRow = futureCount-1;//go to last of future concerts
+                }
+                else {
+                    newSection = ECCellTypeToday;
+                    newRow = 0;
+                }
+            }
+            break;
+        }
+        case ECCellTypeAddPast: {
+            if (direction == 1) { 
+                if(pastCount > 0){
+                    newSection = ECCellTypePastShows;
+                    newRow = 0;
+                }
+                else {
+                    newSection = ECCellTypeToday;
+                    newRow = 0;
+                }
+            }
+            break;
+        }
+        case ECCellTypeToday: {
+            if (direction == -1) {
+                if (pastCount > 0) {
+                    newSection = ECCellTypePastShows;
+                    newRow = pastCount-1;
+                }
+                else {
+                    newSection = ECCellTypeAddPast;
+                    newRow = 0;
+                }
+            }
+            else {
+                if (futureCount > 0) {
+                    newSection = ECCellTypeFutureShows;
+                    newRow = 0;
+                }
+                else {
+                    newSection = ECCellTypeAddFuture;
+                    newRow = 0;
+                }
+            }
+            break;
+        }
+        case ECCellTypeFutureShows: {
+            if (direction == -1) {
+                if (start.row == 0){
+                    newSection = ECCellTypeToday;
+                    newRow = 0;
+                }
+                else {
+                    newRow--;
+                }
+            }
+            else { //moving forward
+                if (start.row == futureCount - 1) {
+                    newSection = ECCellTypeAddFuture;
+                    newRow = 0;
+                }
+                else {
+                    newRow++;
+                }
+            }
+            break;
+        }
+        case ECCellTypePastShows: {
+            if (direction == - 1) {
+                if(start.row == 0){
+                    newSection = ECCellTypeAddPast;
+                    newRow = 0;
+                }
+                else {
+                    newRow--;
+                }
+            }
+            else {
+                if (start.row == pastCount - 1) {
+                    newSection = ECCellTypeToday;
+                    newRow = 0;
+                }
+                else {
+                    newRow++;
+                }
+            }
+            break;
+        }
+        default:
+            newRow = start.row;
+            newSection = start.section;
+            break;
+    }
+    
+    return [NSIndexPath indexPathForItem:newRow inSection:newSection];
+    
+}
+
 @end
