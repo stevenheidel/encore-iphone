@@ -64,9 +64,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     ECConcertCellView *cell = [tableView dequeueReusableCellWithIdentifier:myIdentifier forIndexPath:indexPath];
     NSDictionary * concertDic = [self.arrTodaysConcerts objectAtIndex:indexPath.row];
     [cell setUpCellForConcert:concertDic];
-    
-    cell.imageBackground.image = [UIImage imageNamed:@"Default.png"];
-    //cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", [concertDic venueName]];
+
     
     return cell;
 }

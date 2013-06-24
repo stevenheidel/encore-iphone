@@ -45,7 +45,7 @@ NSString *kCellID = @"cellID";
     self.title = self.artistNameLabel.text;
     
     //TODO: Set pictures dynamically from image urls
-    self.imgBackground.image = [UIImage imageNamed:@"Default.png"];
+    self.imgBackground.image = [UIImage imageNamed:@"sampleArtistImage.jpg"];
     self.imgArtist.image = [UIImage imageNamed:@"placeholder.jpg"];
     self.imgLiveNow.image = [UIImage imageNamed:@"LiveIndicator.png"];
     
@@ -72,7 +72,7 @@ NSString *kCellID = @"cellID";
     self.venueNameLabel.text = [self.concert venueName];
     
     //TODO: Set pictures dynamically from image urls
-    self.imgBackground.image = [UIImage imageNamed:@"Default.png"];
+    self.imgBackground.image = [UIImage imageNamed:@"sampleArtistImage.jpg"];
     self.imgArtist.image = [UIImage imageNamed:@"placeholder.jpg"];
     
     if ([self.concert isLive]) {

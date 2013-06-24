@@ -26,7 +26,8 @@
     self.imageArtist.layer.borderColor = [UIColor grayColor].CGColor;
     self.imageArtist.layer.borderWidth = 3.0;
     
-    self.imageBackground.image = [UIImage imageNamed:@"Default.png"];
+    self.imageBackground.image = [UIImage imageNamed:@"sampleArtistImage.jpg"];
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
 }
 
 @end

@@ -92,7 +92,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     self.arrArtistData = artists;
     hasSearched = TRUE;
     [self.tableView reloadData];
-    //[self.activityIndicator stopAnimating];
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
     [self.hud hide: YES];
 }
 
@@ -161,24 +161,34 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    if (hasSearched) {
-        NSDictionary* data = (NSDictionary*)[self.arrArtistData objectAtIndex:indexPath.row];
-        NSNumber *artistID = [data songkickID];
-        
-        if (self.searchType == ECSearchTypePast) {
-            [self.JSONFetcher fetchConcertsForArtistID:artistID withSearchType:ECSearchTypePast];
-        } else {
-            [self.JSONFetcher fetchConcertsForArtistID:artistID withSearchType:ECSearchTypeFuture];
-        }
-        self.lastSelectedArtist = [data artistName];
-        [self.hud show:YES];
+    if ([self.searchBar isFirstResponder]) {
+        [self.searchBar resignFirstResponder];
     } else {
-        //User clicked on a popular concert
-        ECConcertDetailViewController * concertDetail = [[ECConcertDetailViewController alloc] init];
-        
-        concertDetail.concert = [self.arrPopularData objectAtIndex:indexPath.row];
-        [self.navigationController pushViewController:concertDetail animated:YES];
+        if (hasSearched) {
+            NSDictionary* data = (NSDictionary*)[self.arrArtistData objectAtIndex:indexPath.row];
+            NSNumber *artistID = [data songkickID];
+            
+            if (self.searchType == ECSearchTypePast) {
+                [self.JSONFetcher fetchConcertsForArtistID:artistID withSearchType:ECSearchTypePast];
+            } else {
+                [self.JSONFetcher fetchConcertsForArtistID:artistID withSearchType:ECSearchTypeFuture];
+            }
+            self.lastSelectedArtist = [data artistName];
+            [self.hud show:YES];
+        } else {
+            //User clicked on a popular concert
+            ECConcertDetailViewController * concertDetail = [[ECConcertDetailViewController alloc] init];
+            
+            concertDetail.concert = [self.arrPopularData objectAtIndex:indexPath.row];
+            [self.navigationController pushViewController:concertDetail animated:YES];
+        }
+
+    }
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
+    if ([self.searchBar isFirstResponder]) {
+        [self.searchBar resignFirstResponder];
     }
 }
 
