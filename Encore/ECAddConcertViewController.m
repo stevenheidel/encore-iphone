@@ -44,10 +44,13 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     self.hud = [[MBProgressHUD alloc] initWithView:self.view];
     [self.view addSubview:self.hud];
     self.hud.labelText = NSLocalizedString(@"loading", nil);
-    
+
+    //Register cell nib file to the uitableview
     NSString *myIdentifier = @"ECConcertCellView";
     [self.tableView registerNib:[UINib nibWithNibName:@"ECConcertCellView" bundle:nil]
          forCellReuseIdentifier:myIdentifier];
+    
+    self.lblLocation.font = [UIFont fontWithName:@"Hero" size:15.0];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -58,6 +61,16 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
             [self.JSONFetcher fetchPopularConcertsWithSearchType:ECSearchTypeFuture];
         }
         [self.hud show:YES];
+    }
+    //Get rid of the border in the searchbar textfield
+    UITextField* searchField = nil;
+    for(int i = 0; i < self.searchBar.subviews.count; i++) {
+        if([[self.searchBar.subviews objectAtIndex:i] isKindOfClass:[UITextField class]]) { //conform?
+            searchField = [self.searchBar.subviews objectAtIndex:i];
+        }
+    }
+    if(searchField) {
+        searchField.borderStyle = UITextBorderStyleNone;
     }
 }
 
@@ -177,7 +190,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     [self clearSearchResultsTable];
     [self.JSONFetcher fetchArtistsForString:[searchBar text]];
     [searchBar resignFirstResponder];
-    [searchBar setShowsCancelButton:NO animated:YES];
+    //[searchBar setShowsCancelButton:NO animated:YES];
     //[self.activityIndicator startAnimating];
 	
 	[self.hud show: YES];
@@ -185,7 +198,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
     [searchBar resignFirstResponder];
-    [searchBar setShowsCancelButton:NO animated:YES];
+    //[searchBar setShowsCancelButton:NO animated:YES];
     searchBar.text = @"";
     [self clearSearchResultsTable];
 }
@@ -203,7 +216,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
 }
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
-    [searchBar setShowsCancelButton:YES animated:YES];
+    //[searchBar setShowsCancelButton:YES animated:YES];
 }
 
 #pragma mark - Did Receive Memory Warning

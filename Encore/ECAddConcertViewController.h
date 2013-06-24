@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ECJSONFetcher.h"
+#import "ECCustomSearchBar.h"
 @class MBProgressHUD;
 @interface ECAddConcertViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, ECJSONFetcherDelegate> {
     bool hasSearched;
@@ -18,7 +19,9 @@
 @property (strong, nonatomic) NSArray *arrPopularData;
 @property (strong, nonatomic) ECJSONFetcher * JSONFetcher;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (strong, nonatomic) IBOutlet ECCustomSearchBar *searchBar;
+@property (strong, nonatomic) IBOutlet UITextField *searchField;
+@property (strong, nonatomic) IBOutlet UILabel *lblLocation;
 @property (strong, nonatomic) MBProgressHUD * hud;
 
 @property (nonatomic, assign) NSString * lastSelectedArtist;

@@ -15,6 +15,8 @@
 		A022AAAA1777A9230009244C /* locationmarker.png in Resources */ = {isa = PBXBuildFile; fileRef = A022AAA91777A9230009244C /* locationmarker.png */; };
 		A022AAAF1777C44A0009244C /* navbar.png in Resources */ = {isa = PBXBuildFile; fileRef = A022AAAD1777C44A0009244C /* navbar.png */; };
 		A022AAB01777C44A0009244C /* navbar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A022AAAE1777C44A0009244C /* navbar@2x.png */; };
+		A022AAB21777D50F0009244C /* locationmarker2.png in Resources */ = {isa = PBXBuildFile; fileRef = A022AAB11777D50F0009244C /* locationmarker2.png */; };
+		A022AAB51777DB250009244C /* ECCustomSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A022AAB41777DB240009244C /* ECCustomSearchBar.m */; };
 		A04C4333176F85F9003B4299 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A04C4332176F85F9003B4299 /* CoreLocation.framework */; };
 		A0848C0B176D1F0D009BBB38 /* ECLoginPageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0848C0A176D1F0D009BBB38 /* ECLoginPageView.xib */; };
 		A0848C11176D25D5009BBB38 /* ECLoginPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0848C10176D25D5009BBB38 /* ECLoginPageView.m */; };
@@ -114,6 +116,9 @@
 		A022AAA91777A9230009244C /* locationmarker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = locationmarker.png; sourceTree = "<group>"; };
 		A022AAAD1777C44A0009244C /* navbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navbar.png; sourceTree = "<group>"; };
 		A022AAAE1777C44A0009244C /* navbar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navbar@2x.png"; sourceTree = "<group>"; };
+		A022AAB11777D50F0009244C /* locationmarker2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = locationmarker2.png; sourceTree = "<group>"; };
+		A022AAB31777DB240009244C /* ECCustomSearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECCustomSearchBar.h; sourceTree = "<group>"; };
+		A022AAB41777DB240009244C /* ECCustomSearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECCustomSearchBar.m; sourceTree = "<group>"; };
 		A04C4332176F85F9003B4299 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		A0848C0A176D1F0D009BBB38 /* ECLoginPageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECLoginPageView.xib; sourceTree = "<group>"; };
 		A0848C0F176D25D5009BBB38 /* ECLoginPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECLoginPageView.h; sourceTree = "<group>"; };
@@ -305,6 +310,7 @@
 		D4A8DDD1176A44A0005E9847 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				A022AAB11777D50F0009244C /* locationmarker2.png */,
 				A022AAAD1777C44A0009244C /* navbar.png */,
 				A022AAAE1777C44A0009244C /* navbar@2x.png */,
 				A022AAA91777A9230009244C /* locationmarker.png */,
@@ -485,6 +491,8 @@
 				D4B1A244176E4C6800A95568 /* ECAddConcertViewController.h */,
 				D4B1A245176E4C6900A95568 /* ECAddConcertViewController.m */,
 				D4B1A246176E4C6900A95568 /* ECAddConcertViewController.xib */,
+				A022AAB31777DB240009244C /* ECCustomSearchBar.h */,
+				A022AAB41777DB240009244C /* ECCustomSearchBar.m */,
 			);
 			name = "Add Concert";
 			sourceTree = "<group>";
@@ -614,6 +622,7 @@
 				A022AAAA1777A9230009244C /* locationmarker.png in Resources */,
 				A022AAAF1777C44A0009244C /* navbar.png in Resources */,
 				A022AAB01777C44A0009244C /* navbar@2x.png in Resources */,
+				A022AAB21777D50F0009244C /* locationmarker2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -699,6 +708,7 @@
 				D4B1A247176E4C6900A95568 /* ECAddConcertViewController.m in Sources */,
 				D4B6707A176F57E000A80BA3 /* ECTodayViewController.m in Sources */,
 				A022AAA617779BB50009244C /* ECConcertCellView.m in Sources */,
+				A022AAB51777DB250009244C /* ECCustomSearchBar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
