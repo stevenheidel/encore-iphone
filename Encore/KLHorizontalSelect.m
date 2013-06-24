@@ -246,7 +246,7 @@
         if(!self.cellView) {
             self.cellView = [[ECHorizontalCellView alloc] initWithFrame: CGRectMake(0, 0, kDefaultCellWidth, kDefaultCellHeight)];
             [self.cellView  setTransform:CGAffineTransformMakeRotation(M_PI_2)];
-            [self addSubview:self.cellView ];
+            [self addSubview:self.cellView];
         }
         [self updateWithCellData:cellData];
     }
@@ -261,11 +261,7 @@
 
 -(void) updateCellView {
     
-    if (self.cellType == ECCellTypePastShows) {
-        
-    }
-    
-    self.contentView.backgroundColor = self.cellType == ECCellTypePastShows ? [UIColor colorWithRed:240.0/255.0 green:1.0 blue:240.0/255.0 alpha:1.0] : [UIColor clearColor];
+    //self.contentView.backgroundColor = self.cellType == ECCellTypePastShows ? [UIColor colorWithRed:240.0/255.0 green:1.0 blue:240.0/255.0 alpha:1.0] : [UIColor clearColor];
     ECHorizontalCellView * view =  self.cellView;
     NSDictionary * data = self.cellData;
     view.yearLabel.text = [data year];

@@ -27,6 +27,7 @@
     }
     if(!(searchField == nil)) {
         [searchField setBorderStyle:UITextBorderStyleLine];
+        [searchField setFont:[UIFont fontWithName:@"Hero" size:13.0]];
         [searchField setBorderStyle:UITextBorderStyleNone];
     }
     

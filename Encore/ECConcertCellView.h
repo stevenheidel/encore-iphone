@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-#define CONCERT_CELL_HEIGHT 134.0
+#define CONCERT_CELL_HEIGHT 90.0
 
 @interface ECConcertCellView : UITableViewCell
 
