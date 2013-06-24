@@ -87,12 +87,6 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     [self.navigationController pushViewController:concertDetail animated:YES];
 }
 
-/*- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    if (section == 0)
-        return NSLocalizedString(@"TodayTableTitle",nil);
-    return nil;
-}*/
-
 #pragma mark - ECJSONFetcher methods
 -(void) fetchedPopularConcerts:(NSArray *)concerts {
     self.arrTodaysConcerts = concerts;
