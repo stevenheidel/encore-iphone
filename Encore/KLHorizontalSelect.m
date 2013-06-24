@@ -70,11 +70,11 @@
     size_t num_locations = 2;
     CGFloat locations[2] = { 0.0, 1.0 };
     
-    CGFloat topRed = 0.0, topGreen = 0.0, topBlue = 0.0, topAlpha =0.0;
-    [kDefaultGradientTopColor getRed:&topRed green:&topGreen blue:&topBlue alpha:&topAlpha];
+    CGFloat topRed = 0.0, topGreen = 0.0, topBlue = 0.0, topAlpha =1.0;
+    //[kDefaultGradientTopColor getRed:&topRed green:&topGreen blue:&topBlue alpha:&topAlpha];
     
-    CGFloat bottomRed = 0.0, bottomGreen = 0.0, bottomBlue = 0.0, bottomAlpha =0.0;
-    [kDefaultGradientBottomColor getRed:&bottomRed green:&bottomGreen blue:&bottomBlue alpha:&bottomAlpha];
+    CGFloat bottomRed = 0.0, bottomGreen = 0.0, bottomBlue = 0.0, bottomAlpha =1.0;
+    //[kDefaultGradientBottomColor getRed:&bottomRed green:&bottomGreen blue:&bottomBlue alpha:&bottomAlpha];
     
     CGFloat components[8] = { topRed, topGreen, topBlue, topAlpha,  // Start color
         bottomRed, bottomGreen, bottomBlue, bottomAlpha}; // End color
