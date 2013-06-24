@@ -12,9 +12,7 @@
 
 @interface ECConcertCellView : UITableViewCell
 
-+ (NSString *)reuseIdentifier;
-- (NSString *)reuseIdentifier;
-+ (ECConcertCellView *)cell;
+- (void)setUpCellForConcert:(NSDictionary *)concertDic;
 
 @property(nonatomic, strong) IBOutlet UIImageView *imageArtist;
 @property(nonatomic, strong) IBOutlet UIImageView *imageBackground;

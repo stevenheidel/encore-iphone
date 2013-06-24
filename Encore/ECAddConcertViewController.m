@@ -108,20 +108,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
         ECConcertCellView *cell = [tableView dequeueReusableCellWithIdentifier:myIdentifier forIndexPath:indexPath];
         NSDictionary * concertDic = [self.arrPopularData objectAtIndex:indexPath.row];
         
-        ((ECConcertCellView *)cell).lblDate.text = [concertDic niceDate];
-        ((ECConcertCellView *)cell).lblDate.font = [UIFont fontWithName:@"Hero" size:15.0];
-        ((ECConcertCellView *)cell).lblName.text = [concertDic artistName];
-        ((ECConcertCellView *)cell).lblName.font = [UIFont fontWithName:@"Hero" size:21.0];
-        ((ECConcertCellView *)cell).lblLocation.text = [NSString stringWithFormat:@"at %@",[concertDic venueName]];
-        ((ECConcertCellView *)cell).lblLocation.font = [UIFont fontWithName:@"Hero" size:16.0];
-        
-        ((ECConcertCellView *)cell).imageArtist.image = [UIImage imageNamed:@"placeholder.jpg"];
-        ((ECConcertCellView *)cell).imageArtist.layer.cornerRadius = 35.0;
-        ((ECConcertCellView *)cell).imageArtist.layer.masksToBounds = YES;
-        ((ECConcertCellView *)cell).imageArtist.layer.borderColor = [UIColor grayColor].CGColor;
-        ((ECConcertCellView *)cell).imageArtist.layer.borderWidth = 3.0;
-        
-        ((ECConcertCellView *)cell).imageBackground.image = [UIImage imageNamed:@"Default.png"];
+        [(ECConcertCellView *)cell setUpCellForConcert:concertDic];
         return cell;
     }
 }
@@ -135,7 +122,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     }
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+/*- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     if (!hasSearched) {
         if (self.searchType == ECSearchTypePast) {
             return [NSString stringWithFormat:NSLocalizedString(@"PopularConcerts", nil), NSLocalizedString(@"Past", nil)];
@@ -145,7 +132,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     } else {
         return [NSString stringWithFormat:NSLocalizedString(@"ArtistSearch", nil), [self.searchBar text]];
     }
-}
+}*/
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (hasSearched) {

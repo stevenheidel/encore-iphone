@@ -61,20 +61,7 @@
     
     ECConcertCellView *cell = [tableView dequeueReusableCellWithIdentifier:myIdentifier forIndexPath:indexPath];
     NSDictionary * concertDic = [self.concertList objectAtIndex:indexPath.row];
-    cell.lblDate.text = [concertDic niceDate];
-    cell.lblDate.font = [UIFont fontWithName:@"Hero" size:15.0];
-    cell.lblName.text = [concertDic artistName];
-    cell.lblName.font = [UIFont fontWithName:@"Hero" size:21.0];
-    cell.lblLocation.text = [NSString stringWithFormat:@"at %@",[concertDic venueName]];
-    cell.lblLocation.font = [UIFont fontWithName:@"Hero" size:16.0];
-    
-    cell.imageArtist.image = [UIImage imageNamed:@"placeholder.jpg"];
-    cell.imageArtist.layer.cornerRadius = 35.0;
-    cell.imageArtist.layer.masksToBounds = YES;
-    cell.imageArtist.layer.borderColor = [UIColor grayColor].CGColor;
-    cell.imageArtist.layer.borderWidth = 3.0;
-    
-    cell.imageBackground.image = [UIImage imageNamed:@"Default.png"];
+    [cell setUpCellForConcert:concertDic];
     
     return cell;
 

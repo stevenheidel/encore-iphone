@@ -5,7 +5,7 @@
 //  Created by Shimmy on 2013-06-17.
 //  Copyright (c) 2013 Encore. All rights reserved.
 //
-#import <QuartzCore/QuartzCore.h>
+
 #import "ECTodayViewController.h"
 #import "ECConcertDetailViewController.h"
 #import "NSDictionary+ConcertList.h"
@@ -54,18 +54,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     
     ECConcertCellView *cell = [tableView dequeueReusableCellWithIdentifier:myIdentifier forIndexPath:indexPath];
     NSDictionary * concertDic = [self.arrTodaysConcerts objectAtIndex:indexPath.row];
-    cell.lblDate.text = [concertDic niceDate];
-    cell.lblDate.font = [UIFont fontWithName:@"Hero" size:15.0];
-    cell.lblName.text = [concertDic artistName];
-    cell.lblName.font = [UIFont fontWithName:@"Hero" size:21.0];
-    cell.lblLocation.text = [NSString stringWithFormat:@"at %@",[concertDic venueName]];
-    cell.lblLocation.font = [UIFont fontWithName:@"Hero" size:16.0];
-    
-    cell.imageArtist.image = [UIImage imageNamed:@"placeholder.jpg"];
-    cell.imageArtist.layer.cornerRadius = 35.0;
-    cell.imageArtist.layer.masksToBounds = YES;
-    cell.imageArtist.layer.borderColor = [UIColor grayColor].CGColor;
-    cell.imageArtist.layer.borderWidth = 3.0;
+    [cell setUpCellForConcert:concertDic];
     
     cell.imageBackground.image = [UIImage imageNamed:@"Default.png"];
     //cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", [concertDic venueName]];
@@ -89,11 +78,11 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     [self.navigationController pushViewController:concertDetail animated:YES];
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+/*- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     if (section == 0)
         return NSLocalizedString(@"TodayTableTitle",nil);
     return nil;
-}
+}*/
 
 #pragma mark - ECJSONFetcher methods
 -(void) fetchedPopularConcerts:(NSArray *)concerts {

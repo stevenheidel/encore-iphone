@@ -7,24 +7,26 @@
 //
 
 #import "ECConcertCellView.h"
-
-
+#import <QuartzCore/QuartzCore.h>
+#import "NSDictionary+ConcertList.h"
 
 @implementation ECConcertCellView
 
-+ (NSString *)reuseIdentifier
-{
-    return NSStringFromClass(self);
-}
-
-- (NSString *)reuseIdentifier
-{
-    return [[self class] reuseIdentifier];
-}
-
-+ (ECConcertCellView *)cell
-{
-    return [[[NSBundle mainBundle] loadNibNamed:[self reuseIdentifier] owner:self options:nil] objectAtIndex:0];
+- (void)setUpCellForConcert:(NSDictionary *)concertDic {
+    self.lblDate.text = [concertDic niceDate];
+    self.lblDate.font = [UIFont fontWithName:@"Hero" size:15.0];
+    self.lblName.text = [concertDic artistName];
+    self.lblName.font = [UIFont fontWithName:@"Hero" size:21.0];
+    self.lblLocation.text = [NSString stringWithFormat:@"at %@",[concertDic venueName]];
+    self.lblLocation.font = [UIFont fontWithName:@"Hero" size:16.0];
+    
+    self.imageArtist.image = [UIImage imageNamed:@"placeholder.jpg"];
+    self.imageArtist.layer.cornerRadius = 35.0;
+    self.imageArtist.layer.masksToBounds = YES;
+    self.imageArtist.layer.borderColor = [UIColor grayColor].CGColor;
+    self.imageArtist.layer.borderWidth = 3.0;
+    
+    self.imageBackground.image = [UIImage imageNamed:@"Default.png"];
 }
 
 @end

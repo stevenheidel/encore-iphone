@@ -46,16 +46,16 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
                                               initWithTitle:@"Settings"
-                                              style:UIBarButtonItemStyleBordered
+                                              style:UIBarButtonItemStylePlain
                                               target:self
                                               action:@selector(settingsButtonWasPressed:)];
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
                                               initWithTitle:@"TEST"
-                                              style:UIBarButtonItemStyleBordered
+                                              style:UIBarButtonItemStylePlain
                                               target:self
                                               action:@selector(viewConcerts:)];
-    
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navbar.png"] forBarMetrics:UIBarMetricsDefault];
     ECAppDelegate *appDelegate = (ECAppDelegate *)[[UIApplication sharedApplication] delegate];
     [appDelegate performSelectorInBackground:@selector(getUserLocation) withObject:nil];
 }
