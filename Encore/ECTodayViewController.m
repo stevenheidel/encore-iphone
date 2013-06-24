@@ -34,7 +34,8 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     // Do any additional setup after loading the view from its nib.
     UIView * headerSpace = [[UIView alloc] initWithFrame: CGRectMake(self.tableView.frame.origin.x, self.tableView.frame.origin.y, self.tableView.frame.size.width, 3.0)]; //Added so shadow of horizontal bar doesn't overlap with view. Remove/change once designs in
     self.tableView.tableHeaderView = headerSpace;
-    
+    UIView * empty = [UIView new];
+    self.tableView.tableFooterView = empty;
     NSString *myIdentifier = @"ECConcertCellView";
     [self.tableView registerNib:[UINib nibWithNibName:@"ECConcertCellView" bundle:nil]
                   forCellReuseIdentifier:myIdentifier];
