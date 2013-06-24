@@ -116,6 +116,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
         }
         NSDictionary *artistDic = (NSDictionary *)[self.arrArtistData objectAtIndex:indexPath.row];
         cell.textLabel.text = [artistDic artistName];
+        cell.textLabel.textColor = [UIColor whiteColor];
         return cell;
     } else {
         static NSString *myIdentifier = @"ECConcertCellView";
