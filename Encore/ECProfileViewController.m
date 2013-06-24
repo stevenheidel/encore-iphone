@@ -62,9 +62,7 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
 
 -(void) updateViewWithNewConcert: (NSNumber *) concertID {
     [ECJSONFetcher fetchConcertsForUserID:self.facebook_id completion:^(NSDictionary *concerts) {
-        NSLog(@"%@",[self.concerts description]);
         [self.concerts setDictionary:concerts];
-        NSLog(@"%@",[self.concerts description]);
         [self.horizontalSelect setTableData: self.concerts];
         [self.horizontalSelect.tableView reloadData];
     }];
