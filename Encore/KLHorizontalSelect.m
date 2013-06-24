@@ -208,6 +208,7 @@
             return nil;
     }
 }
+
 -(UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath  {
     ECCellType cellType = indexPath.section;
 
@@ -221,8 +222,21 @@
         NSString * key = cellType == ECCellTypePastShows ? @"past" : @"future";
         NSDictionary * cellData = [[self.tableData objectForKey:key] objectAtIndex:indexPath.row];
         ((KLHorizontalSelectCell*)cell).cellType = cellType;
-        [(KLHorizontalSelectCell*) cell updateWithCellData:cellData];
+        [(KLHorizontalSelectCell*)cell updateWithCellData:cellData];
         
+    }
+    
+    if (cellType == ECCellTypeFutureShows || cellType == ECCellTypePastShows) {
+        if ([indexPath row] % 2) {
+            [[(KLHorizontalSelectCell*)cell contentView] setBackgroundColor:[UIColor whiteColor]];
+        } else {
+            [[(KLHorizontalSelectCell*)cell contentView] setBackgroundColor:[UIColor colorWithRed:0.9647 green:0.9725 blue:0.9804 alpha:1.0]];
+        }
+        
+    } else if (cellType == ECCellTypeToday) {
+        [[cell contentView] setBackgroundColor:[UIColor colorWithRed:0.0 green:0.6902 blue:0.8902 alpha:1.0]];
+    } else {
+        [[cell contentView] setBackgroundColor:[UIColor blackColor]];
     }
     return cell;
 }
@@ -266,10 +280,13 @@
     NSDictionary * data = self.cellData;
     view.yearLabel.text = [data year];
     view.yearLabel.font = [UIFont fontWithName:@"Hero" size:12.0];
+    view.yearLabel.textColor = [UIColor colorWithRed:0.6275 green:0.6431 blue:0.6549 alpha:1.0];
     view.monthLabel.text = [data month];
     view.monthLabel.font = [UIFont fontWithName:@"Hero" size:15.0];
+    view.monthLabel.textColor = [UIColor colorWithRed:0.6275 green:0.6431 blue:0.6549 alpha:1.0];
     view.dayNumberLabel.text = [data day];
     view.dayNumberLabel.font = [UIFont fontWithName:@"Hero" size:34.0];
+    view.dayNumberLabel.textColor = [UIColor colorWithRed:0.6275 green:0.6431 blue:0.6549 alpha:1.0];
 }
 
 @end
@@ -283,6 +300,7 @@
         [cellView setTransform:CGAffineTransformMakeRotation(M_PI_2)];
         cellView.backgroundColor = [UIColor clearColor];
         cellView.font = [UIFont fontWithName:@"Hero" size:14.0];
+        cellView.textColor = [UIColor whiteColor];
         [self addSubview:cellView];
        
     }
@@ -296,16 +314,19 @@
 
 -(id) initWithType:(ECCellType)type {
     if (self=[super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifierForCellType(type)]) {
-        ECEndCellView * cellView = [[ECEndCellView alloc] initWithFrame: CGRectMake(0, -5, kEndCellWidth, kEndCellHeight)];
+        ECEndCellView * cellView = [[ECEndCellView alloc] initWithFrame: CGRectMake(10, 5, kEndCellWidth, kEndCellHeight)];
+        NSLog(@"Content view: (%f, %f) CellView: (%f, %f)", self.frame.size.width, self.frame.size.height, cellView.frame.size.width, cellView.frame.size.height);
         //UILabel * cellView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kEndCellWidth, kEndCellHeight)];
         cellView.backgroundColor = [UIColor clearColor];
         NSString * text = type == ECCellTypeAddPast ? NSLocalizedString(@"AddPast", nil): NSLocalizedString(@"AddFuture", nil);
-        cellView.textLabel.text = text;//.text = text;
+        cellView.textLabel.text = text;
         cellView.textLabel.font = [UIFont fontWithName:@"Hero" size:16.0];
-        cellView.textLabel.textAlignment = type == ECCellTypeAddPast ? NSTextAlignmentRight : NSTextAlignmentLeft;
+        cellView.textLabel.textColor = [UIColor whiteColor];
+        cellView.textLabel.textAlignment = NSTextAlignmentCenter;//type == ECCellTypeAddPast ? NSTextAlignmentRight : NSTextAlignmentLeft;
         [self setTransform:CGAffineTransformMakeRotation(M_PI_2)];
         
         [self addSubview:cellView];
+        cellView.textLabel.center = cellView.center;
         [self setSelectionStyle:UITableViewCellSelectionStyleGray];
     }
     return self;
