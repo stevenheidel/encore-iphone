@@ -42,15 +42,17 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     hasSearched = FALSE;
     self.lastSelectedArtist = nil;
     self.hud = [[MBProgressHUD alloc] initWithView:self.view];
+    
     [self.view addSubview:self.hud];
     self.hud.labelText = NSLocalizedString(@"loading", nil);
-
+    self.hud.color = [UIColor colorWithRed:8.0/255.0 green:56.0/255.0 blue:76.0/255.0 alpha:0.90];
     //Register cell nib file to the uitableview
     NSString *myIdentifier = @"ECConcertCellView";
     [self.tableView registerNib:[UINib nibWithNibName:@"ECConcertCellView" bundle:nil]
          forCellReuseIdentifier:myIdentifier];
     
     self.lblLocation.font = [UIFont fontWithName:@"Hero" size:15.0];
+    self.tableView.tableFooterView = [UIView new];
 }
 
 -(void)viewWillAppear:(BOOL)animated {

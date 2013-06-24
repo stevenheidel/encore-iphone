@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "ECJSONFetcher.h"
-
+@class MBProgressHUD;
 @interface ECTodayViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, ECJSONFetcherDelegate>
 
 @property(nonatomic, strong) IBOutlet UITableView *tableView;
 @property(nonatomic, strong) NSArray *arrTodaysConcerts;
+@property (strong, nonatomic) MBProgressHUD * hud;
 
 @end

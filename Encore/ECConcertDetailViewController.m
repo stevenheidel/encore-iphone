@@ -119,7 +119,6 @@ NSString *kCellID = @"cellID";
 
 -(void) loadImages {
     NSNumber* serverID = [self.concert serverID];
-    NSLog(@"%@",[self.concert description]);
     if (serverID) {
         ECJSONFetcher * fetcher = [[ECJSONFetcher alloc] init];
         fetcher.delegate = self;

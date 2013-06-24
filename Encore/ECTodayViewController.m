@@ -10,6 +10,7 @@
 #import "ECConcertDetailViewController.h"
 #import "NSDictionary+ConcertList.h"
 #import "ECConcertCellView.h"
+#import "MBProgressHUD.h"
 
 static NSString *const ConcertCellIdentifier = @"concertCell";
 
@@ -34,11 +35,16 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     // Do any additional setup after loading the view from its nib.
     UIView * headerSpace = [[UIView alloc] initWithFrame: CGRectMake(self.tableView.frame.origin.x, self.tableView.frame.origin.y, self.tableView.frame.size.width, 3.0)]; //Added so shadow of horizontal bar doesn't overlap with view. Remove/change once designs in
     self.tableView.tableHeaderView = headerSpace;
-    UIView * empty = [UIView new];
-    self.tableView.tableFooterView = empty;
+    self.tableView.tableFooterView = [UIView new];
     NSString *myIdentifier = @"ECConcertCellView";
     [self.tableView registerNib:[UINib nibWithNibName:@"ECConcertCellView" bundle:nil]
                   forCellReuseIdentifier:myIdentifier];
+    
+    self.hud = [[MBProgressHUD alloc] initWithView:self.view];
+    
+    [self.view addSubview:self.hud];
+    self.hud.labelText = NSLocalizedString(@"loading", nil);
+    self.hud.color = [UIColor colorWithRed:8.0/255.0 green:56.0/255.0 blue:76.0/255.0 alpha:0.90];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -46,7 +52,9 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
         ECJSONFetcher *JSONFetcher = [[ECJSONFetcher alloc] init];
         JSONFetcher.delegate = self;
         [JSONFetcher fetchPopularConcertsWithSearchType:ECSearchTypeToday];
+        [self.hud show:YES];
     }
+    
 }
 
 #pragma mark - UITableView methods
@@ -89,6 +97,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
 -(void) fetchedPopularConcerts:(NSArray *)concerts {
     self.arrTodaysConcerts = concerts;
     [self.tableView reloadData];
+    [self.hud hide:YES];
 }
 
 - (void)didReceiveMemoryWarning
