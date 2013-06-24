@@ -6,6 +6,7 @@
 //  Copyright (c) 2013 Encore. All rights reserved.
 //
 
+#import <QuartzCore/QuartzCore.h>
 #import "ECConcertDetailViewController.h"
 #import "NSDictionary+ConcertList.h"
 #import "Cell.h"
@@ -38,9 +39,27 @@ NSString *kCellID = @"cellID";
     [self.collectionView registerNib:[UINib nibWithNibName:@"ECCollectionCell" bundle:nil] forCellWithReuseIdentifier:@"cellID"];
     // Do any additional setup after loading the view from its nib.
     self.artistNameLabel.text = [self.concert artistName];
+    [self.artistNameLabel setAdjustsFontSizeToFitWidth:YES];
     self.dateLabel.text = [self.concert niceDate];
     self.venueNameLabel.text = [self.concert venueName];
     self.title = self.artistNameLabel.text;
+    
+    //TODO: Set pictures dynamically from image urls
+    self.imgBackground.image = [UIImage imageNamed:@"Default.png"];
+    self.imgArtist.image = [UIImage imageNamed:@"placeholder.jpg"];
+    self.imgLiveNow.image = [UIImage imageNamed:@"LiveIndicator.png"];
+    
+    self.imgArtist.layer.cornerRadius = 35.0;
+    self.imgArtist.layer.masksToBounds = YES;
+    self.imgArtist.layer.borderColor = [UIColor grayColor].CGColor;
+    self.imgArtist.layer.borderWidth = 3.0;
+    
+    if ([self.concert isLive]) {
+        self.imgLiveNow.hidden = NO;
+    } else {
+        self.imgLiveNow.hidden = YES;
+    }
+    
     [self loadImages];
     
     self.isOnProfile = FALSE;
@@ -49,9 +68,22 @@ NSString *kCellID = @"cellID";
 
 -(void) updateView {
     self.artistNameLabel.text = [self.concert artistName];
-    self.dateLabel.text = [self.concert niceDate];
+    
     self.venueNameLabel.text = [self.concert venueName];
-    self.title = self.artistNameLabel.text;
+    
+    //TODO: Set pictures dynamically from image urls
+    self.imgBackground.image = [UIImage imageNamed:@"Default.png"];
+    self.imgArtist.image = [UIImage imageNamed:@"placeholder.jpg"];
+    
+    if ([self.concert isLive]) {
+        self.imgLiveNow.hidden = NO;
+        self.dateLabel.text = NSLocalizedString(@"LiveNow", nil);
+    } else {
+        self.imgLiveNow.hidden = YES;
+        self.dateLabel.text = [self.concert niceDate];
+    }
+    
+    //self.title = self.artistNameLabel.text;
     [self loadImages];
 }
 

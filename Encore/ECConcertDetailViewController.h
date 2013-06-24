@@ -16,6 +16,9 @@
 @property (nonatomic,strong) IBOutlet UILabel * venueNameLabel;
 @property (nonatomic,strong) IBOutlet UILabel * dateLabel;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (nonatomic,strong) IBOutlet UIImageView *imgArtist;
+@property (nonatomic,strong) IBOutlet UIImageView *imgBackground;
+@property (nonatomic,strong) IBOutlet UIImageView *imgLiveNow;
 @property (nonatomic, strong) NSArray * posts;
 
 @property (nonatomic, readonly) NSNumber * songkickID;

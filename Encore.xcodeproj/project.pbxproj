@@ -17,6 +17,7 @@
 		A022AAB01777C44A0009244C /* navbar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A022AAAE1777C44A0009244C /* navbar@2x.png */; };
 		A022AAB21777D50F0009244C /* locationmarker2.png in Resources */ = {isa = PBXBuildFile; fileRef = A022AAB11777D50F0009244C /* locationmarker2.png */; };
 		A022AAB51777DB250009244C /* ECCustomSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A022AAB41777DB240009244C /* ECCustomSearchBar.m */; };
+		A022AAB71778D8D60009244C /* LiveIndicator.png in Resources */ = {isa = PBXBuildFile; fileRef = A022AAB61778D8D60009244C /* LiveIndicator.png */; };
 		A04C4333176F85F9003B4299 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A04C4332176F85F9003B4299 /* CoreLocation.framework */; };
 		A0848C0B176D1F0D009BBB38 /* ECLoginPageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0848C0A176D1F0D009BBB38 /* ECLoginPageView.xib */; };
 		A0848C11176D25D5009BBB38 /* ECLoginPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0848C10176D25D5009BBB38 /* ECLoginPageView.m */; };
@@ -119,6 +120,7 @@
 		A022AAB11777D50F0009244C /* locationmarker2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = locationmarker2.png; sourceTree = "<group>"; };
 		A022AAB31777DB240009244C /* ECCustomSearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECCustomSearchBar.h; sourceTree = "<group>"; };
 		A022AAB41777DB240009244C /* ECCustomSearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECCustomSearchBar.m; sourceTree = "<group>"; };
+		A022AAB61778D8D60009244C /* LiveIndicator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LiveIndicator.png; sourceTree = "<group>"; };
 		A04C4332176F85F9003B4299 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		A0848C0A176D1F0D009BBB38 /* ECLoginPageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECLoginPageView.xib; sourceTree = "<group>"; };
 		A0848C0F176D25D5009BBB38 /* ECLoginPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECLoginPageView.h; sourceTree = "<group>"; };
@@ -310,6 +312,7 @@
 		D4A8DDD1176A44A0005E9847 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				A022AAB61778D8D60009244C /* LiveIndicator.png */,
 				A022AAB11777D50F0009244C /* locationmarker2.png */,
 				A022AAAD1777C44A0009244C /* navbar.png */,
 				A022AAAE1777C44A0009244C /* navbar@2x.png */,
@@ -623,6 +626,7 @@
 				A022AAAF1777C44A0009244C /* navbar.png in Resources */,
 				A022AAB01777C44A0009244C /* navbar@2x.png in Resources */,
 				A022AAB21777D50F0009244C /* locationmarker2.png in Resources */,
+				A022AAB71778D8D60009244C /* LiveIndicator.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

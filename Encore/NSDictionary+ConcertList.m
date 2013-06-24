@@ -72,6 +72,14 @@ static NSString * const kDateFormat = @"yyyy-MM-dd";
     return [dateFormat stringFromDate:date];
 }
 
+-(BOOL) isLive {
+    NSString * dateStr = [self objectForKey:@"date"];
+    NSDateFormatter * dateFormat =  [NSDateFormatter new];
+    [dateFormat setDateFormat:kDateFormat];
+    NSDate * date = [dateFormat dateFromString:dateStr];
+    return [date isEqualToDate:[NSDate date]];
+}
+
 -(BOOL) beforeToday {
     NSLog(@"beforeToday doesn't work yet");
     //The date is stored without time and it's annoying to fix so left as is

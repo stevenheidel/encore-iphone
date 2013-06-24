@@ -25,5 +25,6 @@
 -(NSArray *) past;
 -(NSArray *) future;
 
+-(BOOL) isLive;
 -(BOOL) beforeToday;
 @end

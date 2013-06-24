@@ -30,6 +30,10 @@
 "Past" = "Recent";
 "Upcoming" = "Upcoming";
 "loading" = "Loading";
+
+//Concert Detail
+"LiveNow" = "Live Now";
+
 //Today table
 "TodayTableTitle" = "Today's Concerts in Your Area";
 "today" = "TODAY";
