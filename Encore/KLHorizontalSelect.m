@@ -260,12 +260,20 @@
 }
 
 -(void) updateCellView {
+    
+    if (self.cellType == ECCellTypePastShows) {
+        
+    }
+    
     self.contentView.backgroundColor = self.cellType == ECCellTypePastShows ? [UIColor colorWithRed:240.0/255.0 green:1.0 blue:240.0/255.0 alpha:1.0] : [UIColor clearColor];
     ECHorizontalCellView * view =  self.cellView;
     NSDictionary * data = self.cellData;
     view.yearLabel.text = [data year];
+    view.yearLabel.font = [UIFont fontWithName:@"Hero" size:12.0];
     view.monthLabel.text = [data month];
+    view.monthLabel.font = [UIFont fontWithName:@"Hero" size:15.0];
     view.dayNumberLabel.text = [data day];
+    view.dayNumberLabel.font = [UIFont fontWithName:@"Hero" size:34.0];
 }
 
 @end
@@ -277,8 +285,8 @@
         UILabel * cellView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kDefaultCellWidth, kDefaultCellHeight)];
         cellView.text = NSLocalizedString(@"today", nil);
         [cellView setTransform:CGAffineTransformMakeRotation(M_PI_2)];
-         cellView.backgroundColor = [UIColor clearColor];
-        cellView.font = [UIFont boldSystemFontOfSize:14.0];
+        cellView.backgroundColor = [UIColor clearColor];
+        cellView.font = [UIFont fontWithName:@"Hero" size:14.0];
         [self addSubview:cellView];
        
     }
