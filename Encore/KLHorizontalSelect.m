@@ -315,8 +315,6 @@
 -(id) initWithType:(ECCellType)type {
     if (self=[super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifierForCellType(type)]) {
         ECEndCellView * cellView = [[ECEndCellView alloc] initWithFrame: CGRectMake(10, 5, kEndCellWidth, kEndCellHeight)];
-        NSLog(@"Content view: (%f, %f) CellView: (%f, %f)", self.frame.size.width, self.frame.size.height, cellView.frame.size.width, cellView.frame.size.height);
-        //UILabel * cellView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kEndCellWidth, kEndCellHeight)];
         cellView.backgroundColor = [UIColor clearColor];
         NSString * text = type == ECCellTypeAddPast ? NSLocalizedString(@"AddPast", nil): NSLocalizedString(@"AddFuture", nil);
         cellView.textLabel.text = text;
