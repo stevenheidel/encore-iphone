@@ -17,9 +17,15 @@
 #import "ECProfileViewController.h"
 #import "UIImage+GaussBlur.h"
 
+
+#import "SGSStaggeredFlowLayout.h"
+
 NSString *kCellID = @"cellID";
 
-@interface ECConcertDetailViewController ()
+@interface ECConcertDetailViewController (){
+    SGSStaggeredFlowLayout* _flowLayout;
+
+}
 
 @end
 
@@ -37,7 +43,10 @@ NSString *kCellID = @"cellID";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.collectionView registerNib:[UINib nibWithNibName:@"ECCollectionCell" bundle:nil] forCellWithReuseIdentifier:@"cellID"];
+//    [self.collectionView registerNib:[UINib nibWithNibName:@"ECCollectionCell" bundle:nil] forCellWithReuseIdentifier:@"cellID"];
+    
+    [self.collectionView registerClass:[Cell class] forCellWithReuseIdentifier:@"generic"];
+    
     // Do any additional setup after loading the view from its nib.
     self.artistNameLabel.text = [self.concert artistName];
     [self.artistNameLabel setAdjustsFontSizeToFitWidth:YES];
@@ -65,6 +74,15 @@ NSString *kCellID = @"cellID";
     
     self.isOnProfile = FALSE;
     [self setUpRightBarButton];
+    
+    _flowLayout = [[SGSStaggeredFlowLayout alloc] init];
+    _flowLayout.layoutMode = SGSStaggeredFlowLayoutMode_Even;
+    _flowLayout.minimumLineSpacing = 2.0f;
+    _flowLayout.minimumInteritemSpacing = 2.0f;
+    _flowLayout.sectionInset = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 0.0f);
+    _flowLayout.itemSize = CGSizeMake(75.0f, 75.0f);
+    
+    self.collectionView.collectionViewLayout = _flowLayout;
 }
 
 -(void) updateView {
@@ -86,6 +104,7 @@ NSString *kCellID = @"cellID";
     
     //self.title = self.artistNameLabel.text;
     [self loadImages];
+    
 }
 
 -(void) setUpRightBarButton {
@@ -169,6 +188,19 @@ NSString *kCellID = @"cellID";
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - UICollectionViewDelegateFlowLayout
+
+//TODO: change this to use actual image dimensions or remove it.
+- (CGSize) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    UIImage* thisImage = [UIImage imageNamed:@"instagram.jpg"];
+    
+    CGSize cellSize;
+    CGFloat deviceCellSizeConstant = _flowLayout.itemSize.height;
+    cellSize = CGSizeMake((thisImage.size.width*deviceCellSizeConstant)/thisImage.size.height, deviceCellSizeConstant);
+    
+    return cellSize;
+}
+
 #pragma mark - collection view delegate/data source
 
 - (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section;
@@ -178,17 +210,24 @@ NSString *kCellID = @"cellID";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath;
 {
-    Cell *cell = [cv dequeueReusableCellWithReuseIdentifier:kCellID forIndexPath:indexPath];
+    Cell *cell = (Cell*)[cv dequeueReusableCellWithReuseIdentifier:@"generic" forIndexPath:indexPath];
     
-    if(!self.posts){
-        cell.image.image = [UIImage imageNamed:nil]; //TODO replace with blank?
-        return cell;
-    }
+    
     // load the image for this cell
     NSDictionary * postDic = [self.posts objectAtIndex:indexPath.row];
+    if(!cell.image) {
+        UIImageView* imageView = [[UIImageView alloc] initWithFrame:cell.contentView.frame];
+        imageView.contentMode = UIViewContentModeScaleAspectFill;
+        [cell.contentView addSubview:imageView];
+        cell.image=imageView;
+        cell.contentView.clipsToBounds = YES;
+    }
     
-    NSURL *imageToLoad = [postDic imageURL];
-    [cell.image setImageWithURL:imageToLoad];
+    if(self.posts.count > 0) {
+        NSURL *imageToLoad = [postDic imageURL];
+        [cell.image setImageWithURL:imageToLoad];
+    }
+    
     return cell;
 }
 
@@ -201,15 +240,16 @@ NSString *kCellID = @"cellID";
 
 -(void) setUpPlaceholderView {
     if(!self.placeholderView){
-        NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"ECPostPlaceholder" owner:nil options:nil];
-        self.placeholderView = [subviewArray objectAtIndex:0];
-        self.placeholderView.frame = self.collectionView.frame;
+        self.placeholderView = [[ECPlaceHolderView alloc] initWithFrame:self.collectionView.frame owner: self];
     }
     if(!self.placeholderView.superview) {
         [self.view addSubview:self.placeholderView];
     }
 }
 
+-(IBAction)addPhoto {
+    NSLog(@"No photo adding");
+}
 #pragma mark - json fetcher delegate
 -(void) fetchedPosts: (NSArray *) posts {
     self.posts = posts;
@@ -220,6 +260,22 @@ NSString *kCellID = @"cellID";
     else {
         [self setUpPlaceholderView];
     }
+}
+
+@end
+
+@implementation ECPlaceHolderView
+
+-(id) initWithFrame:(CGRect)frame owner: (id) owner {
+    if (self = [super initWithFrame:frame]){
+        NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"ECPostPlaceholder" owner:owner options:nil];
+        self = [subviewArray objectAtIndex:0];
+        self.frame = frame;
+        self.label1.font = [UIFont fontWithName:@"Hero" size:22.0];
+        self.label2.font = [UIFont fontWithName:@"Hero" size:22.0];
+        self.button.titleLabel.font = [UIFont fontWithName:@"Hero" size:22.0];
+    }
+    return self;
 }
 
 @end
