@@ -325,7 +325,7 @@
         
         [self addSubview:cellView];
         cellView.textLabel.center = cellView.center;
-        [self setSelectionStyle:UITableViewCellSelectionStyleGray];
+        [self setSelectionStyle:UITableViewCellSelectionStyleNone];
     }
     return self;
 }
