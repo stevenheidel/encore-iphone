@@ -178,9 +178,9 @@
 						<float key="IBUIMaximumZoomScale">0.0</float>
 						<object class="IBUICollectionViewFlowLayout" key="IBUICollectionViewLayout" id="349850358">
 							<reference key="IBUICollectionView" ref="911402973"/>
-							<string key="IBUIItemSize">{105, 105}</string>
-							<float key="IBUIMinimumLineSpacing">2</float>
-							<float key="IBUIMinimumInteritemSpacing">2</float>
+							<string key="IBUIItemSize">{50, 50}</string>
+							<float key="IBUIMinimumLineSpacing">10</float>
+							<float key="IBUIMinimumInteritemSpacing">10</float>
 						</object>
 						<array key="IBUICells" id="0"/>
 					</object>

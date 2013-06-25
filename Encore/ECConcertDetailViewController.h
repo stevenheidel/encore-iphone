@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ECJSONFetcher.h"
 
-@interface ECConcertDetailViewController : UIViewController <UICollectionViewDataSource,UICollectionViewDelegate,ECJSONFetcherDelegate>
+@interface ECConcertDetailViewController : UIViewController <UICollectionViewDataSource,UICollectionViewDelegate,ECJSONFetcherDelegate, UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic,strong) NSDictionary * concert;
 @property (nonatomic,strong) IBOutlet UILabel * artistNameLabel;

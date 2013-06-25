@@ -24,3 +24,9 @@
 #define COCOAPODS_VERSION_MINOR_MBProgressHUD 6
 #define COCOAPODS_VERSION_PATCH_MBProgressHUD 0
 
+// SGSStaggeredFlowLayout
+#define COCOAPODS_POD_AVAILABLE_SGSStaggeredFlowLayout
+#define COCOAPODS_VERSION_MAJOR_SGSStaggeredFlowLayout 0
+#define COCOAPODS_VERSION_MINOR_SGSStaggeredFlowLayout 0
+#define COCOAPODS_VERSION_PATCH_SGSStaggeredFlowLayout 1
+

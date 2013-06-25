@@ -97,6 +97,7 @@
 		D4B502B5176823EA00E0C52B /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4B502B4176823EA00E0C52B /* Icon@2x.png */; };
 		D4B6707A176F57E000A80BA3 /* ECTodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4B67078176F57E000A80BA3 /* ECTodayViewController.m */; };
 		D4B6707B176F57E000A80BA3 /* ECTodayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4B67079176F57E000A80BA3 /* ECTodayViewController.xib */; };
+		D4C9C085177A090800F864FC /* instagram.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D4C9C084177A090800F864FC /* instagram.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -231,6 +232,7 @@
 		D4B67077176F57E000A80BA3 /* ECTodayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECTodayViewController.h; sourceTree = "<group>"; };
 		D4B67078176F57E000A80BA3 /* ECTodayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECTodayViewController.m; sourceTree = "<group>"; };
 		D4B67079176F57E000A80BA3 /* ECTodayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECTodayViewController.xib; sourceTree = "<group>"; };
+		D4C9C084177A090800F864FC /* instagram.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = instagram.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -317,6 +319,7 @@
 		D4A8DDD1176A44A0005E9847 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				D4C9C084177A090800F864FC /* instagram.jpg */,
 				A022AAB81778E8240009244C /* sampleArtistImage.jpg */,
 				A022AAB61778D8D60009244C /* LiveIndicator.png */,
 				A022AAB11777D50F0009244C /* locationmarker2.png */,
@@ -636,6 +639,7 @@
 				A022AAB21777D50F0009244C /* locationmarker2.png in Resources */,
 				A022AAB71778D8D60009244C /* LiveIndicator.png in Resources */,
 				A022AAB91778E8240009244C /* sampleArtistImage.jpg in Resources */,
+				D4C9C085177A090800F864FC /* instagram.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
