@@ -10,7 +10,7 @@
 #import "ECJSONFetcher.h"
 #import "ECCustomSearchBar.h"
 @class MBProgressHUD;
-@interface ECAddConcertViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, ECJSONFetcherDelegate> {
+@interface ECAddConcertViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, ECJSONFetcherDelegate, UITextFieldDelegate> {
     bool hasSearched;
 }
 
@@ -19,9 +19,13 @@
 @property (strong, nonatomic) NSArray *arrPopularData;
 @property (strong, nonatomic) ECJSONFetcher * JSONFetcher;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) IBOutlet ECCustomSearchBar *searchBar;
-@property (strong, nonatomic) IBOutlet UITextField *searchField;
-@property (strong, nonatomic) IBOutlet UILabel *lblLocation;
+//@property (strong, nonatomic) IBOutlet ECCustomSearchBar *searchBar;
+@property (strong, nonatomic) IBOutlet UITextField *artistSearch;
+@property (strong, nonatomic) IBOutlet UITextField *locationSearch;
+@property (strong, nonatomic) IBOutlet UIButton *btnLocationIcon;
+@property (strong, nonatomic) IBOutlet UIButton *btnSearchIcon;
+@property (strong, nonatomic) IBOutlet UIView * searchDivisor;
+//@property (strong, nonatomic) IBOutlet UILabel *lblLocation;
 @property (strong, nonatomic) MBProgressHUD * hud;
 
 @property (nonatomic, assign) NSString * lastSelectedArtist;

@@ -14,6 +14,29 @@
 #import "MBProgressHUD.h"
 #import "ECConcertCellView.h"
 
+#pragma mark - Search bar animation constants
+
+#define SEARCHBAR_REGULAR_WIDTH 130.0
+#define SEARCHBAR_EXPANDED_WIDTH 265.0
+
+#define ARTIST_SEARCH_X 25.0
+#define ARTIST_SEARCH_HIDDEN_X (-ARTIST_SEARCH_X-SEARCHBAR_REGULAR_WIDTH)
+#define SEARCH_ICON_X 5.0
+#define SEARCH_ICON_HIDDEN_X 5.0
+
+#define LOCATION_SEARCH_X 185.0
+#define LOCATION_SEARCH_HIDDEN_X 320.0
+#define LOCATION_SEARCH_EXPANDED_X 50.0
+#define LOCATION_ICON_X 165.0
+#define LOCATION_ICON_HIDDEN_X 300.0
+#define LOCATION_ICON_EXPANDED_X 30.0
+
+#define DIVISOR_MIDDLE 160.0
+#define DIVISOR_LEFT 25.0
+#define DIVISOR_RIGHT 295.0
+
+
+
 static NSString *const ArtistCellIdentifier = @"artistCell";
 static NSString *const ConcertCellIdentifier = @"concertCell";
 
@@ -51,7 +74,8 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     [self.tableView registerNib:[UINib nibWithNibName:@"ECConcertCellView" bundle:nil]
          forCellReuseIdentifier:myIdentifier];
     
-    self.lblLocation.font = [UIFont fontWithName:@"Hero" size:15.0];
+    self.locationSearch.font = [UIFont fontWithName:@"Hero" size:15.0];
+    self.artistSearch.font = [UIFont fontWithName:@"Hero" size:15.0];
     self.tableView.tableFooterView = [UIView new];
 }
 
@@ -63,16 +87,6 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
             [self.JSONFetcher fetchPopularConcertsWithSearchType:ECSearchTypeFuture];
         }
         [self.hud show:YES];
-    }
-    //Get rid of the border in the searchbar textfield
-    UITextField* searchField = nil;
-    for(int i = 0; i < self.searchBar.subviews.count; i++) {
-        if([[self.searchBar.subviews objectAtIndex:i] isKindOfClass:[UITextField class]]) { //conform?
-            searchField = [self.searchBar.subviews objectAtIndex:i];
-        }
-    }
-    if(searchField) {
-        searchField.borderStyle = UITextBorderStyleNone;
     }
 }
 
@@ -161,8 +175,9 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if ([self.searchBar isFirstResponder]) {
-        [self.searchBar resignFirstResponder];
+    if ([self.artistSearch isFirstResponder] || [self.locationSearch isFirstResponder]) {
+        [self.artistSearch resignFirstResponder];
+        [self.locationSearch resignFirstResponder];
     } else {
         if (hasSearched) {
             NSDictionary* data = (NSDictionary*)[self.arrArtistData objectAtIndex:indexPath.row];
@@ -187,9 +202,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([self.searchBar isFirstResponder]) {
-        [self.searchBar resignFirstResponder];
-    }
+    [self dismissKeyboard:nil];
 }
 
 -(void) clearSearchResultsTable {
@@ -233,9 +246,164 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
 }
 
 -(IBAction)dismissKeyboard:(id)sender {
-    if ([self.searchBar isFirstResponder]) {
-        [self.searchBar resignFirstResponder];
+    if ([self.artistSearch isFirstResponder] || [self.locationSearch isFirstResponder]) {
+        [self.artistSearch resignFirstResponder];
+        [self.locationSearch resignFirstResponder];
     }
+}
+
+#pragma mark - UITextFieldDelegate Methods
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    if (textField.tag == 0) {
+        [self expandArtistSearchBar];
+    } else {
+        [self expandLocationSearchBar];
+    }
+    return YES;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if (textField.tag == 0) {
+        [self clearSearchResultsTable];
+        [self.JSONFetcher fetchArtistsForString:[textField text]];
+        [self.hud show: YES];
+    } else {
+        [textField resignFirstResponder];
+    }
+    
+    return YES;
+}
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
+    if (textField.tag == 0) {
+        [self closeArtistSearchBar];
+    } else {
+        [self closeLocationSearchBar];
+        if ([textField.text length] == 0) {
+            textField.text = @"Toronto, ON";
+        } else {
+            //TODO: (low priority)set Location code
+        }
+    }
+    return YES;
+}
+
+#pragma mark - Search bar animations
+
+- (void)expandArtistSearchBar {
+    
+    CGRect artistSearchFrame = self.artistSearch.frame;
+    CGRect locationSearchFrame = self.locationSearch.frame;
+    CGRect divisorFrame = self.searchDivisor.frame;
+    CGRect locationIconFrame = self.btnLocationIcon.frame;
+    
+    locationSearchFrame.origin.x = LOCATION_SEARCH_HIDDEN_X;
+    locationIconFrame.origin.x = LOCATION_ICON_HIDDEN_X;
+    divisorFrame.origin.x = DIVISOR_RIGHT;
+    artistSearchFrame.size.width = SEARCHBAR_EXPANDED_WIDTH;
+
+    [UIView animateWithDuration:0.5
+                          delay:0.0
+                        options: UIViewAnimationCurveEaseOut
+                     animations:^{
+                         self.locationSearch.frame = locationSearchFrame;
+                         self.btnLocationIcon.frame = locationIconFrame;
+                         self.searchDivisor.frame = divisorFrame;
+                         self.artistSearch.frame = artistSearchFrame;
+                     }
+                     completion:^(BOOL finished){
+
+                     }];
+}
+
+- (void)expandLocationSearchBar {
+    
+    CGRect artistSearchFrame = self.artistSearch.frame;
+    CGRect locationSearchFrame = self.locationSearch.frame;
+    CGRect divisorFrame = self.searchDivisor.frame;
+    CGRect locationIconFrame = self.btnLocationIcon.frame;
+    CGRect artistIconFrame = self.btnSearchIcon.frame;
+    
+    
+    //shift artist search bar
+    artistIconFrame.origin.x = SEARCH_ICON_HIDDEN_X;
+    artistSearchFrame.origin.x = ARTIST_SEARCH_HIDDEN_X;
+    divisorFrame.origin.x = DIVISOR_LEFT;
+    
+    //expand Location search bar
+    locationIconFrame.origin.x = LOCATION_ICON_EXPANDED_X;
+    locationSearchFrame.origin.x = LOCATION_SEARCH_EXPANDED_X;
+    locationSearchFrame.size.width = SEARCHBAR_EXPANDED_WIDTH;
+    
+    [UIView animateWithDuration:0.5
+                          delay:0.0
+                        options: UIViewAnimationCurveEaseOut
+                     animations:^{
+                         self.btnSearchIcon.frame = artistIconFrame;
+                         self.artistSearch.frame = artistSearchFrame;
+                         self.searchDivisor.frame = divisorFrame;
+                         self.btnLocationIcon.frame = locationIconFrame;
+                         self.locationSearch.frame = locationSearchFrame;
+                     }
+                     completion:^(BOOL finished){
+
+                     }];
+}
+
+- (void)closeArtistSearchBar {
+    CGRect artistSearchFrame = self.artistSearch.frame;
+    CGRect locationSearchFrame = self.locationSearch.frame;
+    CGRect divisorFrame = self.searchDivisor.frame;
+    CGRect locationIconFrame = self.btnLocationIcon.frame;
+    
+    artistSearchFrame.size.width = SEARCHBAR_REGULAR_WIDTH;
+    divisorFrame.origin.x = DIVISOR_MIDDLE;
+    locationIconFrame.origin.x = LOCATION_ICON_X;
+    locationSearchFrame.origin.x = LOCATION_SEARCH_X;
+
+    [UIView animateWithDuration:0.5
+                          delay:0.0
+                        options: UIViewAnimationCurveEaseOut
+                     animations:^{
+                         self.artistSearch.frame = artistSearchFrame;
+                         self.searchDivisor.frame = divisorFrame;
+                         self.btnLocationIcon.frame = locationIconFrame;
+                         self.locationSearch.frame = locationSearchFrame;
+                     }
+                     completion:^(BOOL finished){
+
+                     }];
+}
+
+- (void)closeLocationSearchBar {
+    
+    CGRect artistSearchFrame = self.artistSearch.frame;
+    CGRect locationSearchFrame = self.locationSearch.frame;
+    CGRect divisorFrame = self.searchDivisor.frame;
+    CGRect locationIconFrame = self.btnLocationIcon.frame;
+    CGRect artistIconFrame = self.btnSearchIcon.frame;
+    
+    locationSearchFrame.origin.x = LOCATION_SEARCH_X;
+    locationSearchFrame.size.width = SEARCHBAR_REGULAR_WIDTH;
+    locationIconFrame.origin.x = LOCATION_ICON_X;
+    divisorFrame.origin.x = DIVISOR_MIDDLE;
+    artistSearchFrame.origin.x = ARTIST_SEARCH_X;
+    artistIconFrame.origin.x = SEARCH_ICON_X;
+    
+    [UIView animateWithDuration:0.75
+                          delay:0.0
+                        options: UIViewAnimationCurveEaseOut
+                     animations:^{                         
+                         self.locationSearch.frame = locationSearchFrame;
+                         self.btnLocationIcon.frame = locationIconFrame;
+                         self.searchDivisor.frame = divisorFrame;
+                         self.artistSearch.frame = artistSearchFrame;
+                         self.btnSearchIcon.frame = artistIconFrame;
+                     }
+                     completion:^(BOOL finished){
+
+                     }];
 }
 
 #pragma mark - Did Receive Memory Warning
