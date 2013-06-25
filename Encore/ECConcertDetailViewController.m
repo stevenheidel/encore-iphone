@@ -240,15 +240,16 @@ NSString *kCellID = @"cellID";
 
 -(void) setUpPlaceholderView {
     if(!self.placeholderView){
-        NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"ECPostPlaceholder" owner:nil options:nil];
-        self.placeholderView = [subviewArray objectAtIndex:0];
-        self.placeholderView.frame = self.collectionView.frame;
+        self.placeholderView = [[ECPlaceHolderView alloc] initWithFrame:self.collectionView.frame owner: self];
     }
     if(!self.placeholderView.superview) {
         [self.view addSubview:self.placeholderView];
     }
 }
 
+-(IBAction)addPhoto {
+    NSLog(@"No photo adding");
+}
 #pragma mark - json fetcher delegate
 -(void) fetchedPosts: (NSArray *) posts {
     self.posts = posts;
@@ -259,6 +260,22 @@ NSString *kCellID = @"cellID";
     else {
         [self setUpPlaceholderView];
     }
+}
+
+@end
+
+@implementation ECPlaceHolderView
+
+-(id) initWithFrame:(CGRect)frame owner: (id) owner {
+    if (self = [super initWithFrame:frame]){
+        NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"ECPostPlaceholder" owner:owner options:nil];
+        self = [subviewArray objectAtIndex:0];
+        self.frame = frame;
+//        self.label1.font = [UIFont fontWithName:@"Hero" size:15.0];
+//        self.label2.font = [UIFont fontWithName:@"Hero" size:15.0];
+//        self.button.titleLabel.font = [UIFont fontWithName:@"Hero" size:15.0];
+    }
+    return self;
 }
 
 @end

@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "ECJSONFetcher.h"
-
+@class ECPlaceHolderView;
 @interface ECConcertDetailViewController : UIViewController <UICollectionViewDataSource,UICollectionViewDelegate,ECJSONFetcherDelegate, UICollectionViewDelegateFlowLayout>
-
+-(IBAction)addPhoto;
 @property (nonatomic,strong) NSDictionary * concert;
 @property (nonatomic,strong) IBOutlet UILabel * artistNameLabel;
 @property (nonatomic,strong) IBOutlet UILabel * venueNameLabel;
@@ -30,6 +30,14 @@
 
 @property (nonatomic, assign) BOOL isOnProfile;
 
-@property (nonatomic,strong) UIView * placeholderView;
+@property (nonatomic,strong) ECPlaceHolderView * placeholderView;
 -(void) updateView;
 @end
+
+@interface ECPlaceHolderView : UIView
+@property (nonatomic, strong) IBOutlet UILabel* label1;
+@property (nonatomic, strong) IBOutlet UILabel* label2;
+@property (nonatomic, strong) IBOutlet UIButton* button;
+-(id) initWithFrame:(CGRect)frame owner: (id) owner;
+@end
+
