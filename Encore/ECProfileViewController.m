@@ -50,7 +50,7 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
                                               action:@selector(settingsButtonWasPressed:)];
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
-                                              initWithTitle:@"TEST"
+                                              initWithTitle:@"List"
                                               style:UIBarButtonItemStylePlain
                                               target:self
                                               action:@selector(viewConcerts:)];
@@ -83,7 +83,7 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
 }
 
 -(void) scrollToConcertWithID: (NSNumber*) concertID{
-    [self selectIndexPath:[self indexPathForConcert: concertID]];
+    [self selectIndexPath:[self indexPathForConcert: concertID] animated: NO];
 }
 
 -(NSIndexPath *) indexPathForConcert: (NSNumber*) concertID{
@@ -217,12 +217,12 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
 -(void) selectTodayCell {
     NSIndexPath * startIndexPath = [NSIndexPath indexPathForItem:0 inSection:ECCellTypeToday];
     
-    [self selectIndexPath:startIndexPath];
+    [self selectIndexPath:startIndexPath animated: NO];
 }
 
--(void) selectIndexPath: (NSIndexPath*) indexPath {
+-(void) selectIndexPath: (NSIndexPath*) indexPath animated: (BOOL) animated{
     UITableView * tableView = self.horizontalSelect.tableView;
-    [tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionTop];
+    [tableView selectRowAtIndexPath:indexPath animated:animated scrollPosition:UITableViewScrollPositionTop];
     if([tableView.delegate respondsToSelector:@selector(tableView: didSelectRowAtIndexPath:)]){
         [tableView.delegate tableView:tableView didSelectRowAtIndexPath:indexPath];
     }
@@ -324,7 +324,6 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
         [self gesture:+1];
     }
     else {
-        NSLog(@"SWIPED right!"); //right back left forward
         [self gesture: -1];
     }
 }
@@ -332,7 +331,7 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
 -(void) gesture: (NSInteger) direction {
     NSIndexPath * selected = self.horizontalSelect.tableView.indexPathForSelectedRow;
     NSIndexPath * newIndexPath = [self newIndexPathForStart: selected direction: direction];
-    [self selectIndexPath:newIndexPath];
+    [self selectIndexPath:newIndexPath animated: YES];
 }
 
 
