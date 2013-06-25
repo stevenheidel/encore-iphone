@@ -25,4 +25,6 @@
 @property (strong, nonatomic) MBProgressHUD * hud;
 
 @property (nonatomic, assign) NSString * lastSelectedArtist;
+
+-(IBAction)dismissKeyboard:(id)sender;
 @end

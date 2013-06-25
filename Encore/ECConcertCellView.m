@@ -9,6 +9,7 @@
 #import "ECConcertCellView.h"
 #import <QuartzCore/QuartzCore.h>
 #import "NSDictionary+ConcertList.h"
+#import "UIImage+GaussBlur.h"
 
 @implementation ECConcertCellView
 
@@ -26,7 +27,7 @@
     self.imageArtist.layer.borderColor = [UIColor grayColor].CGColor;
     self.imageArtist.layer.borderWidth = 3.0;
     
-    self.imageBackground.image = [UIImage imageNamed:@"sampleArtistImage.jpg"];
+    self.imageBackground.image = [[UIImage imageNamed:@"sampleArtistImage.jpg"] imageWithGaussianBlur];
     self.selectionStyle = UITableViewCellSelectionStyleNone;
 }
 

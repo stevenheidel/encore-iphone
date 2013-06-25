@@ -19,6 +19,7 @@
 		A022AAB51777DB250009244C /* ECCustomSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A022AAB41777DB240009244C /* ECCustomSearchBar.m */; };
 		A022AAB71778D8D60009244C /* LiveIndicator.png in Resources */ = {isa = PBXBuildFile; fileRef = A022AAB61778D8D60009244C /* LiveIndicator.png */; };
 		A022AAB91778E8240009244C /* sampleArtistImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A022AAB81778E8240009244C /* sampleArtistImage.jpg */; };
+		A022AABF1779E8380009244C /* UIImage+GaussBlur.m in Sources */ = {isa = PBXBuildFile; fileRef = A022AABE1779E8380009244C /* UIImage+GaussBlur.m */; };
 		A04C4333176F85F9003B4299 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A04C4332176F85F9003B4299 /* CoreLocation.framework */; };
 		A0848C0B176D1F0D009BBB38 /* ECLoginPageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0848C0A176D1F0D009BBB38 /* ECLoginPageView.xib */; };
 		A0848C11176D25D5009BBB38 /* ECLoginPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0848C10176D25D5009BBB38 /* ECLoginPageView.m */; };
@@ -123,6 +124,8 @@
 		A022AAB41777DB240009244C /* ECCustomSearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECCustomSearchBar.m; sourceTree = "<group>"; };
 		A022AAB61778D8D60009244C /* LiveIndicator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LiveIndicator.png; sourceTree = "<group>"; };
 		A022AAB81778E8240009244C /* sampleArtistImage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sampleArtistImage.jpg; sourceTree = "<group>"; };
+		A022AABD1779E8380009244C /* UIImage+GaussBlur.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+GaussBlur.h"; sourceTree = "<group>"; };
+		A022AABE1779E8380009244C /* UIImage+GaussBlur.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+GaussBlur.m"; sourceTree = "<group>"; };
 		A04C4332176F85F9003B4299 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		A0848C0A176D1F0D009BBB38 /* ECLoginPageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECLoginPageView.xib; sourceTree = "<group>"; };
 		A0848C0F176D25D5009BBB38 /* ECLoginPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECLoginPageView.h; sourceTree = "<group>"; };
@@ -433,6 +436,8 @@
 				D4AA4CFB1766B374009B0635 /* InfoPlist.strings */,
 				D4AA4CFE1766B374009B0635 /* main.m */,
 				D4AA4D001766B374009B0635 /* Encore-Prefix.pch */,
+				A022AABD1779E8380009244C /* UIImage+GaussBlur.h */,
+				A022AABE1779E8380009244C /* UIImage+GaussBlur.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -717,6 +722,7 @@
 				D4B6707A176F57E000A80BA3 /* ECTodayViewController.m in Sources */,
 				A022AAA617779BB50009244C /* ECConcertCellView.m in Sources */,
 				A022AAB51777DB250009244C /* ECCustomSearchBar.m in Sources */,
+				A022AABF1779E8380009244C /* UIImage+GaussBlur.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

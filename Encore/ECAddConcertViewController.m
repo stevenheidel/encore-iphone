@@ -186,7 +186,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     }
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([self.searchBar isFirstResponder]) {
         [self.searchBar resignFirstResponder];
     }
@@ -230,6 +230,12 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
     //[searchBar setShowsCancelButton:YES animated:YES];
+}
+
+-(IBAction)dismissKeyboard:(id)sender {
+    if ([self.searchBar isFirstResponder]) {
+        [self.searchBar resignFirstResponder];
+    }
 }
 
 #pragma mark - Did Receive Memory Warning
