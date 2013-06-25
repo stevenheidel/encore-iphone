@@ -82,8 +82,6 @@
 		D4B6707A176F57E000A80BA3 /* ECTodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4B67078176F57E000A80BA3 /* ECTodayViewController.m */; };
 		D4B6707B176F57E000A80BA3 /* ECTodayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4B67079176F57E000A80BA3 /* ECTodayViewController.xib */; };
 		D4C9C085177A090800F864FC /* instagram.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D4C9C084177A090800F864FC /* instagram.jpg */; };
-		D4C9C087177A2B3E00F864FC /* locationmarker@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4C9C086177A2B3E00F864FC /* locationmarker@2x.png */; };
-		D4C9C089177A2B6400F864FC /* locationmarker2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4C9C088177A2B6400F864FC /* locationmarker2@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -582,8 +580,6 @@
 				A022AAB71778D8D60009244C /* LiveIndicator.png in Resources */,
 				A022AAB91778E8240009244C /* sampleArtistImage.jpg in Resources */,
 				D4C9C085177A090800F864FC /* instagram.jpg in Resources */,
-				D4C9C087177A2B3E00F864FC /* locationmarker@2x.png in Resources */,
-				D4C9C089177A2B6400F864FC /* locationmarker2@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

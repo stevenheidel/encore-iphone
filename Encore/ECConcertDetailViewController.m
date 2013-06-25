@@ -271,9 +271,9 @@ NSString *kCellID = @"cellID";
         NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"ECPostPlaceholder" owner:owner options:nil];
         self = [subviewArray objectAtIndex:0];
         self.frame = frame;
-//        self.label1.font = [UIFont fontWithName:@"Hero" size:15.0];
-//        self.label2.font = [UIFont fontWithName:@"Hero" size:15.0];
-//        self.button.titleLabel.font = [UIFont fontWithName:@"Hero" size:15.0];
+        self.label1.font = [UIFont fontWithName:@"Hero" size:22.0];
+        self.label2.font = [UIFont fontWithName:@"Hero" size:22.0];
+        self.button.titleLabel.font = [UIFont fontWithName:@"Hero" size:22.0];
     }
     return self;
 }
