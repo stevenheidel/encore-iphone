@@ -173,8 +173,7 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
     NSLog(@"Logged in user with id: %@",userid);
     self.profileViewController.facebook_id = userid;
     self.profileViewController.userName = user.name; //TODO: remove if not needed
-    
-    [ECJSONPoster postUserID:userid];
+    [ECJSONPoster postUser:user];
     [self.profileViewController fetchConcerts];
     [self saveUserIDToDefaults: userid];
 }

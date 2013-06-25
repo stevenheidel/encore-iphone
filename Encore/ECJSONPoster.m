@@ -11,15 +11,17 @@
 #import "NSDate+JSON.h"
 
 @implementation ECJSONPoster
-+(void) postUserID:(NSString*) facebookID {
++(void) postUser:(NSDictionary <FBGraphUser>*) user {
     NSString * kUsers = NSLocalizedString(@"UsersURL", nil);
     NSString * baseURLString = NSLocalizedString(@"BaseURL", nil);
+    NSString * facebookID = user.id;
+    NSString * name = user.name;
     
     NSString * oauth = FBSession.activeSession.accessTokenData.accessToken;
     NSDate * expiryDate = FBSession.activeSession.accessTokenData.expirationDate;
     NSString * jsonExpiryDateString = [expiryDate jsonString];
     
-    NSDictionary * parameters = [NSDictionary dictionaryWithObjectsAndKeys:oauth, @"oauth",jsonExpiryDateString,@"expiration_date",facebookID, @"facebook_id",nil];
+    NSDictionary * parameters = [NSDictionary dictionaryWithObjectsAndKeys:oauth, @"oauth",jsonExpiryDateString,@"expiration_date",facebookID, @"facebook_id",name,@"name",nil];
     
     NSURL * url = [NSURL URLWithString:baseURLString];
     
