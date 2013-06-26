@@ -13,6 +13,7 @@
 "SETTINGS" = "Settings";
 "LOGOUT" = "Logout";
 "CONCERTS" = "Concerts";
+"concert" = "Concert";
 "ADD_CONCERT" = "Add Concert";
 "Encore_app_name" = "Encore";
 "AddPast" = "Add Past";

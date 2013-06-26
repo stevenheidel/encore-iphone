@@ -193,10 +193,8 @@
     ECCellType cellType = indexPath.section;
     switch (cellType) {
         case ECCellTypeAddFuture:
-            NSLog(@"added future cell");
             return (id)[[ECHorizontalEndCell alloc] initWithType:ECCellTypeAddFuture];
         case ECCellTypeAddPast:
-              NSLog(@"added past cell");
             return (id)[[ECHorizontalEndCell alloc] initWithType:ECCellTypeAddPast];
         case ECCellTypeToday:
             return (id) [[ECTodayCell alloc] init];
