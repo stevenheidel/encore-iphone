@@ -91,6 +91,10 @@ static NSString * const kDateFormat = @"yyyy-MM-dd";
     return FALSE;
 }
 
+
+-(NSString *) imageURL {
+    return nil;
+}
 #pragma mark -
 
 -(NSArray *) past {
