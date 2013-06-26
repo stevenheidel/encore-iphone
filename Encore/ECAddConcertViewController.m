@@ -27,7 +27,7 @@
 #define LOCATION_SEARCH_X 185.0
 #define LOCATION_SEARCH_HIDDEN_X 320.0
 #define LOCATION_SEARCH_EXPANDED_X 50.0
-#define LOCATION_ICON_X 165.0
+#define LOCATION_ICON_X 167.0
 #define LOCATION_ICON_HIDDEN_X 300.0
 #define LOCATION_ICON_EXPANDED_X 30.0
 
@@ -105,9 +105,34 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
 -(void)fetchedArtists:(NSArray *)artists {
     self.arrArtistData = artists;
     hasSearched = TRUE;
-    [self.tableView reloadData];
-    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
-    [self.hud hide: YES];
+    NSDictionary * matchedArtistDic = nil;
+    for (NSDictionary *artistDic in artists) {
+        if ([[artistDic artistName] isEqualToString:self.artistSearch.text]) {
+            matchedArtistDic = artistDic;
+            NSNumber *artistID = [artistDic songkickID];
+            if (self.searchType == ECSearchTypePast) {
+                [self.JSONFetcher fetchConcertsForArtistID:artistID withSearchType:ECSearchTypePast];
+            } else {
+                [self.JSONFetcher fetchConcertsForArtistID:artistID withSearchType:ECSearchTypeFuture];
+            }
+            self.lastSelectedArtist = [artistDic artistName];
+            break;
+        }
+    }
+    if (!matchedArtistDic) {
+        matchedArtistDic = [artists objectAtIndex:0];
+        NSNumber *artistID = [matchedArtistDic songkickID];
+        if (self.searchType == ECSearchTypePast) {
+            [self.JSONFetcher fetchConcertsForArtistID:artistID withSearchType:ECSearchTypePast];
+        } else {
+            [self.JSONFetcher fetchConcertsForArtistID:artistID withSearchType:ECSearchTypeFuture];
+        }
+        self.lastSelectedArtist = [matchedArtistDic artistName];
+    }
+    
+//    [self.tableView reloadData];
+//    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+//    [self.hud hide: YES];
 }
 
 - (void)fetchedArtistConcerts:(NSArray *)concerts {
@@ -201,48 +226,10 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     }
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self dismissKeyboard:nil];
-}
-
 -(void) clearSearchResultsTable {
     self.arrArtistData = nil;
     hasSearched = FALSE;
     [self.tableView reloadData];
-}
-#pragma mark - UISearchBarDelegate Methods
-
-- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-    [self clearSearchResultsTable];
-    [self.JSONFetcher fetchArtistsForString:[searchBar text]];
-    [searchBar resignFirstResponder];
-    //[searchBar setShowsCancelButton:NO animated:YES];
-    //[self.activityIndicator startAnimating];
-	
-	[self.hud show: YES];
-}
-
-- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
-    [searchBar resignFirstResponder];
-    //[searchBar setShowsCancelButton:NO animated:YES];
-    searchBar.text = @"";
-    [self clearSearchResultsTable];
-}
-
--(void)searchBar:(UISearchBar *) searchBar textDidChange: (NSString*) searchText {
-//can automatically send a search each time a character is typed / group of characters
-    
-    if ([searchText length] == 0) { //if user clicks clear button, clear the table
-        [self clearSearchResultsTable];
-    }
-}
-
--(void)searchBarTextDidEndEditing:(UISearchBar *) searchBar {
-    [searchBar resignFirstResponder];
-}
-
-- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
-    //[searchBar setShowsCancelButton:YES animated:YES];
 }
 
 -(IBAction)dismissKeyboard:(id)sender {
@@ -265,13 +252,19 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     if (textField.tag == 0) {
-        [self clearSearchResultsTable];
+        //[self clearSearchResultsTable];
         [self.JSONFetcher fetchArtistsForString:[textField text]];
+        [self dismissKeyboard:nil];
         [self.hud show: YES];
     } else {
         [textField resignFirstResponder];
     }
     
+    return YES;
+}
+
+- (BOOL)textFieldShouldClear:(UITextField *)textField {
+    [self clearSearchResultsTable];
     return YES;
 }
 

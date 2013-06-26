@@ -43,20 +43,33 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
-                                              initWithTitle:@"Settings"
-                                              style:UIBarButtonItemStylePlain
-                                              target:self
-                                              action:@selector(settingsButtonWasPressed:)];
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
-                                              initWithTitle:@"List"
-                                              style:UIBarButtonItemStylePlain
-                                              target:self
-                                              action:@selector(viewConcerts:)];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
+//                                              initWithTitle:@"Settings"
+//                                              style:UIBarButtonItemStylePlain
+//                                              target:self
+//                                              action:@selector(settingsButtonWasPressed:)];
+//    
+//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
+//                                              initWithTitle:@""
+//                                              style:UIBarButtonItemStyle
+//                                              target:self
+//                                              action:@selector(viewConcerts:)];
+    
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIImage *butImage = [UIImage imageNamed:@"profileButton.png"]; //stretchableImageWithLeftCapWidth:10 topCapHeight:10];
+    [button setBackgroundImage:butImage forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(settingsButtonWasPressed:) forControlEvents:UIControlEventTouchUpInside];
+    button.frame = CGRectMake(0, 0, 32, 32);
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithCustomView:button];
+    self.navigationItem.leftBarButtonItem = backButton;
+    
+    
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navbar.png"] forBarMetrics:UIBarMetricsDefault];
     [[UINavigationBar appearance] setBackgroundColor:[UIColor blackColor]];
+    
     [[UITableView appearance] setBackgroundColor:[UIColor blackColor]];
+    
     ECAppDelegate *appDelegate = (ECAppDelegate *)[[UIApplication sharedApplication] delegate];
     [appDelegate performSelectorInBackground:@selector(getUserLocation) withObject:nil];
     
