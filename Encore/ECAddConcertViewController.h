@@ -16,6 +16,7 @@
 
 @property (nonatomic, assign) ECSearchType searchType;
 @property (strong, nonatomic) NSArray *arrArtistData;
+@property (strong, nonatomic) NSArray *arrArtistConcerts;
 @property (strong, nonatomic) NSArray *arrPopularData;
 @property (strong, nonatomic) ECJSONFetcher * JSONFetcher;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
@@ -28,7 +29,7 @@
 //@property (strong, nonatomic) IBOutlet UILabel *lblLocation;
 @property (strong, nonatomic) MBProgressHUD * hud;
 
-@property (nonatomic, assign) NSString * lastSelectedArtist;
+@property (nonatomic, assign) NSDictionary * lastSelectedArtist;
 
 -(IBAction)dismissKeyboard:(id)sender;
 @end

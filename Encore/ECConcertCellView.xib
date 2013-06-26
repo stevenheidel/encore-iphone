@@ -47,7 +47,6 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrameSize">{320, 90}</string>
 								<reference key="NSSuperview" ref="39346541"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="567403501"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -58,7 +57,6 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrameSize">{320, 90}</string>
 								<reference key="NSSuperview" ref="39346541"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="359144760"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<object class="NSColor" key="IBUIBackgroundColor">
@@ -74,7 +72,6 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{12, 12}, {65, 65}}</string>
 								<reference key="NSSuperview" ref="39346541"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="707616109"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -85,7 +82,6 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{85, 12}, {212, 16}}</string>
 								<reference key="NSSuperview" ref="39346541"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="823322954"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
@@ -116,7 +112,6 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{85, 24}, {212, 41}}</string>
 								<reference key="NSSuperview" ref="39346541"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="267292501"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
@@ -146,7 +141,6 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{97, 63}, {200, 21}}</string>
 								<reference key="NSSuperview" ref="39346541"/>
-								<reference key="NSWindow"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -169,7 +163,6 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{85, 65}, {10, 14}}</string>
 								<reference key="NSSuperview" ref="39346541"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="301923233"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -182,7 +175,6 @@
 						</array>
 						<string key="NSFrameSize">{320, 89}</string>
 						<reference key="NSSuperview" ref="247216852"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="203362829"/>
 						<string key="NSReuseIdentifierKey">_NS:11</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
@@ -198,7 +190,6 @@
 				</array>
 				<string key="NSFrameSize">{320, 90}</string>
 				<reference key="NSSuperview"/>
-				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="39346541"/>
 				<string key="NSReuseIdentifierKey">_NS:9</string>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -1013,55 +1004,7 @@
 			<nil key="sourceID"/>
 			<int key="maxID">323</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes">
-			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
-				<object class="IBPartialClassDescription">
-					<string key="className">ECConcertCellView</string>
-					<string key="superclassName">UITableViewCell</string>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="imageArtist">UIImageView</string>
-						<string key="imageBackground">UIImageView</string>
-						<string key="lblDate">UILabel</string>
-						<string key="lblLocation">UILabel</string>
-						<string key="lblName">UILabel</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="imageArtist">
-							<string key="name">imageArtist</string>
-							<string key="candidateClassName">UIImageView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="imageBackground">
-							<string key="name">imageBackground</string>
-							<string key="candidateClassName">UIImageView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="lblDate">
-							<string key="name">lblDate</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="lblLocation">
-							<string key="name">lblLocation</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="lblName">
-							<string key="name">lblName</string>
-							<string key="candidateClassName">UILabel</string>
-						</object>
-					</dictionary>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/ECConcertCellView.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">NSLayoutConstraint</string>
-					<string key="superclassName">NSObject</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/NSLayoutConstraint.h</string>
-					</object>
-				</object>
-			</array>
-		</object>
+		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaTouchFramework</string>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>

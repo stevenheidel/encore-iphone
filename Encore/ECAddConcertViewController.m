@@ -14,6 +14,9 @@
 #import "MBProgressHUD.h"
 #import "ECConcertCellView.h"
 
+
+#define ARTIST_HEADER_HEIGHT 30.0
+
 #pragma mark - Search bar animation constants
 
 #define SEARCHBAR_REGULAR_WIDTH 130.0
@@ -34,8 +37,6 @@
 #define DIVISOR_MIDDLE 160.0
 #define DIVISOR_LEFT 25.0
 #define DIVISOR_RIGHT 295.0
-
-
 
 static NSString *const ArtistCellIdentifier = @"artistCell";
 static NSString *const ConcertCellIdentifier = @"concertCell";
@@ -106,29 +107,27 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     self.arrArtistData = artists;
     hasSearched = TRUE;
     NSDictionary * matchedArtistDic = nil;
+    
+    /* This kickass piece of code will find if an artist was returned with the exact name that was searched for and if not use the first artist returned
     for (NSDictionary *artistDic in artists) {
         if ([[artistDic artistName] isEqualToString:self.artistSearch.text]) {
             matchedArtistDic = artistDic;
-            NSNumber *artistID = [artistDic songkickID];
-            if (self.searchType == ECSearchTypePast) {
-                [self.JSONFetcher fetchConcertsForArtistID:artistID withSearchType:ECSearchTypePast];
-            } else {
-                [self.JSONFetcher fetchConcertsForArtistID:artistID withSearchType:ECSearchTypeFuture];
-            }
-            self.lastSelectedArtist = [artistDic artistName];
             break;
         }
     }
     if (!matchedArtistDic) {
         matchedArtistDic = [artists objectAtIndex:0];
-        NSNumber *artistID = [matchedArtistDic songkickID];
-        if (self.searchType == ECSearchTypePast) {
-            [self.JSONFetcher fetchConcertsForArtistID:artistID withSearchType:ECSearchTypePast];
-        } else {
-            [self.JSONFetcher fetchConcertsForArtistID:artistID withSearchType:ECSearchTypeFuture];
-        }
-        self.lastSelectedArtist = [matchedArtistDic artistName];
     }
+    */
+    
+    matchedArtistDic = [artists objectAtIndex:0]; //If using kickass piece of code above, please remove this line
+    NSNumber *artistID = [matchedArtistDic songkickID];
+    if (self.searchType == ECSearchTypePast) {
+        [self.JSONFetcher fetchConcertsForArtistID:artistID withSearchType:ECSearchTypePast];
+    } else {
+        [self.JSONFetcher fetchConcertsForArtistID:artistID withSearchType:ECSearchTypeFuture];
+    }
+    self.lastSelectedArtist = matchedArtistDic;
     
 //    [self.tableView reloadData];
 //    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
@@ -136,12 +135,17 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
 }
 
 - (void)fetchedArtistConcerts:(NSArray *)concerts {
-    
-    ECMyConcertViewController *concertsVC = [ECMyConcertViewController new];
-    concertsVC.concertList = concerts;
-    concertsVC.title = self.lastSelectedArtist;
+    hasSearched = TRUE;
+    self.arrArtistConcerts = concerts;
+    [self.tableView reloadData];
+    //[self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
     [self.hud hide:YES];
-    [self.navigationController pushViewController:concertsVC animated:YES];
+    
+//    ECMyConcertViewController *concertsVC = [ECMyConcertViewController new];
+//    concertsVC.concertList = concerts;
+//    concertsVC.title = [self.lastSelectedArtist artistName];
+//    [self.hud hide:YES];
+//    [self.navigationController pushViewController:concertsVC animated:YES];
 }
 
 #pragma mark - UITableView methods
@@ -149,14 +153,19 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
     if (hasSearched) {
-        UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:ArtistCellIdentifier];
-        if (cell == nil) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ArtistCellIdentifier];
-        }
-        NSDictionary *artistDic = (NSDictionary *)[self.arrArtistData objectAtIndex:indexPath.row];
-        cell.textLabel.text = [artistDic artistName];
-        cell.textLabel.textColor = [UIColor whiteColor];
+        static NSString *myIdentifier = @"ECConcertCellView";
+        ECConcertCellView *cell = [tableView dequeueReusableCellWithIdentifier:myIdentifier forIndexPath:indexPath];
+        NSDictionary * concertDic = [self.arrArtistConcerts objectAtIndex:indexPath.row];
+        [(ECConcertCellView *)cell setUpCellForConcert:concertDic];
         return cell;
+//        UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:ArtistCellIdentifier];
+//        if (cell == nil) {
+//            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ArtistCellIdentifier];
+//        }
+//        NSDictionary *artistDic = (NSDictionary *)[self.arrArtistData objectAtIndex:indexPath.row];
+//        cell.textLabel.text = [artistDic artistName];
+//        cell.textLabel.textColor = [UIColor whiteColor];
+//        return cell;
     } else {
         static NSString *myIdentifier = @"ECConcertCellView";
         
@@ -171,27 +180,57 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (hasSearched) {
-        return 40;
+        return CONCERT_CELL_HEIGHT;
     } else {
         return CONCERT_CELL_HEIGHT;
     }
 }
 
-/*- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    if (!hasSearched) {
-        if (self.searchType == ECSearchTypePast) {
-            return [NSString stringWithFormat:NSLocalizedString(@"PopularConcerts", nil), NSLocalizedString(@"Past", nil)];
-        } else {
-            return [NSString stringWithFormat:NSLocalizedString(@"PopularConcerts", nil), NSLocalizedString(@"Upcoming", nil)];
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    if (hasSearched) {
+        NSString *sectionTitle = [self tableView:tableView titleForHeaderInSection:section];
+        if (sectionTitle == nil) {
+            return nil;
         }
+        
+        // Create label with section title
+        UILabel *label = [[UILabel alloc] init] ;
+        label.frame = CGRectMake(0, 0, self.view.frame.size.width, ARTIST_HEADER_HEIGHT);
+        label.backgroundColor = [UIColor blackColor];
+        label.textColor = [UIColor whiteColor];
+        [label setAdjustsFontSizeToFitWidth:YES];
+        label.font = [UIFont fontWithName:@"Hero" size:16.0];
+        label.text = sectionTitle;
+        
+        // Create header view and add label as a subview
+        UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 140, 30)];
+        [headerView addSubview:label];
+        return headerView;
     } else {
-        return [NSString stringWithFormat:NSLocalizedString(@"ArtistSearch", nil), [self.searchBar text]];
+        return nil;
     }
-}*/
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    if (hasSearched) {
+        return ARTIST_HEADER_HEIGHT;
+    } else {
+        return 0;
+    }
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    if (hasSearched) {
+        return [NSString stringWithFormat:NSLocalizedString(@"Header", nil), self.searchType ? NSLocalizedString(@"Upcoming", nil) : NSLocalizedString(@"Past", nil), [self.lastSelectedArtist artistName], @"Toronto, ON"]; //TODO: set location dynamically
+    } else {
+        return nil;
+    }
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (hasSearched) {
-        return self.arrArtistData.count;
+        return self.arrArtistConcerts.count;
+        //return self.arrArtistData.count;
     } else {
         return self.arrPopularData.count;
     }
@@ -213,7 +252,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
             } else {
                 [self.JSONFetcher fetchConcertsForArtistID:artistID withSearchType:ECSearchTypeFuture];
             }
-            self.lastSelectedArtist = [data artistName];
+            self.lastSelectedArtist = data;
             [self.hud show:YES];
         } else {
             //User clicked on a popular concert
