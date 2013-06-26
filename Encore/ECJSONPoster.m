@@ -12,10 +12,6 @@
 #import "UIImage+Orientation.h"
 #import "EncoreURL.h"
 
-NSString* baseURL(){
-    return NSLocalizedString(@"BaseURL", nil);
-}
-
 @implementation ECJSONPoster
 +(void) postUser:(NSDictionary <FBGraphUser>*) user {
     NSString * facebookID = user.id;
