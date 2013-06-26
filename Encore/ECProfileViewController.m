@@ -73,7 +73,10 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
     ECAppDelegate *appDelegate = (ECAppDelegate *)[[UIApplication sharedApplication] delegate];
     [appDelegate performSelectorInBackground:@selector(getUserLocation) withObject:nil];
     
+    [self setupGestureRecgonizers];
+}
 
+-(void) setupGestureRecgonizers {
     UISwipeGestureRecognizer * recognizerLeft = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(showGestureForSwipeRecognizer:)];
     recognizerLeft.numberOfTouchesRequired = 1;
     recognizerLeft.direction = UISwipeGestureRecognizerDirectionLeft;
@@ -131,18 +134,16 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
     return -1;
 }
 
--(void) viewWillAppear:(BOOL)animated {
-    if (FBSession.activeSession.isOpen){
-        [self populateUserDetails];
-    }
-    //  [self.navigationController setNavigationBarHidden:YES];
-    
-    
-}
--(void) populateUserDetails {
-//    self.userNameLabel.text = self.userName;
-                // self.userProfileImage.profileID = [user objectForKey:@"id"];
-}
+//-(void) viewWillAppear:(BOOL)animated {
+//    if (FBSession.activeSession.isOpen){
+//        [self populateUserDetails];
+//    }
+//    //  [self.navigationController setNavigationBarHidden:YES];
+//}
+//-(void) populateUserDetails {
+////    self.userNameLabel.text = self.userName;
+//                // self.userProfileImage.profileID = [user objectForKey:@"id"];
+//}
 
 -(void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];

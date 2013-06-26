@@ -17,7 +17,7 @@
 
 -(void) fetchConcerts;
 -(void) updateViewWithNewConcert: (NSNumber *) concertID;
-- (void)showGestureForSwipeRecognizer:(UISwipeGestureRecognizer *)recognizer;
+-(void) showGestureForSwipeRecognizer:(UISwipeGestureRecognizer *)recognizer;
 -(void) refresh;
 
 @property (strong, nonatomic) FBUserSettingsViewController *settingsViewController;

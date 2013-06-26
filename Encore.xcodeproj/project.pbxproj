@@ -53,7 +53,6 @@
 		D4A8DDCF176A405D005E9847 /* ECPostViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4A8DDCD176A405D005E9847 /* ECPostViewController.xib */; };
 		D4A8DDD3176A8885005E9847 /* placeholder.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D4A8DDD2176A8885005E9847 /* placeholder.jpg */; };
 		D4A8DDD5176AAA99005E9847 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4A8DDD4176AAA98005E9847 /* QuartzCore.framework */; };
-		D4A8DDD7176AB62E005E9847 /* SectionData.plist in Resources */ = {isa = PBXBuildFile; fileRef = D4A8DDD6176AB62E005E9847 /* SectionData.plist */; };
 		D4A8DDED176AB650005E9847 /* gray_gradient_background.png in Resources */ = {isa = PBXBuildFile; fileRef = D4A8DDD9176AB650005E9847 /* gray_gradient_background.png */; };
 		D4A8DDEE176AB650005E9847 /* gray_gradient_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4A8DDDA176AB650005E9847 /* gray_gradient_background@2x.png */; };
 		D4A8DDEF176AB650005E9847 /* home_background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D4A8DDDB176AB650005E9847 /* home_background.jpg */; };
@@ -171,7 +170,6 @@
 		D4A8DDCD176A405D005E9847 /* ECPostViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECPostViewController.xib; sourceTree = "<group>"; };
 		D4A8DDD2176A8885005E9847 /* placeholder.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = placeholder.jpg; sourceTree = "<group>"; };
 		D4A8DDD4176AAA98005E9847 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		D4A8DDD6176AB62E005E9847 /* SectionData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SectionData.plist; sourceTree = "<group>"; };
 		D4A8DDD9176AB650005E9847 /* gray_gradient_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gray_gradient_background.png; sourceTree = "<group>"; };
 		D4A8DDDA176AB650005E9847 /* gray_gradient_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gray_gradient_background@2x.png"; sourceTree = "<group>"; };
 		D4A8DDDB176AB650005E9847 /* home_background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_background.jpg; sourceTree = "<group>"; };
@@ -521,7 +519,6 @@
 			isa = PBXGroup;
 			children = (
 				D4AA4CFA1766B374009B0635 /* Encore-Info.plist */,
-				D4A8DDD6176AB62E005E9847 /* SectionData.plist */,
 				A0FF1C52176CC88000433768 /* LoginInfoPages.plist */,
 			);
 			name = plist;
@@ -616,7 +613,6 @@
 				D4A8DDC1176A13DB005E9847 /* ECMyConcertViewController.xib in Resources */,
 				D4A8DDCF176A405D005E9847 /* ECPostViewController.xib in Resources */,
 				D4A8DDD3176A8885005E9847 /* placeholder.jpg in Resources */,
-				D4A8DDD7176AB62E005E9847 /* SectionData.plist in Resources */,
 				D4A8DDED176AB650005E9847 /* gray_gradient_background.png in Resources */,
 				D4A8DDEE176AB650005E9847 /* gray_gradient_background@2x.png in Resources */,
 				D4A8DDEF176AB650005E9847 /* home_background.jpg in Resources */,
