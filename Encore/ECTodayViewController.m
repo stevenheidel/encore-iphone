@@ -42,6 +42,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     [self.tableView registerNib:[UINib nibWithNibName:@"ECConcertCellView" bundle:nil]
                   forCellReuseIdentifier:myIdentifier];
     
+    self.arrTodaysImages = [[NSMutableArray alloc] init];
     self.hud = [[MBProgressHUD alloc] initWithView:self.view];
     
     [self.view addSubview:self.hud];
@@ -93,9 +94,10 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     self.arrTodaysConcerts = concerts;
     
     for (NSDictionary *concertDic in concerts) {
-        NSString *imageURL = [concertDic imageURL];
+        NSURL *imageURL = [concertDic imageURL];
+        NSURL *backgroundURL = [concertDic backgroundURL];
         UIImage *regImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL]];
-        UIImage *gaussImage = [regImage imageWithGaussianBlur];
+        UIImage *gaussImage = [[UIImage imageWithData:[NSData dataWithContentsOfURL:backgroundURL]] imageWithGaussianBlur];
         
         NSMutableDictionary *imageDic = [[NSMutableDictionary alloc] init];
         [imageDic addImages:regImage :gaussImage];

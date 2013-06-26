@@ -17,7 +17,8 @@
 -(NSNumber *) serverID;
 -(NSNumber *) songkickID;
 
--(NSString *) imageURL;
+-(NSURL *) backgroundURL;
+-(NSURL *) imageURL;
 
 -(NSString *) month;
 -(NSString *) day;

@@ -41,6 +41,10 @@ static NSString * const kDateFormat = @"yyyy-MM-dd";
     return [NSURL URLWithString:[self objectForKey:@"background_url"]];
 }
 
+-(NSURL *) imageURL {
+    return [NSURL URLWithString:[self objectForKey:@"image_url"] ];
+}
+
 -(NSString *) month {
     NSString * dateStr = [self objectForKey:@"date"];
     NSDateFormatter * dateFormat =  [NSDateFormatter new];
@@ -91,10 +95,6 @@ static NSString * const kDateFormat = @"yyyy-MM-dd";
     return FALSE;
 }
 
-
--(NSString *) imageURL {
-    return nil;
-}
 #pragma mark -
 
 -(NSArray *) past {

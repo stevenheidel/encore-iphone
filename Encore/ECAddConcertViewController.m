@@ -106,9 +106,10 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     self.arrPopularData = concerts;
     [self.arrPopularImages removeAllObjects];
     for (NSDictionary *concertDic in concerts) {
-        NSString *imageURL = [concertDic imageURL];
+        NSURL *imageURL = [concertDic imageURL];
+        NSURL *backgroundURL = [concertDic backgroundURL];
         UIImage *regImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL]];
-        UIImage *gaussImage = [regImage imageWithGaussianBlur];
+        UIImage *gaussImage = [[UIImage imageWithData:[NSData dataWithContentsOfURL:backgroundURL]] imageWithGaussianBlur];
         
         NSMutableDictionary *imageDic = [[NSMutableDictionary alloc] init];
         [imageDic addImages:regImage :gaussImage];
@@ -134,9 +135,6 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
         matchedArtistDic = [artists objectAtIndex:0];
     }
     */
-    
-    
-    
     matchedArtistDic = [artists objectAtIndex:0]; //If using kickass piece of code above, please remove this line
     NSNumber *artistID = [matchedArtistDic songkickID];
     if (self.searchType == ECSearchTypePast) {
@@ -155,9 +153,10 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     hasSearched = TRUE;
     self.arrArtistConcerts = concerts;
     for (NSDictionary *concertDic in concerts) {
-        UIImage *regImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[concertDic imageURL]]];
-
-        UIImage *gaussImage = [regImage imageWithGaussianBlur];
+        NSURL *imageURL = [concertDic imageURL];
+        NSURL *backgroundURL = [concertDic backgroundURL];
+        UIImage *regImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL]];
+        UIImage *gaussImage = [[UIImage imageWithData:[NSData dataWithContentsOfURL:backgroundURL]] imageWithGaussianBlur];
         
         NSMutableDictionary *imageDic = [[NSMutableDictionary alloc] init];
         [imageDic addImages:regImage :gaussImage];
@@ -207,7 +206,6 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     if (hasSearched) {
         return CONCERT_CELL_HEIGHT;
     } else {
