@@ -270,7 +270,9 @@ typedef enum {
 -(void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [self.collectionView deselectItemAtIndexPath:indexPath animated:YES];
     ECPostViewController * postVC = [[ECPostViewController alloc] init];
-    postVC.post = [self.posts objectAtIndex:indexPath.row];
+    postVC.post = [self.posts objectAtIndex:indexPath.item];
+    postVC.itemNumber = indexPath.item;
+    postVC.delegate = self;
     [self.navigationController pushViewController:postVC animated:YES];
 }
 
@@ -340,8 +342,22 @@ typedef enum {
     }
 }
 
+#pragma mark - post view controller delegate
+-(NSDictionary*) requestPost:(NSInteger)direction currentIndex:(NSInteger)index {
+    NSInteger newIndex = index + direction;
+    if (newIndex < 0) {
+        newIndex = self.posts.count - 1; //loop to the end
+    }
+    else if (newIndex >= self.posts.count) {
+        newIndex = 0;  //loop to the beginning
+    }
+    
+    return [NSDictionary dictionaryWithObjectsAndKeys:[self.posts objectAtIndex:newIndex], @"dic", [NSNumber numberWithInt:newIndex], @"index",nil];
+}
+
 @end
 
+#pragma mark -
 @implementation ECPlaceHolderView
 
 -(id) initWithFrame:(CGRect)frame owner: (id) owner {

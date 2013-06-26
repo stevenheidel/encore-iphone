@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "ECJSONFetcher.h"
+#import "ECPostViewController.h"
 @class ECPlaceHolderView,ECToolbar;
-@protocol ECConcertDetailViewControllerDelegate;
-@interface ECConcertDetailViewController : UIViewController <UICollectionViewDataSource,UICollectionViewDelegate,ECJSONFetcherDelegate/*, UICollectionViewDelegateFlowLayout*/,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+@interface ECConcertDetailViewController : UIViewController <UICollectionViewDataSource,UICollectionViewDelegate,ECJSONFetcherDelegate/*, UICollectionViewDelegateFlowLayout*/,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,ECPostViewControllerDelegate>
 -(IBAction)addPhoto;
 @property (nonatomic,strong) NSDictionary * concert;
 @property (nonatomic,strong) IBOutlet UILabel * artistNameLabel;
@@ -38,8 +38,10 @@
 @property (nonatomic,strong) UIImagePickerController* imagePickerController;
 @property (nonatomic,strong) IBOutlet ECToolbar* toolbar;
 
-@property (nonatomic,unsafe_unretained) id <ECConcertDetailViewControllerDelegate> delegate;
+@property (nonatomic,unsafe_unretained) id <ECPostViewControllerDelegate> delegate;
 @property (nonatomic,assign) BOOL isChildVC;
+
+
 
 @end
 
@@ -52,10 +54,4 @@
 
 @interface ECToolbar : UIToolbar
 @property (nonatomic,strong) IBOutlet UIBarButtonItem* addButton;
-@end
-
-@protocol ECConcertDetailViewControllerDelegate <NSObject>
-
--(void) refresh;//: (void (^)()) completion;
-
 @end

@@ -29,17 +29,51 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.userNameLabel.text = [self.post userName];
-    self.captionLabel.text = [self.post caption];
-    [self.postImage setImageWithURL:[self.post imageURL]];
-    //[self.profilePicture setImageWithURL:[self.post profilePictureURL]];
-    [self.profilePicture setImageWithURL:[self.post profilePictureURL] placeholderImage:[UIImage imageNamed:@"placeholder.jpg"]];
+    [self setupPost];
     [self.profilePicture.layer setBorderColor:[[UIColor blackColor] CGColor]];
     [self.profilePicture.layer setBorderWidth:1.0];
-    self.title = self.userNameLabel.text;
+    self.title = @"Post";//self.userNameLabel.text;
     
     UIBarButtonItem * shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(shareTapped)];
     self.navigationItem.rightBarButtonItem = shareButton;
+    [self setupGestureRecgonizers];
+}
+
+-(void) setupGestureRecgonizers {
+    UISwipeGestureRecognizer * recognizerLeft = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(showGestureForSwipeRecognizer:)];
+    recognizerLeft.numberOfTouchesRequired = 1;
+    recognizerLeft.direction = UISwipeGestureRecognizerDirectionLeft;
+    
+    UISwipeGestureRecognizer * recognizerRight = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(showGestureForSwipeRecognizer:)];
+    recognizerRight.numberOfTouchesRequired = 1;
+    recognizerRight.direction = UISwipeGestureRecognizerDirectionRight;
+    [self.view addGestureRecognizer:recognizerRight];
+    [self.view addGestureRecognizer:recognizerLeft];
+}
+
+//This function is called on first initial set up as well as later on if the user swipes left or right
+-(void) setupPost {
+    self.userNameLabel.text = [self.post userName];
+    self.captionLabel.text = [self.post caption];
+    [self.postImage setImageWithURL:[self.post imageURL]];
+    [self.profilePicture setImageWithURL:[self.post profilePictureURL] placeholderImage:[UIImage imageNamed:@"placeholder.jpg"]];
+}
+
+-(void) showGestureForSwipeRecognizer: (UISwipeGestureRecognizer*) recognizer {
+    if (recognizer.direction == UISwipeGestureRecognizerDirectionLeft) {
+        [self gesture:+1];
+    }
+    else {
+        [self gesture: -1];
+    }
+}
+
+-(void) gesture: (NSInteger) direction {
+    
+    NSDictionary* dic = [self.delegate requestPost: direction currentIndex: self.itemNumber];
+    self.post = [dic objectForKey:@"dic"];
+    self.itemNumber = [(NSNumber*)[dic objectForKey:@"index"] integerValue];
+    [self setupPost];
 }
 
 -(void) shareTapped {
