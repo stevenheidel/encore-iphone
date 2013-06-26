@@ -19,8 +19,8 @@
 "AddFuture" = "Add Upcoming";
 
 //URLs
-"BaseURL" = "http://192.168.11.15:9283/api/v1/";
-"BaseURL_STAGING" = "http://staging.encoretheapp.com/api/v1/";
+"BaseURL_TEST" = "http://192.168.11.15:9283/api/v1/";
+"BaseURL" = "http://staging.encoretheapp.com/api/v1/";
 "UsersURL" = "users";
 "ConcertsURL" = "concerts";
 "PostsURL" = "posts";
