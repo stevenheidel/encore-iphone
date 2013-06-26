@@ -57,7 +57,7 @@ typedef enum {
     [self.artistNameLabel setAdjustsFontSizeToFitWidth:YES];
     self.dateLabel.text = [self.concert niceDate];
     self.venueNameLabel.text = [self.concert venueName];
-    self.title = self.artistNameLabel.text;
+    self.title = NSLocalizedString(@"concert", nil);//self.artistNameLabel.text;
     
     //TODO: Set pictures dynamically from image urls
     self.imgBackground.image = [[UIImage imageNamed:@"sampleArtistImage.jpg"] imageWithGaussianBlur];
