@@ -209,8 +209,6 @@
 		D4B67078176F57E000A80BA3 /* ECTodayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECTodayViewController.m; sourceTree = "<group>"; };
 		D4B67079176F57E000A80BA3 /* ECTodayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECTodayViewController.xib; sourceTree = "<group>"; };
 		D4C9C084177A090800F864FC /* instagram.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = instagram.jpg; sourceTree = "<group>"; };
-		D4C9C086177A2B3E00F864FC /* locationmarker@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "locationmarker@2x.png"; sourceTree = "<group>"; };
-		D4C9C088177A2B6400F864FC /* locationmarker2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "locationmarker2@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -385,23 +383,12 @@
 		D4AA4CF91766B374009B0635 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				A022AAA0177605900009244C /* Hero Light.otf */,
-				A022AAA1177605900009244C /* Hero.otf */,
+				D4C9C08A177A51BB00F864FC /* Font */,
 				D4A8DDD1176A44A0005E9847 /* Images */,
-				D4A8DDD6176AB62E005E9847 /* SectionData.plist */,
-				A0FF1C52176CC88000433768 /* LoginInfoPages.plist */,
-				D4AC35FA1768C8B20087B1E9 /* ECJSONFetcher.h */,
-				D4AC35FB1768C8B20087B1E9 /* ECJSONFetcher.m */,
-				D4A8DDC2176A20D2005E9847 /* ECJSONPoster.h */,
-				D4A8DDC3176A20D2005E9847 /* ECJSONPoster.m */,
-				D4A8DDC8176A39B9005E9847 /* NSDate+JSON.h */,
-				D4A8DDC9176A39B9005E9847 /* NSDate+JSON.m */,
-				D4A8DDAB176A133B005E9847 /* NSDictionary+Posts.h */,
-				D4A8DDAC176A133B005E9847 /* NSDictionary+Posts.m */,
-				D4AC35F71768C5850087B1E9 /* NSDictionary+ConcertList.h */,
-				D4AC35F81768C5850087B1E9 /* NSDictionary+ConcertList.m */,
+				D4C9C08D177A51E500F864FC /* plist */,
+				D4C9C08C177A51CC00F864FC /* Post+Fetch */,
+				D4C9C08B177A51C600F864FC /* Categories */,
 				D4AA4D381766F3D0009B0635 /* Localizable.strings */,
-				D4AA4CFA1766B374009B0635 /* Encore-Info.plist */,
 				D4AA4CFB1766B374009B0635 /* InfoPlist.strings */,
 				D4AA4CFE1766B374009B0635 /* main.m */,
 				D4AA4D001766B374009B0635 /* Encore-Prefix.pch */,
@@ -475,6 +462,49 @@
 				A022AAB41777DB240009244C /* ECCustomSearchBar.m */,
 			);
 			name = "Add Concert";
+			sourceTree = "<group>";
+		};
+		D4C9C08A177A51BB00F864FC /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				A022AAA0177605900009244C /* Hero Light.otf */,
+				A022AAA1177605900009244C /* Hero.otf */,
+			);
+			name = Font;
+			sourceTree = "<group>";
+		};
+		D4C9C08B177A51C600F864FC /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				D4A8DDC8176A39B9005E9847 /* NSDate+JSON.h */,
+				D4A8DDC9176A39B9005E9847 /* NSDate+JSON.m */,
+				D4A8DDAB176A133B005E9847 /* NSDictionary+Posts.h */,
+				D4A8DDAC176A133B005E9847 /* NSDictionary+Posts.m */,
+				D4AC35F71768C5850087B1E9 /* NSDictionary+ConcertList.h */,
+				D4AC35F81768C5850087B1E9 /* NSDictionary+ConcertList.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
+		D4C9C08C177A51CC00F864FC /* Post+Fetch */ = {
+			isa = PBXGroup;
+			children = (
+				D4AC35FA1768C8B20087B1E9 /* ECJSONFetcher.h */,
+				D4AC35FB1768C8B20087B1E9 /* ECJSONFetcher.m */,
+				D4A8DDC2176A20D2005E9847 /* ECJSONPoster.h */,
+				D4A8DDC3176A20D2005E9847 /* ECJSONPoster.m */,
+			);
+			name = "Post+Fetch";
+			sourceTree = "<group>";
+		};
+		D4C9C08D177A51E500F864FC /* plist */ = {
+			isa = PBXGroup;
+			children = (
+				D4AA4CFA1766B374009B0635 /* Encore-Info.plist */,
+				D4A8DDD6176AB62E005E9847 /* SectionData.plist */,
+				A0FF1C52176CC88000433768 /* LoginInfoPages.plist */,
+			);
+			name = plist;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -803,12 +833,15 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B56B831D22E04C90BC664348 /* Pods.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Encore/Encore-Prefix.pch";
 				INFOPLIST_FILE = "Encore/Encore-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
