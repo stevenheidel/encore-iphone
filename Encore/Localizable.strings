@@ -5,7 +5,8 @@
   Created by Shimmy on 2013-06-02.
   Copyright (c) 2013 Encore. All rights reserved.
 */
-
+"cancel" = "Cancel";
+"ok" = "OK";
 
 //MENU
 "PROFILE" = "Profile";
@@ -40,3 +41,7 @@
 
 //user defaults
 "user_id" = "user_id";
+
+//Photo picker
+"new_from_camera" = "Take new picture";
+"pick_from_lib" = "Select from photo library";
