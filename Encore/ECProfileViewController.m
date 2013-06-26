@@ -77,10 +77,14 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
         [self.concerts setDictionary:concerts];
         [self.horizontalSelect setTableData: self.concerts];
         [self.horizontalSelect.tableView reloadData];
+        [self selectTodayCell];
     }];
  //TODO: scroll to the new concert
-    [self scrollToConcertWithID: concertID];
+//    if(concertID){
+//        [self scrollToConcertWithID: concertID];
+//    }
 }
+
 
 -(void) scrollToConcertWithID: (NSNumber*) concertID{
     [self selectIndexPath:[self indexPathForConcert: concertID] animated: NO];
@@ -279,6 +283,8 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
         case ECCellTypeFutureShows:
             //self.concertChildVC =[ECConcertChildViewController new];
             self.concertChildVC = [ECConcertDetailViewController new];
+            self.concertChildVC.delegate = self;
+            self.concertChildVC.isChildVC = TRUE;
             break;
         case ECCellTypeAddFuture:
             self.addFutureConcertVC = [ECAddConcertViewController new];
@@ -315,6 +321,11 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
 }
 -(CGRect) childViewControllerRect{
     return CGRectMake(self.horizontalSelect.frame.origin.x, self.horizontalSelect.frame.origin.y+self.horizontalSelect.frame.size.height, self.horizontalSelect.frame.size.width, self.view.frame.size.height-self.horizontalSelect.frame.size.height);
+}
+
+-(void) refresh{
+    [self.navigationController popToViewController:self animated:YES];
+    [self updateViewWithNewConcert: nil];
 }
 
 #pragma mark - gestures

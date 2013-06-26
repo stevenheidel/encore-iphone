@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "ECJSONFetcher.h"
-@class ECPlaceHolderView;
-@interface ECConcertDetailViewController : UIViewController <UICollectionViewDataSource,UICollectionViewDelegate,ECJSONFetcherDelegate, UICollectionViewDelegateFlowLayout,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+@class ECPlaceHolderView,ECToolbar;
+@protocol ECConcertDetailViewControllerDelegate;
+@interface ECConcertDetailViewController : UIViewController <UICollectionViewDataSource,UICollectionViewDelegate,ECJSONFetcherDelegate/*, UICollectionViewDelegateFlowLayout*/,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 -(IBAction)addPhoto;
 @property (nonatomic,strong) NSDictionary * concert;
 @property (nonatomic,strong) IBOutlet UILabel * artistNameLabel;
@@ -19,6 +20,7 @@
 @property (nonatomic,strong) IBOutlet UIImageView *imgArtist;
 @property (nonatomic,strong) IBOutlet UIImageView *imgBackground;
 @property (nonatomic,strong) IBOutlet UIImageView *imgLiveNow;
+
 @property (nonatomic, strong) NSArray * posts;
 
 @property (nonatomic, readonly) NSNumber * songkickID;
@@ -34,13 +36,26 @@
 -(void) updateView;
 
 @property (nonatomic,strong) UIImagePickerController* imagePickerController;
+@property (nonatomic,strong) IBOutlet ECToolbar* toolbar;
+
+@property (nonatomic,unsafe_unretained) id <ECConcertDetailViewControllerDelegate> delegate;
+@property (nonatomic,assign) BOOL isChildVC;
 
 @end
 
 @interface ECPlaceHolderView : UIView
 @property (nonatomic, strong) IBOutlet UILabel* label1;
 @property (nonatomic, strong) IBOutlet UILabel* label2;
-@property (nonatomic, strong) IBOutlet UIButton* button;
+//@property (nonatomic, strong) IBOutlet UIButton* button;
 -(id) initWithFrame:(CGRect)frame owner: (id) owner;
 @end
 
+@interface ECToolbar : UIToolbar
+@property (nonatomic,strong) IBOutlet UIBarButtonItem* addButton;
+@end
+
+@protocol ECConcertDetailViewControllerDelegate <NSObject>
+
+-(void) refresh;//: (void (^)()) completion;
+
+@end

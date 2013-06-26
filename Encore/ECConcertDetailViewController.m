@@ -15,6 +15,9 @@
 #import "ECJSONPoster.h"
 #import "ECPostViewController.h"
 #import "ECProfileViewController.h"
+
+#import "ECAppDelegate.h"
+
 #import "UIImage+GaussBlur.h"
 
 
@@ -74,8 +77,8 @@ typedef enum {
     
     self.isOnProfile = FALSE;
     [self setUpRightBarButton];
-    [self setUpFlowLayout];
-
+   // [self setUpFlowLayout];
+    [self setupToolbar];
 }
 
 -(void) setUpFlowLayout {
@@ -108,7 +111,30 @@ typedef enum {
     
     //self.title = self.artistNameLabel.text;
     [self loadImages];
-    
+    [self setupToolbar];
+}
+
+-(void) setupToolbar {
+    NSString * userID = self.userID;
+    [ECJSONFetcher checkIfConcert:[self.concert songkickID] isOnProfile:userID completion:^(BOOL isOnProfile) {
+        if (!isOnProfile) {
+            self.isOnProfile = FALSE;
+            self.toolbar.addButton.title = @"Add";
+        }
+        else {
+            self.isOnProfile = TRUE;
+            self.toolbar.addButton.title = @"Remove";
+        }
+    }];
+}
+
+-(IBAction) addToProfile {
+        if (!self.isOnProfile) {
+            [self addConcert];
+        }
+        else {
+            [self removeConcert];
+        }
 }
 
 -(void) setUpRightBarButton {
@@ -160,19 +186,25 @@ typedef enum {
     [self toggleOnProfileState];
     
    #warning [Simon]: probably shouldn't do it this way (ie. popping to root)
-    [(ECProfileViewController*)[self.navigationController.viewControllers objectAtIndex:0] updateViewWithNewConcert:self.songkickID];
-    [self.navigationController popToRootViewControllerAnimated:YES]; 
+    
+    ECAppDelegate* appDel = (ECAppDelegate *)[UIApplication sharedApplication].delegate;
+    ECProfileViewController* profile = appDel.profileViewController;
+    [profile refresh];
 }
 
 -(void) completedRemovingConcert {
     UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Woohoo!" message:@"You removed a concert" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
     [alert show];
     [self toggleOnProfileState];
+    ECAppDelegate* appDel = (ECAppDelegate *)[UIApplication sharedApplication].delegate;
+    ECProfileViewController* profile = appDel.profileViewController;
+    [profile refresh];
 }   
 
 -(void) toggleOnProfileState {
     self.isOnProfile = !self.isOnProfile;
     self.navigationItem.rightBarButtonItem = self.isOnProfile ? self.removeButton : self.addButton;
+    self.toolbar.addButton.title = self.isOnProfile ? @"Remove" : @"Add";
 }
 
 -(void) loadImages {
@@ -194,18 +226,18 @@ typedef enum {
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - UICollectionViewDelegateFlowLayout
-
-//TODO: change this to use actual image dimensions or remove it.
-- (CGSize) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UIImage* thisImage = [UIImage imageNamed:@"instagram.jpg"];
-    
-    CGSize cellSize;
-    CGFloat deviceCellSizeConstant = _flowLayout.itemSize.height;
-    cellSize = CGSizeMake((thisImage.size.width*deviceCellSizeConstant)/thisImage.size.height, deviceCellSizeConstant);
-    
-    return cellSize;
-}
+//#pragma mark - UICollectionViewDelegateFlowLayout
+//
+////TODO: change this to use actual image dimensions or remove it.
+//- (CGSize) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+//    UIImage* thisImage = [UIImage imageNamed:@"instagram.jpg"];
+//    
+//    CGSize cellSize;
+//    CGFloat deviceCellSizeConstant = _flowLayout.itemSize.height;
+//    cellSize = CGSizeMake((thisImage.size.width*deviceCellSizeConstant)/thisImage.size.height, deviceCellSizeConstant);
+//    
+//    return cellSize;
+//}
 
 #pragma mark - collection view delegate/data source
 
@@ -220,7 +252,6 @@ typedef enum {
     
     
     // load the image for this cell
-    NSDictionary * postDic = [self.posts objectAtIndex:indexPath.row];
     if(!cell.image) {
         UIImageView* imageView = [[UIImageView alloc] initWithFrame:cell.contentView.frame];
         imageView.contentMode = UIViewContentModeScaleAspectFill;
@@ -228,12 +259,11 @@ typedef enum {
         cell.image=imageView;
         cell.contentView.clipsToBounds = YES;
     }
-    
     if(self.posts.count > 0) {
+        NSDictionary * postDic = [self.posts objectAtIndex:indexPath.row];
         NSURL *imageToLoad = [postDic imageURL];
         [cell.image setImageWithURL:imageToLoad];
     }
-    
     return cell;
 }
 
@@ -321,9 +351,13 @@ typedef enum {
         self.frame = frame;
         self.label1.font = [UIFont fontWithName:@"Hero" size:22.0];
         self.label2.font = [UIFont fontWithName:@"Hero" size:22.0];
-        self.button.titleLabel.font = [UIFont fontWithName:@"Hero" size:22.0];
+//        self.button.titleLabel.font = [UIFont fontWithName:@"Hero" size:22.0];
     }
     return self;
 }
+
+@end
+
+@implementation ECToolbar
 
 @end

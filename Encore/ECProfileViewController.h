@@ -10,6 +10,7 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import "KLHorizontalSelect.h"
 #import "ECJSONFetcher.h"
+#import "ECConcertDetailViewController.h"
 @class ECAddConcertViewController,ECTodayViewController;
 
 @interface ECProfileViewController : UIViewController <FBUserSettingsDelegate,KLHorizontalSelectDelegate,ECJSONFetcherDelegate>
@@ -17,6 +18,7 @@
 -(void) fetchConcerts;
 -(void) updateViewWithNewConcert: (NSNumber *) concertID;
 - (void)showGestureForSwipeRecognizer:(UISwipeGestureRecognizer *)recognizer;
+-(void) refresh;
 
 @property (strong, nonatomic) FBUserSettingsViewController *settingsViewController;
 @property (strong, nonatomic) NSString * facebook_id;
