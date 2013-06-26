@@ -29,6 +29,7 @@
 		A0848C11176D25D5009BBB38 /* ECLoginPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0848C10176D25D5009BBB38 /* ECLoginPageView.m */; };
 		A0A2B0BC177B324F00518B6C /* profileButton.png in Resources */ = {isa = PBXBuildFile; fileRef = A0A2B0BB177B324F00518B6C /* profileButton.png */; };
 		A0A2B0BE177B381F00518B6C /* profileButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A0A2B0BD177B381F00518B6C /* profileButton@2x.png */; };
+		A0A2B0C6177B867F00518B6C /* NSMutableDictionary+ConcertImages.m in Sources */ = {isa = PBXBuildFile; fileRef = A0A2B0C5177B867F00518B6C /* NSMutableDictionary+ConcertImages.m */; };
 		A0FF1C53176CC88000433768 /* LoginInfoPages.plist in Resources */ = {isa = PBXBuildFile; fileRef = A0FF1C52176CC88000433768 /* LoginInfoPages.plist */; };
 		D43ACD7F176D2EA700E2282A /* ECCellType.m in Sources */ = {isa = PBXBuildFile; fileRef = D43ACD7E176D2EA700E2282A /* ECCellType.m */; };
 		D43ACD81176D3B7F00E2282A /* ECEndCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D43ACD80176D3B7F00E2282A /* ECEndCellView.xib */; };
@@ -128,6 +129,8 @@
 		A0848C10176D25D5009BBB38 /* ECLoginPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECLoginPageView.m; sourceTree = "<group>"; };
 		A0A2B0BB177B324F00518B6C /* profileButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profileButton.png; sourceTree = "<group>"; };
 		A0A2B0BD177B381F00518B6C /* profileButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profileButton@2x.png"; sourceTree = "<group>"; };
+		A0A2B0C4177B867F00518B6C /* NSMutableDictionary+ConcertImages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableDictionary+ConcertImages.h"; sourceTree = "<group>"; };
+		A0A2B0C5177B867F00518B6C /* NSMutableDictionary+ConcertImages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableDictionary+ConcertImages.m"; sourceTree = "<group>"; };
 		A0FF1C52176CC88000433768 /* LoginInfoPages.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = LoginInfoPages.plist; sourceTree = "<group>"; };
 		B56B831D22E04C90BC664348 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		D43ACD7D176D2BA400E2282A /* ECCellType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECCellType.h; sourceTree = "<group>"; };
@@ -405,8 +408,6 @@
 				D4AA4CFB1766B374009B0635 /* InfoPlist.strings */,
 				D4AA4CFE1766B374009B0635 /* main.m */,
 				D4AA4D001766B374009B0635 /* Encore-Prefix.pch */,
-				A022AABD1779E8380009244C /* UIImage+GaussBlur.h */,
-				A022AABE1779E8380009244C /* UIImage+GaussBlur.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -497,6 +498,10 @@
 				D4A8DDAC176A133B005E9847 /* NSDictionary+Posts.m */,
 				D4AC35F71768C5850087B1E9 /* NSDictionary+ConcertList.h */,
 				D4AC35F81768C5850087B1E9 /* NSDictionary+ConcertList.m */,
+				A0A2B0C4177B867F00518B6C /* NSMutableDictionary+ConcertImages.h */,
+				A0A2B0C5177B867F00518B6C /* NSMutableDictionary+ConcertImages.m */,
+				A022AABD1779E8380009244C /* UIImage+GaussBlur.h */,
+				A022AABE1779E8380009244C /* UIImage+GaussBlur.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -729,6 +734,7 @@
 				A022AAB51777DB250009244C /* ECCustomSearchBar.m in Sources */,
 				A022AABF1779E8380009244C /* UIImage+GaussBlur.m in Sources */,
 				D4A7BEA8177B2F3B00C22D91 /* UIImage+Orientation.m in Sources */,
+				A0A2B0C6177B867F00518B6C /* NSMutableDictionary+ConcertImages.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

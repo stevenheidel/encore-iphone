@@ -13,6 +13,9 @@
 #import "NSDictionary+ConcertList.h"
 #import "MBProgressHUD.h"
 #import "ECConcertCellView.h"
+#import "UIImage+GaussBlur.h"
+#import "NSMutableDictionary+ConcertImages.h"
+#import "UIImageView+AFNetworking.h"
 
 
 #define ARTIST_HEADER_HEIGHT 30.0
@@ -75,6 +78,8 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     [self.tableView registerNib:[UINib nibWithNibName:@"ECConcertCellView" bundle:nil]
          forCellReuseIdentifier:myIdentifier];
     
+    self.arrArtistImages = [[NSMutableArray alloc] init];
+    self.arrPopularImages = [[NSMutableArray alloc] init];
     self.locationSearch.font = [UIFont fontWithName:@"Hero" size:15.0];
     self.artistSearch.font = [UIFont fontWithName:@"Hero" size:15.0];
     self.tableView.tableFooterView = [UIView new];
@@ -99,6 +104,16 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
 
 -(void) fetchedPopularConcerts:(NSArray *)concerts {
     self.arrPopularData = concerts;
+    [self.arrPopularImages removeAllObjects];
+    for (NSDictionary *concertDic in concerts) {
+        NSString *imageURL = [concertDic imageURL];
+        UIImage *regImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL]];
+        UIImage *gaussImage = [regImage imageWithGaussianBlur];
+        
+        NSMutableDictionary *imageDic = [[NSMutableDictionary alloc] init];
+        [imageDic addImages:regImage :gaussImage];
+        [self.arrPopularImages addObject:imageDic];
+    }
     [self.tableView reloadData];
     [self.hud hide:YES];
 }
@@ -120,6 +135,8 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     }
     */
     
+    
+    
     matchedArtistDic = [artists objectAtIndex:0]; //If using kickass piece of code above, please remove this line
     NSNumber *artistID = [matchedArtistDic songkickID];
     if (self.searchType == ECSearchTypePast) {
@@ -137,6 +154,15 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
 - (void)fetchedArtistConcerts:(NSArray *)concerts {
     hasSearched = TRUE;
     self.arrArtistConcerts = concerts;
+    for (NSDictionary *concertDic in concerts) {
+        UIImage *regImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[concertDic imageURL]]];
+
+        UIImage *gaussImage = [regImage imageWithGaussianBlur];
+        
+        NSMutableDictionary *imageDic = [[NSMutableDictionary alloc] init];
+        [imageDic addImages:regImage :gaussImage];
+        [self.arrArtistImages addObject:imageDic];
+    }
     [self.tableView reloadData];
     //[self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
     [self.hud hide:YES];
@@ -155,8 +181,10 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     if (hasSearched) {
         static NSString *myIdentifier = @"ECConcertCellView";
         ECConcertCellView *cell = [tableView dequeueReusableCellWithIdentifier:myIdentifier forIndexPath:indexPath];
-        NSDictionary * concertDic = [self.arrArtistConcerts objectAtIndex:indexPath.row];
+        NSDictionary *concertDic = [self.arrArtistConcerts objectAtIndex:indexPath.row];
+        NSMutableDictionary *imageDic = [self.arrArtistImages objectAtIndex:indexPath.row];
         [(ECConcertCellView *)cell setUpCellForConcert:concertDic];
+        [(ECConcertCellView *)cell setUpCellImagesForConcert:imageDic];
         return cell;
 //        UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:ArtistCellIdentifier];
 //        if (cell == nil) {
@@ -171,8 +199,9 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
         
         ECConcertCellView *cell = [tableView dequeueReusableCellWithIdentifier:myIdentifier forIndexPath:indexPath];
         NSDictionary * concertDic = [self.arrPopularData objectAtIndex:indexPath.row];
-        
+        NSMutableDictionary *imageDic = [self.arrPopularImages objectAtIndex:indexPath.row];
         [(ECConcertCellView *)cell setUpCellForConcert:concertDic];
+        [(ECConcertCellView *)cell setUpCellImagesForConcert:imageDic];
         return cell;
     }
 }
@@ -203,7 +232,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
         label.text = sectionTitle;
         
         // Create header view and add label as a subview
-        UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 140, 30)];
+        UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, ARTIST_HEADER_HEIGHT)];
         [headerView addSubview:label];
         return headerView;
     } else {

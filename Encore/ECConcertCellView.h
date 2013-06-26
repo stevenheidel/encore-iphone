@@ -12,6 +12,7 @@
 
 @interface ECConcertCellView : UITableViewCell
 
+- (void)setUpCellImagesForConcert:(NSMutableDictionary *)imageDic;
 - (void)setUpCellForConcert:(NSDictionary *)concertDic;
 
 @property(nonatomic, strong) IBOutlet UIImageView *imageArtist;

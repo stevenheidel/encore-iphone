@@ -11,6 +11,8 @@
 #import "NSDictionary+ConcertList.h"
 #import "ECConcertCellView.h"
 #import "MBProgressHUD.h"
+#import "UIImage+GaussBlur.h"
+#import "NSMutableDictionary+ConcertImages.h"
 
 static NSString *const ConcertCellIdentifier = @"concertCell";
 
@@ -63,9 +65,10 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     
     ECConcertCellView *cell = [tableView dequeueReusableCellWithIdentifier:myIdentifier forIndexPath:indexPath];
     NSDictionary * concertDic = [self.arrTodaysConcerts objectAtIndex:indexPath.row];
+    NSMutableDictionary *imageDic = [self.arrTodaysImages objectAtIndex:indexPath.row];
     [cell setUpCellForConcert:concertDic];
+    [cell setUpCellImagesForConcert:imageDic];
 
-    
     return cell;
 }
 
@@ -88,6 +91,16 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
 #pragma mark - ECJSONFetcher methods
 -(void) fetchedPopularConcerts:(NSArray *)concerts {
     self.arrTodaysConcerts = concerts;
+    
+    for (NSDictionary *concertDic in concerts) {
+        NSString *imageURL = [concertDic imageURL];
+        UIImage *regImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL]];
+        UIImage *gaussImage = [regImage imageWithGaussianBlur];
+        
+        NSMutableDictionary *imageDic = [[NSMutableDictionary alloc] init];
+        [imageDic addImages:regImage :gaussImage];
+        [self.arrTodaysImages addObject:imageDic];
+    }
     [self.tableView reloadData];
     [self.hud hide:YES];
 }

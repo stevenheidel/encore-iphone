@@ -18,6 +18,8 @@
 @property (strong, nonatomic) NSArray *arrArtistData;
 @property (strong, nonatomic) NSArray *arrArtistConcerts;
 @property (strong, nonatomic) NSArray *arrPopularData;
+@property (strong, nonatomic) NSMutableArray *arrPopularImages;
+@property (strong, nonatomic) NSMutableArray *arrArtistImages;
 @property (strong, nonatomic) ECJSONFetcher * JSONFetcher;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 //@property (strong, nonatomic) IBOutlet ECCustomSearchBar *searchBar;

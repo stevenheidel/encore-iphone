@@ -10,6 +10,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "NSDictionary+ConcertList.h"
 #import "UIImage+GaussBlur.h"
+#import "NSMutableDictionary+ConcertImages.h"
 
 @implementation ECConcertCellView
 
@@ -29,6 +30,11 @@
     
     self.imageBackground.image = [[UIImage imageNamed:@"sampleArtistImage.jpg"] imageWithGaussianBlur];
     self.selectionStyle = UITableViewCellSelectionStyleNone;
+}
+
+- (void)setUpCellImagesForConcert:(NSMutableDictionary *)imageDic {
+    self.imageArtist.image = [imageDic regularImage];
+    self.imageBackground.image = [imageDic gaussImage];
 }
 
 @end

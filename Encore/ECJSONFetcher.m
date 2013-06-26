@@ -95,7 +95,7 @@
     NSURLRequest * request = [NSURLRequest requestWithURL:url];
     AFJSONRequestOperation * operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         concertList = (NSArray*) [(NSDictionary*)JSON objectForKey:@"concerts"];
-        NSLog(@"Successfully fetched %d popular concerts", [concertList count]);
+        NSLog(@"Successfully fetched %d popular concerts %@", [concertList count], concertList);
         [self.delegate fetchedPopularConcerts:concertList];
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         NSLog(@"ERROR fetching popular concerts: %@",[error description]);
@@ -146,8 +146,8 @@
     NSURL * url = [NSURL URLWithString:escapedDataString];
     NSURLRequest * request = [NSURLRequest requestWithURL:url];
     AFJSONRequestOperation * operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-        NSLog(@"Successfully fetched concerts for artist with id: %@", [artistID description]);
         concertList = (NSArray*) [(NSDictionary*)JSON objectForKey:@"concerts"];
+        NSLog(@"Successfully fetched concerts for artist with id: %@ \n%@", [artistID description], concertList);
         [self.delegate fetchedArtistConcerts: concertList];
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         NSLog(@"ERROR fetching concerts for artist with ID %@: %@",[artistID description],[error description]);

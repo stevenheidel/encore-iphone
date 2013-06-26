@@ -36,6 +36,11 @@ static NSString * const kDateFormat = @"yyyy-MM-dd";
 -(NSNumber*) songkickID {
     return [self objectForKey:@"songkick_id"];
 }
+
+-(NSURL *) backgroundURL {
+    return [NSURL URLWithString:[self objectForKey:@"background_url"]];
+}
+
 -(NSString *) month {
     NSString * dateStr = [self objectForKey:@"date"];
     NSDateFormatter * dateFormat =  [NSDateFormatter new];

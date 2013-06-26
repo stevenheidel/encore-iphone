@@ -13,6 +13,7 @@
 
 @property(nonatomic, strong) IBOutlet UITableView *tableView;
 @property(nonatomic, strong) NSArray *arrTodaysConcerts;
+@property(nonatomic, strong) NSMutableArray *arrTodaysImages;
 @property (strong, nonatomic) MBProgressHUD * hud;
 
 @end

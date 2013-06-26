@@ -11,6 +11,8 @@
 #import "ECConcertDetailViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "ECConcertCellView.h"
+#import "UIImage+GaussBlur.h"
+#import "NSMutableDictionary+ConcertImages.h"
 
 @interface ECMyConcertViewController ()
 
