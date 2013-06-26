@@ -9,7 +9,7 @@
 #import "ECJSONPoster.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import "NSDate+JSON.h"
-
+#import "UIImage+Orientation.h"
 NSString* baseURL(){
     return NSLocalizedString(@"BaseURL", nil);
 }
@@ -101,7 +101,7 @@ NSString* baseURL(){
     [client registerHTTPOperationClass:[AFJSONRequestOperation class]];
     [client setDefaultHeader:@"Accept" value:@"application/json"];
 
-    NSData* imageData = UIImagePNGRepresentation([imageDic objectForKey:@"image"]);
+    NSData* imageData = UIImagePNGRepresentation([(UIImage*)[imageDic objectForKey:@"image"] fixOrientation]);
     NSMutableURLRequest * request = [client multipartFormRequestWithMethod:@"POST" path:urlString parameters:imageDic constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         [formData appendPartWithFileData: imageData name:@"image" fileName:@"image.png" mimeType:@"image/png"];
     }];

@@ -35,6 +35,7 @@
 		D4A2F6CD176959BD00A9E3BF /* ECProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4A2F6CC176959BD00A9E3BF /* ECProfileViewController.xib */; };
 		D4A4D813176CC81600EFCBF7 /* ECHorizontalCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4A4D812176CC81600EFCBF7 /* ECHorizontalCellView.xib */; };
 		D4A4D816176CC9AA00EFCBF7 /* ECHorizontalCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A4D815176CC9AA00EFCBF7 /* ECHorizontalCellView.m */; };
+		D4A7BEA8177B2F3B00C22D91 /* UIImage+Orientation.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A7BEA7177B2F3B00C22D91 /* UIImage+Orientation.m */; };
 		D4A8DDB8176A133B005E9847 /* NSDictionary+Posts.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A8DDAC176A133B005E9847 /* NSDictionary+Posts.m */; };
 		D4A8DDB9176A133B005E9847 /* ECConcertDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A8DDAD176A133B005E9847 /* ECConcertDetailViewController.m */; };
 		D4A8DDBA176A133B005E9847 /* Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A8DDAF176A133B005E9847 /* Cell.m */; };
@@ -138,6 +139,8 @@
 		D4A4D812176CC81600EFCBF7 /* ECHorizontalCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECHorizontalCellView.xib; sourceTree = "<group>"; };
 		D4A4D814176CC9A900EFCBF7 /* ECHorizontalCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECHorizontalCellView.h; sourceTree = "<group>"; };
 		D4A4D815176CC9AA00EFCBF7 /* ECHorizontalCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECHorizontalCellView.m; sourceTree = "<group>"; };
+		D4A7BEA6177B2F3B00C22D91 /* UIImage+Orientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Orientation.h"; sourceTree = "<group>"; };
+		D4A7BEA7177B2F3B00C22D91 /* UIImage+Orientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Orientation.m"; sourceTree = "<group>"; };
 		D4A8DDAB176A133B005E9847 /* NSDictionary+Posts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Posts.h"; sourceTree = "<group>"; };
 		D4A8DDAC176A133B005E9847 /* NSDictionary+Posts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Posts.m"; sourceTree = "<group>"; };
 		D4A8DDAD176A133B005E9847 /* ECConcertDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECConcertDetailViewController.m; sourceTree = "<group>"; };
@@ -476,6 +479,8 @@
 		D4C9C08B177A51C600F864FC /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				D4A7BEA6177B2F3B00C22D91 /* UIImage+Orientation.h */,
+				D4A7BEA7177B2F3B00C22D91 /* UIImage+Orientation.m */,
 				D4A8DDC8176A39B9005E9847 /* NSDate+JSON.h */,
 				D4A8DDC9176A39B9005E9847 /* NSDate+JSON.m */,
 				D4A8DDAB176A133B005E9847 /* NSDictionary+Posts.h */,
@@ -711,6 +716,7 @@
 				A022AAA617779BB50009244C /* ECConcertCellView.m in Sources */,
 				A022AAB51777DB250009244C /* ECCustomSearchBar.m in Sources */,
 				A022AABF1779E8380009244C /* UIImage+GaussBlur.m in Sources */,
+				D4A7BEA8177B2F3B00C22D91 /* UIImage+Orientation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
