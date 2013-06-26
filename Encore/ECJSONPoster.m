@@ -88,7 +88,6 @@ NSString* baseURL(){
     
 }
 
-
 //Expect nsdictionary with image, concert, and user
 +(void) postImage:(NSDictionary*)imageDic completion:(void (^)())completion {
     NSString * baseURLString = baseURL();
@@ -101,17 +100,7 @@ NSString* baseURL(){
     
     [client registerHTTPOperationClass:[AFJSONRequestOperation class]];
     [client setDefaultHeader:@"Accept" value:@"application/json"];
-    
-//    [client postPath:urlString parameters:imageDic success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        NSLog(@"%@: Success posting %@", NSStringFromClass([self class]),[responseObject description]);
-//        if (completion) {
-//            completion();
-//        }
-//        
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        NSLog(@"%@: ERROR posting image. %@",NSStringFromClass([self class]),[error description]);
-//    }];
-    
+
     NSData* imageData = UIImagePNGRepresentation([imageDic objectForKey:@"image"]);
     NSMutableURLRequest * request = [client multipartFormRequestWithMethod:@"POST" path:urlString parameters:imageDic constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         [formData appendPartWithFileData: imageData name:@"image" fileName:@"image.png" mimeType:@"image/png"];
