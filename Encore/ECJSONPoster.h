@@ -12,4 +12,6 @@
 +(void) postUser:(NSDictionary <FBGraphUser>*) facebookID;
 +(void) addConcert: (NSNumber *) concertID toUser: (NSString *) userID completion: (void (^)()) completion;
 +(void) removeConcert: (NSNumber *) concertID toUser: (NSString *) userID completion: (void (^)()) completion;
+
++(void) postImage:(NSDictionary*)imageDic completion:(void (^)())completion;
 @end

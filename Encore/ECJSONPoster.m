@@ -10,10 +10,14 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import "NSDate+JSON.h"
 
+NSString* baseURL(){
+    return NSLocalizedString(@"BaseURL", nil);
+}
+
 @implementation ECJSONPoster
 +(void) postUser:(NSDictionary <FBGraphUser>*) user {
     NSString * kUsers = NSLocalizedString(@"UsersURL", nil);
-    NSString * baseURLString = NSLocalizedString(@"BaseURL", nil);
+    NSString * baseURLString = baseURL();
     NSString * facebookID = user.id;
     NSString * name = user.name;
     
@@ -40,7 +44,7 @@
 +(void) addConcert: (NSNumber *) concertID toUser: (NSString *) userID completion: (void (^)()) completion{
     NSString * kUsers = NSLocalizedString(@"UsersURL", nil);
     NSString * kConcerts = NSLocalizedString(@"ConcertsURL", nil);
-    NSString * baseURLString = NSLocalizedString(@"BaseURL", nil);
+    NSString * baseURLString = baseURL();
     //POST /users/:uuid/concerts     {'songkick_id': '1234578'}
     NSString * urlString = [NSString stringWithFormat:@"%@/%@/%@",kUsers,userID,kConcerts];
     NSDictionary * parameters = [NSDictionary dictionaryWithObject:[concertID stringValue] forKey:@"songkick_id"];
@@ -63,7 +67,7 @@
 +(void) removeConcert: (NSNumber *) concertID toUser: (NSString *) userID completion: (void (^)()) completion{
     NSString * kUsers = NSLocalizedString(@"UsersURL", nil);
     NSString * kConcerts = NSLocalizedString(@"ConcertsURL", nil);
-    NSString * baseURLString = NSLocalizedString(@"BaseURL", nil);
+    NSString * baseURLString = baseURL();
     
     //POST /users/:uuid/concerts
     NSString * urlString = [NSString stringWithFormat:@"%@/%@/%@/%@",kUsers,userID,kConcerts,concertID.stringValue];
@@ -82,5 +86,45 @@
         NSLog(@"%@: ERROR removing concert %@ from profile %@: %@",NSStringFromClass([self class]), concertID.stringValue, userID,[error description]);
     }];
     
+}
+
+
+//Expect nsdictionary with image, concert, and user
++(void) postImage:(NSDictionary*)imageDic completion:(void (^)())completion {
+    NSString * baseURLString = baseURL();
+    NSString * kConcerts = NSLocalizedString(@"ConcertsURL", nil);
+    NSString* kPosts = NSLocalizedString(@"PostsURL", nil);
+    
+    //POST /concerts/:id/posts
+    NSString* urlString = [NSString stringWithFormat:@"%@/%@/%@",kConcerts,[imageDic objectForKey:@"concert"],kPosts];
+    AFHTTPClient * client = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:baseURLString]];
+    
+    [client registerHTTPOperationClass:[AFJSONRequestOperation class]];
+    [client setDefaultHeader:@"Accept" value:@"application/json"];
+    
+//    [client postPath:urlString parameters:imageDic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        NSLog(@"%@: Success posting %@", NSStringFromClass([self class]),[responseObject description]);
+//        if (completion) {
+//            completion();
+//        }
+//        
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        NSLog(@"%@: ERROR posting image. %@",NSStringFromClass([self class]),[error description]);
+//    }];
+    
+    NSData* imageData = UIImagePNGRepresentation([imageDic objectForKey:@"image"]);
+    NSMutableURLRequest * request = [client multipartFormRequestWithMethod:@"POST" path:urlString parameters:imageDic constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        [formData appendPartWithFileData: imageData name:@"image" fileName:@"image.png" mimeType:@"image/png"];
+    }];
+    
+    AFHTTPRequestOperation * operation = [[AFHTTPRequestOperation alloc]initWithRequest:request];
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if (completion) {
+            completion();
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"fail");
+    }];
+    [operation start];
 }
 @end

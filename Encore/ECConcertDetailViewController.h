@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ECJSONFetcher.h"
 @class ECPlaceHolderView;
-@interface ECConcertDetailViewController : UIViewController <UICollectionViewDataSource,UICollectionViewDelegate,ECJSONFetcherDelegate, UICollectionViewDelegateFlowLayout>
+@interface ECConcertDetailViewController : UIViewController <UICollectionViewDataSource,UICollectionViewDelegate,ECJSONFetcherDelegate, UICollectionViewDelegateFlowLayout,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 -(IBAction)addPhoto;
 @property (nonatomic,strong) NSDictionary * concert;
 @property (nonatomic,strong) IBOutlet UILabel * artistNameLabel;
@@ -32,6 +32,9 @@
 
 @property (nonatomic,strong) ECPlaceHolderView * placeholderView;
 -(void) updateView;
+
+@property (nonatomic,strong) UIImagePickerController* imagePickerController;
+
 @end
 
 @interface ECPlaceHolderView : UIView

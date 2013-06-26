@@ -21,7 +21,9 @@
 #import "SGSStaggeredFlowLayout.h"
 
 NSString *kCellID = @"cellID";
-
+typedef enum {
+    PhotoSourcePicker
+}ECActionSheetTag;
 @interface ECConcertDetailViewController (){
     SGSStaggeredFlowLayout* _flowLayout;
 
@@ -70,11 +72,13 @@ NSString *kCellID = @"cellID";
         self.imgLiveNow.hidden = YES;
     }
     
-    [self loadImages];
-    
     self.isOnProfile = FALSE;
     [self setUpRightBarButton];
-    
+    [self setUpFlowLayout];
+
+}
+
+-(void) setUpFlowLayout {
     _flowLayout = [[SGSStaggeredFlowLayout alloc] init];
     _flowLayout.layoutMode = SGSStaggeredFlowLayoutMode_Even;
     _flowLayout.minimumLineSpacing = 2.0f;
@@ -123,6 +127,8 @@ NSString *kCellID = @"cellID";
         }
     }];
 }
+
+//Property readonly getter to grab songkickID in a slightly shorter way
 -(NSNumber*) songkickID {
     return [self.concert songkickID];
 }
@@ -247,8 +253,50 @@ NSString *kCellID = @"cellID";
     }
 }
 
+#pragma mark - adding photos
 -(IBAction)addPhoto {
-    NSLog(@"No photo adding");
+    UIActionSheet* actionSheet = [[UIActionSheet alloc] initWithTitle:@"Post photo" delegate:self cancelButtonTitle:NSLocalizedString(@"cancel", nil) destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"pick_from_lib", nil),[UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] ? NSLocalizedString(@"new_from_camera", nil):nil, nil];
+    actionSheet.tag = PhotoSourcePicker;
+    actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
+    [actionSheet showInView:self.view];
+}
+
+-(void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (actionSheet.tag == PhotoSourcePicker ) {
+        NSString* selectedSource;
+        UIImagePickerControllerSourceType sourceType;
+        if(buttonIndex != actionSheet.cancelButtonIndex){
+            selectedSource = [actionSheet buttonTitleAtIndex:buttonIndex];
+            if ([selectedSource isEqualToString:NSLocalizedString(@"new_from_camera", nil)]) {
+                sourceType = UIImagePickerControllerSourceTypeCamera;
+            }
+            else sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            [self showImagePickerForSourceType: sourceType];
+        }
+    }
+}
+
+-(void) showImagePickerForSourceType: (UIImagePickerControllerSourceType) sourceType {
+    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+    imagePickerController.modalPresentationStyle = UIModalPresentationCurrentContext;
+    imagePickerController.sourceType = sourceType;
+    imagePickerController.delegate = self;
+    
+    if(sourceType == UIImagePickerControllerSourceTypeCamera) {
+        imagePickerController.showsCameraControls = YES;
+    }
+    self.imagePickerController = imagePickerController;
+    [self presentViewController: self.imagePickerController animated:YES completion: nil];
+}
+
+-(void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    UIImage* image = [info valueForKey:UIImagePickerControllerOriginalImage];
+    [self dismissViewControllerAnimated:YES completion:NULL];
+ 
+    NSDictionary * imageDic = [NSDictionary dictionaryWithObjectsAndKeys:image, @"image",[self.concert songkickID], @"concert", self.userID, @"user", nil];
+    [ECJSONPoster postImage: imageDic completion:^{
+        NSLog(@"Complete!");
+    }];
 }
 #pragma mark - json fetcher delegate
 -(void) fetchedPosts: (NSArray *) posts {
