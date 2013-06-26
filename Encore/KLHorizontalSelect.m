@@ -150,7 +150,16 @@
                           atScrollPosition:UITableViewScrollPositionNone
                                   animated:YES];
 }
+
+
 #pragma mark - UITableViewDelegate implementation
+-(NSIndexPath*) tableView: (UITableView*) tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if ([indexPath isEqual:self.tableView.indexPathForSelectedRow]) {
+        return nil;
+    }
+    return indexPath;
+}
+
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([self shouldHideArrowForSelectedCellType: indexPath.section]) {
         [self.arrow hide:YES];
@@ -257,6 +266,7 @@
         self.cellType = cellType;
         if(!self.cellView) {
             self.cellView = [[ECHorizontalCellView alloc] initWithFrame: CGRectMake(0, 0, kDefaultCellWidth, kDefaultCellHeight)];
+            [self setCellTextAttributes];
             [self.cellView  setTransform:CGAffineTransformMakeRotation(M_PI_2)];
             [self addSubview:self.cellView];
         }
@@ -277,14 +287,21 @@
     ECHorizontalCellView * view =  self.cellView;
     NSDictionary * data = self.cellData;
     view.yearLabel.text = [data year];
-    view.yearLabel.font = [UIFont fontWithName:@"Hero" size:12.0];
-    view.yearLabel.textColor = [UIColor colorWithRed:0.6275 green:0.6431 blue:0.6549 alpha:1.0];
     view.monthLabel.text = [data month];
-    view.monthLabel.font = [UIFont fontWithName:@"Hero" size:15.0];
-    view.monthLabel.textColor = [UIColor colorWithRed:0.6275 green:0.6431 blue:0.6549 alpha:1.0];
     view.dayNumberLabel.text = [data day];
-    view.dayNumberLabel.font = [UIFont fontWithName:@"Hero" size:34.0];
-    view.dayNumberLabel.textColor = [UIColor colorWithRed:0.6275 green:0.6431 blue:0.6549 alpha:1.0];
+
+}
+
+-(void) setCellTextAttributes {
+    ECHorizontalCellView * view =  self.cellView;
+    NSString * fontName = @"Hero";
+    UIColor* color = [UIColor colorWithRed:0.6275 green:0.6431 blue:0.6549 alpha:1.0];
+    view.yearLabel.font = [UIFont fontWithName:fontName size:12.0];
+    view.yearLabel.textColor = color;
+    view.monthLabel.font = [UIFont fontWithName:fontName size:15.0];
+    view.monthLabel.textColor = color;
+    view.dayNumberLabel.font = [UIFont fontWithName:fontName size:34.0];
+    view.dayNumberLabel.textColor = color;
 }
 
 @end
