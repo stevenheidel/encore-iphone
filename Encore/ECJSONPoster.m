@@ -10,14 +10,14 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import "NSDate+JSON.h"
 #import "UIImage+Orientation.h"
+#import "EncoreURL.h"
+
 NSString* baseURL(){
     return NSLocalizedString(@"BaseURL", nil);
 }
 
 @implementation ECJSONPoster
 +(void) postUser:(NSDictionary <FBGraphUser>*) user {
-    NSString * kUsers = NSLocalizedString(@"UsersURL", nil);
-    NSString * baseURLString = baseURL();
     NSString * facebookID = user.id;
     NSString * name = user.name;
     
@@ -27,13 +27,13 @@ NSString* baseURL(){
     
     NSDictionary * parameters = [NSDictionary dictionaryWithObjectsAndKeys:oauth, @"oauth",jsonExpiryDateString,@"expiration_date",facebookID, @"facebook_id",name,@"name",nil];
     
-    NSURL * url = [NSURL URLWithString:baseURLString];
+    NSURL * url = [NSURL URLWithString:BaseURL];
     
     AFHTTPClient * client = [[AFHTTPClient alloc] initWithBaseURL:url];
     [client registerHTTPOperationClass:[AFJSONRequestOperation class]];
     [client setDefaultHeader:@"Accept" value:@"application/json"];
     
-    [client postPath:kUsers parameters:parameters
+    [client postPath:UsersURL parameters:parameters
              success:^(AFHTTPRequestOperation *operation, id responseObject) {
                  NSLog(@"%@: %@",NSStringFromClass([self class]),[responseObject description]);
              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -42,13 +42,10 @@ NSString* baseURL(){
 }
 
 +(void) addConcert: (NSNumber *) concertID toUser: (NSString *) userID completion: (void (^)()) completion{
-    NSString * kUsers = NSLocalizedString(@"UsersURL", nil);
-    NSString * kConcerts = NSLocalizedString(@"ConcertsURL", nil);
-    NSString * baseURLString = baseURL();
     //POST /users/:uuid/concerts     {'songkick_id': '1234578'}
-    NSString * urlString = [NSString stringWithFormat:@"%@/%@/%@",kUsers,userID,kConcerts];
-    NSDictionary * parameters = [NSDictionary dictionaryWithObject:[concertID stringValue] forKey:@"songkick_id"];
-    AFHTTPClient * client = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:baseURLString]];
+    NSString * urlString = [NSString stringWithFormat:@"%@/%@/%@",UsersURL,userID,ConcertsURL];
+    NSDictionary * parameters = [NSDictionary dictionaryWithObject:[concertID stringValue] forKey:SongkickIDURL];
+    AFHTTPClient * client = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:BaseURL]];
     
     [client registerHTTPOperationClass:[AFJSONRequestOperation class]];
     [client setDefaultHeader:@"Accept" value:@"application/json"];
@@ -65,14 +62,10 @@ NSString* baseURL(){
 }
 
 +(void) removeConcert: (NSNumber *) concertID toUser: (NSString *) userID completion: (void (^)()) completion{
-    NSString * kUsers = NSLocalizedString(@"UsersURL", nil);
-    NSString * kConcerts = NSLocalizedString(@"ConcertsURL", nil);
-    NSString * baseURLString = baseURL();
-    
     //POST /users/:uuid/concerts
-    NSString * urlString = [NSString stringWithFormat:@"%@/%@/%@/%@",kUsers,userID,kConcerts,concertID.stringValue];
+    NSString * urlString = [NSString stringWithFormat:@"%@/%@/%@/%@",UsersURL,userID,ConcertsURL,concertID.stringValue];
     NSDictionary * parameters = [NSDictionary dictionaryWithObject:[concertID stringValue] forKey:@"songkick_id"];
-    AFHTTPClient * client = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:baseURLString]];
+    AFHTTPClient * client = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:BaseURL]];
     
     [client registerHTTPOperationClass:[AFJSONRequestOperation class]];
     [client setDefaultHeader:@"Accept" value:@"application/json"];
@@ -90,13 +83,9 @@ NSString* baseURL(){
 
 //Expect nsdictionary with image, concert, and user
 +(void) postImage:(NSDictionary*)imageDic completion:(void (^)())completion {
-    NSString * baseURLString = baseURL();
-    NSString * kConcerts = NSLocalizedString(@"ConcertsURL", nil);
-    NSString* kPosts = NSLocalizedString(@"PostsURL", nil);
-    
     //POST /concerts/:id/posts
-    NSString* urlString = [NSString stringWithFormat:@"%@/%@/%@",kConcerts,[imageDic objectForKey:@"concert"],kPosts];
-    AFHTTPClient * client = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:baseURLString]];
+    NSString* urlString = [NSString stringWithFormat:@"%@/%@/%@",ConcertsURL,[imageDic objectForKey:@"concert"],PostsURL];
+    AFHTTPClient * client = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:BaseURL]];
     
     [client registerHTTPOperationClass:[AFJSONRequestOperation class]];
     [client setDefaultHeader:@"Accept" value:@"application/json"];
