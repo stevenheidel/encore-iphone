@@ -19,7 +19,7 @@
 }
 
 - (void) addImages:(UIImage *)regImage :(UIImage *)gaussImage {
-    [self setObject:regImage forKey:@"regImage"];
+    [self setObject:regImage forKey:@"regImage"]; //crashed here a couple times, June 26
     [self setObject:gaussImage forKey:@"gaussImage"];
 }
 
