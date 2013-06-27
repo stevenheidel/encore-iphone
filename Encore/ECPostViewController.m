@@ -21,6 +21,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+
     }
     return self;
 }
@@ -30,13 +31,19 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self setupPost];
-    [self.profilePicture.layer setBorderColor:[[UIColor blackColor] CGColor]];
-    [self.profilePicture.layer setBorderWidth:1.0];
+    self.profilePicture.layer.cornerRadius = 35.0;
+    self.profilePicture.layer.masksToBounds = YES;
+    self.profilePicture.layer.borderColor = [UIColor grayColor].CGColor;
+    self.profilePicture.layer.borderWidth = 3.0;
+    self.captionLabel.font = [UIFont fontWithName:@"Hero" size:12.0f];
+    self.userNameLabel.font = [UIFont fontWithName:@"Hero Light" size:18.0f];
+    
     self.title = @"Post";//self.userNameLabel.text;
     
     UIBarButtonItem * shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(shareTapped)];
     self.navigationItem.rightBarButtonItem = shareButton;
     [self setupGestureRecgonizers];
+    self.containerView.alpha = 0.0;
 }
 
 -(void) setupGestureRecgonizers {
@@ -49,14 +56,40 @@
     recognizerRight.direction = UISwipeGestureRecognizerDirectionRight;
     [self.view addGestureRecognizer:recognizerRight];
     [self.view addGestureRecognizer:recognizerLeft];
+    
+    UITapGestureRecognizer* recognizerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapPost)];
+    recognizerTap.numberOfTapsRequired = 1;
+    recognizerTap.numberOfTouchesRequired = 1;
+    [self.view addGestureRecognizer:recognizerTap];
 }
-
+-(void) tapPost {
+    
+    [UIView animateWithDuration:0.4
+                          delay:0.0
+                        options: UIViewAnimationOptionCurveEaseInOut
+                     animations:^{
+                         self.containerView.alpha = self.containerView.alpha == 0.0 ? 1.0 : 0.0;
+                     }
+                     completion:^(BOOL finished){
+                     }];
+    
+}
 //This function is called on first initial set up as well as later on if the user swipes left or right
 -(void) setupPost {
-    self.userNameLabel.text = [self.post userName];
-    self.captionLabel.text = [self.post caption];
-    [self.postImage setImageWithURL:[self.post imageURL]];
-    [self.profilePicture setImageWithURL:[self.post profilePictureURL] placeholderImage:[UIImage imageNamed:@"placeholder.jpg"]];
+    
+    [UIView animateWithDuration:0.2
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                            self.postImage.alpha = 0.0;
+                        } completion:^(BOOL finished) {
+                            self.userNameLabel.text = [self.post userName];
+                            self.captionLabel.text = [self.post caption];
+                            [self.postImage setImageWithURL:[self.post imageURL]];
+                            [self.profilePicture setImageWithURL:[self.post profilePictureURL] placeholderImage:[UIImage imageNamed:@"placeholder.jpg"]];
+                            [UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{self.postImage.alpha = 1.0; }completion:nil];
+                        }
+     ];
+
 }
 
 -(void) showGestureForSwipeRecognizer: (UISwipeGestureRecognizer*) recognizer {
