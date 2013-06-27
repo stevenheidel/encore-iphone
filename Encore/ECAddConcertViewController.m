@@ -9,14 +9,12 @@
 #import <QuartzCore/QuartzCore.h>
 #import "ECAddConcertViewController.h"
 #import "ECConcertDetailViewController.h"
-#import "ECMyConcertViewController.h"
 #import "NSDictionary+ConcertList.h"
 #import "MBProgressHUD.h"
 #import "ECConcertCellView.h"
 #import "UIImage+GaussBlur.h"
 #import "NSMutableDictionary+ConcertImages.h"
 #import "UIImageView+AFNetworking.h"
-
 #import "ECJSONFetcher.h"
 
 #define ARTIST_HEADER_HEIGHT 30.0
@@ -133,14 +131,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
         [self.arrArtistImages addObject:imageDic];
     }
     [self.tableView reloadData];
-    //[self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
     [self.hud hide:YES];
-    
-//    ECMyConcertViewController *concertsVC = [ECMyConcertViewController new];
-//    concertsVC.concertList = concerts;
-//    concertsVC.title = [self.lastSelectedArtist artistName];
-//    [self.hud hide:YES];
-//    [self.navigationController pushViewController:concertsVC animated:YES];
 }
 
 #pragma mark - UITableView methods

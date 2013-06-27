@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ECCustomSearchBar.h"
+#import "ECSearchType.h"
 @class MBProgressHUD;
 
 @interface ECAddConcertViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate> {
