@@ -58,32 +58,22 @@ typedef enum {
     [self.collectionView registerClass:[Cell class] forCellWithReuseIdentifier:@"generic"];
     
     // Do any additional setup after loading the view from its nib.
-    self.artistNameLabel.text = [self.concert artistName];
     [self.artistNameLabel setAdjustsFontSizeToFitWidth:YES];
-    self.dateLabel.text = [self.concert niceDate];
-    self.venueNameLabel.text = [self.concert venueName];
     self.title = NSLocalizedString(@"concert", nil);//self.artistNameLabel.text;
-    
-    //TODO: Set pictures dynamically from image urls
-    self.imgBackground.image = [[UIImage imageNamed:@"sampleArtistImage.jpg"] imageWithGaussianBlur];
-    self.imgArtist.image = [UIImage imageNamed:@"placeholder.jpg"];
-    self.imgLiveNow.image = [UIImage imageNamed:@"LiveIndicator.png"];
-    
-    self.imgArtist.layer.cornerRadius = 35.0;
+    self.artistNameLabel.font = [UIFont fontWithName:@"Hero" size:21.0];
+    [self.artistNameLabel setAdjustsFontSizeToFitWidth:YES];
+    self.venueNameLabel.font = [UIFont fontWithName:@"Hero" size:14.0];
+    self.dateLabel.font = [UIFont fontWithName:@"Hero" size:14.0];
+    self.imgArtist.layer.cornerRadius = 42.0;
     self.imgArtist.layer.masksToBounds = YES;
     self.imgArtist.layer.borderColor = [UIColor grayColor].CGColor;
-    self.imgArtist.layer.borderWidth = 3.0;
-    
-    if ([self.concert isLive]) {
-        self.imgLiveNow.hidden = NO;
-    } else {
-        self.imgLiveNow.hidden = YES;
-    }
+    self.imgArtist.layer.borderWidth = 2.0;
     
     self.isOnProfile = FALSE;
     [self setUpRightBarButton];
    // [self setUpFlowLayout];
     [self setupToolbar];
+    [self loadArtistDetails];
     [self loadImages];
 }
 
@@ -99,23 +89,10 @@ typedef enum {
 //}
 
 -(void) updateView {
-    self.artistNameLabel.text = [self.concert artistName];
     
-    self.venueNameLabel.text = [self.concert venueName];
-    
-    //TODO: Set pictures dynamically from image urls
-    self.imgBackground.image = [[UIImage imageNamed:@"sampleArtistImage.jpg"] imageWithGaussianBlur];
-    self.imgArtist.image = [UIImage imageNamed:@"placeholder.jpg"];
-    
-    if ([self.concert isLive]) {
-        self.imgLiveNow.hidden = NO;
-        self.dateLabel.text = NSLocalizedString(@"LiveNow", nil);
-    } else {
-        self.imgLiveNow.hidden = YES;
-        self.dateLabel.text = [self.concert niceDate];
-    }
     
     //self.title = self.artistNameLabel.text;
+    [self loadArtistDetails];
     [self loadImages];
     [self setupToolbar];
 }
@@ -132,6 +109,29 @@ typedef enum {
             self.toolbar.addButton.title = NSLocalizedString(@"remove", nil);
         }
     }];
+}
+
+-(void) loadArtistDetails {
+    
+    self.artistNameLabel.text = [self.concert artistName];
+    self.venueNameLabel.text = [self.concert venueName];
+    if ([self.concert isLive]) {
+        self.imgLiveNow.hidden = NO;
+        self.dateLabel.text = NSLocalizedString(@"LiveNow", nil);
+    } else {
+        self.imgLiveNow.hidden = YES;
+        self.dateLabel.text = [self.concert niceDate];
+    }
+    NSURL *imageURL = [self.concert imageURL];
+    UIImage *regImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL]];
+    
+    if (regImage) {
+        self.imgArtist.image = regImage;
+        self.imgBackground.image = [regImage imageWithGaussianBlur];
+    } else {
+        self.imgBackground.image = [[UIImage imageNamed:@"Default"] imageWithGaussianBlur];
+        self.imgArtist.image = [UIImage imageNamed:@"placeholder.jpg"];
+    }
 }
 
 -(void) loadImages {

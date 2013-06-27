@@ -178,6 +178,7 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
 -(void) fetchConcerts {
     [ECJSONFetcher fetchConcertsForUserID:self.facebook_id completion:^(NSDictionary *concerts) {
         NSLog(@"Successfully fetched %d past concerts and %d future concerts", [[concerts past] count],[[concerts future]count]);
+        //NSLog(@"Fetched concerts for user:%@", concerts);
         self.concerts = [NSMutableDictionary dictionaryWithDictionary: concerts];
         [self setUpHorizontalSelect]; //only setting up horizontal select once the concert data is received
         [self selectTodayCell];
