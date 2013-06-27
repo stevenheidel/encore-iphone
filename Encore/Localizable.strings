@@ -20,7 +20,7 @@
 "AddFuture" = "Add Upcoming";
 
 //Add Concert View
-"Header" = "%@ concerts for %@ in %@:";
+"Search_Header" = "%@ concerts for %@ in %@:";
 "Past" = "Past";
 "Upcoming" = "Upcoming";
 "loading" = "Loading";

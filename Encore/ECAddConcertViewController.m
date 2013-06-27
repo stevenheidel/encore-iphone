@@ -264,7 +264,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     if (hasSearched) {
         if (self.foundArtistConcerts) {
-            return [NSString stringWithFormat:NSLocalizedString(@"Header", nil), self.searchType ? NSLocalizedString(@"Upcoming", nil) : NSLocalizedString(@"Past", nil), [self.lastSelectedArtist artistName], @"Toronto, ON"]; //TODO: set location dynamically
+            return [NSString stringWithFormat:NSLocalizedString(@"Search_Header", nil), self.searchType ? NSLocalizedString(@"Upcoming", nil) : NSLocalizedString(@"Past", nil), [self.lastSelectedArtist artistName], @"Toronto, ON"]; //TODO: set location dynamically
         } else {
             return NSLocalizedString(@"NoConcertResults", nil);
         }
