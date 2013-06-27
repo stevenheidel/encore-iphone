@@ -11,7 +11,11 @@
 #import "ECPostViewController.h"
 @class ECPlaceHolderView,ECToolbar;
 @interface ECConcertDetailViewController : UIViewController <UICollectionViewDataSource,UICollectionViewDelegate/*, UICollectionViewDelegateFlowLayout*/,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,ECPostViewControllerDelegate,UIAlertViewDelegate>
+
 -(IBAction)addPhoto;
+-(void) shareTapped;
+
+
 @property (nonatomic,strong) NSDictionary * concert;
 @property (nonatomic,strong) IBOutlet UILabel * artistNameLabel;
 @property (nonatomic,strong) IBOutlet UILabel * venueNameLabel;
