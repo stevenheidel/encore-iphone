@@ -27,8 +27,7 @@
 @property (nonatomic, readonly) NSString * userID;
 
 
-@property (nonatomic,strong) UIBarButtonItem * removeButton;
-@property (nonatomic,strong) UIBarButtonItem * addButton;
+@property (nonatomic,strong) UIBarButtonItem * shareButton;
 
 @property (nonatomic, assign) BOOL isOnProfile;
 
@@ -39,7 +38,6 @@
 @property (nonatomic,strong) IBOutlet ECToolbar* toolbar;
 
 @property (nonatomic,unsafe_unretained) id <ECPostViewControllerDelegate> delegate;
-@property (nonatomic,assign) BOOL isChildVC;
 
 
 

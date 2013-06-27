@@ -78,7 +78,7 @@
 					<object class="IBUILabel" id="696228163">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{40, 49}, {240, 21}}</string>
+						<string key="NSFrame">{{40, 49}, {240, 63}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView"/>
@@ -88,7 +88,7 @@
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">Were you there? Add your own:</string>
+						<string key="IBUIText">Were you there? Add your own by clicking on the camera on the bottom right</string>
 						<object class="NSColor" key="IBUITextColor">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MQA</bytes>
@@ -357,15 +357,10 @@
 					<string key="className">ECPlaceHolderView</string>
 					<string key="superclassName">UIView</string>
 					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="button">UIButton</string>
 						<string key="label1">UILabel</string>
 						<string key="label2">UILabel</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="button">
-							<string key="name">button</string>
-							<string key="candidateClassName">UIButton</string>
-						</object>
 						<object class="IBToOneOutletInfo" key="label1">
 							<string key="name">label1</string>
 							<string key="candidateClassName">UILabel</string>

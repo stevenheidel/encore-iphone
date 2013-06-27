@@ -79,6 +79,7 @@ typedef enum {
     [self setUpRightBarButton];
    // [self setUpFlowLayout];
     [self setupToolbar];
+    [self loadImages];
 }
 
 -(void) setUpFlowLayout {
@@ -138,20 +139,11 @@ typedef enum {
 }
 
 -(void) setUpRightBarButton {
-    self.addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addConcert)];
-    self.removeButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(removeConcert)];
-    
-    NSString * userID = self.userID;
-    [ECJSONFetcher checkIfConcert:[self.concert songkickID] isOnProfile:userID completion:^(BOOL isOnProfile) {
-        if (!isOnProfile) {
-            [self.navigationItem setRightBarButtonItem:self.addButton];
-            self.isOnProfile = FALSE;
-        }
-        else {
-            [self.navigationItem setRightBarButtonItem:self.removeButton];
-            self.isOnProfile = TRUE;
-        }
-    }];
+    self.shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(shareTapped)];
+}
+
+-(void) shareTapped {
+    NSLog(@"share tapped");
 }
 
 //Property readonly getter to grab songkickID in a slightly shorter way
@@ -203,7 +195,6 @@ typedef enum {
 
 -(void) toggleOnProfileState {
     self.isOnProfile = !self.isOnProfile;
-    self.navigationItem.rightBarButtonItem = self.isOnProfile ? self.removeButton : self.addButton;
     self.toolbar.addButton.title = self.isOnProfile ? @"Remove" : @"Add";
 }
 
