@@ -24,7 +24,9 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
 @property (strong, nonatomic) NSMutableDictionary * concerts;
 //@property (strong,nonatomic) ECConcertChildViewController * concertChildVC;
 @property (strong,nonatomic) ECConcertDetailViewController * concertChildVC;
--(IBAction)viewConcerts:(id)sender;
+
+@property (strong,nonatomic) UIBarButtonItem* shareButton;
+
 -(IBAction)viewFriends:(id)sender;
 @end
 
@@ -74,6 +76,13 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
     [appDelegate performSelectorInBackground:@selector(getUserLocation) withObject:nil];
     
     [self setupGestureRecgonizers];
+    self.shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(shareTapped)];
+    self.shareButton.enabled = NO;
+    self.navigationItem.rightBarButtonItem = self.shareButton;
+}
+
+-(void) shareTapped {
+    [self.concertChildVC shareTapped];
 }
 
 -(void) setupGestureRecgonizers {
@@ -259,6 +268,10 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
         NSString * key = cellType == ECCellTypePastShows ? @"past" : @"future";
         self.concertChildVC.concert = [[self.concerts objectForKey: key]objectAtIndex:indexPath.row];
         [self.concertChildVC updateView];
+        self.shareButton.enabled = YES;
+    }
+    else {
+        self.shareButton.enabled = NO;
     }
 }
 

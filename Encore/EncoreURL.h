@@ -15,6 +15,8 @@
 #define BASE_URL_DEF "http://192.168.11.15:9283/api/v1/"
 #endif
 
+#define BASE_URL_PUBLIC_DEF "http://staging.encoretheapp.com/"
+
 #define CONCERTS_DEF "concerts"
 #define USERS_DEF "users"
 #define POSTS_DEF "posts"
@@ -28,9 +30,11 @@
 
 
 static NSString *const BaseURL = @BASE_URL_DEF;
-
 //URLS
-static NSString *const ShareConcertURL = @BASE_URL_DEF CONCERTS_DEF "/%@";
+
+//Sharing
+static NSString *const ShareConcertURL = @BASE_URL_PUBLIC_DEF CONCERTS_DEF "/%@";
+static NSString *const SharePostURL = @BASE_URL_PUBLIC_DEF POSTS_DEF "/%@";
 
 //User's concerts
 static NSString *const UserConcertsURL = @BASE_URL_DEF USERS_DEF "/%@/" CONCERTS_DEF; //,facebook id

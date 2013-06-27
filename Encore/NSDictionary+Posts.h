@@ -13,5 +13,5 @@
 -(NSString *) userName;
 -(NSURL *) profilePictureURL;
 -(NSString *) caption;
--(NSNumber *) id;
+-(NSNumber *) postID;
 @end
