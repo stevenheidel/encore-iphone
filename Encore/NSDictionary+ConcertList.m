@@ -16,9 +16,8 @@ static NSString * const kDateFormat = @"yyyy-MM-dd";
     [dateFormat setDateFormat:kDateFormat];
     NSDate *date = [dateFormat dateFromString:dateStr];
     
-    [dateFormat setDateStyle:NSDateFormatterMediumStyle];
-    [dateFormat setTimeStyle:NSDateFormatterNoStyle];
-    return [dateFormat stringFromDate:date];
+    [dateFormat setDateFormat:@"MMMM d, yyyy"];
+    return [[dateFormat stringFromDate:date] capitalizedString];
 }
 
 -(NSString *) artistName {
