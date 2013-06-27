@@ -30,6 +30,7 @@
 		A0A2B0BC177B324F00518B6C /* profileButton.png in Resources */ = {isa = PBXBuildFile; fileRef = A0A2B0BB177B324F00518B6C /* profileButton.png */; };
 		A0A2B0BE177B381F00518B6C /* profileButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A0A2B0BD177B381F00518B6C /* profileButton@2x.png */; };
 		A0A2B0C6177B867F00518B6C /* NSMutableDictionary+ConcertImages.m in Sources */ = {isa = PBXBuildFile; fileRef = A0A2B0C5177B867F00518B6C /* NSMutableDictionary+ConcertImages.m */; };
+		A0A2B0C8177C99DA00518B6C /* ECNoResultsPlaceholder.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0A2B0C7177C99DA00518B6C /* ECNoResultsPlaceholder.xib */; };
 		A0FF1C53176CC88000433768 /* LoginInfoPages.plist in Resources */ = {isa = PBXBuildFile; fileRef = A0FF1C52176CC88000433768 /* LoginInfoPages.plist */; };
 		D43ACD7F176D2EA700E2282A /* ECCellType.m in Sources */ = {isa = PBXBuildFile; fileRef = D43ACD7E176D2EA700E2282A /* ECCellType.m */; };
 		D43ACD81176D3B7F00E2282A /* ECEndCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D43ACD80176D3B7F00E2282A /* ECEndCellView.xib */; };
@@ -130,6 +131,7 @@
 		A0A2B0BD177B381F00518B6C /* profileButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profileButton@2x.png"; sourceTree = "<group>"; };
 		A0A2B0C4177B867F00518B6C /* NSMutableDictionary+ConcertImages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableDictionary+ConcertImages.h"; sourceTree = "<group>"; };
 		A0A2B0C5177B867F00518B6C /* NSMutableDictionary+ConcertImages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableDictionary+ConcertImages.m"; sourceTree = "<group>"; };
+		A0A2B0C7177C99DA00518B6C /* ECNoResultsPlaceholder.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECNoResultsPlaceholder.xib; sourceTree = "<group>"; };
 		A0FF1C52176CC88000433768 /* LoginInfoPages.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = LoginInfoPages.plist; sourceTree = "<group>"; };
 		B56B831D22E04C90BC664348 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		D43ACD7D176D2BA400E2282A /* ECCellType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECCellType.h; sourceTree = "<group>"; };
@@ -466,6 +468,7 @@
 		D4B1A249176E4C6F00A95568 /* Add Concert */ = {
 			isa = PBXGroup;
 			children = (
+				A0A2B0C7177C99DA00518B6C /* ECNoResultsPlaceholder.xib */,
 				D4B1A244176E4C6800A95568 /* ECAddConcertViewController.h */,
 				D4B1A245176E4C6900A95568 /* ECAddConcertViewController.m */,
 				D4B1A246176E4C6900A95568 /* ECAddConcertViewController.xib */,
@@ -643,6 +646,7 @@
 				A0A2B0BE177B381F00518B6C /* profileButton@2x.png in Resources */,
 				D4AA9775177C9562008F4E31 /* 37x-Checkmark.png in Resources */,
 				D4AA9776177C9562008F4E31 /* 37x-Checkmark@2x.png in Resources */,
+				A0A2B0C8177C99DA00518B6C /* ECNoResultsPlaceholder.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

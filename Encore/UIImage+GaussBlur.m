@@ -26,7 +26,7 @@
     // Blur vertically
     UIGraphicsBeginImageContext(self.size);
     [horizBlurredImage drawInRect:CGRectMake(0, 0, self.size.width, self.size.height) blendMode:kCGBlendModePlusLighter alpha:weight[0]];
-    for (int y = 1; y < 5; ++y) {
+    for (int y = 1; y < 3; ++y) {
         [horizBlurredImage drawInRect:CGRectMake(0, y, self.size.width, self.size.height) blendMode:kCGBlendModePlusLighter alpha:weight[y]];
         [horizBlurredImage drawInRect:CGRectMake(0, -y, self.size.width, self.size.height) blendMode:kCGBlendModePlusLighter alpha:weight[y]];
     }
