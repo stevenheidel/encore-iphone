@@ -134,7 +134,6 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     if (concerts.count) {
         self.foundArtistConcerts = TRUE;
         self.arrArtistConcerts = concerts;
-        [self hideNoResults];
         for (NSDictionary *concertDic in concerts) {
             NSURL *imageURL = [concertDic imageURL];
             UIImage *regImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL]];
@@ -145,10 +144,9 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
             }
         }
     } else {
-        //TODO: Error handling for no artist concerts found
         self.foundArtistConcerts = FALSE;
-        [self hideNoResults];
     }
+    [self hideNoResults];
     [self.tableView reloadData];
     [self.hud hide:YES];
 }
@@ -174,8 +172,9 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
             }
             NSDictionary *artistDic = (NSDictionary *)[self.arrArtistData objectAtIndex:indexPath.row];
             cell.textLabel.text = [artistDic artistName];
-            cell.textLabel.textColor = [UIColor colorWithRed:28.0/255.0 green:29.0/255.0 blue:31.0/255.0 alpha:1.0];
-            cell.contentView.backgroundColor = [self getCellColourForRow:[indexPath row]];
+            cell.textLabel.textColor = [UIColor colorWithRed:28.0/255.0 green:29.0/255.0 blue:31.0/255.0 alpha:0.8];
+            //cell.contentView.backgroundColor = [self getCellColourForRow:[indexPath row]];
+            cell.backgroundView.backgroundColor = [self getCellColourForRow:[indexPath row]];
             return cell;
         }
     } else {
@@ -221,8 +220,8 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
         // Create label with section title
         UILabel *label = [[UILabel alloc] init] ;
         label.frame = CGRectMake(0, 0, self.view.frame.size.width, ARTIST_HEADER_HEIGHT);
-        label.backgroundColor = [UIColor blackColor];
-        label.textColor = [UIColor whiteColor];
+        label.backgroundColor = [self getCellColourForRow:1];
+        label.textColor = [UIColor colorWithRed:28.0/255.0 green:29.0/255.0 blue:31.0/255.0 alpha:0.8];
         [label setAdjustsFontSizeToFitWidth:YES];
         label.font = [UIFont fontWithName:@"Hero" size:16.0];
         label.text = sectionTitle;
@@ -232,7 +231,12 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
         [headerView addSubview:label];
         return headerView;
     } else {
-        return nil;
+        UIImage *headerImage = [UIImage imageNamed:@"songkickattribution"];
+        UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, headerImage.size.height)];
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, headerImage.size.width, headerImage.size.height)];
+        imageView.image = headerImage;
+        [headerView addSubview:imageView];
+        return headerView;
     }
 }
 
@@ -240,7 +244,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     if (hasSearched) {
         return ARTIST_HEADER_HEIGHT;
     } else {
-        return 0;
+        return [UIImage imageNamed:@"songkickattribution"].size.height;
     }
 }
 
@@ -347,7 +351,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
                 [self fetchedArtists:artists];
             }];
             [self dismissKeyboard:nil];
-            self.hud.labelText = NSLocalizedString(@"SearchingFor", nil);
+            self.hud.labelText = NSLocalizedString(@"Searching", nil);
             self.hud.detailsLabelText = [NSString stringWithFormat:NSLocalizedString(@"hudSearchArtist", nil), [textField text]];
             [self.hud show:YES];
         } else {
@@ -392,7 +396,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
         self.hud.labelText = NSLocalizedString(@"SearchingFor", nil);
         
         //self.hud.minSize = CGSizeMake(260.f, 260.f);
-        self.hud.detailsLabelText = [NSString stringWithFormat:NSLocalizedString(@"hudSearchConcert", nil), [matchedArtistDic artistName], self.searchType ? NSLocalizedString(@"Upcoming", nil) : NSLocalizedString(@"Past", nil)];
+        self.hud.detailsLabelText = [NSString stringWithFormat:NSLocalizedString(@"hudSearchConcert", nil), self.searchType ? NSLocalizedString(@"Upcoming", nil) : NSLocalizedString(@"Past", nil), [matchedArtistDic artistName]];
 
         self.lastSelectedArtist = matchedArtistDic;
         

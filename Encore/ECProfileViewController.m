@@ -68,7 +68,7 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navbar.png"] forBarMetrics:UIBarMetricsDefault];
     [[UINavigationBar appearance] setBackgroundColor:[UIColor blackColor]];
     
-    [[UITableView appearance] setBackgroundColor:[UIColor blackColor]];
+    //[[UITableView appearance] setBackgroundColor:[UIColor blackColor]];
     
     ECAppDelegate *appDelegate = (ECAppDelegate *)[[UIApplication sharedApplication] delegate];
     [appDelegate performSelectorInBackground:@selector(getUserLocation) withObject:nil];

@@ -94,6 +94,19 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     return cell;
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UIImage *headerImage = [UIImage imageNamed:@"songkickattribution"];
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, headerImage.size.height)];
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, headerImage.size.width, headerImage.size.height)];
+    imageView.image = headerImage;
+    [headerView addSubview:imageView];
+    return headerView;
+                            
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return [UIImage imageNamed:@"songkickattribution"].size.height;
+}
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return CONCERT_CELL_HEIGHT;
 }
