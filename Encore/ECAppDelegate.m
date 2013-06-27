@@ -189,7 +189,6 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
         [defaults synchronize];
     }
     else !defaultID ? NSLog(@"No default ID saved") : NSLog(@"No change in User ID. Defaults not changed");
-    NSLog(@"%@",defaultID);
 }
 
 #pragma mark - location
