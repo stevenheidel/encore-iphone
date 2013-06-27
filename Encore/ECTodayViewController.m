@@ -36,8 +36,9 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    UIView * headerSpace = [[UIView alloc] initWithFrame: CGRectMake(self.tableView.frame.origin.x, self.tableView.frame.origin.y, self.tableView.frame.size.width, 3.0)]; //Added so shadow of horizontal bar doesn't overlap with view. Remove/change once designs in
-    self.tableView.tableHeaderView = headerSpace;
+//    UIView * headerSpace = [[UIView alloc] initWithFrame: CGRectMake(self.tableView.frame.origin.x, self.tableView.frame.origin.y, self.tableView.frame.size.width, 3.0)]; //Added so shadow of horizontal bar doesn't overlap with view. Remove/change once designs in
+    
+    self.tableView.tableHeaderView = [self headerView];
     self.tableView.tableFooterView = [UIView new];
     NSString *myIdentifier = @"ECConcertCellView";
     [self.tableView registerNib:[UINib nibWithNibName:@"ECConcertCellView" bundle:nil]
@@ -50,6 +51,16 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     self.hud.labelText = NSLocalizedString(@"loading", nil);
     self.hud.color = [UIColor colorWithRed:8.0/255.0 green:56.0/255.0 blue:76.0/255.0 alpha:0.90];
     self.hud.labelFont = [UIFont fontWithName:@"Hero" size:self.hud.labelFont.pointSize];
+}
+
+- (UIView *) headerView {
+    UIImage *headerImage = [UIImage imageNamed:@"songkicktest"];
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, headerImage.size.height)];
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, headerImage.size.width, headerImage.size.height)];
+    imageView.image = headerImage;
+    headerView.backgroundColor = [UIColor colorWithRed:225.0/255.0 green:224.0/255.0 blue:225.0/255.0 alpha:1.0];
+    [headerView addSubview:imageView];
+    return headerView;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -94,20 +105,20 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     return cell;
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    UIImage *headerImage = [UIImage imageNamed:@"songkicktest"];
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, headerImage.size.height)];
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, headerImage.size.width, headerImage.size.height)];
-    imageView.image = headerImage;
-    headerView.backgroundColor = [UIColor colorWithRed:225.0/255.0 green:224.0/255.0 blue:225.0/255.0 alpha:1.0];
-    [headerView addSubview:imageView];
-    return headerView;
-                            
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return [UIImage imageNamed:@"songkicktest"].size.height;
-}
+//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+//    UIImage *headerImage = [UIImage imageNamed:@"songkicktest"];
+//    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, headerImage.size.height)];
+//    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, headerImage.size.width, headerImage.size.height)];
+//    imageView.image = headerImage;
+//    headerView.backgroundColor = [UIColor colorWithRed:225.0/255.0 green:224.0/255.0 blue:225.0/255.0 alpha:1.0];
+//    [headerView addSubview:imageView];
+//    return headerView;
+//                            
+//}
+//
+//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+//    return [UIImage imageNamed:@"songkicktest"].size.height;
+//}
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return CONCERT_CELL_HEIGHT;
 }

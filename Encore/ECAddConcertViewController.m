@@ -84,6 +84,17 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     self.artistSearch.font = [UIFont fontWithName:@"Hero" size:15.0];
     self.lblNoresults.font = [UIFont fontWithName:@"Hero" size:22.0];
     self.tableView.tableFooterView = [UIView new];
+    self.tableView.tableHeaderView = [self headerView];
+}
+
+- (UIView *) headerView {
+    UIImage *headerImage = [UIImage imageNamed:@"songkicktest"];
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, headerImage.size.height)];
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, headerImage.size.width, headerImage.size.height)];
+    imageView.image = headerImage;
+    headerView.backgroundColor = [UIColor colorWithRed:225.0/255.0 green:224.0/255.0 blue:225.0/255.0 alpha:1.0];
+    [headerView addSubview:imageView];
+    return headerView;
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -231,13 +242,14 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
         [headerView addSubview:label];
         return headerView;
     } else {
-        UIImage *headerImage = [UIImage imageNamed:@"songkick"];
-        UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, headerImage.size.height)];
-        headerView.backgroundColor = [UIColor colorWithRed:225.0/255.0 green:224.0/255.0 blue:225.0/255.0 alpha:1.0];
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, headerImage.size.width, headerImage.size.height)];
-        imageView.image = headerImage;
-        [headerView addSubview:imageView];
-        return headerView;
+//        UIImage *headerImage = [UIImage imageNamed:@"songkick"];
+//        UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, headerImage.size.height)];
+//        headerView.backgroundColor = [UIColor colorWithRed:225.0/255.0 green:224.0/255.0 blue:225.0/255.0 alpha:1.0];
+//        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, headerImage.size.width, headerImage.size.height)];
+//        imageView.image = headerImage;
+//        [headerView addSubview:imageView];
+//        return headerView;
+        return nil;
     }
 }
 
@@ -245,7 +257,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     if (hasSearched) {
         return ARTIST_HEADER_HEIGHT;
     } else {
-        return [UIImage imageNamed:@"songkick"].size.height;
+        return 0;//[UIImage imageNamed:@"songkick"].size.height;
     }
 }
 
