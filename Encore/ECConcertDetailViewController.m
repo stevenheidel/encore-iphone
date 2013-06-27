@@ -163,8 +163,19 @@ typedef enum {
     [self.navigationItem setRightBarButtonItem:self.shareButton];
 }
 
+#pragma mark - FB Sharing
 -(void) shareTapped {
-    NSLog(@"share tapped");
+    NSLog(@"Share tapped");
+    NSURL* url = [NSURL URLWithString:@"https://developers.facebook.com/ios"];
+    
+    [FBDialogs presentShareDialogWithLink:url
+                                  handler:^(FBAppCall *call, NSDictionary *results, NSError *error) {
+                                      if(error) {
+                                          NSLog(@"Error: %@", error.description);
+                                      } else {
+                                          NSLog(@"Success!");
+                                      }
+                                  }];
 }
 
 #pragma mark - Adding/Removing Concerts
@@ -185,7 +196,6 @@ typedef enum {
 }
 
 -(void) removeConcert {
-    
     UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"confirm_remove_title", nil) message:NSLocalizedString(@"confirm_remove_message", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"cancel", nil) otherButtonTitles:NSLocalizedString(@"remove", nil), nil];
     alert.tag = RemoveConfirm;
     [alert show];    
