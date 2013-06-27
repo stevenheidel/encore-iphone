@@ -231,18 +231,23 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
         [self.locationSearch resignFirstResponder];
     } else {
         if (hasSearched) {
-            NSDictionary* data = (NSDictionary*)[self.arrArtistData objectAtIndex:indexPath.row];
-            NSNumber *artistID = [data songkickID];
-            void (^fetchedConcertsBlock)(NSArray*) = ^(NSArray* concerts){
-                [self fetchedArtistConcerts:concerts];
-            };
-            if (self.searchType == ECSearchTypePast) {
-                [ECJSONFetcher fetchConcertsForArtistID:artistID withSearchType:ECSearchTypePast completion:fetchedConcertsBlock];
-            } else {
-                [ECJSONFetcher fetchConcertsForArtistID:artistID withSearchType:ECSearchTypeFuture completion:fetchedConcertsBlock];
-            }
-            self.lastSelectedArtist = data;
-            [self.hud show:YES];
+            ECConcertDetailViewController * concertDetail = [[ECConcertDetailViewController alloc] init];
+            
+            concertDetail.concert = [self.arrArtistConcerts objectAtIndex:indexPath.row];
+            [self.navigationController pushViewController:concertDetail animated:YES];
+            
+//            NSDictionary* data = (NSDictionary*)[self.arrArtistData objectAtIndex:indexPath.row];
+//            NSNumber *artistID = [data songkickID];
+//            void (^fetchedConcertsBlock)(NSArray*) = ^(NSArray* concerts){
+//                [self fetchedArtistConcerts:concerts];
+//            };
+//            if (self.searchType == ECSearchTypePast) {
+//                [ECJSONFetcher fetchConcertsForArtistID:artistID withSearchType:ECSearchTypePast completion:fetchedConcertsBlock];
+//            } else {
+//                [ECJSONFetcher fetchConcertsForArtistID:artistID withSearchType:ECSearchTypeFuture completion:fetchedConcertsBlock];
+//            }
+//            self.lastSelectedArtist = data;
+//            [self.hud show:YES];
         } else {
             //User clicked on a popular concert
             ECConcertDetailViewController * concertDetail = [[ECConcertDetailViewController alloc] init];
@@ -285,7 +290,8 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
             [self fetchedArtists:artists];
         }];
         [self dismissKeyboard:nil];
-        [self.hud show: YES];
+        
+        [self.hud show:YES];
     } else {
         [textField resignFirstResponder];
     }
