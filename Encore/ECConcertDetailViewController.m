@@ -197,7 +197,7 @@ typedef enum {
 
 -(void) toggleOnProfileState {
     self.isOnProfile = !self.isOnProfile;
-    self.toolbar.addButton.title = self.isOnProfile ? @"Remove" : @"Add";
+    self.toolbar.addButton.title = self.isOnProfile ? NSLocalizedString(@"remove", nil) : NSLocalizedString(@"add", nil);
 }
 
 -(void) loadImages {

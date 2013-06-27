@@ -19,13 +19,6 @@
 "AddPast" = "Add Past";
 "AddFuture" = "Add Upcoming";
 
-////URLs
-//"BaseURL_TEST" = "http://192.168.11.15:9283/api/v1/";
-//"BaseURL" = "http://staging.encoretheapp.com/api/v1/";
-//"UsersURL" = "users";
-//"ConcertsURL" = "concerts";
-//"PostsURL" = "posts";
-
 //Add Concert View
 "Header" = "%@ concerts for %@ in %@:";
 "Past" = "Recent";
@@ -34,7 +27,8 @@
 
 //Concert Detail
 "LiveNow" = "Live Now";
-
+"remove" = "Remove";
+"add" = "Add";
 //Today table
 "TodayTableTitle" = "Today's Concerts in Your Area";
 "today" = "TODAY";
@@ -45,3 +39,4 @@
 //Photo picker
 "new_from_camera" = "Take new picture";
 "pick_from_lib" = "Select from photo library";
+"photo_picker_title" = "Post Photo";
