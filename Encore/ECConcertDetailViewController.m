@@ -5,7 +5,7 @@
 //  Created by Shimmy on 2013-06-13.
 //  Copyright (c) 2013 Encore. All rights reserved.
 //
-
+#import "EncoreURL.h"
 #import <QuartzCore/QuartzCore.h>
 #import "ECConcertDetailViewController.h"
 #import "NSDictionary+ConcertList.h"
@@ -125,11 +125,11 @@ typedef enum {
     [ECJSONFetcher checkIfConcert:[self.concert songkickID] isOnProfile:userID completion:^(BOOL isOnProfile) {
         if (!isOnProfile) {
             self.isOnProfile = FALSE;
-            self.toolbar.addButton.title = @"Add";
+            self.toolbar.addButton.title = NSLocalizedString(@"add", nil);
         }
         else {
             self.isOnProfile = TRUE;
-            self.toolbar.addButton.title = @"Remove";
+            self.toolbar.addButton.title = NSLocalizedString(@"remove", nil);
         }
     }];
 }
@@ -163,8 +163,21 @@ typedef enum {
     [self.navigationItem setRightBarButtonItem:self.shareButton];
 }
 
+#pragma mark - FB Sharing
 -(void) shareTapped {
-    NSLog(@"share tapped");
+    NSLog(@"Share tapped");
+    //baseurl + /concerts/:songkickId
+    NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:ShareConcertURL,self.songkickID]];
+    if ([FBDialogs canPresentShareDialogWithParams:nil]) {
+        [FBDialogs presentShareDialogWithLink:url
+                                      handler:^(FBAppCall *call, NSDictionary *results, NSError *error) {
+                                          if(error) {
+                                              NSLog(@"Error: %@", error.description);
+                                          } else {
+                                              NSLog(@"Success!");
+                                          }
+                                      }];
+    }
 }
 
 #pragma mark - Adding/Removing Concerts
@@ -185,7 +198,6 @@ typedef enum {
 }
 
 -(void) removeConcert {
-    
     UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"confirm_remove_title", nil) message:NSLocalizedString(@"confirm_remove_message", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"cancel", nil) otherButtonTitles:NSLocalizedString(@"remove", nil), nil];
     alert.tag = RemoveConfirm;
     [alert show];    

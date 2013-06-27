@@ -20,7 +20,7 @@
 
 +(void) fetchConcertsForArtistID:(NSNumber *)artistID withSearchType:(ECSearchType)searchType completion: (void (^)(NSArray* concerts)) completion;
 
-+(void) fetchPostsForConcertWithID: (NSNumber *) serverID completion: (void (^)(NSArray* fetchedPosts)) completion;
++(void) fetchPostsForConcertWithID: (NSNumber *) concertID completion: (void (^)(NSArray* fetchedPosts)) completion;
 +(void) checkIfConcert: (NSNumber*) concertID isOnProfile: (NSString *) userID completion: (void (^)(BOOL isOnProfile)) completion;
 
 @property (nonatomic,unsafe_unretained) id <ECJSONFetcherDelegate> delegate;

@@ -25,4 +25,8 @@
     id returnString = [self objectForKey:@"caption"];
     return returnString == [NSNull null] ? @"" : returnString;
 }
+
+-(NSNumber*) id {
+    return [self objectForKey:@"id"];
+}
 @end
