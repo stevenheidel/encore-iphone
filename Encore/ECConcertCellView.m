@@ -22,19 +22,16 @@
     self.lblLocation.text = [concertDic venueName];
     self.lblLocation.font = [UIFont fontWithName:@"Hero" size:14.0];
     
+    //TODO: Move this code to setUpCellImageForConcert: once we have a way to recognized if the server sent a blank image or not
     self.imageArtist.image = [UIImage imageNamed:@"placeholder.jpg"];
     self.imageArtist.layer.cornerRadius = 30.0;
     self.imageArtist.layer.masksToBounds = YES;
-    self.imageArtist.layer.borderColor = [UIColor grayColor].CGColor;
-    self.imageArtist.layer.borderWidth = 3.0;
     
-    self.imageBackground.image = [[UIImage imageNamed:@"sampleArtistImage.jpg"] imageWithGaussianBlur];
     self.selectionStyle = UITableViewCellSelectionStyleNone;
 }
 
-- (void)setUpCellImagesForConcert:(NSMutableDictionary *)imageDic {
-    self.imageArtist.image = [imageDic regularImage];
-    self.imageBackground.image = [imageDic gaussImage];
+- (void)setUpCellImageForConcert:(UIImage *)image {
+    self.imageArtist.image = image;
 }
 
 @end

@@ -66,13 +66,12 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     
     for (NSDictionary *concertDic in concerts) {
         NSURL *imageURL = [concertDic imageURL];
-        NSURL *backgroundURL = [concertDic backgroundURL];
         UIImage *regImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL]];
-        UIImage *gaussImage = [[UIImage imageWithData:[NSData dataWithContentsOfURL:backgroundURL]] imageWithGaussianBlur];
-        
-        NSMutableDictionary *imageDic = [[NSMutableDictionary alloc] init];
-        [imageDic addImages:regImage :gaussImage];
-        [self.arrTodaysImages addObject:imageDic];
+        if (regImage) {
+            [self.arrTodaysImages addObject:regImage];
+        } else {
+            [self.arrTodaysImages addObject:[UIImage imageNamed:@"placeholder.jpg"]];
+        }
     }
     [self.tableView reloadData];
     [self.hud hide:YES];
@@ -84,10 +83,14 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     
     ECConcertCellView *cell = [tableView dequeueReusableCellWithIdentifier:myIdentifier forIndexPath:indexPath];
     NSDictionary * concertDic = [self.arrTodaysConcerts objectAtIndex:indexPath.row];
-    NSMutableDictionary *imageDic = [self.arrTodaysImages objectAtIndex:indexPath.row];
+    UIImage *image = [self.arrTodaysImages objectAtIndex:indexPath.row];
     [cell setUpCellForConcert:concertDic];
-    [cell setUpCellImagesForConcert:imageDic];
-
+    [cell setUpCellImageForConcert:image];
+    if ([indexPath row] % 2) {
+        cell.contentView.backgroundColor = [UIColor whiteColor];
+    } else {
+        cell.contentView.backgroundColor = [UIColor colorWithRed:246.0/255.0 green:248.0/255.0 blue:250.0/255.0 alpha:1.0];
+    }
     return cell;
 }
 

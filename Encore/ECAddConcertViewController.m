@@ -111,13 +111,13 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
         [self.arrPopularImages removeAllObjects];
         for (NSDictionary *concertDic in concerts) {
             NSURL *imageURL = [concertDic imageURL];
-            NSURL *backgroundURL = [concertDic backgroundURL];
             UIImage *regImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL]];
-            UIImage *gaussImage = [[UIImage imageWithData:[NSData dataWithContentsOfURL:backgroundURL]] imageWithGaussianBlur];
-            
-            NSMutableDictionary *imageDic = [[NSMutableDictionary alloc] init];
-            [imageDic addImages:regImage :gaussImage];
-            [self.arrPopularImages addObject:imageDic];
+ 
+            if (regImage) {
+                [self.arrPopularImages addObject:regImage];
+            } else {
+                [self.arrPopularImages addObject:[UIImage imageNamed:@"placeholder.jpg"]];
+            }
         }
         [self.tableView reloadData];
         [self hideNoResults];
@@ -134,15 +134,15 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     if (concerts.count) {
         self.foundArtistConcerts = TRUE;
         self.arrArtistConcerts = concerts;
+        [self hideNoResults];
         for (NSDictionary *concertDic in concerts) {
             NSURL *imageURL = [concertDic imageURL];
-            NSURL *backgroundURL = [concertDic backgroundURL];
             UIImage *regImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL]];
-            UIImage *gaussImage = [[UIImage imageWithData:[NSData dataWithContentsOfURL:backgroundURL]] imageWithGaussianBlur];
-            
-            NSMutableDictionary *imageDic = [[NSMutableDictionary alloc] init];
-            [imageDic addImages:regImage :gaussImage];
-            [self.arrArtistImages addObject:imageDic];
+            if (regImage) {
+                [self.arrArtistImages addObject:regImage];
+            } else {
+                [self.arrArtistImages addObject:[UIImage imageNamed:@"placeholder.jpg"]];
+            }
         }
     } else {
         //TODO: Error handling for no artist concerts found
@@ -161,9 +161,10 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
             static NSString *myIdentifier = @"ECConcertCellView";
             ECConcertCellView *cell = [tableView dequeueReusableCellWithIdentifier:myIdentifier forIndexPath:indexPath];
             NSDictionary *concertDic = [self.arrArtistConcerts objectAtIndex:indexPath.row];
-            NSMutableDictionary *imageDic = [self.arrArtistImages objectAtIndex:indexPath.row];
+            UIImage *image = [self.arrArtistImages objectAtIndex:indexPath.row];
             [(ECConcertCellView *)cell setUpCellForConcert:concertDic];
-            [(ECConcertCellView *)cell setUpCellImagesForConcert:imageDic];
+            [(ECConcertCellView *)cell setUpCellImageForConcert:image];
+            cell.contentView.backgroundColor = [self getCellColourForRow:[indexPath row]];
             return cell;
         } else {
             UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:ArtistCellIdentifier];
@@ -172,7 +173,8 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
             }
             NSDictionary *artistDic = (NSDictionary *)[self.arrArtistData objectAtIndex:indexPath.row];
             cell.textLabel.text = [artistDic artistName];
-            cell.textLabel.textColor = [UIColor whiteColor];
+            cell.textLabel.textColor = [UIColor colorWithRed:28.0/255.0 green:29.0/255.0 blue:31.0/255.0 alpha:1.0];
+            cell.contentView.backgroundColor = [self getCellColourForRow:[indexPath row]];
             return cell;
         }
     } else {
@@ -180,10 +182,19 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
         
         ECConcertCellView *cell = [tableView dequeueReusableCellWithIdentifier:myIdentifier forIndexPath:indexPath];
         NSDictionary * concertDic = [self.arrPopularData objectAtIndex:indexPath.row];
-        NSMutableDictionary *imageDic = [self.arrPopularImages objectAtIndex:indexPath.row];
+        UIImage *image = [self.arrPopularImages objectAtIndex:indexPath.row];
         [(ECConcertCellView *)cell setUpCellForConcert:concertDic];
-        [(ECConcertCellView *)cell setUpCellImagesForConcert:imageDic];
+        [(ECConcertCellView *)cell setUpCellImageForConcert:image];
+        cell.contentView.backgroundColor = [self getCellColourForRow:[indexPath row]];
         return cell;
+    }
+}
+
+- (UIColor *)getCellColourForRow:(int)row {
+    if (row % 2) {
+        return [UIColor whiteColor];
+    } else {
+        return [UIColor colorWithRed:246.0/255.0 green:248.0/255.0 blue:250.0/255.0 alpha:1.0];
     }
 }
 
