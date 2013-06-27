@@ -420,8 +420,12 @@ typedef enum {
         NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"ECPostPlaceholder" owner:owner options:nil];
         self = [subviewArray objectAtIndex:0];
         self.frame = frame;
-        self.label1.font = [UIFont fontWithName:@"Hero" size:22.0];
-        self.label2.font = [UIFont fontWithName:@"Hero" size:22.0];
+        self.label1.font = [UIFont fontWithName:@"Hero" size:18.0];
+        self.label2.font = [UIFont fontWithName:@"Hero" size:18.0];
+        
+        self.label1.text = NSLocalizedString(@"POST_PLACEHOLDER_TEXT_1", nil);
+        self.label2.text = NSLocalizedString(@"POST_PLACEHOLDER_TEXT_2", nil);
+        
 //        self.button.titleLabel.font = [UIFont fontWithName:@"Hero" size:22.0];
     }
     return self;
