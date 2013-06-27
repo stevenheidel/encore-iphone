@@ -103,37 +103,49 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
 }
 
 -(void) fetchedPopularConcerts:(NSArray *)concerts {
-    self.arrPopularData = concerts;
-    [self.arrPopularImages removeAllObjects];
-    for (NSDictionary *concertDic in concerts) {
-        NSURL *imageURL = [concertDic imageURL];
-        NSURL *backgroundURL = [concertDic backgroundURL];
-        UIImage *regImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL]];
-        UIImage *gaussImage = [[UIImage imageWithData:[NSData dataWithContentsOfURL:backgroundURL]] imageWithGaussianBlur];
+    
+    if (concerts.count) {
+        self.arrPopularData = concerts;
+        [self.arrPopularImages removeAllObjects];
+        for (NSDictionary *concertDic in concerts) {
+            NSURL *imageURL = [concertDic imageURL];
+            NSURL *backgroundURL = [concertDic backgroundURL];
+            UIImage *regImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL]];
+            UIImage *gaussImage = [[UIImage imageWithData:[NSData dataWithContentsOfURL:backgroundURL]] imageWithGaussianBlur];
+            
+            NSMutableDictionary *imageDic = [[NSMutableDictionary alloc] init];
+            [imageDic addImages:regImage :gaussImage];
+            [self.arrPopularImages addObject:imageDic];
+        }
+        [self.tableView reloadData];
+        [self.hud hide:YES];
+    } else {
+        //TODO: Error handling for no popular concerts found
         
-        NSMutableDictionary *imageDic = [[NSMutableDictionary alloc] init];
-        [imageDic addImages:regImage :gaussImage];
-        [self.arrPopularImages addObject:imageDic];
+        [self.hud hide:YES];
     }
-    [self.tableView reloadData];
-    [self.hud hide:YES];
 }
 
 - (void)fetchedArtistConcerts:(NSArray *)concerts {
-    hasSearched = TRUE;
-    self.arrArtistConcerts = concerts;
-    for (NSDictionary *concertDic in concerts) {
-        NSURL *imageURL = [concertDic imageURL];
-        NSURL *backgroundURL = [concertDic backgroundURL];
-        UIImage *regImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL]];
-        UIImage *gaussImage = [[UIImage imageWithData:[NSData dataWithContentsOfURL:backgroundURL]] imageWithGaussianBlur];
-        
-        NSMutableDictionary *imageDic = [[NSMutableDictionary alloc] init];
-        [imageDic addImages:regImage :gaussImage];
-        [self.arrArtistImages addObject:imageDic];
+    
+    if (concerts.count) {
+        hasSearched = TRUE;
+        self.arrArtistConcerts = concerts;
+        for (NSDictionary *concertDic in concerts) {
+            NSURL *imageURL = [concertDic imageURL];
+            NSURL *backgroundURL = [concertDic backgroundURL];
+            UIImage *regImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL]];
+            UIImage *gaussImage = [[UIImage imageWithData:[NSData dataWithContentsOfURL:backgroundURL]] imageWithGaussianBlur];
+            
+            NSMutableDictionary *imageDic = [[NSMutableDictionary alloc] init];
+            [imageDic addImages:regImage :gaussImage];
+            [self.arrArtistImages addObject:imageDic];
+        }
+        [self.tableView reloadData];
+        [self.hud hide:YES];
+    } else {
+        //TODO: Error handling for no artist concerts found
     }
-    [self.tableView reloadData];
-    [self.hud hide:YES];
 }
 
 #pragma mark - UITableView methods
@@ -288,14 +300,17 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     if (textField.tag == 0) {
         //[self clearSearchResultsTable];
-        
-        [ECJSONFetcher fetchArtistsForString:[textField text] completion:^(NSArray *artists) {
-            [self fetchedArtists:artists];
-        }];
-        [self dismissKeyboard:nil];
-        self.hud.labelText = NSLocalizedString(@"SearchingFor", nil);
-        self.hud.detailsLabelText = [NSString stringWithFormat:NSLocalizedString(@"hudSearchArtist", nil), [textField text]];
-        [self.hud show:YES];
+        if (textField.text.length > 0) {
+            [ECJSONFetcher fetchArtistsForString:[textField text] completion:^(NSArray *artists) {
+                [self fetchedArtists:artists];
+            }];
+            [self dismissKeyboard:nil];
+            self.hud.labelText = NSLocalizedString(@"SearchingFor", nil);
+            self.hud.detailsLabelText = [NSString stringWithFormat:NSLocalizedString(@"hudSearchArtist", nil), [textField text]];
+            [self.hud show:YES];
+        } else {
+            [textField resignFirstResponder];
+        }
     } else {
         [textField resignFirstResponder];
     }
