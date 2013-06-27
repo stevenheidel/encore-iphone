@@ -125,11 +125,11 @@ typedef enum {
     [ECJSONFetcher checkIfConcert:[self.concert songkickID] isOnProfile:userID completion:^(BOOL isOnProfile) {
         if (!isOnProfile) {
             self.isOnProfile = FALSE;
-            self.toolbar.addButton.title = @"Add";
+            self.toolbar.addButton.title = NSLocalizedString(@"add", nil);
         }
         else {
             self.isOnProfile = TRUE;
-            self.toolbar.addButton.title = @"Remove";
+            self.toolbar.addButton.title = NSLocalizedString(@"remove", nil);
         }
     }];
 }
