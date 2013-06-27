@@ -406,7 +406,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
             [ECJSONFetcher fetchConcertsForArtistID:artistID withSearchType:ECSearchTypeFuture completion:fetchedConcertsBlock];
         }
         
-        self.hud.labelText = NSLocalizedString(@"SearchingFor", nil);
+        self.hud.labelText = NSLocalizedString(@"Searching", nil);
         
         //self.hud.minSize = CGSizeMake(260.f, 260.f);
         self.hud.detailsLabelText = [NSString stringWithFormat:NSLocalizedString(@"hudSearchConcert", nil), self.searchType ? NSLocalizedString(@"Upcoming", nil) : NSLocalizedString(@"Past", nil), [matchedArtistDic artistName]];
