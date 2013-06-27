@@ -46,7 +46,6 @@
 		D4A8DDBC176A133B005E9847 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D4A8DDB3176A133B005E9847 /* InfoPlist.strings */; };
 		D4A8DDBD176A133B005E9847 /* ECCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4A8DDB5176A133B005E9847 /* ECCollectionCell.xib */; };
 		D4A8DDBE176A133B005E9847 /* CustomCellBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A8DDB7176A133B005E9847 /* CustomCellBackground.m */; };
-		D4A8DDC1176A13DB005E9847 /* ECMyConcertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4A8DDC0176A13DB005E9847 /* ECMyConcertViewController.xib */; };
 		D4A8DDC4176A20D2005E9847 /* ECJSONPoster.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A8DDC3176A20D2005E9847 /* ECJSONPoster.m */; };
 		D4A8DDCA176A39BA005E9847 /* NSDate+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A8DDC9176A39B9005E9847 /* NSDate+JSON.m */; };
 		D4A8DDCE176A405D005E9847 /* ECPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A8DDCC176A405D005E9847 /* ECPostViewController.m */; };
@@ -83,7 +82,6 @@
 		D4B1A247176E4C6900A95568 /* ECAddConcertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4B1A245176E4C6900A95568 /* ECAddConcertViewController.m */; };
 		D4B1A248176E4C6900A95568 /* ECAddConcertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4B1A246176E4C6900A95568 /* ECAddConcertViewController.xib */; };
 		D4B1A24B176E704A00A95568 /* ECTodayCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4B1A24A176E704A00A95568 /* ECTodayCellView.xib */; };
-		D4B502B117680CB700E0C52B /* ECMyConcertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4B502B017680CB700E0C52B /* ECMyConcertViewController.m */; };
 		D4B502B3176823E600E0C52B /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D4B502B2176823E600E0C52B /* Icon.png */; };
 		D4B502B5176823EA00E0C52B /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4B502B4176823EA00E0C52B /* Icon@2x.png */; };
 		D4B6707A176F57E000A80BA3 /* ECTodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4B67078176F57E000A80BA3 /* ECTodayViewController.m */; };
@@ -149,6 +147,7 @@
 		D4A7BEA7177B2F3B00C22D91 /* UIImage+Orientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Orientation.m"; sourceTree = "<group>"; };
 		D4A7BEA9177B713400C22D91 /* EncoreURL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EncoreURL.h; sourceTree = "<group>"; };
 		D4A7BEAA177B731F00C22D91 /* Staging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Staging.h; sourceTree = "<group>"; };
+		D4A7BEAB177BFF3700C22D91 /* ECSearchType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECSearchType.h; sourceTree = "<group>"; };
 		D4A8DDAB176A133B005E9847 /* NSDictionary+Posts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Posts.h"; sourceTree = "<group>"; };
 		D4A8DDAC176A133B005E9847 /* NSDictionary+Posts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Posts.m"; sourceTree = "<group>"; };
 		D4A8DDAD176A133B005E9847 /* ECConcertDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECConcertDetailViewController.m; sourceTree = "<group>"; };
@@ -160,7 +159,6 @@
 		D4A8DDB5176A133B005E9847 /* ECCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECCollectionCell.xib; sourceTree = "<group>"; };
 		D4A8DDB6176A133B005E9847 /* CustomCellBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCellBackground.h; sourceTree = "<group>"; };
 		D4A8DDB7176A133B005E9847 /* CustomCellBackground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCellBackground.m; sourceTree = "<group>"; };
-		D4A8DDC0176A13DB005E9847 /* ECMyConcertViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECMyConcertViewController.xib; sourceTree = "<group>"; };
 		D4A8DDC2176A20D2005E9847 /* ECJSONPoster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECJSONPoster.h; sourceTree = "<group>"; };
 		D4A8DDC3176A20D2005E9847 /* ECJSONPoster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECJSONPoster.m; sourceTree = "<group>"; };
 		D4A8DDC8176A39B9005E9847 /* NSDate+JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+JSON.h"; sourceTree = "<group>"; };
@@ -211,8 +209,6 @@
 		D4B1A245176E4C6900A95568 /* ECAddConcertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECAddConcertViewController.m; sourceTree = "<group>"; };
 		D4B1A246176E4C6900A95568 /* ECAddConcertViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECAddConcertViewController.xib; sourceTree = "<group>"; };
 		D4B1A24A176E704A00A95568 /* ECTodayCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECTodayCellView.xib; sourceTree = "<group>"; };
-		D4B502AF17680CB700E0C52B /* ECMyConcertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECMyConcertViewController.h; sourceTree = "<group>"; };
-		D4B502B017680CB700E0C52B /* ECMyConcertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECMyConcertViewController.m; sourceTree = "<group>"; };
 		D4B502B2176823E600E0C52B /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = ../Icon.png; sourceTree = "<group>"; };
 		D4B502B4176823EA00E0C52B /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "../Icon@2x.png"; sourceTree = "<group>"; };
 		D4B67077176F57E000A80BA3 /* ECTodayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECTodayViewController.h; sourceTree = "<group>"; };
@@ -432,9 +428,6 @@
 		D4AA4D2C1766B9B0009B0635 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				D4A8DDC0176A13DB005E9847 /* ECMyConcertViewController.xib */,
-				D4B502AF17680CB700E0C52B /* ECMyConcertViewController.h */,
-				D4B502B017680CB700E0C52B /* ECMyConcertViewController.m */,
 				D4A2F6CC176959BD00A9E3BF /* ECProfileViewController.xib */,
 				D4AA4D331766BB03009B0635 /* ECProfileViewController.h */,
 				D4AA4D341766BB03009B0635 /* ECProfileViewController.m */,
@@ -509,6 +502,7 @@
 			children = (
 				D4AC35FA1768C8B20087B1E9 /* ECJSONFetcher.h */,
 				D4AC35FB1768C8B20087B1E9 /* ECJSONFetcher.m */,
+				D4A7BEAB177BFF3700C22D91 /* ECSearchType.h */,
 				D4A8DDC2176A20D2005E9847 /* ECJSONPoster.h */,
 				D4A8DDC3176A20D2005E9847 /* ECJSONPoster.m */,
 			);
@@ -610,7 +604,6 @@
 				D4A8DDBB176A133B005E9847 /* ECConcertDetailViewController.xib in Resources */,
 				D4A8DDBC176A133B005E9847 /* InfoPlist.strings in Resources */,
 				D4A8DDBD176A133B005E9847 /* ECCollectionCell.xib in Resources */,
-				D4A8DDC1176A13DB005E9847 /* ECMyConcertViewController.xib in Resources */,
 				D4A8DDCF176A405D005E9847 /* ECPostViewController.xib in Resources */,
 				D4A8DDD3176A8885005E9847 /* placeholder.jpg in Resources */,
 				D4A8DDED176AB650005E9847 /* gray_gradient_background.png in Resources */,
@@ -710,7 +703,6 @@
 				D4AC35FC1768C8B20087B1E9 /* ECJSONFetcher.m in Sources */,
 				D4AA4D301766BA8C009B0635 /* ECLoginViewController.m in Sources */,
 				D4AA4D361766BB03009B0635 /* ECProfileViewController.m in Sources */,
-				D4B502B117680CB700E0C52B /* ECMyConcertViewController.m in Sources */,
 				D4A8DDB8176A133B005E9847 /* NSDictionary+Posts.m in Sources */,
 				D4A8DDB9176A133B005E9847 /* ECConcertDetailViewController.m in Sources */,
 				D4A8DDBA176A133B005E9847 /* Cell.m in Sources */,
