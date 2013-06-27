@@ -231,8 +231,9 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
         [headerView addSubview:label];
         return headerView;
     } else {
-        UIImage *headerImage = [UIImage imageNamed:@"songkickattribution"];
+        UIImage *headerImage = [UIImage imageNamed:@"songkick"];
         UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, headerImage.size.height)];
+        headerView.backgroundColor = [UIColor colorWithRed:225.0/255.0 green:224.0/255.0 blue:225.0/255.0 alpha:1.0];
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, headerImage.size.width, headerImage.size.height)];
         imageView.image = headerImage;
         [headerView addSubview:imageView];
@@ -244,7 +245,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     if (hasSearched) {
         return ARTIST_HEADER_HEIGHT;
     } else {
-        return [UIImage imageNamed:@"songkickattribution"].size.height;
+        return [UIImage imageNamed:@"songkick"].size.height;
     }
 }
 
