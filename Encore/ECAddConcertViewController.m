@@ -147,6 +147,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     } else {
         //TODO: Error handling for no artist concerts found
         self.foundArtistConcerts = FALSE;
+        [self hideNoResults];
     }
     [self.tableView reloadData];
     [self.hud hide:YES];
@@ -376,7 +377,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
          matchedArtistDic = [artists objectAtIndex:0];
          }
          */
-        NSLog(@"%@",artists);
+        //NSLog(@"%@",artists);
         matchedArtistDic = [artists objectAtIndex:0]; //If using kickass piece of code above, please remove this line
         NSNumber *artistID = [matchedArtistDic songkickID];
         void (^fetchedConcertsBlock)(NSArray*) = ^(NSArray* concerts){
