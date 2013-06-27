@@ -42,8 +42,8 @@ static NSString *const TodayPopularConcertsURL = @BASE_URL_DEF CONCERTS_DEF "/" 
 
 //Artists
 static NSString *const ArtistSearchURL = @BASE_URL_DEF ARTISTS_DEF "/" SEARCH_DEF "%@"; //, searchStr
-static NSString *const ArtistConcertSearchPastURL = @BASE_URL_DEF ARTISTS_DEF "/%@/" CONCERTS_DEF "/" PAST_DEF "/" CITY_DEF "%@"; //, artistID, userLocation
-static NSString *const ArtistConcertSearchFutureURL = @BASE_URL_DEF ARTISTS_DEF "/%@/" CONCERTS_DEF "/" FUTURE_DEF "/" CITY_DEF "%@"; //artistID, , userLocation
+static NSString *const ArtistConcertSearchPastURL = @BASE_URL_DEF ARTISTS_DEF "/%@/" CONCERTS_DEF "/" PAST_DEF "?" CITY_DEF "%@"; //, artistID, userLocation
+static NSString *const ArtistConcertSearchFutureURL = @BASE_URL_DEF ARTISTS_DEF "/%@/" CONCERTS_DEF "/" FUTURE_DEF "?" CITY_DEF "%@"; //artistID, , userLocation
 
 //Posts
 static NSString *const ConcertPostsURL = @BASE_URL_DEF CONCERTS_DEF "/%@/" POSTS_DEF ; //,concertID
