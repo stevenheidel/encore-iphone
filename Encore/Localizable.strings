@@ -29,6 +29,7 @@
 "LiveNow" = "Live Now";
 "remove" = "Remove";
 "add" = "Add";
+
 //Today table
 "TodayTableTitle" = "Today's Concerts in Your Area";
 "today" = "TODAY";
@@ -40,3 +41,11 @@
 "new_from_camera" = "Take new picture";
 "pick_from_lib" = "Select from photo library";
 "photo_picker_title" = "Post Photo";
+
+//Action sheet for confirming concert adding/removal
+"confirm_remove_title" = "Remove Concert from Profile";
+"confirm_remove_message" = "Do you want to remove this concert from your profile?";
+"confirm_add_title" = "Add Concert to Profile";
+"confirm_add_message" = "Do you want to add this concert to your profile?";
+"concert_added" = "Concert Added";
+"concert_removed" = "Concert Removed";

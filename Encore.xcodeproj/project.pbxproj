@@ -76,6 +76,8 @@
 		D4AA4D311766BA8C009B0635 /* ECLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4AA4D2F1766BA8C009B0635 /* ECLoginViewController.xib */; };
 		D4AA4D361766BB03009B0635 /* ECProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AA4D341766BB03009B0635 /* ECProfileViewController.m */; };
 		D4AA4D391766F3D0009B0635 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D4AA4D381766F3D0009B0635 /* Localizable.strings */; };
+		D4AA9775177C9562008F4E31 /* 37x-Checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AA9773177C9562008F4E31 /* 37x-Checkmark.png */; };
+		D4AA9776177C9562008F4E31 /* 37x-Checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AA9774177C9562008F4E31 /* 37x-Checkmark@2x.png */; };
 		D4AC35F91768C5850087B1E9 /* NSDictionary+ConcertList.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AC35F81768C5850087B1E9 /* NSDictionary+ConcertList.m */; };
 		D4AC35FC1768C8B20087B1E9 /* ECJSONFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AC35FB1768C8B20087B1E9 /* ECJSONFetcher.m */; };
 		D4B0AC4717727FDA00DC4DD2 /* ECPostPlaceholder.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4B0AC4617727FDA00DC4DD2 /* ECPostPlaceholder.xib */; };
@@ -200,6 +202,8 @@
 		D4AA4D331766BB03009B0635 /* ECProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECProfileViewController.h; sourceTree = "<group>"; };
 		D4AA4D341766BB03009B0635 /* ECProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECProfileViewController.m; sourceTree = "<group>"; };
 		D4AA4D381766F3D0009B0635 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		D4AA9773177C9562008F4E31 /* 37x-Checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37x-Checkmark.png"; sourceTree = "<group>"; };
+		D4AA9774177C9562008F4E31 /* 37x-Checkmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37x-Checkmark@2x.png"; sourceTree = "<group>"; };
 		D4AC35F71768C5850087B1E9 /* NSDictionary+ConcertList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+ConcertList.h"; sourceTree = "<group>"; };
 		D4AC35F81768C5850087B1E9 /* NSDictionary+ConcertList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+ConcertList.m"; sourceTree = "<group>"; };
 		D4AC35FA1768C8B20087B1E9 /* ECJSONFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECJSONFetcher.h; sourceTree = "<group>"; };
@@ -301,6 +305,8 @@
 		D4A8DDD1176A44A0005E9847 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				D4AA9773177C9562008F4E31 /* 37x-Checkmark.png */,
+				D4AA9774177C9562008F4E31 /* 37x-Checkmark@2x.png */,
 				A0A2B0BD177B381F00518B6C /* profileButton@2x.png */,
 				A0A2B0BB177B324F00518B6C /* profileButton.png */,
 				A022AACE177A39B00009244C /* magnifyglass.png */,
@@ -635,6 +641,8 @@
 				D4C9C085177A090800F864FC /* instagram.jpg in Resources */,
 				A0A2B0BC177B324F00518B6C /* profileButton.png in Resources */,
 				A0A2B0BE177B381F00518B6C /* profileButton@2x.png in Resources */,
+				D4AA9775177C9562008F4E31 /* 37x-Checkmark.png in Resources */,
+				D4AA9776177C9562008F4E31 /* 37x-Checkmark@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

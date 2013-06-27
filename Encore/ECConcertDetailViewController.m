@@ -20,13 +20,17 @@
 
 #import "UIImage+GaussBlur.h"
 
+#import "MBProgressHUD.h"
+#define HUD_DELAY 0.9
 
 //#import "SGSStaggeredFlowLayout.h"
 
 NSString *kCellID = @"cellID";
 typedef enum {
-    PhotoSourcePicker
-}ECActionSheetTag;
+    PhotoSourcePicker,
+    AddConfirm,
+    RemoveConfirm
+}ECTag;
 @interface ECConcertDetailViewController (){
 //    SGSStaggeredFlowLayout* _flowLayout;
 
@@ -45,6 +49,7 @@ typedef enum {
     return self;
 }
 
+#pragma mark - View Setup
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -129,77 +134,6 @@ typedef enum {
     }];
 }
 
--(IBAction) addToProfile {
-        if (!self.isOnProfile) {
-            [self addConcert];
-        }
-        else {
-            [self removeConcert];
-        }
-}
-
--(void) setUpRightBarButton {
-    self.shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(shareTapped)];
-}
-
--(void) shareTapped {
-    NSLog(@"share tapped");
-}
-
-//Property readonly getter to grab songkickID in a slightly shorter way
--(NSNumber*) songkickID {
-    return [self.concert songkickID];
-}
-
--(NSString*) userID {
-    return [[NSUserDefaults standardUserDefaults] stringForKey:NSLocalizedString(@"user_id", nil)];
-}
-
--(void) addConcert {
-    NSString * userID = self.userID;
-    NSLog(@"%@: Adding concert %@ to profile %@",NSStringFromClass(self.class),self.songkickID.stringValue,userID);
-    [ECJSONPoster addConcert:self.songkickID toUser:userID completion:^{
-        [self completedAddingConcert];
-    }];
-}
-
--(void) removeConcert {
-    NSString * userID = self.userID;
-    NSNumber * songkickID = self.songkickID;
-    NSLog(@"%@: Removing a concert %@ from profile %@",NSStringFromClass(self.class),songkickID,userID);
-    [ECJSONPoster removeConcert:songkickID toUser:userID completion:^{
-        [self completedRemovingConcert];
-    }];
-}
-
--(ECProfileViewController*) profileViewController {
-    ECAppDelegate* appDel = (ECAppDelegate *)[UIApplication sharedApplication].delegate;
-    return appDel.profileViewController;
-}
-
--(void) completedAddingConcert {
-    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Woohoo!" message:@"You added a concert" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-    [alert show];
-    [self toggleOnProfileState];
-    
-    [[self profileViewController] refreshForConcertID:self.songkickID];
-    //Refresh for concert ID will make profile vc pop back to itself
-}
-
--(void) completedRemovingConcert {
-    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Woohoo!" message:@"You removed a concert" delegate:nil cancelButtonTitle:NSLocalizedString(@"ok", nil) otherButtonTitles: nil];
-    [alert show];
-    [self toggleOnProfileState];
-
-    [[self profileViewController] refreshForConcertID:nil];
-    //Refresh for concert ID will make profile vc pop back to itself
-}   
-
--(void) toggleOnProfileState {
-    self.isOnProfile = !self.isOnProfile;
-    self.toolbar.addButton.title = self.isOnProfile ? NSLocalizedString(@"remove", nil) : NSLocalizedString(@"add", nil);
-}
-
 -(void) loadImages {
     NSNumber* serverID = [self.concert serverID];
     if (serverID) {
@@ -224,10 +158,108 @@ typedef enum {
     }
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(void) setUpRightBarButton {
+    self.shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(shareTapped)];
+    [self.navigationItem setRightBarButtonItem:self.shareButton];
+}
+
+-(void) shareTapped {
+    NSLog(@"share tapped");
+}
+
+#pragma mark - Adding/Removing Concerts
+
+-(IBAction) addToProfile {
+    if (!self.isOnProfile) {
+        [self addConcert];
+    }
+    else {
+        [self removeConcert];
+    }
+}
+
+-(void) addConcert {
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"confirm_add_title", nil) message:NSLocalizedString(@"confirm_add_message", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"cancel", nil) otherButtonTitles:NSLocalizedString(@"add", nil), nil];
+    alert.tag = AddConfirm;
+    [alert show];
+}
+
+-(void) removeConcert {
+    
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"confirm_remove_title", nil) message:NSLocalizedString(@"confirm_remove_message", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"cancel", nil) otherButtonTitles:NSLocalizedString(@"remove", nil), nil];
+    alert.tag = RemoveConfirm;
+    [alert show];    
+}
+
+-(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == alertView.firstOtherButtonIndex) {
+        NSString * userID = self.userID;
+        NSNumber * songkickID = self.songkickID;
+        switch (alertView.tag) {
+            case AddConfirm: {
+                NSLog(@"%@: Adding concert %@ to profile %@",NSStringFromClass(self.class),songkickID.stringValue,userID);
+                [ECJSONPoster addConcert:songkickID toUser:userID completion:^{
+                    [self completedAddingConcert];
+                }];
+                break;
+            }
+            case RemoveConfirm: {
+                NSLog(@"%@: Removing a concert %@ from profile %@",NSStringFromClass(self.class),songkickID,userID);
+                [ECJSONPoster removeConcert:songkickID toUser:userID completion:^{
+                    [self completedRemovingConcert];
+                }];
+                break;
+            }
+            default:
+                break;
+        }
+    }
+}
+
+-(void) completedAddingConcert {
+    MBProgressHUD* HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+	[self.navigationController.view addSubview:HUD];
+	
+	// The sample image is based on the work by http://www.pixelpressicons.com, http://creativecommons.org/licenses/by/2.5/ca/
+	// Make the customViews 37 by 37 pixels for best results (those are the bounds of the build-in progress indicators)
+	HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
+	
+	// Set custom view mode
+	HUD.mode = MBProgressHUDModeCustomView;
+	
+	HUD.labelText = NSLocalizedString(@"concert_added",nil);
+    HUD.color = [UIColor colorWithRed:0.0/255.0 green:176.0/255.0 blue:227.0/255.0 alpha:0.90];
+	[HUD show:YES];
+	[HUD hide:YES afterDelay:HUD_DELAY];
+    [self toggleOnProfileState];
+    
+    [[self profileViewController] refreshForConcertID:self.songkickID];
+    //Refresh for concert ID will make profile vc pop back to itself
+}
+
+-(void) completedRemovingConcert {
+    MBProgressHUD* HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+	[self.navigationController.view addSubview:HUD];
+	
+	// TODO replace with our own or a free X icon
+	HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
+	
+	// Set custom view mode
+	HUD.mode = MBProgressHUDModeCustomView;
+	
+	HUD.labelText = NSLocalizedString(@"concert_removed", nil);
+    HUD.color = [UIColor colorWithRed:255.0/255.0 green:51.0/255.0 blue:51.0/255.0 alpha:0.90];
+	[HUD show:YES];
+	[HUD hide:YES afterDelay:HUD_DELAY];
+
+    [[self profileViewController] refreshForConcertID:nil];
+    //Refresh for concert ID will make profile vc pop back to itself
+}   
+
+//Toggle whether or not the profile is on the user's profile.
+-(void) toggleOnProfileState {
+    self.isOnProfile = !self.isOnProfile;
+    self.toolbar.addButton.title = self.isOnProfile ? NSLocalizedString(@"remove", nil) : NSLocalizedString(@"add", nil);
 }
 
 //#pragma mark - UICollectionViewDelegateFlowLayout
@@ -297,20 +329,6 @@ typedef enum {
     [actionSheet showInView:self.view];
 }
 
--(void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if (actionSheet.tag == PhotoSourcePicker ) {
-        NSString* selectedSource;
-        UIImagePickerControllerSourceType sourceType;
-        if(buttonIndex != actionSheet.cancelButtonIndex){
-            selectedSource = [actionSheet buttonTitleAtIndex:buttonIndex];
-            if ([selectedSource isEqualToString:NSLocalizedString(@"new_from_camera", nil)]) {
-                sourceType = UIImagePickerControllerSourceTypeCamera;
-            }
-            else sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-            [self showImagePickerForSourceType: sourceType];
-        }
-    }
-}
 
 -(void) showImagePickerForSourceType: (UIImagePickerControllerSourceType) sourceType {
     UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
@@ -335,7 +353,24 @@ typedef enum {
     }];
 }
 
+#pragma mark - Action Sheet Delegate
+-(void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (actionSheet.tag == PhotoSourcePicker ) {
+        NSString* selectedSource;
+        UIImagePickerControllerSourceType sourceType;
+        if(buttonIndex != actionSheet.cancelButtonIndex){
+            selectedSource = [actionSheet buttonTitleAtIndex:buttonIndex];
+            if ([selectedSource isEqualToString:NSLocalizedString(@"new_from_camera", nil)]) {
+                sourceType = UIImagePickerControllerSourceTypeCamera;
+            }
+            else sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            [self showImagePickerForSourceType: sourceType];
+        }
+    }
+}
+
 #pragma mark - post view controller delegate
+
 -(NSDictionary*) requestPost:(NSInteger)direction currentIndex:(NSInteger)index {
     NSInteger newIndex = index + direction;
     if (newIndex < 0) {
@@ -346,6 +381,21 @@ typedef enum {
     }
     
     return [NSDictionary dictionaryWithObjectsAndKeys:[self.posts objectAtIndex:newIndex], @"dic", [NSNumber numberWithInt:newIndex], @"index",nil];
+}
+
+#pragma mark - getters
+//Property readonly getter to grab songkickID in a slightly shorter way
+-(NSNumber*) songkickID {
+    return [self.concert songkickID];
+}
+
+-(NSString*) userID {
+    return [[NSUserDefaults standardUserDefaults] stringForKey:NSLocalizedString(@"user_id", nil)];
+}
+
+-(ECProfileViewController*) profileViewController {
+    ECAppDelegate* appDel = (ECAppDelegate *)[UIApplication sharedApplication].delegate;
+    return appDel.profileViewController;
 }
 
 @end
