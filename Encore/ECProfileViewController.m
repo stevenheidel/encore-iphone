@@ -8,7 +8,6 @@
 
 #import "ECProfileViewController.h"
 #import "ECAppDelegate.h"
-#import "ECMyConcertViewController.h"
 #import "ECConcertChildViewController.h"
 #import "ECConcertDetailViewController.h"
 #import "ECJSONFetcher.h"
@@ -159,18 +158,14 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
 }
 
 #pragma mark - button actions
--(IBAction)viewConcerts:(id)sender{
-    ECMyConcertViewController * concertsVC = [[ECMyConcertViewController alloc] init];
-    ECJSONFetcher * jsonFetcher = [[ECJSONFetcher alloc] init];
-    jsonFetcher.delegate = concertsVC;
-    concertsVC.title = @"My Concerts";
-    [jsonFetcher fetchConcertsForUserId:self.facebook_id];
-    [self.navigationController pushViewController:concertsVC animated:YES];
-}
+
 -(void) fetchConcerts {
-    ECJSONFetcher * jsonFetcher = [[ECJSONFetcher alloc] init];
-    jsonFetcher.delegate = self;
-    [jsonFetcher fetchConcertsForUserId:self.facebook_id];
+    [ECJSONFetcher fetchConcertsForUserID:self.facebook_id completion:^(NSDictionary *concerts) {
+        NSLog(@"Successfully fetched %d past concerts and %d future concerts", [[concerts past] count],[[concerts future]count]);
+        self.concerts = [NSMutableDictionary dictionaryWithDictionary: concerts];
+        [self setUpHorizontalSelect]; //only setting up horizontal select once the concert data is received
+        [self selectTodayCell];
+    }];
 }
 
 -(IBAction)viewFriends:(id)sender{
@@ -213,13 +208,13 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
     }
 }
 
-#pragma mark - json fetcher delegate
--(void) fetchedConcerts: (NSDictionary *) concerts {
-    NSLog(@"Successfully fetched %d past concerts and %d future concerts", [[concerts past] count],[[concerts future]count]);
-    self.concerts = [NSMutableDictionary dictionaryWithDictionary: concerts];
-    [self setUpHorizontalSelect]; //only setting up horizontal select once the concert data is received
-    [self selectTodayCell];
-}
+//#pragma mark - json fetcher delegate
+//-(void) fetchedConcerts: (NSDictionary *) concerts {
+//    NSLog(@"Successfully fetched %d past concerts and %d future concerts", [[concerts past] count],[[concerts future]count]);
+//    self.concerts = [NSMutableDictionary dictionaryWithDictionary: concerts];
+//    [self setUpHorizontalSelect]; //only setting up horizontal select once the concert data is received
+//    [self selectTodayCell];
+//}
 
 #pragma mark - horizontal slider
 -(void) setUpHorizontalSelect {
@@ -295,10 +290,7 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
             break;
         case ECCellTypePastShows:
         case ECCellTypeFutureShows:
-            //self.concertChildVC =[ECConcertChildViewController new];
             self.concertChildVC = [ECConcertDetailViewController new];
-            self.concertChildVC.delegate = self;
-            self.concertChildVC.isChildVC = TRUE;
             break;
         case ECCellTypeAddFuture:
             self.addFutureConcertVC = [ECAddConcertViewController new];

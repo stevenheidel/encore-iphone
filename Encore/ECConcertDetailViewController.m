@@ -210,12 +210,23 @@ typedef enum {
 -(void) loadImages {
     NSNumber* serverID = [self.concert serverID];
     if (serverID) {
-        ECJSONFetcher * fetcher = [[ECJSONFetcher alloc] init];
-        fetcher.delegate = self;
-        [fetcher fetchPostsForConcertWithID:serverID];
+        [ECJSONFetcher fetchPostsForConcertWithID:serverID completion:^(NSArray *fetchedPosts) {
+            [self fetchedPosts:fetchedPosts];
+        }];
     }
     else {
         NSLog(@"%@: Can't load images, object doesn't have a server_id", NSStringFromClass([self class]));
+        [self setUpPlaceholderView];
+    }
+}
+
+-(void) fetchedPosts: (NSArray *) posts {
+    self.posts = posts;
+    if ([self.posts count] > 0) {
+        [self.collectionView reloadData];
+        [self.placeholderView removeFromSuperview];
+    }
+    else {
         [self setUpPlaceholderView];
     }
 }
@@ -329,17 +340,6 @@ typedef enum {
     [ECJSONPoster postImage: imageDic completion:^{
         NSLog(@"Complete!");
     }];
-}
-#pragma mark - json fetcher delegate
--(void) fetchedPosts: (NSArray *) posts {
-    self.posts = posts;
-    if ([self.posts count] > 0) {
-        [self.collectionView reloadData];
-        [self.placeholderView removeFromSuperview];
-    }
-    else {
-        [self setUpPlaceholderView];
-    }
 }
 
 #pragma mark - post view controller delegate

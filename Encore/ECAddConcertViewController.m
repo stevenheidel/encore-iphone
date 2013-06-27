@@ -17,6 +17,7 @@
 #import "NSMutableDictionary+ConcertImages.h"
 #import "UIImageView+AFNetworking.h"
 
+#import "ECJSONFetcher.h"
 
 #define ARTIST_HEADER_HEIGHT 30.0
 
@@ -64,8 +65,6 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    self.JSONFetcher = [[ECJSONFetcher alloc] init];
-    self.JSONFetcher.delegate = self;
     hasSearched = FALSE;
     self.lastSelectedArtist = nil;
     self.hud = [[MBProgressHUD alloc] initWithView:self.view];
@@ -86,11 +85,14 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
 }
 
 -(void)viewWillAppear:(BOOL)animated {
+    void (^fetchedBlock)(NSArray*) = ^(NSArray* concerts){
+        [self fetchedPopularConcerts:concerts];
+    };
     if (!hasSearched && self.arrPopularData == nil) {
         if (self.searchType == ECSearchTypePast) {
-            [self.JSONFetcher fetchPopularConcertsWithSearchType:ECSearchTypePast];
+            [ECJSONFetcher fetchPopularConcertsWithSearchType:ECSearchTypePast completion:fetchedBlock];
         } else {
-            [self.JSONFetcher fetchPopularConcertsWithSearchType:ECSearchTypeFuture];
+            [ECJSONFetcher fetchPopularConcertsWithSearchType:ECSearchTypeFuture completion:fetchedBlock];
         }
         [self.hud show:YES];
     }
@@ -99,8 +101,6 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
 - (void)viewWillDisappear:(BOOL)animated {
     [self.hud hide:NO];
 }
-
-#pragma mark - ECJSONFetcherDelegate Methods
 
 -(void) fetchedPopularConcerts:(NSArray *)concerts {
     self.arrPopularData = concerts;
@@ -117,36 +117,6 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     }
     [self.tableView reloadData];
     [self.hud hide:YES];
-}
-
--(void)fetchedArtists:(NSArray *)artists {
-    self.arrArtistData = artists;
-    hasSearched = TRUE;
-    NSDictionary * matchedArtistDic = nil;
-    
-    /* This kickass piece of code will find if an artist was returned with the exact name that was searched for and if not use the first artist returned
-    for (NSDictionary *artistDic in artists) {
-        if ([[artistDic artistName] isEqualToString:self.artistSearch.text]) {
-            matchedArtistDic = artistDic;
-            break;
-        }
-    }
-    if (!matchedArtistDic) {
-        matchedArtistDic = [artists objectAtIndex:0];
-    }
-    */
-    matchedArtistDic = [artists objectAtIndex:0]; //If using kickass piece of code above, please remove this line
-    NSNumber *artistID = [matchedArtistDic songkickID];
-    if (self.searchType == ECSearchTypePast) {
-        [self.JSONFetcher fetchConcertsForArtistID:artistID withSearchType:ECSearchTypePast];
-    } else {
-        [self.JSONFetcher fetchConcertsForArtistID:artistID withSearchType:ECSearchTypeFuture];
-    }
-    self.lastSelectedArtist = matchedArtistDic;
-    
-//    [self.tableView reloadData];
-//    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
-//    [self.hud hide: YES];
 }
 
 - (void)fetchedArtistConcerts:(NSArray *)concerts {
@@ -263,7 +233,6 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     }
 }
 
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     if ([self.artistSearch isFirstResponder] || [self.locationSearch isFirstResponder]) {
@@ -273,11 +242,13 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
         if (hasSearched) {
             NSDictionary* data = (NSDictionary*)[self.arrArtistData objectAtIndex:indexPath.row];
             NSNumber *artistID = [data songkickID];
-            
+            void (^fetchedConcertsBlock)(NSArray*) = ^(NSArray* concerts){
+                [self fetchedArtistConcerts:concerts];
+            };
             if (self.searchType == ECSearchTypePast) {
-                [self.JSONFetcher fetchConcertsForArtistID:artistID withSearchType:ECSearchTypePast];
+                [ECJSONFetcher fetchConcertsForArtistID:artistID withSearchType:ECSearchTypePast completion:fetchedConcertsBlock];
             } else {
-                [self.JSONFetcher fetchConcertsForArtistID:artistID withSearchType:ECSearchTypeFuture];
+                [ECJSONFetcher fetchConcertsForArtistID:artistID withSearchType:ECSearchTypeFuture completion:fetchedConcertsBlock];
             }
             self.lastSelectedArtist = data;
             [self.hud show:YES];
@@ -319,7 +290,9 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     if (textField.tag == 0) {
         //[self clearSearchResultsTable];
-        [self.JSONFetcher fetchArtistsForString:[textField text]];
+        [ECJSONFetcher fetchArtistsForString:[textField text] completion:^(NSArray *artists) {
+            [self fetchedArtists:artists];
+        }];
         [self dismissKeyboard:nil];
         [self.hud show: YES];
     } else {
@@ -327,6 +300,39 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     }
     
     return YES;
+}
+
+-(void)fetchedArtists:(NSArray *)artists {
+    self.arrArtistData = artists;
+    hasSearched = TRUE;
+    NSDictionary * matchedArtistDic = nil;
+    
+    /* This kickass piece of code will find if an artist was returned with the exact name that was searched for and if not use the first artist returned
+     for (NSDictionary *artistDic in artists) {
+     if ([[artistDic artistName] isEqualToString:self.artistSearch.text]) {
+     matchedArtistDic = artistDic;
+     break;
+     }
+     }
+     if (!matchedArtistDic) {
+     matchedArtistDic = [artists objectAtIndex:0];
+     }
+     */
+    matchedArtistDic = [artists objectAtIndex:0]; //If using kickass piece of code above, please remove this line
+    NSNumber *artistID = [matchedArtistDic songkickID];
+    void (^fetchedConcertsBlock)(NSArray*) = ^(NSArray* concerts){
+        [self fetchedArtistConcerts:concerts];
+    };
+    if (self.searchType == ECSearchTypePast) {
+        [ECJSONFetcher fetchConcertsForArtistID:artistID withSearchType:ECSearchTypePast completion:fetchedConcertsBlock];
+    } else {
+        [ECJSONFetcher fetchConcertsForArtistID:artistID withSearchType:ECSearchTypeFuture completion:fetchedConcertsBlock];
+    }
+    self.lastSelectedArtist = matchedArtistDic;
+    
+    //    [self.tableView reloadData];
+    //    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+    //    [self.hud hide: YES];
 }
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField {

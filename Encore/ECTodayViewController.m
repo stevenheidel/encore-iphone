@@ -13,6 +13,7 @@
 #import "MBProgressHUD.h"
 #import "UIImage+GaussBlur.h"
 #import "NSMutableDictionary+ConcertImages.h"
+#import "ECJSONFetcher.h"
 
 static NSString *const ConcertCellIdentifier = @"concertCell";
 
@@ -52,12 +53,28 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
 
 - (void)viewWillAppear:(BOOL)animated {
     if (self.arrTodaysConcerts == nil) {
-        ECJSONFetcher *JSONFetcher = [[ECJSONFetcher alloc] init];
-        JSONFetcher.delegate = self;
-        [JSONFetcher fetchPopularConcertsWithSearchType:ECSearchTypeToday];
+        [ECJSONFetcher fetchPopularConcertsWithSearchType:ECSearchTypeToday completion:^(NSArray *concerts) {
+            [self fetchedPopularConcerts:concerts];
+        }];
         [self.hud show:YES];
     }
+}
+
+-(void) fetchedPopularConcerts:(NSArray *)concerts {
+    self.arrTodaysConcerts = concerts;
     
+    for (NSDictionary *concertDic in concerts) {
+        NSURL *imageURL = [concertDic imageURL];
+        NSURL *backgroundURL = [concertDic backgroundURL];
+        UIImage *regImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL]];
+        UIImage *gaussImage = [[UIImage imageWithData:[NSData dataWithContentsOfURL:backgroundURL]] imageWithGaussianBlur];
+        
+        NSMutableDictionary *imageDic = [[NSMutableDictionary alloc] init];
+        [imageDic addImages:regImage :gaussImage];
+        [self.arrTodaysImages addObject:imageDic];
+    }
+    [self.tableView reloadData];
+    [self.hud hide:YES];
 }
 
 #pragma mark - UITableView methods
@@ -87,24 +104,6 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     
     concertDetail.concert = [self.arrTodaysConcerts objectAtIndex:indexPath.row];
     [self.navigationController pushViewController:concertDetail animated:YES];
-}
-
-#pragma mark - ECJSONFetcher methods
--(void) fetchedPopularConcerts:(NSArray *)concerts {
-    self.arrTodaysConcerts = concerts;
-    
-    for (NSDictionary *concertDic in concerts) {
-        NSURL *imageURL = [concertDic imageURL];
-        NSURL *backgroundURL = [concertDic backgroundURL];
-        UIImage *regImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL]];
-        UIImage *gaussImage = [[UIImage imageWithData:[NSData dataWithContentsOfURL:backgroundURL]] imageWithGaussianBlur];
-        
-        NSMutableDictionary *imageDic = [[NSMutableDictionary alloc] init];
-        [imageDic addImages:regImage :gaussImage];
-        [self.arrTodaysImages addObject:imageDic];
-    }
-    [self.tableView reloadData];
-    [self.hud hide:YES];
 }
 
 - (void)didReceiveMemoryWarning
