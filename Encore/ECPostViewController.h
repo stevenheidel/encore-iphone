@@ -17,7 +17,7 @@
 @property (nonatomic,strong) IBOutlet UILabel * userNameLabel;
 @property (nonatomic,assign) NSInteger itemNumber;
 @property (nonatomic,strong) IBOutlet UIView* containerView;
-
+@property (nonatomic,readonly) NSNumber * postID;
 @property (nonatomic,unsafe_unretained) id <ECPostViewControllerDelegate> delegate;
 @end
 

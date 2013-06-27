@@ -10,6 +10,9 @@
 #import "NSDictionary+Posts.h"
 #import "UIImageView+AFNetworking.h"
 #import <QuartzCore/QuartzCore.h>
+#import "EncoreURL.h"
+#import <FacebookSDK/FacebookSDK.h>
+
 @interface ECPostViewController ()
 
 @end
@@ -110,13 +113,26 @@
 }
 
 -(void) shareTapped {
-    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Share" message:@"NO SHARING FOR YOU!!!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-    [alert show];
+    //TODO: Check if user can present share dialogs and if not switch to using web to share
+    
+    //baseurl + /posts/:Id
+    NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:SharePostURL,self.postID]];
+    // if ([FBDialogs canPresentShareDialogWithParams:nil]) {
+    
+    [FBDialogs presentShareDialogWithLink:url
+                                  handler:^(FBAppCall *call, NSDictionary *results, NSError *error) {
+                                      if(error) {
+                                          NSLog(@"Error: %@", error.description);
+                                      } else {
+                                          NSLog(@"Success!");
+                                      }
+                                  }];
+    //    }
 }
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
+#pragma mark - Getters
+-(NSNumber*) postID {
+    return [self.post postID];
 }
 
 @end

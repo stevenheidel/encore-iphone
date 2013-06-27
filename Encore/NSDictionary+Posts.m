@@ -26,7 +26,7 @@
     return returnString == [NSNull null] ? @"" : returnString;
 }
 
--(NSNumber*) id {
+-(NSNumber*) postID {
     return [self objectForKey:@"id"];
 }
 @end
