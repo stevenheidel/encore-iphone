@@ -18,7 +18,7 @@
 -(void) fetchConcerts;
 -(void) updateViewWithNewConcert: (NSNumber *) concertID;
 -(void) showGestureForSwipeRecognizer:(UISwipeGestureRecognizer *)recognizer;
--(void) refresh;
+-(void) refreshForConcertID: (NSNumber*) concertID;
 
 @property (strong, nonatomic) FBUserSettingsViewController *settingsViewController;
 @property (strong, nonatomic) NSString * facebook_id;

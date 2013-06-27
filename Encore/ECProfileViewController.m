@@ -39,6 +39,7 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
     return self;
 }
 
+#pragma mark - View Setup
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -87,22 +88,28 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
     [self.view addGestureRecognizer:recognizerLeft];
 }
 
+#pragma mark View Updating
+-(void) refreshForConcertID:(NSNumber*) concertID {
+    [self.navigationController popToViewController:self animated:YES];
+    [self updateViewWithNewConcert: concertID];
+}
+
 -(void) updateViewWithNewConcert: (NSNumber *) concertID {
     [ECJSONFetcher fetchConcertsForUserID:self.facebook_id completion:^(NSDictionary *concerts) {
         [self.concerts setDictionary:concerts];
         [self.horizontalSelect setTableData: self.concerts];
         [self.horizontalSelect.tableView reloadData];
-        [self selectTodayCell];
+        [self scrollToConcertWithID:concertID];
+        //If concertID is nil, as in the case of a removal, then the scrolling function will scroll to the today cell
     }];
- //TODO: scroll to the new concert
-//    if(concertID){
-//        [self scrollToConcertWithID: concertID];
-//    }
 }
 
-
--(void) scrollToConcertWithID: (NSNumber*) concertID{
-    [self selectIndexPath:[self indexPathForConcert: concertID] animated: NO];
+-(void) scrollToConcertWithID: (NSNumber*) concertID {
+    if(concertID) {
+        [self selectIndexPath:[self indexPathForConcert: concertID] animated: NO];
+    }
+    else
+        [self selectTodayCell];
 }
 
 -(NSIndexPath *) indexPathForConcert: (NSNumber*) concertID{
@@ -327,11 +334,6 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
 }
 -(CGRect) childViewControllerRect{
     return CGRectMake(self.horizontalSelect.frame.origin.x, self.horizontalSelect.frame.origin.y+self.horizontalSelect.frame.size.height, self.horizontalSelect.frame.size.width, self.view.frame.size.height-self.horizontalSelect.frame.size.height);
-}
-
--(void) refresh{
-    [self.navigationController popToViewController:self animated:YES];
-    [self updateViewWithNewConcert: nil];
 }
 
 #pragma mark - gestures

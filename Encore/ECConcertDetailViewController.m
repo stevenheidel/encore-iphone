@@ -172,25 +172,27 @@ typedef enum {
     }];
 }
 
+-(ECProfileViewController*) profileViewController {
+    ECAppDelegate* appDel = (ECAppDelegate *)[UIApplication sharedApplication].delegate;
+    return appDel.profileViewController;
+}
+
 -(void) completedAddingConcert {
     UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Woohoo!" message:@"You added a concert" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
     [alert show];
     [self toggleOnProfileState];
     
-   #warning [Simon]: probably shouldn't do it this way (ie. popping to root)
-    
-    ECAppDelegate* appDel = (ECAppDelegate *)[UIApplication sharedApplication].delegate;
-    ECProfileViewController* profile = appDel.profileViewController;
-    [profile refresh];
+    [[self profileViewController] refreshForConcertID:self.songkickID];
+    //Refresh for concert ID will make profile vc pop back to itself
 }
 
 -(void) completedRemovingConcert {
-    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Woohoo!" message:@"You removed a concert" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Woohoo!" message:@"You removed a concert" delegate:nil cancelButtonTitle:NSLocalizedString(@"ok", nil) otherButtonTitles: nil];
     [alert show];
     [self toggleOnProfileState];
-    ECAppDelegate* appDel = (ECAppDelegate *)[UIApplication sharedApplication].delegate;
-    ECProfileViewController* profile = appDel.profileViewController;
-    [profile refresh];
+
+    [[self profileViewController] refreshForConcertID:nil];
+    //Refresh for concert ID will make profile vc pop back to itself
 }   
 
 -(void) toggleOnProfileState {
