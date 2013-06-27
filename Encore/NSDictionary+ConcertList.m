@@ -17,7 +17,7 @@ static NSString * const kDateFormat = @"yyyy-MM-dd";
     NSDate *date = [dateFormat dateFromString:dateStr];
     
     [dateFormat setDateFormat:@"MMMM d, yyyy"];
-    return [[dateFormat stringFromDate:date] capitalizedString];
+    return [[dateFormat stringFromDate:date] uppercaseString];
 }
 
 -(NSString *) artistName {
