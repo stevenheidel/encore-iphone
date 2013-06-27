@@ -26,7 +26,10 @@
 "loading" = "Loading";
 "SearchingFor" = "Searching for";
 "hudSearchArtist" = "%@";
-"hudSearchConcert" = "%@'s %@ concerts"; 
+"hudSearchConcert" = "%@'s %@ concerts";
+"NoPopularResults" = "Couldn't find any popular %@ concerts.\nTry searching for a specific artist in the search bar above";
+"NoArtistResults" = "Couldn't find an artist named %@.\n Please make sure all words are spelled correctly or try another artist";
+"NoConcertResults" = "No concerts found. Did you mean?";
 
 //Concert Detail
 "LiveNow" = "Live Now";

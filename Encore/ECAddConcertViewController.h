@@ -16,19 +16,20 @@
 }
 
 @property (nonatomic, assign) ECSearchType searchType;
+@property (nonatomic, assign) BOOL foundArtistConcerts;
 @property (strong, nonatomic) NSArray *arrArtistData;
 @property (strong, nonatomic) NSArray *arrArtistConcerts;
 @property (strong, nonatomic) NSArray *arrPopularData;
 @property (strong, nonatomic) NSMutableArray *arrPopularImages;
 @property (strong, nonatomic) NSMutableArray *arrArtistImages;
+
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
-//@property (strong, nonatomic) IBOutlet ECCustomSearchBar *searchBar;
 @property (strong, nonatomic) IBOutlet UITextField *artistSearch;
 @property (strong, nonatomic) IBOutlet UITextField *locationSearch;
 @property (strong, nonatomic) IBOutlet UIButton *btnLocationIcon;
 @property (strong, nonatomic) IBOutlet UIButton *btnSearchIcon;
 @property (strong, nonatomic) IBOutlet UIView * searchDivisor;
-//@property (strong, nonatomic) IBOutlet UILabel *lblLocation;
+@property (strong, nonatomic) IBOutlet UILabel *lblNoresults;
 @property (strong, nonatomic) MBProgressHUD * hud;
 
 @property (nonatomic, assign) NSDictionary * lastSelectedArtist;

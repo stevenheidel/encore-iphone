@@ -18,6 +18,7 @@
 #import "ECJSONFetcher.h"
 
 #define ARTIST_HEADER_HEIGHT 30.0
+#define ARTIST_CELL_HEIGHT 50.0
 
 #pragma mark - Search bar animation constants
 
@@ -81,6 +82,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     self.arrPopularImages = [[NSMutableArray alloc] init];
     self.locationSearch.font = [UIFont fontWithName:@"Hero" size:15.0];
     self.artistSearch.font = [UIFont fontWithName:@"Hero" size:15.0];
+    self.lblNoresults.font = [UIFont fontWithName:@"Hero" size:22.0];
     self.tableView.tableFooterView = [UIView new];
 }
 
@@ -118,18 +120,19 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
             [self.arrPopularImages addObject:imageDic];
         }
         [self.tableView reloadData];
+        [self hideNoResults];
         [self.hud hide:YES];
     } else {
-        //TODO: Error handling for no popular concerts found
-        
+        self.lblNoresults.text = [NSString stringWithFormat:NSLocalizedString(@"NoPopularResults", nil), self.searchType ? NSLocalizedString(@"Upcoming", nil) : NSLocalizedString(@"Past", nil)];
+        [self showNoResults];
         [self.hud hide:YES];
     }
 }
 
 - (void)fetchedArtistConcerts:(NSArray *)concerts {
-    
+    hasSearched = TRUE;
     if (concerts.count) {
-        hasSearched = TRUE;
+        self.foundArtistConcerts = TRUE;
         self.arrArtistConcerts = concerts;
         for (NSDictionary *concertDic in concerts) {
             NSURL *imageURL = [concertDic imageURL];
@@ -141,11 +144,12 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
             [imageDic addImages:regImage :gaussImage];
             [self.arrArtistImages addObject:imageDic];
         }
-        [self.tableView reloadData];
-        [self.hud hide:YES];
     } else {
         //TODO: Error handling for no artist concerts found
+        self.foundArtistConcerts = FALSE;
     }
+    [self.tableView reloadData];
+    [self.hud hide:YES];
 }
 
 #pragma mark - UITableView methods
@@ -153,21 +157,24 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
     if (hasSearched) {
-        static NSString *myIdentifier = @"ECConcertCellView";
-        ECConcertCellView *cell = [tableView dequeueReusableCellWithIdentifier:myIdentifier forIndexPath:indexPath];
-        NSDictionary *concertDic = [self.arrArtistConcerts objectAtIndex:indexPath.row];
-        NSMutableDictionary *imageDic = [self.arrArtistImages objectAtIndex:indexPath.row];
-        [(ECConcertCellView *)cell setUpCellForConcert:concertDic];
-        [(ECConcertCellView *)cell setUpCellImagesForConcert:imageDic];
-        return cell;
-//        UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:ArtistCellIdentifier];
-//        if (cell == nil) {
-//            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ArtistCellIdentifier];
-//        }
-//        NSDictionary *artistDic = (NSDictionary *)[self.arrArtistData objectAtIndex:indexPath.row];
-//        cell.textLabel.text = [artistDic artistName];
-//        cell.textLabel.textColor = [UIColor whiteColor];
-//        return cell;
+        if (self.foundArtistConcerts) {
+            static NSString *myIdentifier = @"ECConcertCellView";
+            ECConcertCellView *cell = [tableView dequeueReusableCellWithIdentifier:myIdentifier forIndexPath:indexPath];
+            NSDictionary *concertDic = [self.arrArtistConcerts objectAtIndex:indexPath.row];
+            NSMutableDictionary *imageDic = [self.arrArtistImages objectAtIndex:indexPath.row];
+            [(ECConcertCellView *)cell setUpCellForConcert:concertDic];
+            [(ECConcertCellView *)cell setUpCellImagesForConcert:imageDic];
+            return cell;
+        } else {
+            UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:ArtistCellIdentifier];
+            if (cell == nil) {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ArtistCellIdentifier];
+            }
+            NSDictionary *artistDic = (NSDictionary *)[self.arrArtistData objectAtIndex:indexPath.row];
+            cell.textLabel.text = [artistDic artistName];
+            cell.textLabel.textColor = [UIColor whiteColor];
+            return cell;
+        }
     } else {
         static NSString *myIdentifier = @"ECConcertCellView";
         
@@ -182,7 +189,11 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (hasSearched) {
-        return CONCERT_CELL_HEIGHT;
+        if (self.foundArtistConcerts) {
+            return CONCERT_CELL_HEIGHT;
+        } else {
+            return ARTIST_CELL_HEIGHT;
+        }
     } else {
         return CONCERT_CELL_HEIGHT;
     }
@@ -223,7 +234,11 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     if (hasSearched) {
-        return [NSString stringWithFormat:NSLocalizedString(@"Header", nil), self.searchType ? NSLocalizedString(@"Upcoming", nil) : NSLocalizedString(@"Past", nil), [self.lastSelectedArtist artistName], @"Toronto, ON"]; //TODO: set location dynamically
+        if (self.foundArtistConcerts) {
+            return [NSString stringWithFormat:NSLocalizedString(@"Header", nil), self.searchType ? NSLocalizedString(@"Upcoming", nil) : NSLocalizedString(@"Past", nil), [self.lastSelectedArtist artistName], @"Toronto, ON"]; //TODO: set location dynamically
+        } else {
+            return NSLocalizedString(@"NoConcertResults", nil);
+        }
     } else {
         return nil;
     }
@@ -231,8 +246,11 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (hasSearched) {
-        return self.arrArtistConcerts.count;
-        //return self.arrArtistData.count;
+        if (self.foundArtistConcerts) {
+            return self.arrArtistConcerts.count;
+        } else {
+            return self.arrArtistData.count;
+        }
     } else {
         return self.arrPopularData.count;
     }
@@ -245,23 +263,25 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
         [self.locationSearch resignFirstResponder];
     } else {
         if (hasSearched) {
-            ECConcertDetailViewController * concertDetail = [[ECConcertDetailViewController alloc] init];
-            
-            concertDetail.concert = [self.arrArtistConcerts objectAtIndex:indexPath.row];
-            [self.navigationController pushViewController:concertDetail animated:YES];
-            
-//            NSDictionary* data = (NSDictionary*)[self.arrArtistData objectAtIndex:indexPath.row];
-//            NSNumber *artistID = [data songkickID];
-//            void (^fetchedConcertsBlock)(NSArray*) = ^(NSArray* concerts){
-//                [self fetchedArtistConcerts:concerts];
-//            };
-//            if (self.searchType == ECSearchTypePast) {
-//                [ECJSONFetcher fetchConcertsForArtistID:artistID withSearchType:ECSearchTypePast completion:fetchedConcertsBlock];
-//            } else {
-//                [ECJSONFetcher fetchConcertsForArtistID:artistID withSearchType:ECSearchTypeFuture completion:fetchedConcertsBlock];
-//            }
-//            self.lastSelectedArtist = data;
-//            [self.hud show:YES];
+            if (self.foundArtistConcerts) {
+                ECConcertDetailViewController * concertDetail = [[ECConcertDetailViewController alloc] init];
+                
+                concertDetail.concert = [self.arrArtistConcerts objectAtIndex:indexPath.row];
+                [self.navigationController pushViewController:concertDetail animated:YES];
+            } else {
+                NSDictionary* artistDic = (NSDictionary*)[self.arrArtistData objectAtIndex:indexPath.row];
+                NSNumber *artistID = [artistDic songkickID];
+                void (^fetchedConcertsBlock)(NSArray*) = ^(NSArray* concerts){
+                    [self fetchedArtistConcerts:concerts];
+                };
+                if (self.searchType == ECSearchTypePast) {
+                    [ECJSONFetcher fetchConcertsForArtistID:artistID withSearchType:ECSearchTypePast completion:fetchedConcertsBlock];
+                } else {
+                    [ECJSONFetcher fetchConcertsForArtistID:artistID withSearchType:ECSearchTypeFuture completion:fetchedConcertsBlock];
+                }
+                self.lastSelectedArtist = artistDic;
+                [self.hud show:YES];
+            }  
         } else {
             //User clicked on a popular concert
             ECConcertDetailViewController * concertDetail = [[ECConcertDetailViewController alloc] init];
@@ -284,6 +304,16 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
         [self.artistSearch resignFirstResponder];
         [self.locationSearch resignFirstResponder];
     }
+}
+
+-(void) showNoResults {
+    self.tableView.hidden = YES;
+    self.lblNoresults.hidden = NO;
+}
+
+-(void) hideNoResults {
+    self.tableView.hidden = NO;
+    self.lblNoresults.hidden = YES;
 }
 
 #pragma mark - UITextFieldDelegate Methods
@@ -335,6 +365,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
          matchedArtistDic = [artists objectAtIndex:0];
          }
          */
+        NSLog(@"%@",artists);
         matchedArtistDic = [artists objectAtIndex:0]; //If using kickass piece of code above, please remove this line
         NSNumber *artistID = [matchedArtistDic songkickID];
         void (^fetchedConcertsBlock)(NSArray*) = ^(NSArray* concerts){
@@ -357,7 +388,8 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
         //    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
         //    [self.hud hide: YES];
     } else {
-        //TODO: Error handling for no artist found
+        self.lblNoresults.text = [NSString stringWithFormat:NSLocalizedString(@"NoArtistResults", nil), self.artistSearch.text];
+        [self showNoResults];
         [self.hud hide:YES];
     }
 }
