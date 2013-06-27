@@ -28,9 +28,12 @@
 
 //Add Concert View
 "Header" = "%@ concerts for %@ in %@:";
-"Past" = "Recent";
+"Past" = "Past";
 "Upcoming" = "Upcoming";
 "loading" = "Loading";
+"SearchingFor" = "Searching for";
+"hudSearchArtist" = "%@";
+"hudSearchConcert" = "%@'s %@ concerts"; 
 
 //Concert Detail
 "LiveNow" = "Live Now";

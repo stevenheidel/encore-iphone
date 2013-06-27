@@ -70,6 +70,8 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     [self.view addSubview:self.hud];
     self.hud.labelText = NSLocalizedString(@"loading", nil);
     self.hud.color = [UIColor colorWithRed:8.0/255.0 green:56.0/255.0 blue:76.0/255.0 alpha:0.90];
+    self.hud.labelFont = [UIFont fontWithName:@"Hero" size:self.hud.labelFont.pointSize];
+    self.hud.detailsLabelFont = [UIFont fontWithName:@"Hero" size:self.hud.detailsLabelFont.pointSize];
     //Register cell nib file to the uitableview
     NSString *myIdentifier = @"ECConcertCellView";
     [self.tableView registerNib:[UINib nibWithNibName:@"ECConcertCellView" bundle:nil]
@@ -286,11 +288,13 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     if (textField.tag == 0) {
         //[self clearSearchResultsTable];
+        
         [ECJSONFetcher fetchArtistsForString:[textField text] completion:^(NSArray *artists) {
             [self fetchedArtists:artists];
         }];
         [self dismissKeyboard:nil];
-        
+        self.hud.labelText = NSLocalizedString(@"SearchingFor", nil);
+        self.hud.detailsLabelText = [NSString stringWithFormat:NSLocalizedString(@"hudSearchArtist", nil), [textField text]];
         [self.hud show:YES];
     } else {
         [textField resignFirstResponder];
@@ -300,36 +304,47 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
 }
 
 -(void)fetchedArtists:(NSArray *)artists {
-    self.arrArtistData = artists;
-    hasSearched = TRUE;
-    NSDictionary * matchedArtistDic = nil;
     
-    /* This kickass piece of code will find if an artist was returned with the exact name that was searched for and if not use the first artist returned
-     for (NSDictionary *artistDic in artists) {
-     if ([[artistDic artistName] isEqualToString:self.artistSearch.text]) {
-     matchedArtistDic = artistDic;
-     break;
-     }
-     }
-     if (!matchedArtistDic) {
-     matchedArtistDic = [artists objectAtIndex:0];
-     }
-     */
-    matchedArtistDic = [artists objectAtIndex:0]; //If using kickass piece of code above, please remove this line
-    NSNumber *artistID = [matchedArtistDic songkickID];
-    void (^fetchedConcertsBlock)(NSArray*) = ^(NSArray* concerts){
-        [self fetchedArtistConcerts:concerts];
-    };
-    if (self.searchType == ECSearchTypePast) {
-        [ECJSONFetcher fetchConcertsForArtistID:artistID withSearchType:ECSearchTypePast completion:fetchedConcertsBlock];
+    if (artists.count) {
+        self.arrArtistData = artists;
+        hasSearched = TRUE;
+        NSDictionary * matchedArtistDic = nil;
+        /* This kickass piece of code will find if an artist was returned with the exact name that was searched for and if not use the first artist returned
+         for (NSDictionary *artistDic in artists) {
+         if ([[artistDic artistName] isEqualToString:self.artistSearch.text]) {
+         matchedArtistDic = artistDic;
+         break;
+         }
+         }
+         if (!matchedArtistDic) {
+         matchedArtistDic = [artists objectAtIndex:0];
+         }
+         */
+        matchedArtistDic = [artists objectAtIndex:0]; //If using kickass piece of code above, please remove this line
+        NSNumber *artistID = [matchedArtistDic songkickID];
+        void (^fetchedConcertsBlock)(NSArray*) = ^(NSArray* concerts){
+            [self fetchedArtistConcerts:concerts];
+        };
+        if (self.searchType == ECSearchTypePast) {
+            [ECJSONFetcher fetchConcertsForArtistID:artistID withSearchType:ECSearchTypePast completion:fetchedConcertsBlock];
+        } else {
+            [ECJSONFetcher fetchConcertsForArtistID:artistID withSearchType:ECSearchTypeFuture completion:fetchedConcertsBlock];
+        }
+        
+        self.hud.labelText = NSLocalizedString(@"SearchingFor", nil);
+        
+        //self.hud.minSize = CGSizeMake(260.f, 260.f);
+        self.hud.detailsLabelText = [NSString stringWithFormat:NSLocalizedString(@"hudSearchConcert", nil), [matchedArtistDic artistName], self.searchType ? NSLocalizedString(@"Upcoming", nil) : NSLocalizedString(@"Past", nil)];
+
+        self.lastSelectedArtist = matchedArtistDic;
+        
+        //    [self.tableView reloadData];
+        //    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+        //    [self.hud hide: YES];
     } else {
-        [ECJSONFetcher fetchConcertsForArtistID:artistID withSearchType:ECSearchTypeFuture completion:fetchedConcertsBlock];
+        //TODO: Error handling for no artist found
+        [self.hud hide:YES];
     }
-    self.lastSelectedArtist = matchedArtistDic;
-    
-    //    [self.tableView reloadData];
-    //    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
-    //    [self.hud hide: YES];
 }
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField {

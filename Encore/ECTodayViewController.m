@@ -49,6 +49,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     [self.view addSubview:self.hud];
     self.hud.labelText = NSLocalizedString(@"loading", nil);
     self.hud.color = [UIColor colorWithRed:8.0/255.0 green:56.0/255.0 blue:76.0/255.0 alpha:0.90];
+    self.hud.labelFont = [UIFont fontWithName:@"Hero" size:self.hud.labelFont.pointSize];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
