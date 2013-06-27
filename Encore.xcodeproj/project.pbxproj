@@ -80,6 +80,8 @@
 		D4AA4D391766F3D0009B0635 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D4AA4D381766F3D0009B0635 /* Localizable.strings */; };
 		D4AA9775177C9562008F4E31 /* 37x-Checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AA9773177C9562008F4E31 /* 37x-Checkmark.png */; };
 		D4AA9776177C9562008F4E31 /* 37x-Checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AA9774177C9562008F4E31 /* 37x-Checkmark@2x.png */; };
+		D4AA9779177CF82A008F4E31 /* ECPostCollectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AA9778177CF82A008F4E31 /* ECPostCollectionHeaderView.m */; };
+		D4AA977B177CFE2C008F4E31 /* ECPostCollectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4AA977A177CFE2C008F4E31 /* ECPostCollectionHeaderView.xib */; };
 		D4AC35F91768C5850087B1E9 /* NSDictionary+ConcertList.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AC35F81768C5850087B1E9 /* NSDictionary+ConcertList.m */; };
 		D4AC35FC1768C8B20087B1E9 /* ECJSONFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AC35FB1768C8B20087B1E9 /* ECJSONFetcher.m */; };
 		D4B0AC4717727FDA00DC4DD2 /* ECPostPlaceholder.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4B0AC4617727FDA00DC4DD2 /* ECPostPlaceholder.xib */; };
@@ -208,6 +210,9 @@
 		D4AA4D381766F3D0009B0635 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		D4AA9773177C9562008F4E31 /* 37x-Checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37x-Checkmark.png"; sourceTree = "<group>"; };
 		D4AA9774177C9562008F4E31 /* 37x-Checkmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37x-Checkmark@2x.png"; sourceTree = "<group>"; };
+		D4AA9777177CF82A008F4E31 /* ECPostCollectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECPostCollectionHeaderView.h; sourceTree = "<group>"; };
+		D4AA9778177CF82A008F4E31 /* ECPostCollectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECPostCollectionHeaderView.m; sourceTree = "<group>"; };
+		D4AA977A177CFE2C008F4E31 /* ECPostCollectionHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECPostCollectionHeaderView.xib; sourceTree = "<group>"; };
 		D4AC35F71768C5850087B1E9 /* NSDictionary+ConcertList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+ConcertList.h"; sourceTree = "<group>"; };
 		D4AC35F81768C5850087B1E9 /* NSDictionary+ConcertList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+ConcertList.m"; sourceTree = "<group>"; };
 		D4AC35FA1768C8B20087B1E9 /* ECJSONFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECJSONFetcher.h; sourceTree = "<group>"; };
@@ -285,6 +290,9 @@
 				D4A8DDAE176A133B005E9847 /* ECConcertDetailViewController.h */,
 				D4A8DDAD176A133B005E9847 /* ECConcertDetailViewController.m */,
 				D4A8DDB1176A133B005E9847 /* ECConcertDetailViewController.xib */,
+				D4AA9777177CF82A008F4E31 /* ECPostCollectionHeaderView.h */,
+				D4AA9778177CF82A008F4E31 /* ECPostCollectionHeaderView.m */,
+				D4AA977A177CFE2C008F4E31 /* ECPostCollectionHeaderView.xib */,
 				D4B0AC4617727FDA00DC4DD2 /* ECPostPlaceholder.xib */,
 				D4A8DDB5176A133B005E9847 /* ECCollectionCell.xib */,
 				D4A8DDB6176A133B005E9847 /* CustomCellBackground.h */,
@@ -651,6 +659,7 @@
 				D4AA9776177C9562008F4E31 /* 37x-Checkmark@2x.png in Resources */,
 				A0A2B0CD177CE82700518B6C /* songkick.png in Resources */,
 				A0A2B0CE177CE82700518B6C /* songkick@2x.png in Resources */,
+				D4AA977B177CFE2C008F4E31 /* ECPostCollectionHeaderView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -739,6 +748,7 @@
 				A022AABF1779E8380009244C /* UIImage+GaussBlur.m in Sources */,
 				D4A7BEA8177B2F3B00C22D91 /* UIImage+Orientation.m in Sources */,
 				A0A2B0C6177B867F00518B6C /* NSMutableDictionary+ConcertImages.m in Sources */,
+				D4AA9779177CF82A008F4E31 /* ECPostCollectionHeaderView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

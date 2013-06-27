@@ -15,6 +15,7 @@
 #import "ECJSONPoster.h"
 #import "ECPostViewController.h"
 #import "ECProfileViewController.h"
+#import "ECPostCollectionHeaderView.h"
 
 #import "ECAppDelegate.h"
 
@@ -57,9 +58,21 @@ typedef enum {
     
     [self.collectionView registerClass:[Cell class] forCellWithReuseIdentifier:@"generic"];
     
-    // Do any additional setup after loading the view from its nib.
-    [self.artistNameLabel setAdjustsFontSizeToFitWidth:YES];
     self.title = NSLocalizedString(@"concert", nil);//self.artistNameLabel.text;
+    self.headerView = [[ECPostCollectionHeaderView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.collectionView.frame.size.width, 126.0) andOwner:self];
+    [self setupArtistUIAttributes];
+    
+    self.isOnProfile = FALSE;
+    [self setUpRightBarButton];
+   // [self setUpFlowLayout];
+    [self setupToolbar];
+    [self loadArtistDetails];
+    [self loadImages];
+    
+}
+
+-(void) setupArtistUIAttributes {
+    [self.artistNameLabel setAdjustsFontSizeToFitWidth:YES];
     self.artistNameLabel.font = [UIFont fontWithName:@"Hero" size:21.0];
     [self.artistNameLabel setAdjustsFontSizeToFitWidth:YES];
     self.venueNameLabel.font = [UIFont fontWithName:@"Hero" size:14.0];
@@ -68,15 +81,7 @@ typedef enum {
     self.imgArtist.layer.masksToBounds = YES;
     self.imgArtist.layer.borderColor = [UIColor grayColor].CGColor;
     self.imgArtist.layer.borderWidth = 2.0;
-    
-    self.isOnProfile = FALSE;
-    [self setUpRightBarButton];
-   // [self setUpFlowLayout];
-    [self setupToolbar];
-    [self loadArtistDetails];
-    [self loadImages];
 }
-
 //-(void) setUpFlowLayout {
 //    _flowLayout = [[SGSStaggeredFlowLayout alloc] init];
 //    _flowLayout.layoutMode = SGSStaggeredFlowLayoutMode_Even;
@@ -89,8 +94,6 @@ typedef enum {
 //}
 
 -(void) updateView {
-    
-    
     //self.title = self.artistNameLabel.text;
     [self loadArtistDetails];
     [self loadImages];
@@ -112,7 +115,6 @@ typedef enum {
 }
 
 -(void) loadArtistDetails {
-    
     self.artistNameLabel.text = [self.concert artistName];
     self.venueNameLabel.text = [self.concert venueName];
     if ([self.concert isLive]) {
@@ -155,7 +157,7 @@ typedef enum {
     }
     else {
         [self setUpPlaceholderView];
-    }
+   }
 }
 
 -(void) setUpRightBarButton {
@@ -327,11 +329,26 @@ typedef enum {
 
 -(void) setUpPlaceholderView {
     if(!self.placeholderView){
-        self.placeholderView = [[ECPlaceHolderView alloc] initWithFrame:self.collectionView.frame owner: self];
+        
+        //Manually set the height of the placeholder view so it fits in under the collection view's header (so that the header scrolls out of the way when you're searching through posts
+        self.placeholderView = [[ECPlaceHolderView alloc] initWithFrame:CGRectMake(0.0, 126.0, self.collectionView.frame.size.width, self.collectionView.frame.size.height-126.0) owner: self];
     }
     if(!self.placeholderView.superview) {
         [self.view addSubview:self.placeholderView];
     }
+}
+
+-(UICollectionReusableView*) collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
+    UICollectionReusableView* reusableView = nil;
+    
+    if (kind == UICollectionElementKindSectionHeader) {
+        reusableView = self.headerView;
+    }
+    return reusableView;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
+    return CGSizeMake(self.collectionView.frame.size.width, 126.0);
 }
 
 #pragma mark - adding photos

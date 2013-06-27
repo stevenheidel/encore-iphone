@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "ECPostViewController.h"
-@class ECPlaceHolderView,ECToolbar;
+
+@class ECPlaceHolderView,ECToolbar,ECPostCollectionHeaderView;
 @interface ECConcertDetailViewController : UIViewController <UICollectionViewDataSource,UICollectionViewDelegate/*, UICollectionViewDelegateFlowLayout*/,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,ECPostViewControllerDelegate,UIAlertViewDelegate>
 
 -(IBAction)addPhoto;
@@ -42,8 +43,7 @@
 
 @property (nonatomic,unsafe_unretained) id <ECPostViewControllerDelegate> delegate;
 
-
-
+@property (nonatomic, strong) ECPostCollectionHeaderView* headerView;
 @end
 
 @interface ECPlaceHolderView : UIView
