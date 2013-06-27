@@ -21,14 +21,14 @@
 #import "UIImage+GaussBlur.h"
 
 
-#import "SGSStaggeredFlowLayout.h"
+//#import "SGSStaggeredFlowLayout.h"
 
 NSString *kCellID = @"cellID";
 typedef enum {
     PhotoSourcePicker
 }ECActionSheetTag;
 @interface ECConcertDetailViewController (){
-    SGSStaggeredFlowLayout* _flowLayout;
+//    SGSStaggeredFlowLayout* _flowLayout;
 
 }
 
@@ -82,16 +82,16 @@ typedef enum {
     [self loadImages];
 }
 
--(void) setUpFlowLayout {
-    _flowLayout = [[SGSStaggeredFlowLayout alloc] init];
-    _flowLayout.layoutMode = SGSStaggeredFlowLayoutMode_Even;
-    _flowLayout.minimumLineSpacing = 2.0f;
-    _flowLayout.minimumInteritemSpacing = 2.0f;
-    _flowLayout.sectionInset = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 0.0f);
-    _flowLayout.itemSize = CGSizeMake(75.0f, 75.0f);
-    
-    self.collectionView.collectionViewLayout = _flowLayout;
-}
+//-(void) setUpFlowLayout {
+//    _flowLayout = [[SGSStaggeredFlowLayout alloc] init];
+//    _flowLayout.layoutMode = SGSStaggeredFlowLayoutMode_Even;
+//    _flowLayout.minimumLineSpacing = 2.0f;
+//    _flowLayout.minimumInteritemSpacing = 2.0f;
+//    _flowLayout.sectionInset = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 0.0f);
+//    _flowLayout.itemSize = CGSizeMake(75.0f, 75.0f);
+//    
+//    self.collectionView.collectionViewLayout = _flowLayout;
+//}
 
 -(void) updateView {
     self.artistNameLabel.text = [self.concert artistName];
