@@ -30,7 +30,7 @@
 static NSString *const BaseURL = @BASE_URL_DEF;
 
 //URLS
-static NSString *const ShareConcertURL = @BASE_URL_DEF CONCERTS_DEF "/";
+static NSString *const ShareConcertURL = @BASE_URL_DEF CONCERTS_DEF "/%@";
 
 //User's concerts
 static NSString *const UserConcertsURL = @BASE_URL_DEF USERS_DEF "/%@/" CONCERTS_DEF; //,facebook id

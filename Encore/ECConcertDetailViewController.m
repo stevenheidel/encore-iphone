@@ -5,7 +5,7 @@
 //  Created by Shimmy on 2013-06-13.
 //  Copyright (c) 2013 Encore. All rights reserved.
 //
-
+#import "EncoreURL.h"
 #import <QuartzCore/QuartzCore.h>
 #import "ECConcertDetailViewController.h"
 #import "NSDictionary+ConcertList.h"
@@ -166,16 +166,18 @@ typedef enum {
 #pragma mark - FB Sharing
 -(void) shareTapped {
     NSLog(@"Share tapped");
-    NSURL* url = [NSURL URLWithString:@"https://developers.facebook.com/ios"];
-    
-    [FBDialogs presentShareDialogWithLink:url
-                                  handler:^(FBAppCall *call, NSDictionary *results, NSError *error) {
-                                      if(error) {
-                                          NSLog(@"Error: %@", error.description);
-                                      } else {
-                                          NSLog(@"Success!");
-                                      }
-                                  }];
+    //baseurl + /concerts/:songkickId
+    NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:ShareConcertURL,self.songkickID]];
+    if ([FBDialogs canPresentShareDialogWithParams:nil]) {
+        [FBDialogs presentShareDialogWithLink:url
+                                      handler:^(FBAppCall *call, NSDictionary *results, NSError *error) {
+                                          if(error) {
+                                              NSLog(@"Error: %@", error.description);
+                                          } else {
+                                              NSLog(@"Success!");
+                                          }
+                                      }];
+    }
 }
 
 #pragma mark - Adding/Removing Concerts
