@@ -14,7 +14,7 @@
 @implementation ECJSONFetcher
 +(void) fetchConcertsForUserID: (NSString *) fbID  completion: (void (^)(NSDictionary* concerts)) completion {
     __block NSDictionary * concertList;
-    NSString *  fullConcertsUrl = [NSString stringWithFormat:@"%@/%@/%@/%@",BaseURL,UsersURL,fbID,ConcertsURL];
+    NSString *  fullConcertsUrl = [NSString stringWithFormat:UserConcertsURL,fbID];
     NSURL * url = [NSURL URLWithString:fullConcertsUrl];
     NSURLRequest * request = [NSURLRequest requestWithURL:url];
     AFJSONRequestOperation * operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
@@ -47,11 +47,11 @@
     NSString *userLocation = @"Toronto"; //TODO: Get location dynamically from app delegate
     NSString *  artistConcertsUrl;
     if (searchType == ECSearchTypePast) {
-        artistConcertsUrl = [NSString stringWithFormat:@"%@/%@/%@?%@%@", BaseURL, ConcertsURL, PastURL, CityURL, userLocation];
+        artistConcertsUrl = [NSString stringWithFormat:PastPopularConcertsURL, userLocation];
     } else if (searchType == ECSearchTypeFuture) {
-        artistConcertsUrl = [NSString stringWithFormat:@"%@/%@/%@?%@%@", BaseURL, ConcertsURL, FutureURL, CityURL, userLocation];
+        artistConcertsUrl = [NSString stringWithFormat:FuturePopularConcertsURL, userLocation];
     } else {
-        artistConcertsUrl = [NSString stringWithFormat:@"%@/%@/%@?%@%@", BaseURL, ConcertsURL, TodayURL, CityURL, userLocation];
+        artistConcertsUrl = [NSString stringWithFormat:TodayPopularConcertsURL, userLocation];
     }
     
     NSString *escapedDataString = [artistConcertsUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
@@ -80,7 +80,7 @@
 
 +(void)fetchArtistsForString:(NSString*) searchStr completion:(void (^)(NSArray* artists)) completion {
     __block NSArray * artistList;
-    NSString *  artistSearchUrl = [NSString stringWithFormat:@"%@/%@/%@%@", BaseURL, ArtistsURL, SearchURL, searchStr];
+    NSString *  artistSearchUrl = [NSString stringWithFormat:ArtistSearchURL, searchStr];
     NSString *escapedDataString = [artistSearchUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
     NSURL * url = [NSURL URLWithString:escapedDataString];
@@ -109,9 +109,9 @@
     NSString *userLocation = @"Toronto"; //TODO: Get location dynamically from app delegate
     NSString *  artistConcertsUrl;
     if (searchType == ECSearchTypePast) {
-        artistConcertsUrl = [NSString stringWithFormat:@"%@/%@/%@/%@/%@?%@%@", BaseURL, ArtistsURL, [artistID stringValue], ConcertsURL, PastURL, CityURL, userLocation];
+        artistConcertsUrl = [NSString stringWithFormat:ArtistConcertSearchPastURL, [artistID stringValue], userLocation];
     } else {
-        artistConcertsUrl = [NSString stringWithFormat:@"%@/%@/%@/%@/%@?%@%@", BaseURL, ArtistsURL, [artistID stringValue], ConcertsURL, FutureURL, CityURL, userLocation];
+        artistConcertsUrl = [NSString stringWithFormat:ArtistConcertSearchFutureURL, [artistID stringValue], userLocation];
     }
     
     NSString *escapedDataString = [artistConcertsUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
@@ -138,9 +138,9 @@
     [operation start];
 }
 
-+(void) fetchPostsForConcertWithID: (NSNumber *) serverID completion: (void (^)(NSArray* fetchedPosts)) completion{
++(void) fetchPostsForConcertWithID: (NSNumber *) concertID completion: (void (^)(NSArray* fetchedPosts)) completion{
     __block NSArray * posts;
-    NSString * fullPostsUrl = [NSString stringWithFormat:@"%@/%@/%@/%@",BaseURL,ConcertsURL,[serverID stringValue],PostsURL];
+    NSString * fullPostsUrl = [NSString stringWithFormat:ConcertPostsURL,[concertID stringValue]];
     NSURL * url = [NSURL URLWithString:fullPostsUrl];
     NSURLRequest * request = [NSURLRequest requestWithURL:url];
     AFJSONRequestOperation * operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
@@ -149,7 +149,7 @@
             completion(posts);
         }
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-        NSLog(@"ERROR fetching posts for concert with id %@: %@...",[serverID description],[[error description] substringToIndex:MAX_ERROR_LEN]);
+        NSLog(@"ERROR fetching posts for concert with id %@: %@...",[concertID description],[[error description] substringToIndex:MAX_ERROR_LEN]);
         if (completion) {
             completion(nil);
         }
@@ -158,7 +158,7 @@
 }
 
 +(void) checkIfConcert: (NSNumber*) concertID isOnProfile: (NSString *) userID completion: (void (^)(BOOL isOnProfile)) completion  {
-   NSString * fullCheckURL = [NSString stringWithFormat:@"%@/%@/%@/%@?%@=%@",BaseURL, UsersURL,userID, ConcertsURL,SongkickIDURL, concertID.stringValue];
+   NSString * fullCheckURL = [NSString stringWithFormat:CheckConcertOnProfileURL,userID, concertID.stringValue];
     
     NSURL * url = [NSURL URLWithString:fullCheckURL];
     NSURLRequest * request = [NSURLRequest requestWithURL:url];
