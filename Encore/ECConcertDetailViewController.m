@@ -23,6 +23,7 @@
 
 #import "MBProgressHUD.h"
 #define HUD_DELAY 0.9
+#define HEADER_HEIGHT 126.0
 
 //#import "SGSStaggeredFlowLayout.h"
 
@@ -59,7 +60,7 @@ typedef enum {
     [self.collectionView registerClass:[Cell class] forCellWithReuseIdentifier:@"generic"];
     
     self.title = NSLocalizedString(@"concert", nil);//self.artistNameLabel.text;
-    self.headerView = [[ECPostCollectionHeaderView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.collectionView.frame.size.width, 126.0) andOwner:self];
+    self.headerView = [[ECPostCollectionHeaderView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.collectionView.frame.size.width, HEADER_HEIGHT) andOwner:self];
     [self setupArtistUIAttributes];
     
     self.isOnProfile = FALSE;
@@ -331,7 +332,7 @@ typedef enum {
     if(!self.placeholderView){
         
         //Manually set the height of the placeholder view so it fits in under the collection view's header (so that the header scrolls out of the way when you're searching through posts
-        self.placeholderView = [[ECPlaceHolderView alloc] initWithFrame:CGRectMake(0.0, 126.0, self.collectionView.frame.size.width, self.collectionView.frame.size.height-126.0) owner: self];
+        self.placeholderView = [[ECPlaceHolderView alloc] initWithFrame:CGRectMake(0.0, HEADER_HEIGHT, self.collectionView.frame.size.width, self.collectionView.frame.size.height-HEADER_HEIGHT) owner: self];
     }
     if(!self.placeholderView.superview) {
         [self.view addSubview:self.placeholderView];
@@ -348,7 +349,9 @@ typedef enum {
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
-    return CGSizeMake(self.collectionView.frame.size.width, 126.0);
+    
+    //Manually set to desired height
+    return CGSizeMake(self.collectionView.frame.size.width, HEADER_HEIGHT);
 }
 
 #pragma mark - adding photos
