@@ -36,6 +36,7 @@
 		A0A2B0D6177E1E7200518B6C /* shareButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A0A2B0D4177E1E7100518B6C /* shareButton@2x.png */; };
 		A0A2B0DA177E333900518B6C /* ECProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0A2B0D8177E333900518B6C /* ECProfileViewController.m */; };
 		A0A2B0DB177E333900518B6C /* ECProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0A2B0D9177E333900518B6C /* ECProfileViewController.xib */; };
+		A0A2B0DD177E3B5A00518B6C /* ECProfileHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0A2B0DC177E3B5A00518B6C /* ECProfileHeader.xib */; };
 		A0FF1C53176CC88000433768 /* LoginInfoPages.plist in Resources */ = {isa = PBXBuildFile; fileRef = A0FF1C52176CC88000433768 /* LoginInfoPages.plist */; };
 		D43ACD7F176D2EA700E2282A /* ECCellType.m in Sources */ = {isa = PBXBuildFile; fileRef = D43ACD7E176D2EA700E2282A /* ECCellType.m */; };
 		D43ACD81176D3B7F00E2282A /* ECEndCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D43ACD80176D3B7F00E2282A /* ECEndCellView.xib */; };
@@ -148,6 +149,7 @@
 		A0A2B0D7177E333900518B6C /* ECProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECProfileViewController.h; sourceTree = "<group>"; };
 		A0A2B0D8177E333900518B6C /* ECProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECProfileViewController.m; sourceTree = "<group>"; };
 		A0A2B0D9177E333900518B6C /* ECProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECProfileViewController.xib; sourceTree = "<group>"; };
+		A0A2B0DC177E3B5A00518B6C /* ECProfileHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECProfileHeader.xib; sourceTree = "<group>"; };
 		A0FF1C52176CC88000433768 /* LoginInfoPages.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = LoginInfoPages.plist; sourceTree = "<group>"; };
 		B56B831D22E04C90BC664348 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		D43ACD7D176D2BA400E2282A /* ECCellType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECCellType.h; sourceTree = "<group>"; };
@@ -485,6 +487,7 @@
 				A0A2B0D7177E333900518B6C /* ECProfileViewController.h */,
 				A0A2B0D8177E333900518B6C /* ECProfileViewController.m */,
 				A0A2B0D9177E333900518B6C /* ECProfileViewController.xib */,
+				A0A2B0DC177E3B5A00518B6C /* ECProfileHeader.xib */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -691,6 +694,7 @@
 				D4ABD2E7177E1E6E00DC691F /* Icon-Small@2x.png in Resources */,
 				D4ABD2EC177E2C8900DC691F /* ECPictureViewController.xib in Resources */,
 				A0A2B0DB177E333900518B6C /* ECProfileViewController.xib in Resources */,
+				A0A2B0DD177E3B5A00518B6C /* ECProfileHeader.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
