@@ -9,5 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface ECPictureViewController : UIViewController
+@property(nonatomic,strong) IBOutlet UIImageView* imageView;
+
+-(IBAction)cancel;
+-(IBAction)confirm;
 
 @end

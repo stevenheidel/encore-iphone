@@ -408,6 +408,10 @@ typedef enum {
     NSDictionary * imageDic = [NSDictionary dictionaryWithObjectsAndKeys:image, @"image",[self.concert songkickID], @"concert", self.userID, @"user", nil];
     [ECJSONPoster postImage: imageDic completion:^{
         NSLog(@"Completed posting image!");
+        MBProgressHUD* HUD = [[MBProgressHUD alloc] initWithView:self.view];
+        [HUD setColor:[UIColor colorWithRed:0.0/255.0 green:176.0/255.0 blue:227.0/255.0 alpha:0.90]];
+        [HUD show:YES];
+        [HUD hide:YES afterDelay:HUD_DELAY];
     }];
 }
 
