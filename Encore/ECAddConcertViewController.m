@@ -459,7 +459,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
 
     [UIView animateWithDuration:0.5
                           delay:0.0
-                        options: UIViewAnimationCurveEaseOut
+                        options: UIViewAnimationOptionCurveEaseOut
                      animations:^{
                          self.locationSearch.frame = locationSearchFrame;
                          self.btnLocationIcon.frame = locationIconFrame;
@@ -492,7 +492,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     
     [UIView animateWithDuration:0.5
                           delay:0.0
-                        options: UIViewAnimationCurveEaseOut
+                        options: UIViewAnimationOptionCurveEaseOut
                      animations:^{
                          self.btnSearchIcon.frame = artistIconFrame;
                          self.artistSearch.frame = artistSearchFrame;
@@ -518,7 +518,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
 
     [UIView animateWithDuration:0.5
                           delay:0.0
-                        options: UIViewAnimationCurveEaseOut
+                        options: UIViewAnimationOptionCurveEaseOut
                      animations:^{
                          self.artistSearch.frame = artistSearchFrame;
                          self.searchDivisor.frame = divisorFrame;
@@ -547,7 +547,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     
     [UIView animateWithDuration:0.75
                           delay:0.0
-                        options: UIViewAnimationCurveEaseOut
+                        options: UIViewAnimationOptionCurveEaseOut
                      animations:^{                         
                          self.locationSearch.frame = locationSearchFrame;
                          self.btnLocationIcon.frame = locationIconFrame;
