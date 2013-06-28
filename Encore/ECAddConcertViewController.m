@@ -356,8 +356,9 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
         [self expandArtistSearchBar];
         [Flurry logEvent: @"Expanded_Artist_Search_Bar"];
     } else {
-        [self expandLocationSearchBar];
-        [Flurry logEvent: @"Expanded_Location_Search_Bar"];
+        return NO;
+//        [self expandLocationSearchBar];
+//        [Flurry logEvent: @"Expanded_Location_Search_Bar"];
     }
     return YES;
 }
