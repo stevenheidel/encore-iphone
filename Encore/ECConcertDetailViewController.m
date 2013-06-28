@@ -22,6 +22,9 @@
 #import "UIImage+GaussBlur.h"
 
 #import "MBProgressHUD.h"
+
+#import "ECPictureViewController.h"
+
 #define HUD_DELAY 0.9
 #define HEADER_HEIGHT 126.0
 
@@ -385,6 +388,24 @@ typedef enum {
     [actionSheet showInView:self.view];
 }
 
+#pragma mark Action Sheet Delegate
+-(void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (actionSheet.tag == PhotoSourcePicker ) {
+        NSString* selectedSource;
+        UIImagePickerControllerSourceType sourceType;
+        if(buttonIndex != actionSheet.cancelButtonIndex){
+            selectedSource = [actionSheet buttonTitleAtIndex:buttonIndex];
+            if ([selectedSource isEqualToString:NSLocalizedString(@"new_from_camera", nil)]) {
+                sourceType = UIImagePickerControllerSourceTypeCamera;
+            }
+            else sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            [self showImagePickerForSourceType: sourceType];
+        }
+        else {
+            [Flurry logEvent:@"Canceled_Photo_Adding_On_Action_Sheet" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:self.userID, @"facebook_id", self.concert, @"concert", nil]];
+        }
+    }
+}
 
 -(void) showImagePickerForSourceType: (UIImagePickerControllerSourceType) sourceType {
     UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
@@ -406,9 +427,17 @@ typedef enum {
 -(void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     [Flurry logEvent:@"Finished_Picking_Image" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:self.userID, @"facebook_id", self.concert, @"concert", nil]];
     UIImage* image = [info valueForKey:UIImagePickerControllerOriginalImage];
-    [self dismissViewControllerAnimated:YES completion:NULL];
- 
+    [self dismissViewControllerAnimated:YES completion:^{
+        ECPictureViewController* pictureVC = [[ECPictureViewController alloc] initWithImage:image];
+        pictureVC.delegate = self;
+        [self presentViewController:pictureVC animated:NO completion:nil];
+    }];
+}
+
+#pragma mark Picture View Controller Delegate
+-(void) postImage:(UIImage *)image {
     NSDictionary * imageDic = [NSDictionary dictionaryWithObjectsAndKeys:image, @"image",[self.concert songkickID], @"concert", self.userID, @"user", nil];
+    [self dismissViewControllerAnimated:YES completion:nil];
     [ECJSONPoster postImage: imageDic completion:^{
         NSLog(@"Completed posting image!");
         MBProgressHUD* HUD = [[MBProgressHUD alloc] initWithView:self.view];
@@ -416,27 +445,8 @@ typedef enum {
         [HUD show:YES];
         [HUD hide:YES afterDelay:HUD_DELAY];
     }];
-}
 
-#pragma mark - Action Sheet Delegate
--(void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if (actionSheet.tag == PhotoSourcePicker ) {
-        NSString* selectedSource;
-        UIImagePickerControllerSourceType sourceType;
-        if(buttonIndex != actionSheet.cancelButtonIndex){
-            selectedSource = [actionSheet buttonTitleAtIndex:buttonIndex];
-            if ([selectedSource isEqualToString:NSLocalizedString(@"new_from_camera", nil)]) {
-                sourceType = UIImagePickerControllerSourceTypeCamera;
-            }
-            else sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-            [self showImagePickerForSourceType: sourceType];
-        }
-        else {
-            [Flurry logEvent:@"Canceled_Photo_Adding_On_Action_Sheet" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:self.userID, @"facebook_id", self.concert, @"concert", nil]];
-        }
-    }
 }
-
 #pragma mark - post view controller delegate
 
 -(NSDictionary*) requestPost:(NSInteger)direction currentIndex:(NSInteger)index {

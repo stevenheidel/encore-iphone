@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "ECPostViewController.h"
-
+#import "ECPictureViewController.h"
 @class ECPlaceHolderView,ECToolbar,ECPostCollectionHeaderView;
-@interface ECConcertDetailViewController : UIViewController <UICollectionViewDataSource,UICollectionViewDelegate/*, UICollectionViewDelegateFlowLayout*/,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,ECPostViewControllerDelegate,UIAlertViewDelegate>
+@interface ECConcertDetailViewController : UIViewController <UICollectionViewDataSource,UICollectionViewDelegate/*, UICollectionViewDelegateFlowLayout*/,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,ECPostViewControllerDelegate,UIAlertViewDelegate,ECPictureViewControllerDelegate>
 
 -(IBAction)addPhoto;
 -(void) shareTapped;

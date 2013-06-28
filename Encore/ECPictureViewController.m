@@ -13,12 +13,9 @@
 @end
 
 @implementation ECPictureViewController
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
+-(id) initWithImage:(UIImage *)image {
+    if (self = [super initWithNibName:@"ECPictureViewController" bundle:[NSBundle mainBundle]]){
+        _image = image;
     }
     return self;
 }
@@ -26,6 +23,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.imageView.image = _image;
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -33,6 +31,15 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - actions
+-(IBAction) cancel {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(IBAction) post {
+    [self.delegate postImage: _image];
 }
 
 @end

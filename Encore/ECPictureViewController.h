@@ -7,11 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface ECPictureViewController : UIViewController
-@property(nonatomic,strong) IBOutlet UIImageView* imageView;
-
+@protocol ECPictureViewControllerDelegate;
+@interface ECPictureViewController : UIViewController {
+    UIImage* _image;
+}
+-(id) initWithImage: (UIImage*) image;
 -(IBAction)cancel;
--(IBAction)confirm;
+-(IBAction)post;
+@property(nonatomic,strong) IBOutlet UIImageView* imageView;
+@property (unsafe_unretained,nonatomic) id <ECPictureViewControllerDelegate> delegate;
+@end
+
+@protocol ECPictureViewControllerDelegate <NSObject>
+
+@required
+-(void) postImage: (UIImage*) image;
 
 @end
