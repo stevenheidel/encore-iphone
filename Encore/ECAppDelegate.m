@@ -11,6 +11,8 @@
 #import "ECLoginViewController.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import "ECJSONPoster.h"
+#import "AFNetworking.h"
+
 NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:ECSessionStateChangedNotification";
 
 @implementation ECAppDelegate

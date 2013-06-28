@@ -11,6 +11,7 @@
 #import "NSDate+JSON.h"
 #import "UIImage+Orientation.h"
 #import "EncoreURL.h"
+#import "AFNetworking.h"
 
 @implementation ECJSONPoster
 +(void) postUser:(NSDictionary <FBGraphUser>*) user {
