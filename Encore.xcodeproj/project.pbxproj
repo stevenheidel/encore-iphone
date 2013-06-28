@@ -657,13 +657,10 @@
 				A0A2B0CD177CE82700518B6C /* songkick.png in Resources */,
 				A0A2B0CE177CE82700518B6C /* songkick@2x.png in Resources */,
 				D4AA977B177CFE2C008F4E31 /* ECPostCollectionHeaderView.xib in Resources */,
-<<<<<<< HEAD
 				A0A2B0D2177E0C4E00518B6C /* liveNow.gif in Resources */,
-=======
 				D4ABD2D9177DF09900DC691F /* Default.png in Resources */,
 				D4ABD2DB177DF09B00DC691F /* Default@2x.png in Resources */,
 				D4ABD2DD177DF09E00DC691F /* Default-568h@2x.png in Resources */,
->>>>>>> 139924c3cc2198929d15c9e6b7b7ad431f91a704
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
