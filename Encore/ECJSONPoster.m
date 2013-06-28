@@ -48,7 +48,7 @@
              }];
     [Flurry setUserID:facebookID];
     NSString* bday = [user objectForKey:@"birthday"];
-    int age = -1;
+    int age = 0;
     if (bday) {
         age = [ECJSONPoster ageFromFBBdayString:bday];
     }
