@@ -58,8 +58,6 @@
 		D4A8DDEE176AB650005E9847 /* gray_gradient_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4A8DDDA176AB650005E9847 /* gray_gradient_background@2x.png */; };
 		D4A8DDEF176AB650005E9847 /* home_background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D4A8DDDB176AB650005E9847 /* home_background.jpg */; };
 		D4A8DDF0176AB650005E9847 /* home_background@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D4A8DDDC176AB650005E9847 /* home_background@2x.jpg */; };
-		D4A8DE09176ACEDB005E9847 /* ECConcertChildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A8DE07176ACEDA005E9847 /* ECConcertChildViewController.m */; };
-		D4A8DE0A176ACEDB005E9847 /* ECConcertChildViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4A8DE08176ACEDA005E9847 /* ECConcertChildViewController.xib */; };
 		D4AA4CF31766B374009B0635 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4AA4CF21766B374009B0635 /* UIKit.framework */; };
 		D4AA4CF51766B374009B0635 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4AA4CF41766B374009B0635 /* Foundation.framework */; };
 		D4AA4CF71766B374009B0635 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4AA4CF61766B374009B0635 /* CoreGraphics.framework */; };
@@ -180,9 +178,6 @@
 		D4A8DDDA176AB650005E9847 /* gray_gradient_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gray_gradient_background@2x.png"; sourceTree = "<group>"; };
 		D4A8DDDB176AB650005E9847 /* home_background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = home_background.jpg; sourceTree = "<group>"; };
 		D4A8DDDC176AB650005E9847 /* home_background@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "home_background@2x.jpg"; sourceTree = "<group>"; };
-		D4A8DE06176ACEDA005E9847 /* ECConcertChildViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECConcertChildViewController.h; sourceTree = "<group>"; };
-		D4A8DE07176ACEDA005E9847 /* ECConcertChildViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECConcertChildViewController.m; sourceTree = "<group>"; };
-		D4A8DE08176ACEDA005E9847 /* ECConcertChildViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECConcertChildViewController.xib; sourceTree = "<group>"; };
 		D4AA4CEF1766B374009B0635 /* Encore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Encore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4AA4CF21766B374009B0635 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D4AA4CF41766B374009B0635 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -451,9 +446,6 @@
 				D4A2F6CC176959BD00A9E3BF /* ECProfileViewController.xib */,
 				D4AA4D331766BB03009B0635 /* ECProfileViewController.h */,
 				D4AA4D341766BB03009B0635 /* ECProfileViewController.m */,
-				D4A8DE06176ACEDA005E9847 /* ECConcertChildViewController.h */,
-				D4A8DE07176ACEDA005E9847 /* ECConcertChildViewController.m */,
-				D4A8DE08176ACEDA005E9847 /* ECConcertChildViewController.xib */,
 				D4B67077176F57E000A80BA3 /* ECTodayViewController.h */,
 				D4B67078176F57E000A80BA3 /* ECTodayViewController.m */,
 				D4B67079176F57E000A80BA3 /* ECTodayViewController.xib */,
@@ -630,7 +622,6 @@
 				D4A8DDEE176AB650005E9847 /* gray_gradient_background@2x.png in Resources */,
 				D4A8DDEF176AB650005E9847 /* home_background.jpg in Resources */,
 				D4A8DDF0176AB650005E9847 /* home_background@2x.jpg in Resources */,
-				D4A8DE0A176ACEDB005E9847 /* ECConcertChildViewController.xib in Resources */,
 				A0FF1C53176CC88000433768 /* LoginInfoPages.plist in Resources */,
 				D4A4D813176CC81600EFCBF7 /* ECHorizontalCellView.xib in Resources */,
 				A0848C0B176D1F0D009BBB38 /* ECLoginPageView.xib in Resources */,
@@ -735,7 +726,6 @@
 				D4A8DDC4176A20D2005E9847 /* ECJSONPoster.m in Sources */,
 				D4A8DDCA176A39BA005E9847 /* NSDate+JSON.m in Sources */,
 				D4A8DDCE176A405D005E9847 /* ECPostViewController.m in Sources */,
-				D4A8DE09176ACEDB005E9847 /* ECConcertChildViewController.m in Sources */,
 				D4A22253176B7FC1005AB205 /* KLHorizontalSelect.m in Sources */,
 				D4A4D816176CC9AA00EFCBF7 /* ECHorizontalCellView.m in Sources */,
 				A0848C11176D25D5009BBB38 /* ECLoginPageView.m in Sources */,
