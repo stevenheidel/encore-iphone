@@ -49,7 +49,7 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
 #warning USE ONLY DURING BETA
     [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
     
-    [TestFlight takeOff:@"40ca7224-1b48-4d23-851c-84ab1ff853d7"];
+    [TestFlight takeOff:@"019687e0-0d30-4959-bf90-f52ba008c834"];
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
