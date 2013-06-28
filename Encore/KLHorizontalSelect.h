@@ -24,7 +24,7 @@
 //Shadow properties
 #define kDefaultShadowColor [UIColor blackColor]
 #define kDefaultShadowOffset CGSizeMake(0.0, 3.0)
-#define kDefaultShadowOpacity 0.96
+#define kDefaultShadowOpacity 0.0
 
 #import "ECCellType.h"
 #import <UIKit/UIKit.h>
