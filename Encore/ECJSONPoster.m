@@ -44,7 +44,7 @@
              success:^(AFHTTPRequestOperation *operation, id responseObject) {
                  NSLog(@"%@: %@",NSStringFromClass([self class]),[responseObject description]);
              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                 NSLog(@"ERROR: %@",[error description]);
+                 NSLog(@"ERROR posting user %@: %@...",facebookID,[[error description] substringToIndex:MAX_ERROR_LEN]);
              }];
     [Flurry setUserID:facebookID];
     NSString* bday = [user objectForKey:@"birthday"];
@@ -72,7 +72,7 @@
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"%@: ERROR removing concert %@ from profile %@: %@",NSStringFromClass([self class]), concertID.stringValue, userID,[error description]);
+        NSLog(@"%@: ERROR removing concert %@ from profile %@: %@...",NSStringFromClass([self class]), concertID.stringValue, userID,[[error description] substringToIndex:MAX_ERROR_LEN]);
     }];
 }
 
@@ -91,7 +91,7 @@
             completion();
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"%@: ERROR removing concert %@ from profile %@: %@",NSStringFromClass([self class]), concertID.stringValue, userID,[error description]);
+        NSLog(@"%@: ERROR removing concert %@ from profile %@: %@...",NSStringFromClass([self class]), concertID.stringValue, userID,[[error description] substringToIndex:MAX_ERROR_LEN]);
     }];
     
 }
@@ -116,7 +116,7 @@
             completion();
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"fail");
+        NSLog(@"failed to post image to concert %@: %@...",concertIDStr, [error.description substringToIndex:MAX_ERROR_LEN]);
     }];
     [operation start];
 }

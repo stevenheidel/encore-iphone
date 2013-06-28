@@ -29,6 +29,8 @@
 #define SONGKICK_ID_DEF "songkick_id"
 
 
+#define MAX_ERROR_LEN 200
+
 static NSString *const BaseURL = @BASE_URL_DEF;
 //URLS
 

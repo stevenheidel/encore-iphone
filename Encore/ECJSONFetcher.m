@@ -9,7 +9,6 @@
 #import "ECJSONFetcher.h"
 #import "EncoreURL.h"
 #import "AFNetworking.h"
-#define MAX_ERROR_LEN 200
 
 //TODO could change to use blocks instead of delegates to return success
 @implementation ECJSONFetcher
