@@ -65,9 +65,6 @@
 		D4AA4CFD1766B374009B0635 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D4AA4CFB1766B374009B0635 /* InfoPlist.strings */; };
 		D4AA4CFF1766B374009B0635 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AA4CFE1766B374009B0635 /* main.m */; };
 		D4AA4D031766B374009B0635 /* ECAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AA4D021766B374009B0635 /* ECAppDelegate.m */; };
-		D4AA4D051766B374009B0635 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AA4D041766B374009B0635 /* Default.png */; };
-		D4AA4D071766B374009B0635 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AA4D061766B374009B0635 /* Default@2x.png */; };
-		D4AA4D091766B374009B0635 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AA4D081766B374009B0635 /* Default-568h@2x.png */; };
 		D4AA4D111766B374009B0635 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4AA4D101766B374009B0635 /* SenTestingKit.framework */; };
 		D4AA4D121766B374009B0635 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4AA4CF21766B374009B0635 /* UIKit.framework */; };
 		D4AA4D131766B374009B0635 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4AA4CF41766B374009B0635 /* Foundation.framework */; };
@@ -81,6 +78,9 @@
 		D4AA9776177C9562008F4E31 /* 37x-Checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AA9774177C9562008F4E31 /* 37x-Checkmark@2x.png */; };
 		D4AA9779177CF82A008F4E31 /* ECPostCollectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AA9778177CF82A008F4E31 /* ECPostCollectionHeaderView.m */; };
 		D4AA977B177CFE2C008F4E31 /* ECPostCollectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4AA977A177CFE2C008F4E31 /* ECPostCollectionHeaderView.xib */; };
+		D4ABD2D9177DF09900DC691F /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = D4ABD2D8177DF09900DC691F /* Default.png */; };
+		D4ABD2DB177DF09B00DC691F /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4ABD2DA177DF09B00DC691F /* Default@2x.png */; };
+		D4ABD2DD177DF09E00DC691F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4ABD2DC177DF09E00DC691F /* Default-568h@2x.png */; };
 		D4AC35F91768C5850087B1E9 /* NSDictionary+ConcertList.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AC35F81768C5850087B1E9 /* NSDictionary+ConcertList.m */; };
 		D4AC35FC1768C8B20087B1E9 /* ECJSONFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AC35FB1768C8B20087B1E9 /* ECJSONFetcher.m */; };
 		D4B0AC4717727FDA00DC4DD2 /* ECPostPlaceholder.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4B0AC4617727FDA00DC4DD2 /* ECPostPlaceholder.xib */; };
@@ -210,6 +210,9 @@
 		D4AA9777177CF82A008F4E31 /* ECPostCollectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECPostCollectionHeaderView.h; sourceTree = "<group>"; };
 		D4AA9778177CF82A008F4E31 /* ECPostCollectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECPostCollectionHeaderView.m; sourceTree = "<group>"; };
 		D4AA977A177CFE2C008F4E31 /* ECPostCollectionHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECPostCollectionHeaderView.xib; sourceTree = "<group>"; };
+		D4ABD2D8177DF09900DC691F /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../Default.png; sourceTree = "<group>"; };
+		D4ABD2DA177DF09B00DC691F /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
+		D4ABD2DC177DF09E00DC691F /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
 		D4AC35F71768C5850087B1E9 /* NSDictionary+ConcertList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+ConcertList.h"; sourceTree = "<group>"; };
 		D4AC35F81768C5850087B1E9 /* NSDictionary+ConcertList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+ConcertList.m"; sourceTree = "<group>"; };
 		D4AC35FA1768C8B20087B1E9 /* ECJSONFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECJSONFetcher.h; sourceTree = "<group>"; };
@@ -315,6 +318,9 @@
 			isa = PBXGroup;
 			children = (
 				A0A2B0D1177E0C4E00518B6C /* liveNow.gif */,
+				D4ABD2DC177DF09E00DC691F /* Default-568h@2x.png */,
+				D4ABD2DA177DF09B00DC691F /* Default@2x.png */,
+				D4ABD2D8177DF09900DC691F /* Default.png */,
 				A0A2B0CB177CE82700518B6C /* songkick.png */,
 				A0A2B0CC177CE82700518B6C /* songkick@2x.png */,
 				D4AA9773177C9562008F4E31 /* 37x-Checkmark.png */,
@@ -608,9 +614,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4AA4CFD1766B374009B0635 /* InfoPlist.strings in Resources */,
-				D4AA4D051766B374009B0635 /* Default.png in Resources */,
-				D4AA4D071766B374009B0635 /* Default@2x.png in Resources */,
-				D4AA4D091766B374009B0635 /* Default-568h@2x.png in Resources */,
 				D4AA4D311766BA8C009B0635 /* ECLoginViewController.xib in Resources */,
 				D4AA4D391766F3D0009B0635 /* Localizable.strings in Resources */,
 				D4B502B3176823E600E0C52B /* Icon.png in Resources */,
@@ -654,7 +657,13 @@
 				A0A2B0CD177CE82700518B6C /* songkick.png in Resources */,
 				A0A2B0CE177CE82700518B6C /* songkick@2x.png in Resources */,
 				D4AA977B177CFE2C008F4E31 /* ECPostCollectionHeaderView.xib in Resources */,
+<<<<<<< HEAD
 				A0A2B0D2177E0C4E00518B6C /* liveNow.gif in Resources */,
+=======
+				D4ABD2D9177DF09900DC691F /* Default.png in Resources */,
+				D4ABD2DB177DF09B00DC691F /* Default@2x.png in Resources */,
+				D4ABD2DD177DF09E00DC691F /* Default-568h@2x.png in Resources */,
+>>>>>>> 139924c3cc2198929d15c9e6b7b7ad431f91a704
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
