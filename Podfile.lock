@@ -1,22 +1,22 @@
 PODS:
-  - AFNetworking (1.3.0)
-  - Facebook-iOS-SDK (3.5.1)
+  - AFNetworking (1.3.1)
+  - Facebook-iOS-SDK (3.5.3)
   - FlurrySDK (4.2.1)
-  - MBProgressHUD (0.6)
+  - MBProgressHUD (0.7)
   - TestFlightSDK (1.3.0-beta.6)
 
 DEPENDENCIES:
   - AFNetworking (~> 1.3)
   - Facebook-iOS-SDK
-  - FlurrySDK
+  - FlurrySDK (~> 4.2.1)
   - MBProgressHUD
   - TestFlightSDK
 
 SPEC CHECKSUMS:
-  AFNetworking: e528f20d06b1b818c3571266fb5efa20031a8ace
-  Facebook-iOS-SDK: 0dbd897e842cefeb012ec2eb8eba659ba6b96b12
+  AFNetworking: 9ec8aafb9269236a7630bd8d9838ce2ba30fa2a0
+  Facebook-iOS-SDK: c11e851555d8cb8b55853ec2990b01d9e343d09e
   FlurrySDK: 9a38bbb195c9f636a40193190ef38fd07e6b76c5
-  MBProgressHUD: 9b55a90566fb5d07df0602f6fd9fa04510ad5d52
+  MBProgressHUD: 1fd8591a2216d5dec6de24e09187bb03bcbe9946
   TestFlightSDK: f3e516c64f61abedeb26a7b184101df54df3db09
 
 COCOAPODS: 0.20.2
