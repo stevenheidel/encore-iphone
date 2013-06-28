@@ -42,19 +42,24 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self setupBarButtons]; 
+    [self setNavBarAppearance];
     
-//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
-//                                              initWithTitle:@"Settings"
-//                                              style:UIBarButtonItemStylePlain
-//                                              target:self
-//                                              action:@selector(settingsButtonWasPressed:)];
-//    
-//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
-//                                              initWithTitle:@""
-//                                              style:UIBarButtonItemStyle
-//                                              target:self
-//                                              action:@selector(viewConcerts:)];
+    ECAppDelegate *appDelegate = (ECAppDelegate *)[[UIApplication sharedApplication] delegate];
+    [appDelegate performSelectorInBackground:@selector(getUserLocation) withObject:nil];
     
+    [self setupGestureRecgonizers];
+    [self.horizontalSelect.tableView setScrollsToTop:NO];
+}
+
+-(void) setNavBarAppearance {
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navbar.png"] forBarMetrics:UIBarMetricsDefault];
+    [[UINavigationBar appearance] setBackgroundColor:[UIColor blackColor]];
+}
+
+
+//Set up left bar button for going to profile and right bar button for sharing
+-(void) setupBarButtons {
     UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
     UIImage *leftButImage = [UIImage imageNamed:@"profileButton.png"]; //stretchableImageWithLeftCapWidth:10 topCapHeight:10];
     [leftButton setBackgroundImage:leftButImage forState:UIControlStateNormal];
@@ -68,22 +73,8 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
     [rightButton setBackgroundImage:rightButImage forState:UIControlStateNormal];
     [rightButton addTarget:self action:@selector(shareTapped:) forControlEvents:UIControlEventTouchUpInside];
     rightButton.frame = CGRectMake(0, 0, rightButImage.size.width*0.75, rightButImage.size.height*0.75);
-    UIBarButtonItem *shareButton = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
-    self.navigationItem.rightBarButtonItem = shareButton;
-    
-    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navbar.png"] forBarMetrics:UIBarMetricsDefault];
-    [[UINavigationBar appearance] setBackgroundColor:[UIColor blackColor]];
-    
-    //[[UITableView appearance] setBackgroundColor:[UIColor blackColor]];
-    
-    ECAppDelegate *appDelegate = (ECAppDelegate *)[[UIApplication sharedApplication] delegate];
-    [appDelegate performSelectorInBackground:@selector(getUserLocation) withObject:nil];
-    
-    [self setupGestureRecgonizers];
-//    self.shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(shareTapped)];
-//    self.shareButton.enabled = NO;
-//    self.navigationItem.rightBarButtonItem = self.shareButton;
-    [self.horizontalSelect.tableView setScrollsToTop:NO];
+    self.shareButton = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
+    self.navigationItem.rightBarButtonItem = self.shareButton;
 }
 
 -(void) shareTapped {
