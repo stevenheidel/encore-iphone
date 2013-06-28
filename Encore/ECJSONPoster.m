@@ -58,7 +58,7 @@
 
 +(void) addConcert: (NSNumber *) concertID toUser: (NSString *) userID completion: (void (^)()) completion{
     //POST /users/:uuid/concerts     {'songkick_id': '1234578'}
-    NSString * urlString = [NSString stringWithFormat:@"%@/%@/%@",UsersURL,userID,ConcertsURL];
+    NSString * urlString = [NSString stringWithFormat:AddConcertToUserURL,userID];
     NSDictionary * parameters = [NSDictionary dictionaryWithObject:[concertID stringValue] forKey:SongkickIDURL];
     AFHTTPClient * client = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:BaseURL]];
     
@@ -78,7 +78,7 @@
 
 +(void) removeConcert: (NSNumber *) concertID toUser: (NSString *) userID completion: (void (^)()) completion{
     //POST /users/:uuid/concerts
-    NSString * urlString = [NSString stringWithFormat:@"%@/%@/%@/%@",UsersURL,userID,ConcertsURL,concertID.stringValue];
+    NSString * urlString = [NSString stringWithFormat:RemoveConcertFromUserURL,userID,concertID.stringValue];
     NSDictionary * parameters = [NSDictionary dictionaryWithObject:[concertID stringValue] forKey:@"songkick_id"];
     AFHTTPClient * client = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:BaseURL]];
     
@@ -99,7 +99,8 @@
 //Expect nsdictionary with image, concert, and user
 +(void) postImage:(NSDictionary*)imageDic completion:(void (^)())completion {
     //POST /concerts/:id/posts
-    NSString* urlString = [NSString stringWithFormat:@"%@/%@/%@",ConcertsURL,[imageDic objectForKey:@"concert"],PostsURL];
+    NSString* concertIDStr = [[imageDic objectForKey:@"concert"] stringValue];
+    NSString* urlString = [NSString stringWithFormat:PostImageURL,concertIDStr];
     AFHTTPClient * client = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:BaseURL]];
     
     [client registerHTTPOperationClass:[AFJSONRequestOperation class]];

@@ -57,7 +57,14 @@ static NSString *const ConcertPostsURL = @BASE_URL_DEF CONCERTS_DEF "/%@/" POSTS
 //Concert Check
 static NSString *const CheckConcertOnProfileURL = @BASE_URL_DEF USERS_DEF "/%@/" CONCERTS_DEF "?" SONGKICK_ID_DEF "=" "%@"; // , userID, ConcertID
 
-//Components
+#pragma mark - Posting
+//static NSString *const ;
+//Add concert to User
+static NSString* const AddConcertToUserURL = @USERS_DEF "/%@/" CONCERTS_DEF; //,userID
+static NSString* const RemoveConcertFromUserURL = @USERS_DEF "/%@/" CONCERTS_DEF "/%@"; //,userID, concertID
+static NSString* const PostImageURL = @CONCERTS_DEF "/%@/" POSTS_DEF;
+
+#pragma mark - Components
 static NSString *const UsersURL = @USERS_DEF;
 static NSString *const ConcertsURL = @CONCERTS_DEF;
 static NSString *const PostsURL = @POSTS_DEF;
@@ -70,4 +77,6 @@ static NSString *const CityURL = @CITY_DEF;
 static NSString *const SongkickIDURL = @SONGKICK_ID_DEF;
 
 //static NSString *const userLocation = @"Toronto"; //TODO: Get location dynamically from app delegate
+
+
 #endif
