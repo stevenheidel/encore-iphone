@@ -303,11 +303,12 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
                 void (^fetchedConcertsBlock)(NSArray*) = ^(NSArray* concerts){
                     [self fetchedArtistConcerts:concerts];
                 };
-                if (self.searchType == ECSearchTypePast) {
-                    [ECJSONFetcher fetchConcertsForArtistID:artistID withSearchType:ECSearchTypePast completion:fetchedConcertsBlock];
-                } else {
-                    [ECJSONFetcher fetchConcertsForArtistID:artistID withSearchType:ECSearchTypeFuture completion:fetchedConcertsBlock];
-                }
+                [ECJSONFetcher fetchConcertsForArtistID:artistID withSearchType:self.searchType completion:fetchedConcertsBlock];
+//                if (self.searchType == ECSearchTypePast) {
+//                    [ECJSONFetcher fetchConcertsForArtistID:artistID withSearchType:ECSearchTypePast completion:fetchedConcertsBlock];
+//                } else {
+//                    [ECJSONFetcher fetchConcertsForArtistID:artistID withSearchType:ECSearchTypeFuture completion:fetchedConcertsBlock];
+//                }
                 self.lastSelectedArtist = artistDic;
                 [self.hud show:YES];
             }  
