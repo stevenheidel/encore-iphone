@@ -55,14 +55,21 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
 //                                              target:self
 //                                              action:@selector(viewConcerts:)];
     
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    UIImage *butImage = [UIImage imageNamed:@"profileButton.png"]; //stretchableImageWithLeftCapWidth:10 topCapHeight:10];
-    [button setBackgroundImage:butImage forState:UIControlStateNormal];
-    [button addTarget:self action:@selector(settingsButtonWasPressed:) forControlEvents:UIControlEventTouchUpInside];
-    button.frame = CGRectMake(0, 0, 32, 32);
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithCustomView:button];
-    self.navigationItem.leftBarButtonItem = backButton;
+    UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIImage *leftButImage = [UIImage imageNamed:@"profileButton.png"]; //stretchableImageWithLeftCapWidth:10 topCapHeight:10];
+    [leftButton setBackgroundImage:leftButImage forState:UIControlStateNormal];
+    [leftButton addTarget:self action:@selector(settingsButtonWasPressed:) forControlEvents:UIControlEventTouchUpInside];
+    leftButton.frame = CGRectMake(0, 0, leftButImage.size.width*0.75, leftButImage.size.height*0.75);
+    UIBarButtonItem *profileButton = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
+    self.navigationItem.leftBarButtonItem = profileButton;
     
+    UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIImage *rightButImage = [UIImage imageNamed:@"shareButton.png"]; //stretchableImageWithLeftCapWidth:10 topCapHeight:10];
+    [rightButton setBackgroundImage:rightButImage forState:UIControlStateNormal];
+    [rightButton addTarget:self action:@selector(shareTapped:) forControlEvents:UIControlEventTouchUpInside];
+    rightButton.frame = CGRectMake(0, 0, rightButImage.size.width*0.75, rightButImage.size.height*0.75);
+    UIBarButtonItem *shareButton = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
+    self.navigationItem.rightBarButtonItem = shareButton;
     
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navbar.png"] forBarMetrics:UIBarMetricsDefault];
     [[UINavigationBar appearance] setBackgroundColor:[UIColor blackColor]];
@@ -73,9 +80,9 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
     [appDelegate performSelectorInBackground:@selector(getUserLocation) withObject:nil];
     
     [self setupGestureRecgonizers];
-    self.shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(shareTapped)];
-    self.shareButton.enabled = NO;
-    self.navigationItem.rightBarButtonItem = self.shareButton;
+//    self.shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(shareTapped)];
+//    self.shareButton.enabled = NO;
+//    self.navigationItem.rightBarButtonItem = self.shareButton;
     [self.horizontalSelect.tableView setScrollsToTop:NO];
 }
 
