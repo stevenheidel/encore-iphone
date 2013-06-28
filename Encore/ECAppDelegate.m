@@ -7,7 +7,7 @@
 //
 
 #import "ECAppDelegate.h"
-#import "ECProfileViewController.h"
+#import "ECMainViewController.h"
 #import "ECLoginViewController.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import "ECJSONPoster.h"
@@ -57,7 +57,7 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
    // [self startAnalytics];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    self.profileViewController = [[ECProfileViewController alloc] init];
+    self.profileViewController = [[ECMainViewController alloc] init];
     self.loginViewController = [[ECLoginViewController alloc] init];
     
     [self setUpLocationManager];
@@ -122,7 +122,7 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
             if ([[topViewController presentedViewController] isKindOfClass:[ECLoginViewController class]]) {
                 [topViewController dismissViewControllerAnimated:YES completion:nil];
             }
-            if (![topViewController isKindOfClass:[ECProfileViewController class]]) {
+            if (![topViewController isKindOfClass:[ECMainViewController class]]) {
             }
             break;
         }

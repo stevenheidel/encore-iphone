@@ -14,7 +14,7 @@
 #import "NSDictionary+Posts.h"
 #import "ECJSONPoster.h"
 #import "ECPostViewController.h"
-#import "ECProfileViewController.h"
+#import "ECMainViewController.h"
 #import "ECPostCollectionHeaderView.h"
 
 #import "ECAppDelegate.h"
@@ -454,7 +454,7 @@ typedef enum {
     return [[NSUserDefaults standardUserDefaults] stringForKey:NSLocalizedString(@"user_id", nil)];
 }
 
--(ECProfileViewController*) profileViewController {
+-(ECMainViewController*) profileViewController {
     ECAppDelegate* appDel = (ECAppDelegate *)[UIApplication sharedApplication].delegate;
     return appDel.profileViewController;
 }

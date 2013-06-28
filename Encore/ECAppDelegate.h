@@ -10,7 +10,7 @@
 #import <CoreLocation/CoreLocation.h>
 
 @class ECLoginViewController;
-@class ECProfileViewController;
+@class ECMainViewController;
 @protocol FBGraphUser;
 
 @interface ECAppDelegate : UIResponder <UIApplicationDelegate,UINavigationControllerDelegate, CLLocationManagerDelegate>
@@ -23,7 +23,7 @@
 
 @property (strong, nonatomic) UINavigationController *navigationController;
 
-@property (strong, nonatomic) ECProfileViewController *profileViewController;
+@property (strong, nonatomic) ECMainViewController *profileViewController;
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
 

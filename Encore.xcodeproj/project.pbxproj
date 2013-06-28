@@ -34,12 +34,14 @@
 		A0A2B0CE177CE82700518B6C /* songkick@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A0A2B0CC177CE82700518B6C /* songkick@2x.png */; };
 		A0A2B0D5177E1E7200518B6C /* shareButton.png in Resources */ = {isa = PBXBuildFile; fileRef = A0A2B0D3177E1E7100518B6C /* shareButton.png */; };
 		A0A2B0D6177E1E7200518B6C /* shareButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A0A2B0D4177E1E7100518B6C /* shareButton@2x.png */; };
+		A0A2B0DA177E333900518B6C /* ECProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0A2B0D8177E333900518B6C /* ECProfileViewController.m */; };
+		A0A2B0DB177E333900518B6C /* ECProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0A2B0D9177E333900518B6C /* ECProfileViewController.xib */; };
 		A0FF1C53176CC88000433768 /* LoginInfoPages.plist in Resources */ = {isa = PBXBuildFile; fileRef = A0FF1C52176CC88000433768 /* LoginInfoPages.plist */; };
 		D43ACD7F176D2EA700E2282A /* ECCellType.m in Sources */ = {isa = PBXBuildFile; fileRef = D43ACD7E176D2EA700E2282A /* ECCellType.m */; };
 		D43ACD81176D3B7F00E2282A /* ECEndCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D43ACD80176D3B7F00E2282A /* ECEndCellView.xib */; };
 		D43ACD84176D3BF400E2282A /* ECEndCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = D43ACD83176D3BF400E2282A /* ECEndCellView.m */; };
 		D4A22253176B7FC1005AB205 /* KLHorizontalSelect.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A22252176B7FC1005AB205 /* KLHorizontalSelect.m */; };
-		D4A2F6CD176959BD00A9E3BF /* ECProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4A2F6CC176959BD00A9E3BF /* ECProfileViewController.xib */; };
+		D4A2F6CD176959BD00A9E3BF /* ECMainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4A2F6CC176959BD00A9E3BF /* ECMainViewController.xib */; };
 		D4A4D813176CC81600EFCBF7 /* ECHorizontalCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4A4D812176CC81600EFCBF7 /* ECHorizontalCellView.xib */; };
 		D4A4D816176CC9AA00EFCBF7 /* ECHorizontalCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A4D815176CC9AA00EFCBF7 /* ECHorizontalCellView.m */; };
 		D4A7BEA8177B2F3B00C22D91 /* UIImage+Orientation.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A7BEA7177B2F3B00C22D91 /* UIImage+Orientation.m */; };
@@ -73,7 +75,7 @@
 		D4AA4D1E1766B374009B0635 /* EncoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AA4D1D1766B374009B0635 /* EncoreTests.m */; };
 		D4AA4D301766BA8C009B0635 /* ECLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AA4D2E1766BA8C009B0635 /* ECLoginViewController.m */; };
 		D4AA4D311766BA8C009B0635 /* ECLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4AA4D2F1766BA8C009B0635 /* ECLoginViewController.xib */; };
-		D4AA4D361766BB03009B0635 /* ECProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AA4D341766BB03009B0635 /* ECProfileViewController.m */; };
+		D4AA4D361766BB03009B0635 /* ECMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AA4D341766BB03009B0635 /* ECMainViewController.m */; };
 		D4AA4D391766F3D0009B0635 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D4AA4D381766F3D0009B0635 /* Localizable.strings */; };
 		D4AA9775177C9562008F4E31 /* 37x-Checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AA9773177C9562008F4E31 /* 37x-Checkmark.png */; };
 		D4AA9776177C9562008F4E31 /* 37x-Checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AA9774177C9562008F4E31 /* 37x-Checkmark@2x.png */; };
@@ -143,6 +145,9 @@
 		A0A2B0CC177CE82700518B6C /* songkick@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "songkick@2x.png"; sourceTree = "<group>"; };
 		A0A2B0D3177E1E7100518B6C /* shareButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shareButton.png; sourceTree = "<group>"; };
 		A0A2B0D4177E1E7100518B6C /* shareButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shareButton@2x.png"; sourceTree = "<group>"; };
+		A0A2B0D7177E333900518B6C /* ECProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECProfileViewController.h; sourceTree = "<group>"; };
+		A0A2B0D8177E333900518B6C /* ECProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECProfileViewController.m; sourceTree = "<group>"; };
+		A0A2B0D9177E333900518B6C /* ECProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECProfileViewController.xib; sourceTree = "<group>"; };
 		A0FF1C52176CC88000433768 /* LoginInfoPages.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = LoginInfoPages.plist; sourceTree = "<group>"; };
 		B56B831D22E04C90BC664348 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		D43ACD7D176D2BA400E2282A /* ECCellType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECCellType.h; sourceTree = "<group>"; };
@@ -152,7 +157,7 @@
 		D43ACD83176D3BF400E2282A /* ECEndCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECEndCellView.m; sourceTree = "<group>"; };
 		D4A22251176B7FC1005AB205 /* KLHorizontalSelect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KLHorizontalSelect.h; sourceTree = "<group>"; };
 		D4A22252176B7FC1005AB205 /* KLHorizontalSelect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KLHorizontalSelect.m; sourceTree = "<group>"; };
-		D4A2F6CC176959BD00A9E3BF /* ECProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECProfileViewController.xib; sourceTree = "<group>"; };
+		D4A2F6CC176959BD00A9E3BF /* ECMainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECMainViewController.xib; sourceTree = "<group>"; };
 		D4A4D812176CC81600EFCBF7 /* ECHorizontalCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECHorizontalCellView.xib; sourceTree = "<group>"; };
 		D4A4D814176CC9A900EFCBF7 /* ECHorizontalCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECHorizontalCellView.h; sourceTree = "<group>"; };
 		D4A4D815176CC9AA00EFCBF7 /* ECHorizontalCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECHorizontalCellView.m; sourceTree = "<group>"; };
@@ -207,8 +212,8 @@
 		D4AA4D2D1766BA8C009B0635 /* ECLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECLoginViewController.h; sourceTree = "<group>"; };
 		D4AA4D2E1766BA8C009B0635 /* ECLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECLoginViewController.m; sourceTree = "<group>"; };
 		D4AA4D2F1766BA8C009B0635 /* ECLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECLoginViewController.xib; sourceTree = "<group>"; };
-		D4AA4D331766BB03009B0635 /* ECProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECProfileViewController.h; sourceTree = "<group>"; };
-		D4AA4D341766BB03009B0635 /* ECProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECProfileViewController.m; sourceTree = "<group>"; };
+		D4AA4D331766BB03009B0635 /* ECMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECMainViewController.h; sourceTree = "<group>"; };
+		D4AA4D341766BB03009B0635 /* ECMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECMainViewController.m; sourceTree = "<group>"; };
 		D4AA4D381766F3D0009B0635 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		D4AA9773177C9562008F4E31 /* 37x-Checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37x-Checkmark.png"; sourceTree = "<group>"; };
 		D4AA9774177C9562008F4E31 /* 37x-Checkmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37x-Checkmark@2x.png"; sourceTree = "<group>"; };
@@ -468,15 +473,18 @@
 		D4AA4D2C1766B9B0009B0635 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				D4A2F6CC176959BD00A9E3BF /* ECProfileViewController.xib */,
-				D4AA4D331766BB03009B0635 /* ECProfileViewController.h */,
-				D4AA4D341766BB03009B0635 /* ECProfileViewController.m */,
+				D4A2F6CC176959BD00A9E3BF /* ECMainViewController.xib */,
+				D4AA4D331766BB03009B0635 /* ECMainViewController.h */,
+				D4AA4D341766BB03009B0635 /* ECMainViewController.m */,
 				D4B67077176F57E000A80BA3 /* ECTodayViewController.h */,
 				D4B67078176F57E000A80BA3 /* ECTodayViewController.m */,
 				D4B67079176F57E000A80BA3 /* ECTodayViewController.xib */,
 				A022AAA417779BB50009244C /* ECConcertCellView.h */,
 				A022AAA517779BB50009244C /* ECConcertCellView.m */,
 				A022AAA717779BDF0009244C /* ECConcertCellView.xib */,
+				A0A2B0D7177E333900518B6C /* ECProfileViewController.h */,
+				A0A2B0D8177E333900518B6C /* ECProfileViewController.m */,
+				A0A2B0D9177E333900518B6C /* ECProfileViewController.xib */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -632,7 +640,7 @@
 				D4AA4CFD1766B374009B0635 /* InfoPlist.strings in Resources */,
 				D4AA4D311766BA8C009B0635 /* ECLoginViewController.xib in Resources */,
 				D4AA4D391766F3D0009B0635 /* Localizable.strings in Resources */,
-				D4A2F6CD176959BD00A9E3BF /* ECProfileViewController.xib in Resources */,
+				D4A2F6CD176959BD00A9E3BF /* ECMainViewController.xib in Resources */,
 				D4A8DDBB176A133B005E9847 /* ECConcertDetailViewController.xib in Resources */,
 				D4A8DDBC176A133B005E9847 /* InfoPlist.strings in Resources */,
 				D4A8DDBD176A133B005E9847 /* ECCollectionCell.xib in Resources */,
@@ -682,6 +690,7 @@
 				D4ABD2E6177E1E6E00DC691F /* Icon-Small.png in Resources */,
 				D4ABD2E7177E1E6E00DC691F /* Icon-Small@2x.png in Resources */,
 				D4ABD2EC177E2C8900DC691F /* ECPictureViewController.xib in Resources */,
+				A0A2B0DB177E333900518B6C /* ECProfileViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -749,7 +758,7 @@
 				D4AA4D031766B374009B0635 /* ECAppDelegate.m in Sources */,
 				D4AC35FC1768C8B20087B1E9 /* ECJSONFetcher.m in Sources */,
 				D4AA4D301766BA8C009B0635 /* ECLoginViewController.m in Sources */,
-				D4AA4D361766BB03009B0635 /* ECProfileViewController.m in Sources */,
+				D4AA4D361766BB03009B0635 /* ECMainViewController.m in Sources */,
 				D4A8DDB8176A133B005E9847 /* NSDictionary+Posts.m in Sources */,
 				D4A8DDB9176A133B005E9847 /* ECConcertDetailViewController.m in Sources */,
 				D4A8DDBA176A133B005E9847 /* Cell.m in Sources */,
@@ -771,6 +780,7 @@
 				A0A2B0C6177B867F00518B6C /* NSMutableDictionary+ConcertImages.m in Sources */,
 				D4AA9779177CF82A008F4E31 /* ECPostCollectionHeaderView.m in Sources */,
 				D4ABD2EB177E2C8900DC691F /* ECPictureViewController.m in Sources */,
+				A0A2B0DA177E333900518B6C /* ECProfileViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
