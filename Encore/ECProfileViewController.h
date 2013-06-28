@@ -10,4 +10,11 @@
 
 @interface ECProfileViewController : UIViewController
 
+@property (strong, nonatomic) IBOutlet UIImageView *imgBackground;
+@property (strong, nonatomic) IBOutlet UIImageView *imgProfile;
+@property (strong, nonatomic) IBOutlet UILabel *lblName;
+@property (strong, nonatomic) IBOutlet UILabel *lblLocation;
+@property (strong, nonatomic) IBOutlet UIImageView *imgLocationMarker;
+@property (strong, nonatomic) IBOutlet UIImageView *imgStubs;
+
 @end
