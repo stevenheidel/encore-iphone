@@ -158,12 +158,12 @@ typedef enum {
 -(void) fetchedPosts: (NSArray *) posts {
     self.posts = posts;
     if ([self.posts count] > 0) {
-        [self.collectionView reloadData];
         [self.placeholderView removeFromSuperview];
     }
     else {
         [self setUpPlaceholderView];
    }
+    [self.collectionView reloadData];
 }
 
 -(void) setUpRightBarButton {
@@ -348,11 +348,14 @@ typedef enum {
     if(!self.placeholderView){
         
         //Manually set the height of the placeholder view so it fits in under the collection view's header (so that the header scrolls out of the way when you're searching through posts
+        //[self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0] atScrollPosition:UICollectionViewScrollPositionTop animated:NO];
+        
         self.placeholderView = [[ECPlaceHolderView alloc] initWithFrame:CGRectMake(0.0, HEADER_HEIGHT, self.collectionView.frame.size.width, self.collectionView.frame.size.height-HEADER_HEIGHT) owner: self];
     }
     if(!self.placeholderView.superview) {
         [self.view addSubview:self.placeholderView];
     }
+    [self.collectionView setContentOffset:CGPointZero animated:NO];
 }
 
 -(UICollectionReusableView*) collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
