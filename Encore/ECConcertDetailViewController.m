@@ -458,6 +458,8 @@ typedef enum {
 
 @end
 
+#import "UIImage+GIF.h"
+
 #pragma mark -
 @implementation ECPlaceHolderView
 
@@ -471,6 +473,8 @@ typedef enum {
         
         self.label1.text = NSLocalizedString(@"POST_PLACEHOLDER_TEXT_1", nil);
         self.label2.text = NSLocalizedString(@"POST_PLACEHOLDER_TEXT_2", nil);
+        
+        self.liveGIF.image = [UIImage animatedGIFNamed:@"liveNow"];
         
 //        self.button.titleLabel.font = [UIFont fontWithName:@"Hero" size:22.0];
     }

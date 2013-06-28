@@ -49,6 +49,7 @@
 @interface ECPlaceHolderView : UIView
 @property (nonatomic, strong) IBOutlet UILabel* label1;
 @property (nonatomic, strong) IBOutlet UILabel* label2;
+@property (nonatomic, strong) IBOutlet UIImageView *liveGIF;
 //@property (nonatomic, strong) IBOutlet UIButton* button;
 -(id) initWithFrame:(CGRect)frame owner: (id) owner;
 @end
