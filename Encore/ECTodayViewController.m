@@ -54,7 +54,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
 }
 
 - (UIView *) headerView {
-    UIImage *headerImage = [UIImage imageNamed:@"songkicktest"];
+    UIImage *headerImage = [UIImage imageNamed:@"songkick"];
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, headerImage.size.height)];
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, headerImage.size.width, headerImage.size.height)];
     imageView.image = headerImage;
