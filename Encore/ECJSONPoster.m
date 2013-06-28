@@ -107,7 +107,10 @@
     [client setDefaultHeader:@"Accept" value:@"application/json"];
 
     NSData* imageData = UIImagePNGRepresentation([(UIImage*)[imageDic objectForKey:@"image"] fixOrientation]);
-    NSMutableURLRequest * request = [client multipartFormRequestWithMethod:@"POST" path:urlString parameters:imageDic constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+    
+    NSDictionary* params = [NSDictionary dictionaryWithObject:[imageDic objectForKey:@"user"] forKey:@"facebook_id"];
+    NSLog(@"%@",params.description);
+    NSMutableURLRequest * request = [client multipartFormRequestWithMethod:@"POST" path:urlString parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         [formData appendPartWithFileData: imageData name:@"image" fileName:@"image.png" mimeType:@"image/png"];
     }];
     
@@ -116,6 +119,7 @@
         if (completion) {
             completion();
         }
+        NSLog(@"Successfully posted image to concert %@",concertIDStr);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"failed to post image to concert %@: %@...",concertIDStr, [error.description substringToIndex:MAX_ERROR_LEN]);
     }];
