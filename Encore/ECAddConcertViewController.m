@@ -83,8 +83,8 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     self.locationSearch.font = [UIFont fontWithName:@"Hero" size:15.0];
     self.artistSearch.font = [UIFont fontWithName:@"Hero" size:15.0];
     self.lblNoresults.font = [UIFont fontWithName:@"Hero" size:22.0];
-    self.tableView.tableFooterView = [UIView new];
-    self.tableView.tableHeaderView = [self headerView];
+    self.tableView.tableFooterView = [self headerView];
+    //self.tableView.tableHeaderView = [self headerView];
 }
 
 - (UIView *) headerView {
@@ -92,6 +92,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, headerImage.size.height)];
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, headerImage.size.width, headerImage.size.height)];
     imageView.image = headerImage;
+    imageView.center = headerView.center;
     headerView.backgroundColor = [UIColor colorWithRed:225.0/255.0 green:224.0/255.0 blue:225.0/255.0 alpha:1.0];
     [headerView addSubview:imageView];
     return headerView;

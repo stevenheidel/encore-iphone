@@ -38,8 +38,8 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     // Do any additional setup after loading the view from its nib.
 //    UIView * headerSpace = [[UIView alloc] initWithFrame: CGRectMake(self.tableView.frame.origin.x, self.tableView.frame.origin.y, self.tableView.frame.size.width, 3.0)]; //Added so shadow of horizontal bar doesn't overlap with view. Remove/change once designs in
     
-    self.tableView.tableHeaderView = [self headerView];
-    self.tableView.tableFooterView = [UIView new];
+    //self.tableView.tableHeaderView = [self headerView];
+    self.tableView.tableFooterView = [self headerView];
     NSString *myIdentifier = @"ECConcertCellView";
     [self.tableView registerNib:[UINib nibWithNibName:@"ECConcertCellView" bundle:nil]
                   forCellReuseIdentifier:myIdentifier];
@@ -58,6 +58,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     UIImage *headerImage = [UIImage imageNamed:@"songkick"];
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, headerImage.size.height)];
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, headerImage.size.width, headerImage.size.height)];
+    imageView.center = headerView.center;
     imageView.image = headerImage;
     headerView.backgroundColor = [UIColor colorWithRed:225.0/255.0 green:224.0/255.0 blue:225.0/255.0 alpha:1.0];
     [headerView addSubview:imageView];

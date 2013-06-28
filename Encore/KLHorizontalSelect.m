@@ -49,9 +49,9 @@
 
         [self addSubview: self.tableView];
 
-        [self.layer setShadowColor: [kDefaultShadowColor CGColor]];
-        [self.layer setShadowOffset: kDefaultShadowOffset];
-        [self.layer setShadowOpacity: kDefaultShadowOpacity];
+//        [self.layer setShadowColor: [kDefaultShadowColor CGColor]];
+//        [self.layer setShadowOffset: kDefaultShadowOffset];
+//        [self.layer setShadowOpacity: kDefaultShadowOpacity];
         
         self.backgroundColor = [UIColor whiteColor];
         
@@ -335,7 +335,7 @@
         cellView.textLabel.text = text;
         cellView.textLabel.font = [UIFont fontWithName:@"Hero" size:16.0];
         cellView.textLabel.textColor = [UIColor whiteColor];
-        cellView.textLabel.textAlignment = NSTextAlignmentCenter;//type == ECCellTypeAddPast ? NSTextAlignmentRight : NSTextAlignmentLeft;
+        cellView.textLabel.textAlignment = type == ECCellTypeAddPast ? NSTextAlignmentRight : NSTextAlignmentLeft;
         [self setTransform:CGAffineTransformMakeRotation(M_PI_2)];
         
         [self addSubview:cellView];

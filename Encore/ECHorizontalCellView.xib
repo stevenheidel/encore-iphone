@@ -77,6 +77,7 @@
 						<string key="NSFrame">{{16, 15}, {19, 40}}</string>
 						<reference key="NSSuperview" ref="345684109"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -330,11 +331,6 @@
 						<reference key="parent" ref="345684109"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">204</int>
-						<reference key="object" ref="406300466"/>
-						<reference key="parent" ref="345684109"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">198</int>
 						<reference key="object" ref="941276126"/>
 						<reference key="parent" ref="345684109"/>
@@ -342,6 +338,11 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">209</int>
 						<reference key="object" ref="462696562"/>
+						<reference key="parent" ref="345684109"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">204</int>
+						<reference key="object" ref="406300466"/>
 						<reference key="parent" ref="345684109"/>
 					</object>
 				</array>
@@ -378,7 +379,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">210</int>
+			<int key="maxID">232</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">

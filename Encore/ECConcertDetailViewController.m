@@ -77,7 +77,7 @@ typedef enum {
     self.artistNameLabel.font = [UIFont fontWithName:@"Hero" size:21.0];
     [self.artistNameLabel setAdjustsFontSizeToFitWidth:YES];
     self.venueNameLabel.font = [UIFont fontWithName:@"Hero" size:14.0];
-    self.dateLabel.font = [UIFont fontWithName:@"Hero" size:14.0];
+    self.dateLabel.font = [UIFont fontWithName:@"Hero" size:12.0];
     self.imgArtist.layer.cornerRadius = 42.0;
     self.imgArtist.layer.masksToBounds = YES;
     self.imgArtist.layer.borderColor = [UIColor grayColor].CGColor;
@@ -126,11 +126,16 @@ typedef enum {
         self.dateLabel.text = [self.concert niceDate];
     }
     NSURL *imageURL = [self.concert imageURL];
-    UIImage *regImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL]];
-    
-    if (regImage) {
-        self.imgArtist.image = regImage;
-        self.imgBackground.image = [regImage imageWithGaussianBlur];
+    if (imageURL) {
+        UIImage *regImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL]];
+        
+        if (regImage) {
+            self.imgArtist.image = regImage;
+            self.imgBackground.image = [regImage imageWithGaussianBlur];
+        } else {
+            self.imgBackground.image = [[UIImage imageNamed:@"Default"] imageWithGaussianBlur];
+            self.imgArtist.image = [UIImage imageNamed:@"placeholder.jpg"];
+        }
     } else {
         self.imgBackground.image = [[UIImage imageNamed:@"Default"] imageWithGaussianBlur];
         self.imgArtist.image = [UIImage imageNamed:@"placeholder.jpg"];

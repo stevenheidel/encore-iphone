@@ -10,7 +10,12 @@
 
 @implementation NSDictionary (Posts)
 -(NSURL *) imageURL {
-    return [NSURL URLWithString:[self objectForKey:@"image_url"] ];
+    NSString *url = [self objectForKey:@"image_url"];
+    if (![url isKindOfClass:[NSNull class]]) {
+        return [NSURL URLWithString:url];
+    } else {
+        return nil;
+    }
 }
 
 -(NSString *) userName {

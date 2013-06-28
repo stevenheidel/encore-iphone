@@ -26,6 +26,8 @@
     self.imageArtist.image = [UIImage imageNamed:@"placeholder.jpg"];
     self.imageArtist.layer.cornerRadius = 30.0;
     self.imageArtist.layer.masksToBounds = YES;
+    self.imageArtist.layer.borderWidth = 1.0;
+    self.imageArtist.layer.borderColor = [UIColor colorWithRed:160.0/255.0 green:165.0/255.0 blue:170.0/255.0 alpha:1.0].CGColor;
     
     self.selectionStyle = UITableViewCellSelectionStyleNone;
 }
