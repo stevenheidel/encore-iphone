@@ -1,0 +1,1 @@
+../../LBGIFImage/UIImage+GIF.h
