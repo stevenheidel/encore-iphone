@@ -72,6 +72,9 @@ typedef enum {
     
 }
 
+-(void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+}
 -(void) setupArtistUIAttributes {
     [self.artistNameLabel setAdjustsFontSizeToFitWidth:YES];
     self.artistNameLabel.font = [UIFont fontWithName:@"Hero" size:21.0];
@@ -164,6 +167,7 @@ typedef enum {
         [self setUpPlaceholderView];
    }
     [self.collectionView reloadData];
+    [self.collectionView setContentOffset:CGPointZero animated:NO];
 }
 
 -(void) setUpRightBarButton {
@@ -355,7 +359,6 @@ typedef enum {
     if(!self.placeholderView.superview) {
         [self.view addSubview:self.placeholderView];
     }
-    [self.collectionView setContentOffset:CGPointZero animated:NO];
 }
 
 -(UICollectionReusableView*) collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
