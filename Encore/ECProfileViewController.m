@@ -8,7 +8,6 @@
 
 #import "ECProfileViewController.h"
 #import "ECAppDelegate.h"
-#import "ECConcertChildViewController.h"
 #import "ECConcertDetailViewController.h"
 #import "ECJSONFetcher.h"
 #import "ECCellType.h"
@@ -18,11 +17,9 @@
 static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users";
 
 @interface ECProfileViewController ()
-@property (strong, nonatomic) IBOutlet UILabel *userNameLabel;
 @property (strong,nonatomic) NSMutableArray * pastConcerts;
 @property (strong,nonatomic) NSMutableArray * futureConcerts;
 @property (strong, nonatomic) NSMutableDictionary * concerts;
-//@property (strong,nonatomic) ECConcertChildViewController * concertChildVC;
 @property (strong,nonatomic) ECConcertDetailViewController * concertChildVC;
 
 @property (strong,nonatomic) UIBarButtonItem* shareButton;
