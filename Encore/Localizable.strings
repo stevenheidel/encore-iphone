@@ -47,7 +47,7 @@
 //Photo picker
 "new_from_camera" = "Take new picture";
 "pick_from_lib" = "Select from photo library";
-"photo_picker_title" = "Post Photo";
+"photo_picker_title" = "Post Public Photo";
 
 //Action sheet for confirming concert adding/removal
 "confirm_remove_title" = "Remove Concert";
