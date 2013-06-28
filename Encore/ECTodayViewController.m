@@ -51,6 +51,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     self.hud.labelText = NSLocalizedString(@"loading", nil);
     self.hud.color = [UIColor colorWithRed:8.0/255.0 green:56.0/255.0 blue:76.0/255.0 alpha:0.90];
     self.hud.labelFont = [UIFont fontWithName:@"Hero" size:self.hud.labelFont.pointSize];
+    [self.tableView setScrollsToTop:YES];
 }
 
 - (UIView *) headerView {
@@ -70,6 +71,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
         }];
         [self.hud show:YES];
     }
+    [Flurry logEvent:@"TodayVC_Appeared"];
 }
 
 -(void) fetchedPopularConcerts:(NSArray *)concerts {
@@ -130,9 +132,13 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     ECConcertDetailViewController * concertDetail = [[ECConcertDetailViewController alloc] init];
+    NSDictionary* concert = [self.arrTodaysConcerts objectAtIndex:indexPath.row];
+    concertDetail.concert = concert;
     
-    concertDetail.concert = [self.arrTodaysConcerts objectAtIndex:indexPath.row];
+    [Flurry logEvent:@"Selected_Popular_Today_Concert" withParameters:concert];
+    
     [self.navigationController pushViewController:concertDetail animated:YES];
+    
 }
 
 - (void)didReceiveMemoryWarning

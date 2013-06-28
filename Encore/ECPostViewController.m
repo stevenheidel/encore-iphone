@@ -66,7 +66,7 @@
     [self.view addGestureRecognizer:recognizerTap];
 }
 -(void) tapPost {
-    
+    [Flurry logEvent:@"Tapped_Post_To_Show_Post_Details"];
     [UIView animateWithDuration:0.4
                           delay:0.0
                         options: UIViewAnimationOptionCurveEaseInOut
@@ -96,12 +96,16 @@
 }
 
 -(void) showGestureForSwipeRecognizer: (UISwipeGestureRecognizer*) recognizer {
+    int direction = 0;
     if (recognizer.direction == UISwipeGestureRecognizerDirectionLeft) {
-        [self gesture:+1];
+        direction = +1;
     }
     else {
-        [self gesture: -1];
+        direction = -1;
     }
+    [Flurry logEvent:@"Swiped_On_Post" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:direction], @"direction", nil]];
+    [self gesture:direction];
+    
 }
 
 -(void) gesture: (NSInteger) direction {
@@ -122,9 +126,10 @@
     [FBDialogs presentShareDialogWithLink:url
                                   handler:^(FBAppCall *call, NSDictionary *results, NSError *error) {
                                       if(error) {
-                                          NSLog(@"Error: %@", error.description);
+                                          NSLog(@"Error posting to FB: %@", error.description);
+                                          [Flurry logEvent:@"Post_Share_To_FB_Fail"];
                                       } else {
-                                          NSLog(@"Success!");
+                                          [Flurry logEvent:@"Post_Share_To_FB_Success" withParameters:[NSDictionary dictionaryWithObject:url.absoluteString forKey:@"url"]];
                                       }
                                   }];
     //    }

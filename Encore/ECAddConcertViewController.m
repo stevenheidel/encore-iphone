@@ -294,8 +294,9 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
         if (hasSearched) {
             if (self.foundArtistConcerts) {
                 ECConcertDetailViewController * concertDetail = [[ECConcertDetailViewController alloc] init];
-                
-                concertDetail.concert = [self.arrArtistConcerts objectAtIndex:indexPath.row];
+                NSDictionary* concert = [self.arrArtistConcerts objectAtIndex:indexPath.row];
+                [Flurry logEvent: @"Selected_Concert_After_Search" withParameters:concert];
+                concertDetail.concert = concert;
                 [self.navigationController pushViewController:concertDetail animated:YES];
             } else {
                 NSDictionary* artistDic = (NSDictionary*)[self.arrArtistData objectAtIndex:indexPath.row];
@@ -334,6 +335,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
         [self.artistSearch resignFirstResponder];
         [self.locationSearch resignFirstResponder];
     }
+    [Flurry logEvent: @"Dismissed_Keyboard_In_Search"];
 }
 
 -(void) showNoResults {
@@ -351,8 +353,10 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
     if (textField.tag == 0) {
         [self expandArtistSearchBar];
+        [Flurry logEvent: @"Expanded_Artist_Search_Bar"];
     } else {
         [self expandLocationSearchBar];
+        [Flurry logEvent: @"Expanded_Location_Search_Bar"];
     }
     return YES;
 }
@@ -370,6 +374,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
             [self.hud show:YES];
         } else {
             [textField resignFirstResponder];
+            [Flurry logEvent: @"Searched_With_Zero_Len_String"];
         }
     } else {
         [textField resignFirstResponder];
@@ -426,6 +431,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField {
     [self clearSearchResultsTable];
+    [Flurry logEvent:@"Search_Text_Field_Cleared"];
     return YES;
 }
 

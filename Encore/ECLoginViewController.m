@@ -150,7 +150,7 @@
 
 -(IBAction)performLogin:(id)sender{
    // [self.spinner startAnimating];  //TODO: Spinner
-    
+    [Flurry logEvent:@"Perform_Login"];
     ECAppDelegate* appDelegate = (ECAppDelegate*)[UIApplication sharedApplication].delegate;
     [appDelegate openSession];
 }
@@ -159,6 +159,7 @@
     // User switched back to the app without authorizing. Stay here, but
     // stop the spinner.
    // [self.spinner stopAnimating];  //TODO: Add spinner?
+    [Flurry logEvent:@"Login_Failed"];
 }
 
 #pragma mark - UIScrollView and UIPageControl methods
@@ -168,6 +169,7 @@
     CGFloat pageWidth = descScrollView.frame.size.width;
     int page = floor((descScrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
     self.pageControl.currentPage = page;
+    [Flurry logEvent:@"Scrolled_Login_Page"];
 }
 
 - (IBAction)changePage {

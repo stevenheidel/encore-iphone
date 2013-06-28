@@ -79,10 +79,13 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
     self.shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(shareTapped)];
     self.shareButton.enabled = NO;
     self.navigationItem.rightBarButtonItem = self.shareButton;
+    [self.horizontalSelect.tableView setScrollsToTop:NO];
 }
 
 -(void) shareTapped {
     [self.concertChildVC shareTapped];
+    [Flurry logEvent:@"Share_Tapped_From_ProfileVC"];
+
 }
 
 -(void) setupGestureRecgonizers {
@@ -171,6 +174,7 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
     }
     
     [self.navigationController pushViewController:self.settingsViewController animated:YES];
+    [Flurry logEvent:@"Settings_Button_Pressed"];
 }
 
 #pragma mark - button actions
@@ -198,6 +202,7 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+    [Flurry logEvent:@"Received_Memory_Warning" withParameters:[NSDictionary dictionaryWithObject:NSStringFromClass(self.class) forKey:@"class"]];
     // Dispose of any resources that can be recreated.
 }
 
@@ -267,13 +272,17 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
     
     if (cellType == ECCellTypeFutureShows || cellType == ECCellTypePastShows) {
         NSString * key = cellType == ECCellTypePastShows ? @"past" : @"future";
-        self.concertChildVC.concert = [[self.concerts objectForKey: key]objectAtIndex:indexPath.row];
+        NSDictionary* concert = [[self.concerts objectForKey: key]objectAtIndex:indexPath.row];
+        self.concertChildVC.concert = concert;
         [self.concertChildVC updateView];
         self.shareButton.enabled = YES;
+        [Flurry logEvent:[NSString stringWithFormat:@"Selected_%@_Cell_HS",key] withParameters:concert];
     }
     else {
         self.shareButton.enabled = NO;
+        [Flurry logEvent:[NSString stringWithFormat:@"Selected_Cell_Type_%d",cellType]];
     }
+    
 }
 
 -(void) addChildViewForCellType:(ECCellType) cellType {
@@ -353,12 +362,16 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
 #pragma mark - gestures
 - (void)showGestureForSwipeRecognizer:(UISwipeGestureRecognizer *)recognizer {
 	//CGPoint location = [recognizer locationInView:self.view];
+    int direction = 0;
     if (recognizer.direction == UISwipeGestureRecognizerDirectionLeft) {
-        [self gesture:+1];
+        direction = +1;
+
     }
     else {
-        [self gesture: -1];
+        direction = -1;
     }
+    [Flurry logEvent:@"Swipe_Gesture_PVC" withParameters:[NSDictionary dictionaryWithObject:[NSNumber numberWithInt:direction] forKey:@"direction"]];
+    [self gesture:direction];
 }
 
 -(void) gesture: (NSInteger) direction {

@@ -11,6 +11,8 @@
 #import "ECLoginViewController.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import "ECJSONPoster.h"
+#import "Flurry.h"
+#import "TestFlight.h"
 #import "AFNetworking.h"
 
 NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:ECSessionStateChangedNotification";
@@ -39,8 +41,18 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
     }];
 }
 
+-(void) startAnalytics {
+    [Flurry startSession:@"GWNDD6XD7GF76QFWFXPQ"];
+
+#warning USE ONLY DURING BETA
+    [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
+    
+    [TestFlight takeOff:@"40ca7224-1b48-4d23-851c-84ab1ff853d7"];
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+   // [self startAnalytics];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.profileViewController = [[ECProfileViewController alloc] init];
@@ -112,7 +124,7 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
             [self.navigationController popToRootViewControllerAnimated:NO];
             
             [FBSession.activeSession closeAndClearTokenInformation];
-            
+            [Flurry logEvent:@"FBSessionStateClosedLoginFailed"];
             [self showLoginView: YES];
             break;
         }
