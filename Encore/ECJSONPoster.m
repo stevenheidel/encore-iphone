@@ -14,6 +14,16 @@
 #import "AFNetworking.h"
 
 @implementation ECJSONPoster
+
++(int) ageFromFBBdayString: (NSString*) bday {
+    NSDateFormatter* formatter = [NSDateFormatter new];
+    [formatter setDateFormat:@"mm/dd/yyyy"];
+    NSDate* date = [formatter dateFromString:bday];
+    NSDate* today = [NSDate date];
+    unsigned int unitFlags =  NSYearCalendarUnit;
+    NSDateComponents* breakdownInfo = [[NSCalendar currentCalendar] components: unitFlags fromDate:date toDate:today options:0];
+    return [breakdownInfo year];
+}
 +(void) postUser:(NSDictionary <FBGraphUser>*) user {
     NSString * facebookID = user.id;
     NSString * name = user.name;
@@ -36,6 +46,14 @@
              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                  NSLog(@"ERROR: %@",[error description]);
              }];
+    [Flurry setUserID:facebookID];
+    NSString* bday = [user objectForKey:@"birthday"];
+    int age = -1;
+    if (bday) {
+        age = [ECJSONPoster ageFromFBBdayString:bday];
+    }
+    [Flurry setAge:[bday integerValue]];
+    [Flurry setGender:[user objectForKey:@"gender"]];
 }
 
 +(void) addConcert: (NSNumber *) concertID toUser: (NSString *) userID completion: (void (^)()) completion{

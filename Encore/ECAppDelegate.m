@@ -43,7 +43,9 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
 
 -(void) startAnalytics {
     [Flurry startSession:@"GWNDD6XD7GF76QFWFXPQ"];
-
+    [Flurry setEventLoggingEnabled:YES];
+    [Flurry setAppVersion:[NSString stringWithFormat:@"%@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]]];
+    
 #warning USE ONLY DURING BETA
     [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
     
@@ -104,11 +106,18 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
     
     switch (state) {
         case FBSessionStateOpen: {
-            [FBRequestConnection startForMeWithCompletionHandler:^(FBRequestConnection *connection,NSDictionary<FBGraphUser> *user,NSError *error){
+            NSDictionary* params = [NSDictionary dictionaryWithObject:@"id,gender,name,username,age_range,birthday" forKey:@"fields"];
+            FBRequest* request = [FBRequest requestWithGraphPath:@"me" parameters:params HTTPMethod:nil];
+            [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
                 if(!error){
-                    [self loginCompletedWithUser:user];
+                    [self loginCompletedWithUser:result];
                 }
             }];
+//            [FBRequestConnection startForMeWithCompletionHandler:^(FBRequestConnection *connection,NSDictionary<FBGraphUser> *user,NSError *error){
+//                if(!error){
+//                    [self loginCompletedWithUser:user];
+//                }
+//            }];
             topViewController = [self.navigationController topViewController];
             if ([[topViewController presentedViewController] isKindOfClass:[ECLoginViewController class]]) {
                 [topViewController dismissViewControllerAnimated:YES completion:nil];
@@ -243,8 +252,12 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
 
 -(void) saveLocationToUserDefaults: (CLLocation *) location {
     NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setDouble:location.coordinate.latitude forKey:@"latitude"];
-    [defaults setDouble:location.coordinate.longitude forKey:@"longitude"];
+    double latitude = location.coordinate.latitude;
+    double longitude = location.coordinate.longitude;
+    [defaults setDouble:latitude forKey:@"latitude"];
+    [defaults setDouble:longitude forKey:@"longitude"];
+    
+    [Flurry setLatitude:latitude longitude:longitude horizontalAccuracy:location.horizontalAccuracy verticalAccuracy:location.verticalAccuracy];
 }
 
 #pragma mark - UINavigationControllerDelegate
