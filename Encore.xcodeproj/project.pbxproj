@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		255A9AF4A1C64F71B97704C8 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 918A85E0EEDE48F3BEFD223A /* libPods.a */; };
+		A00402BD177F4F7300B998CF /* ECProfileHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = A00402BC177F4F7300B998CF /* ECProfileHeader.m */; };
 		A022AAA2177605900009244C /* Hero Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = A022AAA0177605900009244C /* Hero Light.otf */; };
 		A022AAA3177605900009244C /* Hero.otf in Resources */ = {isa = PBXBuildFile; fileRef = A022AAA1177605900009244C /* Hero.otf */; };
 		A022AAA617779BB50009244C /* ECConcertCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = A022AAA517779BB50009244C /* ECConcertCellView.m */; };
@@ -115,6 +116,8 @@
 
 /* Begin PBXFileReference section */
 		918A85E0EEDE48F3BEFD223A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A00402BB177F4F7300B998CF /* ECProfileHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECProfileHeader.h; sourceTree = "<group>"; };
+		A00402BC177F4F7300B998CF /* ECProfileHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECProfileHeader.m; sourceTree = "<group>"; };
 		A022AAA0177605900009244C /* Hero Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Hero Light.otf"; sourceTree = "<group>"; };
 		A022AAA1177605900009244C /* Hero.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Hero.otf; sourceTree = "<group>"; };
 		A022AAA417779BB50009244C /* ECConcertCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECConcertCellView.h; sourceTree = "<group>"; };
@@ -487,6 +490,8 @@
 				A0A2B0D7177E333900518B6C /* ECProfileViewController.h */,
 				A0A2B0D8177E333900518B6C /* ECProfileViewController.m */,
 				A0A2B0D9177E333900518B6C /* ECProfileViewController.xib */,
+				A00402BB177F4F7300B998CF /* ECProfileHeader.h */,
+				A00402BC177F4F7300B998CF /* ECProfileHeader.m */,
 				A0A2B0DC177E3B5A00518B6C /* ECProfileHeader.xib */,
 			);
 			name = Profile;
@@ -785,6 +790,7 @@
 				D4AA9779177CF82A008F4E31 /* ECPostCollectionHeaderView.m in Sources */,
 				D4ABD2EB177E2C8900DC691F /* ECPictureViewController.m in Sources */,
 				A0A2B0DA177E333900518B6C /* ECProfileViewController.m in Sources */,
+				A00402BD177F4F7300B998CF /* ECProfileHeader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -27,6 +27,7 @@
 "SearchingFor" = "Searching for";
 "Searching" = "Searching";
 "hudSearchArtist" = "%@";
+"PastConcertPrompt" = "Add an old concert to see photos and videos";
 "hudSearchConcert" = "%@ concerts for %@";
 "NoPopularResults" = "Couldn't find any popular %@ concerts.\nTry searching for a specific artist in the search bar above";
 "NoArtistResults" = "Couldn't find an artist named %@.\n Please make sure all words are spelled correctly or try another artist";

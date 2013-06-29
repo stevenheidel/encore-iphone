@@ -200,17 +200,19 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
     self.profileViewController.userName = user.name; //TODO: remove if not needed
     [ECJSONPoster postUser:user];
     [self.profileViewController fetchConcerts];
-    [self saveUserIDToDefaults: userid];
+    [self saveUserInfoToDefaults:user];
 }
 
--(void) saveUserIDToDefaults: (NSString *) userID {
+-(void) saveUserInfoToDefaults: (NSDictionary <FBGraphUser> *) userInfo {
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    
     NSString* userIDKey = NSLocalizedString(@"user_id", nil);
     NSString* defaultID = [defaults stringForKey:userIDKey];
-    if (!defaultID || ![defaultID isEqualToString:userID]) {
-        [defaults setObject:userID forKey:userIDKey];
+    if (!defaultID || ![defaultID isEqualToString:userInfo.id]) {
+        [defaults setObject:userInfo.id forKey:userIDKey];
         [defaults synchronize];
     }
+    
     else !defaultID ? NSLog(@"No default ID saved") : NSLog(@"No change in User ID. Defaults not changed");
 }
 
