@@ -135,7 +135,11 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
         [self hideNoResults];
         [self.hud hide:YES];
     } else {
-        self.lblNoresults.text = [NSString stringWithFormat:NSLocalizedString(@"PastConcertPrompt", nil)];//, self.searchType ? NSLocalizedString(@"Upcoming", nil) : NSLocalizedString(@"Past", nil)];
+        if (self.searchType == ECSearchTypePast) {
+            self.lblNoresults.text = [NSString stringWithFormat:NSLocalizedString(@"PastConcertPrompt", nil)];
+        } else {
+            self.lblNoresults.text = [NSString stringWithFormat:NSLocalizedString(@"NoPopularResults", nil), self.searchType ? NSLocalizedString(@"Upcoming", nil) : NSLocalizedString(@"Past", nil)];
+        }
         [self showNoResults];
         [self.hud hide:YES];
     }

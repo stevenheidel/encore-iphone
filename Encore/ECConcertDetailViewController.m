@@ -494,7 +494,7 @@ typedef enum {
 
 -(ECMainViewController*) profileViewController {
     ECAppDelegate* appDel = (ECAppDelegate *)[UIApplication sharedApplication].delegate;
-    return appDel.profileViewController;
+    return appDel.mainViewController;
 }
 
 @end

@@ -55,17 +55,18 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
    // [self startAnalytics];
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    self.profileViewController = [[ECMainViewController alloc] init];
+    self.mainViewController = [[ECMainViewController alloc] init];
     self.loginViewController = [[ECLoginViewController alloc] init];
     
     [self setUpLocationManager];
     
-    self.profileViewController.title = @"Encore";
+    self.mainViewController.title = @"Encore";
     
     //self.navigationController   = [[UINavigationController alloc] initWithRootViewController:self.loginViewController];
-    self.navigationController   = [[UINavigationController alloc] initWithRootViewController:self.profileViewController];
+    self.navigationController   = [[UINavigationController alloc] initWithRootViewController:self.mainViewController];
     [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], UITextAttributeTextColor, [UIColor blackColor], UITextAttributeTextShadowColor, [NSValue valueWithUIOffset:UIOffsetMake(0.0f,1.0f)],UITextAttributeTextShadowOffset, [UIFont fontWithName:@"Hero" size:24.0f], UITextAttributeFont, nil]];
     
     
@@ -196,10 +197,10 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
 -(void) loginCompletedWithUser:(NSDictionary <FBGraphUser>*) user {
     NSString* userid = user.id;
     NSLog(@"Logged in user with id: %@",userid);
-    self.profileViewController.facebook_id = userid;
-    self.profileViewController.userName = user.name; //TODO: remove if not needed
+    self.mainViewController.facebook_id = userid;
+    self.mainViewController.userName = user.name; //TODO: remove if not needed
     [ECJSONPoster postUser:user];
-    [self.profileViewController fetchConcerts];
+    [self.mainViewController fetchConcerts];
     [self saveUserInfoToDefaults:user];
 }
 
@@ -212,8 +213,21 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
         [defaults setObject:userInfo.id forKey:userIDKey];
         [defaults synchronize];
     }
-    
     else !defaultID ? NSLog(@"No default ID saved") : NSLog(@"No change in User ID. Defaults not changed");
+    
+    NSString* usernameKey = NSLocalizedString(@"user_name", nil);
+    NSString* defaultName = [defaults stringForKey:usernameKey];
+    if (!defaultName || ![defaultName isEqualToString:userInfo.name]) {
+        [defaults setObject:userInfo.name forKey:usernameKey];
+        [defaults synchronize];
+    }
+    NSString* userLocationKey = NSLocalizedString(@"user_location", nil);
+    NSString* defaultLocation = [defaults stringForKey:userLocationKey];
+    if (!defaultLocation || ![defaultLocation isEqualToString:userInfo.location.location.city]) {
+        [defaults setObject:userInfo.location.location.city forKey:userLocationKey];
+        [defaults synchronize];
+    }
+    
 }
 
 #pragma mark - location

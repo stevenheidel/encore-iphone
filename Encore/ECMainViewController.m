@@ -63,7 +63,7 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
     UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
     UIImage *leftButImage = [UIImage imageNamed:@"profileButton.png"]; //stretchableImageWithLeftCapWidth:10 topCapHeight:10];
     [leftButton setBackgroundImage:leftButImage forState:UIControlStateNormal];
-    [leftButton addTarget:self action:@selector(settingsButtonWasPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [leftButton addTarget:self action:@selector(profileButtonWasPressed:) forControlEvents:UIControlEventTouchUpInside];
     leftButton.frame = CGRectMake(0, 0, leftButImage.size.width*0.75, leftButImage.size.height*0.75);
     UIBarButtonItem *profileButton = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
     self.navigationItem.leftBarButtonItem = profileButton;
@@ -162,14 +162,14 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
     [super viewDidAppear:animated];
 }
 
--(void)settingsButtonWasPressed:(id)sender {
-    if (self.settingsViewController == nil) {
-        self.settingsViewController = [[FBUserSettingsViewController alloc] init];
-        self.settingsViewController.delegate = self;
+-(void)profileButtonWasPressed:(id)sender {
+    if (self.profileViewController == nil) {
+        self.profileViewController = [[ECProfileViewController alloc] init];
+        self.profileViewController.arrPastConcerts = [self.concerts objectForKey:@"past"];
     }
     
-    [self.navigationController pushViewController:self.settingsViewController animated:YES];
-    [Flurry logEvent:@"Settings_Button_Pressed"];
+    [self.navigationController pushViewController:self.profileViewController animated:YES];
+    [Flurry logEvent:@"Profile_Button_Pressed"];
 }
 
 #pragma mark - button actions

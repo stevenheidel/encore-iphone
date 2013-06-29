@@ -23,7 +23,7 @@
 
 @property (strong, nonatomic) UINavigationController *navigationController;
 
-@property (strong, nonatomic) ECMainViewController *profileViewController;
+@property (strong, nonatomic) ECMainViewController *mainViewController;
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
 

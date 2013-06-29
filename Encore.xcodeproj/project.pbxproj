@@ -17,6 +17,10 @@
 		A00402C9177F701500B998CF /* IWasThereButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A00402C7177F701500B998CF /* IWasThereButton@2x.png */; };
 		A00402CC177F704B00B998CF /* postButton.png in Resources */ = {isa = PBXBuildFile; fileRef = A00402CA177F704B00B998CF /* postButton.png */; };
 		A00402CD177F704B00B998CF /* postButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A00402CB177F704B00B998CF /* postButton@2x.png */; };
+		A00402D2177F9E7700B998CF /* blueLocationMarker.png in Resources */ = {isa = PBXBuildFile; fileRef = A00402D0177F9E7600B998CF /* blueLocationMarker.png */; };
+		A00402D3177F9E7700B998CF /* blueLocationMarker@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A00402D1177F9E7600B998CF /* blueLocationMarker@2x.png */; };
+		A00402D6177F9E9700B998CF /* imgStubs.png in Resources */ = {isa = PBXBuildFile; fileRef = A00402D4177F9E9700B998CF /* imgStubs.png */; };
+		A00402D7177F9E9700B998CF /* imgStubs@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A00402D5177F9E9700B998CF /* imgStubs@2x.png */; };
 		A022AAA2177605900009244C /* Hero Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = A022AAA0177605900009244C /* Hero Light.otf */; };
 		A022AAA3177605900009244C /* Hero.otf in Resources */ = {isa = PBXBuildFile; fileRef = A022AAA1177605900009244C /* Hero.otf */; };
 		A022AAA617779BB50009244C /* ECConcertCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = A022AAA517779BB50009244C /* ECConcertCellView.m */; };
@@ -134,6 +138,10 @@
 		A00402C7177F701500B998CF /* IWasThereButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "IWasThereButton@2x.png"; sourceTree = "<group>"; };
 		A00402CA177F704B00B998CF /* postButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = postButton.png; sourceTree = "<group>"; };
 		A00402CB177F704B00B998CF /* postButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "postButton@2x.png"; sourceTree = "<group>"; };
+		A00402D0177F9E7600B998CF /* blueLocationMarker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueLocationMarker.png; sourceTree = "<group>"; };
+		A00402D1177F9E7600B998CF /* blueLocationMarker@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blueLocationMarker@2x.png"; sourceTree = "<group>"; };
+		A00402D4177F9E9700B998CF /* imgStubs.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = imgStubs.png; sourceTree = "<group>"; };
+		A00402D5177F9E9700B998CF /* imgStubs@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "imgStubs@2x.png"; sourceTree = "<group>"; };
 		A022AAA0177605900009244C /* Hero Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Hero Light.otf"; sourceTree = "<group>"; };
 		A022AAA1177605900009244C /* Hero.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Hero.otf; sourceTree = "<group>"; };
 		A022AAA417779BB50009244C /* ECConcertCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECConcertCellView.h; sourceTree = "<group>"; };
@@ -357,6 +365,10 @@
 		D4A8DDD1176A44A0005E9847 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				A00402D4177F9E9700B998CF /* imgStubs.png */,
+				A00402D5177F9E9700B998CF /* imgStubs@2x.png */,
+				A00402D0177F9E7600B998CF /* blueLocationMarker.png */,
+				A00402D1177F9E7600B998CF /* blueLocationMarker@2x.png */,
 				A00402CA177F704B00B998CF /* postButton.png */,
 				A00402CB177F704B00B998CF /* postButton@2x.png */,
 				A00402C6177F701500B998CF /* IWasThereButton.png */,
@@ -732,6 +744,10 @@
 				A00402C9177F701500B998CF /* IWasThereButton@2x.png in Resources */,
 				A00402CC177F704B00B998CF /* postButton.png in Resources */,
 				A00402CD177F704B00B998CF /* postButton@2x.png in Resources */,
+				A00402D2177F9E7700B998CF /* blueLocationMarker.png in Resources */,
+				A00402D3177F9E7700B998CF /* blueLocationMarker@2x.png in Resources */,
+				A00402D6177F9E9700B998CF /* imgStubs.png in Resources */,
+				A00402D7177F9E9700B998CF /* imgStubs@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

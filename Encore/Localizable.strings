@@ -44,6 +44,8 @@
 
 //user defaults
 "user_id" = "user_id";
+"user_name" = "user_name";
+"user_location" = "user_location";
 
 //Photo picker
 "new_from_camera" = "Take new picture";
