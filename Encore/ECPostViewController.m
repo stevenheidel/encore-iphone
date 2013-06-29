@@ -34,17 +34,33 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self setupPost];
-    self.profilePicture.layer.cornerRadius = 35.0;
+    self.profilePicture.layer.cornerRadius = 30.0;
     self.profilePicture.layer.masksToBounds = YES;
     self.profilePicture.layer.borderColor = [UIColor grayColor].CGColor;
     self.profilePicture.layer.borderWidth = 3.0;
     self.captionLabel.font = [UIFont fontWithName:@"Hero" size:12.0f];
     self.userNameLabel.font = [UIFont fontWithName:@"Hero Light" size:18.0f];
     
-    self.title = @"Post";//self.userNameLabel.text;
+    //self.title = @"Post";//self.userNameLabel.text;
     
-    UIBarButtonItem * shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(shareTapped)];
+    UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIImage *leftButImage = [UIImage imageNamed:@"backButton.png"]; //stretchableImageWithLeftCapWidth:10 topCapHeight:10];
+    [leftButton setBackgroundImage:leftButImage forState:UIControlStateNormal];
+    [leftButton addTarget:self action:@selector(backButtonWasPressed) forControlEvents:UIControlEventTouchUpInside];
+    leftButton.frame = CGRectMake(0, 0, leftButImage.size.width*0.75, leftButImage.size.height*0.75);
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
+    self.navigationItem.leftBarButtonItem = backButton;
+    
+    UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIImage *rightButImage = [UIImage imageNamed:@"shareButton.png"]; //stretchableImageWithLeftCapWidth:10 topCapHeight:10];
+    [rightButton setBackgroundImage:rightButImage forState:UIControlStateNormal];
+    [rightButton addTarget:self action:@selector(shareTapped) forControlEvents:UIControlEventTouchUpInside];
+    rightButton.frame = CGRectMake(0, 0, rightButImage.size.width*0.75, rightButImage.size.height*0.75);
+    UIBarButtonItem *shareButton = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
     self.navigationItem.rightBarButtonItem = shareButton;
+    
+//    UIBarButtonItem * shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(shareTapped)];
+//    self.navigationItem.rightBarButtonItem = shareButton;
     [self setupGestureRecgonizers];
     self.containerView.alpha = 0.0;
 }
@@ -114,6 +130,10 @@
     self.post = [dic objectForKey:@"dic"];
     self.itemNumber = [(NSNumber*)[dic objectForKey:@"index"] integerValue];
     [self setupPost];
+}
+
+-(void) backButtonWasPressed {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void) shareTapped {
