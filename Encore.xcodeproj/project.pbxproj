@@ -13,6 +13,10 @@
 		A00402C1177F65F600B998CF /* loginButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A00402BF177F65F600B998CF /* loginButton@2x.png */; };
 		A00402C4177F6B0900B998CF /* backButton.png in Resources */ = {isa = PBXBuildFile; fileRef = A00402C2177F6B0900B998CF /* backButton.png */; };
 		A00402C5177F6B0900B998CF /* backButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A00402C3177F6B0900B998CF /* backButton@2x.png */; };
+		A00402C8177F701500B998CF /* IWasThereButton.png in Resources */ = {isa = PBXBuildFile; fileRef = A00402C6177F701500B998CF /* IWasThereButton.png */; };
+		A00402C9177F701500B998CF /* IWasThereButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A00402C7177F701500B998CF /* IWasThereButton@2x.png */; };
+		A00402CC177F704B00B998CF /* postButton.png in Resources */ = {isa = PBXBuildFile; fileRef = A00402CA177F704B00B998CF /* postButton.png */; };
+		A00402CD177F704B00B998CF /* postButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A00402CB177F704B00B998CF /* postButton@2x.png */; };
 		A022AAA2177605900009244C /* Hero Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = A022AAA0177605900009244C /* Hero Light.otf */; };
 		A022AAA3177605900009244C /* Hero.otf in Resources */ = {isa = PBXBuildFile; fileRef = A022AAA1177605900009244C /* Hero.otf */; };
 		A022AAA617779BB50009244C /* ECConcertCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = A022AAA517779BB50009244C /* ECConcertCellView.m */; };
@@ -126,6 +130,10 @@
 		A00402BF177F65F600B998CF /* loginButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loginButton@2x.png"; sourceTree = "<group>"; };
 		A00402C2177F6B0900B998CF /* backButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backButton.png; sourceTree = "<group>"; };
 		A00402C3177F6B0900B998CF /* backButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "backButton@2x.png"; sourceTree = "<group>"; };
+		A00402C6177F701500B998CF /* IWasThereButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IWasThereButton.png; sourceTree = "<group>"; };
+		A00402C7177F701500B998CF /* IWasThereButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "IWasThereButton@2x.png"; sourceTree = "<group>"; };
+		A00402CA177F704B00B998CF /* postButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = postButton.png; sourceTree = "<group>"; };
+		A00402CB177F704B00B998CF /* postButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "postButton@2x.png"; sourceTree = "<group>"; };
 		A022AAA0177605900009244C /* Hero Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Hero Light.otf"; sourceTree = "<group>"; };
 		A022AAA1177605900009244C /* Hero.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Hero.otf; sourceTree = "<group>"; };
 		A022AAA417779BB50009244C /* ECConcertCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECConcertCellView.h; sourceTree = "<group>"; };
@@ -349,6 +357,10 @@
 		D4A8DDD1176A44A0005E9847 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				A00402CA177F704B00B998CF /* postButton.png */,
+				A00402CB177F704B00B998CF /* postButton@2x.png */,
+				A00402C6177F701500B998CF /* IWasThereButton.png */,
+				A00402C7177F701500B998CF /* IWasThereButton@2x.png */,
 				A00402C2177F6B0900B998CF /* backButton.png */,
 				A00402C3177F6B0900B998CF /* backButton@2x.png */,
 				A00402BE177F65F600B998CF /* loginButton.png */,
@@ -716,6 +728,10 @@
 				A00402C1177F65F600B998CF /* loginButton@2x.png in Resources */,
 				A00402C4177F6B0900B998CF /* backButton.png in Resources */,
 				A00402C5177F6B0900B998CF /* backButton@2x.png in Resources */,
+				A00402C8177F701500B998CF /* IWasThereButton.png in Resources */,
+				A00402C9177F701500B998CF /* IWasThereButton@2x.png in Resources */,
+				A00402CC177F704B00B998CF /* postButton.png in Resources */,
+				A00402CD177F704B00B998CF /* postButton@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

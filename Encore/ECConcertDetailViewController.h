@@ -24,6 +24,7 @@
 @property (nonatomic,strong) IBOutlet UIImageView *imgArtist;
 @property (nonatomic,strong) IBOutlet UIImageView *imgBackground;
 @property (nonatomic,strong) IBOutlet UIImageView *imgLiveNow;
+@property (nonatomic, strong) IBOutlet UIButton *iWasThereButton;
 
 @property (nonatomic, strong) NSArray * posts;
 
@@ -39,7 +40,7 @@
 -(void) updateView;
 
 @property (nonatomic,strong) UIImagePickerController* imagePickerController;
-@property (nonatomic,strong) IBOutlet ECToolbar* toolbar;
+
 
 @property (nonatomic,unsafe_unretained) id <ECPostViewControllerDelegate> delegate;
 
@@ -52,8 +53,4 @@
 @property (nonatomic, strong) IBOutlet UIImageView *liveGIF;
 //@property (nonatomic, strong) IBOutlet UIButton* button;
 -(id) initWithFrame:(CGRect)frame owner: (id) owner;
-@end
-
-@interface ECToolbar : UIToolbar
-@property (nonatomic,strong) IBOutlet UIBarButtonItem* addButton;
 @end

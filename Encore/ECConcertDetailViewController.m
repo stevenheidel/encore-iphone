@@ -26,7 +26,7 @@
 #import "ECPictureViewController.h"
 
 #define HUD_DELAY 0.9
-#define HEADER_HEIGHT 126.0
+#define HEADER_HEIGHT 176.0
 
 //#import "SGSStaggeredFlowLayout.h"
 
@@ -67,7 +67,7 @@ typedef enum {
     [self setupArtistUIAttributes];
     
     self.isOnProfile = FALSE;
-    [self setUpRightBarButton];
+    [self setUpNavBarButtons];
    // [self setUpFlowLayout];
     [self setupToolbar];
     [self loadArtistDetails];
@@ -112,11 +112,11 @@ typedef enum {
     [ECJSONFetcher checkIfConcert:[self.concert songkickID] isOnProfile:userID completion:^(BOOL isOnProfile) {
         if (!isOnProfile) {
             self.isOnProfile = FALSE;
-            self.toolbar.addButton.title = NSLocalizedString(@"add", nil);
+            [self.iWasThereButton setSelected:NO];
         }
         else {
             self.isOnProfile = TRUE;
-            self.toolbar.addButton.title = NSLocalizedString(@"remove", nil);
+            [self.iWasThereButton setSelected:YES];
         }
     }];
 }
@@ -173,9 +173,30 @@ typedef enum {
     [self.collectionView setContentOffset:CGPointZero animated:NO];
 }
 
--(void) setUpRightBarButton {
-    self.shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(shareTapped)];
-    [self.navigationItem setRightBarButtonItem:self.shareButton];
+-(void) setUpNavBarButtons {
+    
+    UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIImage *leftButImage = [UIImage imageNamed:@"backButton.png"]; //stretchableImageWithLeftCapWidth:10 topCapHeight:10];
+    [leftButton setBackgroundImage:leftButImage forState:UIControlStateNormal];
+    [leftButton addTarget:self action:@selector(backButtonWasPressed) forControlEvents:UIControlEventTouchUpInside];
+    leftButton.frame = CGRectMake(0, 0, leftButImage.size.width*0.75, leftButImage.size.height*0.75);
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
+    self.navigationItem.leftBarButtonItem = backButton;
+    
+    UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIImage *rightButImage = [UIImage imageNamed:@"shareButton.png"]; //stretchableImageWithLeftCapWidth:10 topCapHeight:10];
+    [rightButton setBackgroundImage:rightButImage forState:UIControlStateNormal];
+    [rightButton addTarget:self action:@selector(shareTapped) forControlEvents:UIControlEventTouchUpInside];
+    rightButton.frame = CGRectMake(0, 0, rightButImage.size.width*0.75, rightButImage.size.height*0.75);
+    self.shareButton = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
+    self.navigationItem.rightBarButtonItem = self.shareButton;
+    
+//    self.shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(shareTapped)];
+//    [self.navigationItem setRightBarButtonItem:self.shareButton];
+}
+
+-(void) backButtonWasPressed {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - FB Sharing
@@ -298,7 +319,7 @@ typedef enum {
 //Toggle whether or not the profile is on the user's profile.
 -(void) toggleOnProfileState {
     self.isOnProfile = !self.isOnProfile;
-    self.toolbar.addButton.title = self.isOnProfile ? NSLocalizedString(@"remove", nil) : NSLocalizedString(@"add", nil);
+    [self.iWasThereButton setSelected:self.isOnProfile];
 }
 
 //#pragma mark - UICollectionViewDelegateFlowLayout
@@ -500,9 +521,5 @@ typedef enum {
     }
     return self;
 }
-
-@end
-
-@implementation ECToolbar
 
 @end
