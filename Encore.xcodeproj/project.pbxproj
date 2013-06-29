@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		255A9AF4A1C64F71B97704C8 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 918A85E0EEDE48F3BEFD223A /* libPods.a */; };
 		A00402BD177F4F7300B998CF /* ECProfileHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = A00402BC177F4F7300B998CF /* ECProfileHeader.m */; };
+		A00402C0177F65F600B998CF /* loginButton.png in Resources */ = {isa = PBXBuildFile; fileRef = A00402BE177F65F600B998CF /* loginButton.png */; };
+		A00402C1177F65F600B998CF /* loginButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A00402BF177F65F600B998CF /* loginButton@2x.png */; };
 		A022AAA2177605900009244C /* Hero Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = A022AAA0177605900009244C /* Hero Light.otf */; };
 		A022AAA3177605900009244C /* Hero.otf in Resources */ = {isa = PBXBuildFile; fileRef = A022AAA1177605900009244C /* Hero.otf */; };
 		A022AAA617779BB50009244C /* ECConcertCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = A022AAA517779BB50009244C /* ECConcertCellView.m */; };
@@ -118,6 +120,8 @@
 		918A85E0EEDE48F3BEFD223A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A00402BB177F4F7300B998CF /* ECProfileHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECProfileHeader.h; sourceTree = "<group>"; };
 		A00402BC177F4F7300B998CF /* ECProfileHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECProfileHeader.m; sourceTree = "<group>"; };
+		A00402BE177F65F600B998CF /* loginButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loginButton.png; sourceTree = "<group>"; };
+		A00402BF177F65F600B998CF /* loginButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loginButton@2x.png"; sourceTree = "<group>"; };
 		A022AAA0177605900009244C /* Hero Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Hero Light.otf"; sourceTree = "<group>"; };
 		A022AAA1177605900009244C /* Hero.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Hero.otf; sourceTree = "<group>"; };
 		A022AAA417779BB50009244C /* ECConcertCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECConcertCellView.h; sourceTree = "<group>"; };
@@ -341,6 +345,8 @@
 		D4A8DDD1176A44A0005E9847 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				A00402BE177F65F600B998CF /* loginButton.png */,
+				A00402BF177F65F600B998CF /* loginButton@2x.png */,
 				A0A2B0D3177E1E7100518B6C /* shareButton.png */,
 				A0A2B0D4177E1E7100518B6C /* shareButton@2x.png */,
 				D4ABD2E4177E1E6E00DC691F /* Icon-Small.png */,
@@ -700,6 +706,8 @@
 				D4ABD2EC177E2C8900DC691F /* ECPictureViewController.xib in Resources */,
 				A0A2B0DB177E333900518B6C /* ECProfileViewController.xib in Resources */,
 				A0A2B0DD177E3B5A00518B6C /* ECProfileHeader.xib in Resources */,
+				A00402C0177F65F600B998CF /* loginButton.png in Resources */,
+				A00402C1177F65F600B998CF /* loginButton@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
