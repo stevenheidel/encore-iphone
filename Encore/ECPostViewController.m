@@ -13,6 +13,8 @@
 #import "EncoreURL.h"
 #import <FacebookSDK/FacebookSDK.h>
 
+#import "UIFont+Encore.h"
+
 @interface ECPostViewController ()
 
 @end
@@ -38,8 +40,8 @@
     self.profilePicture.layer.masksToBounds = YES;
     self.profilePicture.layer.borderColor = [UIColor grayColor].CGColor;
     self.profilePicture.layer.borderWidth = 3.0;
-    self.captionLabel.font = [UIFont fontWithName:@"Hero" size:12.0f];
-    self.userNameLabel.font = [UIFont fontWithName:@"Hero Light" size:18.0f];
+    self.captionLabel.font = [UIFont heroFontWithSize: 12.0f];
+    self.userNameLabel.font = [UIFont lightHeroFontWithSize: 18.0f];
     
     //self.title = @"Post";//self.userNameLabel.text;
     

@@ -36,6 +36,8 @@
     return [UIColor colorWithRed:160.0/255.0 green:165.0/255.0 blue:170.0/255.0 alpha:1.0];
 }
 
+
+#pragma mark - HUD
 +(UIColor*) lightBlueHUDConfirmationColor {
     return [UIColor colorWithRed:0.0/255.0 green:176.0/255.0 blue:227.0/255.0 alpha:0.90];
 }
@@ -44,4 +46,16 @@
     return [UIColor colorWithRed:255.0/255.0 green:51.0/255.0 blue:51.0/255.0 alpha:0.90];
 }
 
+#pragma mark - Horizontal select
++(UIColor*) horizontalSelectTextColor {
+    return [UIColor colorWithRed:160.0/255.0 green:164.0/255.0 blue:167.0/255.0 alpha:1.0];
+}
+
++(UIColor*) horizontalSelectTodayCellColor {
+    return [UIColor colorWithRed:0.0 green:176.0/255.0 blue:227.0/255.0 alpha:1.0];
+}
+
++(UIColor*) horizontalSelectGrayCellColor {
+    return [UIColor colorWithRed:246.0/255.0 green:248.0/255.0 blue:250.0/255.0 alpha:1.0];
+}
 @end

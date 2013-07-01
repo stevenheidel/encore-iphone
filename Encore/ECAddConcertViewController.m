@@ -18,6 +18,8 @@
 #import "ECJSONFetcher.h"
 
 #import "UIColor+EncoreUI.h"
+#import "UIFont+Encore.h"
+#import "UIFont+Encore.h"
 
 #define ARTIST_HEADER_HEIGHT 30.0
 #define ARTIST_CELL_HEIGHT 50.0
@@ -73,8 +75,8 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     [self.view addSubview:self.hud];
     self.hud.labelText = NSLocalizedString(@"loading", nil);
     self.hud.color = [UIColor encoreDarkGreenColorWithAlpha:0.90];
-    self.hud.labelFont = [UIFont fontWithName:@"Hero" size:self.hud.labelFont.pointSize];
-    self.hud.detailsLabelFont = [UIFont fontWithName:@"Hero" size:self.hud.detailsLabelFont.pointSize];
+    self.hud.labelFont = [UIFont heroFontWithSize:self.hud.labelFont.pointSize];
+    self.hud.detailsLabelFont = [UIFont heroFontWithSize:self.hud.detailsLabelFont.pointSize];
     //Register cell nib file to the uitableview
     NSString *myIdentifier = @"ECConcertCellView";
     [self.tableView registerNib:[UINib nibWithNibName:@"ECConcertCellView" bundle:nil]
@@ -82,9 +84,9 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     
     self.arrArtistImages = [[NSMutableArray alloc] init];
     self.arrPopularImages = [[NSMutableArray alloc] init];
-    self.locationSearch.font = [UIFont fontWithName:@"Hero" size:15.0];
-    self.artistSearch.font = [UIFont fontWithName:@"Hero" size:15.0];
-    self.lblNoresults.font = [UIFont fontWithName:@"Hero" size:22.0];
+    self.locationSearch.font = [UIFont heroFontWithSize: 15.0];
+    self.artistSearch.font = [UIFont heroFontWithSize: 15.0];
+    self.lblNoresults.font = [UIFont heroFontWithSize: 22.0];
     self.tableView.tableFooterView = [self headerView];
     //self.tableView.tableHeaderView = [self headerView];
 }
@@ -242,7 +244,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
         label.textColor = [UIColor darkTextColorWithAlpha:0.8];
         
         [label setAdjustsFontSizeToFitWidth:YES];
-        label.font = [UIFont fontWithName:@"Hero" size:16.0];
+        label.font = [UIFont heroFontWithSize:16.0];
         label.text = sectionTitle;
         
         // Create header view and add label as a subview

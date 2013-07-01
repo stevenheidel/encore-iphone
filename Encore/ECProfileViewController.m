@@ -15,6 +15,7 @@
 #import <FacebookSDK/FacebookSDK.h>
 
 #import "UIColor+EncoreUI.h"
+#import "UIFont+Encore.h"
 
 #import "UIColor+FlatUI.h"
 #import "UIFont+FlatUI.h"
@@ -101,9 +102,9 @@ typedef enum {
 
 - (void) setUpHeaderView {
     
-    self.lblName.font = [UIFont fontWithName:@"Hero" size:18.0];
-    self.lblLocation.font = [UIFont fontWithName:@"Hero" size:14.0];
-    self.lblConcerts.font = [UIFont fontWithName:@"Hero" size:14.0];
+    self.lblName.font = [UIFont heroFontWithSize: 18.0];
+    self.lblLocation.font = [UIFont heroFontWithSize: 14.0];
+    self.lblConcerts.font = [UIFont heroFontWithSize: 14.0];
     
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     

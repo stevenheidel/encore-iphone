@@ -26,6 +26,7 @@
 #import "ECPictureViewController.h"
 
 #import "UIColor+EncoreUI.h"
+#import "UIFont+Encore.h"
 
 #define HUD_DELAY 0.9
 #define HEADER_HEIGHT 176.0
@@ -87,10 +88,10 @@ typedef enum {
 }
 -(void) setupArtistUIAttributes {
     [self.artistNameLabel setAdjustsFontSizeToFitWidth:YES];
-    self.artistNameLabel.font = [UIFont fontWithName:@"Hero" size:21.0];
+    self.artistNameLabel.font = [UIFont heroFontWithSize: 21.0];
     [self.artistNameLabel setAdjustsFontSizeToFitWidth:YES];
-    self.venueNameLabel.font = [UIFont fontWithName:@"Hero" size:14.0];
-    self.dateLabel.font = [UIFont fontWithName:@"Hero" size:12.0];
+    self.venueNameLabel.font = [UIFont heroFontWithSize: 14.0];
+    self.dateLabel.font = [UIFont heroFontWithSize: 12.0];
     self.imgArtist.layer.cornerRadius = 42.0;
     self.imgArtist.layer.masksToBounds = YES;
     self.imgArtist.layer.borderColor = [UIColor grayColor].CGColor;
@@ -536,15 +537,15 @@ typedef enum {
         NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"ECPostPlaceholder" owner:owner options:nil];
         self = [subviewArray objectAtIndex:0];
         self.frame = frame;
-        self.label1.font = [UIFont fontWithName:@"Hero" size:18.0];
-        self.label2.font = [UIFont fontWithName:@"Hero" size:18.0];
+        self.label1.font = [UIFont heroFontWithSize: 18.0];
+        self.label2.font = [UIFont heroFontWithSize: 18.0];
         
         self.label1.text = NSLocalizedString(@"POST_PLACEHOLDER_TEXT_1", nil);
         self.label2.text = NSLocalizedString(@"POST_PLACEHOLDER_TEXT_2", nil);
         
         self.liveGIF.image = [UIImage animatedGIFNamed:@"liveNow"];
         
-//        self.button.titleLabel.font = [UIFont fontWithName:@"Hero" size:22.0];
+//        self.button.titleLabel.font = [UIFont heroFontWithSize: 22.0];
     }
     return self;
 }

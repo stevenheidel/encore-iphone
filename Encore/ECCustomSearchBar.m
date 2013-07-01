@@ -7,6 +7,7 @@
 //
 
 #import "ECCustomSearchBar.h"
+#import "UIFont+Encore.h"
 
 @implementation ECCustomSearchBar
 
@@ -27,7 +28,7 @@
     }
     if(!(searchField == nil)) {
         [searchField setBorderStyle:UITextBorderStyleLine];
-        [searchField setFont:[UIFont fontWithName:@"Hero" size:15.0]];
+        [searchField setFont:[UIFont heroFontWithSize: 15.0]];
         [searchField setBorderStyle:UITextBorderStyleNone];
     }
     

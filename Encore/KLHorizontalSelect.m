@@ -9,6 +9,11 @@
 #import "KLHorizontalSelect.h"
 #import "NSDictionary+ConcertList.h"
 #import <QuartzCore/QuartzCore.h>
+
+#import "UIFont+Encore.h"
+#import "UIColor+EncoreUI.h"
+
+
 #define NUM_ENDS 2
 
 @interface KLHorizontalSelect ()
@@ -237,11 +242,11 @@
         if ([indexPath row] % 2) {
             [[(KLHorizontalSelectCell*)cell contentView] setBackgroundColor:[UIColor whiteColor]];
         } else {
-            [[(KLHorizontalSelectCell*)cell contentView] setBackgroundColor:[UIColor colorWithRed:0.9647 green:0.9725 blue:0.9804 alpha:1.0]];
+            [[(KLHorizontalSelectCell*)cell contentView] setBackgroundColor:[UIColor horizontalSelectGrayCellColor]];
         }
         
     } else if (cellType == ECCellTypeToday) {
-        [[cell contentView] setBackgroundColor:[UIColor colorWithRed:0.0 green:0.6902 blue:0.8902 alpha:1.0]];
+        [[cell contentView] setBackgroundColor:[UIColor horizontalSelectTodayCellColor]];
     } else {
         [[cell contentView] setBackgroundColor:[UIColor blackColor]];
     }
@@ -294,13 +299,12 @@
 
 -(void) setCellTextAttributes {
     ECHorizontalCellView * view =  self.cellView;
-    NSString * fontName = @"Hero";
-    UIColor* color = [UIColor colorWithRed:0.6275 green:0.6431 blue:0.6549 alpha:1.0];
-    view.yearLabel.font = [UIFont fontWithName:fontName size:12.0];
+    UIColor* color = [UIColor horizontalSelectTextColor];
+    view.yearLabel.font = [UIFont heroFontWithSize: 12.0];
     view.yearLabel.textColor = color;
-    view.monthLabel.font = [UIFont fontWithName:fontName size:15.0];
+    view.monthLabel.font = [UIFont heroFontWithSize:15.0];
     view.monthLabel.textColor = color;
-    view.dayNumberLabel.font = [UIFont fontWithName:fontName size:34.0];
+    view.dayNumberLabel.font = [UIFont heroFontWithSize:34.0];
     view.dayNumberLabel.textColor = color;
 }
 
@@ -314,7 +318,7 @@
         cellView.text = NSLocalizedString(@"today", nil);
         [cellView setTransform:CGAffineTransformMakeRotation(M_PI_2)];
         cellView.backgroundColor = [UIColor clearColor];
-        cellView.font = [UIFont fontWithName:@"Hero" size:14.0];
+        cellView.font = [UIFont heroFontWithSize: 14.0];
         cellView.textColor = [UIColor whiteColor];
         [self addSubview:cellView];
        
@@ -333,7 +337,7 @@
         cellView.backgroundColor = [UIColor clearColor];
         NSString * text = type == ECCellTypeAddPast ? NSLocalizedString(@"AddPast", nil): NSLocalizedString(@"AddFuture", nil);
         cellView.textLabel.text = text;
-        cellView.textLabel.font = [UIFont fontWithName:@"Hero" size:16.0];
+        cellView.textLabel.font = [UIFont heroFontWithSize: 16.0];
         cellView.textLabel.textColor = [UIColor whiteColor];
         cellView.textLabel.textAlignment = type == ECCellTypeAddPast ? NSTextAlignmentRight : NSTextAlignmentLeft;
         [self setTransform:CGAffineTransformMakeRotation(M_PI_2)];

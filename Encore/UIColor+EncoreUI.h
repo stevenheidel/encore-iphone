@@ -24,7 +24,12 @@
 
 +(UIColor*) profileImageBorderColor;
 
+//HUDs
 +(UIColor*) lightBlueHUDConfirmationColor;
-
 +(UIColor*) redHUDConfirmationColor;
+
+//Horizontal select
++(UIColor*) horizontalSelectTextColor;
++(UIColor*) horizontalSelectGrayCellColor;
++(UIColor*) horizontalSelectTodayCellColor;
 @end

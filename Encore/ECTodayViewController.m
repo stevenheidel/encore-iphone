@@ -16,6 +16,8 @@
 #import "ECJSONFetcher.h"
 
 #import "UIColor+EncoreUI.h"
+#import "UIFont+Encore.h"
+
 static NSString *const ConcertCellIdentifier = @"concertCell";
 
 @interface ECTodayViewController ()
@@ -54,7 +56,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     [self.view addSubview:self.hud];
     self.hud.labelText = NSLocalizedString(@"loading", nil);
     self.hud.color = [UIColor encoreDarkGreenColorWithAlpha:0.90];
-    self.hud.labelFont = [UIFont fontWithName:@"Hero" size:self.hud.labelFont.pointSize];
+    self.hud.labelFont = [UIFont heroFontWithSize: self.hud.labelFont.pointSize];
     [self.tableView setScrollsToTop:YES];
 }
 
