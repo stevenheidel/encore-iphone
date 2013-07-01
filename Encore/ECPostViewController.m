@@ -127,9 +127,11 @@
 -(void) gesture: (NSInteger) direction {
     
     NSDictionary* dic = [self.delegate requestPost: direction currentIndex: self.itemNumber];
-    self.post = [dic objectForKey:@"dic"];
-    self.itemNumber = [(NSNumber*)[dic objectForKey:@"index"] integerValue];
-    [self setupPost];
+    if(dic) {
+        self.post = [dic objectForKey:@"dic"];
+        self.itemNumber = [(NSNumber*)[dic objectForKey:@"index"] integerValue];
+        [self setupPost];
+    }
 }
 
 -(void) backButtonWasPressed {
