@@ -59,6 +59,15 @@
     
 }
 
+-(void) setupLogoutButton {
+    UIButton* logoutButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIImage* image = [UIImage imageNamed:@"logout.png"];
+    [logoutButton setBackgroundImage:image forState:UIControlStateNormal];
+    [logoutButton addTarget:self action:@selector(logoutTapped) forControlEvents:UIControlEventTouchUpInside];
+    logoutButton.frame = CGRectMake(0,0,image.size.width*0.75, image.size.height*0.75);
+
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:logoutButton];
+}
 - (UIView *) footerView {
     
     UIImage *footerImage = [UIImage imageNamed:@"songkick"];
@@ -156,6 +165,42 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Logout
+-(void) logoutTapped {
+    FUIAlertView *alertView = [[FUIAlertView alloc] initWithTitle:NSLocalizedString(@"logout_alert_title",nil) message:NSLocalizedString(@"logout_alert_message", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"cancel", nil) otherButtonTitles:NSLocalizedString(@"logout", nil), nil];
+    alertView.titleLabel.textColor = [UIColor cloudsColor];
+    alertView.titleLabel.font = [UIFont boldFlatFontOfSize:16];
+    alertView.messageLabel.textColor = [UIColor cloudsColor];
+    alertView.messageLabel.font = [UIFont flatFontOfSize:14];
+    alertView.backgroundOverlay.backgroundColor = [[UIColor cloudsColor] colorWithAlphaComponent:0.8];
+    alertView.alertContainer.backgroundColor = [UIColor midnightBlueColor];
+    alertView.defaultButtonColor = [UIColor cloudsColor];
+    alertView.defaultButtonShadowColor = [UIColor asbestosColor];
+    alertView.defaultButtonFont = [UIFont boldFlatFontOfSize:16];
+    alertView.defaultButtonTitleColor = [UIColor asbestosColor];
+    alertView.tag = LogoutTag;
+    [alertView show];
+    
+//    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"logout_alert_title", nil) message:NSLocalizedString(@"logout_alert_message",nil) delegate:self cancelButtonTitle:NSLocalizedString(@"cancel", nil) otherButtonTitles:NSLocalizedString(@"logout", nil), nil];
+//    alert.tag = LogoutTag;
+//    [alert show];
+    [Flurry logEvent:@"Logout_Tapped_Profile"];
+}
+
+-(void) alertView:(FUIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (alertView.tag == LogoutTag && buttonIndex == 0) {
+        [self logout];
+    }
+    else {
+        [Flurry logEvent:@"Canceled_Logout"];
+    }
+}
+
+-(void) logout {
+    [Flurry logEvent: @"Logged_out_facebook"];
+    [FBSession.activeSession closeAndClearTokenInformation];
 }
 
 @end
