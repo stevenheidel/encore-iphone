@@ -372,8 +372,8 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     if (textField.tag == 0) {
-        //[self clearSearchResultsTable];
         if (textField.text.length > 0) {
+            [self clearSearchResultsTable];  //Clear previous results upon new search
             [ECJSONFetcher fetchArtistsForString:[textField text] completion:^(NSArray *artists) {
                 [self fetchedArtists:artists];
             }];
@@ -415,11 +415,8 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
         void (^fetchedConcertsBlock)(NSArray*) = ^(NSArray* concerts){
             [self fetchedArtistConcerts:concerts];
         };
-        if (self.searchType == ECSearchTypePast) {
-            [ECJSONFetcher fetchConcertsForArtistID:artistID withSearchType:ECSearchTypePast completion:fetchedConcertsBlock];
-        } else {
-            [ECJSONFetcher fetchConcertsForArtistID:artistID withSearchType:ECSearchTypeFuture completion:fetchedConcertsBlock];
-        }
+        
+        [ECJSONFetcher fetchConcertsForArtistID:artistID withSearchType:self.searchType completion:fetchedConcertsBlock];
         
         self.hud.labelText = NSLocalizedString(@"Searching", nil);
         
