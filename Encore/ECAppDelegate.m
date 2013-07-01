@@ -11,9 +11,11 @@
 #import "ECLoginViewController.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import "ECJSONPoster.h"
-#import "Flurry.h"
+
 #import "TestFlight.h"
 #import "AFNetworking.h"
+
+#import "Staging.h"
 
 NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:ECSessionStateChangedNotification";
 
@@ -42,19 +44,22 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
 }
 
 -(void) startAnalytics {
+    [Flurry setDebugLogEnabled:FLURRY_LOGGING];
     [Flurry startSession:@"GWNDD6XD7GF76QFWFXPQ"];
+
     [Flurry setEventLoggingEnabled:YES];
     [Flurry setAppVersion:[NSString stringWithFormat:@"%@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]]];
+    [Flurry logEvent:@"STARTEDSESSION"];
     
-#warning USE ONLY DURING BETA
-    [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
-    
+    if(IN_BETA){
+        [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
+    }
     [TestFlight takeOff:@"019687e0-0d30-4959-bf90-f52ba008c834"];
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-   // [self startAnalytics];
+    [self startAnalytics];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
@@ -167,7 +172,7 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
         ECLoginViewController* loginViewController = [[ECLoginViewController alloc]
                                                       initWithNibName:@"ECLoginViewController"
                                                       bundle:nil];
-        
+        loginViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
         [topViewController presentViewController:loginViewController animated:animated completion:nil];
     } else {
         ECLoginViewController* loginViewController = (ECLoginViewController*)modalViewController;
