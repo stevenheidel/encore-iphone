@@ -60,7 +60,11 @@
 "concert_added" = "Concert Added";
 "concert_removed" = "Concert Removed";
 
-
 //post placeholder
 "POST_PLACEHOLDER_TEXT_1" = "No photos or videos found";
 "POST_PLACEHOLDER_TEXT_2" = "Were you there? Add your own by clicking on the camera on the bottom right";
+
+//Profile
+"logout_alert_title" = "Log out";
+"logout_alert_message" = "Do you want to log out of Encore?";
+"logout" = "Log out";
