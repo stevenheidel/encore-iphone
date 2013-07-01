@@ -25,6 +25,8 @@
 
 #import "ECPictureViewController.h"
 
+#import "UIColor+EncoreUI.h"
+
 #define HUD_DELAY 0.9
 #define HEADER_HEIGHT 176.0
 
@@ -288,7 +290,7 @@ typedef enum {
 	HUD.mode = MBProgressHUDModeCustomView;
 	
 	HUD.labelText = NSLocalizedString(@"concert_added",nil);
-    HUD.color = [UIColor colorWithRed:0.0/255.0 green:176.0/255.0 blue:227.0/255.0 alpha:0.90];
+    HUD.color = [UIColor lightBlueHUDConfirmationColor];
 	[HUD show:YES];
 	[HUD hide:YES afterDelay:HUD_DELAY];
     [self toggleOnProfileState];
@@ -308,7 +310,7 @@ typedef enum {
 	HUD.mode = MBProgressHUDModeCustomView;
 	
 	HUD.labelText = NSLocalizedString(@"concert_removed", nil);
-    HUD.color = [UIColor colorWithRed:255.0/255.0 green:51.0/255.0 blue:51.0/255.0 alpha:0.90];
+    HUD.color = [UIColor redHUDConfirmationColor];
 	[HUD show:YES];
 	[HUD hide:YES afterDelay:HUD_DELAY];
 
@@ -462,12 +464,12 @@ typedef enum {
     [ECJSONPoster postImage: imageDic completion:^{
         NSLog(@"Completed posting image!");
         MBProgressHUD* HUD = [[MBProgressHUD alloc] initWithView:self.view];
-        [HUD setColor:[UIColor colorWithRed:0.0/255.0 green:176.0/255.0 blue:227.0/255.0 alpha:0.90]];
+        [HUD setColor:[UIColor lightBlueHUDConfirmationColor]];
         [HUD show:YES];
         [HUD hide:YES afterDelay:HUD_DELAY];
     }];
-
 }
+
 #pragma mark - post view controller delegate
 
 -(NSDictionary*) requestPost:(NSInteger)direction currentIndex:(NSInteger)index {

@@ -14,6 +14,7 @@
 #import "ECAddConcertViewController.h"
 #import "NSDictionary+ConcertList.h"
 #import "ECTodayViewController.h"
+#import "UIColor+EncoreUI.h"
 static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users";
 
 @interface ECMainViewController ()

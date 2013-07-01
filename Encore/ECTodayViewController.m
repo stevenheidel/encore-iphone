@@ -15,6 +15,7 @@
 #import "NSMutableDictionary+ConcertImages.h"
 #import "ECJSONFetcher.h"
 
+#import "UIColor+EncoreUI.h"
 static NSString *const ConcertCellIdentifier = @"concertCell";
 
 @interface ECTodayViewController ()
@@ -49,7 +50,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     
     [self.view addSubview:self.hud];
     self.hud.labelText = NSLocalizedString(@"loading", nil);
-    self.hud.color = [UIColor colorWithRed:8.0/255.0 green:56.0/255.0 blue:76.0/255.0 alpha:0.90];
+    self.hud.color = [UIColor encoreDarkGreenColorWithAlpha:0.90];
     self.hud.labelFont = [UIFont fontWithName:@"Hero" size:self.hud.labelFont.pointSize];
     [self.tableView setScrollsToTop:YES];
 }
@@ -60,7 +61,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, headerImage.size.width, headerImage.size.height)];
     imageView.center = headerView.center;
     imageView.image = headerImage;
-    headerView.backgroundColor = [UIColor colorWithRed:225.0/255.0 green:224.0/255.0 blue:225.0/255.0 alpha:1.0];
+    headerView.backgroundColor = [UIColor lightGrayHeaderColor];
     [headerView addSubview:imageView];
     return headerView;
 }
@@ -103,7 +104,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     if ([indexPath row] % 2) {
         cell.contentView.backgroundColor = [UIColor whiteColor];
     } else {
-        cell.contentView.backgroundColor = [UIColor colorWithRed:246.0/255.0 green:248.0/255.0 blue:250.0/255.0 alpha:1.0];
+        cell.contentView.backgroundColor = [UIColor lightGrayTableColor];
     }
     return cell;
 }

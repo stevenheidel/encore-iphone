@@ -14,6 +14,8 @@
 #import <QuartzCore/QuartzCore.h>
 
 #define HEADER_HEIGHT 200.0
+#import "UIColor+EncoreUI.h"
+
 
 @interface ECProfileViewController ()
 
@@ -64,7 +66,7 @@
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, footerImage.size.width, footerImage.size.height)];
     imageView.center = footerView.center;
     imageView.image = footerImage;
-    footerView.backgroundColor = [UIColor colorWithRed:225.0/255.0 green:224.0/255.0 blue:225.0/255.0 alpha:1.0];
+    footerView.backgroundColor = [UIColor lightGrayHeaderColor];
     [footerView addSubview:imageView];
     return footerView;
     
@@ -84,7 +86,7 @@
     self.imgProfile.layer.cornerRadius = 30.0;
     self.imgProfile.layer.masksToBounds = YES;
     self.imgProfile.layer.borderWidth = 1.0;
-    self.imgProfile.layer.borderColor = [UIColor colorWithRed:160.0/255.0 green:165.0/255.0 blue:170.0/255.0 alpha:1.0].CGColor;
+    self.imgProfile.layer.borderColor = [UIColor profileImageBorderColor].CGColor;
     
     NSString* userNameKey = NSLocalizedString(@"user_name", nil);
     NSString* userName = [defaults stringForKey:userNameKey];
@@ -126,7 +128,7 @@
     if ([indexPath row] % 2) {
         cell.contentView.backgroundColor = [UIColor whiteColor];
     } else {
-        cell.contentView.backgroundColor = [UIColor colorWithRed:246.0/255.0 green:248.0/255.0 blue:250.0/255.0 alpha:1.0];
+        cell.contentView.backgroundColor = [UIColor lightGrayTableColor];
     }
     return cell;
 }

@@ -17,6 +17,8 @@
 #import "UIImageView+AFNetworking.h"
 #import "ECJSONFetcher.h"
 
+#import "UIColor+EncoreUI.h"
+
 #define ARTIST_HEADER_HEIGHT 30.0
 #define ARTIST_CELL_HEIGHT 50.0
 
@@ -70,7 +72,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     
     [self.view addSubview:self.hud];
     self.hud.labelText = NSLocalizedString(@"loading", nil);
-    self.hud.color = [UIColor colorWithRed:8.0/255.0 green:56.0/255.0 blue:76.0/255.0 alpha:0.90];
+    self.hud.color = [UIColor encoreDarkGreenColorWithAlpha:0.90];
     self.hud.labelFont = [UIFont fontWithName:@"Hero" size:self.hud.labelFont.pointSize];
     self.hud.detailsLabelFont = [UIFont fontWithName:@"Hero" size:self.hud.detailsLabelFont.pointSize];
     //Register cell nib file to the uitableview
@@ -93,7 +95,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, headerImage.size.width, headerImage.size.height)];
     imageView.image = headerImage;
     imageView.center = headerView.center;
-    headerView.backgroundColor = [UIColor colorWithRed:225.0/255.0 green:224.0/255.0 blue:225.0/255.0 alpha:1.0];
+    headerView.backgroundColor = [UIColor lightGrayHeaderColor];
     [headerView addSubview:imageView];
     return headerView;
 }
@@ -188,7 +190,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
             }
             NSDictionary *artistDic = (NSDictionary *)[self.arrArtistData objectAtIndex:indexPath.row];
             cell.textLabel.text = [artistDic artistName];
-            cell.textLabel.textColor = [UIColor colorWithRed:28.0/255.0 green:29.0/255.0 blue:31.0/255.0 alpha:0.8];
+            cell.textLabel.textColor = [UIColor darkTextColorWithAlpha:0.8];
             //cell.contentView.backgroundColor = [self getCellColourForRow:[indexPath row]];
             cell.backgroundView.backgroundColor = [self getCellColourForRow:[indexPath row]];
             return cell;
@@ -210,7 +212,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     if (row % 2) {
         return [UIColor whiteColor];
     } else {
-        return [UIColor colorWithRed:246.0/255.0 green:248.0/255.0 blue:250.0/255.0 alpha:1.0];
+        return [UIColor lightGrayTableColor];
     }
 }
 
@@ -237,7 +239,8 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
         UILabel *label = [[UILabel alloc] init] ;
         label.frame = CGRectMake(0, 0, self.view.frame.size.width, ARTIST_HEADER_HEIGHT);
         label.backgroundColor = [self getCellColourForRow:1];
-        label.textColor = [UIColor colorWithRed:28.0/255.0 green:29.0/255.0 blue:31.0/255.0 alpha:0.8];
+        label.textColor = [UIColor darkTextColorWithAlpha:0.8];
+        
         [label setAdjustsFontSizeToFitWidth:YES];
         label.font = [UIFont fontWithName:@"Hero" size:16.0];
         label.text = sectionTitle;
