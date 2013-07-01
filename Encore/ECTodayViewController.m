@@ -46,7 +46,10 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
                   forCellReuseIdentifier:myIdentifier];
     
     self.arrTodaysImages = [[NSMutableArray alloc] init];
+    
+    //Progress HUD to indicate loading of images
     self.hud = [[MBProgressHUD alloc] initWithView:self.view];
+    self.hud.userInteractionEnabled = YES;
     
     [self.view addSubview:self.hud];
     self.hud.labelText = NSLocalizedString(@"loading", nil);
