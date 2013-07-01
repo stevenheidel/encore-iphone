@@ -217,9 +217,6 @@ typedef enum {
 
 #pragma mark - FB Sharing
 -(void) shareTapped {
-    //TODO: Check if user can present share dialogs and if not switch to using web to share
-
-    //baseurl + /concerts/:songkickId
     NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:ShareConcertURL,self.songkickID]];
     
     FBShareDialogParams* params = [[FBShareDialogParams alloc] init];
