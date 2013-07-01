@@ -483,6 +483,10 @@ typedef enum {
 #pragma mark - post view controller delegate
 
 -(NSDictionary*) requestPost:(NSInteger)direction currentIndex:(NSInteger)index {
+    if(self.posts.count <= 1) { //if only one or zero posts, no need to switch
+        return nil;
+    }
+    
     NSInteger newIndex = index + direction;
     if (newIndex < 0) {
         newIndex = self.posts.count - 1; //loop to the end
