@@ -75,9 +75,10 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
     UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
     UIImage *rightButImage = [UIImage imageNamed:@"shareButton.png"]; //stretchableImageWithLeftCapWidth:10 topCapHeight:10];
     [rightButton setBackgroundImage:rightButImage forState:UIControlStateNormal];
-    [rightButton addTarget:self action:@selector(shareTapped:) forControlEvents:UIControlEventTouchUpInside];
+    [rightButton addTarget:self action:@selector(shareTapped) forControlEvents:UIControlEventTouchUpInside];
     rightButton.frame = CGRectMake(0, 0, rightButImage.size.width*0.75, rightButImage.size.height*0.75);
     self.shareButton = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
+    self.shareButton.enabled = NO;
     self.navigationItem.rightBarButtonItem = self.shareButton;
 }
 
