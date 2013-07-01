@@ -104,8 +104,8 @@
 		D4ABD2DB177DF09B00DC691F /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4ABD2DA177DF09B00DC691F /* Default@2x.png */; };
 		D4ABD2DD177DF09E00DC691F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4ABD2DC177DF09E00DC691F /* Default-568h@2x.png */; };
 		D4ABD2DF177E10D100DC691F /* liveNow.gif in Resources */ = {isa = PBXBuildFile; fileRef = D4ABD2DE177E10D100DC691F /* liveNow.gif */; };
-		D4ABD2E1177E1BBB00DC691F /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4ABD2E0177E1BBB00DC691F /* icon@2x.png */; };
-		D4ABD2E3177E1BC500DC691F /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D4ABD2E2177E1BC500DC691F /* icon.png */; };
+		D4ABD2E1177E1BBB00DC691F /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4ABD2E0177E1BBB00DC691F /* Icon@2x.png */; };
+		D4ABD2E3177E1BC500DC691F /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D4ABD2E2177E1BC500DC691F /* Icon.png */; };
 		D4ABD2E6177E1E6E00DC691F /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = D4ABD2E4177E1E6E00DC691F /* Icon-Small.png */; };
 		D4ABD2E7177E1E6E00DC691F /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4ABD2E5177E1E6E00DC691F /* Icon-Small@2x.png */; };
 		D4ABD2EB177E2C8900DC691F /* ECPictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4ABD2E9177E2C8900DC691F /* ECPictureViewController.m */; };
@@ -264,8 +264,8 @@
 		D4ABD2DA177DF09B00DC691F /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
 		D4ABD2DC177DF09E00DC691F /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
 		D4ABD2DE177E10D100DC691F /* liveNow.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = liveNow.gif; sourceTree = "<group>"; };
-		D4ABD2E0177E1BBB00DC691F /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon@2x.png"; path = "../icon@2x.png"; sourceTree = "<group>"; };
-		D4ABD2E2177E1BC500DC691F /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = ../icon.png; sourceTree = "<group>"; };
+		D4ABD2E0177E1BBB00DC691F /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "../Icon@2x.png"; sourceTree = "<group>"; };
+		D4ABD2E2177E1BC500DC691F /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = ../Icon.png; sourceTree = "<group>"; };
 		D4ABD2E4177E1E6E00DC691F /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small.png"; sourceTree = "<group>"; };
 		D4ABD2E5177E1E6E00DC691F /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
 		D4ABD2E8177E2C8800DC691F /* ECPictureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECPictureViewController.h; sourceTree = "<group>"; };
@@ -406,8 +406,8 @@
 				A0A2B0D4177E1E7100518B6C /* shareButton@2x.png */,
 				D4ABD2E4177E1E6E00DC691F /* Icon-Small.png */,
 				D4ABD2E5177E1E6E00DC691F /* Icon-Small@2x.png */,
-				D4ABD2E2177E1BC500DC691F /* icon.png */,
-				D4ABD2E0177E1BBB00DC691F /* icon@2x.png */,
+				D4ABD2E2177E1BC500DC691F /* Icon.png */,
+				D4ABD2E0177E1BBB00DC691F /* Icon@2x.png */,
 				D4ABD2DE177E10D100DC691F /* liveNow.gif */,
 				D4ABD2DC177DF09E00DC691F /* Default-568h@2x.png */,
 				D4ABD2DA177DF09B00DC691F /* Default@2x.png */,
@@ -489,12 +489,12 @@
 			children = (
 				D4AA4D011766B374009B0635 /* ECAppDelegate.h */,
 				D4AA4D021766B374009B0635 /* ECAppDelegate.m */,
+				D4AA4D321766BA8F009B0635 /* Login */,
 				D4AA632C1780BAFB008111C6 /* Main View */,
 				D4AA4D2C1766B9B0009B0635 /* Profile */,
 				D4A22254176B7FFC005AB205 /* Horizontal Select */,
 				D4B1A249176E4C6F00A95568 /* Add Concert */,
 				D4A8DDBF176A134B005E9847 /* Concert */,
-				D4AA4D321766BA8F009B0635 /* Login */,
 				D4AA4CF91766B374009B0635 /* Supporting Files */,
 			);
 			path = Encore;
@@ -762,8 +762,8 @@
 				D4ABD2DF177E10D100DC691F /* liveNow.gif in Resources */,
 				A0A2B0D5177E1E7200518B6C /* shareButton.png in Resources */,
 				A0A2B0D6177E1E7200518B6C /* shareButton@2x.png in Resources */,
-				D4ABD2E1177E1BBB00DC691F /* icon@2x.png in Resources */,
-				D4ABD2E3177E1BC500DC691F /* icon.png in Resources */,
+				D4ABD2E1177E1BBB00DC691F /* Icon@2x.png in Resources */,
+				D4ABD2E3177E1BC500DC691F /* Icon.png in Resources */,
 				D4ABD2E6177E1E6E00DC691F /* Icon-Small.png in Resources */,
 				D4ABD2E7177E1E6E00DC691F /* Icon-Small@2x.png in Resources */,
 				D4ABD2EC177E2C8900DC691F /* ECPictureViewController.xib in Resources */,
