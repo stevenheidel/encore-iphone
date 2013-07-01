@@ -217,7 +217,10 @@ typedef enum {
 
     //baseurl + /concerts/:songkickId
     NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:ShareConcertURL,self.songkickID]];
-   // if ([FBDialogs canPresentShareDialogWithParams:nil]) {
+    
+    FBShareDialogParams* params = [[FBShareDialogParams alloc] init];
+    params.link = url;
+    if ([FBDialogs canPresentShareDialogWithParams:params]) {
         [FBDialogs presentShareDialogWithLink:url
                                       handler:^(FBAppCall *call, NSDictionary *results, NSError *error) {
                                           if(error) {
@@ -228,7 +231,14 @@ typedef enum {
                                               [Flurry logEvent:@"Concert_Share_To_FB_Success" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:url.absoluteString, @"url", self.userID, @"facebook_id",self.concert,@"concert", nil]];
                                           }
                                       }];
-//    }
+    }
+    else {
+            NSArray* items = [NSArray arrayWithObjects:url,[NSString stringWithFormat:@"Check out %@ on Encore",[self.concert artistName]],nil];
+            UIActivityViewController* activityVC = [[UIActivityViewController alloc] initWithActivityItems: items applicationActivities:nil];
+            activityVC.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypePostToWeibo, UIActivityTypeSaveToCameraRoll,UIActivityTypeAssignToContact];
+            activityVC.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+            [self presentViewController:activityVC animated:YES completion:nil];
+    }
 }
 
 #pragma mark - Adding/Removing Concerts
