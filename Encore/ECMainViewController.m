@@ -14,7 +14,10 @@
 #import "ECAddConcertViewController.h"
 #import "NSDictionary+ConcertList.h"
 #import "ECTodayViewController.h"
+
 #import "UIColor+EncoreUI.h"
+
+#define LINE_THICKNESS 1.0
 static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users";
 
 @interface ECMainViewController ()
@@ -240,6 +243,10 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
         self.horizontalSelect = [[KLHorizontalSelect alloc] initWithFrame: self.view.bounds];
         self.horizontalSelect.delegate = self;
         [self.view addSubview: self.horizontalSelect];
+        
+        UIView* line = [[UIView alloc] initWithFrame:CGRectMake(0.0, self.horizontalSelect.frame.size.height, self.view.frame.size.width, LINE_THICKNESS)];
+        line.backgroundColor = [UIColor encoreDarkGreenColor];
+        [self.view addSubview:line];
     }
     [self.horizontalSelect setTableData: self.concerts];
     [self.horizontalSelect.tableView reloadData];
@@ -352,7 +359,7 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
     }
 }
 -(CGRect) childViewControllerRect{
-    return CGRectMake(self.horizontalSelect.frame.origin.x, self.horizontalSelect.frame.origin.y+self.horizontalSelect.frame.size.height, self.horizontalSelect.frame.size.width, self.view.frame.size.height-self.horizontalSelect.frame.size.height);
+    return CGRectMake(self.horizontalSelect.frame.origin.x, self.horizontalSelect.frame.origin.y+self.horizontalSelect.frame.size.height+LINE_THICKNESS, self.horizontalSelect.frame.size.width, self.view.frame.size.height-self.horizontalSelect.frame.size.height);
 }
 
 #pragma mark - gestures
