@@ -79,6 +79,11 @@ typedef enum {
 
 -(void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    [self clearCollectionView];
+}
+
+-(void) clearCollectionView {
+    [self.collectionView reloadData];
 }
 -(void) setupArtistUIAttributes {
     [self.artistNameLabel setAdjustsFontSizeToFitWidth:YES];
@@ -186,7 +191,6 @@ typedef enum {
 }
 
 -(void) setUpNavBarButtons {
-    
     UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
     UIImage *leftButImage = [UIImage imageNamed:@"backButton.png"]; //stretchableImageWithLeftCapWidth:10 topCapHeight:10];
     [leftButton setBackgroundImage:leftButImage forState:UIControlStateNormal];
