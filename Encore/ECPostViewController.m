@@ -144,17 +144,27 @@
     //baseurl + /posts/:Id
     NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:SharePostURL,self.postID]];
     // if ([FBDialogs canPresentShareDialogWithParams:nil]) {
-    
-    [FBDialogs presentShareDialogWithLink:url
-                                  handler:^(FBAppCall *call, NSDictionary *results, NSError *error) {
-                                      if(error) {
-                                          NSLog(@"Error posting to FB: %@", error.description);
-                                          [Flurry logEvent:@"Post_Share_To_FB_Fail"];
-                                      } else {
-                                          [Flurry logEvent:@"Post_Share_To_FB_Success" withParameters:[NSDictionary dictionaryWithObject:url.absoluteString forKey:@"url"]];
-                                      }
-                                  }];
+    FBShareDialogParams* params = [[FBShareDialogParams alloc] init];
+    params.link = url;
+     if ([FBDialogs canPresentShareDialogWithParams:params]) {
+         [FBDialogs presentShareDialogWithLink:url
+                                       handler:^(FBAppCall *call, NSDictionary *results, NSError *error) {
+                                           if(error) {
+                                               NSLog(@"Error posting to FB: %@", error.description);
+                                               [Flurry logEvent:@"Post_Share_To_FB_Fail"];
+                                           } else {
+                                               [Flurry logEvent:@"Post_Share_To_FB_Success" withParameters:[NSDictionary dictionaryWithObject:url.absoluteString forKey:@"url"]];
+                                           }
+                                       }];
     //    }
+     }
+     else {
+         NSArray* items = [NSArray arrayWithObjects:url,[NSString stringWithFormat:@"Check out this picture on Encore"],self.postImage.image, nil];
+         UIActivityViewController* activityVC = [[UIActivityViewController alloc] initWithActivityItems: items applicationActivities:nil];
+         activityVC.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypePostToWeibo, UIActivityTypeSaveToCameraRoll,UIActivityTypeAssignToContact];
+         activityVC.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+         [self presentViewController:activityVC animated:YES completion:nil];
+     }
 }
 
 #pragma mark - Getters
