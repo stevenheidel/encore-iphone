@@ -12,10 +12,19 @@
 #import "ECConcertDetailViewController.h"
 #import "NSDictionary+ConcertList.h"
 #import <QuartzCore/QuartzCore.h>
+#import <FacebookSDK/FacebookSDK.h>
 
-#define HEADER_HEIGHT 200.0
 #import "UIColor+EncoreUI.h"
 
+#import "UIColor+FlatUI.h"
+#import "UIFont+FlatUI.h"
+//#import "UIBarButtonItem+FlatUI.h"
+
+#define HEADER_HEIGHT 170.0
+
+typedef enum {
+    LogoutTag
+}ECProfileAlertTags;
 
 @interface ECProfileViewController ()
 
@@ -36,10 +45,15 @@
 {
     [super viewDidLoad];
     [self setUpBackButton];
-    // Do any additional setup after loading the view from its nib.
+    [self setupLogoutButton];
     NSString *myIdentifier = @"ECConcertCellView";
-    self.tableView.tableFooterView = [self footerView];
-    self.tableView.tableHeaderView = [[ECProfileHeader alloc] initWithFrame:CGRectMake(0.0, 0.0, self.tableView.frame.size.width, HEADER_HEIGHT) andOwner:self];
+    self.tableView.tableFooterView = [UIView new];
+   // self.tableView.tableFooterView = [self footerView];
+    
+    ECProfileHeader * header = [[ECProfileHeader alloc] initWithFrame:CGRectMake(0.0, 0.0, self.tableView.frame.size.width, HEADER_HEIGHT) andOwner:self];
+    UIView* myView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, HEADER_HEIGHT)];
+    [myView addSubview:header];
+    self.tableView.tableHeaderView = myView;
     [self.tableView registerNib:[UINib nibWithNibName:@"ECConcertCellView" bundle:nil]
          forCellReuseIdentifier:myIdentifier];
     [self setUpHeaderView];
@@ -48,7 +62,6 @@
     
 }
 - (void) setUpBackButton {
-    
     UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
     UIImage *leftButImage = [UIImage imageNamed:@"backButton.png"]; //stretchableImageWithLeftCapWidth:10 topCapHeight:10];
     [leftButton setBackgroundImage:leftButImage forState:UIControlStateNormal];
@@ -56,6 +69,11 @@
     leftButton.frame = CGRectMake(0, 0, leftButImage.size.width*0.75, leftButImage.size.height*0.75);
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
     self.navigationItem.leftBarButtonItem = backButton;
+
+//    [UIBarButtonItem configureFlatButtonsWithColor:[UIColor peterRiverColor]
+//                                  highlightedColor:[UIColor belizeHoleColor]
+//                                      cornerRadius:3
+//                                   whenContainedIn:[UINavigationBar class]];
     
 }
 
