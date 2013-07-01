@@ -112,15 +112,25 @@ typedef enum {
 -(void) setupToolbar {
     NSString * userID = self.userID;
     [ECJSONFetcher checkIfConcert:[self.concert songkickID] isOnProfile:userID completion:^(BOOL isOnProfile) {
-        if (!isOnProfile) {
-            self.isOnProfile = FALSE;
-            [self.iWasThereButton setSelected:NO];
-        }
-        else {
-            self.isOnProfile = TRUE;
-            [self.iWasThereButton setSelected:YES];
-        }
+//        if (!isOnProfile) {
+//            self.isOnProfile = FALSE;
+//           // [self.iWasThereButton setSelected:NO];
+//        }
+//        else {
+//            self.isOnProfile = TRUE;
+//            [self.iWasThereButton setSelected:YES];
+//        }
+        self.isOnProfile = isOnProfile;
+        [self setImageForConcertStatusButton];
     }];
+}
+-(void) setImageForConcertStatusButton {
+    if (self.isOnProfile) {
+        [self.iWasThereButton setImage:[UIImage imageNamed:@"removebutton.png"] forState:UIControlStateNormal];
+    }
+    else {
+        [self.iWasThereButton setImage:[UIImage imageNamed:@"IWasThereButton.png"] forState:UIControlStateNormal];
+    }
 }
 
 -(void) loadArtistDetails {
