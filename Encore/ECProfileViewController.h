@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "FBProfilePictureView.h"
-
-@interface ECProfileViewController : UIViewController
+#import "FUIAlertView.h"
+@interface ECProfileViewController : UIViewController <FUIAlertViewDelegate>
 
 @property(nonatomic, strong) IBOutlet UITableView *tableView;
 
