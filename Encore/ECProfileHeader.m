@@ -12,12 +12,9 @@
 
 - (id)initWithFrame:(CGRect)frame andOwner: (id) owner
 {
-    self = [super initWithFrame:frame];
-    if (self) {
+    if (self = [super initWithFrame:frame]) {
         NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"ECProfileHeader" owner:owner options:nil];
         self = [subviewArray objectAtIndex:0];
-        self.frame = frame;
-        
     }
     return self;
 }
