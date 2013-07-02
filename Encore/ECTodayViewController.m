@@ -95,6 +95,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     }
     [self.tableView reloadData];
     [self.hud hide:YES];
+    [self.delegate doneLoadingTodayConcerts];
 }
 
 #pragma mark - UITableView methods

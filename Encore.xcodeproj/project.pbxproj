@@ -124,10 +124,10 @@
 		D4B0AC4717727FDA00DC4DD2 /* ECPostPlaceholder.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4B0AC4617727FDA00DC4DD2 /* ECPostPlaceholder.xib */; };
 		D4B1A247176E4C6900A95568 /* ECAddConcertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4B1A245176E4C6900A95568 /* ECAddConcertViewController.m */; };
 		D4B1A248176E4C6900A95568 /* ECAddConcertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4B1A246176E4C6900A95568 /* ECAddConcertViewController.xib */; };
-		D4B1A24B176E704A00A95568 /* ECTodayCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4B1A24A176E704A00A95568 /* ECTodayCellView.xib */; };
 		D4B6707A176F57E000A80BA3 /* ECTodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4B67078176F57E000A80BA3 /* ECTodayViewController.m */; };
 		D4B6707B176F57E000A80BA3 /* ECTodayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4B67079176F57E000A80BA3 /* ECTodayViewController.xib */; };
 		D4C9C085177A090800F864FC /* instagram.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D4C9C084177A090800F864FC /* instagram.jpg */; };
+		D4D4D7071783534A00DDDE4D /* ECTodayCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4D4D7061783534A00DDDE4D /* ECTodayCellView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -298,11 +298,11 @@
 		D4B1A244176E4C6800A95568 /* ECAddConcertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECAddConcertViewController.h; sourceTree = "<group>"; };
 		D4B1A245176E4C6900A95568 /* ECAddConcertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECAddConcertViewController.m; sourceTree = "<group>"; };
 		D4B1A246176E4C6900A95568 /* ECAddConcertViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECAddConcertViewController.xib; sourceTree = "<group>"; };
-		D4B1A24A176E704A00A95568 /* ECTodayCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECTodayCellView.xib; sourceTree = "<group>"; };
 		D4B67077176F57E000A80BA3 /* ECTodayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECTodayViewController.h; sourceTree = "<group>"; };
 		D4B67078176F57E000A80BA3 /* ECTodayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECTodayViewController.m; sourceTree = "<group>"; };
 		D4B67079176F57E000A80BA3 /* ECTodayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECTodayViewController.xib; sourceTree = "<group>"; };
 		D4C9C084177A090800F864FC /* instagram.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = instagram.jpg; sourceTree = "<group>"; };
+		D4D4D7061783534A00DDDE4D /* ECTodayCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECTodayCellView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -349,10 +349,10 @@
 				D4A22252176B7FC1005AB205 /* KLHorizontalSelect.m */,
 				D43ACD7D176D2BA400E2282A /* ECCellType.h */,
 				D43ACD7E176D2EA700E2282A /* ECCellType.m */,
+				D4D4D7061783534A00DDDE4D /* ECTodayCellView.xib */,
 				D4A4D814176CC9A900EFCBF7 /* ECHorizontalCellView.h */,
 				D4A4D815176CC9AA00EFCBF7 /* ECHorizontalCellView.m */,
 				D4A4D812176CC81600EFCBF7 /* ECHorizontalCellView.xib */,
-				D4B1A24A176E704A00A95568 /* ECTodayCellView.xib */,
 				D43ACD80176D3B7F00E2282A /* ECEndCellView.xib */,
 				D43ACD82176D3BF400E2282A /* ECEndCellView.h */,
 				D43ACD83176D3BF400E2282A /* ECEndCellView.m */,
@@ -761,7 +761,6 @@
 				A0848C0B176D1F0D009BBB38 /* ECLoginPageView.xib in Resources */,
 				D43ACD81176D3B7F00E2282A /* ECEndCellView.xib in Resources */,
 				D4B1A248176E4C6900A95568 /* ECAddConcertViewController.xib in Resources */,
-				D4B1A24B176E704A00A95568 /* ECTodayCellView.xib in Resources */,
 				D4B6707B176F57E000A80BA3 /* ECTodayViewController.xib in Resources */,
 				D4B0AC4717727FDA00DC4DD2 /* ECPostPlaceholder.xib in Resources */,
 				A022AAA2177605900009244C /* Hero Light.otf in Resources */,
@@ -822,6 +821,7 @@
 				D4AB1B1817829413002A29B9 /* login2@2x.png in Resources */,
 				D4AB1B1917829413002A29B9 /* login3.png in Resources */,
 				D4AB1B1A17829413002A29B9 /* login3@2x.png in Resources */,
+				D4D4D7071783534A00DDDE4D /* ECTodayCellView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

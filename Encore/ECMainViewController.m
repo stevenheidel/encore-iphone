@@ -13,11 +13,11 @@
 #import "ECCellType.h"
 #import "ECAddConcertViewController.h"
 #import "NSDictionary+ConcertList.h"
-#import "ECTodayViewController.h"
+//#import "ECTodayViewController.h"
 
 #import "UIColor+EncoreUI.h"
 
-#define LINE_THICKNESS 1.0
+#define LINE_THICKNESS 0.3
 static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users";
 
 @interface ECMainViewController ()
@@ -186,6 +186,7 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
         self.concerts = [NSMutableDictionary dictionaryWithDictionary: concerts];
         [self setUpHorizontalSelect]; //only setting up horizontal select once the concert data is received
         [self selectTodayCell];
+
     }];
 }
 
@@ -340,6 +341,7 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
     switch (cellType) {
         case ECCellTypeToday:
             self.todayVC = [ECTodayViewController new];
+            self.todayVC.delegate = self;
             break;
         case ECCellTypePastShows:
         case ECCellTypeFutureShows:
@@ -358,6 +360,9 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
     }
 }
 
+-(void) doneLoadingTodayConcerts {
+    [self.horizontalSelect.arrow show:YES];
+}
 -(void) removeFromViewForCurrentCellType: (ECCellType) cellType {
     if (cellType != ECCellTypeAddPast) {
        // [self.addConcertVC removeFromParentViewController]; Doesn't seem to be necessary? //TODO: doublecheck

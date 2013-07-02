@@ -7,9 +7,9 @@
 //  Modified extensively 2013 Simon Bromberg
 
 //Control Properties
-#define kDefaultCellWidth 60.0 //The width of each of the items
+#define kDefaultCellWidth 45.0 //The width of each of the items
 #define kEndCellWidth 120.0
-#define kDefaultCellHeight 70.0       //Height of the items/control
+#define kDefaultCellHeight 60.0       //Height of the items/control
 #define kEndCellHeight 70.0       //Height of the items/control
 
 #define kDefaultGradientTopColor  [UIColor colorWithRed: 242/255.0 green: 243/255.0 blue: 246/255.0 alpha: 1]   //Top Gradient Color
@@ -18,8 +18,8 @@
 #define kDefaultImageHeight 60.0    //Adjusts the height of the image
 
 //Arrow properties
-#define kHeaderArrowWidth 60.0      //Adjusts the width of the selection arrow
-#define kHeaderArrowHeight 15.0     //Adjusts the width of the selection arrow
+#define kHeaderArrowWidth 45.0      //Adjusts the width of the selection arrow
+#define kHeaderArrowHeight 8.0     //Adjusts the width of the selection arrow
 
 //Shadow properties
 #define kDefaultShadowColor [UIColor blackColor]
@@ -47,6 +47,8 @@
 @end
 
 @interface ECTodayCell : UITableViewCell
+@property (nonatomic,strong) IBOutlet UILabel* todayLabel;
+@property (nonatomic,assign) CGRect labelFrame;
 @end
 
 @interface KLHorizontalSelectArrow : UIView

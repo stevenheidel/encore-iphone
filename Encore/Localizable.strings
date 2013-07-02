@@ -16,8 +16,8 @@
 "concert" = "Concert";
 "ADD_CONCERT" = "Add Concert";
 "Encore_app_name" = "Encore";
-"AddPast" = "Past";
-"AddFuture" = "Upcoming";
+"AddPast" = "Past   ";
+"AddFuture" = "   Upcoming";
 
 //Add Concert View
 "Search_Header" = "%@ concerts for %@ in %@:";

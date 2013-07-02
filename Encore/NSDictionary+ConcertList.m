@@ -55,11 +55,12 @@ static NSString * const kDateFormat = @"yyyy-MM-dd";
 
 -(NSString *) day {
     NSString * dateStr = [self objectForKey:@"date"];
-    NSDateFormatter * dateFormat =  [NSDateFormatter new];
-    [dateFormat setDateFormat:kDateFormat];
-    NSDate * date = [dateFormat dateFromString:dateStr];
-    [dateFormat setDateFormat:@"dd"]; 
-    return [dateFormat stringFromDate:date];
+    NSDateFormatter* formatter = [NSDateFormatter new];
+    [formatter setDateFormat:kDateFormat];
+    NSDate* date = [formatter dateFromString:dateStr];
+    unsigned int unitFlags =  NSDayCalendarUnit;
+    NSDateComponents* breakdownInfo = [[NSCalendar currentCalendar] components: unitFlags fromDate:date];
+    return [NSString stringWithFormat:@"%d",[breakdownInfo day]];
 }
 
 -(NSString *) weekday {

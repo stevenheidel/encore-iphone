@@ -33,9 +33,9 @@
     self = [super initWithFrame:frame];
     if (self) {
         //Configure the arrow
-//        self.arrow = [[KLHorizontalSelectArrow alloc] initWithFrame:CGRectMake(0, kDefaultCellHeight, kHeaderArrowWidth, kHeaderArrowHeight)color:kDefaultGradientBottomColor];
-//        [self.arrow setCenter:CGPointMake(self.frame.size.width/2.0, self.arrow.center.y)];
-//        [self addSubview:self.arrow];
+        self.arrow = [[KLHorizontalSelectArrow alloc] initWithFrame:CGRectMake(0, kDefaultCellHeight, kHeaderArrowWidth, kHeaderArrowHeight)color:kDefaultGradientBottomColor];
+        [self.arrow setCenter:CGPointMake(self.frame.size.width/2.0, self.arrow.center.y)];
+        
         
         // Make the UITableView's height the width, and width the height so that when we rotate it it will fit exactly
         self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.height, self.frame.size.width)];
@@ -103,19 +103,23 @@
 -(void) scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
     CGPoint point = [self convertPoint:CGPointMake(self.frame.size.width/2.0, kDefaultCellHeight/2.0) toView:self.tableView];
      NSIndexPath* centerIndexPath = [self.tableView indexPathForRowAtPoint:point];
-    
-    if ([self shouldHideArrowForSelectedCellType:centerIndexPath.section]) {
-        [self.arrow hide:YES];  
+//    
+//    if ([self shouldHideArrowForSelectedCellType:centerIndexPath.section]) {
+//        [self.arrow hide:YES];  
+//    }
+//
+//    else [self.arrow show:YES];
+
+    if (![self shouldHideArrowForSelectedCellType:[self.tableView indexPathForSelectedRow].section] && [centerIndexPath isEqual:self.tableView.indexPathForSelectedRow]) {
+        [self.arrow show:YES];
     }
-
-    else [self.arrow show:YES];
 }
-
+//-(void) scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+//    [self.arrow hide:YES];
+//}
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if (scrollView.isDragging) {
-     //   [self.arrow hide:YES];
-            CGPoint point = [self convertPoint:CGPointMake(self.frame.size.width/2.0, kDefaultCellHeight/2.0) toView:self.tableView];
-        [self.arrow lock: point];
+        [self.arrow hide:YES];
     }
 }
 
@@ -130,23 +134,11 @@
 }
 
 -(void) scrollViewDidFinishScrolling: (UIScrollView*) scrollView {
-//    CGPoint point = [self convertPoint:CGPointMake(self.frame.size.width/2.0, kDefaultCellHeight/2.0) toView:self.tableView];
-//    NSLog(@"%@", NSStringFromCGPoint(point));
-//    NSIndexPath* centerIndexPath = [self.tableView indexPathForRowAtPoint:point];
-//    
-//    [self.tableView selectRowAtIndexPath: centerIndexPath
-//                                animated: YES
-//                          scrollPosition: UITableViewScrollPositionTop];
-//    
-//    NSLog(@"%@", [centerIndexPath description]);
-//    if (centerIndexPath.row != self.currentIndex.row || centerIndexPath.section != self.currentIndex.section) {
-//        //Hide the arrow when scrolling
-//        [self setCurrentIndex:centerIndexPath];
-//    }
-//    if ([self shouldHideArrowForSelectedCellType:centerIndexPath.section]) {
-//        [self.arrow hide:YES];  //TODO: this doesn't work reliably!
-//    }
-//    else [self.arrow show:YES];
+    CGPoint point = [self convertPoint:CGPointMake(self.frame.size.width/2.0, kDefaultCellHeight/2.0) toView:self.tableView];
+    NSIndexPath* centerIndexPath = [self.tableView indexPathForRowAtPoint:point];
+    if (![self shouldHideArrowForSelectedCellType:[self.tableView indexPathForSelectedRow].section] && [centerIndexPath isEqual:self.tableView.indexPathForSelectedRow]) {
+        [self.arrow show:YES];
+    }
 }
 -(void) setCurrentIndex:(NSIndexPath *)currentIndex {
     self->_currentIndex = currentIndex;
@@ -160,20 +152,25 @@
 #pragma mark - UITableViewDelegate implementation
 -(NSIndexPath*) tableView: (UITableView*) tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([indexPath isEqual:self.tableView.indexPathForSelectedRow]) {
+        [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
         return nil;
     }
     return indexPath;
 }
 
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([self shouldHideArrowForSelectedCellType: indexPath.section]) {
-        [self.arrow hide:YES];
-    }
-    
     if (indexPath.row != self.currentIndex.row || indexPath.section != self.currentIndex.section) {
         //Hide the arrow when scrolling but don't hide it when clicking on already active cell
         [self setCurrentIndex:indexPath];
     }
+    if(![self.arrow isDescendantOfView:self])
+        [self addSubview:self.arrow];
+//    if ([self shouldHideArrowForSelectedCellType: indexPath.section]) {
+//        [self.arrow hide:YES];
+//    }
+//    else {
+//        [self.arrow show:YES];
+//    }
 
     if ([self.delegate respondsToSelector:@selector(horizontalSelect:didSelectCell:atIndexPath:)]) {
         [self.delegate horizontalSelect:self didSelectCell:(KLHorizontalSelectCell*)[self.tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
@@ -181,7 +178,7 @@
 }
 
 -(BOOL) shouldHideArrowForSelectedCellType: (ECCellType) type {
-    return type == ECCellTypeAddFuture || type == ECCellTypeAddPast;
+    return type != ECCellTypeToday;//type == ECCellTypeAddFuture || type == ECCellTypeAddPast;
 }
 
 #pragma mark - UITableViewDataSource implementation
@@ -235,7 +232,6 @@
         NSDictionary * cellData = [[self.tableData objectForKey:key] objectAtIndex:indexPath.row];
         ((KLHorizontalSelectCell*)cell).cellType = cellType;
         [(KLHorizontalSelectCell*)cell updateWithCellData:cellData];
-        
     }
     
     if (cellType == ECCellTypeFutureShows || cellType == ECCellTypePastShows) {
@@ -244,11 +240,13 @@
         } else {
             [[(KLHorizontalSelectCell*)cell contentView] setBackgroundColor:[UIColor horizontalSelectGrayCellColor]];
         }
-        
-    } else if (cellType == ECCellTypeToday) {
-        [[cell contentView] setBackgroundColor:[UIColor horizontalSelectTodayCellColor]];
-    } else {
-        [[cell contentView] setBackgroundColor:[UIColor blackColor]];
+    }
+    if (cellType == ECCellTypeToday) {
+        NSLog(@"before %@", NSStringFromCGRect([[(ECTodayCell*) cell todayLabel] frame]));
+        [[(ECTodayCell*) cell todayLabel] setFrame:((ECTodayCell*)cell).labelFrame];
+        NSLog(@"after %@", NSStringFromCGRect([[(ECTodayCell*) cell todayLabel] frame]));
+        [[(ECTodayCell*) cell todayLabel] setNeedsDisplay];
+
     }
     return cell;
 }
@@ -270,10 +268,12 @@
     if (self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifierForCellType(cellType)]){
         self.cellType = cellType;
         if(!self.cellView) {
-            self.cellView = [[ECHorizontalCellView alloc] initWithFrame: CGRectMake(0, 0, kDefaultCellWidth, kDefaultCellHeight)];
+            self.cellView = [[ECHorizontalCellView alloc] initWithFrame: self.contentView.frame];
             [self setCellTextAttributes];
-            [self.cellView  setTransform:CGAffineTransformMakeRotation(M_PI_2)];
             [self addSubview:self.cellView];
+            [self  setTransform:CGAffineTransformMakeRotation(M_PI_2)];
+            [[self contentView] setBackgroundColor:[UIColor blackColor]];
+            [self.dateNumberLabel setTextAlignment:NSTextAlignmentCenter];
         }
         [self updateWithCellData:cellData];
     }
@@ -302,9 +302,9 @@
     UIColor* color = [UIColor horizontalSelectTextColor];
     view.yearLabel.font = [UIFont heroFontWithSize: 12.0];
     view.yearLabel.textColor = color;
-    view.monthLabel.font = [UIFont heroFontWithSize:15.0];
+    view.monthLabel.font = [UIFont heroFontWithSize:12.0];
     view.monthLabel.textColor = color;
-    view.dayNumberLabel.font = [UIFont heroFontWithSize:34.0];
+    view.dayNumberLabel.font = [UIFont heroFontWithSize:30.0];
     view.dayNumberLabel.textColor = color;
 }
 
@@ -313,17 +313,22 @@
 @implementation ECTodayCell
 -(id) init {
     if (self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifierForCellType(ECCellTypeToday)]){
-
-        UILabel * cellView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kDefaultCellWidth, kDefaultCellHeight)];
-        cellView.text = NSLocalizedString(@"today", nil);
-        [cellView setTransform:CGAffineTransformMakeRotation(M_PI_2)];
-        cellView.backgroundColor = [UIColor clearColor];
-        cellView.font = [UIFont heroFontWithSize: 14.0];
-        cellView.textColor = [UIColor whiteColor];
-        [self addSubview:cellView];
-       
+        NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"ECEndCellView" owner:self options:nil];
+        UIView *todayView = [subviewArray objectAtIndex:0];
+        self.todayLabel = [[todayView subviews] objectAtIndex:0];
+      
+        self.todayLabel.center = self.center;
+        self.todayLabel.text = NSLocalizedString(@"today", nil);
+        self.todayLabel.backgroundColor = [UIColor clearColor];
+        self.todayLabel.font = [UIFont heroFontWithSize: 12.0];
+        self.todayLabel.textColor = [UIColor whiteColor];
+        [self setTransform:CGAffineTransformMakeRotation(M_PI_2)];
+        [self setSelectionStyle:UITableViewCellSelectionStyleNone];
+        
+        [[self contentView] setBackgroundColor:[UIColor horizontalSelectTodayCellColor]];
+        self.labelFrame = self.todayLabel.frame;
     }
-    
+
     return self;
 }
 @end
@@ -333,16 +338,18 @@
 
 -(id) initWithType:(ECCellType)type {
     if (self=[super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifierForCellType(type)]) {
-        ECEndCellView * cellView = [[ECEndCellView alloc] initWithFrame: CGRectMake(10, 5, kEndCellWidth, kEndCellHeight)];
+        ECEndCellView * cellView = [[ECEndCellView alloc] initWithFrame: self.contentView.frame];
         cellView.backgroundColor = [UIColor clearColor];
         NSString * text = type == ECCellTypeAddPast ? NSLocalizedString(@"AddPast", nil): NSLocalizedString(@"AddFuture", nil);
-        cellView.textLabel.text = text;
+        cellView.textLabel.text = [text uppercaseString];
         cellView.textLabel.font = [UIFont heroFontWithSize: 16.0];
-        cellView.textLabel.textColor = [UIColor whiteColor];
+        cellView.textLabel.textColor = type == ECCellTypeAddPast ? [UIColor whiteColor] : [UIColor horizontalSelectTodayCellColor];
         cellView.textLabel.textAlignment = type == ECCellTypeAddPast ? NSTextAlignmentRight : NSTextAlignmentLeft;
-        [self setTransform:CGAffineTransformMakeRotation(M_PI_2)];
         
         [self addSubview:cellView];
+        
+        [self setTransform:CGAffineTransformMakeRotation(M_PI_2)];
+        
         cellView.textLabel.center = cellView.center;
         [self setSelectionStyle:UITableViewCellSelectionStyleNone];
     }
@@ -370,7 +377,7 @@
 
         CAShapeLayer *shapeLayer = [CAShapeLayer layer];
         [shapeLayer setPath:path];
-        [shapeLayer setFillColor:[[UIColor blueColor] CGColor]]; //TODO Change colouring
+        [shapeLayer setFillColor:[[UIColor horizontalSelectTodayCellColor] CGColor]]; 
         
         
         
@@ -397,10 +404,7 @@
 
     self.isShowing = YES;
 }
--(void) lock:(CGPoint)point {
-//    self.frame = CGRectMake(point.x, point.y, self.frame.size.width, self.frame.size.height);
-//    [self.layer setTransform: CATransform3DRotate(self.layer.transform, -(1/4.0)*M_PI,1.0, 0.0, 0.0)];
-}
+
 //Allows setting of the anchor point for animations without moving the sublayers (i.e the drawn arrow) to the origin of the anchor
 -(void)setAnchorPoint:(CGPoint)anchorPoint forView:(UIView *)view
 {
@@ -424,7 +428,7 @@
 -(void) hide:(BOOL) animated {
     if (self.isShowing) {
         if (animated) {
-            [UIView animateWithDuration:0.1 animations:^{
+            [UIView animateWithDuration:0.05 animations:^{
                 [self.layer setTransform: CATransform3DRotate(self.layer.transform, -(1/4.0)*M_PI,1.0, 0.0, 0.0)];
                 
             }];
