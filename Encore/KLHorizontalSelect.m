@@ -163,8 +163,10 @@
         //Hide the arrow when scrolling but don't hide it when clicking on already active cell
         [self setCurrentIndex:indexPath];
     }
-    if(![self.arrow isDescendantOfView:self])
+    if(![self.arrow isDescendantOfView:self]){
         [self addSubview:self.arrow];
+        [self.arrow show:YES];
+    }
 //    if ([self shouldHideArrowForSelectedCellType: indexPath.section]) {
 //        [self.arrow hide:YES];
 //    }
@@ -241,13 +243,9 @@
             [[(KLHorizontalSelectCell*)cell contentView] setBackgroundColor:[UIColor horizontalSelectGrayCellColor]];
         }
     }
-    if (cellType == ECCellTypeToday) {
-        NSLog(@"before %@", NSStringFromCGRect([[(ECTodayCell*) cell todayLabel] frame]));
-        [[(ECTodayCell*) cell todayLabel] setFrame:((ECTodayCell*)cell).labelFrame];
-        NSLog(@"after %@", NSStringFromCGRect([[(ECTodayCell*) cell todayLabel] frame]));
-        [[(ECTodayCell*) cell todayLabel] setNeedsDisplay];
-
-    }
+//    if (cellType == ECCellTypeToday) {
+//
+//    }
     return cell;
 }
 
@@ -322,11 +320,13 @@
         self.todayLabel.backgroundColor = [UIColor clearColor];
         self.todayLabel.font = [UIFont heroFontWithSize: 12.0];
         self.todayLabel.textColor = [UIColor whiteColor];
-        [self setTransform:CGAffineTransformMakeRotation(M_PI_2)];
+
         [self setSelectionStyle:UITableViewCellSelectionStyleNone];
         
         [[self contentView] setBackgroundColor:[UIColor horizontalSelectTodayCellColor]];
-        self.labelFrame = self.todayLabel.frame;
+        
+        
+        [self setTransform:CGAffineTransformMakeRotation(M_PI_2)];
     }
 
     return self;

@@ -48,7 +48,6 @@
 
 @interface ECTodayCell : UITableViewCell
 @property (nonatomic,strong) IBOutlet UILabel* todayLabel;
-@property (nonatomic,assign) CGRect labelFrame;
 @end
 
 @interface KLHorizontalSelectArrow : UIView

@@ -42,7 +42,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
 //    UIView * headerSpace = [[UIView alloc] initWithFrame: CGRectMake(self.tableView.frame.origin.x, self.tableView.frame.origin.y, self.tableView.frame.size.width, 3.0)]; //Added so shadow of horizontal bar doesn't overlap with view. Remove/change once designs in
     
     //self.tableView.tableHeaderView = [self headerView];
-    self.tableView.tableFooterView = [self headerView];
+    
     NSString *myIdentifier = @"ECConcertCellView";
     [self.tableView registerNib:[UINib nibWithNibName:@"ECConcertCellView" bundle:nil]
                   forCellReuseIdentifier:myIdentifier];
@@ -60,7 +60,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     [self.tableView setScrollsToTop:YES];
 }
 
-- (UIView *) headerView {
+- (void) setupAttribution {
     UIImage *headerImage = [UIImage imageNamed:@"songkick"];
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, headerImage.size.height)];
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, headerImage.size.width, headerImage.size.height)];
@@ -68,7 +68,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     imageView.image = headerImage;
     headerView.backgroundColor = [UIColor lightGrayHeaderColor];
     [headerView addSubview:imageView];
-    return headerView;
+    self.tableView.tableFooterView = headerView;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -95,7 +95,8 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     }
     [self.tableView reloadData];
     [self.hud hide:YES];
-    [self.delegate doneLoadingTodayConcerts];
+    [self setupAttribution];
+//    [self.delegate doneLoadingTodayConcerts];
 }
 
 #pragma mark - UITableView methods
