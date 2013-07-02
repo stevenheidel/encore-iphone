@@ -168,7 +168,7 @@
     CGFloat pageWidth = descScrollView.frame.size.width;
     int page = floor((descScrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
     self.pageControl.currentPage = page;
-    [Flurry logEvent:@"Scrolled_Login_Page"];
+    [Flurry logEvent:@"Scrolled_Login_Page" withParameters:[NSDictionary dictionaryWithObject:[NSNumber numberWithInt:page] forKey:@"page_number"]];
 }
 
 - (IBAction)changePage {

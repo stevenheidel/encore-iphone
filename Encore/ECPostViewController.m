@@ -84,7 +84,10 @@
     [self.view addGestureRecognizer:recognizerTap];
 }
 -(void) tapPost {
-    [Flurry logEvent:@"Tapped_Post_To_Show_Post_Details"];
+    
+    NSString* logKey = self.containerView.alpha == 1.0 ? @"Hide" : @"Show";
+    [Flurry logEvent:[NSString stringWithFormat:@"Tapped_Post_To_%@_Details",logKey]];
+    
     [UIView animateWithDuration:0.4
                           delay:0.0
                         options: UIViewAnimationOptionCurveEaseInOut
@@ -153,7 +156,7 @@
                                        handler:^(FBAppCall *call, NSDictionary *results, NSError *error) {
                                            if(error) {
                                                NSLog(@"Error posting to FB: %@", error.description);
-                                               [Flurry logEvent:@"Post_Share_To_FB_Fail"];
+                                               [Flurry logEvent:@"Post_Share_To_FB_Fail" withParameters:[NSDictionary dictionaryWithObject:url.absoluteString forKey:@"url"]];
                                            } else {
                                                [Flurry logEvent:@"Post_Share_To_FB_Success" withParameters:[NSDictionary dictionaryWithObject:url.absoluteString forKey:@"url"]];
                                            }
@@ -165,7 +168,12 @@
          UIActivityViewController* activityVC = [[UIActivityViewController alloc] initWithActivityItems: items applicationActivities:nil];
          activityVC.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypePostToWeibo, UIActivityTypeSaveToCameraRoll,UIActivityTypeAssignToContact];
          activityVC.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+         activityVC.completionHandler = ^(NSString* activityType, BOOL completed){
+             [Flurry logEvent:@"Post_Share_With_ActivityVC" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:completed], @"completed", activityType, @"activity_type", url.absoluteString, @"url",nil]];
+         };
+
          [self presentViewController:activityVC animated:YES completion:nil];
+
      }
 }
 

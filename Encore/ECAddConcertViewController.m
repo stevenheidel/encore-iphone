@@ -383,6 +383,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
             self.hud.labelText = NSLocalizedString(@"Searching", nil);
             self.hud.detailsLabelText = [NSString stringWithFormat:NSLocalizedString(@"hudSearchArtist", nil), [textField text]];
             [self.hud show:YES];
+            [Flurry logEvent:@"Searched_With_String" withParameters:[NSDictionary dictionaryWithObject:textField.text forKey:@"search_string"]];
         } else {
             [textField resignFirstResponder];
             [Flurry logEvent: @"Searched_With_Zero_Len_String"];
@@ -434,6 +435,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
         self.lblNoresults.text = [NSString stringWithFormat:NSLocalizedString(@"NoArtistResults", nil), self.artistSearch.text];
         [self showNoResults];
         [self.hud hide:YES];
+        [Flurry logEvent:@"No_Artist_Returned"];
     }
 }
 

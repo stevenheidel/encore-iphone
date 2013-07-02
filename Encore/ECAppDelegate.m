@@ -51,7 +51,6 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
 
     [Flurry setEventLoggingEnabled:YES];
     [Flurry setAppVersion:[NSString stringWithFormat:@"%@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]]];
-    [Flurry logEvent:@"STARTEDSESSION"];
     
     if(IN_BETA){
         [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
@@ -135,13 +134,13 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
             break;
         }
         case FBSessionStateClosed: //no break on purpose
+            
         case FBSessionStateClosedLoginFailed: {
             // Once the user has logged in, we want them to
             // be looking at the root view.
             [self.navigationController popToRootViewControllerAnimated:NO];
             
             [FBSession.activeSession closeAndClearTokenInformation];
-            [Flurry logEvent:@"FBSessionStateClosedLoginFailed"];
             [self showLoginView: YES];
             break;
         }
@@ -149,6 +148,14 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
             break;
         }
     }
+    
+    if (state == FBSessionStateClosed) {
+        [Flurry logEvent:@"FBSessionClosed"];
+    }
+    else if (state == FBSessionStateClosedLoginFailed) {
+        [Flurry logEvent:@"FBSessionStateClosedLoginFailed"];
+    }
+    
     [[NSNotificationCenter defaultCenter] postNotificationName:ECSessionStateChangedNotification object:session];
     
     if (error) {
@@ -234,7 +241,6 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
         [defaults setObject:userInfo.location.location.city forKey:userLocationKey];
         [defaults synchronize];
     }
-    
 }
 
 #pragma mark - location
@@ -300,12 +306,14 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+    [Flurry logEvent:@"Application_Will_Resign_Active"];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    [Flurry logEvent:@"Application_Did_Enter_Background"];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -321,6 +329,7 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    [Flurry logEvent:@"Application_Will_Terminate"];
 }
 
 @end

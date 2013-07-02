@@ -227,19 +227,23 @@ typedef enum {
                                       handler:^(FBAppCall *call, NSDictionary *results, NSError *error) {
                                           if(error) {
                                               NSLog(@"Error sharing concert: %@", error.description);
-                                              [Flurry logEvent:@"Concert_Share_To_FB_Fail" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:url.absoluteString, @"url", self.userID, @"facebook_id",self.concert,@"concert", nil]];
+                                              [Flurry logEvent:@"Concert_Share_To_FB_Fail" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:url.absoluteString, @"url", nil]];
                                           } else {
                                               NSLog(@"Success sharing concert!");
-                                              [Flurry logEvent:@"Concert_Share_To_FB_Success" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:url.absoluteString, @"url", self.userID, @"facebook_id",self.concert,@"concert", nil]];
+                                              [Flurry logEvent:@"Concert_Share_To_FB_Success" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:url.absoluteString, @"url", nil]];
                                           }
                                       }];
     }
     else {
-            NSArray* items = [NSArray arrayWithObjects:url,[NSString stringWithFormat:@"Check out %@ on Encore",[self.concert artistName]],nil];
-            UIActivityViewController* activityVC = [[UIActivityViewController alloc] initWithActivityItems: items applicationActivities:nil];
-            activityVC.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypePostToWeibo, UIActivityTypeSaveToCameraRoll,UIActivityTypeAssignToContact];
-            activityVC.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-            [self presentViewController:activityVC animated:YES completion:nil];
+        NSArray* items = [NSArray arrayWithObjects:url,[NSString stringWithFormat:@"Check out %@ on Encore",[self.concert artistName]],nil];
+        UIActivityViewController* activityVC = [[UIActivityViewController alloc] initWithActivityItems: items applicationActivities:nil];
+        activityVC.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypePostToWeibo, UIActivityTypeSaveToCameraRoll,UIActivityTypeAssignToContact];
+        activityVC.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+        activityVC.completionHandler = ^(NSString* activityType, BOOL completed){
+            [Flurry logEvent:@"Concert_Share_With_ActivityVC" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:completed], @"completed", activityType, @"activity_type", url.absoluteString, @"url",nil]];
+        };
+        [self presentViewController:activityVC animated:YES completion:nil];
+
     }
 }
 
@@ -255,14 +259,14 @@ typedef enum {
 }
 
 -(void) addConcert {
-    [Flurry logEvent:@"Tapped_Add_Concert" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:self.userID, @"facebook_id",self.concert,@"concert", nil]];
+    [Flurry logEvent:@"Tapped_Add_Concert" withParameters:[self flurryParam]];
     UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"confirm_add_title", nil) message:NSLocalizedString(@"confirm_add_message", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"cancel", nil) otherButtonTitles:NSLocalizedString(@"add", nil), nil];
     alert.tag = AddConfirm;
     [alert show];
 }
 
 -(void) removeConcert {
-    [Flurry logEvent:@"Tapped_Remove_Concert" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:self.userID, @"facebook_id",self.concert,@"concert", nil]];
+    [Flurry logEvent:@"Tapped_Remove_Concert" withParameters:[self flurryParam]];
     UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"confirm_remove_title", nil) message:NSLocalizedString(@"confirm_remove_message", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"cancel", nil) otherButtonTitles:NSLocalizedString(@"remove", nil), nil];
     alert.tag = RemoveConfirm;
     [alert show];    
@@ -275,19 +279,21 @@ typedef enum {
         switch (alertView.tag) {
             case AddConfirm: {
                 NSLog(@"%@: Adding concert %@ to profile %@",NSStringFromClass(self.class),songkickID.stringValue,userID);
-                [Flurry logEvent:@"Confirmed_Add_Concert" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:self.userID, @"facebook_id",self.concert,@"concert", nil]];
+                [Flurry logEvent:@"Confirmed_Add_Concert" withParameters:[self flurryParam]];
                 
                 [ECJSONPoster addConcert:songkickID toUser:userID completion:^{
                     [self completedAddingConcert];
+                    [Flurry logEvent:@"Completed_Adding_Concert" withParameters:[self flurryParam]];
                 }];
                 break;
             }
             case RemoveConfirm: {
-                [Flurry logEvent:@"Confirmed_Remove_Concert" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:self.userID, @"facebook_id",self.concert,@"concert", nil]];
+                [Flurry logEvent:@"Confirmed_Remove_Concert" withParameters:[self flurryParam]];
                 
                 NSLog(@"%@: Removing a concert %@ from profile %@",NSStringFromClass(self.class),songkickID,userID);
                 [ECJSONPoster removeConcert:songkickID toUser:userID completion:^{
                     [self completedRemovingConcert];
+                    [Flurry logEvent:@"Completed_Removing_Concert" withParameters:[self flurryParam]];
                 }];
                 break;
             }
@@ -296,7 +302,7 @@ typedef enum {
         }
     }
     else {
-        [Flurry logEvent:@"Canceled_Adding_or_Removing_Concert" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:self.userID, @"facebook_id", nil]];
+        [Flurry logEvent:@"Canceled_Adding_or_Removing_Concert" withParameters:[self flurryParam]];
     }
 }
 
@@ -426,7 +432,7 @@ typedef enum {
 
 #pragma mark - adding photos
 -(IBAction)addPhoto {
-    [Flurry logEvent:@"Tapped_Add_Photo" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:self.userID, @"facebook_id", self.concert, @"concert", nil]];
+    [Flurry logEvent:@"Tapped_Add_Photo" withParameters:[self flurryParam]];
     UIActionSheet* actionSheet = [[UIActionSheet alloc] initWithTitle:@"Post photo" delegate:self cancelButtonTitle:NSLocalizedString(@"cancel", nil) destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"pick_from_lib", nil),[UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] ? NSLocalizedString(@"new_from_camera", nil):nil, nil];
     actionSheet.tag = PhotoSourcePicker;
     actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
@@ -447,7 +453,7 @@ typedef enum {
             [self showImagePickerForSourceType: sourceType];
         }
         else {
-            [Flurry logEvent:@"Canceled_Photo_Adding_On_Action_Sheet" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:self.userID, @"facebook_id", self.concert, @"concert", nil]];
+            [Flurry logEvent:@"Canceled_Photo_Adding" withParameters:[self flurryParam]];
         }
     }
 }
@@ -460,17 +466,17 @@ typedef enum {
     
     if(sourceType == UIImagePickerControllerSourceTypeCamera) {
         imagePickerController.showsCameraControls = YES;
-        [Flurry logEvent:@"Showed_Camera" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:self.userID, @"facebook_id", self.concert, @"concert", nil]];
+        [Flurry logEvent:@"Showed_Camera" withParameters:[self flurryParam]];
     }
     else {
-        [Flurry logEvent:@"Showed_Photo_Library" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:self.userID, @"facebook_id", self.concert, @"concert", nil]];
+        [Flurry logEvent:@"Showed_Photo_Library" withParameters:[self flurryParam]];
     }
     self.imagePickerController = imagePickerController;
     [self presentViewController: self.imagePickerController animated:YES completion: nil];
 }
 
 -(void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    [Flurry logEvent:@"Finished_Picking_Image" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:self.userID, @"facebook_id", self.concert, @"concert", nil]];
+    [Flurry logEvent:@"Finished_Picking_Image" withParameters:[self flurryParam]];
     UIImage* image = [info valueForKey:UIImagePickerControllerOriginalImage];
     [self dismissViewControllerAnimated:YES completion:^{
         ECPictureViewController* pictureVC = [[ECPictureViewController alloc] initWithImage:image];
@@ -489,9 +495,12 @@ typedef enum {
         [HUD setColor:[UIColor lightBlueHUDConfirmationColor]];
         [HUD show:YES];
         [HUD hide:YES afterDelay:HUD_DELAY];
+        [Flurry logEvent:@"Completed_Posting_Image" withParameters:[self flurryParam]];
     }];
 }
-
+-(NSDictionary*) flurryParam {
+    return self.concert;
+}
 #pragma mark - post view controller delegate
 
 -(NSDictionary*) requestPost:(NSInteger)direction currentIndex:(NSInteger)index {

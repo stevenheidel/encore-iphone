@@ -84,7 +84,7 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
 
 -(void) shareTapped {
     [self.concertChildVC shareTapped];
-    [Flurry logEvent:@"Share_Tapped_From_ProfileVC"];
+    [Flurry logEvent:@"Share_Tapped_From_ProfileVC" withParameters:self.concertChildVC.concert];
 
 }
 
@@ -280,15 +280,34 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
         self.concertChildVC.concert = concert;
         [self.concertChildVC updateView];
         self.shareButton.enabled = YES;
-        [Flurry logEvent:[NSString stringWithFormat:@"Selected_%@_Cell_HS",key] withParameters:concert];
+        
+        NSMutableDictionary* param = [NSMutableDictionary dictionaryWithDictionary:concert];
+        [param setObject:[NSNumber numberWithInt:indexPath.row] forKey:@"row"];
+        [Flurry logEvent:[NSString stringWithFormat:@"Selected_%@_Cell_HS",key] withParameters:param];
     }
     else {
         self.shareButton.enabled = NO;
-        [Flurry logEvent:[NSString stringWithFormat:@"Selected_Cell_Type_%d",cellType]];
+        [Flurry logEvent:[NSString stringWithFormat:@"Selected_%@",[self logStringForCellType:cellType]]];
     }
     
 }
-
+-(NSString*) logStringForCellType: (ECCellType) type {
+    switch (type) {
+        case ECCellTypeAddFuture:
+            return @"Add_Future";
+        case ECCellTypeAddPast:
+            return @"Add_Past";
+        case ECCellTypeToday:
+            return @"Today";
+        case ECCellTypeFutureShows:
+            return @"Future";
+        case ECCellTypePastShows:
+            return @"Past";
+        default:
+            return @"";
+    }
+    return nil;
+}
 -(void) addChildViewForCellType:(ECCellType) cellType {
     UIViewController * child = [self childViewControllerForCellType: cellType];
     if ([self childViewControllerForCellType: cellType] == nil) {
@@ -374,7 +393,7 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
     else {
         direction = -1;
     }
-    [Flurry logEvent:@"Swipe_Gesture_PVC" withParameters:[NSDictionary dictionaryWithObject:[NSNumber numberWithInt:direction] forKey:@"direction"]];
+    [Flurry logEvent:@"Swipe_Gesture_Main_View" withParameters:[NSDictionary dictionaryWithObject:[NSNumber numberWithInt:direction] forKey:@"direction"]];
     [self gesture:direction];
 }
 
