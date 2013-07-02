@@ -103,6 +103,12 @@
 		D4AB1B0A178213FF002A29B9 /* UIFont+Encore.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AB1B09178213FF002A29B9 /* UIFont+Encore.m */; };
 		D4AB1B0D17827050002A29B9 /* flag.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AB1B0B17827050002A29B9 /* flag.png */; };
 		D4AB1B0E17827050002A29B9 /* flag@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AB1B0C17827050002A29B9 /* flag@2x.png */; };
+		D4AB1B1517829413002A29B9 /* login1.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AB1B0F17829412002A29B9 /* login1.png */; };
+		D4AB1B1617829413002A29B9 /* login1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AB1B1017829412002A29B9 /* login1@2x.png */; };
+		D4AB1B1717829413002A29B9 /* login2.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AB1B1117829412002A29B9 /* login2.png */; };
+		D4AB1B1817829413002A29B9 /* login2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AB1B1217829412002A29B9 /* login2@2x.png */; };
+		D4AB1B1917829413002A29B9 /* login3.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AB1B1317829412002A29B9 /* login3.png */; };
+		D4AB1B1A17829413002A29B9 /* login3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AB1B1417829413002A29B9 /* login3@2x.png */; };
 		D4ABD2D9177DF09900DC691F /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = D4ABD2D8177DF09900DC691F /* Default.png */; };
 		D4ABD2DB177DF09B00DC691F /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4ABD2DA177DF09B00DC691F /* Default@2x.png */; };
 		D4ABD2DD177DF09E00DC691F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4ABD2DC177DF09E00DC691F /* Default-568h@2x.png */; };
@@ -267,6 +273,12 @@
 		D4AB1B09178213FF002A29B9 /* UIFont+Encore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+Encore.m"; sourceTree = "<group>"; };
 		D4AB1B0B17827050002A29B9 /* flag.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flag.png; sourceTree = "<group>"; };
 		D4AB1B0C17827050002A29B9 /* flag@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "flag@2x.png"; sourceTree = "<group>"; };
+		D4AB1B0F17829412002A29B9 /* login1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login1.png; sourceTree = "<group>"; };
+		D4AB1B1017829412002A29B9 /* login1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login1@2x.png"; sourceTree = "<group>"; };
+		D4AB1B1117829412002A29B9 /* login2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login2.png; sourceTree = "<group>"; };
+		D4AB1B1217829412002A29B9 /* login2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login2@2x.png"; sourceTree = "<group>"; };
+		D4AB1B1317829412002A29B9 /* login3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login3.png; sourceTree = "<group>"; };
+		D4AB1B1417829413002A29B9 /* login3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login3@2x.png"; sourceTree = "<group>"; };
 		D4ABD2D8177DF09900DC691F /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../Default.png; sourceTree = "<group>"; };
 		D4ABD2DA177DF09B00DC691F /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
 		D4ABD2DC177DF09E00DC691F /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -393,6 +405,12 @@
 		D4A8DDD1176A44A0005E9847 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				D4AB1B0F17829412002A29B9 /* login1.png */,
+				D4AB1B1017829412002A29B9 /* login1@2x.png */,
+				D4AB1B1117829412002A29B9 /* login2.png */,
+				D4AB1B1217829412002A29B9 /* login2@2x.png */,
+				D4AB1B1317829412002A29B9 /* login3.png */,
+				D4AB1B1417829413002A29B9 /* login3@2x.png */,
 				D4AB1B0B17827050002A29B9 /* flag.png */,
 				D4AB1B0C17827050002A29B9 /* flag@2x.png */,
 				D428A45D17811F4A00101F12 /* removebutton.png */,
@@ -798,6 +816,12 @@
 				D428A46017811F4A00101F12 /* removebutton@2x.png in Resources */,
 				D4AB1B0D17827050002A29B9 /* flag.png in Resources */,
 				D4AB1B0E17827050002A29B9 /* flag@2x.png in Resources */,
+				D4AB1B1517829413002A29B9 /* login1.png in Resources */,
+				D4AB1B1617829413002A29B9 /* login1@2x.png in Resources */,
+				D4AB1B1717829413002A29B9 /* login2.png in Resources */,
+				D4AB1B1817829413002A29B9 /* login2@2x.png in Resources */,
+				D4AB1B1917829413002A29B9 /* login3.png in Resources */,
+				D4AB1B1A17829413002A29B9 /* login3@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -983,7 +1007,8 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -991,6 +1016,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};

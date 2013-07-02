@@ -8,7 +8,7 @@
 		<key>text</key>
 		<string>Discover concerts to go to with friends, see what everyone is already sharing, show your night out to your friends, and keep it for yourself on your profile.</string>
 		<key>image</key>
-		<string>Icon@2x.png</string>
+		<string>login1.png</string>
 	</dict>
 	<dict>
 		<key>header</key>
@@ -16,7 +16,7 @@
 		<key>text</key>
 		<string>Description text 1</string>
 		<key>image</key>
-		<string>Icon@2x.png</string>
+		<string>login2.png</string>
 	</dict>
 	<dict>
 		<key>header</key>
@@ -24,7 +24,7 @@
 		<key>text</key>
 		<string>Description Text 2</string>
 		<key>image</key>
-		<string>Icon@2x.png</string>
+		<string>login3.png</string>
 	</dict>
 </array>
 </plist>
