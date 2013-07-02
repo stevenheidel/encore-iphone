@@ -78,12 +78,8 @@ typedef enum {
     
 }
 
--(void) viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    [self clearCollectionView];
-}
-
 -(void) clearCollectionView {
+    self.posts = nil;
     [self.collectionView reloadData];
 }
 -(void) setupArtistUIAttributes {
@@ -110,6 +106,7 @@ typedef enum {
 
 -(void) updateView {
     //self.title = self.artistNameLabel.text;
+    [self clearCollectionView];
     [self loadArtistDetails];
     [self loadImages];
     [self setupToolbar];
