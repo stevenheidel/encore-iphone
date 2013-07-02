@@ -14,4 +14,7 @@
 +(void) removeConcert: (NSNumber *) concertID toUser: (NSString *) userID completion: (void (^)()) completion;
 
 +(void) postImage:(NSDictionary*)imageDic completion:(void (^)())completion;
+
++(void) flagPost:(NSNumber *)postID withFlag:(NSString *)flag completion:(void (^)(BOOL success))completion;
+
 @end

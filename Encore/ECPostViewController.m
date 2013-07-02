@@ -13,8 +13,16 @@
 #import "EncoreURL.h"
 #import <FacebookSDK/FacebookSDK.h>
 
-#import "UIFont+Encore.h"
+#import "MBProgressHUD.h"
 
+#import "UIFont+Encore.h"
+#import "ECJSONPoster.h"
+
+#define FLAG_HUD_DELAY 1.0
+
+typedef enum {
+    FlagPhoto
+}ActionSheetTags;
 @interface ECPostViewController ()
 
 @end
@@ -42,9 +50,16 @@
     self.profilePicture.layer.borderWidth = 3.0;
     self.captionLabel.font = [UIFont heroFontWithSize: 12.0f];
     self.userNameLabel.font = [UIFont lightHeroFontWithSize: 18.0f];
-    
-    //self.title = @"Post";//self.userNameLabel.text;
-    
+
+    [self setupBarButtons];    
+
+    [self setupGestureRecgonizers];
+    self.containerView.alpha = 0.0;
+    self.flagPostButton.alpha = 0.0;
+    self.flagPostButton.enabled = NO;
+}
+
+-(void) setupBarButtons {
     UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
     UIImage *leftButImage = [UIImage imageNamed:@"backButton.png"]; //stretchableImageWithLeftCapWidth:10 topCapHeight:10];
     [leftButton setBackgroundImage:leftButImage forState:UIControlStateNormal];
@@ -60,11 +75,6 @@
     rightButton.frame = CGRectMake(0, 0, rightButImage.size.width*0.75, rightButImage.size.height*0.75);
     UIBarButtonItem *shareButton = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
     self.navigationItem.rightBarButtonItem = shareButton;
-    
-//    UIBarButtonItem * shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(shareTapped)];
-//    self.navigationItem.rightBarButtonItem = shareButton;
-    [self setupGestureRecgonizers];
-    self.containerView.alpha = 0.0;
 }
 
 -(void) setupGestureRecgonizers {
@@ -93,11 +103,15 @@
                         options: UIViewAnimationOptionCurveEaseInOut
                      animations:^{
                          self.containerView.alpha = self.containerView.alpha == 0.0 ? 1.0 : 0.0;
+                         self.flagPostButton.alpha = self.flagPostButton.alpha == 0.0 ? 1.0 : 0.0;
                      }
                      completion:^(BOOL finished){
+                         self.flagPostButton.enabled = self.flagPostButton.alpha == 1.0;
                      }];
     
 }
+
+
 //This function is called on first initial set up as well as later on if the user swipes left or right
 -(void) setupPost {
     
@@ -130,7 +144,6 @@
 }
 
 -(void) gesture: (NSInteger) direction {
-    
     NSDictionary* dic = [self.delegate requestPost: direction currentIndex: self.itemNumber];
     if(dic) {
         self.post = [dic objectForKey:@"dic"];
@@ -141,6 +154,45 @@
 
 -(void) backButtonWasPressed {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(IBAction) flagPhoto {
+    NSString* flagPhotoTitle = NSLocalizedString(@"flag_post_title", nil);
+    NSString* cancel = NSLocalizedString(@"cancel", nil);
+    
+    UIActionSheet* actionSheet = [[UIActionSheet alloc] initWithTitle:flagPhotoTitle
+                                                             delegate:self
+                                                    cancelButtonTitle:cancel
+                                               destructiveButtonTitle:nil
+                                                    otherButtonTitles:NSLocalizedString(@"flag_1", nil),NSLocalizedString(@"flag_2", nil), NSLocalizedString(@"flag_other", nil), nil];
+    
+    actionSheet.tag = FlagPhoto;
+    [actionSheet showInView:self.view];
+}
+
+-(void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (actionSheet.tag == FlagPhoto) {
+        if(buttonIndex != actionSheet.cancelButtonIndex){
+            NSString* flag = [actionSheet buttonTitleAtIndex:buttonIndex];
+            
+            NSMutableDictionary* params = [NSMutableDictionary dictionaryWithObjectsAndKeys:flag,@"flag",[NSNumber numberWithInt:buttonIndex], @"button_index",nil];
+            [params addEntriesFromDictionary:self.post];
+            
+            [ECJSONPoster flagPost:self.postID withFlag:flag completion:^(BOOL success) {
+                [params setObject:[NSNumber numberWithBool:success] forKey:@"success"];
+                [Flurry logEvent:@"Flagged_Post" withParameters:params];
+                MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+                hud.labelText = success ? NSLocalizedString(@"flag_hud_text", nil) : NSLocalizedString(@"flag_hud_fail_text", nil);
+                hud.mode = MBProgressHUDModeText;
+                hud.removeFromSuperViewOnHide = YES;
+                [hud hide:YES afterDelay:FLAG_HUD_DELAY];
+            }];
+        }
+        else {
+            [Flurry logEvent:@"Canceled_Flagging_Post" withParameters:self.post];
+        }
+    }
+    
 }
 
 -(void) shareTapped {

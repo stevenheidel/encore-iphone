@@ -8,13 +8,17 @@
 
 #import <UIKit/UIKit.h>
 @protocol ECPostViewControllerDelegate;
-@interface ECPostViewController : UIViewController
+@interface ECPostViewController : UIViewController <UIActionSheetDelegate>
 
+-(IBAction)flagPhoto;
 @property (nonatomic,strong) NSDictionary * post;
+
 @property (nonatomic,strong) IBOutlet UIImageView * postImage;
 @property (nonatomic,strong) IBOutlet UIImageView * profilePicture;
 @property (nonatomic,strong) IBOutlet UILabel * captionLabel;
 @property (nonatomic,strong) IBOutlet UILabel * userNameLabel;
+@property (nonatomic,strong) IBOutlet UIButton* flagPostButton;
+
 @property (nonatomic,assign) NSInteger itemNumber;
 @property (nonatomic,strong) IBOutlet UIView* containerView;
 @property (nonatomic,readonly) NSNumber * postID;

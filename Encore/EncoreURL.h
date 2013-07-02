@@ -53,7 +53,7 @@ static NSString *const ArtistConcertSearchFutureURL = @BASE_URL_DEF ARTISTS_DEF 
 
 //Posts
 static NSString *const ConcertPostsURL = @BASE_URL_DEF CONCERTS_DEF "/%@/" POSTS_DEF ; //,concertID
-
+static NSString *const FlagPostURL = @POSTS_DEF "/%@/"; //,postID
 //Concert Check
 static NSString *const CheckConcertOnProfileURL = @BASE_URL_DEF USERS_DEF "/%@/" CONCERTS_DEF "?" SONGKICK_ID_DEF "=" "%@"; // , userID, ConcertID
 

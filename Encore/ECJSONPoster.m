@@ -125,4 +125,29 @@
     }];
     [operation start];
 }
+
++(void) flagPost:(NSNumber *)postID withFlag:(NSString *)flag completion:(void (^)(BOOL success))completion {
+    NSString * urlString = [NSString stringWithFormat:FlagPostURL,postID.stringValue];
+    
+    NSDictionary * parameters = [NSDictionary dictionaryWithObject:flag forKey:@"flag"];
+    AFHTTPClient * client = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:BaseURL]];
+    
+    [client registerHTTPOperationClass:[AFJSONRequestOperation class]];
+    [client setDefaultHeader:@"Accept" value:@"application/json"];
+    
+    [client postPath:urlString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"%@: Success flagging post %@. Response: %@", NSStringFromClass([self class]),postID.stringValue,[responseObject description]);
+        if (completion) {
+            completion(TRUE);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"%@: ERROR flagging post %@: %@...",NSStringFromClass([self class]), postID.stringValue,[[error description] substringToIndex:MAX_ERROR_LEN]);
+        
+        if (completion) {
+            completion(FALSE);
+        }
+    }];
+}
+
+
 @end

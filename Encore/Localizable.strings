@@ -68,3 +68,12 @@
 "logout_alert_title" = "Log out";
 "logout_alert_message" = "Do you want to log out of Encore?";
 "logout" = "Log out";
+
+//Post flags
+"flag_post_title" = "Report photo";
+"flag_1" = "Inappropriate";
+"flag_2" = "Not From Show";
+"flag_other" = "Other";
+"flag_hud_text" = "Thanks. We'll look into that for you.";
+"flag_hud_fail_text" = "Could not connect to server";
+//"flag_3" = "";
