@@ -111,8 +111,11 @@
     else [self.arrow show:YES];
 
     if (![self shouldHideArrowForSelectedCellType:[self.tableView indexPathForSelectedRow].section] && [centerIndexPath isEqual:self.tableView.indexPathForSelectedRow]) {
-        [self.tableView scrollToRowAtIndexPath:centerIndexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
-        [self.arrow show:YES];
+        if(flag) {
+            [self.tableView scrollToRowAtIndexPath:centerIndexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+            [self.arrow show:YES];
+            flag = false;
+        }
     }
 }
 //-(void) scrollViewWillBeginDragging:(UIScrollView *)scrollView {
@@ -121,6 +124,7 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if (scrollView.isDragging) {
         [self.arrow hide:YES];
+        flag = true;
     }
 }
 
@@ -302,7 +306,7 @@
     view.yearLabel.textColor = color;
     view.monthLabel.font = [UIFont heroFontWithSize:12.0];
     view.monthLabel.textColor = color;
-    view.dayNumberLabel.font = [UIFont heroFontWithSize:30.0];
+    view.dayNumberLabel.font = [UIFont heroFontWithSize:28.0];
     view.dayNumberLabel.textColor = color;
 }
 

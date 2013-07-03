@@ -67,6 +67,9 @@
 @end
 
 @interface KLHorizontalSelect : UIView <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
+{
+    BOOL flag;
+}
 @property (nonatomic, strong) NSIndexPath* currentIndex;
 @property (nonatomic, strong) UITableView* tableView;
 @property (nonatomic, strong) NSDictionary* tableData;
