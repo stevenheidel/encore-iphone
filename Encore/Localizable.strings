@@ -62,7 +62,7 @@
 
 //post placeholder
 "POST_PLACEHOLDER_TEXT_1" = "No photos or videos found";
-"POST_PLACEHOLDER_TEXT_2" = "Were you there? Add your own by clicking on the camera on the bottom right";
+"POST_PLACEHOLDER_TEXT_2" = "Were you there? Add your own by clicking 'Post' on the bar above";
 
 //Profile
 "logout_alert_title" = "Log out";
