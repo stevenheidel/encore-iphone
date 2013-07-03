@@ -140,10 +140,9 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-    ECConcertDetailViewController * concertDetail = [[ECConcertDetailViewController alloc] init];
-    NSDictionary* concert = [self.arrTodaysConcerts objectAtIndex:indexPath.row];
-    concertDetail.concert = concert;
     
+    NSDictionary* concert = [self.arrTodaysConcerts objectAtIndex:indexPath.row];
+    ECConcertDetailViewController * concertDetail = [[ECConcertDetailViewController alloc] initWithConcert:concert];
     [Flurry logEvent:@"Selected_Popular_Today_Concert" withParameters:concert];
     
     [self.navigationController pushViewController:concertDetail animated:YES];

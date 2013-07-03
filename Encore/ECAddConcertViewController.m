@@ -300,13 +300,14 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     if ([self.artistSearch isFirstResponder] || [self.locationSearch isFirstResponder]) {
         [self.artistSearch resignFirstResponder];
         [self.locationSearch resignFirstResponder];
-    } else {
+    }
+    else {
         if (hasSearched) {
             if (self.foundArtistConcerts) {
-                ECConcertDetailViewController * concertDetail = [[ECConcertDetailViewController alloc] init];
                 NSDictionary* concert = [self.arrArtistConcerts objectAtIndex:indexPath.row];
+                ECConcertDetailViewController * concertDetail = [[ECConcertDetailViewController alloc] initWithConcert: concert];
                 [Flurry logEvent: @"Selected_Concert_After_Search" withParameters:concert];
-                concertDetail.concert = concert;
+                
                 [self.navigationController pushViewController:concertDetail animated:YES];
             } else {
                 NSDictionary* artistDic = (NSDictionary*)[self.arrArtistData objectAtIndex:indexPath.row];
@@ -315,19 +316,14 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
                     [self fetchedArtistConcerts:concerts];
                 };
                 [ECJSONFetcher fetchConcertsForArtistID:artistID withSearchType:self.searchType completion:fetchedConcertsBlock];
-//                if (self.searchType == ECSearchTypePast) {
-//                    [ECJSONFetcher fetchConcertsForArtistID:artistID withSearchType:ECSearchTypePast completion:fetchedConcertsBlock];
-//                } else {
-//                    [ECJSONFetcher fetchConcertsForArtistID:artistID withSearchType:ECSearchTypeFuture completion:fetchedConcertsBlock];
-//                }
+
                 self.lastSelectedArtist = artistDic;
                 [self.hud show:YES];
             }  
         } else {
             //User clicked on a popular concert
-            ECConcertDetailViewController * concertDetail = [[ECConcertDetailViewController alloc] init];
-            
-            concertDetail.concert = [self.arrPopularData objectAtIndex:indexPath.row];
+            ECConcertDetailViewController * concertDetail = [[ECConcertDetailViewController alloc] initWithConcert:[self.arrPopularData objectAtIndex:indexPath.row]];
+
             [self.navigationController pushViewController:concertDetail animated:YES];
         }
 
