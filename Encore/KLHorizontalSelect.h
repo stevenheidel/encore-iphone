@@ -39,6 +39,7 @@
 @property (nonatomic, strong) NSDictionary * cellData;
 @property (nonatomic, strong) ECHorizontalCellView * cellView;
 @property (nonatomic, assign) ECCellType cellType;
+
 @end
 
 @interface ECHorizontalEndCell : UITableViewCell
@@ -55,7 +56,7 @@
 -(void) show:(BOOL) animated;
 -(void) hide:(BOOL) animated;
 -(void) toggle:(BOOL) animated;
--(void) lock: (CGPoint) point;
+//-(void) lock: (CGPoint) point;
 -(id) initWithFrame:(CGRect)frame color:(UIColor*) color;
 @end
 

@@ -33,7 +33,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         //Configure the arrow
-        self.arrow = [[KLHorizontalSelectArrow alloc] initWithFrame:CGRectMake(0, kDefaultCellHeight, kHeaderArrowWidth, kHeaderArrowHeight)color:kDefaultGradientBottomColor];
+        self.arrow = [[KLHorizontalSelectArrow alloc] initWithFrame:CGRectMake(0, kDefaultCellHeight, kHeaderArrowWidth, kHeaderArrowHeight)color:[UIColor horizontalSelectTodayCellColor]];
         [self.arrow setCenter:CGPointMake(self.frame.size.width/2.0, self.arrow.center.y)];
         
         
@@ -59,7 +59,6 @@
 //        [self.layer setShadowOpacity: kDefaultShadowOpacity];
         
         self.backgroundColor = [UIColor whiteColor];
-        
     }
     return self;
 }
@@ -67,6 +66,7 @@
 -(void) setFrame:(CGRect)frame {
     [super setFrame:CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, kDefaultCellHeight)];
 }
+
 -(void) drawRect:(CGRect)rect {
     CGContextRef context = UIGraphicsGetCurrentContext();
     // Draw gradient
@@ -226,6 +226,7 @@
     NSString* reuseIdentifier = reuseIdentifierForCellType(cellType);
 
     id cell = (id)[tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
+    
     if (cell==nil) {
         cell = [self initCellAtIndexPath:indexPath];
     }
@@ -243,9 +244,7 @@
             [[(KLHorizontalSelectCell*)cell contentView] setBackgroundColor:[UIColor horizontalSelectGrayCellColor]];
         }
     }
-//    if (cellType == ECCellTypeToday) {
-//
-//    }
+
     return cell;
 }
 
@@ -311,21 +310,19 @@
 @implementation ECTodayCell
 -(id) init {
     if (self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifierForCellType(ECCellTypeToday)]){
-        NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"ECEndCellView" owner:self options:nil];
+        NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"ECTodayCellView" owner:self options:nil];
         UIView *todayView = [subviewArray objectAtIndex:0];
         self.todayLabel = [[todayView subviews] objectAtIndex:0];
-      
-        self.todayLabel.center = self.center;
         self.todayLabel.text = NSLocalizedString(@"today", nil);
         self.todayLabel.backgroundColor = [UIColor clearColor];
         self.todayLabel.font = [UIFont heroFontWithSize: 12.0];
         self.todayLabel.textColor = [UIColor whiteColor];
 
         [self setSelectionStyle:UITableViewCellSelectionStyleNone];
-        
-        [[self contentView] setBackgroundColor:[UIColor horizontalSelectTodayCellColor]];
-        
-        
+        [todayView setBackgroundColor:[UIColor horizontalSelectTodayCellColor]];
+//        [[self contentView] setBackgroundColor:[UIColor horizontalSelectTodayCellColor]];
+        todayView.frame = self.contentView.frame;
+        [self.contentView addSubview:todayView];
         [self setTransform:CGAffineTransformMakeRotation(M_PI_2)];
     }
 
@@ -377,7 +374,7 @@
 
         CAShapeLayer *shapeLayer = [CAShapeLayer layer];
         [shapeLayer setPath:path];
-        [shapeLayer setFillColor:[[UIColor horizontalSelectTodayCellColor] CGColor]]; 
+        [shapeLayer setFillColor:[color CGColor]];
         
         
         
