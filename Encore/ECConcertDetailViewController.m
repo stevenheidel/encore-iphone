@@ -320,7 +320,7 @@ typedef enum {
 	[HUD hide:YES afterDelay:HUD_DELAY];
     [self toggleOnProfileState];
     
-    [[self profileViewController] refreshForConcertID:self.songkickID];
+    [[self mainViewController] refreshForConcertID:self.songkickID];
     //Refresh for concert ID will make profile vc pop back to itself
 }
 
@@ -339,7 +339,7 @@ typedef enum {
 	[HUD show:YES];
 	[HUD hide:YES afterDelay:HUD_DELAY];
 
-    [[self profileViewController] refreshForConcertID:nil];
+    [[self mainViewController] refreshForConcertID:nil];
     //Refresh for concert ID will make profile vc pop back to itself
 }   
 
@@ -526,7 +526,7 @@ typedef enum {
     return [[NSUserDefaults standardUserDefaults] stringForKey:NSLocalizedString(@"user_id", nil)];
 }
 
--(ECMainViewController*) profileViewController {
+-(ECMainViewController*) mainViewController {
     ECAppDelegate* appDel = (ECAppDelegate *)[UIApplication sharedApplication].delegate;
     return appDel.mainViewController;
 }

@@ -102,7 +102,7 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
 
 #pragma mark View Updating
 -(void) refreshForConcertID:(NSNumber*) concertID {
-    [self.navigationController popToViewController:self animated:YES];
+    [self.navigationController popToViewController:self animated:NO];
     [self updateViewWithNewConcert: concertID];
 }
 
