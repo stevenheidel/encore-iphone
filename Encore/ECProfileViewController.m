@@ -170,9 +170,9 @@ typedef enum {
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-    ECConcertDetailViewController * concertDetail = [[ECConcertDetailViewController alloc] init];
+    
     NSDictionary* concert = [self.arrPastConcerts objectAtIndex:indexPath.row];
-    concertDetail.concert = concert;
+    ECConcertDetailViewController * concertDetail = [[ECConcertDetailViewController alloc] initWithConcert:concert];
     
     //[Flurry logEvent:@"Selected_Popular_Today_Concert" withParameters:concert];
     

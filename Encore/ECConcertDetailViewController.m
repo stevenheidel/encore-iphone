@@ -57,6 +57,14 @@ typedef enum {
     return self;
 }
 
+-(id) initWithConcert:(NSDictionary *)concert {
+    self = [super init];
+    if (self) {
+        self.concert = concert;
+    }
+    return self;
+}
+
 #pragma mark - View Setup
 - (void)viewDidLoad
 {
@@ -71,11 +79,15 @@ typedef enum {
     
     self.isOnProfile = FALSE;
     [self setUpNavBarButtons];
-   // [self setUpFlowLayout];
-    [self setupToolbar];
-    [self loadArtistDetails];
-    [self loadImages];
-    
+
+    [self updateView];
+}
+
+-(void) setConcert:(NSDictionary *)concert andUpdate: (BOOL) update {
+    self.concert = concert;
+    if (update) {
+        [self updateView];
+    }
 }
 
 -(void) clearCollectionView {

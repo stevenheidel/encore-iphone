@@ -17,7 +17,7 @@
 
 #import "UIColor+EncoreUI.h"
 
-#define LINE_THICKNESS 0.3
+#define LINE_THICKNESS 0.5
 static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users";
 
 @interface ECMainViewController ()
@@ -271,15 +271,14 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
 - (void) horizontalSelect:(id)horizontalSelect didSelectCell:(KLHorizontalSelectCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     ECCellType cellType = indexPath.section;
     
-    [self addChildViewForCellType:cellType];
-    [self removeFromViewForCurrentCellType:cellType];
-    [self.view bringSubviewToFront:self.horizontalSelect.viewForBaselineLayout];
+    [self addChildViewForCellType:cellType]; //add child view corresponding to cell type (allocates if necessary)
+    [self removeFromViewForCurrentCellType:cellType]; //remove any views that don't match the current cell type
+    [self.view bringSubviewToFront:self.horizontalSelect.viewForBaselineLayout]; //make sure horiz select stays on top, for arrow
     
     if (cellType == ECCellTypeFutureShows || cellType == ECCellTypePastShows) {
         NSString * key = cellType == ECCellTypePastShows ? @"past" : @"future";
         NSDictionary* concert = [[self.concerts objectForKey: key]objectAtIndex:indexPath.row];
-        self.concertChildVC.concert = concert;
-        [self.concertChildVC updateView];
+        [self.concertChildVC setConcert:concert andUpdate:YES];
         self.shareButton.enabled = YES;
         
         NSMutableDictionary* param = [NSMutableDictionary dictionaryWithDictionary:concert];
@@ -363,6 +362,8 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
 //-(void) doneLoadingTodayConcerts {
 //    [self.horizontalSelect.arrow show:YES];
 //}
+
+//Remove any view that doesn't match the current cell type
 -(void) removeFromViewForCurrentCellType: (ECCellType) cellType {
     if (cellType != ECCellTypeAddPast) {
        // [self.addConcertVC removeFromParentViewController]; Doesn't seem to be necessary? //TODO: doublecheck

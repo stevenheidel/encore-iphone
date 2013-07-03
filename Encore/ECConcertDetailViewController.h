@@ -17,7 +17,8 @@
 
 -(IBAction)addPhoto;
 -(void) shareTapped;
-
+-(id) initWithConcert:(NSDictionary*) concert;
+-(void) setConcert:(NSDictionary *)concert andUpdate: (BOOL) update;
 
 @property (nonatomic, assign) ECSearchType searchType;
 @property (nonatomic,strong) NSDictionary * concert;
