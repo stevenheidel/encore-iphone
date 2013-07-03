@@ -103,14 +103,15 @@
 -(void) scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
     CGPoint point = [self convertPoint:CGPointMake(self.frame.size.width/2.0, kDefaultCellHeight/2.0) toView:self.tableView];
      NSIndexPath* centerIndexPath = [self.tableView indexPathForRowAtPoint:point];
-//    
-//    if ([self shouldHideArrowForSelectedCellType:centerIndexPath.section]) {
-//        [self.arrow hide:YES];  
-//    }
-//
-//    else [self.arrow show:YES];
+
+    if ([self shouldHideArrowForSelectedCellType:centerIndexPath.section]) {
+        [self.arrow hide:YES];  
+    }
+
+    else [self.arrow show:YES];
 
     if (![self shouldHideArrowForSelectedCellType:[self.tableView indexPathForSelectedRow].section] && [centerIndexPath isEqual:self.tableView.indexPathForSelectedRow]) {
+        [self.tableView scrollToRowAtIndexPath:centerIndexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
         [self.arrow show:YES];
     }
 }
@@ -137,7 +138,7 @@
     CGPoint point = [self convertPoint:CGPointMake(self.frame.size.width/2.0, kDefaultCellHeight/2.0) toView:self.tableView];
     NSIndexPath* centerIndexPath = [self.tableView indexPathForRowAtPoint:point];
     if (![self shouldHideArrowForSelectedCellType:[self.tableView indexPathForSelectedRow].section] && [centerIndexPath isEqual:self.tableView.indexPathForSelectedRow]) {
-        [self.arrow show:YES];
+        [self.tableView scrollToRowAtIndexPath:centerIndexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
     }
 }
 -(void) setCurrentIndex:(NSIndexPath *)currentIndex {
