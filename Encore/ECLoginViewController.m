@@ -168,16 +168,17 @@
     CGFloat pageWidth = descScrollView.frame.size.width;
     int page = floor((descScrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
     self.pageControl.currentPage = page;
-    [Flurry logEvent:@"Scrolled_Login_Page" withParameters:[NSDictionary dictionaryWithObject:[NSNumber numberWithInt:page] forKey:@"page_number"]];
 }
 
-- (IBAction)changePage {
+- (IBAction)changePage: (id) sender {
     // update the scroll view to the appropriate page
     CGRect frame;
     frame.origin.x = self.descScrollView.frame.size.width * self.pageControl.currentPage;
     frame.origin.y = 0;
     frame.size = self.descScrollView.frame.size;
     [self.descScrollView scrollRectToVisible:frame animated:YES];
+    
+    [Flurry logEvent:@"Scrolled_Login_Page" withParameters:[NSDictionary dictionaryWithObject:[NSNumber numberWithInt:((UIPageControl*) sender).currentPage] forKey:@"page_number"]];
 }
 
 

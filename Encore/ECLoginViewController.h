@@ -19,6 +19,6 @@
 @property (nonatomic, retain) IBOutlet UIPageControl *pageControl;
 @property (unsafe_unretained, nonatomic) IBOutlet FBLoginView *FBLoginView;
 
-- (IBAction)changePage;
+- (IBAction)changePage: (id) sender;
 
 @end
