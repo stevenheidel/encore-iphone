@@ -20,11 +20,13 @@
 #define CONCERTS_DEF "concerts"
 #define USERS_DEF "users"
 #define POSTS_DEF "posts"
-#define SEARCH_DEF "search?term="
+#define SEARCH_DEF "search?"
+#define TERM_DEF "term="
 #define ARTISTS_DEF "artists"
 #define PAST_DEF "past"
 #define FUTURE_DEF "future"
 #define TODAY_DEF "today"
+#define TENSE_DEF "tense="
 #define CITY_DEF "city="
 #define SONGKICK_ID_DEF "songkick_id"
 
@@ -50,6 +52,10 @@ static NSString *const TodayPopularConcertsURL = @BASE_URL_DEF CONCERTS_DEF "/" 
 static NSString *const ArtistSearchURL = @BASE_URL_DEF ARTISTS_DEF "/" SEARCH_DEF "%@"; //, searchStr
 static NSString *const ArtistConcertSearchPastURL = @BASE_URL_DEF ARTISTS_DEF "/%@/" CONCERTS_DEF "/" PAST_DEF "?" CITY_DEF "%@"; //, artistID, userLocation
 static NSString *const ArtistConcertSearchFutureURL = @BASE_URL_DEF ARTISTS_DEF "/%@/" CONCERTS_DEF "/" FUTURE_DEF "?" CITY_DEF "%@"; //artistID, , userLocation
+
+//Artists and Concerts combo
+static NSString *const ArtistConcertComboPastURL = @BASE_URL_DEF ARTISTS_DEF "/" SEARCH_DEF "?" CITY_DEF "%@," TERM_DEF "%@," TENSE_DEF PAST_DEF;
+static NSString *const ArtistConcertComboFutureURL = @BASE_URL_DEF ARTISTS_DEF "/" SEARCH_DEF "?" CITY_DEF "%@," TERM_DEF "%@," TENSE_DEF FUTURE_DEF;
 
 //Posts
 static NSString *const ConcertPostsURL = @BASE_URL_DEF CONCERTS_DEF "/%@/" POSTS_DEF ; //,concertID

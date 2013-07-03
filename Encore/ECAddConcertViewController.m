@@ -180,9 +180,9 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
             static NSString *myIdentifier = @"ECConcertCellView";
             ECConcertCellView *cell = [tableView dequeueReusableCellWithIdentifier:myIdentifier forIndexPath:indexPath];
             NSDictionary *concertDic = [self.arrArtistConcerts objectAtIndex:indexPath.row];
-            UIImage *image = [self.arrArtistImages objectAtIndex:indexPath.row];
+            //UIImage *image = [self.arrArtistImages objectAtIndex:indexPath.row];
             [(ECConcertCellView *)cell setUpCellForConcert:concertDic];
-            [(ECConcertCellView *)cell setUpCellImageForConcert:image];
+            //[(ECConcertCellView *)cell setUpCellImageForConcert:image];
             cell.contentView.backgroundColor = [self getCellColourForRow:[indexPath row]];
             return cell;
         } else {
@@ -376,8 +376,9 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     if (textField.tag == 0) {
         if (textField.text.length > 0) {
             [self clearSearchResultsTable];  //Clear previous results upon new search
-            [ECJSONFetcher fetchArtistsForString:[textField text] completion:^(NSArray *artists) {
-                [self fetchedArtists:artists];
+            NSString *locationString = @"Toronto";
+            [ECJSONFetcher fetchArtistsForString:[textField text] withSearchType:self.searchType forLocation:locationString completion:^(NSDictionary* artistsConcerts){
+                [self fetchedArtists:artistsConcerts];
             }];
             [self dismissKeyboard:nil];
             self.hud.labelText = NSLocalizedString(@"Searching", nil);
@@ -395,42 +396,34 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     return YES;
 }
 
--(void)fetchedArtists:(NSArray *)artists {
+-(void)fetchedArtists:(NSDictionary *)artistsConcerts {
     
-    if (artists.count) {
-        self.arrArtistData = artists;
+    if (artistsConcerts.count) {
+        //NSLog(@"Combo Response: %@", artistsConcerts);
+        self.lastSelectedArtist = [artistsConcerts objectForKey:@"artist"];
+        self.arrArtistData = [artistsConcerts objectForKey:@"others"];
+        self.arrArtistConcerts = [artistsConcerts objectForKey:@"concerts"];
         hasSearched = TRUE;
-        NSDictionary * matchedArtistDic = nil;
-        /* This kickass piece of code will find if an artist was returned with the exact name that was searched for and if not use the first artist returned
-         for (NSDictionary *artistDic in artists) {
-         if ([[artistDic artistName] isEqualToString:self.artistSearch.text]) {
-         matchedArtistDic = artistDic;
-         break;
-         }
-         }
-         if (!matchedArtistDic) {
-         matchedArtistDic = [artists objectAtIndex:0];
-         }
-         */
-        //NSLog(@"%@",artists);
-        matchedArtistDic = [artists objectAtIndex:0]; //If using kickass piece of code above, please remove this line
-        NSNumber *artistID = [matchedArtistDic songkickID];
-        void (^fetchedConcertsBlock)(NSArray*) = ^(NSArray* concerts){
-            [self fetchedArtistConcerts:concerts];
-        };
+        self.foundArtistConcerts = TRUE;
+//        NSDictionary * matchedArtistDic = nil;
+//        matchedArtistDic = [artists objectAtIndex:0]; 
+//        NSNumber *artistID = [matchedArtistDic songkickID];
+//        void (^fetchedConcertsBlock)(NSArray*) = ^(NSArray* concerts){
+//            [self fetchedArtistConcerts:concerts];
+//        };
         
-        [ECJSONFetcher fetchConcertsForArtistID:artistID withSearchType:self.searchType completion:fetchedConcertsBlock];
+//        [ECJSONFetcher fetchConcertsForArtistID:artistID withSearchType:self.searchType completion:fetchedConcertsBlock];
         
-        self.hud.labelText = NSLocalizedString(@"Searching", nil);
-        
-        //self.hud.minSize = CGSizeMake(260.f, 260.f);
-        self.hud.detailsLabelText = [NSString stringWithFormat:NSLocalizedString(@"hudSearchConcert", nil), self.searchType ? NSLocalizedString(@"Upcoming", nil) : NSLocalizedString(@"Past", nil), [matchedArtistDic artistName]];
+//        self.hud.labelText = NSLocalizedString(@"Searching", nil);
+//        
+//        self.hud.minSize = CGSizeMake(260.f, 260.f);
+//        self.hud.detailsLabelText = [NSString stringWithFormat:NSLocalizedString(@"hudSearchConcert", nil), self.searchType ? NSLocalizedString(@"Upcoming", nil) : NSLocalizedString(@"Past", nil), [matchedArtistDic artistName]];
 
-        self.lastSelectedArtist = matchedArtistDic;
+        //self.lastSelectedArtist = matchedArtistDic;
         
-        //    [self.tableView reloadData];
-        //    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
-        //    [self.hud hide: YES];
+        [self.tableView reloadData];
+        //[self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+        [self.hud hide: YES];
     } else {
         self.lblNoresults.text = [NSString stringWithFormat:NSLocalizedString(@"NoArtistResults", nil), self.artistSearch.text];
         [self showNoResults];

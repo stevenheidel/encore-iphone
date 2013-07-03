@@ -32,7 +32,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *lblNoresults;
 @property (strong, nonatomic) MBProgressHUD * hud;
 
-@property (nonatomic, assign) NSDictionary * lastSelectedArtist;
+@property (nonatomic, strong) NSDictionary * lastSelectedArtist;
 
 -(IBAction)dismissKeyboard:(id)sender;
 @end
