@@ -14,6 +14,7 @@
 #import "UIImage+GaussBlur.h"
 #import "NSMutableDictionary+ConcertImages.h"
 #import "ECJSONFetcher.h"
+#import "ECSearchType.h"
 
 #import "UIColor+EncoreUI.h"
 #import "UIFont+Encore.h"
@@ -143,6 +144,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
     ECConcertDetailViewController * concertDetail = [[ECConcertDetailViewController alloc] init];
     NSDictionary* concert = [self.arrTodaysConcerts objectAtIndex:indexPath.row];
     concertDetail.concert = concert;
+    concertDetail.searchType = ECSearchTypeFuture;
     
     [Flurry logEvent:@"Selected_Popular_Today_Concert" withParameters:concert];
     

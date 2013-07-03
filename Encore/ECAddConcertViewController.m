@@ -307,6 +307,7 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
                 NSDictionary* concert = [self.arrArtistConcerts objectAtIndex:indexPath.row];
                 [Flurry logEvent: @"Selected_Concert_After_Search" withParameters:concert];
                 concertDetail.concert = concert;
+                concertDetail.searchType = self.searchType;
                 [self.navigationController pushViewController:concertDetail animated:YES];
             } else {
                 NSDictionary* artistDic = (NSDictionary*)[self.arrArtistData objectAtIndex:indexPath.row];

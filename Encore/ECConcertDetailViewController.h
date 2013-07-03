@@ -9,13 +9,17 @@
 #import <UIKit/UIKit.h>
 #import "ECPostViewController.h"
 #import "ECPictureViewController.h"
+#import "ECSearchType.h"
+
 @class ECPlaceHolderView,ECToolbar,ECPostCollectionHeaderView;
+
 @interface ECConcertDetailViewController : UIViewController <UICollectionViewDataSource,UICollectionViewDelegate/*, UICollectionViewDelegateFlowLayout*/,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,ECPostViewControllerDelegate,UIAlertViewDelegate,ECPictureViewControllerDelegate>
 
 -(IBAction)addPhoto;
 -(void) shareTapped;
 
 
+@property (nonatomic, assign) ECSearchType searchType;
 @property (nonatomic,strong) NSDictionary * concert;
 @property (nonatomic,strong) IBOutlet UILabel * artistNameLabel;
 @property (nonatomic,strong) IBOutlet UILabel * venueNameLabel;

@@ -132,7 +132,11 @@ typedef enum {
         [self.iWasThereButton setImage:[UIImage imageNamed:@"removebutton.png"] forState:UIControlStateNormal];
     }
     else {
-        [self.iWasThereButton setImage:[UIImage imageNamed:@"IWasThereButton.png"] forState:UIControlStateNormal];
+        if (self.searchType == ECSearchTypePast) {
+            [self.iWasThereButton setImage:[UIImage imageNamed:@"IWasThereButton.png"] forState:UIControlStateNormal];
+        } else {
+            [self.iWasThereButton setImage:[UIImage imageNamed:@"imgoing.png"] forState:UIControlStateNormal];
+        }
     }
 }
 

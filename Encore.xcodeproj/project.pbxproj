@@ -21,6 +21,8 @@
 		A00402D3177F9E7700B998CF /* blueLocationMarker@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A00402D1177F9E7600B998CF /* blueLocationMarker@2x.png */; };
 		A00402D6177F9E9700B998CF /* imgStubs.png in Resources */ = {isa = PBXBuildFile; fileRef = A00402D4177F9E9700B998CF /* imgStubs.png */; };
 		A00402D7177F9E9700B998CF /* imgStubs@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A00402D5177F9E9700B998CF /* imgStubs@2x.png */; };
+		A004FD921784A4A10003C564 /* imgoing.png in Resources */ = {isa = PBXBuildFile; fileRef = A004FD901784A4A10003C564 /* imgoing.png */; };
+		A004FD931784A4A10003C564 /* imgoing@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A004FD911784A4A10003C564 /* imgoing@2x.png */; };
 		A022AAA2177605900009244C /* Hero Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = A022AAA0177605900009244C /* Hero Light.otf */; };
 		A022AAA3177605900009244C /* Hero.otf in Resources */ = {isa = PBXBuildFile; fileRef = A022AAA1177605900009244C /* Hero.otf */; };
 		A022AAA617779BB50009244C /* ECConcertCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = A022AAA517779BB50009244C /* ECConcertCellView.m */; };
@@ -156,6 +158,8 @@
 		A00402D1177F9E7600B998CF /* blueLocationMarker@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blueLocationMarker@2x.png"; sourceTree = "<group>"; };
 		A00402D4177F9E9700B998CF /* imgStubs.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = imgStubs.png; sourceTree = "<group>"; };
 		A00402D5177F9E9700B998CF /* imgStubs@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "imgStubs@2x.png"; sourceTree = "<group>"; };
+		A004FD901784A4A10003C564 /* imgoing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = imgoing.png; sourceTree = "<group>"; };
+		A004FD911784A4A10003C564 /* imgoing@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "imgoing@2x.png"; sourceTree = "<group>"; };
 		A022AAA0177605900009244C /* Hero Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Hero Light.otf"; sourceTree = "<group>"; };
 		A022AAA1177605900009244C /* Hero.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Hero.otf; sourceTree = "<group>"; };
 		A022AAA417779BB50009244C /* ECConcertCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECConcertCellView.h; sourceTree = "<group>"; };
@@ -369,6 +373,8 @@
 		D45DBD641783EE14000ED3C1 /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
+				A004FD901784A4A10003C564 /* imgoing.png */,
+				A004FD911784A4A10003C564 /* imgoing@2x.png */,
 				A0A2B0BD177B381F00518B6C /* profileButton@2x.png */,
 				A0A2B0BB177B324F00518B6C /* profileButton.png */,
 				D4AB1B0B17827050002A29B9 /* flag.png */,
@@ -862,6 +868,8 @@
 				D45DBD5D1783C57D000ED3C1 /* Icon@2x.png in Resources */,
 				D45DBD5F1783C5C5000ED3C1 /* Icon-Small@2x.png in Resources */,
 				D45DBD611783C5DF000ED3C1 /* Icon.png in Resources */,
+				A004FD921784A4A10003C564 /* imgoing.png in Resources */,
+				A004FD931784A4A10003C564 /* imgoing@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
