@@ -113,9 +113,10 @@
     if (![self shouldHideArrowForSelectedCellType:[self.tableView indexPathForSelectedRow].section] && [centerIndexPath isEqual:self.tableView.indexPathForSelectedRow]) {
         if(flag) {
             [self.tableView scrollToRowAtIndexPath:centerIndexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
-            [self.arrow show:YES];
+            
             flag = false;
         }
+        [self.arrow show:YES];
     }
 }
 //-(void) scrollViewWillBeginDragging:(UIScrollView *)scrollView {
@@ -143,6 +144,7 @@
     NSIndexPath* centerIndexPath = [self.tableView indexPathForRowAtPoint:point];
     if (![self shouldHideArrowForSelectedCellType:[self.tableView indexPathForSelectedRow].section] && [centerIndexPath isEqual:self.tableView.indexPathForSelectedRow]) {
         [self.tableView scrollToRowAtIndexPath:centerIndexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+        flag = false;
     }
 }
 -(void) setCurrentIndex:(NSIndexPath *)currentIndex {
