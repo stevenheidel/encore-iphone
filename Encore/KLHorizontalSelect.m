@@ -308,7 +308,7 @@
     view.yearLabel.textColor = color;
     view.monthLabel.font = [UIFont heroFontWithSize:12.0];
     view.monthLabel.textColor = color;
-    view.dayNumberLabel.font = [UIFont heroFontWithSize:28.0];
+    view.dayNumberLabel.font = [UIFont heroFontWithSize:24.0];
     view.dayNumberLabel.textColor = color;
 }
 
