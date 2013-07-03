@@ -342,6 +342,86 @@
 			name = Today;
 			sourceTree = "<group>";
 		};
+		D45DBD621783EDF4000ED3C1 /* App Icons */ = {
+			isa = PBXGroup;
+			children = (
+				D4ABD2E4177E1E6E00DC691F /* Icon-Small.png */,
+				D45DBD5E1783C5C5000ED3C1 /* Icon-Small@2x.png */,
+				D45DBD601783C5DF000ED3C1 /* Icon.png */,
+				D45DBD5C1783C57D000ED3C1 /* Icon@2x.png */,
+			);
+			name = "App Icons";
+			sourceTree = "<group>";
+		};
+		D45DBD631783EDFB000ED3C1 /* Login Screens */ = {
+			isa = PBXGroup;
+			children = (
+				D4AB1B0F17829412002A29B9 /* login1.png */,
+				D4AB1B1017829412002A29B9 /* login1@2x.png */,
+				D4AB1B1117829412002A29B9 /* login2.png */,
+				D4AB1B1217829412002A29B9 /* login2@2x.png */,
+				D4AB1B1317829412002A29B9 /* login3.png */,
+				D4AB1B1417829413002A29B9 /* login3@2x.png */,
+			);
+			name = "Login Screens";
+			sourceTree = "<group>";
+		};
+		D45DBD641783EE14000ED3C1 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				A0A2B0BD177B381F00518B6C /* profileButton@2x.png */,
+				A0A2B0BB177B324F00518B6C /* profileButton.png */,
+				D4AB1B0B17827050002A29B9 /* flag.png */,
+				D4AB1B0C17827050002A29B9 /* flag@2x.png */,
+				D428A45D17811F4A00101F12 /* removebutton.png */,
+				D428A45E17811F4A00101F12 /* removebutton@2x.png */,
+				A00402CA177F704B00B998CF /* postButton.png */,
+				A00402CB177F704B00B998CF /* postButton@2x.png */,
+				A00402C6177F701500B998CF /* IWasThereButton.png */,
+				A00402C7177F701500B998CF /* IWasThereButton@2x.png */,
+				A00402C2177F6B0900B998CF /* backButton.png */,
+				D4AA632D1780BBB1008111C6 /* logout.png */,
+				D4AA632E1780BBB1008111C6 /* logout@2x.png */,
+				A00402C3177F6B0900B998CF /* backButton@2x.png */,
+				A00402BE177F65F600B998CF /* loginButton.png */,
+				A00402BF177F65F600B998CF /* loginButton@2x.png */,
+				A0A2B0D3177E1E7100518B6C /* shareButton.png */,
+				A0A2B0D4177E1E7100518B6C /* shareButton@2x.png */,
+			);
+			name = Buttons;
+			sourceTree = "<group>";
+		};
+		D45DBD651783EE2A000ED3C1 /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				A022AAB61778D8D60009244C /* LiveIndicator.png */,
+				A022AAC0177A35B30009244C /* locationmarker.png */,
+				A022AAC1177A35B30009244C /* locationmarker@2x.png */,
+				A022AAC2177A35B30009244C /* locationmarkergrey.png */,
+				A022AAC3177A35B30009244C /* locationmarkergrey@2x.png */,
+				A022AACE177A39B00009244C /* magnifyglass.png */,
+				A022AACC177A38C90009244C /* magnifyglass@2x.png */,
+				D4AA9773177C9562008F4E31 /* 37x-Checkmark.png */,
+				D4AA9774177C9562008F4E31 /* 37x-Checkmark@2x.png */,
+				D4ABD2DE177E10D100DC691F /* liveNow.gif */,
+				A00402D4177F9E9700B998CF /* imgStubs.png */,
+				A00402D5177F9E9700B998CF /* imgStubs@2x.png */,
+				A00402D0177F9E7600B998CF /* blueLocationMarker.png */,
+				A00402D1177F9E7600B998CF /* blueLocationMarker@2x.png */,
+			);
+			name = Icons;
+			sourceTree = "<group>";
+		};
+		D45DBD661783EE3F000ED3C1 /* Launch */ = {
+			isa = PBXGroup;
+			children = (
+				D4ABD2DC177DF09E00DC691F /* Default-568h@2x.png */,
+				D4ABD2DA177DF09B00DC691F /* Default@2x.png */,
+				D4ABD2D8177DF09900DC691F /* Default.png */,
+			);
+			name = Launch;
+			sourceTree = "<group>";
+		};
 		D4A22254176B7FFC005AB205 /* Horizontal Select */ = {
 			isa = PBXGroup;
 			children = (
@@ -405,54 +485,14 @@
 		D4A8DDD1176A44A0005E9847 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				D4AB1B0F17829412002A29B9 /* login1.png */,
-				D4AB1B1017829412002A29B9 /* login1@2x.png */,
-				D4AB1B1117829412002A29B9 /* login2.png */,
-				D4AB1B1217829412002A29B9 /* login2@2x.png */,
-				D4AB1B1317829412002A29B9 /* login3.png */,
-				D4AB1B1417829413002A29B9 /* login3@2x.png */,
-				D4AB1B0B17827050002A29B9 /* flag.png */,
-				D4AB1B0C17827050002A29B9 /* flag@2x.png */,
-				D428A45D17811F4A00101F12 /* removebutton.png */,
-				D428A45E17811F4A00101F12 /* removebutton@2x.png */,
-				A00402D4177F9E9700B998CF /* imgStubs.png */,
-				A00402D5177F9E9700B998CF /* imgStubs@2x.png */,
-				A00402D0177F9E7600B998CF /* blueLocationMarker.png */,
-				A00402D1177F9E7600B998CF /* blueLocationMarker@2x.png */,
-				A00402CA177F704B00B998CF /* postButton.png */,
-				A00402CB177F704B00B998CF /* postButton@2x.png */,
-				A00402C6177F701500B998CF /* IWasThereButton.png */,
-				A00402C7177F701500B998CF /* IWasThereButton@2x.png */,
-				A00402C2177F6B0900B998CF /* backButton.png */,
-				D4AA632D1780BBB1008111C6 /* logout.png */,
-				D4AA632E1780BBB1008111C6 /* logout@2x.png */,
-				A00402C3177F6B0900B998CF /* backButton@2x.png */,
-				A00402BE177F65F600B998CF /* loginButton.png */,
-				A00402BF177F65F600B998CF /* loginButton@2x.png */,
-				A0A2B0D3177E1E7100518B6C /* shareButton.png */,
-				A0A2B0D4177E1E7100518B6C /* shareButton@2x.png */,
-				D4ABD2E4177E1E6E00DC691F /* Icon-Small.png */,
-				D45DBD5E1783C5C5000ED3C1 /* Icon-Small@2x.png */,
-				D45DBD601783C5DF000ED3C1 /* Icon.png */,
-				D45DBD5C1783C57D000ED3C1 /* Icon@2x.png */,
-				D4ABD2DE177E10D100DC691F /* liveNow.gif */,
-				D4ABD2DC177DF09E00DC691F /* Default-568h@2x.png */,
-				D4ABD2DA177DF09B00DC691F /* Default@2x.png */,
-				D4ABD2D8177DF09900DC691F /* Default.png */,
+				D45DBD631783EDFB000ED3C1 /* Login Screens */,
+				D45DBD641783EE14000ED3C1 /* Buttons */,
+				D45DBD651783EE2A000ED3C1 /* Icons */,
+				D45DBD621783EDF4000ED3C1 /* App Icons */,
+				D45DBD661783EE3F000ED3C1 /* Launch */,
 				A0A2B0CB177CE82700518B6C /* songkick.png */,
 				A0A2B0CC177CE82700518B6C /* songkick@2x.png */,
-				D4AA9773177C9562008F4E31 /* 37x-Checkmark.png */,
-				D4AA9774177C9562008F4E31 /* 37x-Checkmark@2x.png */,
-				A0A2B0BD177B381F00518B6C /* profileButton@2x.png */,
-				A0A2B0BB177B324F00518B6C /* profileButton.png */,
-				A022AACE177A39B00009244C /* magnifyglass.png */,
-				A022AACC177A38C90009244C /* magnifyglass@2x.png */,
-				A022AAC0177A35B30009244C /* locationmarker.png */,
-				A022AAC1177A35B30009244C /* locationmarker@2x.png */,
-				A022AAC2177A35B30009244C /* locationmarkergrey.png */,
-				A022AAC3177A35B30009244C /* locationmarkergrey@2x.png */,
 				A022AAB81778E8240009244C /* sampleArtistImage.jpg */,
-				A022AAB61778D8D60009244C /* LiveIndicator.png */,
 				A022AAAD1777C44A0009244C /* navbar.png */,
 				A022AAAE1777C44A0009244C /* navbar@2x.png */,
 				D4C9C084177A090800F864FC /* instagram.jpg */,
