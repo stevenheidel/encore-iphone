@@ -576,11 +576,12 @@
 				D4C9C08C177A51CC00F864FC /* Post+Fetch */,
 				D4C9C08B177A51C600F864FC /* Categories */,
 				D4AA4D381766F3D0009B0635 /* Localizable.strings */,
-				D4A7BEAA177B731F00C22D91 /* Staging.h */,
-				D4A7BEA9177B713400C22D91 /* EncoreURL.h */,
 				D4AA4CFB1766B374009B0635 /* InfoPlist.strings */,
 				D4AA4CFE1766B374009B0635 /* main.m */,
 				D4AA4D001766B374009B0635 /* Encore-Prefix.pch */,
+				D4A7BEAA177B731F00C22D91 /* Staging.h */,
+				D4A7BEA9177B713400C22D91 /* EncoreURL.h */,
+				D4A7BEAB177BFF3700C22D91 /* ECSearchType.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -693,7 +694,6 @@
 			children = (
 				D4AC35FA1768C8B20087B1E9 /* ECJSONFetcher.h */,
 				D4AC35FB1768C8B20087B1E9 /* ECJSONFetcher.m */,
-				D4A7BEAB177BFF3700C22D91 /* ECSearchType.h */,
 				D4A8DDC2176A20D2005E9847 /* ECJSONPoster.h */,
 				D4A8DDC3176A20D2005E9847 /* ECJSONPoster.m */,
 			);
