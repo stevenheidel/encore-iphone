@@ -305,10 +305,8 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
         if (hasSearched) {
             if (self.foundArtistConcerts) {
                 NSDictionary* concert = [self.arrArtistConcerts objectAtIndex:indexPath.row];
-                ECConcertDetailViewController * concertDetail = [[ECConcertDetailViewController alloc] initWithConcert: concert];
                 [Flurry logEvent: @"Selected_Concert_After_Search" withParameters:concert];
-                concertDetail.searchType = self.searchType;
-                [self.navigationController pushViewController:concertDetail animated:YES];
+                [self pushConcertViewControllerFor:concert];
             } else {
                 NSDictionary* artistDic = (NSDictionary*)[self.arrArtistData objectAtIndex:indexPath.row];
                 NSNumber *artistID = [artistDic songkickID];
@@ -322,12 +320,18 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
             }  
         } else {
             //User clicked on a popular concert
-            ECConcertDetailViewController * concertDetail = [[ECConcertDetailViewController alloc] initWithConcert:[self.arrPopularData objectAtIndex:indexPath.row]];
-
-            [self.navigationController pushViewController:concertDetail animated:YES];
+            NSDictionary* concert = [self.arrPopularData objectAtIndex:indexPath.row];
+            [Flurry logEvent: [NSString stringWithFormat:@"Selected_Popular_%@_Concert", self.searchType ? NSLocalizedString(@"Upcoming", nil) : NSLocalizedString(@"Past", nil)] withParameters:concert];
+            [self pushConcertViewControllerFor:concert];
         }
 
     }
+}
+
+- (void) pushConcertViewControllerFor:(NSDictionary *)concert {
+    ECConcertDetailViewController * concertDetail = [[ECConcertDetailViewController alloc] initWithConcert:concert];
+    concertDetail.searchType = self.searchType;
+    [self.navigationController pushViewController:concertDetail animated:YES];
 }
 
 -(void) clearSearchResultsTable {
