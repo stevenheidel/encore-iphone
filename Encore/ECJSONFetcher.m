@@ -233,15 +233,15 @@
 }
 
 +(void) checkIfConcert: (NSNumber*) concertID isOnProfile: (NSString *) userID completion: (void (^)(BOOL isOnProfile)) completion  {
-   NSString * fullCheckURL = [NSString stringWithFormat:CheckConcertOnProfileURL,userID, concertID.stringValue];
-    
+    NSString * fullCheckURL = [NSString stringWithFormat:CheckConcertOnProfileURL,userID, concertID.stringValue];
     NSURL * url = [NSURL URLWithString:fullCheckURL];
+    
     NSURLRequest * request = [NSURLRequest requestWithURL:url];
     AFJSONRequestOperation * operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-        NSLog(@"Successfully polled server for if concert %@ is on profile %@", concertID, userID);
+        
         BOOL result = FALSE;
-        NSLog(@"%@",[JSON description]);
         result = [(NSNumber*)[(NSDictionary*) JSON objectForKey:@"response"] boolValue];
+        NSLog(@"Successfully polled server for if concert %@ is on profile %@. Response: %d", concertID, userID,result);
         if(completion)
             completion(result);
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
