@@ -22,6 +22,7 @@
     NSDate* today = [NSDate date];
     unsigned int unitFlags =  NSYearCalendarUnit;
     NSDateComponents* breakdownInfo = [[NSCalendar currentCalendar] components: unitFlags fromDate:date toDate:today options:0];
+    NSLog(@"%d", [breakdownInfo year]);
     return [breakdownInfo year];
 }
 +(void) postUser:(NSDictionary <FBGraphUser>*) user {
@@ -52,8 +53,9 @@
     if (bday) {
         age = [ECJSONPoster ageFromFBBdayString:bday];
     }
-    [Flurry setAge:[bday integerValue]];
-    [Flurry setGender:[user objectForKey:@"gender"]];
+    [Flurry setAge:age];
+
+    [Flurry setGender:[[user objectForKey:@"gender"] substringToIndex:1]];
 }
 
 +(void) addConcert: (NSNumber *) concertID toUser: (NSString *) userID completion: (void (^)()) completion{
