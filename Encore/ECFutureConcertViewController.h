@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ECFutureConcertViewController : UIViewController
+@interface ECFutureConcertViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+
+@property(nonatomic, strong) NSArray* arrFutureConcerts;
+@property(nonatomic, strong) NSArray* arrImages;
+@property(nonatomic, strong) IBOutlet UITableView *tableView;
 
 @end
