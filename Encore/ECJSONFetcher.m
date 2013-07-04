@@ -94,8 +94,8 @@
     NSURL * url = [NSURL URLWithString:escapedDataString];
     NSURLRequest * request = [NSURLRequest requestWithURL:url];
     AFJSONRequestOperation * operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-        NSLog(@"Successfully fetched Artists for string. %@", searchStr);
         artistList = (NSArray*) [(NSDictionary*)JSON objectForKey:@"artists"];
+        NSLog(@"Successfully fetched %d Artists for string. %@", artistList.count, searchStr);
         if (completion) {
             completion(artistList);
         }
