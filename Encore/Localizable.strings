@@ -75,5 +75,9 @@
 "flag_2" = "Not From Show";
 "flag_other" = "Other";
 "flag_hud_text" = "Thanks. We'll look into that for you.";
-"flag_hud_fail_text" = "Could not connect to server";
+"flag_hud_fail_text" = "Thanks. We'll look into that for you.";
 //"flag_3" = "";
+
+//Feedback
+"Feedback_Placeholder" = "As a beta tester, we'd love to get any feedback you have on the app. Please enter your feedback here and hit send...";
+"Feedback_Sent" = "Thank you for your feedback!";
