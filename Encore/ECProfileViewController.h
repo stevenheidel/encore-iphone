@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "FBProfilePictureView.h"
 #import "FUIAlertView.h"
-@interface ECProfileViewController : UIViewController <FUIAlertViewDelegate>
+#import "ECFeedbackViewController.h"
+@interface ECProfileViewController : UIViewController <FUIAlertViewDelegate,ECFeedbackViewControllerDelegate>
 
 @property(nonatomic, strong) IBOutlet UITableView *tableView;
 

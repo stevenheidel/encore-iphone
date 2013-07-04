@@ -19,9 +19,12 @@
 
 #import "UIColor+FlatUI.h"
 #import "UIFont+FlatUI.h"
+#import "TestFlight.h"
 //#import "UIBarButtonItem+FlatUI.h"
+#import "MBProgressHUD.h"
 
 #define HEADER_HEIGHT 170.0
+#define FLAG_HUD_DELAY 2.0
 
 typedef enum {
     LogoutTag
@@ -60,7 +63,11 @@ typedef enum {
     [self setUpHeaderView];
     self.arrPastImages = [[NSMutableArray alloc] init];
     [self getArtistImages];
-    
+}
+
+-(void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self setupTestflightFeedback];
 }
 - (void) setUpBackButton {
     UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -221,6 +228,36 @@ typedef enum {
     [Flurry logEvent: @"Logged_out_facebook"];
     [FBSession.activeSession closeAndClearTokenInformation];
 }
+
+
+
+#pragma mark - TestFlight Feedback solicitation
+-(void) setupTestflightFeedback {
+    //    UIButton* feedback = [[UIButton alloc] initWithFrame:self.navigationItem.titleView.frame];
+    UIButton* feedback = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIImage* image = [UIImage imageNamed:@"feedback.png"];
+    [feedback setBackgroundImage:image forState:UIControlStateNormal];
+    [feedback addTarget:self action:@selector(openFeedback) forControlEvents:UIControlEventTouchUpInside];
+    feedback.frame = CGRectMake(0.0, 0.0, image.size.width, image.size.height);
+    self.navigationItem.titleView = feedback;
+}
+
+-(void) openFeedback {
+    ECFeedbackViewController* feedbackVC = [ECFeedbackViewController new];
+    feedbackVC.delegate = self;
+    [self presentViewController:feedbackVC animated:YES completion:nil];
+}
+
+#pragma mark ECFeedbackViewControllerDelegate method
+-(void) feedbackSent {
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+    hud.labelText = NSLocalizedString(@"Feedback_Sent", nil);
+    hud.mode = MBProgressHUDModeText;
+    hud.removeFromSuperViewOnHide = YES;
+    hud.userInteractionEnabled = YES;
+    [hud hide:YES afterDelay:FLAG_HUD_DELAY];
+}
+
 
 @end
 
