@@ -326,10 +326,11 @@ static NSString *const ConcertCellIdentifier = @"concertCell";
             }
         } else {
             //User clicked on a popular concert
-            ECConcertDetailViewController * concertDetail = [[ECConcertDetailViewController alloc] initWithConcert:[self.arrPopularData objectAtIndex:indexPath.row]];
+            NSDictionary* concert = [self.arrPopularData objectAtIndex:indexPath.row];
+            ECConcertDetailViewController * concertDetail = [[ECConcertDetailViewController alloc] initWithConcert:concert];
             concertDetail.searchType = self.searchType;
             [self.navigationController pushViewController:concertDetail animated:YES];
-
+            
             [Flurry logEvent: [NSString stringWithFormat:@"Selected_Popular_%@_Concert", self.searchType ? NSLocalizedString(@"Upcoming", nil) : NSLocalizedString(@"Past", nil)] withParameters:concert];
         }
         
