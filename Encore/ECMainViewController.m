@@ -68,7 +68,7 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
     UIImage *leftButImage = [UIImage imageNamed:@"profileButton.png"]; //stretchableImageWithLeftCapWidth:10 topCapHeight:10];
     [leftButton setBackgroundImage:leftButImage forState:UIControlStateNormal];
     [leftButton addTarget:self action:@selector(profileButtonWasPressed:) forControlEvents:UIControlEventTouchUpInside];
-    leftButton.frame = CGRectMake(0, 0, leftButImage.size.width*0.75, leftButImage.size.height*0.75);
+    leftButton.frame = CGRectMake(0, 0, leftButImage.size.width, leftButImage.size.height);
     UIBarButtonItem *profileButton = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
     self.navigationItem.leftBarButtonItem = profileButton;
     
@@ -76,7 +76,7 @@ static NSString *const BaseURLString = @"http://192.168.11.15:9283/api/v1/users"
     UIImage *rightButImage = [UIImage imageNamed:@"shareButton.png"]; //stretchableImageWithLeftCapWidth:10 topCapHeight:10];
     [rightButton setBackgroundImage:rightButImage forState:UIControlStateNormal];
     [rightButton addTarget:self action:@selector(shareTapped) forControlEvents:UIControlEventTouchUpInside];
-    rightButton.frame = CGRectMake(0, 0, rightButImage.size.width*0.75, rightButImage.size.height*0.75);
+    rightButton.frame = CGRectMake(0, 0, rightButImage.size.width, rightButImage.size.height);
     self.shareButton = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
     self.shareButton.enabled = NO;
     self.navigationItem.rightBarButtonItem = self.shareButton;
