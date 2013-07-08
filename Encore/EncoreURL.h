@@ -12,7 +12,7 @@
 #if STAGING
 #define BASE_URL_DEF "http://staging.encoretheapp.com/api/v1/"
 #else
-#define BASE_URL_DEF "http://192.168.11.15:9283/api/v1/"
+#define BASE_URL_DEF "http://192.168.11.15:3000/api/v1/"
 #endif
 
 #define BASE_URL_PUBLIC_DEF "http://staging.encoretheapp.com/"

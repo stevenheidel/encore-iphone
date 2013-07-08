@@ -43,6 +43,8 @@
 "today" = "TODAY";
 
 //user defaults
+"user" = "user";
+"image_url" = "facebook_image_url";
 "user_id" = "user_id";
 "user_name" = "user_name";
 "user_location" = "user_location";
