@@ -7,7 +7,7 @@
 //
 
 #import "ECAppDelegate.h"
-#import "ECMainViewController.h"
+#import "ECNewMainViewController.h"
 #import "ECLoginViewController.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import "ECJSONPoster.h"
@@ -62,14 +62,19 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
 {
     [self startAnalytics];
     
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+//    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    self.mainViewController = [[ECMainViewController alloc] init];
-    self.loginViewController = [[ECLoginViewController alloc] init];
+    
+    self.navigationController = (UINavigationController*)self.window.rootViewController;
+    self.mainViewController = (ECNewMainViewController*)[[self.navigationController viewControllers] objectAtIndex:0];
+    
+//    self.mainViewController = [[ECMainViewController alloc] init];
+//    self.mainViewController =
+//    self.loginViewController = [[ECLoginViewController alloc] init];
     
     [self setUpLocationManager];
     
-    self.mainViewController.title = @"Encore";
+//    self.mainViewController.title = @"Encore";
     
     //self.navigationController   = [[UINavigationController alloc] initWithRootViewController:self.loginViewController];
     self.navigationController   = [[UINavigationController alloc] initWithRootViewController:self.mainViewController];
@@ -82,13 +87,7 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
     [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
     [FBLoginView class];
     
-    // See if the app has a valid token for the current state.
-    if (FBSession.activeSession.state == FBSessionStateCreatedTokenLoaded) {
-        [self openSession];
-    } else {
-        // No, display the login page.
-        [self showLoginView: NO];
-    }
+
     return YES;
 }
 
@@ -109,7 +108,7 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
                       state:(FBSessionState) state
                       error:(NSError *)error {
     
-    UIViewController *topViewController;
+//    UIViewController *topViewController;
     
     switch (state) {
         case FBSessionStateOpen: {
@@ -120,17 +119,12 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
                     [self loginCompletedWithUser:result];
                 }
             }];
-//            [FBRequestConnection startForMeWithCompletionHandler:^(FBRequestConnection *connection,NSDictionary<FBGraphUser> *user,NSError *error){
-//                if(!error){
-//                    [self loginCompletedWithUser:user];
-//                }
-//            }];
-            topViewController = [self.navigationController topViewController];
-            if ([[topViewController presentedViewController] isKindOfClass:[ECLoginViewController class]]) {
-                [topViewController dismissViewControllerAnimated:YES completion:nil];
-            }
-            if (![topViewController isKindOfClass:[ECMainViewController class]]) {
-            }
+//            topViewController = [self.navigationController topViewController];
+//            if ([[topViewController presentedViewController] isKindOfClass:[ECLoginViewController class]]) {
+//                [topViewController dismissViewControllerAnimated:YES completion:nil];
+//            }
+//            if (![topViewController isKindOfClass:[ECNewMainViewController class]]) {
+//            }
             break;
         }
         case FBSessionStateClosed: //no break on purpose
@@ -203,7 +197,7 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
                           completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
                               // Forward any errors to the FBLoginView delegate.
                               if (error) {
-                                  [self.loginViewController loginView:nil handleError:error];
+//                                  [self.loginViewController loginView:nil handleError:error];
                               }
                           }];
 }
@@ -214,6 +208,9 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
     self.mainViewController.facebook_id = userid;
     self.mainViewController.userName = user.name; //TODO: remove if not needed
     [ECJSONPoster postUser:user];
+    
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    
     [self.mainViewController fetchConcerts];
     [self saveUserInfoToDefaults:user];
 }
@@ -323,8 +320,20 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [FBSession.activeSession handleDidBecomeActive];
+    // See if the app has a valid token for the current state.
+    if (FBSession.activeSession.state == FBSessionStateCreatedTokenLoaded) {
+        [self openSession];
+    } else {
+        // No, display the login page.
+        UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        self.loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"ECLoginViewController"];
+        [self.window.rootViewController presentViewController:self.loginViewController animated:NO completion:nil];
+        //        [self showLoginView: NO];
+    }
+    
 }
+
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
