@@ -58,4 +58,9 @@
 +(UIColor*) horizontalSelectGrayCellColor {
     return [UIColor colorWithRed:246.0/255.0 green:248.0/255.0 blue:250.0/255.0 alpha:1.0];
 }
+
+#pragma mark - Nav bar
++(UIColor*) lightBlueNavBarColor {
+    return [UIColor colorWithHue:193.0/360.0 saturation:0.99 brightness:0.80 alpha:.8];
+}
 @end
