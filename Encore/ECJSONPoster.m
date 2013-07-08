@@ -44,6 +44,15 @@
     [client postPath:UsersURL parameters:parameters
              success:^(AFHTTPRequestOperation *operation, id responseObject) {
                  NSLog(@"%@: %@",NSStringFromClass([self class]),[responseObject description]);
+                 NSDictionary *userDic = [responseObject objectForKey:NSLocalizedString(@"user", nil)];
+                 NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+                 
+                 NSString* imageURLKey = NSLocalizedString(@"image_url", nil);
+                 NSString* defaultID = [defaults stringForKey:imageURLKey];
+                 if (!defaultID || ![defaultID isEqualToString:[userDic objectForKey:imageURLKey]]) {
+                     [defaults setObject:[userDic objectForKey:imageURLKey] forKey:imageURLKey];
+                     [defaults synchronize];
+                 }
              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                  NSLog(@"ERROR posting user %@: %@...",facebookID,[[error description] substringToIndex:MAX_ERROR_LEN]);
              }];

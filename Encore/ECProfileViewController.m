@@ -111,7 +111,7 @@ typedef enum {
     
     self.lblName.font = [UIFont heroFontWithSize: 18.0];
     self.lblLocation.font = [UIFont heroFontWithSize: 14.0];
-    self.lblConcerts.font = [UIFont heroFontWithSize: 14.0];
+    self.lblConcerts.font = [UIFont heroFontWithSize: 12.0];
     
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     
@@ -122,6 +122,11 @@ typedef enum {
     self.imgProfile.layer.masksToBounds = YES;
     self.imgProfile.layer.borderWidth = 1.0;
     self.imgProfile.layer.borderColor = [UIColor profileImageBorderColor].CGColor;
+    
+    NSString* userImageUrl = NSLocalizedString(@"image_url", nil);
+    NSURL *imageURL = [NSURL URLWithString:[defaults stringForKey:userImageUrl]];
+    UIImage *profileImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL]];
+    self.imgBackground.image = profileImage;
     
     NSString* userNameKey = NSLocalizedString(@"user_name", nil);
     NSString* userName = [defaults stringForKey:userNameKey];
@@ -160,11 +165,13 @@ typedef enum {
     UIImage *image = [self.arrPastImages objectAtIndex:indexPath.row];
     [cell setUpCellForConcert:concertDic];
     [cell setUpCellImageForConcert:image];
-    if ([indexPath row] % 2) {
-        cell.contentView.backgroundColor = [UIColor whiteColor];
-    } else {
-        cell.contentView.backgroundColor = [UIColor lightGrayTableColor];
-    }
+
+    cell.contentView.backgroundColor = [UIColor clearColor];
+//    if ([indexPath row] % 2) {
+//        cell.contentView.backgroundColor = [UIColor whiteColor];
+//    } else {
+//        cell.contentView.backgroundColor = [UIColor lightGrayTableColor];
+//    }
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
