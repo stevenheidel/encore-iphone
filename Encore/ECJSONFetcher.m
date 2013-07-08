@@ -47,29 +47,34 @@
     [operation start];
 }
 
-//GET /concerts/future?city=Toronto
+
 +(void)fetchPopularConcertsWithSearchType:(ECSearchType)searchType completion: (void (^)(NSArray* concerts)) completion {
     __block NSArray * concertList;
     NSString *userLocation = @"Toronto"; //TODO: Get location dynamically from app delegate
+    NSDictionary * parameters = [NSDictionary dictionaryWithObjectsAndKeys:userLocation, CityURL,nil];
+    
+    NSURL * url = [NSURL URLWithString:BaseURL];
+    AFHTTPClient * client = [[AFHTTPClient alloc] initWithBaseURL:url];
+    [client registerHTTPOperationClass:[AFJSONRequestOperation class]];
+    [client setDefaultHeader:@"Accept" value:@"application/json"];
+    
     NSString *  artistConcertsUrl;
     if (searchType == ECSearchTypePast) {
-        artistConcertsUrl = [NSString stringWithFormat:PastPopularConcertsURL, userLocation];
+        artistConcertsUrl = [NSString stringWithFormat:PastPopularConcertsURL];
     } else if (searchType == ECSearchTypeFuture) {
-        artistConcertsUrl = [NSString stringWithFormat:FuturePopularConcertsURL, userLocation];
+        artistConcertsUrl = [NSString stringWithFormat:FuturePopularConcertsURL];
     } else {
-        artistConcertsUrl = [NSString stringWithFormat:TodayPopularConcertsURL, userLocation];
+        artistConcertsUrl = [NSString stringWithFormat:TodayPopularConcertsURL];
     }
     
-    NSString *escapedDataString = [artistConcertsUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSURL * url = [NSURL URLWithString:escapedDataString];
-    NSURLRequest * request = [NSURLRequest requestWithURL:url];
-    AFJSONRequestOperation * operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-        concertList = (NSArray*) [(NSDictionary*)JSON objectForKey:@"concerts"];
+    [client getPath:UsersURL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"%@: %@",NSStringFromClass([self class]),[responseObject description]);
+        concertList = (NSArray*) [(NSDictionary*)responseObject objectForKey:@"concerts"];
         NSLog(@"Successfully fetched %d popular concerts", [concertList count]);
         if (completion) {
             completion(concertList);
         }
-    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"ERROR fetching popular concerts: %@...",[[error description] substringToIndex:MAX_ERROR_LEN]);
         
         
@@ -83,7 +88,41 @@
         }
     }];
     
-    [operation start];
+//    __block NSArray * concertList;
+//    NSString *userLocation = @"Toronto"; //TODO: Get location dynamically from app delegate
+//    NSString *  artistConcertsUrl;
+//    if (searchType == ECSearchTypePast) {
+//        artistConcertsUrl = [NSString stringWithFormat:PastPopularConcertsURL, userLocation];
+//    } else if (searchType == ECSearchTypeFuture) {
+//        artistConcertsUrl = [NSString stringWithFormat:FuturePopularConcertsURL, userLocation];
+//    } else {
+//        artistConcertsUrl = [NSString stringWithFormat:TodayPopularConcertsURL, userLocation];
+//    }
+//    
+//    NSString *escapedDataString = [artistConcertsUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//    NSURL * url = [NSURL URLWithString:escapedDataString];
+//    NSURLRequest * request = [NSURLRequest requestWithURL:url];
+//    AFJSONRequestOperation * operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+//        concertList = (NSArray*) [(NSDictionary*)JSON objectForKey:@"concerts"];
+//        NSLog(@"Successfully fetched %d popular concerts", [concertList count]);
+//        if (completion) {
+//            completion(concertList);
+//        }
+//    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+//        NSLog(@"ERROR fetching popular concerts: %@...",[[error description] substringToIndex:MAX_ERROR_LEN]);
+//        
+//        
+//        if (RETURN_TEST_DATA) {
+//            NSDictionary * concert1 = [NSDictionary dictionaryWithObjectsAndKeys:@"Test Venue Name 1", @"venue_name", @"1989-02-16", @"date",@"Simon and the Destroyers", @"name",[NSNumber numberWithInt:99], @"server_id", nil];
+//            NSDictionary * concert2 = [NSDictionary dictionaryWithObjectsAndKeys:@"Test Venue Name 2", @"venue_name", @"1999-03-26", @"date",@"Simon and the Destroyers", @"name",[NSNumber numberWithInt:55], @"server_id", nil];
+//            NSArray * testConcertList = [NSArray arrayWithObjects:concert1,concert2, nil];
+//            if (completion) {
+//                completion(testConcertList);
+//            }
+//        }
+//    }];
+//    
+//    [operation start];
 }
 
 +(void)fetchArtistsForString:(NSString*) searchStr completion:(void (^)(NSArray* artists)) completion {
