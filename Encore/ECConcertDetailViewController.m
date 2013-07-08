@@ -29,7 +29,7 @@
 #import "UIFont+Encore.h"
 
 #define HUD_DELAY 0.9
-#define HEADER_HEIGHT 176.0
+#define HEADER_HEIGHT 160.0
 
 //#import "SGSStaggeredFlowLayout.h"
 
@@ -96,14 +96,14 @@ typedef enum {
 }
 -(void) setupArtistUIAttributes {
     [self.artistNameLabel setAdjustsFontSizeToFitWidth:YES];
-    self.artistNameLabel.font = [UIFont heroFontWithSize: 21.0];
+    self.artistNameLabel.font = [UIFont heroFontWithSize: 16.0];
     [self.artistNameLabel setAdjustsFontSizeToFitWidth:YES];
     self.venueNameLabel.font = [UIFont heroFontWithSize: 14.0];
     self.dateLabel.font = [UIFont heroFontWithSize: 12.0];
-    self.imgArtist.layer.cornerRadius = 42.0;
+    self.imgArtist.layer.cornerRadius = 25.0;
     self.imgArtist.layer.masksToBounds = YES;
     self.imgArtist.layer.borderColor = [UIColor grayColor].CGColor;
-    self.imgArtist.layer.borderWidth = 2.0;
+    self.imgArtist.layer.borderWidth = 0.1;
 }
 //-(void) setUpFlowLayout {
 //    _flowLayout = [[SGSStaggeredFlowLayout alloc] init];
