@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <FacebookSDK/FacebookSDK.h>
 
-@interface ECLoginViewController : UIViewController<FBLoginViewDelegate, UIScrollViewDelegate>{
+@interface ECLoginViewController : UIViewController<UIScrollViewDelegate>{
     UIScrollView *descScrollView;
     UIPageControl *pageControl;
     NSArray *arrPages;
@@ -17,7 +17,6 @@
 - (void)loginFailed;
 @property (nonatomic, retain) IBOutlet UIScrollView *descScrollView;
 @property (nonatomic, retain) IBOutlet UIPageControl *pageControl;
-@property (unsafe_unretained, nonatomic) IBOutlet FBLoginView *FBLoginView;
 
 - (IBAction)changePage: (id) sender;
 
