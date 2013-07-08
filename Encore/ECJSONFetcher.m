@@ -18,7 +18,7 @@
     NSURL * url = [NSURL URLWithString:fullConcertsUrl];
     NSURLRequest * request = [NSURLRequest requestWithURL:url];
     AFJSONRequestOperation * operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-        concertList = (NSDictionary*) [(NSDictionary*)JSON objectForKey:@"concerts"];
+        concertList = (NSDictionary*) [(NSDictionary*)JSON objectForKey:@"events"];
         if (completion) {
             completion(concertList);
         }
