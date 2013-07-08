@@ -32,4 +32,7 @@
 +(UIColor*) horizontalSelectTextColor;
 +(UIColor*) horizontalSelectGrayCellColor;
 +(UIColor*) horizontalSelectTodayCellColor;
+
+//navbar
++(UIColor*) lightBlueNavBarColor;
 @end
