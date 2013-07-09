@@ -16,7 +16,10 @@
                             <rect key="frame" x="0.0" y="0.0" width="320" height="71"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="uCu-Hb-gis">
+                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="uCu-Hb-gis">
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="205" id="fiT-xX-gdm"/>
+                                    </constraints>
                                     <segments>
                                         <segment title="Past"/>
                                         <segment title="Upcoming"/>
@@ -25,11 +28,22 @@
                                         <action selector="switchedSelection:" destination="wSB-iT-c4V" eventType="valueChanged" id="lyj-9b-O20"/>
                                     </connections>
                                 </segmentedControl>
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="vtu-yS-SNa">
+                                    <nil key="textColor"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                    <textInputTraits key="textInputTraits" returnKeyType="search"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="wSB-iT-c4V" id="JkJ-l9-hvB"/>
+                                    </connections>
+                                </textField>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstItem="uCu-Hb-gis" firstAttribute="centerY" secondItem="5Te-QE-PfB" secondAttribute="centerY" type="default" id="3Jq-8e-XBE"/>
                                 <constraint firstAttribute="centerX" secondItem="uCu-Hb-gis" secondAttribute="centerX" type="user" id="3zj-HE-iLx"/>
+                                <constraint firstItem="uCu-Hb-gis" firstAttribute="top" secondItem="5Te-QE-PfB" secondAttribute="top" constant="5" id="SgL-ig-4B5"/>
+                                <constraint firstAttribute="bottom" secondItem="vtu-yS-SNa" secondAttribute="bottom" constant="5" id="ZlC-Du-4Hv"/>
+                                <constraint firstItem="vtu-yS-SNa" firstAttribute="leading" secondItem="uCu-Hb-gis" secondAttribute="leading" type="default" id="hQa-mb-MBq"/>
+                                <constraint firstItem="vtu-yS-SNa" firstAttribute="trailing" secondItem="uCu-Hb-gis" secondAttribute="trailing" type="default" id="pqa-oi-Xmv"/>
                             </constraints>
                         </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="fvV-rj-Z2B" userLabel="Empty footer view">
@@ -51,6 +65,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Root View Controller" id="8CT-uX-XXE"/>
                     <connections>
+                        <outlet property="SearchBar" destination="vtu-yS-SNa" id="gH0-vw-HlX"/>
                         <outlet property="segmentedControl" destination="uCu-Hb-gis" id="nPl-7E-33Z"/>
                     </connections>
                 </tableViewController>
@@ -154,6 +169,8 @@
         <class className="ECNewMainViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ECNewMainViewController.h"/>
             <relationships>
+                <relationship kind="action" name="switchedSelection:"/>
+                <relationship kind="outlet" name="SearchBar" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="segmentedControl" candidateClass="UISegmentedControl"/>
             </relationships>
         </class>

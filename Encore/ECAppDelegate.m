@@ -218,7 +218,7 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
         }
         [self.navigationController dismissViewControllerAnimated:YES completion:nil];
         
-        [self.mainViewController fetchConcerts];
+        //[self.mainViewController fetchConcerts];
     }];
     [self saveUserInfoToDefaults:user];
 }

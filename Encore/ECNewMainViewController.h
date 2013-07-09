@@ -10,9 +10,12 @@
 #import "ECProfileViewController.h"
 
 @interface ECNewMainViewController : UITableViewController
--(void) fetchConcerts;
+
+
+@property (assign, nonatomic) BOOL hasSearched;
 
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
+@property (strong, nonatomic) IBOutlet UITextField *SearchBar;
 
 @property (strong, nonatomic) ECProfileViewController *profileViewController;
 @property (strong, nonatomic) NSString * facebook_id;
@@ -20,6 +23,10 @@
 @property (strong, nonatomic) NSString * userCity;
 
 @property(nonatomic, strong) NSArray *arrTodaysConcerts;
+@property(nonatomic, strong) NSMutableArray *arrTodaysImages;
+@property(nonatomic, strong) NSArray *arrSearchConcerts;
+@property(nonatomic, strong) NSDictionary *searchedArtistDic;
+@property(nonatomic, strong) NSArray *arrAltArtists;
 
 @property (strong,nonatomic) UIBarButtonItem* shareButton;
 @end

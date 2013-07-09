@@ -11,6 +11,7 @@
 #import "ECSearchType.h"
 #import "ECConcertCellView.h"
 #import "ECSearchResultCell.h"
+#import "NSDictionary+ConcertList.h"
 
 #define searchCellIdentifier @"ECSearchResultCell"
 #define concertCellIdentifier @"ECConcertCellView"
@@ -22,21 +23,11 @@
 
 @implementation ECNewMainViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
-
 #pragma mark - View loading
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    self.hasSearched = FALSE;
     [self.tableView registerNib:[UINib nibWithNibName:@"ECSearchResultCell" bundle:nil]
          forCellReuseIdentifier:searchCellIdentifier];
     [self.tableView registerNib:[UINib nibWithNibName:@"ECConcertCellView" bundle:nil]
@@ -44,6 +35,18 @@
     
     [self setupBarButtons];
     [self setNavBarAppearance];
+    
+    if (self.arrTodaysConcerts == nil) {
+        [ECJSONFetcher fetchPopularConcertsWithSearchType:ECSearchTypeToday completion:^(NSArray *concerts) {
+            [self fetchedPopularConcerts:concerts];
+        }];
+        //        [self.hud show:YES];
+    }
+}
+
+-(void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
 }
 
 //Set up left bar button for going to profile and right bar button for sharing
@@ -74,22 +77,9 @@
     self.navigationItem.titleView = encoreLogo;
 }
 
--(void) viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    if (self.arrTodaysConcerts == nil) {
-//        [ECJSONFetcher fetchArtistsForString:@"Bruno" withSearchType:ECSearchTypePast forLocation:@"Toronto" completion:^(NSDictionary *responseDic) ] {
-//            
-//        }]; //This is just to test the search end to end 
-        [ECJSONFetcher fetchPopularConcertsWithSearchType:ECSearchTypeToday completion:^(NSArray *concerts) {
-            [self fetchedPopularConcerts:concerts];
-        }];
-//        [self.hud show:YES];
-    }
-}
-
 -(void) fetchedPopularConcerts:(NSArray *)concerts {
     self.arrTodaysConcerts = concerts;
-    NSLog(@"%@", self.arrTodaysConcerts.description);
+    NSLog(@"%@: %@", NSStringFromClass([self class]), self.arrTodaysConcerts.description);
 //    for (NSDictionary *concertDic in concerts) {
 //        NSURL *imageURL = [concertDic imageURL];
 //        UIImage *regImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL]];
@@ -102,9 +92,30 @@
     [self.tableView reloadData];
 //    [self.hud hide:YES];
 //    [self setupAttribution];
-    //    [self.delegate doneLoadingTodayConcerts];
+//    [self.delegate doneLoadingTodayConcerts];
 }
 
+- (void)fetchedConcertsForSearch:(NSDictionary *)comboDic {
+    if (comboDic) {
+        self.hasSearched = TRUE;
+        self.searchedArtistDic = [comboDic objectForKey:@"artist"];
+        self.arrSearchConcerts = [comboDic objectForKey:@"concerts"];
+        self.arrAltArtists = [comboDic objectForKey:@"others"];
+        [self.tableView reloadData];
+    }
+}
+
+-(void) getArtistImages {
+    for (NSDictionary *concertDic in self.arrTodaysConcerts) {
+        NSURL *imageURL = [concertDic imageURL];
+        UIImage *regImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL]];
+        if (regImage) {
+            [self.arrTodaysImages addObject:regImage];
+        } else {
+            [self.arrTodaysImages addObject:[UIImage imageNamed:@"placeholder.jpg"]];
+        }
+    }
+}
 
 #pragma mark - Buttons
 -(void)profileTapped {
@@ -130,16 +141,6 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void) fetchConcerts {
-//    [ECJSONFetcher fetchConcertsForUserID:self.facebook_id completion:^(NSDictionary *concerts) {
-//        NSLog(@"Successfully fetched %d past concerts and %d future concerts", [[concerts past] count],[[concerts future]count]);
-        //NSLog(@"Fetched concerts for user:%@", concerts);
-//        self.concerts = [NSMutableDictionary dictionaryWithDictionary: concerts];
-        //        [self setUpHorizontalSelect]; //only setting up horizontal select once the concert data is received
-        //        [self selectTodayCell];
-        
-//    }];
-}
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -153,16 +154,28 @@
 {
 #warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return [self.arrTodaysConcerts count];
+    if (self.hasSearched) {
+        return [self.arrSearchConcerts count];
+    } else {
+        return [self.arrTodaysConcerts count];
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:searchCellIdentifier forIndexPath:indexPath];
-    
-    // Configure the cell...
-//    cell.textLabel.text =
-    return cell;
+    if (self.hasSearched) {
+        ECSearchResultCell *cell = [tableView dequeueReusableCellWithIdentifier:searchCellIdentifier forIndexPath:indexPath];
+        NSDictionary * concertDic = [self.arrSearchConcerts objectAtIndex:indexPath.row];
+        [cell setUpCellForConcert:concertDic];
+        return cell;
+    } else {
+        ECConcertCellView *cell = [tableView dequeueReusableCellWithIdentifier:concertCellIdentifier forIndexPath:indexPath];
+        NSDictionary * concertDic = [self.arrTodaysConcerts objectAtIndex:indexPath.row];
+        UIImage *image = [self.arrTodaysImages objectAtIndex:indexPath.row];
+        [cell setUpCellForConcert:concertDic];
+        [cell setUpCellImageForConcert:image];
+        return cell;
+    }
 }
 
 
@@ -174,13 +187,25 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
+- (BOOL)textFieldShouldClear:(UITextField *)textField {
+    self.hasSearched = FALSE;
+    [self.tableView reloadData];
+    return YES;
+}
+
+#pragma mark - Text Field delegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    
+    if ([textField.text length] > 0) {
+        [ECJSONFetcher fetchArtistsForString:textField.text withSearchType:self.segmentedControl.selectedSegmentIndex forLocation:@"Toronto" completion:^(NSDictionary * comboDic) {
+            NSLog(@"%@: %@", NSStringFromClass([self class]), comboDic);
+            [self fetchedConcertsForSearch:comboDic];
+        }];
+    }
+    [textField resignFirstResponder];
+    return YES;
+}
 @end

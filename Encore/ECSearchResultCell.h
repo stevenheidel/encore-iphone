@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NSDictionary+ConcertList.h"
 #define SEARCH_CELL_HEIGHT 70.0
 @interface ECSearchResultCell : UITableViewCell
+
+- (void)setUpCellForConcert:(NSDictionary *)concertDic;
 
 @property(nonatomic, strong) IBOutlet UIButton *btnAdd;
 @property(nonatomic, strong) IBOutlet UIButton *btnDisclosure;
