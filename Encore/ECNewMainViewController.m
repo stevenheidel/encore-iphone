@@ -68,9 +68,9 @@
 //        [ECJSONFetcher fetchArtistsForString:@"Bruno" withSearchType:ECSearchTypePast forLocation:@"Toronto" completion:^(NSDictionary *responseDic) ] {
 //            
 //        }]; //This is just to test the search end to end 
-//        [ECJSONFetcher fetchPopularConcertsWithSearchType:ECSearchTypeToday completion:^(NSArray *concerts) {
-//            [self fetchedPopularConcerts:concerts];
-//        }];
+        [ECJSONFetcher fetchPopularConcertsWithSearchType:ECSearchTypeToday completion:^(NSArray *concerts) {
+            [self fetchedPopularConcerts:concerts];
+        }];
 //        [self.hud show:YES];
     }
 }

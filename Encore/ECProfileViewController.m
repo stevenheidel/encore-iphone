@@ -149,7 +149,7 @@ typedef enum {
 
 -(void) fetchEvents {
     [ECJSONFetcher fetchConcertsForUserID:userID completion:^(NSDictionary *concerts) {
-        NSLog(@"%@: User Concerts response = %@", NSStringFromClass([self class]), concerts);
+        //NSLog(@"%@: User Concerts response = %@", NSStringFromClass([self class]), concerts);
         self.events = concerts;
         self.arrPastConcerts = [self.events objectForKey:@"past"];
         [self getArtistImages];

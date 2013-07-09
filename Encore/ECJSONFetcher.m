@@ -67,12 +67,21 @@
         artistConcertsUrl = [NSString stringWithFormat:TodayPopularConcertsURL];
     }
     
-    [client getPath:UsersURL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [client getPath:artistConcertsUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"%@: %@",NSStringFromClass([self class]),[responseObject description]);
         concertList = (NSArray*) [(NSDictionary*)responseObject objectForKey:@"concerts"];
         NSLog(@"Successfully fetched %d popular concerts", [concertList count]);
-        if (completion) {
-            completion(concertList);
+        if (RETURN_TEST_DATA) {
+            NSDictionary * concert1 = [NSDictionary dictionaryWithObjectsAndKeys:@"Test Venue Name 1", @"venue_name", @"1989-02-16", @"date",@"Simon and the Destroyers", @"name",[NSNumber numberWithInt:99], @"server_id", nil];
+            NSDictionary * concert2 = [NSDictionary dictionaryWithObjectsAndKeys:@"Test Venue Name 2", @"venue_name", @"1999-03-26", @"date",@"Simon and the Destroyers", @"name",[NSNumber numberWithInt:55], @"server_id", nil];
+            NSArray * testConcertList = [NSArray arrayWithObjects:concert1,concert2, nil];
+            if (completion) {
+                completion(testConcertList);
+            }
+        }else {
+            if (completion) {
+                completion(concertList);
+            }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"ERROR fetching popular concerts: %@...",[[error description] substringToIndex:MAX_ERROR_LEN]);
