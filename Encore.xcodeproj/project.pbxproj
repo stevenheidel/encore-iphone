@@ -40,7 +40,7 @@
 		A022AACD177A38C90009244C /* magnifyglass@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A022AACC177A38C90009244C /* magnifyglass@2x.png */; };
 		A022AACF177A39B00009244C /* magnifyglass.png in Resources */ = {isa = PBXBuildFile; fileRef = A022AACE177A39B00009244C /* magnifyglass.png */; };
 		A02661E0178C937200741C9A /* ECSearchResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A02661DF178C937200741C9A /* ECSearchResultCell.m */; };
-		A02661E2178C938F00741C9A /* ECSearchResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A02661E1178C938F00741C9A /* ECSearchResultCell.xib */; };
+		A02661E4178C9F6200741C9A /* ECSearchResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A02661E3178C9F6200741C9A /* ECSearchResultCell.xib */; };
 		A04C4333176F85F9003B4299 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A04C4332176F85F9003B4299 /* CoreLocation.framework */; };
 		A0848C0B176D1F0D009BBB38 /* ECLoginPageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0848C0A176D1F0D009BBB38 /* ECLoginPageView.xib */; };
 		A0848C11176D25D5009BBB38 /* ECLoginPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0848C10176D25D5009BBB38 /* ECLoginPageView.m */; };
@@ -198,7 +198,7 @@
 		A022AACE177A39B00009244C /* magnifyglass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = magnifyglass.png; sourceTree = "<group>"; };
 		A02661DE178C937200741C9A /* ECSearchResultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECSearchResultCell.h; sourceTree = "<group>"; };
 		A02661DF178C937200741C9A /* ECSearchResultCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECSearchResultCell.m; sourceTree = "<group>"; };
-		A02661E1178C938F00741C9A /* ECSearchResultCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECSearchResultCell.xib; sourceTree = "<group>"; };
+		A02661E3178C9F6200741C9A /* ECSearchResultCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECSearchResultCell.xib; sourceTree = "<group>"; };
 		A04C4332176F85F9003B4299 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		A0848C0A176D1F0D009BBB38 /* ECLoginPageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECLoginPageView.xib; sourceTree = "<group>"; };
 		A0848C0F176D25D5009BBB38 /* ECLoginPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECLoginPageView.h; sourceTree = "<group>"; };
@@ -700,7 +700,7 @@
 				A022AAA717779BDF0009244C /* ECConcertCellView.xib */,
 				A02661DE178C937200741C9A /* ECSearchResultCell.h */,
 				A02661DF178C937200741C9A /* ECSearchResultCell.m */,
-				A02661E1178C938F00741C9A /* ECSearchResultCell.xib */,
+				A02661E3178C9F6200741C9A /* ECSearchResultCell.xib */,
 			);
 			name = "Main View";
 			sourceTree = "<group>";
@@ -933,7 +933,7 @@
 				D491F807178B54C9002E00E5 /* logo.png in Resources */,
 				D491F808178B54C9002E00E5 /* logo@2x.png in Resources */,
 				D491F80C178B57C1002E00E5 /* Main.storyboard in Resources */,
-				A02661E2178C938F00741C9A /* ECSearchResultCell.xib in Resources */,
+				A02661E4178C9F6200741C9A /* ECSearchResultCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
