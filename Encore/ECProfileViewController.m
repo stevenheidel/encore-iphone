@@ -84,7 +84,7 @@ typedef enum {
 }
 
 - (UIView *) footerView {
-    
+    // Who needs songkick when you have lastFm!!!
     UIImage *footerImage = [UIImage imageNamed:@"songkick"];
     UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, footerImage.size.height)];
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, footerImage.size.width, footerImage.size.height)];
@@ -149,7 +149,10 @@ typedef enum {
 
 -(void) fetchEvents {
     [ECJSONFetcher fetchConcertsForUserID:userID completion:^(NSDictionary *concerts) {
+        NSLog(@"%@: User Concerts response = %@", NSStringFromClass([self class]), concerts);
         self.events = concerts;
+        self.arrPastConcerts = [self.events objectForKey:@"past"];
+        [self getArtistImages];
         [self.tableView reloadData];
     }];
 }

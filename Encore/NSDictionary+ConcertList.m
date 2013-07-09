@@ -32,6 +32,10 @@ static NSString * const kDateFormat = @"yyyy-MM-dd";
     return [self songkickID];//[self objectForKey:@"server_id"];
 }
 
+-(NSString*) lastfmID {
+    return [self objectForKey:@"lastfm_id"];
+}
+
 -(NSNumber*) songkickID {
     return [self objectForKey:@"songkick_id"];
 }

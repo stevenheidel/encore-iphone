@@ -17,17 +17,19 @@
 
 #define BASE_URL_PUBLIC_DEF "http://staging.encoretheapp.com/"
 
-#define EVENTS_DEF "events.json"
+#define EVENTS_DEF "events"
 #define USERS_DEF "users"
 #define POSTS_DEF "posts"
-#define SEARCH_DEF "search?"
-#define TERM_DEF "term="
+#define SEARCH_DEF "search"
+#define TERM_DEF "term"
 #define ARTISTS_DEF "artists"
-#define PAST_DEF "past.json"
-#define FUTURE_DEF "future.json"
-#define TODAY_DEF "today.json"
-#define TENSE_DEF "tense="
-#define CITY_DEF "city="
+#define PAST_DEF "past"
+#define FUTURE_DEF "future"
+#define TODAY_DEF "today"
+#define TENSE_DEF "tense"
+#define CITY_DEF "city"
+#define JSON_DEF ".json"
+#define LASTFM_ID_DEF "lastfm_id"
 #define SONGKICK_ID_DEF "songkick_id"
 
 
@@ -44,24 +46,23 @@ static NSString *const SharePostURL = @BASE_URL_PUBLIC_DEF POSTS_DEF "/%@";
 static NSString *const UserConcertsURL = @BASE_URL_DEF USERS_DEF "/%@/" EVENTS_DEF; //,facebook id
 
 //Popular concerts
-static NSString *const PastPopularConcertsURL = @EVENTS_DEF "/" PAST_DEF;
-static NSString *const FuturePopularConcertsURL = @EVENTS_DEF "/" FUTURE_DEF;
-static NSString *const TodayPopularConcertsURL = @EVENTS_DEF "/" TODAY_DEF;
+static NSString *const PastPopularConcertsURL = @EVENTS_DEF "/" PAST_DEF JSON_DEF;
+static NSString *const FuturePopularConcertsURL = @EVENTS_DEF "/" FUTURE_DEF JSON_DEF;
+static NSString *const TodayPopularConcertsURL = @EVENTS_DEF "/" TODAY_DEF JSON_DEF;
+
+//Artists and Concerts combo
+static NSString *const ArtistConcertComboURL = @ARTISTS_DEF "/" SEARCH_DEF JSON_DEF;
 
 //Artists
 static NSString *const ArtistSearchURL = @BASE_URL_DEF ARTISTS_DEF "/" SEARCH_DEF TERM_DEF "%@"; //, searchStr
 static NSString *const ArtistConcertSearchPastURL = @BASE_URL_DEF ARTISTS_DEF "/%@/" EVENTS_DEF "/" PAST_DEF "?" CITY_DEF "%@"; //, artistID, userLocation
 static NSString *const ArtistConcertSearchFutureURL = @BASE_URL_DEF ARTISTS_DEF "/%@/" EVENTS_DEF "/" FUTURE_DEF "?" CITY_DEF "%@"; //artistID, , userLocation
 
-//Artists and Concerts combo
-static NSString *const ArtistConcertComboPastURL = @BASE_URL_DEF ARTISTS_DEF "/" SEARCH_DEF "?" CITY_DEF "%@," TERM_DEF "%@," TENSE_DEF PAST_DEF;
-static NSString *const ArtistConcertComboFutureURL = @BASE_URL_DEF ARTISTS_DEF "/" SEARCH_DEF "?" CITY_DEF "%@," TERM_DEF "%@," TENSE_DEF FUTURE_DEF;
-
 //Posts
 static NSString *const ConcertPostsURL = @BASE_URL_DEF EVENTS_DEF "/%@/" POSTS_DEF ; //,concertID
 static NSString *const FlagPostURL = @POSTS_DEF "/%@/"; //,postID
 //Concert Check
-static NSString *const CheckConcertOnProfileURL = @BASE_URL_DEF USERS_DEF "/%@/" EVENTS_DEF "?" SONGKICK_ID_DEF "=" "%@"; // , userID, ConcertID
+static NSString *const CheckConcertOnProfileURL = @USERS_DEF "/%@/" EVENTS_DEF JSON_DEF;
 
 #pragma mark - Posting
 //static NSString *const ;
@@ -80,6 +81,9 @@ static NSString *const PastURL = @PAST_DEF;
 static NSString *const FutureURL = @FUTURE_DEF;
 static NSString *const TodayURL = @TODAY_DEF;
 static NSString *const CityURL = @CITY_DEF;
+static NSString *const TermURL = @TERM_DEF;
+static NSString *const TenseURL = @TENSE_DEF;
+static NSString *const LastfmIDURL = @LASTFM_ID_DEF;
 static NSString *const SongkickIDURL = @SONGKICK_ID_DEF;
 
 //static NSString *const userLocation = @"Toronto"; //TODO: Get location dynamically from app delegate

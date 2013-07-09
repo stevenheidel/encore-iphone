@@ -87,42 +87,6 @@
             }
         }
     }];
-    
-//    __block NSArray * concertList;
-//    NSString *userLocation = @"Toronto"; //TODO: Get location dynamically from app delegate
-//    NSString *  artistConcertsUrl;
-//    if (searchType == ECSearchTypePast) {
-//        artistConcertsUrl = [NSString stringWithFormat:PastPopularConcertsURL, userLocation];
-//    } else if (searchType == ECSearchTypeFuture) {
-//        artistConcertsUrl = [NSString stringWithFormat:FuturePopularConcertsURL, userLocation];
-//    } else {
-//        artistConcertsUrl = [NSString stringWithFormat:TodayPopularConcertsURL, userLocation];
-//    }
-//    
-//    NSString *escapedDataString = [artistConcertsUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-//    NSURL * url = [NSURL URLWithString:escapedDataString];
-//    NSURLRequest * request = [NSURLRequest requestWithURL:url];
-//    AFJSONRequestOperation * operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-//        concertList = (NSArray*) [(NSDictionary*)JSON objectForKey:@"concerts"];
-//        NSLog(@"Successfully fetched %d popular concerts", [concertList count]);
-//        if (completion) {
-//            completion(concertList);
-//        }
-//    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-//        NSLog(@"ERROR fetching popular concerts: %@...",[[error description] substringToIndex:MAX_ERROR_LEN]);
-//        
-//        
-//        if (RETURN_TEST_DATA) {
-//            NSDictionary * concert1 = [NSDictionary dictionaryWithObjectsAndKeys:@"Test Venue Name 1", @"venue_name", @"1989-02-16", @"date",@"Simon and the Destroyers", @"name",[NSNumber numberWithInt:99], @"server_id", nil];
-//            NSDictionary * concert2 = [NSDictionary dictionaryWithObjectsAndKeys:@"Test Venue Name 2", @"venue_name", @"1999-03-26", @"date",@"Simon and the Destroyers", @"name",[NSNumber numberWithInt:55], @"server_id", nil];
-//            NSArray * testConcertList = [NSArray arrayWithObjects:concert1,concert2, nil];
-//            if (completion) {
-//                completion(testConcertList);
-//            }
-//        }
-//    }];
-//    
-//    [operation start];
 }
 
 +(void)fetchArtistsForString:(NSString*) searchStr completion:(void (^)(NSArray* artists)) completion {
@@ -153,40 +117,30 @@
 }
 
 +(void)fetchArtistsForString:(NSString*)searchStr withSearchType:(ECSearchType)searchType forLocation:(NSString*)locationString completion:(void (^)(NSDictionary* artists)) completion {
-    __block NSDictionary * artistConcertComboList;
-    NSString *  artistConcertsUrl;
-    if (searchType == ECSearchTypePast) {
-        artistConcertsUrl = [NSString stringWithFormat:ArtistConcertComboPastURL, locationString, searchStr];
-    } else {
-        artistConcertsUrl = [NSString stringWithFormat:ArtistConcertComboFutureURL, locationString, searchStr];
-    }
-    NSString *escapedDataString = [artistConcertsUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
-    NSURL * url = [NSURL URLWithString:escapedDataString];
-    NSURLRequest * request = [NSURLRequest requestWithURL:url];
-    AFJSONRequestOperation * operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-        if (!RETURN_TEST_DATA) {
-            NSLog(@"Successfully fetched Artists and Concerts for string. %@", searchStr);
-            artistConcertComboList = (NSDictionary*)JSON;
-            if (completion) {
-                completion(artistConcertComboList);
-            }
-        } else {
-            NSDictionary *artistDic = [NSDictionary dictionaryWithObjectsAndKeys:@"Test Artist 1",@"name", @"1234", @"songkick_id", nil];
-            NSDictionary * artist2 = [NSDictionary dictionaryWithObjectsAndKeys:@"Test Artist 2",@"name", @"1234", @"songkick_id", nil];
-            NSDictionary * artist3 = [NSDictionary dictionaryWithObjectsAndKeys:@"Test Artist 3",@"name", @"4321", @"songkick_id", nil];
-            NSDictionary *others = [NSArray arrayWithObjects:artist2, artist3, nil];
-            
-            NSDictionary * concert1 = [NSDictionary dictionaryWithObjectsAndKeys:@"Test Venue Name 1", @"venue_name", @"1989-02-16", @"date",@"Simon and the Destroyers", @"name",[NSNumber numberWithInt:99], @"server_id", nil];
-            NSDictionary * concert2 = [NSDictionary dictionaryWithObjectsAndKeys:@"Test Venue Name 2", @"venue_name", @"1999-03-26", @"date",@"Simon and the Destroyers", @"name",[NSNumber numberWithInt:55], @"server_id", nil];
-            NSArray * testConcertList = [NSArray arrayWithObjects:concert1,concert2, nil];
-            
-            NSDictionary *testArtistConcertCombo = [NSDictionary dictionaryWithObjectsAndKeys: artistDic, @"artist", others, @"others", testConcertList, @"concerts", nil];
-            if(completion){
-                completion(testArtistConcertCombo);
-            }
+    __block NSDictionary * artistConcertComboList;
+
+    
+    NSURL * url = [NSURL URLWithString:BaseURL];
+    AFHTTPClient * client = [[AFHTTPClient alloc] initWithBaseURL:url];
+    [client registerHTTPOperationClass:[AFJSONRequestOperation class]];
+    [client setDefaultHeader:@"Accept" value:@"application/json"];
+    NSString *tenseString;
+    if (searchType == ECSearchTypePast) {
+        tenseString = PastURL;
+    } else {
+        tenseString = FutureURL;
+    }
+    
+    NSDictionary * parameters = [NSDictionary dictionaryWithObjectsAndKeys:locationString, CityURL, searchStr, TermURL, tenseString, TenseURL, nil];
+    
+    [client getPath:UsersURL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"Successfully fetched Artists and Concerts for string. %@", searchStr);
+        artistConcertComboList = (NSDictionary*)responseObject;
+        if (completion) {
+            completion(artistConcertComboList);
         }
-    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"ERROR fetching artists for string %@: %@...",searchStr,[[error description] substringToIndex:MAX_ERROR_LEN]);
         if (RETURN_TEST_DATA) {
             
@@ -210,8 +164,6 @@
             completion(nil);
         }
     }];
-    
-    [operation start];
 }
 
 +(void) fetchConcertsForArtistID:(NSNumber *)artistID withSearchType:(ECSearchType)searchType completion: (void (^)(NSArray* concerts)) completion {
@@ -252,9 +204,9 @@
     [operation start];
 }
 
-+(void) fetchPostsForConcertWithID: (NSNumber *) concertID completion: (void (^)(NSArray* fetchedPosts)) completion{
++(void) fetchPostsForConcertWithID: (NSString *) concertID completion: (void (^)(NSArray* fetchedPosts)) completion{
     __block NSArray * posts;
-    NSString * fullPostsUrl = [NSString stringWithFormat:ConcertPostsURL,[concertID stringValue]];
+    NSString * fullPostsUrl = [NSString stringWithFormat:ConcertPostsURL,concertID];
     NSURL * url = [NSURL URLWithString:fullPostsUrl];
     NSURLRequest * request = [NSURLRequest requestWithURL:url];
     AFJSONRequestOperation * operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
@@ -271,22 +223,43 @@
     [operation start];
 }
 
-+(void) checkIfConcert: (NSNumber*) concertID isOnProfile: (NSString *) userID completion: (void (^)(BOOL isOnProfile)) completion  {
-    NSString * fullCheckURL = [NSString stringWithFormat:CheckConcertOnProfileURL,userID, concertID.stringValue];
-    NSURL * url = [NSURL URLWithString:fullCheckURL];
++(void) checkIfConcert: (NSString*) concertID isOnProfile: (NSString *) userID completion: (void (^)(BOOL isOnProfile)) completion  {
     
-    NSURLRequest * request = [NSURLRequest requestWithURL:url];
-    AFJSONRequestOperation * operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-        
+    NSDictionary * parameters = [NSDictionary dictionaryWithObjectsAndKeys:concertID, LastfmIDURL,nil];
+    
+    NSURL * url = [NSURL URLWithString:BaseURL];
+    AFHTTPClient * client = [[AFHTTPClient alloc] initWithBaseURL:url];
+    [client registerHTTPOperationClass:[AFJSONRequestOperation class]];
+    [client setDefaultHeader:@"Accept" value:@"application/json"];
+    
+    NSString *  CheckConcertForUserUrl = [NSString stringWithFormat:CheckConcertOnProfileURL, userID];
+    
+    [client getPath:CheckConcertForUserUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         BOOL result = FALSE;
-        result = [(NSNumber*)[(NSDictionary*) JSON objectForKey:@"response"] boolValue];
+        result = [(NSNumber*)[(NSDictionary*) responseObject objectForKey:@"response"] boolValue];
         NSLog(@"Successfully polled server for if concert %@ is on profile %@. Response: %d", concertID, userID,result);
         if(completion)
             completion(result);
-    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-        NSLog(@"%@: ERROR checking if concert %@ is on profile %@: %@...", NSStringFromClass([self class]),concertID.stringValue,userID,[[error description] substringToIndex:MAX_ERROR_LEN]);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"%@: ERROR checking if concert %@ is on profile %@: %@...", NSStringFromClass([self class]),concertID,userID,[[error description] substringToIndex:MAX_ERROR_LEN]);
     }];
-    [operation start];
+    
+    
+//    NSString * fullCheckURL = [NSString stringWithFormat:CheckConcertOnProfileURL,userID, concertID];
+//    NSURL * url = [NSURL URLWithString:fullCheckURL];
+//    
+//    NSURLRequest * request = [NSURLRequest requestWithURL:url];
+//    AFJSONRequestOperation * operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+//        
+//        BOOL result = FALSE;
+//        result = [(NSNumber*)[(NSDictionary*) JSON objectForKey:@"response"] boolValue];
+//        NSLog(@"Successfully polled server for if concert %@ is on profile %@. Response: %d", concertID, userID,result);
+//        if(completion)
+//            completion(result);
+//    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+//        NSLog(@"%@: ERROR checking if concert %@ is on profile %@: %@...", NSStringFromClass([self class]),concertID,userID,[[error description] substringToIndex:MAX_ERROR_LEN]);
+//    }];
+//    [operation start];
 }
 
 

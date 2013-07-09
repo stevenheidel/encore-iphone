@@ -126,7 +126,7 @@ typedef enum {
 
 -(void) setupToolbar {
     NSString * userID = self.userID;
-    [ECJSONFetcher checkIfConcert:[self.concert songkickID] isOnProfile:userID completion:^(BOOL isOnProfile) {
+    [ECJSONFetcher checkIfConcert:[self.concert lastfmID] isOnProfile:userID completion:^(BOOL isOnProfile) {
 //        if (!isOnProfile) {
 //            self.isOnProfile = FALSE;
 //           // [self.iWasThereButton setSelected:NO];
@@ -155,13 +155,9 @@ typedef enum {
 -(void) loadArtistDetails {
     self.artistNameLabel.text = [self.concert artistName];
     self.venueNameLabel.text = [self.concert venueName];
-    if ([self.concert isLive]) {
-        self.imgLiveNow.hidden = NO;
-        self.dateLabel.text = NSLocalizedString(@"LiveNow", nil);
-    } else {
-        self.imgLiveNow.hidden = YES;
-        self.dateLabel.text = [self.concert niceDate];
-    }
+
+    self.dateLabel.text = [NSString stringWithFormat:@"%@, %@", [self.concert venueName], [self.concert niceDate]];
+
     NSURL *imageURL = [self.concert imageURL];
     if (imageURL) {
         UIImage *regImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL]];
@@ -180,7 +176,7 @@ typedef enum {
 }
 
 -(void) loadImages {
-    NSNumber* serverID = [self.concert serverID];
+    NSString* serverID = [self.concert lastfmID];
     if (serverID) {
         [ECJSONFetcher fetchPostsForConcertWithID:serverID completion:^(NSArray *fetchedPosts) {
             [self fetchedPosts:fetchedPosts];

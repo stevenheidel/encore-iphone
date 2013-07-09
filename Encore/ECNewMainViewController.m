@@ -61,12 +61,16 @@
     UIImageView* encoreLogo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo.png"]];
     self.navigationItem.titleView = encoreLogo;
 }
+
 -(void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     if (self.arrTodaysConcerts == nil) {
-        [ECJSONFetcher fetchPopularConcertsWithSearchType:ECSearchTypeToday completion:^(NSArray *concerts) {
-            [self fetchedPopularConcerts:concerts];
-        }];
+//        [ECJSONFetcher fetchArtistsForString:@"Bruno" withSearchType:ECSearchTypePast forLocation:@"Toronto" completion:^(NSDictionary *responseDic) ] {
+//            
+//        }]; //This is just to test the search end to end 
+//        [ECJSONFetcher fetchPopularConcertsWithSearchType:ECSearchTypeToday completion:^(NSArray *concerts) {
+//            [self fetchedPopularConcerts:concerts];
+//        }];
 //        [self.hud show:YES];
     }
 }

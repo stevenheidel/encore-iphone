@@ -15,6 +15,7 @@
 -(NSString *) venueName;
 
 -(NSNumber *) serverID;
+-(NSString*) lastfmID;
 -(NSNumber *) songkickID;
 
 -(NSURL *) backgroundURL;
