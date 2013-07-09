@@ -40,6 +40,7 @@
     [self dismissViewControllerAnimated:YES completion:nil];
     [Flurry logEvent:@"Canceled_Feedback"];
 }
+
 - (IBAction)send {
     BOOL textLengthNotZero = self.textView.text.length > 0;
     if (textLengthNotZero && didEdit) {

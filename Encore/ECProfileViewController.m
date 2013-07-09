@@ -236,8 +236,6 @@ typedef enum {
     [FBSession.activeSession closeAndClearTokenInformation];
 }
 
-
-
 #pragma mark - TestFlight Feedback solicitation
 -(void) setupTestflightFeedback {
     //    UIButton* feedback = [[UIButton alloc] initWithFrame:self.navigationItem.titleView.frame];
