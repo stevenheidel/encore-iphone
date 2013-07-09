@@ -25,7 +25,8 @@
 //    NSLog(@"%d", [breakdownInfo year]);
     return [breakdownInfo year];
 }
-+(void) postUser:(NSDictionary <FBGraphUser>*) user {
+
++(void) postUser:(NSDictionary<FBGraphUser> *)user completion: (void (^)(NSDictionary* response)) completion {
     NSString * facebookID = user.id;
     NSString * name = user.name;
     
@@ -43,18 +44,18 @@
     
     [client postPath:UsersURL parameters:parameters
              success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                 NSLog(@"%@: %@",NSStringFromClass([self class]),[responseObject description]);
-                 NSDictionary *userDic = [responseObject objectForKey:NSLocalizedString(@"user", nil)];
-                 NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+                 NSLog(@"%@: Successfully posted user %@",NSStringFromClass([self class]),facebookID);
+                 NSDictionary *userDic = [responseObject objectForKey:@"user"];
                  
-                 NSString* imageURLKey = NSLocalizedString(@"image_url", nil);
-                 NSString* defaultID = [defaults stringForKey:imageURLKey];
-                 if (!defaultID || ![defaultID isEqualToString:[userDic objectForKey:imageURLKey]]) {
-                     [defaults setObject:[userDic objectForKey:imageURLKey] forKey:imageURLKey];
-                     [defaults synchronize];
+                 if (completion) {
+                     completion(userDic);
                  }
+     
              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                  NSLog(@"ERROR posting user %@: %@...",facebookID,[[error description] substringToIndex:MAX_ERROR_LEN]);
+                 if(completion) {
+                     completion(nil);
+                 }
              }];
     [Flurry setUserID:facebookID];
     NSString* bday = [user objectForKey:@"birthday"];
@@ -63,7 +64,7 @@
         age = [ECJSONPoster ageFromFBBdayString:bday];
     }
     [Flurry setAge:age];
-
+    
     [Flurry setGender:[[user objectForKey:@"gender"] substringToIndex:1]];
 }
 

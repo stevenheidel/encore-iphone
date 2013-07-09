@@ -206,12 +206,20 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
     NSString* userid = user.id;
     NSLog(@"Logged in user with id: %@",userid);
     self.mainViewController.facebook_id = userid;
-    self.mainViewController.userName = user.name; //TODO: remove if not needed
-    [ECJSONPoster postUser:user];
-    
-    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-    
-    [self.mainViewController fetchConcerts];
+    self.mainViewController.userName = user.name;
+    [ECJSONPoster postUser:user completion:^(NSDictionary *response) {
+        NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+        
+        NSString* imageURLKey = @"facebook_image_url";
+        NSString* defaultID = [defaults stringForKey:imageURLKey];
+        if (!defaultID || ![defaultID isEqualToString:[response objectForKey:imageURLKey]]) {
+            [defaults setObject:[response objectForKey:imageURLKey] forKey:imageURLKey];
+            [defaults synchronize];
+        }
+        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+        
+        [self.mainViewController fetchConcerts];
+    }];
     [self saveUserInfoToDefaults:user];
 }
 

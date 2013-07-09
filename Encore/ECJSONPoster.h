@@ -9,7 +9,8 @@
 #import <Foundation/Foundation.h>
 @protocol FBGraphUser;
 @interface ECJSONPoster : NSObject
-+(void) postUser:(NSDictionary <FBGraphUser>*) facebookID;
++(void) postUser:(NSDictionary<FBGraphUser> *)user completion: (void (^)(NSDictionary* response)) completion;
+
 +(void) addConcert: (NSNumber *) concertID toUser: (NSString *) userID completion: (void (^)()) completion;
 +(void) removeConcert: (NSNumber *) concertID toUser: (NSString *) userID completion: (void (^)()) completion;
 
