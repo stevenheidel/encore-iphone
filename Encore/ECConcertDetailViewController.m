@@ -355,6 +355,7 @@ typedef enum {
 	[HUD show:YES];
 	[HUD hide:YES afterDelay:HUD_DELAY];
 
+    //TODO: update this for new design
     [[self mainViewController] refreshForConcertID:nil];
     //Refresh for concert ID will make profile vc pop back to itself
 }   
@@ -364,19 +365,6 @@ typedef enum {
     self.isOnProfile = !self.isOnProfile;
     [self.iWasThereButton setSelected:self.isOnProfile];
 }
-
-//#pragma mark - UICollectionViewDelegateFlowLayout
-//
-////TODO: change this to use actual image dimensions or remove it.
-//- (CGSize) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-//    UIImage* thisImage = [UIImage imageNamed:@"instagram.jpg"];
-//    
-//    CGSize cellSize;
-//    CGFloat deviceCellSizeConstant = _flowLayout.itemSize.height;
-//    cellSize = CGSizeMake((thisImage.size.width*deviceCellSizeConstant)/thisImage.size.height, deviceCellSizeConstant);
-//    
-//    return cellSize;
-//}
 
 #pragma mark - collection view delegate/data source
 
