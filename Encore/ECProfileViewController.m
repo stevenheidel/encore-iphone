@@ -130,7 +130,11 @@ typedef enum {
     NSLog(@"userLocation:%@", userLocation);
     self.lblLocation.text = @"Toronto, ON";//userLocation;
     
-    self.lblConcerts.text = [NSString stringWithFormat:@"%d Concerts", [self.arrPastConcerts count]];
+    self.lblConcerts.text = [self.arrPastConcerts count] == 1 ? [NSString stringWithFormat:@"%d Concert", [self.arrPastConcerts count]] : [NSString stringWithFormat:@"%d Concerts", [self.arrPastConcerts count]];
+}
+
+- (void) updateHeader {
+    self.lblConcerts.text = [self.arrPastConcerts count] == 1 ? [NSString stringWithFormat:@"%d Concert", [self.arrPastConcerts count]] : [NSString stringWithFormat:@"%d Concerts", [self.arrPastConcerts count]];
 }
 
 -(void) viewDidAppear:(BOOL)animated {
@@ -153,6 +157,7 @@ typedef enum {
         self.events = concerts;
         self.arrPastConcerts = [self.events objectForKey:@"past"];
         [self getArtistImages];
+        [self updateHeader];
         [self.tableView reloadData];
     }];
 }
