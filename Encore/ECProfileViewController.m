@@ -20,6 +20,8 @@
 #import "UIColor+FlatUI.h"
 #import "UIFont+FlatUI.h"
 #import "TestFlight.h"
+
+#import "ECJSONFetcher.h"
 //#import "UIBarButtonItem+FlatUI.h"
 #import "MBProgressHUD.h"
 
@@ -45,19 +47,16 @@ typedef enum {
     return self;
 }
 
-- (void)viewDidLoad
-{
+#pragma mark - view setup
+- (void)viewDidLoad {
     [super viewDidLoad];
     [self setUpBackButton];
     [self setupLogoutButton];
+    
     NSString *myIdentifier = @"ECConcertCellView";
     self.tableView.tableFooterView = [UIView new];
-   // self.tableView.tableFooterView = [self footerView];
-    
-    ECProfileHeader * header = [[ECProfileHeader alloc] initWithFrame:CGRectMake(0.0, 0.0, self.tableView.frame.size.width, HEADER_HEIGHT) andOwner:self];
-    UIView* myView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, HEADER_HEIGHT)];
-    [myView addSubview:header];
-    self.tableView.tableHeaderView = myView;
+   // self.tableView.tableFooterView = [self footerView]; //Commented out Songkick attribution
+   
     [self.tableView registerNib:[UINib nibWithNibName:@"ECConcertCellView" bundle:nil]
          forCellReuseIdentifier:myIdentifier];
     [self setUpHeaderView];
@@ -65,24 +64,13 @@ typedef enum {
     [self getArtistImages];
 }
 
--(void) viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    [self setupTestflightFeedback];
-}
 - (void) setUpBackButton {
     UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    UIImage *leftButImage = [UIImage imageNamed:@"backButton.png"]; //stretchableImageWithLeftCapWidth:10 topCapHeight:10];
-    [leftButton setBackgroundImage:leftButImage forState:UIControlStateNormal];
+    UIImage *leftButImage = [UIImage imageNamed:@"backButton.png"];     [leftButton setBackgroundImage:leftButImage forState:UIControlStateNormal];
     [leftButton addTarget:self action:@selector(backButtonWasPressed) forControlEvents:UIControlEventTouchUpInside];
-    leftButton.frame = CGRectMake(0, 0, leftButImage.size.width*0.75, leftButImage.size.height*0.75);
+    leftButton.frame = CGRectMake(0, 0, leftButImage.size.width, leftButImage.size.height);
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
     self.navigationItem.leftBarButtonItem = backButton;
-
-//    [UIBarButtonItem configureFlatButtonsWithColor:[UIColor peterRiverColor]
-//                                  highlightedColor:[UIColor belizeHoleColor]
-//                                      cornerRadius:3
-//                                   whenContainedIn:[UINavigationBar class]];
-    
 }
 
 -(void) setupLogoutButton {
@@ -90,10 +78,11 @@ typedef enum {
     UIImage* image = [UIImage imageNamed:@"logout.png"];
     [logoutButton setBackgroundImage:image forState:UIControlStateNormal];
     [logoutButton addTarget:self action:@selector(logoutTapped) forControlEvents:UIControlEventTouchUpInside];
-    logoutButton.frame = CGRectMake(0,0,image.size.width*0.75, image.size.height*0.75);
-
+    logoutButton.frame = CGRectMake(0,0,image.size.width, image.size.height);
+    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:logoutButton];
 }
+
 - (UIView *) footerView {
     
     UIImage *footerImage = [UIImage imageNamed:@"songkick"];
@@ -104,10 +93,14 @@ typedef enum {
     footerView.backgroundColor = [UIColor lightGrayHeaderColor];
     [footerView addSubview:imageView];
     return footerView;
-    
 }
 
 - (void) setUpHeaderView {
+    
+    ECProfileHeader * header = [[ECProfileHeader alloc] initWithFrame:CGRectMake(0.0, 0.0, self.tableView.frame.size.width, HEADER_HEIGHT) andOwner:self];
+    UIView* myView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, HEADER_HEIGHT)];
+    [myView addSubview:header];
+    self.tableView.tableHeaderView = myView;
     
     self.lblName.font = [UIFont heroFontWithSize: 18.0];
     self.lblLocation.font = [UIFont heroFontWithSize: 14.0];
@@ -116,12 +109,12 @@ typedef enum {
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     
     NSString* userIDKey = NSLocalizedString(@"user_id", nil);
-    NSString* userID = [defaults stringForKey:userIDKey];
+    userID = [defaults stringForKey:userIDKey];
     self.imgProfile.profileID = userID;
     self.imgProfile.layer.cornerRadius = 30.0;
     self.imgProfile.layer.masksToBounds = YES;
-//    self.imgProfile.layer.borderWidth = 1.0;
-//    self.imgProfile.layer.borderColor = [UIColor profileImageBorderColor].CGColor;
+    //    self.imgProfile.layer.borderWidth = 1.0;
+    //    self.imgProfile.layer.borderColor = [UIColor profileImageBorderColor].CGColor;
     
     NSString* userImageUrl = NSLocalizedString(@"image_url", nil);
     NSURL *imageURL = [NSURL URLWithString:[defaults stringForKey:userImageUrl]];
@@ -138,6 +131,27 @@ typedef enum {
     self.lblLocation.text = @"Toronto, ON";//userLocation;
     
     self.lblConcerts.text = [NSString stringWithFormat:@"%d Concerts", [self.arrPastConcerts count]];
+}
+
+-(void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self setupTestflightFeedback];
+    [self fetchEvents];
+}
+
+//Custom getters
+-(NSArray*) pastEvents {
+    return [self.events objectForKey: @"past"];
+}
+-(NSArray*) futureEvents {
+    return [self.events objectForKey: @"future"];
+}
+
+-(void) fetchEvents {
+    [ECJSONFetcher fetchConcertsForUserID:userID completion:^(NSDictionary *concerts) {
+        self.events = concerts;
+        [self.tableView reloadData];
+    }];
 }
 
 -(void) getArtistImages {

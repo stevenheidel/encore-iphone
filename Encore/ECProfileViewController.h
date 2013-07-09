@@ -10,7 +10,9 @@
 #import "FBProfilePictureView.h"
 #import "FUIAlertView.h"
 #import "ECFeedbackViewController.h"
-@interface ECProfileViewController : UIViewController <FUIAlertViewDelegate,ECFeedbackViewControllerDelegate>
+@interface ECProfileViewController : UIViewController <FUIAlertViewDelegate,ECFeedbackViewControllerDelegate> {
+    NSString* userID;
+}
 
 @property(nonatomic, strong) IBOutlet UITableView *tableView;
 
@@ -24,5 +26,9 @@
 @property (strong, nonatomic) IBOutlet UILabel *lblConcerts;
 @property (strong, nonatomic) IBOutlet UIImageView *imgLocationMarker;
 @property (strong, nonatomic) IBOutlet UIImageView *imgStubs;
+
+@property (nonatomic, readonly) NSArray* pastEvents;
+@property (nonatomic, readonly) NSArray* futureEvents;
+@property (nonatomic, strong) NSDictionary* events;
 
 @end
