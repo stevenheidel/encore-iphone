@@ -402,7 +402,7 @@ typedef enum {
 
 -(UICollectionReusableView*) collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
     UICollectionReusableView* reusableView = nil;
-    
+
     if (kind == UICollectionElementKindSectionHeader) {
         reusableView = self.headerView;
     }

@@ -41,6 +41,7 @@
 		A022AACF177A39B00009244C /* magnifyglass.png in Resources */ = {isa = PBXBuildFile; fileRef = A022AACE177A39B00009244C /* magnifyglass.png */; };
 		A02661E0178C937200741C9A /* ECSearchResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A02661DF178C937200741C9A /* ECSearchResultCell.m */; };
 		A02661E4178C9F6200741C9A /* ECSearchResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A02661E3178C9F6200741C9A /* ECSearchResultCell.xib */; };
+		A02661EA178DB94700741C9A /* ECCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = A02661E9178DB94700741C9A /* ECCollectionViewFlowLayout.m */; };
 		A04C4333176F85F9003B4299 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A04C4332176F85F9003B4299 /* CoreLocation.framework */; };
 		A0848C0B176D1F0D009BBB38 /* ECLoginPageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0848C0A176D1F0D009BBB38 /* ECLoginPageView.xib */; };
 		A0848C11176D25D5009BBB38 /* ECLoginPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0848C10176D25D5009BBB38 /* ECLoginPageView.m */; };
@@ -199,6 +200,8 @@
 		A02661DE178C937200741C9A /* ECSearchResultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECSearchResultCell.h; sourceTree = "<group>"; };
 		A02661DF178C937200741C9A /* ECSearchResultCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECSearchResultCell.m; sourceTree = "<group>"; };
 		A02661E3178C9F6200741C9A /* ECSearchResultCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECSearchResultCell.xib; sourceTree = "<group>"; };
+		A02661E8178DB94700741C9A /* ECCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECCollectionViewFlowLayout.h; sourceTree = "<group>"; };
+		A02661E9178DB94700741C9A /* ECCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECCollectionViewFlowLayout.m; sourceTree = "<group>"; };
 		A04C4332176F85F9003B4299 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		A0848C0A176D1F0D009BBB38 /* ECLoginPageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECLoginPageView.xib; sourceTree = "<group>"; };
 		A0848C0F176D25D5009BBB38 /* ECLoginPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECLoginPageView.h; sourceTree = "<group>"; };
@@ -515,6 +518,8 @@
 				A00A7F471784BD2A00839EFD /* ECFutureConcertViewController.h */,
 				A00A7F481784BD2A00839EFD /* ECFutureConcertViewController.m */,
 				A00A7F491784BD2A00839EFD /* ECFutureConcertViewController.xib */,
+				A02661E8178DB94700741C9A /* ECCollectionViewFlowLayout.h */,
+				A02661E9178DB94700741C9A /* ECCollectionViewFlowLayout.m */,
 			);
 			name = Concert;
 			sourceTree = "<group>";
@@ -1031,6 +1036,7 @@
 				A00A7F4A1784BD2A00839EFD /* ECFutureConcertViewController.m in Sources */,
 				D491F80F178B595D002E00E5 /* ECNewMainViewController.m in Sources */,
 				A02661E0178C937200741C9A /* ECSearchResultCell.m in Sources */,
+				A02661EA178DB94700741C9A /* ECCollectionViewFlowLayout.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
