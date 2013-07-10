@@ -106,10 +106,9 @@
 				<string key="NSFrameSize">{320, 180}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
-					<int key="NSColorSpace">2</int>
-					<bytes key="NSRGB">MC4wMzEzNzI1NDkwMiAwLjIxOTYwNzg0MzEgMC4yOTgwMzkyMTU3AA</bytes>
+					<int key="NSColorSpace">3</int>
+					<bytes key="NSWhite">MCAwAA</bytes>
 				</object>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
@@ -405,10 +404,10 @@
 						<string key="artistNameLabel">UILabel</string>
 						<string key="collectionView">UICollectionView</string>
 						<string key="dateLabel">UILabel</string>
+						<string key="iWasThereButton">UIButton</string>
 						<string key="imgArtist">UIImageView</string>
 						<string key="imgBackground">UIImageView</string>
 						<string key="imgLiveNow">UIImageView</string>
-						<string key="toolbar">ECToolbar</string>
 						<string key="venueNameLabel">UILabel</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -424,6 +423,10 @@
 							<string key="name">dateLabel</string>
 							<string key="candidateClassName">UILabel</string>
 						</object>
+						<object class="IBToOneOutletInfo" key="iWasThereButton">
+							<string key="name">iWasThereButton</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="imgArtist">
 							<string key="name">imgArtist</string>
 							<string key="candidateClassName">UIImageView</string>
@@ -435,10 +438,6 @@
 						<object class="IBToOneOutletInfo" key="imgLiveNow">
 							<string key="name">imgLiveNow</string>
 							<string key="candidateClassName">UIImageView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="toolbar">
-							<string key="name">toolbar</string>
-							<string key="candidateClassName">ECToolbar</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="venueNameLabel">
 							<string key="name">venueNameLabel</string>
@@ -475,25 +474,6 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/ECPlaceHolderView.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">ECToolbar</string>
-					<string key="superclassName">UIToolbar</string>
-					<object class="NSMutableDictionary" key="outlets">
-						<string key="NS.key.0">addButton</string>
-						<string key="NS.object.0">UIBarButtonItem</string>
-					</object>
-					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<string key="NS.key.0">addButton</string>
-						<object class="IBToOneOutletInfo" key="NS.object.0">
-							<string key="name">addButton</string>
-							<string key="candidateClassName">UIBarButtonItem</string>
-						</object>
-					</object>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/ECToolbar.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
