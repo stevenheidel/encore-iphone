@@ -33,6 +33,8 @@ typedef enum {
     LogoutTag
 }ECProfileAlertTags;
 
+#import "ECAppDelegate.h"
+
 @interface ECProfileViewController ()
 
 @end
@@ -176,7 +178,7 @@ typedef enum {
 }
 
 -(void) backButtonWasPressed {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - UITableView methods

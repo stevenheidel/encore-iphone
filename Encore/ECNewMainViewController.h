@@ -23,7 +23,7 @@
 
 @property (nonatomic, assign) ECSearchType currentSearchType;
 
-@property (strong, nonatomic) ECProfileViewController *profileViewController;
+@property (strong, nonatomic) UINavigationController *profileViewController;
 @property (strong, nonatomic) NSString * facebook_id;
 @property (strong, nonatomic) NSString * userName;
 @property (strong, nonatomic) NSString * userCity;

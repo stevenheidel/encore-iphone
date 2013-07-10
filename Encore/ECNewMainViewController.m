@@ -179,13 +179,16 @@ typedef enum {
 
 #pragma mark - Buttons
 -(void)profileTapped {
+    [Flurry logEvent:@"Profile_Button_Pressed"];
+    
     if (self.profileViewController == nil) {
-        self.profileViewController = [[ECProfileViewController alloc] init];
+        ECProfileViewController* profileViewController = [ECProfileViewController new];
+        self.profileViewController = [[UINavigationController alloc] initWithRootViewController:profileViewController];
+        
 //        self.profileViewController.arrPastConcerts = [self.concerts objectForKey:@"past"];
     }
-    
-    [self.navigationController pushViewController:self.profileViewController animated:YES];
-    [Flurry logEvent:@"Profile_Button_Pressed"];
+    self.profileViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    [self presentViewController:self.profileViewController animated:YES completion:nil];
 }
 
 #pragma mark Segmented Control
