@@ -44,7 +44,7 @@ typedef enum {
     
     [self setupBarButtons];
     [self setNavBarAppearance];
-
+    [self setSegmentedControlAppearance];
     [ECJSONFetcher fetchPopularConcertsWithSearchType:ECSearchTypeToday completion:^(NSArray *concerts) {
 //            [self fetchedPopularConcerts:concerts];
         self.todaysConcerts = concerts;
@@ -84,12 +84,29 @@ typedef enum {
 
 -(void) setNavBarAppearance {
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navbar.png"] forBarMetrics:UIBarMetricsDefault];
-    [[UINavigationBar appearance] setBackgroundColor:[UIColor blackColor]];
+//    [[UINavigationBar appearance] setBackgroundColor:[UIColor blackColor]];
     
+    [[UINavigationBar appearance] setTintColor:[UIColor clearColor]];
+    [[UINavigationBar appearance] setBackgroundColor:[UIColor clearColor]];
     UIImageView* encoreLogo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo.png"]];
     self.navigationItem.titleView = encoreLogo;
+    UIImage* image = [UIImage imageNamed:@"noimage"];
+    self.navigationController.navigationBar.shadowImage = image;
 }
 
+-(void) setSegmentedControlAppearance {
+    UIImage* unselected = [UIImage imageNamed:@"defaultfull"];
+    UIImage* selected = [UIImage imageNamed:@"activfull"];
+    UIImage* dividerLeftActive = [UIImage imageNamed:@"divideractiveleft"];
+    UIImage* dividerRightActive = [UIImage imageNamed:@"divideractiveright"];
+    UIImage* bothInactive = [UIImage imageNamed:@"dividerdefault"];
+    [[UISegmentedControl appearance] setBackgroundImage:unselected forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    [[UISegmentedControl appearance] setBackgroundImage:selected forState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
+    
+    [[UISegmentedControl appearance] setDividerImage:dividerLeftActive forLeftSegmentState:UIControlStateSelected rightSegmentState:UIControlStateNormal];
+    [[UISegmentedControl appearance] setDividerImage:dividerRightActive forLeftSegmentState:UIControlStateNormal rightSegmentState:UIControlStateSelected];
+    [[UISegmentedControl appearance] setDividerImage:bothInactive forLeftSegmentState:UIControlStateNormal rightSegmentState:UIControlStateNormal];
+}
 -(void) fetchedPopularConcerts:(NSArray *)concerts {
     self.todaysConcerts = concerts;
     NSLog(@"%@: %@", NSStringFromClass([self class]), self.todaysConcerts.description);
