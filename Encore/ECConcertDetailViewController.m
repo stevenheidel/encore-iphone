@@ -146,11 +146,7 @@ typedef enum {
         self.artistNameLabel.textColor = [UIColor lightBlueNavBarColor];
     }
     else {
-        if (self.searchType == ECSearchTypePast) {
-            [self.iWasThereButton setImage:[UIImage imageNamed:@"IWasThereButton.png"] forState:UIControlStateNormal];
-        } else {
-            [self.iWasThereButton setImage:[UIImage imageNamed:@"imgoing.png"] forState:UIControlStateNormal];
-        }
+        [self.iWasThereButton setImage:[UIImage imageNamed:@"addEventButton.png"] forState:UIControlStateNormal];
         self.artistNameLabel.textColor = [UIColor whiteColor];
     }
 }
@@ -167,9 +163,9 @@ typedef enum {
         
         if (regImage) {
             self.imgArtist.image = regImage;
-            self.imgBackground.image = [regImage imageWithGaussianBlur];
+            self.imgBackground.image = regImage;// imageWithGaussianBlur];
         } else {
-            self.imgBackground.image = [[UIImage imageNamed:@"Default"] imageWithGaussianBlur];
+            self.imgBackground.image = [UIImage imageNamed:@"Default"];// imageWithGaussianBlur];
             self.imgArtist.image = [UIImage imageNamed:@"placeholder.jpg"];
         }
     } else {
