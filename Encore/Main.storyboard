@@ -28,11 +28,11 @@
                                         <action selector="switchedSelection:" destination="wSB-iT-c4V" eventType="valueChanged" id="lyj-9b-O20"/>
                                     </connections>
                                 </segmentedControl>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search..." minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="vtu-yS-SNa">
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Artist search..." clearsOnBeginEditing="YES" minimumFontSize="17" background="search.png" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="vtu-yS-SNa">
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="30" id="MqX-g2-4CW"/>
+                                        <constraint firstAttribute="height" constant="30" id="gg2-hD-j4o"/>
                                     </constraints>
-                                    <nil key="textColor"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     <textInputTraits key="textInputTraits" returnKeyType="search"/>
                                     <connections>
@@ -40,7 +40,7 @@
                                     </connections>
                                 </textField>
                             </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstItem="uCu-Hb-gis" firstAttribute="top" secondItem="5Te-QE-PfB" secondAttribute="top" constant="20" symbolic="YES" type="user" id="0qV-4A-LBV"/>
                                 <constraint firstItem="uCu-Hb-gis" firstAttribute="leading" secondItem="vtu-yS-SNa" secondAttribute="leading" type="default" id="43O-Gp-5P0"/>
@@ -92,6 +92,9 @@
             <point key="canvasLocation" x="43" y="-20"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="search.png" width="454" height="47"/>
+    </resources>
     <classes>
         <class className="ECNewMainViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ECNewMainViewController.h"/>

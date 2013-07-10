@@ -57,8 +57,25 @@ typedef enum {
 //        [self.tableView reloadData];
     }];
     self.currentSearchType = [ECNewMainViewController searchTypeForSegmentIndex:self.segmentedControl.selectedSegmentIndex];
-}
+    
+    //Add padding for search bar
+    UIView* paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 20)];
+    self.SearchBar.leftView = paddingView;
+    self.SearchBar.leftViewMode = UITextFieldViewModeAlways;
+    self.SearchBar.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    self.SearchBar.font = [UIFont heroFontWithSize:14.0f];
+    
+    UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
 
+    [button setImage:[UIImage imageNamed:@"xbutton"] forState:UIControlStateNormal];
+    button.frame = CGRectMake(0,0,26,30);
+    [button addTarget:self action:@selector(clearSearchBar) forControlEvents:UIControlEventTouchUpInside];
+    self.SearchBar.rightView = button;
+    self.SearchBar.rightViewMode = UITextFieldViewModeAlways;
+}
+-(void) clearSearchBar {
+    self.SearchBar.text = @"";
+}
 -(void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 }
