@@ -31,7 +31,7 @@
 #define JSON_DEF ".json"
 #define LASTFM_ID_DEF "lastfm_id"
 #define SONGKICK_ID_DEF "songkick_id"
-
+#define COMBINED_SEARCH_DEF "combined_search"
 
 #define MAX_ERROR_LEN 200
 
@@ -57,6 +57,10 @@ static NSString *const ArtistConcertComboURL = @ARTISTS_DEF "/" SEARCH_DEF JSON_
 static NSString *const ArtistSearchURL = @BASE_URL_DEF ARTISTS_DEF "/" SEARCH_DEF TERM_DEF "%@"; //, searchStr
 static NSString *const ArtistConcertSearchPastURL = @BASE_URL_DEF ARTISTS_DEF "/%@/" EVENTS_DEF "/" PAST_DEF "?" CITY_DEF "%@"; //, artistID, userLocation
 static NSString *const ArtistConcertSearchFutureURL = @BASE_URL_DEF ARTISTS_DEF "/%@/" EVENTS_DEF "/" FUTURE_DEF "?" CITY_DEF "%@"; //artistID, , userLocation
+
+
+//purposely left out base url, get is initialized with base url
+static NSString *const ArtistCombinedSearchURL = @ARTISTS_DEF "/" COMBINED_SEARCH_DEF JSON_DEF;
 
 //Posts
 static NSString *const ConcertPostsURL = @BASE_URL_DEF EVENTS_DEF "/%@/" POSTS_DEF ; //,concertID

@@ -13,6 +13,8 @@
 #import "ECConcertDetailViewController.h"
 #import "ECProfileViewController.h"
 //#import "ECTodayViewController.h"
+
+
 @class ECAddConcertViewController,ECTodayViewController;
 
 @interface ECMainViewController : UIViewController <FBUserSettingsDelegate,KLHorizontalSelectDelegate,ECJSONFetcherDelegate/*, ECTodayViewControllerDelegate*/>

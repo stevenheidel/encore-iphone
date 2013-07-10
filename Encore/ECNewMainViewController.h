@@ -8,25 +8,36 @@
 
 #import <UIKit/UIKit.h>
 #import "ECProfileViewController.h"
+#import "ECSearchType.h"
+
+@class MBProgressHUD; //TODO add HUD during search
 
 @interface ECNewMainViewController : UITableViewController
 
 
-@property (assign, nonatomic) BOOL hasSearched;
+@property (assign, nonatomic) BOOL hasSearched; //Flag for whether use has performed a search
+@property (assign, nonatomic) BOOL loadOther; //Flag for whether user has asked for other search results
 
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
 @property (strong, nonatomic) IBOutlet UITextField *SearchBar;
+
+@property (nonatomic, assign) ECSearchType currentSearchType;
 
 @property (strong, nonatomic) ECProfileViewController *profileViewController;
 @property (strong, nonatomic) NSString * facebook_id;
 @property (strong, nonatomic) NSString * userName;
 @property (strong, nonatomic) NSString * userCity;
 
-@property(nonatomic, strong) NSArray *arrTodaysConcerts;
-@property(nonatomic, strong) NSMutableArray *arrTodaysImages;
-@property(nonatomic, strong) NSArray *arrSearchConcerts;
-@property(nonatomic, strong) NSDictionary *searchedArtistDic;
-@property(nonatomic, strong) NSArray *arrAltArtists;
+@property(nonatomic, strong) NSArray* todaysConcerts;
+@property(nonatomic, strong) NSArray* pastConcerts;
+@property(nonatomic, strong) NSArray* futureConcerts;
+
+//@property(nonatomic, strong) NSMutableArray *arrTodaysImages;
+@property(nonatomic, readonly) NSArray *searchResultsEvents;
+@property(nonatomic, readonly) NSDictionary *searchedArtistDic;
+@property(nonatomic, readonly) NSArray *otherArtists;
+//The three above properties are custom getters based on the one below
+@property (nonatomic, strong) NSDictionary* comboSearchResultsDic;
 
 @property (strong,nonatomic) UIBarButtonItem* shareButton;
 @end

@@ -10,7 +10,7 @@
 
 @implementation ECSearchResultCell
 
-- (void)setUpCellForConcert:(NSDictionary *)concertDic {
+- (void)setupCellForEvent:(NSDictionary *)concertDic {
     
     self.selectionStyle = UITableViewCellSelectionStyleGray;
     self.lblEventTitle.text = [concertDic artistName];

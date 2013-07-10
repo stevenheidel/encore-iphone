@@ -47,10 +47,11 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
 
 -(void) startAnalytics {
     [Flurry setDebugLogEnabled:FLURRY_LOGGING];
+    [Flurry setAppVersion:[NSString stringWithFormat:@"%@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]]];
     [Flurry startSession:@"GWNDD6XD7GF76QFWFXPQ"];
 
     [Flurry setEventLoggingEnabled:YES];
-    [Flurry setAppVersion:[NSString stringWithFormat:@"%@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]]];
+
     
     if(IN_BETA){
         [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
@@ -85,9 +86,18 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
-    [FBLoginView class];
+//    [FBLoginView class];
     
-
+    // See if the app has a valid token for the current state.
+    if (FBSession.activeSession.state == FBSessionStateCreatedTokenLoaded) {
+        [self openSession];
+    } else {
+        // No, display the login page.
+//        UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//        self.loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"ECLoginViewController"];
+//        [self.window.rootViewController presentViewController:self.loginViewController animated:NO completion:nil];
+        [self showLoginView: NO];
+    }
     return YES;
 }
 
@@ -207,6 +217,8 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
     NSLog(@"Logged in user with id: %@",userid);
     self.mainViewController.facebook_id = userid;
     self.mainViewController.userName = user.name;
+    self.mainViewController.userCity = @"Toronto"; //TODO: change to lat/long
+    
     [ECJSONPoster postUser:user completion:^(NSDictionary *response) {
         NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
         
@@ -217,8 +229,6 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
             [defaults synchronize];
         }
         [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-        
-        //[self.mainViewController fetchConcerts];
     }];
     [self saveUserInfoToDefaults:user];
 }
@@ -329,17 +339,6 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     [FBSession.activeSession handleDidBecomeActive];
-    // See if the app has a valid token for the current state.
-    if (FBSession.activeSession.state == FBSessionStateCreatedTokenLoaded) {
-        [self openSession];
-    } else {
-        // No, display the login page.
-        UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        self.loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"ECLoginViewController"];
-        [self.window.rootViewController presentViewController:self.loginViewController animated:NO completion:nil];
-        //        [self showLoginView: NO];
-    }
-    
 }
 
 
