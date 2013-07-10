@@ -142,7 +142,7 @@ typedef enum {
 }
 -(void) setImageForConcertStatusButton {
     if (self.isOnProfile) {
-        [self.iWasThereButton setImage:[UIImage imageNamed:@"removebutton.png"] forState:UIControlStateNormal];
+        [self.iWasThereButton setImage:[UIImage imageNamed:@"removeEventButton"] forState:UIControlStateNormal];
         self.artistNameLabel.textColor = [UIColor lightBlueNavBarColor];
     }
     else {

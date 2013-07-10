@@ -40,14 +40,14 @@
         
         //Create frame for each page
         CGRect frame;
-        frame.origin.x = descScrollView.frame.size.width * i;
+        frame.origin.x = self.descScrollView.frame.size.width * i;
         frame.origin.y = 0.0f;
-        frame.size = descScrollView.frame.size;
+        frame.size = self.descScrollView.frame.size;
         
         ECLoginPageView *subview = [[ECLoginPageView alloc] initWithFrame:frame];
         [subview SetUpPageforItem:currPageItem];
         
-        [descScrollView addSubview:subview];
+        [self.descScrollView addSubview:subview];
     }
 }
 
@@ -63,7 +63,7 @@
     NSString *myListPath = [[NSBundle mainBundle] pathForResource:@"LoginInfoPages" ofType:@"plist"];
     arrPages = [[NSArray alloc]initWithContentsOfFile:myListPath];
     
-    descScrollView.contentSize = CGSizeMake(descScrollView.frame.size.width * arrPages.count, descScrollView.frame.size.height);
+    self.descScrollView.contentSize = CGSizeMake(descScrollView.frame.size.width * arrPages.count, descScrollView.frame.size.height);
 }
 
 - (void)viewDidUnload {
@@ -94,8 +94,8 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)sender {
     // Update the page when more than 50% of the previous/next page is visible
-    CGFloat pageWidth = descScrollView.frame.size.width;
-    int page = floor((descScrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
+    CGFloat pageWidth = self.descScrollView.frame.size.width;
+    int page = floor((self.descScrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
     self.pageControl.currentPage = page;
 }
 

@@ -10,8 +10,6 @@
 #import <FacebookSDK/FacebookSDK.h>
 
 @interface ECLoginViewController : UIViewController<UIScrollViewDelegate>{
-    UIScrollView *descScrollView;
-    UIPageControl *pageControl;
     NSArray *arrPages;
 }
 - (void)loginFailed;

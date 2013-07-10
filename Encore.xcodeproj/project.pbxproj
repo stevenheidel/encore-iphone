@@ -43,6 +43,8 @@
 		A02661EE178DDCEA00741C9A /* addEventButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A02661EC178DDCEA00741C9A /* addEventButton@2x.png */; };
 		A02661F1178DE29500741C9A /* LoginSplash.png in Resources */ = {isa = PBXBuildFile; fileRef = A02661EF178DE29500741C9A /* LoginSplash.png */; };
 		A02661F2178DE29500741C9A /* loginSplash@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A02661F0178DE29500741C9A /* loginSplash@2x.png */; };
+		A02661F5178DE62700741C9A /* removeEventButton.png in Resources */ = {isa = PBXBuildFile; fileRef = A02661F3178DE62700741C9A /* removeEventButton.png */; };
+		A02661F6178DE62700741C9A /* removeEventButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A02661F4178DE62700741C9A /* removeEventButton@2x.png */; };
 		A04C4333176F85F9003B4299 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A04C4332176F85F9003B4299 /* CoreLocation.framework */; };
 		A0848C0B176D1F0D009BBB38 /* ECLoginPageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0848C0A176D1F0D009BBB38 /* ECLoginPageView.xib */; };
 		A0848C11176D25D5009BBB38 /* ECLoginPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0848C10176D25D5009BBB38 /* ECLoginPageView.m */; };
@@ -214,6 +216,8 @@
 		A02661EC178DDCEA00741C9A /* addEventButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "addEventButton@2x.png"; sourceTree = "<group>"; };
 		A02661EF178DE29500741C9A /* LoginSplash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LoginSplash.png; sourceTree = "<group>"; };
 		A02661F0178DE29500741C9A /* loginSplash@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loginSplash@2x.png"; sourceTree = "<group>"; };
+		A02661F3178DE62700741C9A /* removeEventButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = removeEventButton.png; sourceTree = "<group>"; };
+		A02661F4178DE62700741C9A /* removeEventButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "removeEventButton@2x.png"; sourceTree = "<group>"; };
 		A04C4332176F85F9003B4299 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		A0848C0A176D1F0D009BBB38 /* ECLoginPageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECLoginPageView.xib; sourceTree = "<group>"; };
 		A0848C0F176D25D5009BBB38 /* ECLoginPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECLoginPageView.h; sourceTree = "<group>"; };
@@ -435,6 +439,8 @@
 		D45DBD641783EE14000ED3C1 /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
+				A02661F3178DE62700741C9A /* removeEventButton.png */,
+				A02661F4178DE62700741C9A /* removeEventButton@2x.png */,
 				A02661EB178DDCEA00741C9A /* addEventButton.png */,
 				A02661EC178DDCEA00741C9A /* addEventButton@2x.png */,
 				D4A99ED81784EEC400F4FB46 /* feedback.png */,
@@ -1003,6 +1009,8 @@
 				A02661EE178DDCEA00741C9A /* addEventButton@2x.png in Resources */,
 				A02661F1178DE29500741C9A /* LoginSplash.png in Resources */,
 				A02661F2178DE29500741C9A /* loginSplash@2x.png in Resources */,
+				A02661F5178DE62700741C9A /* removeEventButton.png in Resources */,
+				A02661F6178DE62700741C9A /* removeEventButton@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
