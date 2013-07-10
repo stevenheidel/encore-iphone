@@ -6,6 +6,7 @@
 //  Copyright (c) 2013 Encore. All rights reserved.
 //
 #import "UIColor+EncoreUI.h"
+#import "UIFont+Encore.h"
 
 #import "ECNewMainViewController.h"
 #import "ECJSONFetcher.h"
@@ -96,16 +97,38 @@ typedef enum {
 
 -(void) setSegmentedControlAppearance {
     UIImage* unselected = [UIImage imageNamed:@"defaultfull"];
-    UIImage* selected = [UIImage imageNamed:@"activfull"];
+    UIImage* selected = [UIImage imageNamed:@"activefull"];
     UIImage* dividerLeftActive = [UIImage imageNamed:@"divideractiveleft"];
     UIImage* dividerRightActive = [UIImage imageNamed:@"divideractiveright"];
     UIImage* bothInactive = [UIImage imageNamed:@"dividerdefault"];
+    
     [[UISegmentedControl appearance] setBackgroundImage:unselected forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
     [[UISegmentedControl appearance] setBackgroundImage:selected forState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
+
     
-//    [[UISegmentedControl appearance] setDividerImage:dividerLeftActive forLeftSegmentState:UIControlStateSelected rightSegmentState:UIControlStateNormal];
-//    [[UISegmentedControl appearance] setDividerImage:dividerRightActive forLeftSegmentState:UIControlStateNormal rightSegmentState:UIControlStateSelected];
-//    [[UISegmentedControl appearance] setDividerImage:bothInactive forLeftSegmentState:UIControlStateNormal rightSegmentState:UIControlStateNormal];
+    [[UISegmentedControl appearance] setDividerImage:dividerLeftActive forLeftSegmentState:UIControlStateSelected rightSegmentState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    [[UISegmentedControl appearance] setDividerImage:dividerRightActive forLeftSegmentState:UIControlStateNormal rightSegmentState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
+    [[UISegmentedControl appearance] setDividerImage:bothInactive forLeftSegmentState:UIControlStateNormal rightSegmentState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    NSDictionary* selectedTextAttr = [NSDictionary dictionaryWithObjectsAndKeys:
+                                      [UIColor whiteColor], UITextAttributeTextColor,
+                                      [UIColor clearColor], UITextAttributeTextShadowColor,
+                                      [NSValue valueWithUIOffset:UIOffsetMake(0, 0)], UITextAttributeTextShadowOffset,
+                                      [UIFont heroFontWithSize:16.0f], UITextAttributeFont,
+                                       nil];
+    NSDictionary* unselectedTextAttr = [NSDictionary dictionaryWithObjectsAndKeys:
+                                        [UIColor whiteColor], UITextAttributeTextColor,
+                                        [UIColor clearColor], UITextAttributeTextShadowColor,
+                                        [NSValue valueWithUIOffset:UIOffsetMake(0, 0)], UITextAttributeTextShadowOffset,
+                                        [UIFont heroFontWithSize:16.0f], UITextAttributeFont,
+                                        nil];
+//    UIOffsetMake(CGFloat horizontal, CGFloat vertical)
+    [[UISegmentedControl appearance] setTitleTextAttributes:selectedTextAttr forState:UIControlStateSelected];
+    [[UISegmentedControl appearance] setTitleTextAttributes:unselectedTextAttr forState:UIControlStateNormal];
+    
+    //Guess and check to get right offset. May not be perfect, seems to be good though
+    [[UISegmentedControl appearance] setContentPositionAdjustment:UIOffsetMake(4, 2) forSegmentType:UISegmentedControlSegmentLeft barMetrics:UIBarMetricsDefault];
+    [[UISegmentedControl appearance] setContentPositionAdjustment:UIOffsetMake(-4, 2) forSegmentType:UISegmentedControlSegmentRight barMetrics:UIBarMetricsDefault];
+
 }
 -(void) fetchedPopularConcerts:(NSArray *)concerts {
     self.todaysConcerts = concerts;

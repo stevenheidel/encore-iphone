@@ -13,22 +13,25 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="5Te-QE-PfB" userLabel="Header">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="71"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="109"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="uCu-Hb-gis">
                                     <constraints>
-                                        <constraint firstAttribute="width" constant="205" id="fiT-xX-gdm"/>
+                                        <constraint firstAttribute="width" constant="205" id="EuC-j5-rc5"/>
                                     </constraints>
                                     <segments>
-                                        <segment title="Past"/>
-                                        <segment title="Today"/>
+                                        <segment title="PAST"/>
+                                        <segment title="TODAY"/>
                                     </segments>
                                     <connections>
                                         <action selector="switchedSelection:" destination="wSB-iT-c4V" eventType="valueChanged" id="lyj-9b-O20"/>
                                     </connections>
                                 </segmentedControl>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search..." minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="vtu-yS-SNa">
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search..." minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="vtu-yS-SNa">
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="30" id="MqX-g2-4CW"/>
+                                    </constraints>
                                     <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     <textInputTraits key="textInputTraits" returnKeyType="search"/>
@@ -39,21 +42,21 @@
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="centerX" secondItem="uCu-Hb-gis" secondAttribute="centerX" type="user" id="3zj-HE-iLx"/>
-                                <constraint firstItem="uCu-Hb-gis" firstAttribute="top" secondItem="5Te-QE-PfB" secondAttribute="top" constant="5" id="SgL-ig-4B5"/>
-                                <constraint firstAttribute="bottom" secondItem="vtu-yS-SNa" secondAttribute="bottom" constant="5" id="ZlC-Du-4Hv"/>
-                                <constraint firstItem="vtu-yS-SNa" firstAttribute="leading" secondItem="uCu-Hb-gis" secondAttribute="leading" type="default" id="hQa-mb-MBq"/>
-                                <constraint firstItem="vtu-yS-SNa" firstAttribute="trailing" secondItem="uCu-Hb-gis" secondAttribute="trailing" type="default" id="pqa-oi-Xmv"/>
+                                <constraint firstItem="uCu-Hb-gis" firstAttribute="top" secondItem="5Te-QE-PfB" secondAttribute="top" constant="20" symbolic="YES" type="user" id="0qV-4A-LBV"/>
+                                <constraint firstItem="uCu-Hb-gis" firstAttribute="leading" secondItem="vtu-yS-SNa" secondAttribute="leading" type="default" id="43O-Gp-5P0"/>
+                                <constraint firstItem="vtu-yS-SNa" firstAttribute="top" secondItem="uCu-Hb-gis" secondAttribute="bottom" constant="18" type="user" id="j5c-Xg-gss"/>
+                                <constraint firstItem="uCu-Hb-gis" firstAttribute="trailing" secondItem="vtu-yS-SNa" secondAttribute="trailing" type="default" id="knG-ky-T3x"/>
+                                <constraint firstItem="vtu-yS-SNa" firstAttribute="centerX" secondItem="5Te-QE-PfB" secondAttribute="centerX" type="default" id="tCw-sA-EsQ"/>
                             </constraints>
                         </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="fvV-rj-Z2B" userLabel="Empty footer view">
-                            <rect key="frame" x="0.0" y="137" width="320" height="0.0"/>
+                            <rect key="frame" x="0.0" y="175" width="320" height="0.0"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         </view>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" restorationIdentifier="Cell" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="1hf-AV-VNA" customClass="ECSearchResultCell">
-                                <rect key="frame" x="0.0" y="93" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="131" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -93,7 +96,6 @@
         <class className="ECNewMainViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ECNewMainViewController.h"/>
             <relationships>
-                <relationship kind="action" name="switchedSelection:"/>
                 <relationship kind="outlet" name="SearchBar" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="segmentedControl" candidateClass="UISegmentedControl"/>
             </relationships>
