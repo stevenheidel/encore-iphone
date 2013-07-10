@@ -10,4 +10,7 @@
 
 @interface ECCollectionViewFlowLayout : UICollectionViewFlowLayout
 
+- (NSArray *) layoutAttributesForElementsInRect:(CGRect)rect;
+- (BOOL) shouldInvalidateLayoutForBoundsChange:(CGRect)newBound;
+
 @end

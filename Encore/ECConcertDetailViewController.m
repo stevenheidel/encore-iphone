@@ -16,6 +16,7 @@
 #import "ECPostViewController.h"
 #import "ECMainViewController.h"
 #import "ECPostCollectionHeaderView.h"
+#import "ECCollectionViewFlowLayout.h"
 
 #import "ECAppDelegate.h"
 
@@ -72,7 +73,6 @@ typedef enum {
 //    [self.collectionView registerNib:[UINib nibWithNibName:@"ECCollectionCell" bundle:nil] forCellWithReuseIdentifier:@"cellID"];
     
     [self.collectionView registerClass:[Cell class] forCellWithReuseIdentifier:@"generic"];
-    
     self.title = NSLocalizedString(@"concert", nil);//self.artistNameLabel.text;
     self.headerView = [[ECPostCollectionHeaderView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.collectionView.frame.size.width, HEADER_HEIGHT) andOwner:self];
     [self setupArtistUIAttributes];
