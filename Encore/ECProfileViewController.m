@@ -124,7 +124,7 @@ typedef enum {
     
     NSString* userNameKey = NSLocalizedString(@"user_name", nil);
     NSString* userName = [defaults stringForKey:userNameKey];
-    self.lblName.text = userName;
+    self.lblName.text = [userName uppercaseString];
     
     NSString* userLocationKey = NSLocalizedString(@"user_location", nil);
     NSString* userLocation = [defaults stringForKey:userLocationKey];
