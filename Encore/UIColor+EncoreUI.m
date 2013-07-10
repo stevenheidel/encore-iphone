@@ -63,4 +63,8 @@
 +(UIColor*) lightBlueNavBarColor {
     return [UIColor colorWithHue:193.0/360.0 saturation:0.99 brightness:0.80 alpha:.8];
 }
+
++(UIColor*) lightBlueNavBarEndColor {
+    return [UIColor colorWithHue:184.0/360.0 saturation:0.98 brightness:0.78 alpha:0.5];
+}
 @end

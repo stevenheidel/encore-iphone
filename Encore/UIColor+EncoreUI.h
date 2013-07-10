@@ -35,4 +35,5 @@
 
 //navbar
 +(UIColor*) lightBlueNavBarColor;
++(UIColor*) lightBlueNavBarEndColor;
 @end

@@ -5,6 +5,7 @@
 //  Created by Shimmy on 2013-07-08.
 //  Copyright (c) 2013 Encore. All rights reserved.
 //
+#import "UIColor+EncoreUI.h"
 
 #import "ECNewMainViewController.h"
 #import "ECJSONFetcher.h"
