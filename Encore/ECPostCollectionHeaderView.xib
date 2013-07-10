@@ -48,6 +48,7 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{120, 20}, {80, 80}}</string>
 								<reference key="NSSuperview" ref="516548814"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="318651063"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -58,6 +59,7 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{20, 130}, {280, 21}}</string>
 								<reference key="NSSuperview" ref="516548814"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="917318978"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
@@ -89,6 +91,7 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{74, 100}, {172, 32}}</string>
 								<reference key="NSSuperview" ref="516548814"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="754388287"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
@@ -119,6 +122,7 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{254, 96}, {40, 40}}</string>
 								<reference key="NSSuperview" ref="516548814"/>
+								<reference key="NSWindow"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -150,18 +154,19 @@
 						</array>
 						<string key="NSFrameSize">{320, 160}</string>
 						<reference key="NSSuperview" ref="230774141"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="608881736"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MC4wMzEzNzI1NDkwMiAwLjIxOTYwNzg0MzEgMC4yOTgwMzkyMTU3AA</bytes>
 						</object>
-						<float key="IBUIAlpha">0.80000001192092896</float>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
 				</array>
 				<string key="NSFrameSize">{320, 160}</string>
 				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="516548814"/>
 				<string key="NSReuseIdentifierKey">_NS:9</string>
 				<reference key="IBUIBackgroundColor" ref="300235867"/>
@@ -633,26 +638,6 @@
 						<reference key="parent" ref="754388287"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">194</int>
-						<reference key="object" ref="138901074"/>
-						<reference key="parent" ref="230774141"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">71</int>
-						<reference key="object" ref="156333"/>
-						<reference key="parent" ref="230774141"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">72</int>
-						<reference key="object" ref="412809230"/>
-						<reference key="parent" ref="230774141"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">196</int>
-						<reference key="object" ref="484309633"/>
-						<reference key="parent" ref="230774141"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">207</int>
 						<reference key="object" ref="260183160"/>
 						<reference key="parent" ref="608881736"/>
@@ -726,6 +711,26 @@
 						<int key="objectID">255</int>
 						<reference key="object" ref="524310195"/>
 						<reference key="parent" ref="516548814"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">71</int>
+						<reference key="object" ref="156333"/>
+						<reference key="parent" ref="230774141"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">72</int>
+						<reference key="object" ref="412809230"/>
+						<reference key="parent" ref="230774141"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">196</int>
+						<reference key="object" ref="484309633"/>
+						<reference key="parent" ref="230774141"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">194</int>
+						<reference key="object" ref="138901074"/>
+						<reference key="parent" ref="230774141"/>
 					</object>
 				</array>
 			</object>
@@ -805,9 +810,99 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">255</int>
+			<int key="maxID">259</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes"/>
+		<object class="IBClassDescriber" key="IBDocument.Classes">
+			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
+				<object class="IBPartialClassDescription">
+					<string key="className">ECConcertDetailViewController</string>
+					<string key="superclassName">UIViewController</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">addPhoto</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">addPhoto</string>
+						<object class="IBActionInfo" key="NS.object.0">
+							<string key="name">addPhoto</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</object>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="artistNameLabel">UILabel</string>
+						<string key="collectionView">UICollectionView</string>
+						<string key="dateLabel">UILabel</string>
+						<string key="iWasThereButton">UIButton</string>
+						<string key="imgArtist">UIImageView</string>
+						<string key="imgBackground">UIImageView</string>
+						<string key="imgLiveNow">UIImageView</string>
+						<string key="venueNameLabel">UILabel</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="artistNameLabel">
+							<string key="name">artistNameLabel</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="collectionView">
+							<string key="name">collectionView</string>
+							<string key="candidateClassName">UICollectionView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="dateLabel">
+							<string key="name">dateLabel</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="iWasThereButton">
+							<string key="name">iWasThereButton</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="imgArtist">
+							<string key="name">imgArtist</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="imgBackground">
+							<string key="name">imgBackground</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="imgLiveNow">
+							<string key="name">imgLiveNow</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="venueNameLabel">
+							<string key="name">venueNameLabel</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/ECConcertDetailViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">ECPostCollectionHeaderView</string>
+					<string key="superclassName">UICollectionReusableView</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/ECPostCollectionHeaderView.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">NSLayoutConstraint</string>
+					<string key="superclassName">NSObject</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/NSLayoutConstraint.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">UICollectionReusableView</string>
+					<string key="superclassName">UIView</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/UICollectionReusableView.h</string>
+					</object>
+				</object>
+			</array>
+		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaTouchFramework</string>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
