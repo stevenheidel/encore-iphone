@@ -118,6 +118,7 @@ typedef enum {
 
 -(void) updateView {
     //self.title = self.artistNameLabel.text;
+    self.lastfmID = [self.concert lastfmID];
     [self clearCollectionView];
     [self loadArtistDetails];
     [self loadImages];
@@ -284,13 +285,13 @@ typedef enum {
 -(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == alertView.firstOtherButtonIndex) {
         NSString * userID = self.userID;
-        NSNumber * songkickID = self.songkickID;
+        NSString * lastfmID = self.lastfmID;
         switch (alertView.tag) {
             case AddConfirm: {
-                NSLog(@"%@: Adding concert %@ to profile %@",NSStringFromClass(self.class),songkickID.stringValue,userID);
+                NSLog(@"%@: Adding concert %@ to profile %@", NSStringFromClass(self.class), lastfmID, userID);
                 [Flurry logEvent:@"Confirmed_Add_Concert" withParameters:[self flurryParam]];
                 
-                [ECJSONPoster addConcert:songkickID toUser:userID completion:^{
+                [ECJSONPoster addConcert:lastfmID toUser:userID completion:^{
                     [self completedAddingConcert];
                     [Flurry logEvent:@"Completed_Adding_Concert" withParameters:[self flurryParam]];
                 }];
@@ -299,8 +300,8 @@ typedef enum {
             case RemoveConfirm: {
                 [Flurry logEvent:@"Confirmed_Remove_Concert" withParameters:[self flurryParam]];
                 
-                NSLog(@"%@: Removing a concert %@ from profile %@",NSStringFromClass(self.class),songkickID,userID);
-                [ECJSONPoster removeConcert:songkickID toUser:userID completion:^{
+                NSLog(@"%@: Removing a concert %@ from profile %@", NSStringFromClass(self.class), lastfmID, userID);
+                [ECJSONPoster removeConcert:lastfmID toUser:userID completion:^{
                     [self completedRemovingConcert];
                     [Flurry logEvent:@"Completed_Removing_Concert" withParameters:[self flurryParam]];
                 }];
@@ -332,7 +333,7 @@ typedef enum {
 	[HUD hide:YES afterDelay:HUD_DELAY];
     [self toggleOnProfileState];
     
-    [[self mainViewController] refreshForConcertID:self.songkickID];
+    //[[self mainViewController] refreshForConcertID:self.lastfmID];
     //Refresh for concert ID will make profile vc pop back to itself
 }
 
@@ -352,7 +353,7 @@ typedef enum {
 	[HUD hide:YES afterDelay:HUD_DELAY];
 
     //TODO: update this for new design
-    [[self mainViewController] refreshForConcertID:nil];
+    //[[self mainViewController] refreshForConcertID:nil];
     //Refresh for concert ID will make profile vc pop back to itself
 }   
 
@@ -399,19 +400,6 @@ typedef enum {
     [self.navigationController pushViewController:postVC animated:YES];
 }
 
--(void) setUpPlaceholderView {
-    if(!self.placeholderView){
-        
-        //Manually set the height of the placeholder view so it fits in under the collection view's header (so that the header scrolls out of the way when you're searching through posts
-        //[self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0] atScrollPosition:UICollectionViewScrollPositionTop animated:NO];
-        
-        self.placeholderView = [[ECPlaceHolderView alloc] initWithFrame:CGRectMake(0.0, HEADER_HEIGHT, self.collectionView.frame.size.width, self.collectionView.frame.size.height-HEADER_HEIGHT) owner: self];
-    }
-    if(!self.placeholderView.superview) {
-        [self.view addSubview:self.placeholderView];
-    }
-}
-
 -(UICollectionReusableView*) collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
     UICollectionReusableView* reusableView = nil;
     
@@ -425,6 +413,19 @@ typedef enum {
     
     //Manually set to desired height
     return CGSizeMake(self.collectionView.frame.size.width, HEADER_HEIGHT);
+}
+
+-(void) setUpPlaceholderView {
+    if(!self.placeholderView){
+        
+        //Manually set the height of the placeholder view so it fits in under the collection view's header (so that the header scrolls out of the way when you're searching through posts
+        //[self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0] atScrollPosition:UICollectionViewScrollPositionTop animated:NO];
+        
+        self.placeholderView = [[ECPlaceHolderView alloc] initWithFrame:CGRectMake(0.0, HEADER_HEIGHT, self.collectionView.frame.size.width, self.collectionView.frame.size.height-HEADER_HEIGHT) owner: self];
+    }
+    if(!self.placeholderView.superview) {
+        [self.view addSubview:self.placeholderView];
+    }
 }
 
 #pragma mark - adding photos

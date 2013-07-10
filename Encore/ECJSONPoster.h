@@ -11,8 +11,8 @@
 @interface ECJSONPoster : NSObject
 +(void) postUser:(NSDictionary<FBGraphUser> *)user completion: (void (^)(NSDictionary* response)) completion;
 
-+(void) addConcert: (NSNumber *) concertID toUser: (NSString *) userID completion: (void (^)()) completion;
-+(void) removeConcert: (NSNumber *) concertID toUser: (NSString *) userID completion: (void (^)()) completion;
++(void) addConcert: (NSString *) concertID toUser: (NSString *) userID completion: (void (^)()) completion;
++(void) removeConcert: (NSString *) concertID toUser: (NSString *) userID completion: (void (^)()) completion;
 
 +(void) postImage:(NSDictionary*)imageDic completion:(void (^)())completion;
 

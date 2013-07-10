@@ -33,7 +33,7 @@
 
 @property (nonatomic, strong) NSArray * posts;
 
-@property (nonatomic, readonly) NSNumber * songkickID;
+@property (nonatomic, strong) NSString * lastfmID;
 @property (nonatomic, readonly) NSString * userID;
 
 
