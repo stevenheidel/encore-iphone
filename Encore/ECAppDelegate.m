@@ -78,7 +78,7 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
     
     //self.navigationController   = [[UINavigationController alloc] initWithRootViewController:self.loginViewController];
     self.navigationController   = [[UINavigationController alloc] initWithRootViewController:self.mainViewController];
-    [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], UITextAttributeTextColor, [UIColor blackColor], UITextAttributeTextShadowColor, [NSValue valueWithUIOffset:UIOffsetMake(0.0f,1.0f)],UITextAttributeTextShadowOffset, [UIFont heroFontWithSize:24.0f], UITextAttributeFont, nil]];
+    [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], UITextAttributeTextColor, [UIColor clearColor], UITextAttributeTextShadowColor, [NSValue valueWithUIOffset:UIOffsetMake(0.0f,1.0f)],UITextAttributeTextShadowOffset, [UIFont heroFontWithSize:24.0f], UITextAttributeFont, nil]];
     
     
     self.window.rootViewController = self.navigationController;

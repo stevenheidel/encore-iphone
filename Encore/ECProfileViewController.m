@@ -17,6 +17,7 @@
 #import "UIColor+EncoreUI.h"
 #import "UIFont+Encore.h"
 
+#import "UIImage+GaussBlur.h"
 #import "UIColor+FlatUI.h"
 #import "UIFont+FlatUI.h"
 #import "TestFlight.h"
@@ -103,15 +104,15 @@ typedef enum {
     self.tableView.tableHeaderView = myView;
     
     self.lblName.font = [UIFont heroFontWithSize: 18.0];
-    self.lblLocation.font = [UIFont heroFontWithSize: 14.0];
+    self.lblName.textColor = [UIColor whiteColor];
     self.lblConcerts.font = [UIFont heroFontWithSize: 12.0];
-    
+    self.lblConcerts.textColor = [UIColor whiteColor];
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     
     NSString* userIDKey = NSLocalizedString(@"user_id", nil);
     userID = [defaults stringForKey:userIDKey];
     self.imgProfile.profileID = userID;
-    self.imgProfile.layer.cornerRadius = 30.0;
+    self.imgProfile.layer.cornerRadius = 50.0;
     self.imgProfile.layer.masksToBounds = YES;
     //    self.imgProfile.layer.borderWidth = 1.0;
     //    self.imgProfile.layer.borderColor = [UIColor profileImageBorderColor].CGColor;
@@ -119,7 +120,7 @@ typedef enum {
     NSString* userImageUrl = NSLocalizedString(@"image_url", nil);
     NSURL *imageURL = [NSURL URLWithString:[defaults stringForKey:userImageUrl]];
     UIImage *profileImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL]];
-    self.imgBackground.image = profileImage;
+    self.imgBackground.image = [profileImage imageWithGaussianBlur];
     
     NSString* userNameKey = NSLocalizedString(@"user_name", nil);
     NSString* userName = [defaults stringForKey:userNameKey];

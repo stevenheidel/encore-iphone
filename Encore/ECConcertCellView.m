@@ -20,10 +20,13 @@
 - (void)setUpCellForConcert:(NSDictionary *)concertDic {
     self.lblDate.text = [concertDic niceDate];
     self.lblDate.font = [UIFont heroFontWithSize: 12.0];
+    self.lblDate.textColor = [UIColor whiteColor];
     self.lblName.text = [concertDic artistName];
     self.lblName.font = [UIFont heroFontWithSize: 18.0];
+    self.lblName.textColor = [UIColor lightBlueNavBarColor];
     self.lblLocation.text = [concertDic venueName];
     self.lblLocation.font = [UIFont heroFontWithSize: 14.0];
+    self.lblLocation.textColor = [UIColor whiteColor];
     
     //TODO: Move this code to setUpCellImageForConcert: once we have a way to recognized if the server sent a blank image or not
     self.imageArtist.image = [UIImage imageNamed:@"placeholder.jpg"];
