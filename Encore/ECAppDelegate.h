@@ -13,12 +13,18 @@
 @class ECNewMainViewController;
 @protocol FBGraphUser;
 
-@interface ECAppDelegate : UIResponder <UIApplicationDelegate,UINavigationControllerDelegate, CLLocationManagerDelegate>
+@interface ECAppDelegate : UIResponder <UIApplicationDelegate,UINavigationControllerDelegate, CLLocationManagerDelegate> {
+    BOOL loggedIn;
+}
 
 -(void) loginCompletedWithUser: (NSDictionary <FBGraphUser> *) user;
 -(void) openSession;
+-(void) loginLater;
+-(void) showLoginView: (BOOL) animated;
+-(BOOL) isLoggedIn;
 
 @property (strong, nonatomic) UIWindow *window;
+
 @property (strong,nonatomic) ECLoginViewController * loginViewController;
 
 @property (strong, nonatomic) UINavigationController *navigationController;

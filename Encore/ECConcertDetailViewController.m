@@ -13,8 +13,11 @@
 #import "UIImageView+AFNetworking.h"
 #import "NSDictionary+Posts.h"
 #import "ECJSONPoster.h"
+#import "ECJSONFetcher.h"
+
 #import "ECPostViewController.h"
-#import "ECMainViewController.h"
+//#import "ECMainViewController.h"
+#import <FacebookSDK/FacebookSDK.h>
 #import "ECPostCollectionHeaderView.h"
 #import "ECCollectionViewFlowLayout.h"
 
@@ -29,17 +32,15 @@
 #import "UIColor+EncoreUI.h"
 #import "UIFont+Encore.h"
 
+#import "ECAlertTags.h"
+
 #define HUD_DELAY 0.9
 #define HEADER_HEIGHT 160.0
 
 //#import "SGSStaggeredFlowLayout.h"
 
 NSString *kCellID = @"cellID";
-typedef enum {
-    PhotoSourcePicker,
-    AddConfirm,
-    RemoveConfirm
-}ECTag;
+
 @interface ECConcertDetailViewController (){
 //    SGSStaggeredFlowLayout* _flowLayout;
 
@@ -81,6 +82,7 @@ typedef enum {
     [self setUpNavBarButtons];
 
     [self updateView];
+    self.view.clipsToBounds = YES;
 }
 
 -(void) setConcert:(NSDictionary *)concert andUpdate: (BOOL) update {
@@ -163,7 +165,7 @@ typedef enum {
         
         if (regImage) {
             self.imgArtist.image = regImage;
-            self.imgBackground.image = regImage;// imageWithGaussianBlur];
+            self.imgBackground.image = [regImage imageWithGaussianBlur];// imageWithGaussianBlur];
         } else {
             self.imgBackground.image = [UIImage imageNamed:@"Default"];// imageWithGaussianBlur];
             self.imgArtist.image = [UIImage imageNamed:@"placeholder.jpg"];
@@ -265,52 +267,82 @@ typedef enum {
         [self removeConcert];
     }
 }
-
+-(BOOL) isLoggedIn {
+    return [[self appDelegate] isLoggedIn];
+}
 -(void) addConcert {
     [Flurry logEvent:@"Tapped_Add_Concert" withParameters:[self flurryParam]];
-    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"confirm_add_title", nil) message:NSLocalizedString(@"confirm_add_message", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"cancel", nil) otherButtonTitles:NSLocalizedString(@"add", nil), nil];
-    alert.tag = AddConfirm;
-    [alert show];
+    if(self.isLoggedIn) {
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"confirm_add_title", nil) message:NSLocalizedString(@"confirm_add_message", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"cancel", nil) otherButtonTitles:NSLocalizedString(@"add", nil), nil];
+        alert.tag = AddConcertConfirmTag;
+        [alert show];
+    }
+    else {
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login", nil) message:NSLocalizedString(@"You must be logged in to add a concert to your profile", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Login", nil), nil];
+        alert.tag = ECNotLoggedInAlert;
+        [alert show];
+    }
 }
 
 -(void) removeConcert {
-    [Flurry logEvent:@"Tapped_Remove_Concert" withParameters:[self flurryParam]];
-    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"confirm_remove_title", nil) message:NSLocalizedString(@"confirm_remove_message", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"cancel", nil) otherButtonTitles:NSLocalizedString(@"remove", nil), nil];
-    alert.tag = RemoveConfirm;
-    [alert show];    
+    if (self.isLoggedIn) {
+        [Flurry logEvent:@"Tapped_Remove_Concert" withParameters:[self flurryParam]];
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"confirm_remove_title", nil) message:NSLocalizedString(@"confirm_remove_message", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"cancel", nil) otherButtonTitles:NSLocalizedString(@"remove", nil), nil];
+        alert.tag = RemoveConcertConfirmTag;
+        [alert show];
+    }
+    else {
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login", nil) message:NSLocalizedString(@"You must be logged in to remove a concert from your profile", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Login", nil), nil];
+        alert.tag = ECNotLoggedInAlert;
+        [alert show];
+    }
 }
 
 -(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (buttonIndex == alertView.firstOtherButtonIndex) {
-        NSString * userID = self.userID;
-        NSString * lastfmID = self.lastfmID;
-        switch (alertView.tag) {
-            case AddConfirm: {
-                NSLog(@"%@: Adding concert %@ to profile %@", NSStringFromClass(self.class), lastfmID, userID);
-                [Flurry logEvent:@"Confirmed_Add_Concert" withParameters:[self flurryParam]];
-                
-                [ECJSONPoster addConcert:lastfmID toUser:userID completion:^{
-                    [self completedAddingConcert];
-                    [Flurry logEvent:@"Completed_Adding_Concert" withParameters:[self flurryParam]];
-                }];
-                break;
-            }
-            case RemoveConfirm: {
-                [Flurry logEvent:@"Confirmed_Remove_Concert" withParameters:[self flurryParam]];
-                
-                NSLog(@"%@: Removing a concert %@ from profile %@", NSStringFromClass(self.class), lastfmID, userID);
-                [ECJSONPoster removeConcert:lastfmID toUser:userID completion:^{
-                    [self completedRemovingConcert];
-                    [Flurry logEvent:@"Completed_Removing_Concert" withParameters:[self flurryParam]];
-                }];
-                break;
-            }
-            default:
-                break;
+    if (alertView.tag == ECNotLoggedInAlert) {
+//        [self.navigationController popToRootViewControllerAnimated:NO];
+        if (buttonIndex == alertView.firstOtherButtonIndex) {
+            [[self appDelegate] showLoginView:YES];
         }
+        else {
+            [Flurry logEvent: @"Canceled_Login_From_Alert"]; //This is not the only place this log is made
+        }
+        return; //don't process other alerts
     }
-    else {
-        [Flurry logEvent:@"Canceled_Adding_or_Removing_Concert" withParameters:[self flurryParam]];
+    
+    if (alertView.tag == AddConcertConfirmTag || alertView.tag == RemoveConcertConfirmTag) {
+        if (buttonIndex == alertView.firstOtherButtonIndex) {
+            NSString * userID = self.userID;
+            NSString * lastfmID = self.lastfmID;
+            switch (alertView.tag) {
+                case AddConcertConfirmTag: {
+                    NSLog(@"%@: Adding concert %@ to profile %@", NSStringFromClass(self.class), lastfmID, userID);
+                    [Flurry logEvent:@"Confirmed_Add_Concert" withParameters:[self flurryParam]];
+                    
+                    [ECJSONPoster addConcert:lastfmID toUser:userID completion:^{
+                        [self completedAddingConcert];
+                        [Flurry logEvent:@"Completed_Adding_Concert" withParameters:[self flurryParam]];
+                    }];
+                    break;
+                }
+                case RemoveConcertConfirmTag: {
+                    [Flurry logEvent:@"Confirmed_Remove_Concert" withParameters:[self flurryParam]];
+                    
+                    NSLog(@"%@: Removing a concert %@ from profile %@", NSStringFromClass(self.class), lastfmID, userID);
+                    [ECJSONPoster removeConcert:lastfmID toUser:userID completion:^{
+                        [self completedRemovingConcert];
+                        [Flurry logEvent:@"Completed_Removing_Concert" withParameters:[self flurryParam]];
+                    }];
+                    break;
+                }
+                default:
+                    break;
+            }
+        }
+        else {
+            [Flurry logEvent:@"Canceled_Adding_or_Removing_Concert" withParameters:[self flurryParam]];
+        }
+        return;
     }
 }
 
@@ -430,14 +462,14 @@ typedef enum {
 -(IBAction)addPhoto {
     [Flurry logEvent:@"Tapped_Add_Photo" withParameters:[self flurryParam]];
     UIActionSheet* actionSheet = [[UIActionSheet alloc] initWithTitle:@"Post photo" delegate:self cancelButtonTitle:NSLocalizedString(@"cancel", nil) destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"pick_from_lib", nil),[UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] ? NSLocalizedString(@"new_from_camera", nil):nil, nil];
-    actionSheet.tag = PhotoSourcePicker;
+    actionSheet.tag = PhotoSourcePickerTag;
     actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
     [actionSheet showInView:self.view];
 }
 
 #pragma mark Action Sheet Delegate
 -(void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if (actionSheet.tag == PhotoSourcePicker ) {
+    if (actionSheet.tag == PhotoSourcePickerTag ) {
         NSString* selectedSource;
         UIImagePickerControllerSourceType sourceType;
         if(buttonIndex != actionSheet.cancelButtonIndex){
@@ -525,9 +557,13 @@ typedef enum {
     return [[NSUserDefaults standardUserDefaults] stringForKey:NSLocalizedString(@"user_id", nil)];
 }
 
--(ECMainViewController*) mainViewController {
-    ECAppDelegate* appDel = (ECAppDelegate *)[UIApplication sharedApplication].delegate;
-    return appDel.mainViewController;
+//-(ECMainViewController*) mainViewController {
+//    ECAppDelegate* appDel = (ECAppDelegate *)[UIApplication sharedApplication].delegate;
+//    return appDel.mainViewController;
+//}
+
+-(ECAppDelegate*) appDelegate {
+    return (ECAppDelegate *)[UIApplication sharedApplication].delegate;
 }
 
 @end

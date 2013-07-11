@@ -67,7 +67,7 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
     
     self.navigationController = (UINavigationController*)self.window.rootViewController;
     self.mainViewController = (ECNewMainViewController*)[[self.navigationController viewControllers] objectAtIndex:0];
-    
+    loggedIn = NO;
 //    self.mainViewController = [[ECMainViewController alloc] init];
 //    self.mainViewController =
 //    self.loginViewController = [[ECLoginViewController alloc] init];
@@ -95,8 +95,12 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
 //        UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
 //        self.loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"ECLoginViewController"];
 //        [self.window.rootViewController presentViewController:self.loginViewController animated:NO completion:nil];
+    
+        
         [self showLoginView: NO];
     }
+    
+
     return YES;
 }
 
@@ -171,7 +175,14 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
         [alertView show];
     }
 }
+-(BOOL) isLoggedIn {
+    return loggedIn;
+}
 
+-(void) loginLater {
+    loggedIn = NO;
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+}
 -(void) showLoginView: (BOOL) animated {
     UIViewController *topViewController = [self.navigationController topViewController];
     
@@ -217,6 +228,7 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
     self.mainViewController.facebook_id = userid;
     self.mainViewController.userName = user.name;
     self.mainViewController.userCity = @"Toronto"; //TODO: change to lat/long
+    loggedIn = YES;
     
     [ECJSONPoster postUser:user completion:^(NSDictionary *response) {
         NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
@@ -227,6 +239,7 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
             [defaults setObject:[response objectForKey:imageURLKey] forKey:imageURLKey];
             [defaults synchronize];
         }
+
         [self.navigationController dismissViewControllerAnimated:YES completion:nil];
     }];
     [self saveUserInfoToDefaults:user];
@@ -239,7 +252,6 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
     NSString* defaultID = [defaults stringForKey:userIDKey];
     if (!defaultID || ![defaultID isEqualToString:userInfo.id]) {
         [defaults setObject:userInfo.id forKey:userIDKey];
-        [defaults synchronize];
     }
     else !defaultID ? NSLog(@"No default ID saved") : NSLog(@"No change in User ID. Defaults not changed");
     
@@ -247,14 +259,15 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
     NSString* defaultName = [defaults stringForKey:usernameKey];
     if (!defaultName || ![defaultName isEqualToString:userInfo.name]) {
         [defaults setObject:userInfo.name forKey:usernameKey];
-        [defaults synchronize];
     }
     NSString* userLocationKey = NSLocalizedString(@"user_location", nil);
     NSString* defaultLocation = [defaults stringForKey:userLocationKey];
     if (!defaultLocation || ![defaultLocation isEqualToString:userInfo.location.location.city]) {
         [defaults setObject:userInfo.location.location.city forKey:userLocationKey];
-        [defaults synchronize];
+
     }
+    
+    [defaults synchronize];
 }
 
 #pragma mark - location

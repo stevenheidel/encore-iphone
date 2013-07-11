@@ -12,8 +12,9 @@
 
 @class MBProgressHUD; //TODO add HUD during search
 
-@interface ECNewMainViewController : UITableViewController
+@interface ECNewMainViewController : UITableViewController <UIAlertViewDelegate>
 
+@property (nonatomic, readonly) BOOL isLoggedIn; //Getter that pulls from app delegate
 
 @property (assign, nonatomic) BOOL hasSearched; //Flag for whether use has performed a search
 @property (assign, nonatomic) BOOL loadOther; //Flag for whether user has asked for other search results
@@ -23,7 +24,7 @@
 
 @property (nonatomic, assign) ECSearchType currentSearchType;
 
-@property (strong, nonatomic) ECProfileViewController *profileViewController;
+@property (strong, nonatomic) UINavigationController *profileViewController;
 @property (strong, nonatomic) NSString * facebook_id;
 @property (strong, nonatomic) NSString * userName;
 @property (strong, nonatomic) NSString * userCity;

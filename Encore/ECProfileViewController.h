@@ -14,6 +14,7 @@
     NSString* userID;
 }
 
+@property (nonatomic,strong) IBOutlet UINavigationBar* navBar;
 @property(nonatomic, strong) IBOutlet UITableView *tableView;
 
 @property(nonatomic, strong) NSArray *arrPastConcerts;
