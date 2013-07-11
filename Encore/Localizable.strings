@@ -63,8 +63,8 @@
 "concert_removed" = "Concert Removed";
 
 //post placeholder
-"POST_PLACEHOLDER_TEXT_1" = "No photos or videos found";
-"POST_PLACEHOLDER_TEXT_2" = "Were you there? Add your own by clicking 'Post' on the bar above";
+"POST_PLACEHOLDER_TEXT_1" = "Add the concert to you profile by clicking the + sign on the artist image, in order to get images";
+"POST_PLACEHOLDER_TEXT_2" = "";
 
 //Profile
 "logout_alert_title" = "Log out";

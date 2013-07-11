@@ -18,6 +18,8 @@
 #import "MBProgressHUD.h"
 #import "ECConcertDetailViewController.h"
 #import "ECAppDelegate.h"
+#import "UIImage+GaussBlur.h"
+#import <QuartzCore/QuartzCore.h>
 
 #import "ECAlertTags.h"
 #define SearchCellIdentifier @"ECSearchResultCell"
@@ -49,10 +51,17 @@ typedef enum {
     [self setupBarButtons];
     [self setNavBarAppearance];
     [self setSegmentedControlAppearance];
+    [self setDateLabel];
+    
+    self.tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(dismissKeyboard:)];
+    
     [ECJSONFetcher fetchPopularConcertsWithSearchType:ECSearchTypeToday completion:^(NSArray *concerts) {
 //            [self fetchedPopularConcerts:concerts];
         self.todaysConcerts = concerts;
         [self.tableView reloadData];
+        [self setBackgroundImage];
         }];
         //        [self.hud show:YES];
     [ECJSONFetcher fetchPopularConcertsWithSearchType:ECSearchTypePast completion:^(NSArray *concerts) {
@@ -60,7 +69,7 @@ typedef enum {
 //        [self.tableView reloadData];
     }];
     self.currentSearchType = [ECNewMainViewController searchTypeForSegmentIndex:self.segmentedControl.selectedSegmentIndex];
-    
+    [self displayViewsAccordingToSearchType];
     
     //add hud progress indicator
     self.hud = [[MBProgressHUD alloc] initWithView:self.view];
@@ -92,6 +101,10 @@ typedef enum {
 }
 -(void) clearSearchBar {
     self.SearchBar.text = @"";
+    self.hasSearched = FALSE;
+    
+    [self.tableView reloadData];
+    [self setBackgroundImage];
 }
 -(void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -163,6 +176,16 @@ typedef enum {
     [[UISegmentedControl appearance] setContentPositionAdjustment:UIOffsetMake(4, 2) forSegmentType:UISegmentedControlSegmentLeft barMetrics:UIBarMetricsDefault];
     [[UISegmentedControl appearance] setContentPositionAdjustment:UIOffsetMake(-4, 2) forSegmentType:UISegmentedControlSegmentRight barMetrics:UIBarMetricsDefault];
 
+}
+
+-(void)setDateLabel {
+    self.lblTodaysDate.font = [UIFont heroFontWithSize:self.lblTodaysDate.font.pointSize];
+    
+    NSDateFormatter *formatter;
+    formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"MMMM d, yyyy"];
+    
+     self.lblTodaysDate.text = [[formatter stringFromDate:[NSDate date]] uppercaseString];
 }
 -(void) fetchedPopularConcerts:(NSArray *)concerts {
     self.todaysConcerts = concerts;
@@ -246,7 +269,9 @@ typedef enum {
     UISegmentedControl* control = (UISegmentedControl*)sender;
     
     self.currentSearchType = [ECNewMainViewController searchTypeForSegmentIndex:control.selectedSegmentIndex];
+    [self displayViewsAccordingToSearchType];
     [self.tableView reloadData];
+    [self setBackgroundImage];
 }
 
 +(ECSearchType) searchTypeForSegmentIndex: (NSInteger) index {
@@ -262,6 +287,16 @@ typedef enum {
     return ECSearchTypeToday;
 }
 
+- (void)displayViewsAccordingToSearchType {
+    if (self.currentSearchType) {
+        self.SearchBar.hidden = YES;
+        self.lblTodaysDate.hidden = NO;
+    } else {
+        self.SearchBar.hidden = NO;
+        self.lblTodaysDate.hidden = YES;
+    }
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -271,9 +306,9 @@ typedef enum {
 #pragma mark - Table view data source + Delegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    if (self.hasSearched) {
-        return ECNumberOfSearchSections;
-    }
+//    if (self.hasSearched) {
+//        return ECNumberOfSearchSections;
+//    }
     
     return 1;
 }
@@ -333,10 +368,6 @@ typedef enum {
         //Using UIImageView+AFNetworking, automatically set the cell's image view based on the URL
         [cell.imageArtist setImageWithURL:[concertDic imageURL] placeholderImage:nil]; //TODO add placeholder
         
-        if ([indexPath row] == 0) {
-             [self.imgBackground setImageWithURL:[concertDic imageURL] placeholderImage:nil];
-        }
-        
         return cell;
     }
     
@@ -372,6 +403,7 @@ typedef enum {
         if (indexPath.section == ECSearchLoadOtherSection) {
             self.loadOther = TRUE;
             [self.tableView reloadData];
+            [self setBackgroundImage];
         }
         else {
             ECConcertDetailViewController* detailVC = [[ECConcertDetailViewController alloc] initWithConcert:[self.searchResultsEvents objectAtIndex:indexPath.row]];
@@ -390,12 +422,28 @@ typedef enum {
             NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"SearchResultsSectionHeader" owner:nil options:nil];
             UIView *mainView = [subviewArray objectAtIndex:0];
 //            [(UILabel*)[mainView viewWithTag:20] setText:[[self.searchResultsEvents objectAtIndex:0] artistName]];
-            [(UIImageView*)[mainView viewWithTag:10] setImageWithURL:[[self.searchResultsEvents objectAtIndex:0] imageURL] placeholderImage:nil];
+            UIImageView *artistImage = (UIImageView*)[mainView viewWithTag:10];
+            UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[[self.searchResultsEvents objectAtIndex:0] imageURL]]];
+            //[artistImage setFrame:CGRectMake(0, 0, image.size.width, image.size.height)];
+            [artistImage setImage:image];
+            artistImage.layer.cornerRadius = 35.0;
+            artistImage.layer.masksToBounds = YES;
+
             mainView.clipsToBounds =YES;
             return mainView;
         }
     }
     return nil;
+}
+
+- (void) setBackgroundImage {
+    if (self.hasSearched && self.searchResultsEvents.count>0) {
+        UIImage *background = [[UIImage imageWithData:[NSData dataWithContentsOfURL:[[self.searchResultsEvents objectAtIndex:0] imageURL]]] imageWithGaussianBlur];
+        [self.imgBackground setImage:background];
+    } else {
+        UIImage *background = [[UIImage imageWithData:[NSData dataWithContentsOfURL:[[[self currentEventArray] objectAtIndex:0] imageURL]]] imageWithGaussianBlur];
+        [self.imgBackground setImage:background];
+    }
 }
 -(CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     if (self.hasSearched && section == ECSearchResultSection && self.searchResultsEvents.count>0) {
@@ -409,6 +457,7 @@ typedef enum {
     self.hasSearched = FALSE;
     
     [self.tableView reloadData];
+    [self setBackgroundImage];
     return YES;
 }
 
@@ -423,8 +472,13 @@ typedef enum {
         self.hud.detailsLabelText = [NSString stringWithFormat:NSLocalizedString(@"hudSearchArtist", nil), [textField text]];
         [self.hud show:YES];
     }
+    [self.view removeGestureRecognizer:self.tap];
     [textField resignFirstResponder];
     return YES;
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    [self.view addGestureRecognizer:self.tap];
 }
 
 - (void)fetchedConcertsForSearch:(NSDictionary *)comboDic {
@@ -447,6 +501,12 @@ typedef enum {
         alert.color = [UIColor redHUDConfirmationColor];
     }
     [self.tableView reloadData];
+    [self setBackgroundImage];
+}
+
+- (IBAction)dismissKeyboard:(id)sender {
+    [self.SearchBar resignFirstResponder];
+    [self.view removeGestureRecognizer:self.tap];
 }
 
 #pragma mark Getters on combo search results dic

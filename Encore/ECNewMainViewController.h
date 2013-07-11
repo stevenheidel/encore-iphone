@@ -14,13 +14,17 @@
 
 @interface ECNewMainViewController : UIViewController <UIAlertViewDelegate, UITableViewDataSource,UITableViewDelegate>
 
+- (IBAction)dismissKeyboard:(id)sender;
+
 @property(nonatomic, strong) IBOutlet UIImageView *imgBackground;
+@property(nonatomic, strong) IBOutlet UILabel *lblTodaysDate;
 @property(nonatomic, strong) IBOutlet UITableView *tableView;
 @property (nonatomic, readonly) BOOL isLoggedIn; //Getter that pulls from app delegate
 
 @property (assign, nonatomic) BOOL hasSearched; //Flag for whether use has performed a search
 @property (assign, nonatomic) BOOL loadOther; //Flag for whether user has asked for other search results
 
+@property (strong, nonatomic) UITapGestureRecognizer *tap;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
 @property (strong, nonatomic) IBOutlet UITextField *SearchBar;
 
