@@ -18,20 +18,15 @@
 #import "UIFont+Encore.h"
 
 #import "UIImage+GaussBlur.h"
-#import "UIColor+FlatUI.h"
-#import "UIFont+FlatUI.h"
 #import "TestFlight.h"
 
 #import "ECJSONFetcher.h"
-//#import "UIBarButtonItem+FlatUI.h"
 #import "MBProgressHUD.h"
 
 #define HEADER_HEIGHT 170.0
 #define FLAG_HUD_DELAY 2.0
 
-typedef enum {
-    LogoutTag
-}ECProfileAlertTags;
+#import "ECAlertTags.h"
 
 #import "ECAppDelegate.h"
 
@@ -228,29 +223,16 @@ typedef enum {
 
 #pragma mark - Logout
 -(void) logoutTapped {
-    FUIAlertView *alertView = [[FUIAlertView alloc] initWithTitle:NSLocalizedString(@"logout_alert_title",nil) message:NSLocalizedString(@"logout_alert_message", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"cancel", nil) otherButtonTitles:NSLocalizedString(@"logout", nil), nil];
-    alertView.titleLabel.textColor = [UIColor cloudsColor];
-    alertView.titleLabel.font = [UIFont boldFlatFontOfSize:16];
-    alertView.messageLabel.textColor = [UIColor cloudsColor];
-    alertView.messageLabel.font = [UIFont flatFontOfSize:14];
-    alertView.backgroundOverlay.backgroundColor = [[UIColor cloudsColor] colorWithAlphaComponent:0.8];
-    alertView.alertContainer.backgroundColor = [UIColor midnightBlueColor];
-    alertView.defaultButtonColor = [UIColor cloudsColor];
-    alertView.defaultButtonShadowColor = [UIColor asbestosColor];
-    alertView.defaultButtonFont = [UIFont boldFlatFontOfSize:16];
-    alertView.defaultButtonTitleColor = [UIColor asbestosColor];
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"logout_alert_title",nil) message:NSLocalizedString(@"logout_alert_message", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"cancel", nil) otherButtonTitles:NSLocalizedString(@"logout", nil), nil];
     alertView.tag = LogoutTag;
     [alertView show];
     
-//    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"logout_alert_title", nil) message:NSLocalizedString(@"logout_alert_message",nil) delegate:self cancelButtonTitle:NSLocalizedString(@"cancel", nil) otherButtonTitles:NSLocalizedString(@"logout", nil), nil];
-//    alert.tag = LogoutTag;
-//    [alert show];
     [Flurry logEvent:@"Logout_Tapped_Profile"];
 }
 
--(void) alertView:(FUIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (alertView.tag == LogoutTag && buttonIndex == 0) {
-        [self logout];
+-(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (alertView.tag == LogoutTag && buttonIndex == alertView.firstOtherButtonIndex) {
+        [self logout];  
     }
     else {
         [Flurry logEvent:@"Canceled_Logout"];
@@ -259,7 +241,7 @@ typedef enum {
 
 -(void) logout {
     [Flurry logEvent: @"Logged_out_facebook"];
-    [self dismissViewControllerAnimated:NO completion:nil];
+    [self dismissViewControllerAnimated:NO completion:nil]; //necessary to get rid of the profile modal view controller first
     [FBSession.activeSession closeAndClearTokenInformation];
 
 }

@@ -13,7 +13,8 @@ typedef enum {
     ECNotLoggedInAlert,
     PhotoSourcePickerTag,
     AddConcertConfirmTag,
-    RemoveConcertConfirmTag
+    RemoveConcertConfirmTag,
+    LogoutTag
 }ECAlertTags;
 
 #endif

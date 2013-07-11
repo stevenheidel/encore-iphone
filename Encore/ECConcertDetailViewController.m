@@ -568,8 +568,6 @@ NSString *kCellID = @"cellID";
 
 @end
 
-#import "UIImage+GIF.h"
-
 #pragma mark -
 @implementation ECPlaceHolderView
 
@@ -583,8 +581,6 @@ NSString *kCellID = @"cellID";
         
         self.label1.text = NSLocalizedString(@"POST_PLACEHOLDER_TEXT_1", nil);
         self.label2.text = NSLocalizedString(@"POST_PLACEHOLDER_TEXT_2", nil);
-        
-        self.liveGIF.image = [UIImage animatedGIFNamed:@"liveNow"];
         
 //        self.button.titleLabel.font = [UIFont heroFontWithSize: 22.0];
     }
