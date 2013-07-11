@@ -12,8 +12,9 @@
 
 @class MBProgressHUD; //TODO add HUD during search
 
-@interface ECNewMainViewController : UITableViewController
+@interface ECNewMainViewController : UITableViewController <UIAlertViewDelegate>
 
+@property (nonatomic, readonly) BOOL isLoggedIn; //Getter that pulls from app delegate
 
 @property (assign, nonatomic) BOOL hasSearched; //Flag for whether use has performed a search
 @property (assign, nonatomic) BOOL loadOther; //Flag for whether user has asked for other search results

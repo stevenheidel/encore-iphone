@@ -19,7 +19,7 @@
 -(void) shareTapped;
 -(id) initWithConcert:(NSDictionary*) concert;
 -(void) setConcert:(NSDictionary *)concert andUpdate: (BOOL) update;
-
+@property (nonatomic, readonly) BOOL isLoggedIn;
 @property (nonatomic, assign) ECSearchType searchType;
 @property (nonatomic,strong) NSDictionary * concert;
 @property (nonatomic,strong) IBOutlet UILabel * artistNameLabel;

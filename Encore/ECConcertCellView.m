@@ -34,7 +34,8 @@
     self.imageArtist.layer.masksToBounds = YES;
 //    self.imageArtist.layer.borderWidth = 1.0;
 //    self.imageArtist.layer.borderColor = [UIColor imageBorderColor].CGColor;
-    
+
+
     self.selectionStyle = UITableViewCellSelectionStyleGray; //TODO: custom selection style?
 }
 

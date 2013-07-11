@@ -8,7 +8,7 @@
 
 #import "ECLoginViewController.h"
 #import "ECAppDelegate.h"
-#import "ECMainViewController.h"
+//#import "ECMainViewController.h"
 #import "ECJSONPoster.h"
 #import "ECLoginPageView.h"
 @interface ECLoginViewController ()
@@ -83,6 +83,11 @@
     [appDelegate openSession];
 }
 
+-(IBAction)loginLater {
+    [Flurry logEvent:@"Login_Later"]; //TODO: add to flurry list v2
+    ECAppDelegate* appDelegate = (ECAppDelegate*)[UIApplication sharedApplication].delegate;
+    [appDelegate loginLater];
+}
 - (void)loginFailed {
     // User switched back to the app without authorizing. Stay here, but
     // stop the spinner.

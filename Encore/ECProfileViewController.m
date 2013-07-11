@@ -65,6 +65,7 @@ typedef enum {
     [self setUpHeaderView];
     self.arrPastImages = [[NSMutableArray alloc] init];
     [self getArtistImages];
+    self.view.clipsToBounds = YES;
 }
 
 - (void) setUpBackButton {
@@ -258,7 +259,9 @@ typedef enum {
 
 -(void) logout {
     [Flurry logEvent: @"Logged_out_facebook"];
+    [self dismissViewControllerAnimated:NO completion:nil];
     [FBSession.activeSession closeAndClearTokenInformation];
+
 }
 
 #pragma mark - TestFlight Feedback solicitation

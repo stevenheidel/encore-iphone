@@ -17,7 +17,9 @@
 #import "UIImageView+AFNetworking.h"
 
 #import "ECConcertDetailViewController.h"
+#import "ECAppDelegate.h"
 
+#import "ECAlertTags.h"
 #define SearchCellIdentifier @"ECSearchResultCell"
 #define ConcertCellIdentifier @"ECConcertCellView"
 
@@ -26,6 +28,7 @@ typedef enum {
     ECSearchLoadOtherSection,
     ECNumberOfSearchSections //always have this one last
 }ECSearchSection;
+
 @interface ECNewMainViewController ()
 
 @end
@@ -72,6 +75,8 @@ typedef enum {
     [button addTarget:self action:@selector(clearSearchBar) forControlEvents:UIControlEventTouchUpInside];
     self.SearchBar.rightView = button;
     self.SearchBar.rightViewMode = UITextFieldViewModeAlways;
+    
+    self.view.backgroundColor = [UIColor blackColor];
 }
 -(void) clearSearchBar {
     self.SearchBar.text = @"";
@@ -177,20 +182,49 @@ typedef enum {
 //    }
 //}
 
+-(ECAppDelegate*) appDelegate  {
+    return (ECAppDelegate*)[UIApplication sharedApplication].delegate;
+}
+
+-(BOOL) isLoggedIn {
+    return [[self appDelegate] isLoggedIn];
+}
+
 #pragma mark - Buttons
 -(void)profileTapped {
     [Flurry logEvent:@"Profile_Button_Pressed"];
-    
-    if (self.profileViewController == nil) {
-        ECProfileViewController* profileViewController = [ECProfileViewController new];
-        self.profileViewController = [[UINavigationController alloc] initWithRootViewController:profileViewController];
-        
-//        self.profileViewController.arrPastConcerts = [self.concerts objectForKey:@"past"];
+    if (self.isLoggedIn){
+        if (self.profileViewController == nil) {
+            ECProfileViewController* profileViewController = [ECProfileViewController new];
+            self.profileViewController = [[UINavigationController alloc] initWithRootViewController:profileViewController];
+            
+            //        self.profileViewController.arrPastConcerts = [self.concerts objectForKey:@"past"];
+        }
+        self.profileViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+        [self presentViewController:self.profileViewController animated:YES completion:nil];
     }
-    self.profileViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-    [self presentViewController:self.profileViewController animated:YES completion:nil];
+    
+    else {
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login", nil) message:NSLocalizedString(@"To view your profile, you must first login", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Login", nil), nil];
+        alert.tag = ECNotLoggedInAlert;
+        [alert show];
+    }
 }
 
+#pragma mark Alert View Delegate
+-(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (alertView.tag == ECNotLoggedInAlert) {
+        if (buttonIndex == alertView.firstOtherButtonIndex) {
+            [self showLogin];
+        }
+        else {
+            [Flurry logEvent:@"Canceled_Login_From_Alert"];//This is not the only place this log is made
+        }
+    }
+}
+-(void) showLogin {
+    [[self appDelegate] showLoginView: YES];
+}
 #pragma mark Segmented Control
 -(IBAction) switchedSelection: (id) sender {
     self.hasSearched = FALSE;
@@ -250,7 +284,16 @@ typedef enum {
     }
     return 0;
 }
-
+-(void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.hasSearched) {
+    }
+    else {
+    //TODO: remove when background set up properly
+        cell.backgroundColor = [UIColor blackColor];
+        cell.accessoryView.backgroundColor = [UIColor blackColor];
+        cell.contentView.superview.backgroundColor = [UIColor blackColor];
+    }
+}
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (self.hasSearched) {
         if (indexPath.section == ECSearchResultSection) {
@@ -264,25 +307,27 @@ typedef enum {
                 //TODO: customize cell
                 UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
                 cell.textLabel.text = @"Wrong artist?";
+                cell.textLabel.textColor = [UIColor whiteColor];
                 return cell;
             }
             else {
                 UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
                 cell.textLabel.text = [[self.otherArtists objectAtIndex:indexPath.row] objectForKey:@"name"];
+                cell.textLabel.textColor = [UIColor whiteColor];
                 return cell;
             }
         }
     }
-    else {
+    else { //popular concert cell
         ECConcertCellView *cell = [tableView dequeueReusableCellWithIdentifier:ConcertCellIdentifier forIndexPath:indexPath];
         NSArray* concerts = [self currentEventArray];
         NSDictionary * concertDic = [concerts objectAtIndex:indexPath.row];
-//        UIImage *image = [self.arrTodaysImages objectAtIndex:indexPath.row];
+
         [cell setUpCellForConcert:concertDic];
-//        [cell setUpCellImageForConcert:image];
         
         //Using UIImageView+AFNetworking, automatically set the cell's image view based on the URL
         [cell.imageArtist setImageWithURL:[concertDic imageURL] placeholderImage:nil]; //TODO add placeholder
+        
         return cell;
     }
     
@@ -325,7 +370,25 @@ typedef enum {
         [self.navigationController pushViewController:detailVC animated:YES];
     }
 }
-
+-(UIView*) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    if (self.hasSearched && self.searchResultsEvents.count>0) {
+        if (section == ECSearchResultSection) {
+            NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"SearchResultsSectionHeader" owner:nil options:nil];
+            UIView *mainView = [subviewArray objectAtIndex:0];
+//            [(UILabel*)[mainView viewWithTag:20] setText:[[self.searchResultsEvents objectAtIndex:0] artistName]];
+            [(UIImageView*)[mainView viewWithTag:10] setImageWithURL:[[self.searchResultsEvents objectAtIndex:0] imageURL] placeholderImage:nil];
+            mainView.clipsToBounds =YES;
+            return mainView;
+        }
+    }
+    return nil;
+}
+-(CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    if (self.hasSearched && section == ECSearchResultSection) {
+        return 117.0;
+    }
+    return 0.0;
+}
 #pragma mark - Search Text Field
 - (BOOL)textFieldShouldClear:(UITextField *)textField {
     self.hasSearched = FALSE;
@@ -351,6 +414,8 @@ typedef enum {
         self.hasSearched = TRUE;
         self.loadOther = FALSE;
         self.comboSearchResultsDic = comboDic;
+        UIImageView* image = [UIImageView new];
+        [image setImageWithURL:[[self.searchResultsEvents objectAtIndex:0] imageURL] placeholderImage:nil];
         [self.tableView reloadData];
     }
 }
