@@ -13,7 +13,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="HlE-VT-IbH">
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="E96-RF-aMq" userLabel="Header">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="109"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -107,6 +107,29 @@
     <resources>
         <image name="search.png" width="454" height="47"/>
     </resources>
+    <classes>
+        <class className="ECNewMainViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ECNewMainViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="SearchBar" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="segmentedControl" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="ECSearchResultCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ECSearchResultCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="btnAdd" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="btnDisclosure" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="lblDate" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="lblEventTitle" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="lblVenue" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
