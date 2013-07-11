@@ -399,7 +399,7 @@ typedef enum {
     return nil;
 }
 -(CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if (self.hasSearched && section == ECSearchResultSection) {
+    if (self.hasSearched && section == ECSearchResultSection && self.searchResultsEvents.count>0) {
         return 117.0;
     }
     return 0.0;
@@ -429,13 +429,25 @@ typedef enum {
 }
 
 - (void)fetchedConcertsForSearch:(NSDictionary *)comboDic {
+    [self.hud hide:YES];
     if (comboDic) {
         self.hasSearched = TRUE;
         self.loadOther = FALSE;
         self.comboSearchResultsDic = comboDic;
-        [self.tableView reloadData];
-        [self.hud hide:YES];
     }
+    else {
+        self.hasSearched = FALSE;
+        self.loadOther = FALSE;
+        self.comboSearchResultsDic = nil;
+        MBProgressHUD* alert = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+        alert.labelText = @"No artists found";
+        alert.mode = MBProgressHUDModeText;
+        alert.removeFromSuperViewOnHide = YES;
+        [alert hide:YES afterDelay:2.0]; //TODO use #define for delay
+        alert.labelFont = [UIFont heroFontWithSize:18.0f];
+        alert.color = [UIColor redHUDConfirmationColor];
+    }
+    [self.tableView reloadData];
 }
 
 #pragma mark Getters on combo search results dic
