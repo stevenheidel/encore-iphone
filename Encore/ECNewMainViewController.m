@@ -348,7 +348,12 @@ typedef enum {
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return SEARCH_CELL_HEIGHT;
+    if (self.hasSearched) {
+        return SEARCH_CELL_HEIGHT;
+    } else {
+        return CONCERT_CELL_HEIGHT;
+    }
+    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
