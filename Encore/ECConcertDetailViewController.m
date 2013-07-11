@@ -14,7 +14,8 @@
 #import "NSDictionary+Posts.h"
 #import "ECJSONPoster.h"
 #import "ECPostViewController.h"
-#import "ECMainViewController.h"
+//#import "ECMainViewController.h"
+#import <FacebookSDK/FacebookSDK.h>
 #import "ECPostCollectionHeaderView.h"
 #import "ECCollectionViewFlowLayout.h"
 
@@ -525,9 +526,10 @@ typedef enum {
     return [[NSUserDefaults standardUserDefaults] stringForKey:NSLocalizedString(@"user_id", nil)];
 }
 
--(ECMainViewController*) mainViewController {
-    ECAppDelegate* appDel = (ECAppDelegate *)[UIApplication sharedApplication].delegate;
-    return appDel.mainViewController;
+//-(ECMainViewController*) mainViewController {
+//    ECAppDelegate* appDel = (ECAppDelegate *)[UIApplication sharedApplication].delegate;
+//    return appDel.mainViewController;
+//}
 }
 
 @end
