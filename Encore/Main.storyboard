@@ -12,7 +12,13 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="HlE-VT-IbH">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SOM-DW-RgO"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="gradient.png" translatesAutoresizingMaskIntoConstraints="NO" id="ewv-3k-71O">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="550" id="atl-WT-3My"/>
+                                </constraints>
+                            </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="HlE-VT-IbH">
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="E96-RF-aMq" userLabel="Header">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="109"/>
@@ -42,7 +48,7 @@
                                             </connections>
                                         </textField>
                                     </subviews>
-                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstItem="UU0-XP-3u7" firstAttribute="top" secondItem="BPv-ov-Jp0" secondAttribute="bottom" constant="18" type="user" id="7Rf-pR-1Oq"/>
                                         <constraint firstItem="BPv-ov-Jp0" firstAttribute="top" secondItem="E96-RF-aMq" secondAttribute="top" constant="20" symbolic="YES" type="user" id="G8o-h9-ghT"/>
@@ -60,6 +66,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -70,15 +77,23 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="ewv-3k-71O" firstAttribute="leading" secondItem="r8f-Xx-36C" secondAttribute="leading" type="default" id="0Gn-9Q-sHG"/>
                             <constraint firstItem="HlE-VT-IbH" firstAttribute="top" secondItem="r8f-Xx-36C" secondAttribute="top" type="default" id="BuE-Pa-zv4"/>
                             <constraint firstItem="HlE-VT-IbH" firstAttribute="trailing" secondItem="r8f-Xx-36C" secondAttribute="trailing" type="default" id="Ktu-F3-X28"/>
                             <constraint firstItem="HlE-VT-IbH" firstAttribute="leading" secondItem="r8f-Xx-36C" secondAttribute="leading" type="default" id="Vhd-4o-OhP"/>
                             <constraint firstItem="HlE-VT-IbH" firstAttribute="bottom" secondItem="r8f-Xx-36C" secondAttribute="bottom" type="default" id="adz-Ev-knC"/>
+                            <constraint firstItem="SOM-DW-RgO" firstAttribute="leading" secondItem="r8f-Xx-36C" secondAttribute="leading" type="default" id="dcs-gv-Vap"/>
+                            <constraint firstItem="SOM-DW-RgO" firstAttribute="bottom" secondItem="r8f-Xx-36C" secondAttribute="bottom" type="default" id="jUP-ZD-N4B"/>
+                            <constraint firstItem="ewv-3k-71O" firstAttribute="bottom" secondItem="r8f-Xx-36C" secondAttribute="bottom" type="default" id="kHf-dr-W65"/>
+                            <constraint firstItem="SOM-DW-RgO" firstAttribute="trailing" secondItem="r8f-Xx-36C" secondAttribute="trailing" type="default" id="oCG-nV-OFP"/>
+                            <constraint firstItem="SOM-DW-RgO" firstAttribute="top" secondItem="r8f-Xx-36C" secondAttribute="top" type="default" id="rJk-Qb-6n6"/>
+                            <constraint firstItem="ewv-3k-71O" firstAttribute="trailing" secondItem="r8f-Xx-36C" secondAttribute="trailing" type="default" id="veB-s4-VFG"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="hU3-8N-dbJ"/>
                     <connections>
                         <outlet property="SearchBar" destination="UU0-XP-3u7" id="8rI-Cl-dtP"/>
+                        <outlet property="imgBackground" destination="SOM-DW-RgO" id="9JC-84-F7Y"/>
                         <outlet property="segmentedControl" destination="BPv-ov-Jp0" id="Mca-YI-uBY"/>
                         <outlet property="tableView" destination="HlE-VT-IbH" id="NtG-Dl-PID"/>
                         <outlet property="view" destination="r8f-Xx-36C" id="iNS-MP-tOe"/>
@@ -105,6 +120,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="gradient.png" width="1" height="1015"/>
         <image name="search.png" width="454" height="47"/>
     </resources>
     <classes>
@@ -112,6 +128,7 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ECNewMainViewController.h"/>
             <relationships>
                 <relationship kind="outlet" name="SearchBar" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="imgBackground" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="segmentedControl" candidateClass="UISegmentedControl"/>
                 <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
             </relationships>

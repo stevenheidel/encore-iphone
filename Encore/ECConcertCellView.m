@@ -18,6 +18,7 @@
 @implementation ECConcertCellView
 
 - (void)setUpCellForConcert:(NSDictionary *)concertDic {
+        
     self.lblDate.text = [concertDic niceDate];
     self.lblDate.font = [UIFont heroFontWithSize: 12.0];
     self.lblDate.textColor = [UIColor whiteColor];
@@ -36,7 +37,7 @@
 //    self.imageArtist.layer.borderColor = [UIColor imageBorderColor].CGColor;
 
 
-    self.selectionStyle = UITableViewCellSelectionStyleGray; //TODO: custom selection style?
+    self.selectionStyle = UITableViewCellSelectionStyleNone; //TODO: custom selection style?
 }
 
 - (void)setUpCellImageForConcert:(UIImage *)image {

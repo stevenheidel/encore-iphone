@@ -14,7 +14,7 @@
 
 @interface ECNewMainViewController : UIViewController <UIAlertViewDelegate, UITableViewDataSource,UITableViewDelegate>
 
-
+@property(nonatomic, strong) IBOutlet UIImageView *imgBackground;
 @property(nonatomic, strong) IBOutlet UITableView *tableView;
 @property (nonatomic, readonly) BOOL isLoggedIn; //Getter that pulls from app delegate
 

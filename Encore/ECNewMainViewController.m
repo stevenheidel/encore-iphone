@@ -297,14 +297,7 @@ typedef enum {
     return 0;
 }
 -(void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (self.hasSearched) {
-    }
-    else {
-    //TODO: remove when background set up properly
-        cell.backgroundColor = [UIColor blackColor];
-        cell.accessoryView.backgroundColor = [UIColor blackColor];
-//        cell.contentView.superview.backgroundColor = [UIColor blackColor];
-    }
+
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (self.hasSearched) {
@@ -339,6 +332,10 @@ typedef enum {
         
         //Using UIImageView+AFNetworking, automatically set the cell's image view based on the URL
         [cell.imageArtist setImageWithURL:[concertDic imageURL] placeholderImage:nil]; //TODO add placeholder
+        
+        if ([indexPath row] == 0) {
+             [self.imgBackground setImageWithURL:[concertDic imageURL] placeholderImage:nil];
+        }
         
         return cell;
     }
