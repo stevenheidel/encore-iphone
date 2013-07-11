@@ -61,6 +61,7 @@
     self.arrPastImages = [[NSMutableArray alloc] init];
     [self getArtistImages];
     self.view.clipsToBounds = YES;
+    [self.tableView setIndicatorStyle:UIScrollViewIndicatorStyleWhite];
 }
 
 - (void) setUpBackButton {

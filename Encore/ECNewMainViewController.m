@@ -87,6 +87,8 @@ typedef enum {
     self.SearchBar.rightViewMode = UITextFieldViewModeAlways;
     
     self.view.backgroundColor = [UIColor blackColor];
+    
+    [self.tableView setIndicatorStyle:UIScrollViewIndicatorStyleWhite];
 }
 -(void) clearSearchBar {
     self.SearchBar.text = @"";
