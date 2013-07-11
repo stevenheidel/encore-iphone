@@ -291,7 +291,7 @@ typedef enum {
     //TODO: remove when background set up properly
         cell.backgroundColor = [UIColor blackColor];
         cell.accessoryView.backgroundColor = [UIColor blackColor];
-        cell.contentView.superview.backgroundColor = [UIColor blackColor];
+//        cell.contentView.superview.backgroundColor = [UIColor blackColor];
     }
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -419,8 +419,6 @@ typedef enum {
         self.hasSearched = TRUE;
         self.loadOther = FALSE;
         self.comboSearchResultsDic = comboDic;
-        UIImageView* image = [UIImageView new];
-        [image setImageWithURL:[[self.searchResultsEvents objectAtIndex:0] imageURL] placeholderImage:nil];
         [self.tableView reloadData];
     }
 }
