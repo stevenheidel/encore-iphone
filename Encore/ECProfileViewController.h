@@ -9,11 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "FBProfilePictureView.h"
 #import "ECFeedbackViewController.h"
-@interface ECProfileViewController : UIViewController <UIAlertViewDelegate,ECFeedbackViewControllerDelegate> {
+@interface ECProfileViewController : UIViewController <UIAlertViewDelegate,ECFeedbackViewControllerDelegate, UITableViewDelegate, UITableViewDataSource> {
     NSString* userID;
 }
 
-@property (nonatomic,strong) IBOutlet UINavigationBar* navBar;
 @property(nonatomic, strong) IBOutlet UITableView *tableView;
 
 @property(nonatomic, strong) NSArray *arrPastConcerts;

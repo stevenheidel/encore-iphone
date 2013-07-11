@@ -4,77 +4,89 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
     <scenes>
-        <!--New Main View Controller - Root View Controller-->
-        <scene sceneID="C3Q-xK-t9j">
+        <!--New Main View Controller-->
+        <scene sceneID="p5r-kV-TIM">
             <objects>
-                <tableViewController id="wSB-iT-c4V" customClass="ECNewMainViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="F8s-8c-5sE">
+                <viewController id="8hQ-DB-bIb" customClass="ECNewMainViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="r8f-Xx-36C">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" id="5Te-QE-PfB" userLabel="Header">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="109"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <subviews>
-                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="uCu-Hb-gis">
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="HlE-VT-IbH">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <view key="tableHeaderView" contentMode="scaleToFill" id="E96-RF-aMq" userLabel="Header">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="109"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="BPv-ov-Jp0">
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="205" id="OTt-cL-kbJ"/>
+                                            </constraints>
+                                            <segments>
+                                                <segment title="PAST"/>
+                                                <segment title="TODAY"/>
+                                            </segments>
+                                            <connections>
+                                                <action selector="switchedSelection:" destination="8hQ-DB-bIb" eventType="valueChanged" id="anV-ke-fVB"/>
+                                            </connections>
+                                        </segmentedControl>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Artist search..." clearsOnBeginEditing="YES" minimumFontSize="17" background="search.png" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="UU0-XP-3u7">
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="30" id="zgo-hM-Seq"/>
+                                            </constraints>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <textInputTraits key="textInputTraits" returnKeyType="search"/>
+                                            <connections>
+                                                <outlet property="delegate" destination="8hQ-DB-bIb" id="ez6-fH-gFb"/>
+                                            </connections>
+                                        </textField>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" constant="205" id="EuC-j5-rc5"/>
+                                        <constraint firstItem="UU0-XP-3u7" firstAttribute="top" secondItem="BPv-ov-Jp0" secondAttribute="bottom" constant="18" type="user" id="7Rf-pR-1Oq"/>
+                                        <constraint firstItem="BPv-ov-Jp0" firstAttribute="top" secondItem="E96-RF-aMq" secondAttribute="top" constant="20" symbolic="YES" type="user" id="G8o-h9-ghT"/>
+                                        <constraint firstItem="BPv-ov-Jp0" firstAttribute="trailing" secondItem="UU0-XP-3u7" secondAttribute="trailing" type="default" id="U2Q-za-E0O"/>
+                                        <constraint firstItem="BPv-ov-Jp0" firstAttribute="leading" secondItem="UU0-XP-3u7" secondAttribute="leading" type="default" id="Zma-LA-pKe"/>
+                                        <constraint firstItem="UU0-XP-3u7" firstAttribute="centerX" secondItem="E96-RF-aMq" secondAttribute="centerX" type="default" id="qvy-J3-npg"/>
                                     </constraints>
-                                    <segments>
-                                        <segment title="PAST"/>
-                                        <segment title="TODAY"/>
-                                    </segments>
-                                    <connections>
-                                        <action selector="switchedSelection:" destination="wSB-iT-c4V" eventType="valueChanged" id="lyj-9b-O20"/>
-                                    </connections>
-                                </segmentedControl>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Artist search..." clearsOnBeginEditing="YES" minimumFontSize="17" background="search.png" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="vtu-yS-SNa">
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="30" id="gg2-hD-j4o"/>
-                                    </constraints>
-                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                    <textInputTraits key="textInputTraits" returnKeyType="search"/>
-                                    <connections>
-                                        <outlet property="delegate" destination="wSB-iT-c4V" id="JkJ-l9-hvB"/>
-                                    </connections>
-                                </textField>
-                            </subviews>
-                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                            <constraints>
-                                <constraint firstItem="uCu-Hb-gis" firstAttribute="top" secondItem="5Te-QE-PfB" secondAttribute="top" constant="20" symbolic="YES" type="user" id="0qV-4A-LBV"/>
-                                <constraint firstItem="uCu-Hb-gis" firstAttribute="leading" secondItem="vtu-yS-SNa" secondAttribute="leading" type="default" id="43O-Gp-5P0"/>
-                                <constraint firstItem="vtu-yS-SNa" firstAttribute="top" secondItem="uCu-Hb-gis" secondAttribute="bottom" constant="18" type="user" id="j5c-Xg-gss"/>
-                                <constraint firstItem="uCu-Hb-gis" firstAttribute="trailing" secondItem="vtu-yS-SNa" secondAttribute="trailing" type="default" id="knG-ky-T3x"/>
-                                <constraint firstItem="vtu-yS-SNa" firstAttribute="centerX" secondItem="5Te-QE-PfB" secondAttribute="centerX" type="default" id="tCw-sA-EsQ"/>
-                            </constraints>
-                        </view>
-                        <view key="tableFooterView" contentMode="scaleToFill" id="fvV-rj-Z2B" userLabel="Empty footer view">
-                            <rect key="frame" x="0.0" y="175" width="320" height="0.0"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        </view>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="Cell" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="1hf-AV-VNA" customClass="ECSearchResultCell">
-                                <rect key="frame" x="0.0" y="131" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
-                            </tableViewCell>
-                        </prototypes>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="8CT-uX-XXE"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" restorationIdentifier="Cell" selectionStyle="blue" indentationWidth="10" reuseIdentifier="Cell" id="7Fj-8N-9kC" customClass="ECSearchResultCell">
+                                        <rect key="frame" x="0.0" y="131" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="8hQ-DB-bIb" id="jQd-LX-NwO"/>
+                                    <outlet property="delegate" destination="8hQ-DB-bIb" id="fbW-Ai-rnv"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="HlE-VT-IbH" firstAttribute="top" secondItem="r8f-Xx-36C" secondAttribute="top" type="default" id="BuE-Pa-zv4"/>
+                            <constraint firstItem="HlE-VT-IbH" firstAttribute="trailing" secondItem="r8f-Xx-36C" secondAttribute="trailing" type="default" id="Ktu-F3-X28"/>
+                            <constraint firstItem="HlE-VT-IbH" firstAttribute="leading" secondItem="r8f-Xx-36C" secondAttribute="leading" type="default" id="Vhd-4o-OhP"/>
+                            <constraint firstItem="HlE-VT-IbH" firstAttribute="bottom" secondItem="r8f-Xx-36C" secondAttribute="bottom" type="default" id="adz-Ev-knC"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="hU3-8N-dbJ"/>
                     <connections>
-                        <outlet property="SearchBar" destination="vtu-yS-SNa" id="gH0-vw-HlX"/>
-                        <outlet property="segmentedControl" destination="uCu-Hb-gis" id="nPl-7E-33Z"/>
+                        <outlet property="SearchBar" destination="UU0-XP-3u7" id="8rI-Cl-dtP"/>
+                        <outlet property="segmentedControl" destination="BPv-ov-Jp0" id="Mca-YI-uBY"/>
+                        <outlet property="tableView" destination="HlE-VT-IbH" id="NtG-Dl-PID"/>
+                        <outlet property="view" destination="r8f-Xx-36C" id="iNS-MP-tOe"/>
                     </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="5J8-0o-QKu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="n0N-t9-FCf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="577" y="-20"/>
+            <point key="canvasLocation" x="435" y="-20"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="sgR-27-kM6">
@@ -84,7 +96,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="wSB-iT-c4V" kind="relationship" relationship="rootViewController" id="x90-dH-byx"/>
+                        <segue destination="8hQ-DB-bIb" kind="relationship" relationship="rootViewController" id="dQi-Z0-j4S"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sw1-pr-qeA" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -95,28 +107,6 @@
     <resources>
         <image name="search.png" width="454" height="47"/>
     </resources>
-    <classes>
-        <class className="ECNewMainViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ECNewMainViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="SearchBar" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="segmentedControl" candidateClass="UISegmentedControl"/>
-            </relationships>
-        </class>
-        <class className="ECSearchResultCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ECSearchResultCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="btnAdd" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="btnDisclosure" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="lblDate" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lblEventTitle" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lblVenue" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

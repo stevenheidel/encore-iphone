@@ -12,8 +12,10 @@
 
 @class MBProgressHUD;
 
-@interface ECNewMainViewController : UITableViewController <UIAlertViewDelegate>
+@interface ECNewMainViewController : UIViewController <UIAlertViewDelegate, UITableViewDataSource,UITableViewDelegate>
 
+
+@property(nonatomic, strong) IBOutlet UITableView *tableView;
 @property (nonatomic, readonly) BOOL isLoggedIn; //Getter that pulls from app delegate
 
 @property (assign, nonatomic) BOOL hasSearched; //Flag for whether use has performed a search
