@@ -30,8 +30,6 @@
 		A02661E4178C9F6200741C9A /* ECSearchResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A02661E3178C9F6200741C9A /* ECSearchResultCell.xib */; };
 		A02661ED178DDCEA00741C9A /* addEventButton.png in Resources */ = {isa = PBXBuildFile; fileRef = A02661EB178DDCEA00741C9A /* addEventButton.png */; };
 		A02661EE178DDCEA00741C9A /* addEventButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A02661EC178DDCEA00741C9A /* addEventButton@2x.png */; };
-		A02661F1178DE29500741C9A /* LoginSplash.png in Resources */ = {isa = PBXBuildFile; fileRef = A02661EF178DE29500741C9A /* LoginSplash.png */; };
-		A02661F2178DE29500741C9A /* loginSplash@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A02661F0178DE29500741C9A /* loginSplash@2x.png */; };
 		A02661F5178DE62700741C9A /* removeEventButton.png in Resources */ = {isa = PBXBuildFile; fileRef = A02661F3178DE62700741C9A /* removeEventButton.png */; };
 		A02661F6178DE62700741C9A /* removeEventButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A02661F4178DE62700741C9A /* removeEventButton@2x.png */; };
 		A02661F8178DF02000741C9A /* gradient.png in Resources */ = {isa = PBXBuildFile; fileRef = A02661F7178DF01F00741C9A /* gradient.png */; };
@@ -188,8 +186,6 @@
 		A02661E3178C9F6200741C9A /* ECSearchResultCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECSearchResultCell.xib; sourceTree = "<group>"; };
 		A02661EB178DDCEA00741C9A /* addEventButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addEventButton.png; sourceTree = "<group>"; };
 		A02661EC178DDCEA00741C9A /* addEventButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "addEventButton@2x.png"; sourceTree = "<group>"; };
-		A02661EF178DE29500741C9A /* LoginSplash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LoginSplash.png; sourceTree = "<group>"; };
-		A02661F0178DE29500741C9A /* loginSplash@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loginSplash@2x.png"; sourceTree = "<group>"; };
 		A02661F3178DE62700741C9A /* removeEventButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = removeEventButton.png; sourceTree = "<group>"; };
 		A02661F4178DE62700741C9A /* removeEventButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "removeEventButton@2x.png"; sourceTree = "<group>"; };
 		A02661F7178DF01F00741C9A /* gradient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gradient.png; sourceTree = "<group>"; };
@@ -396,8 +392,6 @@
 		D45DBD631783EDFB000ED3C1 /* Login Screens */ = {
 			isa = PBXGroup;
 			children = (
-				A02661EF178DE29500741C9A /* LoginSplash.png */,
-				A02661F0178DE29500741C9A /* loginSplash@2x.png */,
 				D4AB1B0F17829412002A29B9 /* login1.png */,
 				D4AB1B1017829412002A29B9 /* login1@2x.png */,
 				D4AB1B1117829412002A29B9 /* login2.png */,
@@ -954,8 +948,6 @@
 				D4A9B310178DDABD008B5504 /* dividerdefault@2x.png in Resources */,
 				A02661ED178DDCEA00741C9A /* addEventButton.png in Resources */,
 				A02661EE178DDCEA00741C9A /* addEventButton@2x.png in Resources */,
-				A02661F1178DE29500741C9A /* LoginSplash.png in Resources */,
-				A02661F2178DE29500741C9A /* loginSplash@2x.png in Resources */,
 				A02661F5178DE62700741C9A /* removeEventButton.png in Resources */,
 				A02661F6178DE62700741C9A /* removeEventButton@2x.png in Resources */,
 				A02661F8178DF02000741C9A /* gradient.png in Resources */,
