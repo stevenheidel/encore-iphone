@@ -15,7 +15,7 @@
 #import "ECSearchResultCell.h"
 #import "NSDictionary+ConcertList.h"
 #import "UIImageView+AFNetworking.h"
-
+#import "MBProgressHUD.h"
 #import "ECConcertDetailViewController.h"
 #import "ECAppDelegate.h"
 
@@ -60,6 +60,16 @@ typedef enum {
 //        [self.tableView reloadData];
     }];
     self.currentSearchType = [ECNewMainViewController searchTypeForSegmentIndex:self.segmentedControl.selectedSegmentIndex];
+    
+    
+    //add hud progress indicator
+    self.hud = [[MBProgressHUD alloc] initWithView:self.view];
+    
+    [self.view addSubview:self.hud];
+    self.hud.labelText = NSLocalizedString(@"loading", nil);
+    self.hud.color = [UIColor lightBlueHUDConfirmationColor];
+    self.hud.labelFont = [UIFont heroFontWithSize:self.hud.labelFont.pointSize];
+    self.hud.detailsLabelFont = [UIFont heroFontWithSize:self.hud.detailsLabelFont.pointSize];
     
     //Add padding for search bar
     UIView* paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 20)];
@@ -394,6 +404,7 @@ typedef enum {
     }
     return 0.0;
 }
+
 #pragma mark - Search Text Field
 - (BOOL)textFieldShouldClear:(UITextField *)textField {
     self.hasSearched = FALSE;
@@ -409,6 +420,9 @@ typedef enum {
             [self fetchedConcertsForSearch:comboDic];
         }];
         
+        self.hud.labelText = NSLocalizedString(@"Searching", nil);
+        self.hud.detailsLabelText = [NSString stringWithFormat:NSLocalizedString(@"hudSearchArtist", nil), [textField text]];
+        [self.hud show:YES];
     }
     [textField resignFirstResponder];
     return YES;
@@ -420,6 +434,7 @@ typedef enum {
         self.loadOther = FALSE;
         self.comboSearchResultsDic = comboDic;
         [self.tableView reloadData];
+        [self.hud hide:YES];
     }
 }
 

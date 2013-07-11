@@ -12,7 +12,7 @@
 
 - (void)setupCellForEvent:(NSDictionary *)concertDic {
     
-    self.selectionStyle = UITableViewCellSelectionStyleGray;
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
     self.lblEventTitle.text = [concertDic artistName];
     self.lblDate.text = [concertDic niceDate];
     self.lblVenue.text = [concertDic venueName];

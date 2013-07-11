@@ -10,7 +10,7 @@
 #import "ECProfileViewController.h"
 #import "ECSearchType.h"
 
-@class MBProgressHUD; //TODO add HUD during search
+@class MBProgressHUD;
 
 @interface ECNewMainViewController : UITableViewController <UIAlertViewDelegate>
 
@@ -41,4 +41,6 @@
 @property (nonatomic, strong) NSDictionary* comboSearchResultsDic;
 
 @property (strong,nonatomic) UIBarButtonItem* shareButton;
+
+@property (strong, nonatomic) MBProgressHUD * hud;
 @end
