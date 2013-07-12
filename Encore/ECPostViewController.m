@@ -51,7 +51,7 @@ typedef enum {
     self.captionLabel.font = [UIFont heroFontWithSize: 12.0f];
     self.userNameLabel.font = [UIFont lightHeroFontWithSize: 18.0f];
 
-    [self setupBarButtons];    
+    [self setupNavBar];
 
     [self setupGestureRecgonizers];
     self.containerView.alpha = 0.0;
@@ -59,7 +59,10 @@ typedef enum {
     self.flagPostButton.enabled = NO;
 }
 
--(void) setupBarButtons {
+-(void) setupNavBar {
+    UIImageView* encoreLogo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo.png"]];
+    self.navigationItem.titleView = encoreLogo;
+    
     UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
     UIImage *leftButImage = [UIImage imageNamed:@"backButton.png"]; //stretchableImageWithLeftCapWidth:10 topCapHeight:10];
     [leftButton setBackgroundImage:leftButImage forState:UIControlStateNormal];

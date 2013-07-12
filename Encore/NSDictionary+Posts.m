@@ -23,7 +23,7 @@
 }
 
 -(NSURL *) profilePictureURL {
-    if ([self objectForKey:@"user_profile_picture"]) {
+    if ([self objectForKey:@"user_profile_picture"] != [NSNull null]) {
         return [NSURL URLWithString:[self objectForKey:@"user_profile_picture"]];
     }
     return nil;

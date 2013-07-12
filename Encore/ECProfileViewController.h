@@ -16,7 +16,6 @@
 @property(nonatomic, strong) IBOutlet UITableView *tableView;
 
 @property(nonatomic, strong) NSArray *arrPastConcerts;
-@property(nonatomic, strong) NSMutableArray *arrPastImages;
 
 @property (strong, nonatomic) IBOutlet UIImageView *imgBackground;
 @property (strong, nonatomic) IBOutlet FBProfilePictureView *imgProfile;

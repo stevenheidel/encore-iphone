@@ -13,7 +13,7 @@
 #import "NSDictionary+ConcertList.h"
 #import <QuartzCore/QuartzCore.h>
 #import <FacebookSDK/FacebookSDK.h>
-
+#import "UIImageView+AFNetworking.h"
 #import "UIColor+EncoreUI.h"
 #import "UIFont+Encore.h"
 
@@ -57,8 +57,6 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"ECProfileConcertCell" bundle:nil]
          forCellReuseIdentifier:@"ECProfileConcertCell"];
     [self setUpHeaderView];
-    self.arrPastImages = [[NSMutableArray alloc] init];
-    [self getArtistImages];
     self.view.clipsToBounds = YES;
     [self.tableView setIndicatorStyle:UIScrollViewIndicatorStyleWhite];
     [self.tableView setSeparatorColor:[UIColor separatorColor]];
@@ -157,22 +155,9 @@
         //NSLog(@"%@: User Concerts response = %@", NSStringFromClass([self class]), concerts);
         self.events = concerts;
         self.arrPastConcerts = [self.events objectForKey:@"past"];
-        [self getArtistImages];
         [self updateHeader];
         [self.tableView reloadData];
     }];
-}
-
--(void) getArtistImages {
-    for (NSDictionary *concertDic in self.arrPastConcerts) {
-        NSURL *imageURL = [concertDic imageURL];
-        UIImage *regImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL]];
-        if (regImage) {
-            [self.arrPastImages addObject:regImage];
-        } else {
-            [self.arrPastImages addObject:[UIImage imageNamed:@"placeholder.jpg"]];
-        }
-    }
 }
 
 -(void) backButtonWasPressed {
@@ -185,9 +170,8 @@
     
     ECProfileConcertCell *cell = [tableView dequeueReusableCellWithIdentifier:myIdentifier forIndexPath:indexPath];
     NSDictionary * concertDic = [self.arrPastConcerts objectAtIndex:indexPath.row];
-    UIImage *image = [self.arrPastImages objectAtIndex:indexPath.row];
     [cell setUpCellForConcert:concertDic];
-    [cell setUpCellImageForConcert:image];
+    [cell.imageArtist setImageWithURL:[concertDic imageURL] placeholderImage:nil];
 
     cell.contentView.backgroundColor = [UIColor clearColor];
 //    if ([indexPath row] % 2) {
