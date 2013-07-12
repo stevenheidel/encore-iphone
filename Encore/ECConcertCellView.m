@@ -25,7 +25,6 @@
     self.lblName.text = [[concertDic artistName] uppercaseString];
     self.lblName.font = [UIFont heroFontWithSize: 16.0];
     self.lblName.textColor = [UIColor blueArtistTextColor];
-    [self.lblName sizeToFit];
     self.lblLocation.text = [[concertDic venueName] uppercaseString];
     self.lblLocation.font = [UIFont heroFontWithSize: 10.0];
     self.lblLocation.textColor = [UIColor whiteColor];
