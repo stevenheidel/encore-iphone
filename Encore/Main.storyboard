@@ -21,7 +21,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="HlE-VT-IbH">
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="E96-RF-aMq" userLabel="Header">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="130"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="115"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="BPv-ov-Jp0" userLabel="Segmented Control">
@@ -58,29 +58,29 @@
                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hC3-fG-MyG">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" image="lastfmAttr@2x.png" translatesAutoresizingMaskIntoConstraints="NO" id="hC3-fG-MyG">
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="30" id="Odr-AY-sdZ"/>
-                                                <constraint firstAttribute="width" constant="160" id="hF4-FZ-fYP"/>
+                                                <constraint firstAttribute="width" constant="98" id="bx7-nD-38J"/>
+                                                <constraint firstAttribute="height" constant="13" id="sed-BQ-9p5"/>
                                             </constraints>
                                         </imageView>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
-                                        <constraint firstItem="hC3-fG-MyG" firstAttribute="bottom" secondItem="E96-RF-aMq" secondAttribute="bottom" type="default" id="3Tb-1J-MOx"/>
                                         <constraint firstItem="Aq3-2n-a8G" firstAttribute="centerX" secondItem="BPv-ov-Jp0" secondAttribute="centerX" type="default" id="54D-Ko-cQr"/>
                                         <constraint firstItem="BPv-ov-Jp0" firstAttribute="top" secondItem="E96-RF-aMq" secondAttribute="top" constant="10" type="user" id="G8o-h9-ghT"/>
-                                        <constraint firstItem="Aq3-2n-a8G" firstAttribute="top" secondItem="E96-RF-aMq" secondAttribute="top" constant="57" id="KWa-wD-DTH"/>
                                         <constraint firstItem="UU0-XP-3u7" firstAttribute="top" secondItem="E96-RF-aMq" secondAttribute="top" constant="55" id="NBF-XE-Elw"/>
+                                        <constraint firstItem="hC3-fG-MyG" firstAttribute="top" secondItem="UU0-XP-3u7" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="TNX-Z6-oe6"/>
+                                        <constraint firstItem="hC3-fG-MyG" firstAttribute="centerX" secondItem="Aq3-2n-a8G" secondAttribute="centerX" type="default" id="bUa-rU-mSz"/>
                                         <constraint firstItem="Aq3-2n-a8G" firstAttribute="baseline" secondItem="UU0-XP-3u7" secondAttribute="baseline" type="default" id="fFf-4Z-gN5"/>
+                                        <constraint firstAttribute="bottom" secondItem="Aq3-2n-a8G" secondAttribute="bottom" constant="31" id="hbt-vb-dI9"/>
                                         <constraint firstItem="Aq3-2n-a8G" firstAttribute="leading" secondItem="E96-RF-aMq" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="nJo-b4-RNd"/>
-                                        <constraint firstItem="hC3-fG-MyG" firstAttribute="centerX" secondItem="Aq3-2n-a8G" secondAttribute="centerX" type="default" id="u1b-uD-pw2"/>
                                         <constraint firstItem="UU0-XP-3u7" firstAttribute="centerX" secondItem="Aq3-2n-a8G" secondAttribute="centerX" type="default" id="wMK-ev-uGC"/>
                                     </constraints>
                                 </view>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" restorationIdentifier="Cell" selectionStyle="blue" indentationWidth="10" reuseIdentifier="Cell" id="7Fj-8N-9kC" customClass="ECSearchResultCell">
-                                        <rect key="frame" x="0.0" y="152" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="137" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -114,6 +114,7 @@
                     <navigationItem key="navigationItem" id="hU3-8N-dbJ"/>
                     <connections>
                         <outlet property="imgBackground" destination="SOM-DW-RgO" id="9JC-84-F7Y"/>
+                        <outlet property="imgLastfmAttr" destination="hC3-fG-MyG" id="tR0-PZ-KW1"/>
                         <outlet property="lblTodaysDate" destination="Aq3-2n-a8G" id="cEH-Mc-vax"/>
                         <outlet property="searchBar" destination="UU0-XP-3u7" id="dl6-xV-dhp"/>
                         <outlet property="segmentedControl" destination="BPv-ov-Jp0" id="Mca-YI-uBY"/>
@@ -143,6 +144,7 @@
     </scenes>
     <resources>
         <image name="gradient.png" width="1" height="1015"/>
+        <image name="lastfmAttr@2x.png" width="196" height="25"/>
         <image name="search.png" width="454" height="47"/>
     </resources>
     <classes>
@@ -151,6 +153,7 @@
             <relationships>
                 <relationship kind="action" name="dismissKeyboard:"/>
                 <relationship kind="outlet" name="imgBackground" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="imgLastfmAttr" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="lblTodaysDate" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="searchBar" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="segmentedControl" candidateClass="UISegmentedControl"/>
