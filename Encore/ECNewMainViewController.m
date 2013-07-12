@@ -254,6 +254,10 @@ typedef enum {
     }
 }
 
+- (IBAction)openLastFM:(id)sender {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.last.fm"]];
+}
+
 #pragma mark Alert View Delegate
 -(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (alertView.tag == ECNotLoggedInAlert) {

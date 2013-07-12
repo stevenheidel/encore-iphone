@@ -15,7 +15,7 @@
 @interface ECNewMainViewController : UIViewController <UIAlertViewDelegate, UITableViewDataSource,UITableViewDelegate>
 
 - (IBAction)dismissKeyboard:(id)sender;
-
+- (IBAction)openLastFM:(id)sender;
 @property(nonatomic, strong) IBOutlet UIImageView *imgBackground;
 @property(nonatomic, strong) IBOutlet UILabel *lblTodaysDate;
 @property(nonatomic, strong) IBOutlet UITableView *tableView;
