@@ -1,7 +1,7 @@
 //
 //  ECConcertCellView.m
 //  Encore
-//
+//  Used in listing Today's concerts
 //  Created by Luis Ramirez on 2013-06-23.
 //  Copyright (c) 2013 Encore. All rights reserved.
 //
@@ -22,7 +22,7 @@
     self.lblDate.text = [concertDic niceDate];
     self.lblDate.font = [UIFont heroFontWithSize: 12.0];
     self.lblDate.textColor = [UIColor whiteColor];
-    self.lblName.text = [concertDic artistName];
+    self.lblName.text = [[concertDic artistName] uppercaseString];
     self.lblName.font = [UIFont heroFontWithSize: 18.0];
     self.lblName.textColor = [UIColor blueArtistTextColor];
     self.lblLocation.text = [concertDic venueName];
