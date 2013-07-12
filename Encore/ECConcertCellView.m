@@ -38,6 +38,7 @@
 
 
     self.selectionStyle = UITableViewCellSelectionStyleNone; //TODO: custom selection style?
+    self.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"accessory"]];
 }
 
 - (void)setUpCellImageForConcert:(UIImage *)image {
