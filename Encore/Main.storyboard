@@ -163,7 +163,6 @@
             <relationships>
                 <relationship kind="action" name="dismissKeyboard:"/>
                 <relationship kind="action" name="openLastFM:"/>
-                <relationship kind="action" name="switchedSelection:"/>
                 <relationship kind="outlet" name="imgBackground" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="imgLastfmAttr" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="lblTodaysDate" candidateClass="UILabel"/>

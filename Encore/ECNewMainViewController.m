@@ -40,6 +40,7 @@ typedef enum {
 #pragma mark - View loading
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.searchHeaderView = nil;
     self.hasSearched = FALSE;
     self.loadOther = FALSE;
     self.comboSearchResultsDic = nil;
@@ -107,13 +108,7 @@ typedef enum {
     self.searchBar.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
 //    [self.searchBar setTextColor:[UIColor blueArtistTextColor]];
 }
--(void) clearSearchBar {
-    self.searchBar.text = @"";
-    self.hasSearched = FALSE;
-    
-    [self.tableView reloadData];
-    [self setBackgroundImage];
-}
+
 -(void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 }
@@ -275,7 +270,7 @@ typedef enum {
 }
 #pragma mark Segmented Control
 -(IBAction) switchedSelection: (id) sender {
-    self.hasSearched = FALSE;
+
     self.loadOther = FALSE;
     self.searchBar.text = @"";
     [self.searchBar resignFirstResponder];
@@ -285,6 +280,10 @@ typedef enum {
     [self displayViewsAccordingToSearchType];
     [self.tableView reloadData];
     [self setBackgroundImage];
+    if(self.currentSearchType == ECSearchTypeToday && self.hasSearched == TRUE) {
+        [self resetTableHeaderView]; //remove artist image that appears during search results
+    }
+        self.hasSearched = FALSE;
 }
 
 +(ECSearchType) searchTypeForSegmentIndex: (NSInteger) index {
@@ -467,21 +466,66 @@ typedef enum {
 }
 
 #pragma mark - Search Text Field
+
+-(void) clearSearchBar {
+    self.searchBar.text = @"";
+    self.hasSearched = FALSE;
+    
+    [self.tableView reloadData];
+    [self resetTableHeaderView];
+    [self setBackgroundImage];
+}
+
+//not used because overrided with custom clear image
 - (BOOL)textFieldShouldClear:(UITextField *)textField {
     self.hasSearched = FALSE;
     
     [self.tableView reloadData];
     [self setBackgroundImage];
+    [self resetTableHeaderView];
     return YES;
 }
+-(void) addArtistImageToHeader {
+    
+    if(!self.searchHeaderView) {
+        NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"SearchResultsSectionHeader" owner:nil options:nil];
+        self.searchHeaderView = [subviewArray objectAtIndex:0];
+    }
+    UIImageView* artistImage = (UIImageView*)[self.searchHeaderView viewWithTag:10];
+    
+    [artistImage setImageWithURL:[[self.searchResultsEvents objectAtIndex:0] imageURL] placeholderImage:[UIImage imageNamed:@"placeholder.jpg"]];
 
+    artistImage.layer.cornerRadius = 5.0;
+    artistImage.layer.masksToBounds = YES;
+    
+    self.searchHeaderView.clipsToBounds =YES;
+    CGRect headerFrame = self.tableView.tableHeaderView.frame;
+
+    self.searchHeaderView.frame = CGRectMake(0,headerFrame.size.height,320,98);
+    headerFrame.size.height = headerFrame.size.height + 98.0f;
+    UIView* header = self.tableView.tableHeaderView;
+    header.frame = headerFrame;
+    [header addSubview:self.searchHeaderView];
+    self.tableView.tableHeaderView = header;
+}
+
+-(void) resetTableHeaderView {
+    if (self.searchHeaderView) {
+        UIView* header = self.tableView.tableHeaderView;
+        CGRect frame = header.frame;
+        frame.size.height = frame.size.height - 98.0f;
+        header.frame = frame;
+        [self.searchHeaderView removeFromSuperview];
+        self.tableView.tableHeaderView = header;
+    }
+}
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     
     if ([textField.text length] > 0) {
         [ECJSONFetcher fetchArtistsForString:textField.text withSearchType:self.currentSearchType forLocation:self.userCity completion:^(NSDictionary * comboDic) { //TODO load actual location
             [self fetchedConcertsForSearch:comboDic];
         }];
-        
+
         self.hud.labelText = NSLocalizedString(@"Searching", nil);
         self.hud.detailsLabelText = [NSString stringWithFormat:NSLocalizedString(@"hudSearchArtist", nil), [textField text]];
         [self.hud show:YES];
@@ -516,6 +560,7 @@ typedef enum {
     }
     [self.tableView reloadData];
     [self setBackgroundImage];
+    [self addArtistImageToHeader];
 }
 
 - (IBAction)dismissKeyboard:(id)sender {

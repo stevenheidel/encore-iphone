@@ -50,4 +50,6 @@
 @property (strong,nonatomic) UIBarButtonItem* shareButton;
 
 @property (strong, nonatomic) MBProgressHUD * hud;
+
+@property (strong, nonatomic) UIView* searchHeaderView;
 @end
