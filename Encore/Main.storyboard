@@ -49,7 +49,7 @@
                                                 <outlet property="delegate" destination="8hQ-DB-bIb" id="ez6-fH-gFb"/>
                                             </connections>
                                         </textField>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="JULY 28, 2013" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aq3-2n-a8G" userLabel="Date">
+                                        <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="JULY 28, 2013" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aq3-2n-a8G" userLabel="Date">
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="280" type="user" id="SN3-Jn-cd7"/>
                                                 <constraint firstAttribute="height" constant="21" type="user" id="Zd0-xj-X68"/>
@@ -78,13 +78,13 @@
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="Aq3-2n-a8G" secondAttribute="bottom" constant="32" id="A9e-iJ-Xw7"/>
                                         <constraint firstItem="hXC-Wo-Qyy" firstAttribute="top" secondItem="UU0-XP-3u7" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="CKg-Kn-OFj"/>
                                         <constraint firstItem="BPv-ov-Jp0" firstAttribute="top" secondItem="E96-RF-aMq" secondAttribute="top" constant="10" type="user" id="G8o-h9-ghT"/>
                                         <constraint firstItem="UU0-XP-3u7" firstAttribute="top" secondItem="E96-RF-aMq" secondAttribute="top" constant="54" id="NE4-ic-w04"/>
                                         <constraint firstItem="UU0-XP-3u7" firstAttribute="centerX" secondItem="BPv-ov-Jp0" secondAttribute="centerX" type="default" id="SJg-gl-5uO"/>
                                         <constraint firstItem="Aq3-2n-a8G" firstAttribute="baseline" secondItem="UU0-XP-3u7" secondAttribute="baseline" type="default" id="fFf-4Z-gN5"/>
                                         <constraint firstItem="hXC-Wo-Qyy" firstAttribute="centerX" secondItem="Aq3-2n-a8G" secondAttribute="centerX" type="default" id="fQg-6L-hVw"/>
-                                        <constraint firstAttribute="bottom" secondItem="Aq3-2n-a8G" secondAttribute="bottom" constant="31" id="hbt-vb-dI9"/>
                                         <constraint firstItem="Aq3-2n-a8G" firstAttribute="leading" secondItem="E96-RF-aMq" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="nJo-b4-RNd"/>
                                         <constraint firstItem="UU0-XP-3u7" firstAttribute="centerX" secondItem="Aq3-2n-a8G" secondAttribute="centerX" type="default" id="wMK-ev-uGC"/>
                                     </constraints>
