@@ -98,6 +98,7 @@ typedef enum {
     self.view.backgroundColor = [UIColor blackColor];
     
     [self.tableView setIndicatorStyle:UIScrollViewIndicatorStyleWhite];
+    self.view.clipsToBounds = YES;
 }
 -(void) clearSearchBar {
     self.SearchBar.text = @"";
