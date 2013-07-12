@@ -9,6 +9,14 @@
 #import "UIColor+EncoreUI.h"
 
 @implementation UIColor (EncoreUI)
+UIColor* colorWithRGB(float red, float green, float blue, float alpha) {
+    return [UIColor colorWithRed:red/255.0 green:green/255.0 blue:blue/255.0 alpha:alpha];
+}
+
+UIColor* colorWithHSB(float hue, float saturation, float brightness, float alpha) {
+    return [UIColor colorWithHue:hue/360.0 saturation:saturation brightness:brightness alpha:alpha];
+}
+
 +(UIColor*) lightGrayTableColor {
     return [UIColor colorWithRed:246.0/255.0 green:248.0/255.0 blue:250.0/255.0 alpha:1.0];
 }
@@ -61,10 +69,14 @@
 
 #pragma mark - Nav bar
 +(UIColor*) lightBlueNavBarColor {
-    return [UIColor colorWithHue:193.0/360.0 saturation:0.99 brightness:0.80 alpha:.8];
+    return colorWithHSB(193.0f, 0.99f, 0.8f, 0.8f); 
 }
 
 +(UIColor*) lightBlueNavBarEndColor {
-    return [UIColor colorWithHue:184.0/360.0 saturation:0.98 brightness:0.78 alpha:0.5];
+    return  colorWithHSB(184.0f, 0.98f, 0.78f, 0.5f);
+}
+
++(UIColor*) blueArtistTextColor {
+    return colorWithRGB(3.0f, 176.0f, 227.0f, 1.0f);
 }
 @end

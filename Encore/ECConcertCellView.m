@@ -24,7 +24,7 @@
     self.lblDate.textColor = [UIColor whiteColor];
     self.lblName.text = [concertDic artistName];
     self.lblName.font = [UIFont heroFontWithSize: 18.0];
-    self.lblName.textColor = [UIColor lightBlueNavBarColor];
+    self.lblName.textColor = [UIColor blueArtistTextColor];
     self.lblLocation.text = [concertDic venueName];
     self.lblLocation.font = [UIFont heroFontWithSize: 14.0];
     self.lblLocation.textColor = [UIColor whiteColor];

@@ -10,6 +10,7 @@
 
 @interface UIColor (EncoreUI)
 
++(UIColor*) blueArtistTextColor;
 +(UIColor *) lightGrayTableColor;
 
 +(UIColor *) lightGrayHeaderColor;
