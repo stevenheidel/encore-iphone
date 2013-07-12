@@ -486,27 +486,28 @@ typedef enum {
     return YES;
 }
 -(void) addArtistImageToHeader {
-    
-    if(!self.searchHeaderView) {
-        NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"SearchResultsSectionHeader" owner:nil options:nil];
-        self.searchHeaderView = [subviewArray objectAtIndex:0];
+    if (self.searchResultsEvents.count > 0) {
+        if(!self.searchHeaderView) {
+            NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"SearchResultsSectionHeader" owner:nil options:nil];
+            self.searchHeaderView = [subviewArray objectAtIndex:0];
+        }
+        UIImageView* artistImage = (UIImageView*)[self.searchHeaderView viewWithTag:10];
+        
+        [artistImage setImageWithURL:[[self.searchResultsEvents objectAtIndex:0] imageURL] placeholderImage:[UIImage imageNamed:@"placeholder.jpg"]];
+        
+        artistImage.layer.cornerRadius = 5.0;
+        artistImage.layer.masksToBounds = YES;
+        
+        self.searchHeaderView.clipsToBounds =YES;
+        CGRect headerFrame = self.tableView.tableHeaderView.frame;
+        
+        self.searchHeaderView.frame = CGRectMake(0,headerFrame.size.height,320,98);
+        headerFrame.size.height = headerFrame.size.height + 98.0f;
+        UIView* header = self.tableView.tableHeaderView;
+        header.frame = headerFrame;
+        [header addSubview:self.searchHeaderView];
+        self.tableView.tableHeaderView = header;
     }
-    UIImageView* artistImage = (UIImageView*)[self.searchHeaderView viewWithTag:10];
-    
-    [artistImage setImageWithURL:[[self.searchResultsEvents objectAtIndex:0] imageURL] placeholderImage:[UIImage imageNamed:@"placeholder.jpg"]];
-
-    artistImage.layer.cornerRadius = 5.0;
-    artistImage.layer.masksToBounds = YES;
-    
-    self.searchHeaderView.clipsToBounds =YES;
-    CGRect headerFrame = self.tableView.tableHeaderView.frame;
-
-    self.searchHeaderView.frame = CGRectMake(0,headerFrame.size.height,320,98);
-    headerFrame.size.height = headerFrame.size.height + 98.0f;
-    UIView* header = self.tableView.tableHeaderView;
-    header.frame = headerFrame;
-    [header addSubview:self.searchHeaderView];
-    self.tableView.tableHeaderView = header;
 }
 
 -(void) resetTableHeaderView {
@@ -545,19 +546,32 @@ typedef enum {
         self.hasSearched = TRUE;
         self.loadOther = FALSE;
         self.comboSearchResultsDic = comboDic;
+        if (!self.searchResultsEvents.count > 0) {
+            self.hasSearched = FALSE;
+            self.loadOther = FALSE;
+            self.comboSearchResultsDic = nil;
+            MBProgressHUD* alert = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+            alert.labelText = NSLocalizedString(@"No events found", nil);
+            alert.mode = MBProgressHUDModeText;
+            alert.removeFromSuperViewOnHide = YES;
+            [alert hide:YES afterDelay:2.0]; //TODO use #define for delay
+            alert.labelFont = [UIFont heroFontWithSize:18.0f];
+            alert.color = [UIColor redHUDConfirmationColor];
+        }
     }
-    else {
+    else { //failed to find anything
         self.hasSearched = FALSE;
         self.loadOther = FALSE;
         self.comboSearchResultsDic = nil;
         MBProgressHUD* alert = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
-        alert.labelText = @"No artists found";
+        alert.labelText = NSLocalizedString(@"No artists found",nil);
         alert.mode = MBProgressHUDModeText;
         alert.removeFromSuperViewOnHide = YES;
         [alert hide:YES afterDelay:2.0]; //TODO use #define for delay
         alert.labelFont = [UIFont heroFontWithSize:18.0f];
         alert.color = [UIColor redHUDConfirmationColor];
     }
+    
     [self.tableView reloadData];
     [self setBackgroundImage];
     [self addArtistImageToHeader];
