@@ -32,6 +32,8 @@
 		A02661F6178DE62700741C9A /* removeEventButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A02661F4178DE62700741C9A /* removeEventButton@2x.png */; };
 		A02661F8178DF02000741C9A /* gradient.png in Resources */ = {isa = PBXBuildFile; fileRef = A02661F7178DF01F00741C9A /* gradient.png */; };
 		A04C4333176F85F9003B4299 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A04C4332176F85F9003B4299 /* CoreLocation.framework */; };
+		A068AE711790621800FA1BF4 /* lastfmAttr.png in Resources */ = {isa = PBXBuildFile; fileRef = A068AE6F1790621800FA1BF4 /* lastfmAttr.png */; };
+		A068AE721790621800FA1BF4 /* lastfmAttr@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A068AE701790621800FA1BF4 /* lastfmAttr@2x.png */; };
 		A0848C0B176D1F0D009BBB38 /* ECLoginPageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0848C0A176D1F0D009BBB38 /* ECLoginPageView.xib */; };
 		A0848C11176D25D5009BBB38 /* ECLoginPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0848C10176D25D5009BBB38 /* ECLoginPageView.m */; };
 		A0A2B0BC177B324F00518B6C /* profileButton.png in Resources */ = {isa = PBXBuildFile; fileRef = A0A2B0BB177B324F00518B6C /* profileButton.png */; };
@@ -196,6 +198,8 @@
 		A02661F4178DE62700741C9A /* removeEventButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "removeEventButton@2x.png"; sourceTree = "<group>"; };
 		A02661F7178DF01F00741C9A /* gradient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gradient.png; sourceTree = "<group>"; };
 		A04C4332176F85F9003B4299 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		A068AE6F1790621800FA1BF4 /* lastfmAttr.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lastfmAttr.png; sourceTree = "<group>"; };
+		A068AE701790621800FA1BF4 /* lastfmAttr@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lastfmAttr@2x.png"; sourceTree = "<group>"; };
 		A0848C0A176D1F0D009BBB38 /* ECLoginPageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECLoginPageView.xib; sourceTree = "<group>"; };
 		A0848C0F176D25D5009BBB38 /* ECLoginPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECLoginPageView.h; sourceTree = "<group>"; };
 		A0848C10176D25D5009BBB38 /* ECLoginPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECLoginPageView.m; sourceTree = "<group>"; };
@@ -523,6 +527,8 @@
 		D4A8DDD1176A44A0005E9847 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				A068AE6F1790621800FA1BF4 /* lastfmAttr.png */,
+				A068AE701790621800FA1BF4 /* lastfmAttr@2x.png */,
 				D4AC2E02178FD2E200F292CA /* Black.png */,
 				D4AC2E03178FD2E200F292CA /* Black@2x 22-49-48-390.png */,
 				D4AC2E04178FD2E200F292CA /* Black~568h@2x.png */,
@@ -1040,6 +1046,8 @@
 				D4AC2E05178FD2E200F292CA /* Black.png in Resources */,
 				D4AC2E06178FD2E200F292CA /* Black@2x 22-49-48-390.png in Resources */,
 				D4AC2E07178FD2E200F292CA /* Black~568h@2x.png in Resources */,
+				A068AE711790621800FA1BF4 /* lastfmAttr.png in Resources */,
+				A068AE721790621800FA1BF4 /* lastfmAttr@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
