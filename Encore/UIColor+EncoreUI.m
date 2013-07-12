@@ -81,6 +81,6 @@ UIColor* colorWithHSB(float hue, float saturation, float brightness, float alpha
 }
 
 +(UIColor*) separatorColor {
-    return colorWithRGB(255.0, 255.0, 255.0, 0.52);
+    return colorWithRGB(255.0, 255.0, 255.0, 0.20);
 }
 @end

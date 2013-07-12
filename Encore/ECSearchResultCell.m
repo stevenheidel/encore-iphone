@@ -28,4 +28,8 @@
     self.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"accessory"]];
 }
 
+-(IBAction) addToProfile {
+    
+}
+
 @end
