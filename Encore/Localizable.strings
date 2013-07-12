@@ -76,8 +76,8 @@
 "flag_1" = "Inappropriate";
 "flag_2" = "Not From Show";
 "flag_other" = "Other";
-"flag_hud_text" = "Thanks. We'll look into that for you.";
-"flag_hud_fail_text" = "Thanks. We'll look into that for you.";
+"flag_hud_text" = "Thanks. We'll look into that";
+"flag_hud_fail_text" = "Thanks. We'll look into that";
 //"flag_3" = "";
 
 //Feedback
