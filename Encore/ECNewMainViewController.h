@@ -26,7 +26,7 @@
 
 @property (strong, nonatomic) UITapGestureRecognizer *tap;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
-@property (strong, nonatomic) IBOutlet UITextField *SearchBar;
+@property (strong, nonatomic) IBOutlet UITextField *searchBar;
 
 @property (nonatomic, assign) ECSearchType currentSearchType;
 

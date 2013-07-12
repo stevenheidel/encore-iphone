@@ -272,12 +272,32 @@
     [client getPath:CheckConcertForUserUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         BOOL result = FALSE;
         result = [(NSNumber*)[(NSDictionary*) responseObject objectForKey:@"response"] boolValue];
-        NSLog(@"Successfully polled server for if concert %@ is on profile %@. Response: %d", concertID, userID,result);
+        NSLog(@"Successfully polled server for if concert %@ is on profile %@. Response: %@", concertID, userID,result ? @"YES" :@"NO");
         if(completion)
             completion(result);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@: ERROR checking if concert %@ is on profile %@: %@...", NSStringFromClass([self class]),concertID,userID,[[error description] substringToIndex:MAX_ERROR_LEN]);
     }];
+}
+
++(void) checkIfEventIsPopulating: (NSString*) eventID completion: (void (^)(BOOL isPopulating)) completion {
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:CheckEventPopulatingURL,eventID]];
+
+    NSURLRequest * request = [NSURLRequest requestWithURL:url];
+    AFJSONRequestOperation * operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        BOOL result = FALSE;
+        result = [(NSNumber*)[(NSDictionary*) JSON objectForKey:@"response"] boolValue];
+        NSLog(@"%@: Successfully polled server for if event %@ is populating: %@",NSStringFromClass([ ECJSONFetcher class]),eventID,result ? @"YES":@"NO");
+        if (completion) {
+            completion(result);
+        }
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        NSLog(@"%@: ERROR Failed to poll server for if event %@ is populating: %@...",NSStringFromClass([ ECJSONFetcher class]),eventID,[error.description substringToIndex:MAX_ERROR_LEN]);
+        if (completion) {
+            completion(FALSE); //default to false
+        }
+    }];
+    [operation start];
 }
 
 

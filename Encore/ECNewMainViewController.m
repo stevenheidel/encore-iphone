@@ -80,28 +80,35 @@ typedef enum {
     self.hud.labelFont = [UIFont heroFontWithSize:self.hud.labelFont.pointSize];
     self.hud.detailsLabelFont = [UIFont heroFontWithSize:self.hud.detailsLabelFont.pointSize];
     
-    //Add padding for search bar
-    UIView* paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 20)];
-    self.SearchBar.leftView = paddingView;
-    self.SearchBar.leftViewMode = UITextFieldViewModeAlways;
-    self.SearchBar.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-    self.SearchBar.font = [UIFont heroFontWithSize:14.0f];
-    
-    UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self setupSearchBar];
 
-    [button setImage:[UIImage imageNamed:@"xbutton"] forState:UIControlStateNormal];
-    button.frame = CGRectMake(0,0,26,30);
-    [button addTarget:self action:@selector(clearSearchBar) forControlEvents:UIControlEventTouchUpInside];
-    self.SearchBar.rightView = button;
-    self.SearchBar.rightViewMode = UITextFieldViewModeAlways;
     
     self.view.backgroundColor = [UIColor blackColor];
     
     [self.tableView setIndicatorStyle:UIScrollViewIndicatorStyleWhite];
     self.view.clipsToBounds = YES;
 }
+
+-(void) setupSearchBar {
+    //Add padding for search bar
+    UIView* paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 20)];
+    self.searchBar.leftView = paddingView;
+    self.searchBar.leftViewMode = UITextFieldViewModeAlways;
+    self.searchBar.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    self.searchBar.font = [UIFont heroFontWithSize:14.0f];
+    UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    [button setImage:[UIImage imageNamed:@"xbutton"] forState:UIControlStateNormal];
+    button.frame = CGRectMake(0,0,26,30);
+    [button addTarget:self action:@selector(clearSearchBar) forControlEvents:UIControlEventTouchUpInside];
+    self.searchBar.rightView = button;
+    self.searchBar.rightViewMode = UITextFieldViewModeAlways;
+    
+    self.searchBar.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
+//    [self.searchBar setTextColor:[UIColor blueArtistTextColor]];
+}
 -(void) clearSearchBar {
-    self.SearchBar.text = @"";
+    self.searchBar.text = @"";
     self.hasSearched = FALSE;
     
     [self.tableView reloadData];
@@ -236,7 +243,7 @@ typedef enum {
             
             //        self.profileViewController.arrPastConcerts = [self.concerts objectForKey:@"past"];
         }
-        self.profileViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+        self.profileViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
         [self presentViewController:self.profileViewController animated:YES completion:nil];
     }
     
@@ -265,8 +272,8 @@ typedef enum {
 -(IBAction) switchedSelection: (id) sender {
     self.hasSearched = FALSE;
     self.loadOther = FALSE;
-    self.SearchBar.text = @"";
-    [self.SearchBar resignFirstResponder];
+    self.searchBar.text = @"";
+    [self.searchBar resignFirstResponder];
     UISegmentedControl* control = (UISegmentedControl*)sender;
     
     self.currentSearchType = [ECNewMainViewController searchTypeForSegmentIndex:control.selectedSegmentIndex];
@@ -290,10 +297,10 @@ typedef enum {
 
 - (void)displayViewsAccordingToSearchType {
     if (self.currentSearchType) {
-        self.SearchBar.hidden = YES;
+        self.searchBar.hidden = YES;
         self.lblTodaysDate.hidden = NO;
     } else {
-        self.SearchBar.hidden = NO;
+        self.searchBar.hidden = NO;
         self.lblTodaysDate.hidden = YES;
     }
 }
@@ -418,22 +425,23 @@ typedef enum {
     }
 }
 -(UIView*) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    if (self.hasSearched && self.searchResultsEvents.count>0) {
-        if (section == ECSearchResultSection) {
-            NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"SearchResultsSectionHeader" owner:nil options:nil];
-            UIView *mainView = [subviewArray objectAtIndex:0];
-//            [(UILabel*)[mainView viewWithTag:20] setText:[[self.searchResultsEvents objectAtIndex:0] artistName]];
-            UIImageView *artistImage = (UIImageView*)[mainView viewWithTag:10];
-            UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[[self.searchResultsEvents objectAtIndex:0] imageURL]]];
-            //[artistImage setFrame:CGRectMake(0, 0, image.size.width, image.size.height)];
-            [artistImage setImage:image];
-            artistImage.layer.cornerRadius = 35.0;
-            artistImage.layer.masksToBounds = YES;
-
-            mainView.clipsToBounds =YES;
-            return mainView;
-        }
-    }
+//    if (self.hasSearched && self.searchResultsEvents.count>0) {
+//        if (section == ECSearchResultSection) {
+//            NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"SearchResultsSectionHeader" owner:nil options:nil];
+//            UIView *mainView = [subviewArray objectAtIndex:0];
+////            [(UILabel*)[mainView viewWithTag:20] setText:[[self.searchResultsEvents objectAtIndex:0] artistName]];
+//            UIImageView *artistImage = (UIImageView*)[mainView viewWithTag:10];
+//            UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[[self.searchResultsEvents objectAtIndex:0] imageURL]]];
+//            //[artistImage setFrame:CGRectMake(0, 0, image.size.width, image.size.height)];
+//            [artistImage setImage:image];
+//            artistImage.layer.cornerRadius = 35.0;
+//            artistImage.layer.masksToBounds = YES;
+//
+//            mainView.clipsToBounds =YES;
+//            return mainView;
+//        }
+//    }
+    
     return nil;
 }
 
@@ -447,9 +455,9 @@ typedef enum {
     }
 }
 -(CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if (self.hasSearched && section == ECSearchResultSection && self.searchResultsEvents.count>0) {
-        return 117.0;
-    }
+//    if (self.hasSearched && section == ECSearchResultSection && self.searchResultsEvents.count>0) {
+//        return 117.0;
+//    }
     return 0.0;
 }
 
@@ -506,7 +514,7 @@ typedef enum {
 }
 
 - (IBAction)dismissKeyboard:(id)sender {
-    [self.SearchBar resignFirstResponder];
+    [self.searchBar resignFirstResponder];
     [self.view removeGestureRecognizer:self.tap];
 }
 

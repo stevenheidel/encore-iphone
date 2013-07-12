@@ -8,7 +8,7 @@
 
 #import "ECProfileViewController.h"
 #import "ECProfileHeader.h"
-#import "ECConcertCellView.h"
+#import "ECProfileConcertCell.h"
 #import "ECConcertDetailViewController.h"
 #import "NSDictionary+ConcertList.h"
 #import <QuartzCore/QuartzCore.h>
@@ -51,17 +51,18 @@
     [self setUpBackButton];
     [self setupLogoutButton];
     
-    NSString *myIdentifier = @"ECConcertCellView";
     self.tableView.tableFooterView = [UIView new];
    // self.tableView.tableFooterView = [self footerView]; //Commented out Songkick attribution
    
-    [self.tableView registerNib:[UINib nibWithNibName:@"ECConcertCellView" bundle:nil]
-         forCellReuseIdentifier:myIdentifier];
+    [self.tableView registerNib:[UINib nibWithNibName:@"ECProfileConcertCell" bundle:nil]
+         forCellReuseIdentifier:@"ECProfileConcertCell"];
     [self setUpHeaderView];
     self.arrPastImages = [[NSMutableArray alloc] init];
     [self getArtistImages];
     self.view.clipsToBounds = YES;
     [self.tableView setIndicatorStyle:UIScrollViewIndicatorStyleWhite];
+    [self.tableView setSeparatorColor:[UIColor separatorColor]];
+     
 }
 
 - (void) setUpBackButton {
@@ -180,9 +181,9 @@
 
 #pragma mark - UITableView methods
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *myIdentifier = @"ECConcertCellView";
+    static NSString *myIdentifier = @"ECProfileConcertCell";
     
-    ECConcertCellView *cell = [tableView dequeueReusableCellWithIdentifier:myIdentifier forIndexPath:indexPath];
+    ECProfileConcertCell *cell = [tableView dequeueReusableCellWithIdentifier:myIdentifier forIndexPath:indexPath];
     NSDictionary * concertDic = [self.arrPastConcerts objectAtIndex:indexPath.row];
     UIImage *image = [self.arrPastImages objectAtIndex:indexPath.row];
     [cell setUpCellForConcert:concertDic];

@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import <FacebookSDK/FacebookSDK.h>
 #import "KLHorizontalSelect.h"
-#import "ECJSONFetcher.h"
 #import "ECConcertDetailViewController.h"
 #import "ECProfileViewController.h"
 //#import "ECTodayViewController.h"
@@ -17,7 +16,7 @@
 
 @class ECAddConcertViewController,ECTodayViewController;
 
-@interface ECMainViewController : UIViewController <FBUserSettingsDelegate,KLHorizontalSelectDelegate,ECJSONFetcherDelegate/*, ECTodayViewControllerDelegate*/>
+@interface ECMainViewController : UIViewController <FBUserSettingsDelegate,KLHorizontalSelectDelegate/*, ECTodayViewControllerDelegate*/>
 
 -(void) fetchConcerts;
 -(void) updateViewWithNewConcert: (NSNumber *) concertID;

@@ -12,7 +12,7 @@
 @interface ECSearchResultCell : UITableViewCell
 
 - (void)setupCellForEvent:(NSDictionary *)concertDic;
-
+-(IBAction) addToProfile;
 @property(nonatomic, strong) IBOutlet UIButton *btnAdd;
 @property(nonatomic, strong) IBOutlet UIButton *btnDisclosure;
 @property(nonatomic, strong) IBOutlet UILabel *lblEventTitle;
@@ -20,3 +20,10 @@
 @property(nonatomic, strong) IBOutlet UILabel *lblVenue;
 
 @end
+
+//@protocol ECSearchResultCellDelegate <NSObject>
+
+//@required
+
+
+//@end

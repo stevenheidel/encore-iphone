@@ -138,6 +138,8 @@
 		D4ABD2EC177E2C8900DC691F /* ECPictureViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4ABD2EA177E2C8900DC691F /* ECPictureViewController.xib */; };
 		D4AC2DF9178F854600F292CA /* accessory.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AC2DF7178F854600F292CA /* accessory.png */; };
 		D4AC2DFA178F854600F292CA /* accessory@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AC2DF8178F854600F292CA /* accessory@2x.png */; };
+		D4AC2DFF178FA64E00F292CA /* ECProfileConcertCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AC2DFE178FA64E00F292CA /* ECProfileConcertCell.m */; };
+		D4AC2E01178FA6BC00F292CA /* ECProfileConcertCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4AC2E00178FA6BC00F292CA /* ECProfileConcertCell.xib */; };
 		D4AC35F91768C5850087B1E9 /* NSDictionary+ConcertList.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AC35F81768C5850087B1E9 /* NSDictionary+ConcertList.m */; };
 		D4AC35FC1768C8B20087B1E9 /* ECJSONFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AC35FB1768C8B20087B1E9 /* ECJSONFetcher.m */; };
 		D4B0AC4717727FDA00DC4DD2 /* ECPostPlaceholder.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4B0AC4617727FDA00DC4DD2 /* ECPostPlaceholder.xib */; };
@@ -330,6 +332,9 @@
 		D4ABD2EA177E2C8900DC691F /* ECPictureViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECPictureViewController.xib; sourceTree = "<group>"; };
 		D4AC2DF7178F854600F292CA /* accessory.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = accessory.png; sourceTree = "<group>"; };
 		D4AC2DF8178F854600F292CA /* accessory@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "accessory@2x.png"; sourceTree = "<group>"; };
+		D4AC2DFD178FA64D00F292CA /* ECProfileConcertCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECProfileConcertCell.h; sourceTree = "<group>"; };
+		D4AC2DFE178FA64E00F292CA /* ECProfileConcertCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECProfileConcertCell.m; sourceTree = "<group>"; };
+		D4AC2E00178FA6BC00F292CA /* ECProfileConcertCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECProfileConcertCell.xib; sourceTree = "<group>"; };
 		D4AC35F71768C5850087B1E9 /* NSDictionary+ConcertList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+ConcertList.h"; sourceTree = "<group>"; };
 		D4AC35F81768C5850087B1E9 /* NSDictionary+ConcertList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+ConcertList.m"; sourceTree = "<group>"; };
 		D4AC35FA1768C8B20087B1E9 /* ECJSONFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECJSONFetcher.h; sourceTree = "<group>"; };
@@ -479,10 +484,10 @@
 				D4A8DDAE176A133B005E9847 /* ECConcertDetailViewController.h */,
 				D4A8DDAD176A133B005E9847 /* ECConcertDetailViewController.m */,
 				D4A8DDB1176A133B005E9847 /* ECConcertDetailViewController.xib */,
+				D4B0AC4617727FDA00DC4DD2 /* ECPostPlaceholder.xib */,
 				D4AA9777177CF82A008F4E31 /* ECPostCollectionHeaderView.h */,
 				D4AA9778177CF82A008F4E31 /* ECPostCollectionHeaderView.m */,
 				D4AA977A177CFE2C008F4E31 /* ECPostCollectionHeaderView.xib */,
-				D4B0AC4617727FDA00DC4DD2 /* ECPostPlaceholder.xib */,
 				D4A8DDB5176A133B005E9847 /* ECCollectionCell.xib */,
 				D4A8DDB6176A133B005E9847 /* CustomCellBackground.h */,
 				D4A8DDB7176A133B005E9847 /* CustomCellBackground.m */,
@@ -701,13 +706,13 @@
 		D4AA4CF91766B374009B0635 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D4C9C08C177A51CC00F864FC /* Post+Fetch */,
 				D4A2F6CC176959BD00A9E3BF /* ECMainViewController.xib */,
 				D4AA4D331766BB03009B0635 /* ECMainViewController.h */,
 				D4AA4D341766BB03009B0635 /* ECMainViewController.m */,
 				D4C9C08A177A51BB00F864FC /* Font */,
 				D4A8DDD1176A44A0005E9847 /* Images */,
 				D4C9C08D177A51E500F864FC /* plist */,
-				D4C9C08C177A51CC00F864FC /* Post+Fetch */,
 				D4C9C08B177A51C600F864FC /* Categories */,
 				D4AA4D381766F3D0009B0635 /* Localizable.strings */,
 				D4AA4CFB1766B374009B0635 /* InfoPlist.strings */,
@@ -752,6 +757,9 @@
 				D4A99EDC178524F600F4FB46 /* ECFeedbackViewController.h */,
 				D4A99EDD178524F600F4FB46 /* ECFeedbackViewController.m */,
 				D4A99EDE178524F600F4FB46 /* ECFeedbackViewController.xib */,
+				D4AC2DFD178FA64D00F292CA /* ECProfileConcertCell.h */,
+				D4AC2DFE178FA64E00F292CA /* ECProfileConcertCell.m */,
+				D4AC2E00178FA6BC00F292CA /* ECProfileConcertCell.xib */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -1019,6 +1027,7 @@
 				D4A9B32E178E6588008B5504 /* SearchResultsSectionHeader.xib in Resources */,
 				D4AC2DF9178F854600F292CA /* accessory.png in Resources */,
 				D4AC2DFA178F854600F292CA /* accessory@2x.png in Resources */,
+				D4AC2E01178FA6BC00F292CA /* ECProfileConcertCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1116,6 +1125,7 @@
 				A00A7F4A1784BD2A00839EFD /* ECFutureConcertViewController.m in Sources */,
 				D491F80F178B595D002E00E5 /* ECNewMainViewController.m in Sources */,
 				A02661E0178C937200741C9A /* ECSearchResultCell.m in Sources */,
+				D4AC2DFF178FA64E00F292CA /* ECProfileConcertCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

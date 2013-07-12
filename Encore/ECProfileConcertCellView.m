@@ -19,9 +19,9 @@
 
 - (void)setUpCellForConcert:(NSDictionary *)concertDic {
         
-    self.lblDate.text = [concertDic niceDate];
-    self.lblDate.font = [UIFont heroFontWithSize: 9.0];
-    self.lblDate.textColor = [UIColor whiteColor];
+//    self.lblDate.text = [concertDic niceDate];
+//    self.lblDate.font = [UIFont heroFontWithSize: 12.0];
+//    self.lblDate.textColor = [UIColor whiteColor];
     self.lblName.text = [[concertDic artistName] uppercaseString];
     self.lblName.font = [UIFont heroFontWithSize: 16.0];
     self.lblName.textColor = [UIColor blueArtistTextColor];

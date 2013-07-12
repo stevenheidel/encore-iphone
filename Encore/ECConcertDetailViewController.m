@@ -71,18 +71,26 @@ NSString *kCellID = @"cellID";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    [self.collectionView registerNib:[UINib nibWithNibName:@"ECCollectionCell" bundle:nil] forCellWithReuseIdentifier:@"cellID"];
     
     [self.collectionView registerClass:[Cell class] forCellWithReuseIdentifier:@"generic"];
-    self.title = NSLocalizedString(@"concert", nil);//self.artistNameLabel.text;
+    UIImageView* encoreLogo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo.png"]];
+    self.navigationItem.titleView = encoreLogo;
     self.headerView = [[ECPostCollectionHeaderView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.collectionView.frame.size.width, HEADER_HEIGHT) andOwner:self];
     [self setupArtistUIAttributes];
     
     self.isOnProfile = FALSE;
+    self.isPopulating = FALSE;
     [self setUpNavBarButtons];
 
     [self updateView];
     self.view.clipsToBounds = YES;
+    self.collectionView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
+    
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(loadImages)
+             forControlEvents:UIControlEventValueChanged];
+    [self.collectionView addSubview:self.refreshControl];
+    self.refreshControl.tintColor = [UIColor lightBlueNavBarColor];
 }
 
 -(void) setConcert:(NSDictionary *)concert andUpdate: (BOOL) update {
@@ -96,10 +104,13 @@ NSString *kCellID = @"cellID";
     self.posts = nil;
     [self.collectionView reloadData];
 }
+
 -(void) setupArtistUIAttributes {
-    [self.artistNameLabel setAdjustsFontSizeToFitWidth:YES];
+//    [self.artistNameLabel setAdjustsFontSizeToFitWidth:YES];
     self.artistNameLabel.font = [UIFont heroFontWithSize: 16.0];
-    [self.artistNameLabel setAdjustsFontSizeToFitWidth:YES];
+    self.artistNameLabel.textColor = [UIColor blueArtistTextColor];
+    
+//    [self.venueNameLabel setAdjustsFontSizeToFitWidth:YES];
     self.venueNameLabel.font = [UIFont heroFontWithSize: 14.0];
     self.dateLabel.font = [UIFont heroFontWithSize: 12.0];
     self.imgArtist.layer.cornerRadius = 25.0;
@@ -107,54 +118,37 @@ NSString *kCellID = @"cellID";
     self.imgArtist.layer.borderColor = [UIColor grayColor].CGColor;
     self.imgArtist.layer.borderWidth = 0.1;
 }
-//-(void) setUpFlowLayout {
-//    _flowLayout = [[SGSStaggeredFlowLayout alloc] init];
-//    _flowLayout.layoutMode = SGSStaggeredFlowLayoutMode_Even;
-//    _flowLayout.minimumLineSpacing = 2.0f;
-//    _flowLayout.minimumInteritemSpacing = 2.0f;
-//    _flowLayout.sectionInset = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 0.0f);
-//    _flowLayout.itemSize = CGSizeMake(75.0f, 75.0f);
-//    
-//    self.collectionView.collectionViewLayout = _flowLayout;
-//}
 
 -(void) updateView {
-    //self.title = self.artistNameLabel.text;
-    self.lastfmID = [self.concert lastfmID];
     [self clearCollectionView];
     [self loadArtistDetails];
     [self loadImages];
-    [self setupToolbar];
-}
-
--(void) setupToolbar {
     NSString * userID = self.userID;
     [ECJSONFetcher checkIfConcert:[self.concert lastfmID] isOnProfile:userID completion:^(BOOL isOnProfile) {
-//        if (!isOnProfile) {
-//            self.isOnProfile = FALSE;
-//           // [self.iWasThereButton setSelected:NO];
-//        }
-//        else {
-//            self.isOnProfile = TRUE;
-//            [self.iWasThereButton setSelected:YES];
-//        }
         self.isOnProfile = isOnProfile;
         [self setImageForConcertStatusButton];
     }];
+    
 }
+
+//Toggle whether or not the profile is on the user's profile.
+-(void) toggleOnProfileState {
+    self.isOnProfile = !self.isOnProfile;
+    [self setImageForConcertStatusButton];
+    [self updatePlaceholderText];
+}
+
 -(void) setImageForConcertStatusButton {
     if (self.isOnProfile) {
-        [self.iWasThereButton setImage:[UIImage imageNamed:@"removeEventButton"] forState:UIControlStateNormal];
-        self.artistNameLabel.textColor = [UIColor lightBlueNavBarColor];
+        [self.concertStausButton setImage:[UIImage imageNamed:@"removeEventButton"] forState:UIControlStateNormal];
     }
     else {
-        [self.iWasThereButton setImage:[UIImage imageNamed:@"addEventButton.png"] forState:UIControlStateNormal];
-        self.artistNameLabel.textColor = [UIColor whiteColor];
+        [self.concertStausButton setImage:[UIImage imageNamed:@"addEventButton.png"] forState:UIControlStateNormal];
     }
 }
 
 -(void) loadArtistDetails {
-    self.artistNameLabel.text = [self.concert artistName];
+    self.artistNameLabel.text = [[self.concert artistName] uppercaseString];
     self.venueNameLabel.text = [self.concert venueName];
 
     self.dateLabel.text = [NSString stringWithFormat:@"%@, %@", [self.concert venueName], [self.concert niceDate]];
@@ -195,10 +189,16 @@ NSString *kCellID = @"cellID";
         [self.placeholderView removeFromSuperview];
     }
     else {
-        [self setUpPlaceholderView];
-   }
+        [ECJSONFetcher checkIfEventIsPopulating:[self.concert lastfmID] completion:^(BOOL isPopulating) {
+            self.isPopulating = isPopulating;
+            [self setUpPlaceholderView];
+        }];
+    }
     [self.collectionView reloadData];
     [self.collectionView setContentOffset:CGPointZero animated:NO];
+    if (self.refreshControl.refreshing) {
+        [self.refreshControl endRefreshing];
+    }
 }
 
 -(void) setUpNavBarButtons {
@@ -217,9 +217,6 @@ NSString *kCellID = @"cellID";
     rightButton.frame = CGRectMake(0, 0, rightButImage.size.width, rightButImage.size.height);
     self.shareButton = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
     self.navigationItem.rightBarButtonItem = self.shareButton;
-    
-//    self.shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(shareTapped)];
-//    [self.navigationItem setRightBarButtonItem:self.shareButton];
 }
 
 -(void) backButtonWasPressed {
@@ -313,7 +310,7 @@ NSString *kCellID = @"cellID";
     if (alertView.tag == AddConcertConfirmTag || alertView.tag == RemoveConcertConfirmTag) {
         if (buttonIndex == alertView.firstOtherButtonIndex) {
             NSString * userID = self.userID;
-            NSString * lastfmID = self.lastfmID;
+            NSString * lastfmID = [self.concert lastfmID];
             switch (alertView.tag) {
                 case AddConcertConfirmTag: {
                     NSLog(@"%@: Adding concert %@ to profile %@", NSStringFromClass(self.class), lastfmID, userID);
@@ -322,6 +319,11 @@ NSString *kCellID = @"cellID";
                     [ECJSONPoster addConcert:lastfmID toUser:userID completion:^{
                         [self completedAddingConcert];
                         [Flurry logEvent:@"Completed_Adding_Concert" withParameters:[self flurryParam]];
+                        [ECJSONFetcher checkIfEventIsPopulating:[self.concert lastfmID] completion:^(BOOL isPopulating) {
+                            self.isPopulating = isPopulating;
+                            [self updatePlaceholderText];
+                        }];
+                        
                     }];
                     break;
                 }
@@ -362,9 +364,6 @@ NSString *kCellID = @"cellID";
 	[HUD show:YES];
 	[HUD hide:YES afterDelay:HUD_DELAY];
     [self toggleOnProfileState];
-    
-    //[[self mainViewController] refreshForConcertID:self.lastfmID];
-    //Refresh for concert ID will make profile vc pop back to itself
 }
 
 -(void) completedRemovingConcert {
@@ -381,16 +380,8 @@ NSString *kCellID = @"cellID";
     HUD.color = [UIColor redHUDConfirmationColor];
 	[HUD show:YES];
 	[HUD hide:YES afterDelay:HUD_DELAY];
-
-    //TODO: update this for new design
-    //[[self mainViewController] refreshForConcertID:nil];
-    //Refresh for concert ID will make profile vc pop back to itself
-}   
-
-//Toggle whether or not the profile is on the user's profile.
--(void) toggleOnProfileState {
-    self.isOnProfile = !self.isOnProfile;
-    [self.iWasThereButton setSelected:self.isOnProfile];
+    
+    [self toggleOnProfileState];
 }
 
 #pragma mark - collection view delegate/data source
@@ -452,10 +443,39 @@ NSString *kCellID = @"cellID";
         //[self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0] atScrollPosition:UICollectionViewScrollPositionTop animated:NO];
         
         self.placeholderView = [[ECPlaceHolderView alloc] initWithFrame:CGRectMake(0.0, HEADER_HEIGHT, self.collectionView.frame.size.width, self.collectionView.frame.size.height-HEADER_HEIGHT) owner: self];
+        UITapGestureRecognizer* recognizerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapPlaceholder)];
+        recognizerTap.numberOfTapsRequired = 1;
+        recognizerTap.numberOfTouchesRequired = 1;
+        [self.placeholderView addGestureRecognizer:recognizerTap];
     }
+    
+    [self updatePlaceholderText];
+
     if(!self.placeholderView.superview) {
         [self.view addSubview:self.placeholderView];
     }
+}
+-(void) tapPlaceholder {
+    if (self.isPopulating) {
+        [self loadImages];
+    }
+}
+-(void) updatePlaceholderText {
+    NSString* placeHolderText = nil;
+    
+//    if (self.isFuture) {
+//        placeHolderText = @"Add the concert to your profile by clicking the + sign above.";
+//    }
+    if (!self.isOnProfile) {
+        placeHolderText = @"Add the concert to your profile by clicking the + sign above in order to get images.";
+    }
+    else if (self.isPopulating) {
+        placeHolderText = @"Images are still loading, please check back again soon! Tap here to check again.";
+    }
+    else {
+        placeHolderText = @"Sorry, no content for this concert yet :(";
+    }
+    self.placeholderView.label1.text = placeHolderText;
 }
 
 #pragma mark - adding photos
@@ -572,10 +592,10 @@ NSString *kCellID = @"cellID";
         self = [subviewArray objectAtIndex:0];
         self.frame = frame;
         self.label1.font = [UIFont heroFontWithSize: 18.0];
-        self.label2.font = [UIFont heroFontWithSize: 18.0];
+//        self.label2.font = [UIFont heroFontWithSize: 18.0];
         
-        self.label1.text = NSLocalizedString(@"POST_PLACEHOLDER_TEXT_1", nil);
-        self.label2.text = NSLocalizedString(@"POST_PLACEHOLDER_TEXT_2", nil);
+//        self.label1.text = NSLocalizedString(@"POST_PLACEHOLDER_TEXT_1", nil);
+//        self.label2.text = NSLocalizedString(@"POST_PLACEHOLDER_TEXT_2", nil);
         
 //        self.button.titleLabel.font = [UIFont heroFontWithSize: 22.0];
     }

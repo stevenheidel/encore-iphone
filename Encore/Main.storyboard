@@ -12,8 +12,8 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="SOM-DW-RgO"/>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="gradient.png" translatesAutoresizingMaskIntoConstraints="NO" id="ewv-3k-71O">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="SOM-DW-RgO" userLabel="Artist Background"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="gradient.png" translatesAutoresizingMaskIntoConstraints="NO" id="ewv-3k-71O" userLabel="Gradient">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="550" id="atl-WT-3My"/>
                                 </constraints>
@@ -21,12 +21,13 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="HlE-VT-IbH">
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="E96-RF-aMq" userLabel="Header">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="109"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="88"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="BPv-ov-Jp0">
+                                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="BPv-ov-Jp0" userLabel="Segmented Control">
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="205" id="OTt-cL-kbJ"/>
+                                                <constraint firstAttribute="height" constant="30" type="user" id="51j-nW-7Ra"/>
+                                                <constraint firstAttribute="width" constant="205" type="user" id="OTt-cL-kbJ"/>
                                             </constraints>
                                             <segments>
                                                 <segment title="PAST"/>
@@ -36,9 +37,10 @@
                                                 <action selector="switchedSelection:" destination="8hQ-DB-bIb" eventType="valueChanged" id="anV-ke-fVB"/>
                                             </connections>
                                         </segmentedControl>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Artist search..." clearsOnBeginEditing="YES" minimumFontSize="17" background="search.png" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="UU0-XP-3u7">
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Artist search..." clearsOnBeginEditing="YES" minimumFontSize="17" background="search.png" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="UU0-XP-3u7" userLabel="Search">
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="30" id="zgo-hM-Seq"/>
+                                                <constraint firstAttribute="width" constant="205" type="user" id="aCs-zM-scp"/>
+                                                <constraint firstAttribute="height" constant="26" type="user" id="u8F-6Y-EY8"/>
                                             </constraints>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -47,30 +49,30 @@
                                                 <outlet property="delegate" destination="8hQ-DB-bIb" id="ez6-fH-gFb"/>
                                             </connections>
                                         </textField>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="JULY 28, 2013" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aq3-2n-a8G">
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="JULY 28, 2013" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aq3-2n-a8G" userLabel="Date">
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="100" id="BlJ-yJ-Ev6"/>
-                                                <constraint firstAttribute="height" constant="21" id="c4i-2u-DXa"/>
+                                                <constraint firstAttribute="width" constant="280" type="user" id="SN3-Jn-cd7"/>
+                                                <constraint firstAttribute="height" constant="21" type="user" id="Zd0-xj-X68"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
-                                        <constraint firstItem="UU0-XP-3u7" firstAttribute="top" secondItem="BPv-ov-Jp0" secondAttribute="bottom" constant="18" type="user" id="7Rf-pR-1Oq"/>
-                                        <constraint firstItem="Aq3-2n-a8G" firstAttribute="centerX" secondItem="UU0-XP-3u7" secondAttribute="centerX" type="default" id="AIg-Hy-5bA"/>
-                                        <constraint firstItem="BPv-ov-Jp0" firstAttribute="top" secondItem="E96-RF-aMq" secondAttribute="top" constant="20" symbolic="YES" type="user" id="G8o-h9-ghT"/>
-                                        <constraint firstAttribute="bottom" secondItem="Aq3-2n-a8G" secondAttribute="bottom" constant="17" id="GCu-RT-6gl"/>
-                                        <constraint firstItem="Aq3-2n-a8G" firstAttribute="centerX" secondItem="E96-RF-aMq" secondAttribute="centerX" type="default" id="Thj-h9-Ea8"/>
-                                        <constraint firstItem="BPv-ov-Jp0" firstAttribute="trailing" secondItem="UU0-XP-3u7" secondAttribute="trailing" type="default" id="U2Q-za-E0O"/>
-                                        <constraint firstItem="BPv-ov-Jp0" firstAttribute="leading" secondItem="UU0-XP-3u7" secondAttribute="leading" type="default" id="Zma-LA-pKe"/>
+                                        <constraint firstAttribute="centerX" secondItem="Aq3-2n-a8G" secondAttribute="centerX" type="user" id="4Oj-ck-2Da"/>
+                                        <constraint firstAttribute="centerX" secondItem="UU0-XP-3u7" secondAttribute="centerX" type="user" id="8s6-1y-ass"/>
+                                        <constraint firstAttribute="bottom" secondItem="UU0-XP-3u7" secondAttribute="bottom" constant="10" type="user" id="B3u-uN-pII"/>
+                                        <constraint firstItem="BPv-ov-Jp0" firstAttribute="top" secondItem="E96-RF-aMq" secondAttribute="top" constant="10" type="user" id="G8o-h9-ghT"/>
+                                        <constraint firstAttribute="centerX" secondItem="BPv-ov-Jp0" secondAttribute="centerX" type="user" id="HWq-1n-gZA"/>
+                                        <constraint firstItem="Aq3-2n-a8G" firstAttribute="baseline" secondItem="UU0-XP-3u7" secondAttribute="baseline" type="default" id="fFf-4Z-gN5"/>
+                                        <constraint firstItem="UU0-XP-3u7" firstAttribute="bottom" secondItem="Aq3-2n-a8G" secondAttribute="bottom" type="default" id="uFq-lk-FpR"/>
                                     </constraints>
                                 </view>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" restorationIdentifier="Cell" selectionStyle="blue" indentationWidth="10" reuseIdentifier="Cell" id="7Fj-8N-9kC" customClass="ECSearchResultCell">
-                                        <rect key="frame" x="0.0" y="131" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="110" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -86,7 +88,7 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="ewv-3k-71O" firstAttribute="leading" secondItem="r8f-Xx-36C" secondAttribute="leading" type="default" id="0Gn-9Q-sHG"/>
                             <constraint firstItem="HlE-VT-IbH" firstAttribute="top" secondItem="r8f-Xx-36C" secondAttribute="top" type="default" id="BuE-Pa-zv4"/>
@@ -103,9 +105,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="hU3-8N-dbJ"/>
                     <connections>
-                        <outlet property="SearchBar" destination="UU0-XP-3u7" id="8rI-Cl-dtP"/>
                         <outlet property="imgBackground" destination="SOM-DW-RgO" id="9JC-84-F7Y"/>
                         <outlet property="lblTodaysDate" destination="Aq3-2n-a8G" id="cEH-Mc-vax"/>
+                        <outlet property="searchBar" destination="UU0-XP-3u7" id="dl6-xV-dhp"/>
                         <outlet property="segmentedControl" destination="BPv-ov-Jp0" id="Mca-YI-uBY"/>
                         <outlet property="tableView" destination="HlE-VT-IbH" id="NtG-Dl-PID"/>
                         <outlet property="view" destination="r8f-Xx-36C" id="iNS-MP-tOe"/>
@@ -136,14 +138,14 @@
         <image name="search.png" width="454" height="47"/>
     </resources>
     <classes>
-        <class className="ECNewMainViewController" superclassName="UIViewController">
+        <class className="ECNewMainViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ECNewMainViewController.h"/>
             <relationships>
                 <relationship kind="action" name="dismissKeyboard:"/>
                 <relationship kind="action" name="switchedSelection:"/>
-                <relationship kind="outlet" name="SearchBar" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="imgBackground" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="lblTodaysDate" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="searchBar" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="segmentedControl" candidateClass="UISegmentedControl"/>
                 <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
             </relationships>

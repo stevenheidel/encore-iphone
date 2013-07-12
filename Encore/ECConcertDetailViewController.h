@@ -19,6 +19,8 @@
 -(void) shareTapped;
 -(id) initWithConcert:(NSDictionary*) concert;
 -(void) setConcert:(NSDictionary *)concert andUpdate: (BOOL) update;
+-(void) updateView;
+
 @property (nonatomic, readonly) BOOL isLoggedIn;
 @property (nonatomic, assign) ECSearchType searchType;
 @property (nonatomic,strong) NSDictionary * concert;
@@ -29,27 +31,26 @@
 @property (nonatomic,strong) IBOutlet UIImageView *imgArtist;
 @property (nonatomic,strong) IBOutlet UIImageView *imgBackground;
 @property (nonatomic,strong) IBOutlet UIImageView *imgLiveNow;
-@property (nonatomic, strong) IBOutlet UIButton *iWasThereButton;
+@property (nonatomic, strong) IBOutlet UIButton *concertStausButton;
 
 @property (nonatomic, strong) NSArray * posts;
 
-@property (nonatomic, strong) NSString * lastfmID;
 @property (nonatomic, readonly) NSString * userID;
-
 
 @property (nonatomic,strong) UIBarButtonItem * shareButton;
 
 @property (nonatomic, assign) BOOL isOnProfile;
 
 @property (nonatomic,strong) ECPlaceHolderView * placeholderView;
--(void) updateView;
 
 @property (nonatomic,strong) UIImagePickerController* imagePickerController;
-
 
 @property (nonatomic,unsafe_unretained) id <ECPostViewControllerDelegate> delegate;
 
 @property (nonatomic, strong) ECPostCollectionHeaderView* headerView;
+
+@property (nonatomic, assign) BOOL isPopulating;
+@property (nonatomic, strong) UIRefreshControl* refreshControl;
 @end
 
 @interface ECPlaceHolderView : UIView

@@ -24,14 +24,8 @@
 
 +(void) fetchPostsForConcertWithID: (NSString *) concertID completion: (void (^)(NSArray* fetchedPosts)) completion;
 +(void) checkIfConcert: (NSString*) concertID isOnProfile: (NSString *) userID completion: (void (^)(BOOL isOnProfile)) completion;
++(void) checkIfEventIsPopulating: (NSString*) eventID completion: (void (^)(BOOL isPopulating)) completion;
 
-@property (nonatomic,unsafe_unretained) id <ECJSONFetcherDelegate> delegate;
+//@property (nonatomic,unsafe_unretained) id <ECJSONFetcherDelegate> delegate;
 @end
 
-@protocol ECJSONFetcherDelegate <NSObject>
-
-@optional
--(void) fetchedArtists:(NSArray *)artists;
--(void) fetchedArtistConcerts:(NSArray *)concerts;
-
-@end

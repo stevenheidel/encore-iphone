@@ -79,4 +79,8 @@ UIColor* colorWithHSB(float hue, float saturation, float brightness, float alpha
 +(UIColor*) blueArtistTextColor {
     return colorWithRGB(3.0f, 176.0f, 227.0f, 1.0f);
 }
+
++(UIColor*) separatorColor {
+    return colorWithRGB(255.0, 255.0, 255.0, 0.52);
+}
 @end

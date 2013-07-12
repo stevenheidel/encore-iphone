@@ -32,6 +32,7 @@
 #define LASTFM_ID_DEF "lastfm_id"
 #define SONGKICK_ID_DEF "songkick_id"
 #define COMBINED_SEARCH_DEF "combined_search"
+#define POPULATING_DEF "populating.json"
 
 #define MAX_ERROR_LEN 200
 
@@ -74,6 +75,9 @@ static NSString *const CheckConcertOnProfileURL = @USERS_DEF "/%@/" EVENTS_DEF J
 static NSString* const AddConcertToUserURL = @USERS_DEF "/%@/" EVENTS_DEF; //,userID
 static NSString* const RemoveConcertFromUserURL = @USERS_DEF "/%@/" EVENTS_DEF "/%@"; //,userID, concertID
 static NSString* const PostImageURL = @EVENTS_DEF "/%@/" POSTS_DEF;
+
+#pragma mark - Check populating
+static NSString* const CheckEventPopulatingURL = @BASE_URL_DEF EVENTS_DEF "/%@/" POPULATING_DEF; //,eventID
 
 #pragma mark - Components
 static NSString *const UsersURL = @USERS_DEF;

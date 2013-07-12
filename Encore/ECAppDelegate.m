@@ -68,34 +68,22 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
     self.navigationController = (UINavigationController*)self.window.rootViewController;
     self.mainViewController = (ECNewMainViewController*)[[self.navigationController viewControllers] objectAtIndex:0];
     loggedIn = NO;
-//    self.mainViewController = [[ECMainViewController alloc] init];
-//    self.mainViewController =
-//    self.loginViewController = [[ECLoginViewController alloc] init];
     
     [self setUpLocationManager];
     
-//    self.mainViewController.title = @"Encore";
-    
-    //self.navigationController   = [[UINavigationController alloc] initWithRootViewController:self.loginViewController];
     self.navigationController   = [[UINavigationController alloc] initWithRootViewController:self.mainViewController];
     [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], UITextAttributeTextColor, [UIColor clearColor], UITextAttributeTextShadowColor, [NSValue valueWithUIOffset:UIOffsetMake(0.0f,1.0f)],UITextAttributeTextShadowOffset, [UIFont heroFontWithSize:24.0f], UITextAttributeFont, nil]];
     
-    
     self.window.rootViewController = self.navigationController;
-    self.window.backgroundColor = [UIColor whiteColor];
+    self.window.backgroundColor = [UIColor blackColor];
     [self.window makeKeyAndVisible];
     [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
-//    [FBLoginView class];
     
     // See if the app has a valid token for the current state.
     if (FBSession.activeSession.state == FBSessionStateCreatedTokenLoaded) {
         [self openSession];
     } else {
         // No, display the login page.
-//        UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//        self.loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"ECLoginViewController"];
-//        [self.window.rootViewController presentViewController:self.loginViewController animated:NO completion:nil];
-    
         
         [self showLoginView: NO];
     }
