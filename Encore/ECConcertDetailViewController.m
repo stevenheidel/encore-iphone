@@ -557,11 +557,6 @@ NSString *kCellID = @"cellID";
     return [[NSUserDefaults standardUserDefaults] stringForKey:NSLocalizedString(@"user_id", nil)];
 }
 
-//-(ECMainViewController*) mainViewController {
-//    ECAppDelegate* appDel = (ECAppDelegate *)[UIApplication sharedApplication].delegate;
-//    return appDel.mainViewController;
-//}
-
 -(ECAppDelegate*) appDelegate {
     return (ECAppDelegate *)[UIApplication sharedApplication].delegate;
 }
