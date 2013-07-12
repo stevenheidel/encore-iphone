@@ -23,7 +23,10 @@
 }
 
 -(NSURL *) profilePictureURL {
-    return [NSURL URLWithString:[self objectForKey:@"user_profile_picture"]];
+    if ([self objectForKey:@"user_profile_picture"]) {
+        return [NSURL URLWithString:[self objectForKey:@"user_profile_picture"]];
+    }
+    return nil;
 }
 
 -(NSString *) caption {

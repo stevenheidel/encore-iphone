@@ -258,7 +258,8 @@ typedef enum {
 -(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (alertView.tag == ECNotLoggedInAlert) {
         if (buttonIndex == alertView.firstOtherButtonIndex) {
-            [self showLogin];
+            [Flurry logEvent:@"Perform_Login"];
+            [[self appDelegate] openSession];
         }
         else {
             [Flurry logEvent:@"Canceled_Login_From_Alert"];//This is not the only place this log is made
