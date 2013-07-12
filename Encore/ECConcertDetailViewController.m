@@ -161,11 +161,11 @@ NSString *kCellID = @"cellID";
             self.imgArtist.image = regImage;
             self.imgBackground.image = [regImage imageWithGaussianBlur];// imageWithGaussianBlur];
         } else {
-            self.imgBackground.image = [UIImage imageNamed:@"Default"];// imageWithGaussianBlur];
+            self.imgBackground.image = [UIImage imageNamed:@"Black"];// imageWithGaussianBlur];
             self.imgArtist.image = [UIImage imageNamed:@"placeholder.jpg"];
         }
     } else {
-        self.imgBackground.image = [[UIImage imageNamed:@"Default"] imageWithGaussianBlur];
+        self.imgBackground.image = [[UIImage imageNamed:@"Black"] imageWithGaussianBlur];
         self.imgArtist.image = [UIImage imageNamed:@"placeholder.jpg"];
     }
 }

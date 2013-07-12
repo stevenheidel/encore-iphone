@@ -140,6 +140,9 @@
 		D4AC2DFA178F854600F292CA /* accessory@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AC2DF8178F854600F292CA /* accessory@2x.png */; };
 		D4AC2DFF178FA64E00F292CA /* ECProfileConcertCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AC2DFE178FA64E00F292CA /* ECProfileConcertCell.m */; };
 		D4AC2E01178FA6BC00F292CA /* ECProfileConcertCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4AC2E00178FA6BC00F292CA /* ECProfileConcertCell.xib */; };
+		D4AC2E05178FD2E200F292CA /* Black.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AC2E02178FD2E200F292CA /* Black.png */; };
+		D4AC2E06178FD2E200F292CA /* Black@2x 22-49-48-390.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AC2E03178FD2E200F292CA /* Black@2x 22-49-48-390.png */; };
+		D4AC2E07178FD2E200F292CA /* Black~568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AC2E04178FD2E200F292CA /* Black~568h@2x.png */; };
 		D4AC35F91768C5850087B1E9 /* NSDictionary+ConcertList.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AC35F81768C5850087B1E9 /* NSDictionary+ConcertList.m */; };
 		D4AC35FC1768C8B20087B1E9 /* ECJSONFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AC35FB1768C8B20087B1E9 /* ECJSONFetcher.m */; };
 		D4B0AC4717727FDA00DC4DD2 /* ECPostPlaceholder.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4B0AC4617727FDA00DC4DD2 /* ECPostPlaceholder.xib */; };
@@ -335,6 +338,9 @@
 		D4AC2DFD178FA64D00F292CA /* ECProfileConcertCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECProfileConcertCell.h; sourceTree = "<group>"; };
 		D4AC2DFE178FA64E00F292CA /* ECProfileConcertCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECProfileConcertCell.m; sourceTree = "<group>"; };
 		D4AC2E00178FA6BC00F292CA /* ECProfileConcertCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECProfileConcertCell.xib; sourceTree = "<group>"; };
+		D4AC2E02178FD2E200F292CA /* Black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Black.png; sourceTree = "<group>"; };
+		D4AC2E03178FD2E200F292CA /* Black@2x 22-49-48-390.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Black@2x 22-49-48-390.png"; sourceTree = "<group>"; };
+		D4AC2E04178FD2E200F292CA /* Black~568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Black~568h@2x.png"; sourceTree = "<group>"; };
 		D4AC35F71768C5850087B1E9 /* NSDictionary+ConcertList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+ConcertList.h"; sourceTree = "<group>"; };
 		D4AC35F81768C5850087B1E9 /* NSDictionary+ConcertList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+ConcertList.m"; sourceTree = "<group>"; };
 		D4AC35FA1768C8B20087B1E9 /* ECJSONFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECJSONFetcher.h; sourceTree = "<group>"; };
@@ -517,6 +523,9 @@
 		D4A8DDD1176A44A0005E9847 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				D4AC2E02178FD2E200F292CA /* Black.png */,
+				D4AC2E03178FD2E200F292CA /* Black@2x 22-49-48-390.png */,
+				D4AC2E04178FD2E200F292CA /* Black~568h@2x.png */,
 				D4AC2DF7178F854600F292CA /* accessory.png */,
 				D4AC2DF8178F854600F292CA /* accessory@2x.png */,
 				D4A9B311178DFCC9008B5504 /* search bar */,
@@ -1028,6 +1037,9 @@
 				D4AC2DF9178F854600F292CA /* accessory.png in Resources */,
 				D4AC2DFA178F854600F292CA /* accessory@2x.png in Resources */,
 				D4AC2E01178FA6BC00F292CA /* ECProfileConcertCell.xib in Resources */,
+				D4AC2E05178FD2E200F292CA /* Black.png in Resources */,
+				D4AC2E06178FD2E200F292CA /* Black@2x 22-49-48-390.png in Resources */,
+				D4AC2E07178FD2E200F292CA /* Black~568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
