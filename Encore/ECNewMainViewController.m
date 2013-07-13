@@ -25,6 +25,7 @@
 #define SearchCellIdentifier @"ECSearchResultCell"
 #define ConcertCellIdentifier @"ECConcertCellView"
 #define ALERT_HIDE_DELAY 2.0
+#define SEARCH_HEADER_HEIGHT 98.0f
 typedef enum {
     ECSearchResultSection,
     ECSearchLoadOtherSection,
@@ -42,7 +43,6 @@ typedef enum {
     [super viewDidLoad];
     self.searchHeaderView = nil;
     self.hasSearched = FALSE;
-    self.loadOther = FALSE;
     self.comboSearchResultsDic = nil;
     [self.tableView registerNib:[UINib nibWithNibName:@"ECSearchResultCell" bundle:nil]
          forCellReuseIdentifier:SearchCellIdentifier];
@@ -97,6 +97,8 @@ typedef enum {
 
 
 -(void) reloadData {
+    [Flurry logEvent:@"Used_Refresh_Control_Main_View" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[self currentSearchTypeString], @"search_type", nil]];
+    
     [ECJSONFetcher fetchPopularConcertsWithSearchType:self.currentSearchType completion:^(NSArray *concerts) {
         //            [self fetchedPopularConcerts:concerts];
         self.todaysConcerts = concerts;
@@ -121,7 +123,7 @@ typedef enum {
     self.searchBar.rightViewMode = UITextFieldViewModeAlways;
     
     self.searchBar.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
-//    [self.searchBar setTextColor:[UIColor blueArtistTextColor]];
+    [self.searchBar setTextColor:[UIColor blueArtistTextColor]];
 }
 
 -(void) viewWillAppear:(BOOL)animated {
@@ -131,26 +133,16 @@ typedef enum {
 //Set up left bar button for going to profile and right bar button for sharing
 -(void) setupBarButtons {
     UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    UIImage *leftButImage = [UIImage imageNamed:@"profileButton.png"]; //stretchableImageWithLeftCapWidth:10 topCapHeight:10];
+    UIImage *leftButImage = [UIImage imageNamed:@"profileButton.png"];
     [leftButton setBackgroundImage:leftButImage forState:UIControlStateNormal];
     [leftButton addTarget:self action:@selector(profileTapped) forControlEvents:UIControlEventTouchUpInside];
     leftButton.frame = CGRectMake(0, 0, leftButImage.size.width, leftButImage.size.height);
     UIBarButtonItem *profileButton = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
     self.navigationItem.leftBarButtonItem = profileButton;
-    
-//    UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
-//    UIImage *rightButImage = [UIImage imageNamed:@"shareButton.png"]; //stretchableImageWithLeftCapWidth:10 topCapHeight:10];
-//    [rightButton setBackgroundImage:rightButImage forState:UIControlStateNormal];
-//    [rightButton addTarget:self action:@selector(shareTapped) forControlEvents:UIControlEventTouchUpInside];
-//    rightButton.frame = CGRectMake(0, 0, rightButImage.size.width, rightButImage.size.height);
-//    self.shareButton = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
-//    self.shareButton.enabled = NO;
-//    self.navigationItem.rightBarButtonItem = self.shareButton;
 }
 
 -(void) setNavBarAppearance {
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navbar.png"] forBarMetrics:UIBarMetricsDefault];
-//    [[UINavigationBar appearance] setBackgroundColor:[UIColor blackColor]];
     
     [[UINavigationBar appearance] setTintColor:[UIColor clearColor]];
     [[UINavigationBar appearance] setBackgroundColor:[UIColor clearColor]];
@@ -186,7 +178,7 @@ typedef enum {
                                         [NSValue valueWithUIOffset:UIOffsetMake(0, 0)], UITextAttributeTextShadowOffset,
                                         [UIFont heroFontWithSize:16.0f], UITextAttributeFont,
                                         nil];
-//    UIOffsetMake(CGFloat horizontal, CGFloat vertical)
+
     [[UISegmentedControl appearance] setTitleTextAttributes:selectedTextAttr forState:UIControlStateSelected];
     [[UISegmentedControl appearance] setTitleTextAttributes:unselectedTextAttr forState:UIControlStateNormal];
     
@@ -205,35 +197,6 @@ typedef enum {
     
      self.lblTodaysDate.text = [[formatter stringFromDate:[NSDate date]] uppercaseString];
 }
--(void) fetchedPopularConcerts:(NSArray *)concerts {
-    self.todaysConcerts = concerts;
-    NSLog(@"%@: %@", NSStringFromClass([self class]), self.todaysConcerts.description);
-//    for (NSDictionary *concertDic in concerts) {
-//        NSURL *imageURL = [concertDic imageURL];
-//        UIImage *regImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL]];
-//        if (regImage) {
-//            [self.arrTodaysImages addObject:regImage];
-//        } else {
-//            [self.arrTodaysImages addObject:[UIImage imageNamed:@"placeholder.jpg"]];
-//        }
-//    }
-    [self.tableView reloadData];
-//    [self.hud hide:YES];
-//    [self setupAttribution];
-//    [self.delegate doneLoadingTodayConcerts];
-}
-
-//-(void) getArtistImages {
-//    for (NSDictionary *concertDic in self.todaysConcerts) {
-//        NSURL *imageURL = [concertDic imageURL];
-//        UIImage *regImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL]];
-//        if (regImage) {
-//            [self.arrTodaysImages addObject:regImage];
-//        } else {
-//            [self.arrTodaysImages addObject:[UIImage imageNamed:@"placeholder.jpg"]];
-//        }
-//    }
-//}
 
 -(ECAppDelegate*) appDelegate  {
     return (ECAppDelegate*)[UIApplication sharedApplication].delegate;
@@ -245,7 +208,7 @@ typedef enum {
 
 #pragma mark - Buttons
 -(void)profileTapped {
-    [Flurry logEvent:@"Profile_Button_Pressed"];
+    [Flurry logEvent:@"Profile_Button_Pressed" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:self.isLoggedIn ? @"Logged_In" : @"Not_Logged_In",@"Logged_In_State",[self currentSearchTypeString],@"Search_Type", nil]];
     if (self.isLoggedIn){
         if (self.profileViewController == nil) {
             ECProfileViewController* profileViewController = [ECProfileViewController new];
@@ -265,6 +228,7 @@ typedef enum {
 }
 
 - (IBAction)openLastFM:(id)sender {
+    [Flurry logEvent:@"Opened_Last_FM" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[self currentSearchTypeString], @"Search_Type",nil]];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.last.fm"]];
 }
 
@@ -272,33 +236,51 @@ typedef enum {
 -(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (alertView.tag == ECNotLoggedInAlert) {
         if (buttonIndex == alertView.firstOtherButtonIndex) {
-            [Flurry logEvent:@"Perform_Login"];
             [[self appDelegate] openSession];
         }
-        else {
-            [Flurry logEvent:@"Canceled_Login_From_Alert"];//This is not the only place this log is made
-        }
+        [Flurry logEvent:@"Login_Alert_Selection" withParameters:[NSDictionary dictionaryWithObjectsAndKeys: @"Main_View", @"Current_View", buttonIndex == alertView.firstOtherButtonIndex ? @"Login":@"Cancel",@"Selection", nil]];
     }
 }
+
 -(void) showLogin {
     [[self appDelegate] showLoginView: YES];
 }
+
 #pragma mark Segmented Control
 -(IBAction) switchedSelection: (id) sender {
-
-    self.loadOther = FALSE;
-    self.searchBar.text = @"";
-    [self.searchBar resignFirstResponder];
-    UISegmentedControl* control = (UISegmentedControl*)sender;
+    self.searchBar.text = @""; // clear search bar - will show placeholder
+    [self.searchBar resignFirstResponder]; //hide keyboard in case it was visible
     
+    UISegmentedControl* control = (UISegmentedControl*)sender;
     self.currentSearchType = [ECNewMainViewController searchTypeForSegmentIndex:control.selectedSegmentIndex];
+    
+    
+    //reload data/images
     [self displayViewsAccordingToSearchType];
     [self.tableView reloadData];
     [self setBackgroundImage];
     if(self.currentSearchType == ECSearchTypeToday) {
         [self resetTableHeaderView]; //remove artist image that appears during search results
     }
-        self.hasSearched = FALSE;
+    
+    self.hasSearched = FALSE;
+    
+    [Flurry logEvent:@"Switched_Selection" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[self currentSearchTypeString], @"Search_Type",nil]];
+}
+
+
+//return a string based on the current search type for logging to Flurry etc
+-(NSString*) currentSearchTypeString {
+    switch (self.currentSearchType) {
+        case ECSearchTypeToday:
+            return @"Today";
+        case ECSearchTypeFuture:
+            return @"Future";
+        case ECSearchTypePast:
+            return @"Past";
+        default:
+            return nil;
+    }
 }
 
 +(ECSearchType) searchTypeForSegmentIndex: (NSInteger) index {
@@ -343,19 +325,14 @@ typedef enum {
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
     if (self.hasSearched) {
-        if (section == ECSearchResultSection) {
             return [self.searchResultsEvents count];
-        }
-        if (section == ECSearchLoadOtherSection) {
-            return self.loadOther ? self.otherArtists.count : 1;
-        }
-        
     }
     else {
         return [[self currentEventArray] count];
     }
     return 0;
 }
+
 -(void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
 
 }
@@ -366,21 +343,6 @@ typedef enum {
             NSDictionary * eventDic = [self.searchResultsEvents objectAtIndex:indexPath.row];
             [cell setupCellForEvent:eventDic];
             return cell;
-        }
-        else if (indexPath.section == ECSearchLoadOtherSection) {
-            if(!self.loadOther) {
-                //TODO: customize cell
-                UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
-                cell.textLabel.text = @"Wrong artist?";
-                cell.textLabel.textColor = [UIColor whiteColor];
-                return cell;
-            }
-            else {
-                UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
-                cell.textLabel.text = [[self.otherArtists objectAtIndex:indexPath.row] objectForKey:@"name"];
-                cell.textLabel.textColor = [UIColor whiteColor];
-                return cell;
-            }
         }
     }
     else { //popular concert cell
@@ -423,10 +385,12 @@ typedef enum {
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    [Flurry logEvent:@"Main_Selected_Row" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[self currentSearchTypeString], @"Search_Type", [NSNumber numberWithInt:indexPath.row], @"row", self.hasSearched ? @"post_search" : @"not_post_search", @"is_post_search", nil]];
+    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (self.hasSearched) {
         if (indexPath.section == ECSearchLoadOtherSection) {
-            self.loadOther = TRUE;
             [self.tableView reloadData];
             [self setBackgroundImage];
         }
@@ -516,7 +480,7 @@ typedef enum {
         CGRect headerFrame = self.tableView.tableHeaderView.frame;
         
         self.searchHeaderView.frame = CGRectMake(0,headerFrame.size.height,320,98);
-        headerFrame.size.height = headerFrame.size.height + 98.0f;
+        headerFrame.size.height = headerFrame.size.height + SEARCH_HEADER_HEIGHT;
         UIView* header = self.tableView.tableHeaderView;
         header.frame = headerFrame;
         [header addSubview:self.searchHeaderView];
@@ -528,15 +492,14 @@ typedef enum {
     if ([self.searchHeaderView isDescendantOfView:self.tableView.tableHeaderView]) {
         UIView* header = self.tableView.tableHeaderView;
         CGRect frame = header.frame;
-        frame.size.height = frame.size.height - 98.0f;
+        frame.size.height = frame.size.height - SEARCH_HEADER_HEIGHT;
         header.frame = frame;
         [self.searchHeaderView removeFromSuperview];
         self.tableView.tableHeaderView = header;
     }
 }
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    
-    if ([textField.text length] > 0) {
+    if ([textField.text length] > 0) { //don't search empty searches
         [ECJSONFetcher fetchArtistsForString:textField.text withSearchType:self.currentSearchType forLocation:self.userCity completion:^(NSDictionary * comboDic) { //TODO load actual location
             [self fetchedConcertsForSearch:comboDic];
         }];
@@ -544,6 +507,8 @@ typedef enum {
         self.hud.labelText = NSLocalizedString(@"Searching", nil);
         self.hud.detailsLabelText = [NSString stringWithFormat:NSLocalizedString(@"hudSearchArtist", nil), [textField text]];
         [self.hud show:YES];
+        
+        [Flurry logEvent:@"Searched_Artist" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:textField.text, @"search_text", [self currentSearchTypeString], @"Search_Type", nil]];
     }
     [self.view removeGestureRecognizer:self.tap];
     [textField resignFirstResponder];
@@ -559,11 +524,9 @@ typedef enum {
     [self resetTableHeaderView];
     if (comboDic) {
         self.hasSearched = TRUE;
-        self.loadOther = FALSE;
         self.comboSearchResultsDic = comboDic;
         if (!self.searchResultsEvents.count > 0) {
             self.hasSearched = FALSE;
-            self.loadOther = FALSE;
             self.comboSearchResultsDic = nil;
             MBProgressHUD* alert = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
             alert.labelText = NSLocalizedString(@"No events found", nil);
@@ -577,7 +540,6 @@ typedef enum {
     }
     else { //failed to find anything
         self.hasSearched = FALSE;
-        self.loadOther = FALSE;
         self.comboSearchResultsDic = nil;
         MBProgressHUD* alert = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
         alert.labelText = NSLocalizedString(@"No artists found",nil);

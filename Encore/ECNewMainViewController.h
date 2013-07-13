@@ -22,7 +22,6 @@
 @property (nonatomic, readonly) BOOL isLoggedIn; //Getter that pulls from app delegate
 
 @property (assign, nonatomic) BOOL hasSearched; //Flag for whether use has performed a search
-@property (assign, nonatomic) BOOL loadOther; //Flag for whether user has asked for other search results
 
 @property (strong, nonatomic) UITapGestureRecognizer *tap;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
