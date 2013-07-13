@@ -38,6 +38,7 @@
                                             </connections>
                                         </segmentedControl>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Artist search..." clearsOnBeginEditing="YES" minimumFontSize="17" background="search.png" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="UU0-XP-3u7" userLabel="Search">
+                                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="26" type="user" id="u8F-6Y-EY8"/>
                                                 <constraint firstAttribute="width" constant="250" id="xqA-2r-8SQ"/>
@@ -83,8 +84,8 @@
                                         <constraint firstItem="BPv-ov-Jp0" firstAttribute="top" secondItem="E96-RF-aMq" secondAttribute="top" constant="10" type="user" id="G8o-h9-ghT"/>
                                         <constraint firstItem="UU0-XP-3u7" firstAttribute="top" secondItem="E96-RF-aMq" secondAttribute="top" constant="54" id="NE4-ic-w04"/>
                                         <constraint firstItem="UU0-XP-3u7" firstAttribute="centerX" secondItem="BPv-ov-Jp0" secondAttribute="centerX" type="default" id="SJg-gl-5uO"/>
+                                        <constraint firstAttribute="centerX" secondItem="hXC-Wo-Qyy" secondAttribute="centerX" type="user" id="Ymj-Pz-Hwq"/>
                                         <constraint firstItem="Aq3-2n-a8G" firstAttribute="baseline" secondItem="UU0-XP-3u7" secondAttribute="baseline" type="default" id="fFf-4Z-gN5"/>
-                                        <constraint firstItem="hXC-Wo-Qyy" firstAttribute="centerX" secondItem="Aq3-2n-a8G" secondAttribute="centerX" type="default" id="fQg-6L-hVw"/>
                                         <constraint firstItem="Aq3-2n-a8G" firstAttribute="leading" secondItem="E96-RF-aMq" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="nJo-b4-RNd"/>
                                         <constraint firstItem="UU0-XP-3u7" firstAttribute="centerX" secondItem="Aq3-2n-a8G" secondAttribute="centerX" type="default" id="wMK-ev-uGC"/>
                                     </constraints>
@@ -157,6 +158,36 @@
         <image name="lastfmAttr.png" width="98" height="13"/>
         <image name="search.png" width="454" height="47"/>
     </resources>
+    <classes>
+        <class className="ECNewMainViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ECNewMainViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="dismissKeyboard:"/>
+                <relationship kind="action" name="openLastFM:"/>
+                <relationship kind="action" name="switchedSelection:"/>
+                <relationship kind="outlet" name="imgBackground" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="imgLastfmAttr" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="lblTodaysDate" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="searchBar" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="segmentedControl" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="ECSearchResultCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ECSearchResultCell.h"/>
+            <relationships>
+                <relationship kind="action" name="addToProfile"/>
+                <relationship kind="outlet" name="btnAdd" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="btnDisclosure" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="lblDate" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="lblEventTitle" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="lblVenue" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
