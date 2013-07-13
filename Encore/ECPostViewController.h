@@ -21,7 +21,7 @@
 
 @property (nonatomic,assign) NSInteger itemNumber;
 @property (nonatomic,strong) IBOutlet UIView* containerView;
-@property (nonatomic,readonly) NSNumber * postID;
+@property (nonatomic,readonly) NSString * postID;
 @property (nonatomic,unsafe_unretained) id <ECPostViewControllerDelegate> delegate;
 @end
 
