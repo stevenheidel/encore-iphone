@@ -157,35 +157,6 @@
         <image name="lastfmAttr.png" width="98" height="13"/>
         <image name="search.png" width="454" height="47"/>
     </resources>
-    <classes>
-        <class className="ECNewMainViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ECNewMainViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="dismissKeyboard:"/>
-                <relationship kind="action" name="openLastFM:"/>
-                <relationship kind="outlet" name="imgBackground" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="imgLastfmAttr" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="lblTodaysDate" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="searchBar" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="segmentedControl" candidateClass="UISegmentedControl"/>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="ECSearchResultCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ECSearchResultCell.h"/>
-            <relationships>
-                <relationship kind="action" name="addToProfile"/>
-                <relationship kind="outlet" name="btnAdd" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="btnDisclosure" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="lblDate" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lblEventTitle" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="lblVenue" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

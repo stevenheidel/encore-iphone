@@ -74,7 +74,6 @@ typedef enum {
     
     //add hud progress indicator
     self.hud = [[MBProgressHUD alloc] initWithView:self.view];
-    
     [self.view addSubview:self.hud];
     self.hud.labelText = NSLocalizedString(@"loading", nil);
     self.hud.color = [UIColor lightBlueHUDConfirmationColor];
@@ -88,8 +87,24 @@ typedef enum {
     
     [self.tableView setIndicatorStyle:UIScrollViewIndicatorStyleWhite];
     self.view.clipsToBounds = YES;
+    
+    self.refreshControl = [UIRefreshControl new];
+    [self.refreshControl addTarget:self action:@selector(reloadData)
+                  forControlEvents:UIControlEventValueChanged];
+    [self.tableView addSubview:self.refreshControl];
+    self.refreshControl.tintColor = [UIColor lightBlueNavBarColor];
 }
 
+
+-(void) reloadData {
+    [ECJSONFetcher fetchPopularConcertsWithSearchType:self.currentSearchType completion:^(NSArray *concerts) {
+        //            [self fetchedPopularConcerts:concerts];
+        self.todaysConcerts = concerts;
+        [self.tableView reloadData];
+        [self setBackgroundImage];
+        [self.refreshControl endRefreshing];
+    }];
+}
 -(void) setupSearchBar {
     //Add padding for search bar
     UIView* paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 20)];
@@ -559,6 +574,7 @@ typedef enum {
             [alert hide:YES afterDelay:ALERT_HIDE_DELAY]; //TODO use #define for delay
             alert.labelFont = [UIFont heroFontWithSize:18.0f];
             alert.color = [UIColor redHUDConfirmationColor];
+            alert.userInteractionEnabled = NO;
         }
     }
     else { //failed to find anything
@@ -572,6 +588,7 @@ typedef enum {
         [alert hide:YES afterDelay:ALERT_HIDE_DELAY]; //TODO use #define for delay
         alert.labelFont = [UIFont heroFontWithSize:18.0f];
         alert.color = [UIColor redHUDConfirmationColor];
+        alert.userInteractionEnabled = NO;
     }
     
     [self.tableView reloadData];

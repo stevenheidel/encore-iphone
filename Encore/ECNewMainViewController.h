@@ -52,4 +52,6 @@
 @property (strong, nonatomic) MBProgressHUD * hud;
 
 @property (strong, nonatomic) UIView* searchHeaderView;
+
+@property (strong,nonatomic) UIRefreshControl* refreshControl;
 @end
