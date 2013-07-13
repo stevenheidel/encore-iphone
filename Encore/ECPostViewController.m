@@ -233,7 +233,7 @@ typedef enum {
 }
 
 #pragma mark - Getters
--(NSNumber*) postID {
+-(NSString*) postID {
     return [self.post postID];
 }
 
