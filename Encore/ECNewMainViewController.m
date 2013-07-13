@@ -295,7 +295,7 @@ typedef enum {
     [self displayViewsAccordingToSearchType];
     [self.tableView reloadData];
     [self setBackgroundImage];
-    if(self.currentSearchType == ECSearchTypeToday && self.hasSearched == TRUE) {
+    if(self.currentSearchType == ECSearchTypeToday) {
         [self resetTableHeaderView]; //remove artist image that appears during search results
     }
         self.hasSearched = FALSE;
@@ -350,11 +350,9 @@ typedef enum {
             return self.loadOther ? self.otherArtists.count : 1;
         }
         
-    } else if (self.currentSearchType == ECSearchTypeToday) {
-        return [self.todaysConcerts count];
     }
-    else if (self.currentSearchType == ECSearchTypePast) {
-        return [self.pastConcerts count];
+    else {
+        return [[self currentEventArray] count];
     }
     return 0;
 }
@@ -465,11 +463,11 @@ typedef enum {
 }
 
 - (void) setBackgroundImage {
-    if (self.hasSearched && self.searchResultsEvents.count>0) {
+    if (self.hasSearched && self.searchResultsEvents.count>0 && self.currentSearchType != ECSearchTypeToday) {
         UIImage *background = [[UIImage imageWithData:[NSData dataWithContentsOfURL:[[self.searchResultsEvents objectAtIndex:0] imageURL]]] imageWithGaussianBlur];
         [self.imgBackground setImage:background];
     }
-    else if (self.currentSearchType == ECSearchTypeToday) {
+    else {
         UIImage *background = [[UIImage imageWithData:[NSData dataWithContentsOfURL:[[[self currentEventArray] objectAtIndex:0] imageURL]]] imageWithGaussianBlur];
         [self.imgBackground setImage:background];
     }
