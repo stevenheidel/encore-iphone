@@ -24,7 +24,7 @@
 #import "ECAlertTags.h"
 #define SearchCellIdentifier @"ECSearchResultCell"
 #define ConcertCellIdentifier @"ECConcertCellView"
-
+#define ALERT_HIDE_DELAY 2.0
 typedef enum {
     ECSearchResultSection,
     ECSearchLoadOtherSection,
@@ -556,7 +556,7 @@ typedef enum {
             alert.labelText = NSLocalizedString(@"No events found", nil);
             alert.mode = MBProgressHUDModeText;
             alert.removeFromSuperViewOnHide = YES;
-            [alert hide:YES afterDelay:2.0]; //TODO use #define for delay
+            [alert hide:YES afterDelay:ALERT_HIDE_DELAY]; //TODO use #define for delay
             alert.labelFont = [UIFont heroFontWithSize:18.0f];
             alert.color = [UIColor redHUDConfirmationColor];
         }
@@ -569,7 +569,7 @@ typedef enum {
         alert.labelText = NSLocalizedString(@"No artists found",nil);
         alert.mode = MBProgressHUDModeText;
         alert.removeFromSuperViewOnHide = YES;
-        [alert hide:YES afterDelay:2.0]; //TODO use #define for delay
+        [alert hide:YES afterDelay:ALERT_HIDE_DELAY]; //TODO use #define for delay
         alert.labelFont = [UIFont heroFontWithSize:18.0f];
         alert.color = [UIColor redHUDConfirmationColor];
     }
