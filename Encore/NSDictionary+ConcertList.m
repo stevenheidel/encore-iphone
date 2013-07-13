@@ -28,16 +28,12 @@ static NSString * const kDateFormat = @"yyyy-MM-dd";
    return [self objectForKey:@"venue_name"];
 }
 
--(NSNumber*) serverID {
-    return [self songkickID];//[self objectForKey:@"server_id"];
+-(NSString*) serverID {
+    return [self eventID];
 }
 
--(NSString*) lastfmID {
+-(NSString*) eventID {
     return [self objectForKey:@"lastfm_id"];
-}
-
--(NSNumber*) songkickID {
-    return [self objectForKey:@"songkick_id"];
 }
 
 -(NSURL *) backgroundURL {

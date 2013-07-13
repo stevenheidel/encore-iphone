@@ -124,11 +124,10 @@ NSString *kCellID = @"cellID";
     [self loadArtistDetails];
     [self loadImages];
     NSString * userID = self.userID;
-    [ECJSONFetcher checkIfConcert:[self.concert lastfmID] isOnProfile:userID completion:^(BOOL isOnProfile) {
+    [ECJSONFetcher checkIfConcert:[self.concert eventID] isOnProfile:userID completion:^(BOOL isOnProfile) {
         self.isOnProfile = isOnProfile;
         [self setImageForConcertStatusButton];
     }];
-    
 }
 
 //Toggle whether or not the profile is on the user's profile.
@@ -171,7 +170,7 @@ NSString *kCellID = @"cellID";
 }
 
 -(void) loadImages {
-    NSString* serverID = [self.concert lastfmID];
+    NSString* serverID = [self.concert eventID];
     if (serverID) {
         [ECJSONFetcher fetchPostsForConcertWithID:serverID completion:^(NSArray *fetchedPosts) {
             [self fetchedPosts:fetchedPosts];
@@ -189,7 +188,7 @@ NSString *kCellID = @"cellID";
         [self.placeholderView removeFromSuperview];
     }
     else {
-        [ECJSONFetcher checkIfEventIsPopulating:[self.concert lastfmID] completion:^(BOOL isPopulating) {
+        [ECJSONFetcher checkIfEventIsPopulating:[self.concert eventID] completion:^(BOOL isPopulating) {
             self.isPopulating = isPopulating;
             [self setUpPlaceholderView];
         }];
@@ -225,7 +224,7 @@ NSString *kCellID = @"cellID";
 
 #pragma mark - FB Sharing
 -(void) shareTapped {
-    NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:ShareConcertURL,self.songkickID]];
+    NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:ShareConcertURL,self.eventID]];
     
     FBShareDialogParams* params = [[FBShareDialogParams alloc] init];
     params.link = url;
@@ -301,25 +300,23 @@ NSString *kCellID = @"cellID";
         if (buttonIndex == alertView.firstOtherButtonIndex) {
             [[self appDelegate] showLoginView:YES];
         }
-        else {
-            [Flurry logEvent: @"Canceled_Login_From_Alert"]; //This is not the only place this log is made
-        }
+        [Flurry logEvent:@"Login_Alert_Selection" withParameters:[NSDictionary dictionaryWithObjectsAndKeys: @"Detail_View", @"Current_View", buttonIndex == alertView.firstOtherButtonIndex ? @"Login":@"Cancel",@"Selection", nil]];
         return; //don't process other alerts
     }
     
     if (alertView.tag == AddConcertConfirmTag || alertView.tag == RemoveConcertConfirmTag) {
         if (buttonIndex == alertView.firstOtherButtonIndex) {
             NSString * userID = self.userID;
-            NSString * lastfmID = [self.concert lastfmID];
+            NSString * eventID = [self.concert eventID];
             switch (alertView.tag) {
                 case AddConcertConfirmTag: {
-                    NSLog(@"%@: Adding concert %@ to profile %@", NSStringFromClass(self.class), lastfmID, userID);
+                    NSLog(@"%@: Adding concert %@ to profile %@", NSStringFromClass(self.class), eventID, userID);
                     [Flurry logEvent:@"Confirmed_Add_Concert" withParameters:[self flurryParam]];
                     
-                    [ECJSONPoster addConcert:lastfmID toUser:userID completion:^{
+                    [ECJSONPoster addConcert:eventID toUser:userID completion:^{
                         [self completedAddingConcert];
                         [Flurry logEvent:@"Completed_Adding_Concert" withParameters:[self flurryParam]];
-                        [ECJSONFetcher checkIfEventIsPopulating:[self.concert lastfmID] completion:^(BOOL isPopulating) {
+                        [ECJSONFetcher checkIfEventIsPopulating:[self.concert eventID] completion:^(BOOL isPopulating) {
                             self.isPopulating = isPopulating;
                             [self updatePlaceholderText];
                         }];
@@ -330,8 +327,8 @@ NSString *kCellID = @"cellID";
                 case RemoveConcertConfirmTag: {
                     [Flurry logEvent:@"Confirmed_Remove_Concert" withParameters:[self flurryParam]];
                     
-                    NSLog(@"%@: Removing a concert %@ from profile %@", NSStringFromClass(self.class), lastfmID, userID);
-                    [ECJSONPoster removeConcert:lastfmID toUser:userID completion:^{
+                    NSLog(@"%@: Removing a concert %@ from profile %@", NSStringFromClass(self.class), eventID, userID);
+                    [ECJSONPoster removeConcert:eventID toUser:userID completion:^{
                         [self completedRemovingConcert];
                         [Flurry logEvent:@"Completed_Removing_Concert" withParameters:[self flurryParam]];
                     }];
@@ -535,7 +532,7 @@ NSString *kCellID = @"cellID";
 
 #pragma mark Picture View Controller Delegate
 -(void) postImage:(UIImage *)image {
-    NSDictionary * imageDic = [NSDictionary dictionaryWithObjectsAndKeys:image, @"image",[self.concert songkickID], @"concert", self.userID, @"user", nil];
+    NSDictionary * imageDic = [NSDictionary dictionaryWithObjectsAndKeys:image, @"image",[self eventID], @"concert", self.userID, @"user", nil];
     [self dismissViewControllerAnimated:YES completion:nil];
     [ECJSONPoster postImage: imageDic completion:^{
         NSLog(@"Completed posting image!");
@@ -568,9 +565,9 @@ NSString *kCellID = @"cellID";
 }
 
 #pragma mark - getters
-//Property readonly getter to grab songkickID in a slightly shorter way
--(NSNumber*) songkickID {
-    return [self.concert songkickID];
+//Property readonly getter to grab id in a slightly shorter way
+-(NSString*) eventID {
+    return [self.concert eventID];
 }
 
 -(NSString*) userID {
