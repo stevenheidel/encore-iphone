@@ -453,7 +453,8 @@ typedef enum {
     if (self.hasSearched && self.searchResultsEvents.count>0) {
         UIImage *background = [[UIImage imageWithData:[NSData dataWithContentsOfURL:[[self.searchResultsEvents objectAtIndex:0] imageURL]]] imageWithGaussianBlur];
         [self.imgBackground setImage:background];
-    } else {
+    }
+    else if (self.currentSearchType == ECSearchTypeToday) {
         UIImage *background = [[UIImage imageWithData:[NSData dataWithContentsOfURL:[[[self currentEventArray] objectAtIndex:0] imageURL]]] imageWithGaussianBlur];
         [self.imgBackground setImage:background];
     }
@@ -511,7 +512,7 @@ typedef enum {
 }
 
 -(void) resetTableHeaderView {
-    if (self.searchHeaderView) {
+    if ([self.searchHeaderView isDescendantOfView:self.tableView.tableHeaderView]) {
         UIView* header = self.tableView.tableHeaderView;
         CGRect frame = header.frame;
         frame.size.height = frame.size.height - 98.0f;
@@ -542,6 +543,7 @@ typedef enum {
 
 - (void)fetchedConcertsForSearch:(NSDictionary *)comboDic {
     [self.hud hide:YES];
+    [self resetTableHeaderView];
     if (comboDic) {
         self.hasSearched = TRUE;
         self.loadOther = FALSE;
