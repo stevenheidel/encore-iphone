@@ -302,7 +302,7 @@ typedef enum {
 }
 
 +(ECSearchType) searchTypeForSegmentIndex: (NSInteger) index {
-    //TODO change when adding future
+    //TODO change if adding future
     switch (index) {
         case 0:
             return ECSearchTypePast;
