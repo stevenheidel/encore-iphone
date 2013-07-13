@@ -84,7 +84,7 @@
 }
 
 -(IBAction)loginLater {
-    [Flurry logEvent:@"Login_Later"]; //TODO: add to flurry list v2
+    [Flurry logEvent:@"Login_Later"];
     ECAppDelegate* appDelegate = (ECAppDelegate*)[UIApplication sharedApplication].delegate;
     [appDelegate loginLater];
 }
