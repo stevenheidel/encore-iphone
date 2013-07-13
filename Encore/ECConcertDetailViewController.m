@@ -113,7 +113,7 @@ NSString *kCellID = @"cellID";
 //    [self.venueNameLabel setAdjustsFontSizeToFitWidth:YES];
     self.venueNameLabel.font = [UIFont heroFontWithSize: 14.0];
     self.dateLabel.font = [UIFont heroFontWithSize: 12.0];
-    self.imgArtist.layer.cornerRadius = 25.0;
+    self.imgArtist.layer.cornerRadius = 5.0;
     self.imgArtist.layer.masksToBounds = YES;
     self.imgArtist.layer.borderColor = [UIColor grayColor].CGColor;
     self.imgArtist.layer.borderWidth = 0.1;
