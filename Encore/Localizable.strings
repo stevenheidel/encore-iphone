@@ -81,5 +81,5 @@
 //"flag_3" = "";
 
 //Feedback
-"Feedback_Placeholder" = "As a beta tester, we'd love to get any feedback you have on the app. Please enter your feedback here and hit send...";
+"Feedback_Placeholder" = "We'd love to get any feedback you have on the app. Please enter your feedback here and hit send...";
 "Feedback_Sent" = "Thank you for your feedback!";
