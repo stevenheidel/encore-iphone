@@ -48,7 +48,7 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
 -(void) startAnalytics {
     [Flurry setDebugLogEnabled:FLURRY_LOGGING];
     [Flurry setAppVersion:[NSString stringWithFormat:@"%@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]]];
-    [Flurry startSession:@"GWNDD6XD7GF76QFWFXPQ"];
+    [Flurry startSession:@"GM2TRR7TWT9DRX9N9PG9"];
 
     [Flurry setEventLoggingEnabled:YES];
 
