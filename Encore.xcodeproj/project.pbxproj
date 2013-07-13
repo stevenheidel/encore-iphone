@@ -19,7 +19,6 @@
 		A022AAA3177605900009244C /* Hero.otf in Resources */ = {isa = PBXBuildFile; fileRef = A022AAA1177605900009244C /* Hero.otf */; };
 		A022AAA617779BB50009244C /* ECConcertCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = A022AAA517779BB50009244C /* ECConcertCellView.m */; };
 		A022AAA817779BDF0009244C /* ECConcertCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A022AAA717779BDF0009244C /* ECConcertCellView.xib */; };
-		A022AAB51777DB250009244C /* ECCustomSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A022AAB41777DB240009244C /* ECCustomSearchBar.m */; };
 		A022AAB71778D8D60009244C /* LiveIndicator.png in Resources */ = {isa = PBXBuildFile; fileRef = A022AAB61778D8D60009244C /* LiveIndicator.png */; };
 		A022AABF1779E8380009244C /* UIImage+GaussBlur.m in Sources */ = {isa = PBXBuildFile; fileRef = A022AABE1779E8380009244C /* UIImage+GaussBlur.m */; };
 		A022AACD177A38C90009244C /* magnifyglass@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A022AACC177A38C90009244C /* magnifyglass@2x.png */; };
@@ -46,9 +45,6 @@
 		A0A2B0DD177E3B5A00518B6C /* ECProfileHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0A2B0DC177E3B5A00518B6C /* ECProfileHeader.xib */; };
 		A0FF1C53176CC88000433768 /* LoginInfoPages.plist in Resources */ = {isa = PBXBuildFile; fileRef = A0FF1C52176CC88000433768 /* LoginInfoPages.plist */; };
 		D428A45B1781085500101F12 /* UIColor+EncoreUI.m in Sources */ = {isa = PBXBuildFile; fileRef = D428A45A1781085500101F12 /* UIColor+EncoreUI.m */; };
-		D43ACD7F176D2EA700E2282A /* ECCellType.m in Sources */ = {isa = PBXBuildFile; fileRef = D43ACD7E176D2EA700E2282A /* ECCellType.m */; };
-		D43ACD81176D3B7F00E2282A /* ECEndCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D43ACD80176D3B7F00E2282A /* ECEndCellView.xib */; };
-		D43ACD84176D3BF400E2282A /* ECEndCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = D43ACD83176D3BF400E2282A /* ECEndCellView.m */; };
 		D45DBD5D1783C57D000ED3C1 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D45DBD5C1783C57D000ED3C1 /* Icon@2x.png */; };
 		D45DBD5F1783C5C5000ED3C1 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D45DBD5E1783C5C5000ED3C1 /* Icon-Small@2x.png */; };
 		D45DBD611783C5DF000ED3C1 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D45DBD601783C5DF000ED3C1 /* Icon.png */; };
@@ -56,10 +52,6 @@
 		D491F808178B54C9002E00E5 /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D491F806178B54C9002E00E5 /* logo@2x.png */; };
 		D491F80C178B57C1002E00E5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D491F80B178B57C1002E00E5 /* Main.storyboard */; };
 		D491F80F178B595D002E00E5 /* ECNewMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D491F80E178B595D002E00E5 /* ECNewMainViewController.m */; };
-		D4A22253176B7FC1005AB205 /* KLHorizontalSelect.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A22252176B7FC1005AB205 /* KLHorizontalSelect.m */; };
-		D4A2F6CD176959BD00A9E3BF /* ECMainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4A2F6CC176959BD00A9E3BF /* ECMainViewController.xib */; };
-		D4A4D813176CC81600EFCBF7 /* ECHorizontalCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4A4D812176CC81600EFCBF7 /* ECHorizontalCellView.xib */; };
-		D4A4D816176CC9AA00EFCBF7 /* ECHorizontalCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A4D815176CC9AA00EFCBF7 /* ECHorizontalCellView.m */; };
 		D4A7BEA8177B2F3B00C22D91 /* UIImage+Orientation.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A7BEA7177B2F3B00C22D91 /* UIImage+Orientation.m */; };
 		D4A8DDB8176A133B005E9847 /* NSDictionary+Posts.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A8DDAC176A133B005E9847 /* NSDictionary+Posts.m */; };
 		D4A8DDB9176A133B005E9847 /* ECConcertDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A8DDAD176A133B005E9847 /* ECConcertDetailViewController.m */; };
@@ -118,7 +110,6 @@
 		D4AA4D1E1766B374009B0635 /* EncoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AA4D1D1766B374009B0635 /* EncoreTests.m */; };
 		D4AA4D301766BA8C009B0635 /* ECLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AA4D2E1766BA8C009B0635 /* ECLoginViewController.m */; };
 		D4AA4D311766BA8C009B0635 /* ECLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4AA4D2F1766BA8C009B0635 /* ECLoginViewController.xib */; };
-		D4AA4D361766BB03009B0635 /* ECMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AA4D341766BB03009B0635 /* ECMainViewController.m */; };
 		D4AA4D391766F3D0009B0635 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D4AA4D381766F3D0009B0635 /* Localizable.strings */; };
 		D4AA632F1780BBB1008111C6 /* logout.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AA632D1780BBB1008111C6 /* logout.png */; };
 		D4AA63301780BBB1008111C6 /* logout@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AA632E1780BBB1008111C6 /* logout@2x.png */; };
@@ -148,12 +139,9 @@
 		D4AC35F91768C5850087B1E9 /* NSDictionary+ConcertList.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AC35F81768C5850087B1E9 /* NSDictionary+ConcertList.m */; };
 		D4AC35FC1768C8B20087B1E9 /* ECJSONFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AC35FB1768C8B20087B1E9 /* ECJSONFetcher.m */; };
 		D4B0AC4717727FDA00DC4DD2 /* ECPostPlaceholder.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4B0AC4617727FDA00DC4DD2 /* ECPostPlaceholder.xib */; };
-		D4B1A247176E4C6900A95568 /* ECAddConcertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4B1A245176E4C6900A95568 /* ECAddConcertViewController.m */; };
-		D4B1A248176E4C6900A95568 /* ECAddConcertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4B1A246176E4C6900A95568 /* ECAddConcertViewController.xib */; };
 		D4B6707A176F57E000A80BA3 /* ECTodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4B67078176F57E000A80BA3 /* ECTodayViewController.m */; };
 		D4B6707B176F57E000A80BA3 /* ECTodayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4B67079176F57E000A80BA3 /* ECTodayViewController.xib */; };
 		D4C9C085177A090800F864FC /* instagram.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D4C9C084177A090800F864FC /* instagram.jpg */; };
-		D4D4D7071783534A00DDDE4D /* ECTodayCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4D4D7061783534A00DDDE4D /* ECTodayCellView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -182,8 +170,6 @@
 		A022AAA417779BB50009244C /* ECConcertCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECConcertCellView.h; sourceTree = "<group>"; };
 		A022AAA517779BB50009244C /* ECConcertCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECConcertCellView.m; sourceTree = "<group>"; };
 		A022AAA717779BDF0009244C /* ECConcertCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECConcertCellView.xib; sourceTree = "<group>"; };
-		A022AAB31777DB240009244C /* ECCustomSearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECCustomSearchBar.h; sourceTree = "<group>"; };
-		A022AAB41777DB240009244C /* ECCustomSearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECCustomSearchBar.m; sourceTree = "<group>"; };
 		A022AAB61778D8D60009244C /* LiveIndicator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LiveIndicator.png; sourceTree = "<group>"; };
 		A022AABD1779E8380009244C /* UIImage+GaussBlur.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+GaussBlur.h"; sourceTree = "<group>"; };
 		A022AABE1779E8380009244C /* UIImage+GaussBlur.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+GaussBlur.m"; sourceTree = "<group>"; };
@@ -217,11 +203,6 @@
 		B56B831D22E04C90BC664348 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		D428A4591781085500101F12 /* UIColor+EncoreUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+EncoreUI.h"; sourceTree = "<group>"; };
 		D428A45A1781085500101F12 /* UIColor+EncoreUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+EncoreUI.m"; sourceTree = "<group>"; };
-		D43ACD7D176D2BA400E2282A /* ECCellType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECCellType.h; sourceTree = "<group>"; };
-		D43ACD7E176D2EA700E2282A /* ECCellType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECCellType.m; sourceTree = "<group>"; };
-		D43ACD80176D3B7F00E2282A /* ECEndCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECEndCellView.xib; sourceTree = "<group>"; };
-		D43ACD82176D3BF400E2282A /* ECEndCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECEndCellView.h; sourceTree = "<group>"; };
-		D43ACD83176D3BF400E2282A /* ECEndCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECEndCellView.m; sourceTree = "<group>"; };
 		D45DBD5C1783C57D000ED3C1 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		D45DBD5E1783C5C5000ED3C1 /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
 		D45DBD601783C5DF000ED3C1 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
@@ -230,12 +211,6 @@
 		D491F80B178B57C1002E00E5 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		D491F80D178B595D002E00E5 /* ECNewMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECNewMainViewController.h; sourceTree = "<group>"; };
 		D491F80E178B595D002E00E5 /* ECNewMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECNewMainViewController.m; sourceTree = "<group>"; };
-		D4A22251176B7FC1005AB205 /* KLHorizontalSelect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KLHorizontalSelect.h; sourceTree = "<group>"; };
-		D4A22252176B7FC1005AB205 /* KLHorizontalSelect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KLHorizontalSelect.m; sourceTree = "<group>"; };
-		D4A2F6CC176959BD00A9E3BF /* ECMainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECMainViewController.xib; sourceTree = "<group>"; };
-		D4A4D812176CC81600EFCBF7 /* ECHorizontalCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECHorizontalCellView.xib; sourceTree = "<group>"; };
-		D4A4D814176CC9A900EFCBF7 /* ECHorizontalCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECHorizontalCellView.h; sourceTree = "<group>"; };
-		D4A4D815176CC9AA00EFCBF7 /* ECHorizontalCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECHorizontalCellView.m; sourceTree = "<group>"; };
 		D4A7BEA6177B2F3B00C22D91 /* UIImage+Orientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Orientation.h"; sourceTree = "<group>"; };
 		D4A7BEA7177B2F3B00C22D91 /* UIImage+Orientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Orientation.m"; sourceTree = "<group>"; };
 		D4A7BEA9177B713400C22D91 /* EncoreURL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EncoreURL.h; sourceTree = "<group>"; };
@@ -313,8 +288,6 @@
 		D4AA4D2D1766BA8C009B0635 /* ECLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECLoginViewController.h; sourceTree = "<group>"; };
 		D4AA4D2E1766BA8C009B0635 /* ECLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECLoginViewController.m; sourceTree = "<group>"; };
 		D4AA4D2F1766BA8C009B0635 /* ECLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECLoginViewController.xib; sourceTree = "<group>"; };
-		D4AA4D331766BB03009B0635 /* ECMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECMainViewController.h; sourceTree = "<group>"; };
-		D4AA4D341766BB03009B0635 /* ECMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECMainViewController.m; sourceTree = "<group>"; };
 		D4AA4D381766F3D0009B0635 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		D4AA632D1780BBB1008111C6 /* logout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logout.png; sourceTree = "<group>"; };
 		D4AA632E1780BBB1008111C6 /* logout@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logout@2x.png"; sourceTree = "<group>"; };
@@ -350,14 +323,10 @@
 		D4AC35FA1768C8B20087B1E9 /* ECJSONFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECJSONFetcher.h; sourceTree = "<group>"; };
 		D4AC35FB1768C8B20087B1E9 /* ECJSONFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECJSONFetcher.m; sourceTree = "<group>"; };
 		D4B0AC4617727FDA00DC4DD2 /* ECPostPlaceholder.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECPostPlaceholder.xib; sourceTree = "<group>"; };
-		D4B1A244176E4C6800A95568 /* ECAddConcertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECAddConcertViewController.h; sourceTree = "<group>"; };
-		D4B1A245176E4C6900A95568 /* ECAddConcertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECAddConcertViewController.m; sourceTree = "<group>"; };
-		D4B1A246176E4C6900A95568 /* ECAddConcertViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECAddConcertViewController.xib; sourceTree = "<group>"; };
 		D4B67077176F57E000A80BA3 /* ECTodayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECTodayViewController.h; sourceTree = "<group>"; };
 		D4B67078176F57E000A80BA3 /* ECTodayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECTodayViewController.m; sourceTree = "<group>"; };
 		D4B67079176F57E000A80BA3 /* ECTodayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECTodayViewController.xib; sourceTree = "<group>"; };
 		D4C9C084177A090800F864FC /* instagram.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = instagram.jpg; sourceTree = "<group>"; };
-		D4D4D7061783534A00DDDE4D /* ECTodayCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECTodayCellView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -459,24 +428,6 @@
 				D4A9B31F178E546F008B5504 /* Default-568h@2x.png */,
 			);
 			name = Launch;
-			sourceTree = "<group>";
-		};
-		D4A22254176B7FFC005AB205 /* Horizontal Select */ = {
-			isa = PBXGroup;
-			children = (
-				D4A22251176B7FC1005AB205 /* KLHorizontalSelect.h */,
-				D4A22252176B7FC1005AB205 /* KLHorizontalSelect.m */,
-				D43ACD7D176D2BA400E2282A /* ECCellType.h */,
-				D43ACD7E176D2EA700E2282A /* ECCellType.m */,
-				D4D4D7061783534A00DDDE4D /* ECTodayCellView.xib */,
-				D4A4D814176CC9A900EFCBF7 /* ECHorizontalCellView.h */,
-				D4A4D815176CC9AA00EFCBF7 /* ECHorizontalCellView.m */,
-				D4A4D812176CC81600EFCBF7 /* ECHorizontalCellView.xib */,
-				D43ACD80176D3B7F00E2282A /* ECEndCellView.xib */,
-				D43ACD82176D3BF400E2282A /* ECEndCellView.h */,
-				D43ACD83176D3BF400E2282A /* ECEndCellView.m */,
-			);
-			name = "Horizontal Select";
 			sourceTree = "<group>";
 		};
 		D4A8DDB2176A133B005E9847 /* en.lproj */ = {
@@ -710,8 +661,6 @@
 				D4AA4D321766BA8F009B0635 /* Login */,
 				D4AA632C1780BAFB008111C6 /* Main View */,
 				D4AA4D2C1766B9B0009B0635 /* Profile */,
-				D4A22254176B7FFC005AB205 /* Horizontal Select */,
-				D4B1A249176E4C6F00A95568 /* Add Concert */,
 				D4A8DDBF176A134B005E9847 /* Concert */,
 				D4AA4CF91766B374009B0635 /* Supporting Files */,
 			);
@@ -722,9 +671,6 @@
 			isa = PBXGroup;
 			children = (
 				D4C9C08C177A51CC00F864FC /* Post+Fetch */,
-				D4A2F6CC176959BD00A9E3BF /* ECMainViewController.xib */,
-				D4AA4D331766BB03009B0635 /* ECMainViewController.h */,
-				D4AA4D341766BB03009B0635 /* ECMainViewController.m */,
 				D4C9C08A177A51BB00F864FC /* Font */,
 				D4A8DDD1176A44A0005E9847 /* Images */,
 				D4C9C08D177A51E500F864FC /* plist */,
@@ -808,18 +754,6 @@
 				A02661E3178C9F6200741C9A /* ECSearchResultCell.xib */,
 			);
 			name = "Main View";
-			sourceTree = "<group>";
-		};
-		D4B1A249176E4C6F00A95568 /* Add Concert */ = {
-			isa = PBXGroup;
-			children = (
-				D4B1A244176E4C6800A95568 /* ECAddConcertViewController.h */,
-				D4B1A245176E4C6900A95568 /* ECAddConcertViewController.m */,
-				D4B1A246176E4C6900A95568 /* ECAddConcertViewController.xib */,
-				A022AAB31777DB240009244C /* ECCustomSearchBar.h */,
-				A022AAB41777DB240009244C /* ECCustomSearchBar.m */,
-			);
-			name = "Add Concert";
 			sourceTree = "<group>";
 		};
 		D4C9C08A177A51BB00F864FC /* Font */ = {
@@ -951,7 +885,6 @@
 				D4AA4CFD1766B374009B0635 /* InfoPlist.strings in Resources */,
 				D4AA4D311766BA8C009B0635 /* ECLoginViewController.xib in Resources */,
 				D4AA4D391766F3D0009B0635 /* Localizable.strings in Resources */,
-				D4A2F6CD176959BD00A9E3BF /* ECMainViewController.xib in Resources */,
 				D4A8DDBB176A133B005E9847 /* ECConcertDetailViewController.xib in Resources */,
 				D4A8DDBC176A133B005E9847 /* InfoPlist.strings in Resources */,
 				D4A8DDBD176A133B005E9847 /* ECCollectionCell.xib in Resources */,
@@ -962,10 +895,7 @@
 				D4A8DDEF176AB650005E9847 /* home_background.jpg in Resources */,
 				D4A8DDF0176AB650005E9847 /* home_background@2x.jpg in Resources */,
 				A0FF1C53176CC88000433768 /* LoginInfoPages.plist in Resources */,
-				D4A4D813176CC81600EFCBF7 /* ECHorizontalCellView.xib in Resources */,
 				A0848C0B176D1F0D009BBB38 /* ECLoginPageView.xib in Resources */,
-				D43ACD81176D3B7F00E2282A /* ECEndCellView.xib in Resources */,
-				D4B1A248176E4C6900A95568 /* ECAddConcertViewController.xib in Resources */,
 				D4B6707B176F57E000A80BA3 /* ECTodayViewController.xib in Resources */,
 				D4B0AC4717727FDA00DC4DD2 /* ECPostPlaceholder.xib in Resources */,
 				A022AAA2177605900009244C /* Hero Light.otf in Resources */,
@@ -1000,7 +930,6 @@
 				D4AB1B1817829413002A29B9 /* login2@2x.png in Resources */,
 				D4AB1B1917829413002A29B9 /* login3.png in Resources */,
 				D4AB1B1A17829413002A29B9 /* login3@2x.png in Resources */,
-				D4D4D7071783534A00DDDE4D /* ECTodayCellView.xib in Resources */,
 				D45DBD5D1783C57D000ED3C1 /* Icon@2x.png in Resources */,
 				D45DBD5F1783C5C5000ED3C1 /* Icon-Small@2x.png in Resources */,
 				D45DBD611783C5DF000ED3C1 /* Icon.png in Resources */,
@@ -1115,7 +1044,6 @@
 				D4AA4D031766B374009B0635 /* ECAppDelegate.m in Sources */,
 				D4AC35FC1768C8B20087B1E9 /* ECJSONFetcher.m in Sources */,
 				D4AA4D301766BA8C009B0635 /* ECLoginViewController.m in Sources */,
-				D4AA4D361766BB03009B0635 /* ECMainViewController.m in Sources */,
 				D4A8DDB8176A133B005E9847 /* NSDictionary+Posts.m in Sources */,
 				D4A8DDB9176A133B005E9847 /* ECConcertDetailViewController.m in Sources */,
 				D4A8DDBA176A133B005E9847 /* Cell.m in Sources */,
@@ -1123,15 +1051,9 @@
 				D4A8DDC4176A20D2005E9847 /* ECJSONPoster.m in Sources */,
 				D4A8DDCA176A39BA005E9847 /* NSDate+JSON.m in Sources */,
 				D4A8DDCE176A405D005E9847 /* ECPostViewController.m in Sources */,
-				D4A22253176B7FC1005AB205 /* KLHorizontalSelect.m in Sources */,
-				D4A4D816176CC9AA00EFCBF7 /* ECHorizontalCellView.m in Sources */,
 				A0848C11176D25D5009BBB38 /* ECLoginPageView.m in Sources */,
-				D43ACD7F176D2EA700E2282A /* ECCellType.m in Sources */,
-				D43ACD84176D3BF400E2282A /* ECEndCellView.m in Sources */,
-				D4B1A247176E4C6900A95568 /* ECAddConcertViewController.m in Sources */,
 				D4B6707A176F57E000A80BA3 /* ECTodayViewController.m in Sources */,
 				A022AAA617779BB50009244C /* ECConcertCellView.m in Sources */,
-				A022AAB51777DB250009244C /* ECCustomSearchBar.m in Sources */,
 				A022AABF1779E8380009244C /* UIImage+GaussBlur.m in Sources */,
 				D4A7BEA8177B2F3B00C22D91 /* UIImage+Orientation.m in Sources */,
 				A0A2B0C6177B867F00518B6C /* NSMutableDictionary+ConcertImages.m in Sources */,
