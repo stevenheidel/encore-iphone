@@ -1324,6 +1324,7 @@
 					"-weak_framework",
 					Social,
 					"-all_load",
+					"-lTestFlight",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -1367,6 +1368,7 @@
 					"-weak_framework",
 					Social,
 					"-all_load",
+					"-lTestFlight",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
