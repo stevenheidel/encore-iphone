@@ -1301,7 +1301,6 @@
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lFlurry",
-					"-lTestFlight",
 					"-lsqlite3.0",
 					"-lz",
 					"-framework",
@@ -1345,7 +1344,6 @@
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lFlurry",
-					"-lTestFlight",
 					"-lsqlite3.0",
 					"-lz",
 					"-framework",

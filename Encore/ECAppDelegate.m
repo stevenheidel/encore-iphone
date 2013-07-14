@@ -18,7 +18,10 @@
 
 #import "UIFont+Encore.h"
 
-#import "TestFlight.h"
+//#if IN_BETA
+//#import "TestFlight.h"
+//#endif
+
 #import "AFNetworking.h"
 
 #import "Staging.h"
@@ -62,10 +65,10 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
     ATAppRatingFlow *sharedFlow = [ATAppRatingFlow sharedRatingFlow];
     sharedFlow.appID = kApptentiveAppID;
     
-    if(IN_BETA){
-        [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
-        [TestFlight takeOff:@"019687e0-0d30-4959-bf90-f52ba008c834"];
-    }
+//#if IN_BETA
+//        [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
+//        [TestFlight takeOff:@"019687e0-0d30-4959-bf90-f52ba008c834"];
+//#endif
 
 }
 
