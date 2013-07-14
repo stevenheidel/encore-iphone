@@ -9,16 +9,21 @@
 #import <UIKit/UIKit.h>
 #import "ECProfileViewController.h"
 #import "ECSearchType.h"
-
-@class MBProgressHUD,KenBurnsView;
+@class CLLocation;
+@class MBProgressHUD, ECLocationSetterViewController;
 
 @interface ECNewMainViewController : UIViewController <UIAlertViewDelegate, UITableViewDataSource,UITableViewDelegate>
 
 - (IBAction)dismissKeyboard:(id)sender;
 - (IBAction)openLastFM:(id)sender;
+- (IBAction)openLocationSetter;
+-(void) initializeSearchLocation: (CLLocation*) currentSearchLocation;
 
-@property (nonatomic,strong) IBOutlet KenBurnsView* kenBurnsView;
+@property (nonatomic, assign) CLLocation* currentSearchLocation;
+@property (nonatomic, assign) NSNumber* currentSearchRadius;
+
 @property(nonatomic, strong) IBOutlet UIImageView *imgBackground;
+@property (nonatomic, strong) ECLocationSetterViewController* locationSetterView;
 
 @property(nonatomic, strong) IBOutlet UILabel *lblTodaysDate;
 @property(nonatomic, strong) IBOutlet UITableView *tableView;

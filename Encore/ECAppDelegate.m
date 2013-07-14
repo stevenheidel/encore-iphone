@@ -230,7 +230,8 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
     NSLog(@"Logged in user with id: %@",userid);
     self.mainViewController.facebook_id = userid;
     self.mainViewController.userName = user.name;
-    self.mainViewController.userCity = @"Toronto"; //TODO: change to lat/long
+    self.mainViewController.userCity = @"Toronto";  //user.location.location.city;
+    
     loggedIn = YES;
     
     [ECJSONPoster postUser:user completion:^(NSDictionary *response) {
@@ -258,17 +259,17 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
     }
     else !defaultID ? NSLog(@"No default ID saved") : NSLog(@"No change in User ID. Defaults not changed");
     
-    NSString* usernameKey = NSLocalizedString(@"user_name", nil);
+    NSString* usernameKey = @"user_name";
     NSString* defaultName = [defaults stringForKey:usernameKey];
     if (!defaultName || ![defaultName isEqualToString:userInfo.name]) {
         [defaults setObject:userInfo.name forKey:usernameKey];
     }
-    NSString* userLocationKey = NSLocalizedString(@"user_location", nil);
-    NSString* defaultLocation = [defaults stringForKey:userLocationKey];
-    if (!defaultLocation || ![defaultLocation isEqualToString:userInfo.location.location.city]) {
-        [defaults setObject:userInfo.location.location.city forKey:userLocationKey];
-
-    }
+//    NSString* userLocationKey = @"user_city";
+//    NSString* defaultLocation = [defaults stringForKey:userLocationKey];
+//    if (!defaultLocation || ![defaultLocation isEqualToString:userInfo.location.location.city]) {
+//        [defaults setObject:userInfo.location.location.city forKey:userLocationKey];
+//
+//    }
     
     [defaults synchronize];
 }
@@ -302,14 +303,14 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
             NSLog(@"Horizontal Accuracy:%f", newLocation.horizontalAccuracy);
             //turn off location services once we've gotten a good location
             [manager stopUpdatingLocation];
-            //TODO: add code for getting the user's city from the server using coordinates
-            
+            [self.mainViewController initializeSearchLocation:newLocation];
             [self saveLocationToUserDefaults:newLocation];
         }
     }
 }
 
 -(void) saveLocationToUserDefaults: (CLLocation *) location {
+    
     NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
     double latitude = location.coordinate.latitude;
     double longitude = location.coordinate.longitude;

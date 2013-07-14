@@ -9,6 +9,7 @@
 #import "ECJSONFetcher.h"
 #import "EncoreURL.h"
 #import "AFNetworking.h"
+#import <CoreLocation/CoreLocation.h>
 
 //TODO could change to use blocks instead of delegates to return success
 @implementation ECJSONFetcher
@@ -47,29 +48,32 @@
     [operation start];
 }
 
+NSString* pathForSearchType (ECSearchType searchType) {
+    if (searchType == ECSearchTypePast) {
+        return [NSString stringWithFormat:PastPopularConcertsURL];
+    } else if (searchType == ECSearchTypeFuture) {
+        return [NSString stringWithFormat:FuturePopularConcertsURL];
+    } else {
+        return [NSString stringWithFormat:TodayPopularConcertsURL];
+    }
+}
 
-+(void)fetchPopularConcertsWithSearchType:(ECSearchType)searchType completion: (void (^)(NSArray* concerts)) completion {
++(void)fetchPopularConcertsWithSearchType:(ECSearchType)searchType location: (CLLocation*) location completion: (void (^)(NSArray* concerts)) completion {
     __block NSArray * concertList;
-    NSString *userLocation = @"Toronto"; //TODO: Get location dynamically from app delegate
-    NSDictionary * parameters = [NSDictionary dictionaryWithObjectsAndKeys:userLocation, CityURL,nil];
+    NSNumber* latitude = [NSNumber numberWithDouble:location.coordinate.latitude];
+    NSNumber* longitude = [NSNumber numberWithDouble:location.coordinate.longitude];
+    
+    NSDictionary * parameters = [NSDictionary dictionaryWithObjectsAndKeys:latitude,@"latitude", longitude, @"longitude",nil];
     
     NSURL * url = [NSURL URLWithString:BaseURL];
     AFHTTPClient * client = [[AFHTTPClient alloc] initWithBaseURL:url];
     [client registerHTTPOperationClass:[AFJSONRequestOperation class]];
     [client setDefaultHeader:@"Accept" value:@"application/json"];
     
-    NSString *  artistConcertsUrl;
-    if (searchType == ECSearchTypePast) {
-        artistConcertsUrl = [NSString stringWithFormat:PastPopularConcertsURL];
-    } else if (searchType == ECSearchTypeFuture) {
-        artistConcertsUrl = [NSString stringWithFormat:FuturePopularConcertsURL];
-    } else {
-        artistConcertsUrl = [NSString stringWithFormat:TodayPopularConcertsURL];
-    }
+    NSString *  artistConcertsPath = pathForSearchType(searchType);
     
-    [client getPath:artistConcertsUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [client getPath:artistConcertsPath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
 
-//        NSLog(@"%@: %@",NSStringFromClass([self class]),[responseObject description]);
         concertList = (NSArray*) [(NSDictionary*)responseObject objectForKey:@"events"];
         NSLog(@"%@: Successfully fetched %d popular concerts for search type: %d", NSStringFromClass([ECJSONFetcher class]),concertList.count,searchType);
         if (RETURN_TEST_DATA) {
@@ -128,7 +132,7 @@
 }
 
 //using combined search
-+(void)fetchArtistsForString:(NSString*)searchStr withSearchType:(ECSearchType)searchType forLocation:(NSString*)locationString completion:(void (^)(NSDictionary* artists)) completion {
++(void)fetchArtistsForString:(NSString*)searchStr withSearchType:(ECSearchType)searchType forLocation:(CLLocation*)location completion:(void (^)(NSDictionary* artists)) completion {
     
     __block NSDictionary * artistConcertComboList;
 
@@ -144,7 +148,9 @@
         tenseString = FutureURL;
     }
     
-    NSDictionary * parameters = [NSDictionary dictionaryWithObjectsAndKeys:locationString, @"city", searchStr, @"term", tenseString, @"tense", nil];
+    NSNumber* latitude = [NSNumber numberWithDouble:location.coordinate.latitude];
+    NSNumber* longitude = [NSNumber numberWithDouble:location.coordinate.longitude];
+    NSDictionary * parameters = [NSDictionary dictionaryWithObjectsAndKeys:latitude,@"latitude",longitude, @"longitude", searchStr, @"term", tenseString, @"tense", nil];
     
     [client getPath:ArtistCombinedSearchURL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if (RETURN_TEST_DATA) {

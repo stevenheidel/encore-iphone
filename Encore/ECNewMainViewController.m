@@ -24,13 +24,16 @@
 #import "UIImage+GaussBlur.h"
 #import <QuartzCore/QuartzCore.h>
 
-#import "JBKenBurnsView.h"
+#import "UIViewController+KNSemiModal.h"
 
 #import "ECAlertTags.h"
+#import "ECLocationSetterViewController.h"
+
 #define SearchCellIdentifier @"ECSearchResultCell"
 #define ConcertCellIdentifier @"ECConcertCellView"
 #define ALERT_HIDE_DELAY 2.0
 #define SEARCH_HEADER_HEIGHT 98.0f
+
 typedef enum {
     ECSearchResultSection,
     ECSearchLoadOtherSection,
@@ -62,29 +65,13 @@ typedef enum {
     self.tap = [[UITapGestureRecognizer alloc]
                                    initWithTarget:self
                                    action:@selector(dismissKeyboard:)];
+    if(self.currentSearchLocation)
+        [self fetchConcerts];
     
-    [ECJSONFetcher fetchPopularConcertsWithSearchType:ECSearchTypeToday completion:^(NSArray *concerts) {
-//            [self fetchedPopularConcerts:concerts];
-        self.todaysConcerts = concerts;
-        [self.tableView reloadData];
-        [self setBackgroundImage];
-        }];
-        //        [self.hud show:YES];
-    [ECJSONFetcher fetchPopularConcertsWithSearchType:ECSearchTypePast completion:^(NSArray *concerts) {
-        self.pastConcerts = concerts;
-//        [self.tableView reloadData];
-    }];
     self.currentSearchType = [ECNewMainViewController searchTypeForSegmentIndex:self.segmentedControl.selectedSegmentIndex];
     [self displayViewsAccordingToSearchType];
     
-    //add hud progress indicator
-    self.hud = [[MBProgressHUD alloc] initWithView:self.view];
-    [self.view addSubview:self.hud];
-    self.hud.labelText = NSLocalizedString(@"loading", nil);
-    self.hud.color = [UIColor lightBlueHUDConfirmationColor];
-    self.hud.labelFont = [UIFont heroFontWithSize:self.hud.labelFont.pointSize];
-    self.hud.detailsLabelFont = [UIFont heroFontWithSize:self.hud.detailsLabelFont.pointSize];
-    
+    [self setupHUD];
     [self setupSearchBar];
     
     self.view.backgroundColor = [UIColor blackColor];
@@ -92,22 +79,52 @@ typedef enum {
     [self.tableView setIndicatorStyle:UIScrollViewIndicatorStyleWhite];
     self.view.clipsToBounds = YES;
     
+    [self setupRefreshControl];
+    
+    [[ATAppRatingFlow sharedRatingFlow] showRatingFlowFromViewControllerIfConditionsAreMet:self];
+}
+
+-(void) initializeSearchLocation: (CLLocation*) currentSearchLocation {
+    self.currentSearchLocation = currentSearchLocation;
+    [self fetchConcerts];
+}
+
+-(void) fetchConcerts {
+    [ECJSONFetcher fetchPopularConcertsWithSearchType:ECSearchTypeToday location: self.currentSearchLocation completion:^(NSArray *concerts) {
+        self.todaysConcerts = concerts;
+        [self.tableView reloadData];
+        [self setBackgroundImage];
+    }];
+    [ECJSONFetcher fetchPopularConcertsWithSearchType:ECSearchTypePast location: self.currentSearchLocation completion:^(NSArray *concerts) {
+        self.pastConcerts = concerts;
+        //default is today, so don't
+        //TODO: remember what was last selected state of
+    }];
+}
+
+-(void) setupHUD {
+    //add hud progress indicator
+    self.hud = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.view addSubview:self.hud];
+    self.hud.labelText = NSLocalizedString(@"loading", nil);
+    self.hud.color = [UIColor lightBlueHUDConfirmationColor];
+    self.hud.labelFont = [UIFont heroFontWithSize:self.hud.labelFont.pointSize];
+    self.hud.detailsLabelFont = [UIFont heroFontWithSize:self.hud.detailsLabelFont.pointSize];
+}
+
+-(void) setupRefreshControl {
     self.refreshControl = [UIRefreshControl new];
     [self.refreshControl addTarget:self action:@selector(reloadData)
                   forControlEvents:UIControlEventValueChanged];
     [self.tableView addSubview:self.refreshControl];
     self.refreshControl.tintColor = [UIColor lightBlueNavBarColor];
-    
-    [[ATAppRatingFlow sharedRatingFlow] showRatingFlowFromViewControllerIfConditionsAreMet:self];
 }
-
-
 -(void) reloadData {
     [Flurry logEvent:@"Used_Refresh_Control_Main_View" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[self currentSearchTypeString], @"search_type", nil]];
     
-    [ECJSONFetcher fetchPopularConcertsWithSearchType:self.currentSearchType completion:^(NSArray *concerts) {
-        //            [self fetchedPopularConcerts:concerts];
-        self.todaysConcerts = concerts;
+    [ECJSONFetcher fetchPopularConcertsWithSearchType:self.currentSearchType location: self.currentSearchLocation completion:^(NSArray *concerts) {
+        NSArray* currentArray = [self currentEventArray];
+        currentArray = concerts;
         [self.tableView reloadData];
         [self setBackgroundImage];
         [self.refreshControl endRefreshing];
@@ -263,6 +280,20 @@ typedef enum {
 - (IBAction)openLastFM:(id)sender {
     [Flurry logEvent:@"Opened_Last_FM" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[self currentSearchTypeString], @"Search_Type",nil]];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.last.fm"]];
+}
+
+- (IBAction)openLocationSetter {
+    if (self.locationSetterView == nil)
+        self.locationSetterView = [[ECLocationSetterViewController alloc] init];
+    
+    [self presentSemiViewController:self.locationSetterView withOptions:@{
+     KNSemiModalOptionKeys.pushParentBack : @(NO),
+     KNSemiModalOptionKeys.parentAlpha : @(0.8)
+	 }];
+}
+
+-(void) hideLocationSetter {
+    [self dismissSemiModalView];
 }
 
 #pragma mark Alert View Delegate
@@ -530,7 +561,7 @@ typedef enum {
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
     if ([textField.text length] > 0) { //don't search empty searches
-        [ECJSONFetcher fetchArtistsForString:textField.text withSearchType:self.currentSearchType forLocation:self.userCity completion:^(NSDictionary * comboDic) { //TODO load actual location
+        [ECJSONFetcher fetchArtistsForString:textField.text withSearchType:self.currentSearchType forLocation:self.currentSearchLocation completion:^(NSDictionary * comboDic) { //TODO load actual location
             [self fetchedConcertsForSearch:comboDic];
         }];
 
