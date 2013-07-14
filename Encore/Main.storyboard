@@ -38,7 +38,6 @@
                                             </connections>
                                         </segmentedControl>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Artist search..." clearsOnBeginEditing="YES" minimumFontSize="17" background="search.png" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="UU0-XP-3u7" userLabel="Search">
-                                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="26" type="user" id="u8F-6Y-EY8"/>
                                                 <constraint firstAttribute="width" constant="250" id="xqA-2r-8SQ"/>
@@ -164,7 +163,6 @@
             <relationships>
                 <relationship kind="action" name="dismissKeyboard:"/>
                 <relationship kind="action" name="openLastFM:"/>
-                <relationship kind="action" name="switchedSelection:"/>
                 <relationship kind="outlet" name="imgBackground" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="imgLastfmAttr" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="lblTodaysDate" candidateClass="UILabel"/>

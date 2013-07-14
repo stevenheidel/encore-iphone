@@ -8,6 +8,9 @@
 #import "UIColor+EncoreUI.h"
 #import "UIFont+Encore.h"
 
+#import "ATConnect.h"
+#import "ATAppRatingFlow.h"
+
 #import "ECNewMainViewController.h"
 #import "ECJSONFetcher.h"
 
@@ -81,7 +84,6 @@ typedef enum {
     self.hud.detailsLabelFont = [UIFont heroFontWithSize:self.hud.detailsLabelFont.pointSize];
     
     [self setupSearchBar];
-
     
     self.view.backgroundColor = [UIColor blackColor];
     
@@ -93,6 +95,8 @@ typedef enum {
                   forControlEvents:UIControlEventValueChanged];
     [self.tableView addSubview:self.refreshControl];
     self.refreshControl.tintColor = [UIColor lightBlueNavBarColor];
+    
+    [[ATAppRatingFlow sharedRatingFlow] showRatingFlowFromViewControllerIfConditionsAreMet:self];
 }
 
 
@@ -133,12 +137,25 @@ typedef enum {
 //Set up left bar button for going to profile and right bar button for sharing
 -(void) setupBarButtons {
     UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    UIImage *leftButImage = [UIImage imageNamed:@"profileButton.png"];
+    UIImage *leftButImage = [UIImage imageNamed:@"profileButton"];
     [leftButton setBackgroundImage:leftButImage forState:UIControlStateNormal];
     [leftButton addTarget:self action:@selector(profileTapped) forControlEvents:UIControlEventTouchUpInside];
     leftButton.frame = CGRectMake(0, 0, leftButImage.size.width, leftButImage.size.height);
     UIBarButtonItem *profileButton = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
     self.navigationItem.leftBarButtonItem = profileButton;
+    
+    UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIImage *rightButImage = [UIImage imageNamed:@"feedback"];
+    [rightButton setBackgroundImage:rightButImage forState:UIControlStateNormal];
+    [rightButton addTarget:self action:@selector(feedbackTapped) forControlEvents:UIControlEventTouchUpInside];
+    rightButton.frame = CGRectMake(0, 0, rightButImage.size.width, rightButImage.size.height);
+    UIBarButtonItem *feedbackButton = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
+    self.navigationItem.rightBarButtonItem = feedbackButton;
+}
+
+-(void) feedbackTapped {
+    ATConnect *connection = [ATConnect sharedConnection];
+    [connection presentMessageCenterFromViewController: self];
 }
 
 -(void) setNavBarAppearance {
@@ -208,6 +225,7 @@ typedef enum {
 
 #pragma mark - Buttons
 -(void)profileTapped {
+    [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
     [Flurry logEvent:@"Profile_Button_Pressed" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:self.isLoggedIn ? @"Logged_In" : @"Not_Logged_In",@"Logged_In_State",[self currentSearchTypeString],@"Search_Type", nil]];
     if (self.isLoggedIn){
         if (self.profileViewController == nil) {
@@ -248,6 +266,8 @@ typedef enum {
 
 #pragma mark Segmented Control
 -(IBAction) switchedSelection: (id) sender {
+    [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
+    
     self.searchBar.text = @""; // clear search bar - will show placeholder
     [self.searchBar resignFirstResponder]; //hide keyboard in case it was visible
     
@@ -385,7 +405,7 @@ typedef enum {
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent]; 
     [Flurry logEvent:@"Main_Selected_Row" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[self currentSearchTypeString], @"Search_Type", [NSNumber numberWithInt:indexPath.row], @"row", self.hasSearched ? @"post_search" : @"not_post_search", @"is_post_search", nil]];
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -446,6 +466,7 @@ typedef enum {
 #pragma mark - Search Text Field
 
 -(void) clearSearchBar {
+    [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
     self.searchBar.text = @"";
     self.hasSearched = FALSE;
     
@@ -499,6 +520,7 @@ typedef enum {
     }
 }
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
     if ([textField.text length] > 0) { //don't search empty searches
         [ECJSONFetcher fetchArtistsForString:textField.text withSearchType:self.currentSearchType forLocation:self.userCity completion:^(NSDictionary * comboDic) { //TODO load actual location
             [self fetchedConcertsForSearch:comboDic];

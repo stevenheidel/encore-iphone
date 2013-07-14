@@ -15,6 +15,8 @@
 #import "ECJSONPoster.h"
 #import "ECJSONFetcher.h"
 
+#import "ATAppRatingFlow.h"
+
 #import "ECPostViewController.h"
 //#import "ECMainViewController.h"
 #import <FacebookSDK/FacebookSDK.h>
@@ -224,6 +226,8 @@ NSString *kCellID = @"cellID";
 
 #pragma mark - FB Sharing
 -(void) shareTapped {
+    [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
+    
     NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:ShareConcertURL,self.eventID]];
     
     FBShareDialogParams* params = [[FBShareDialogParams alloc] init];
@@ -267,7 +271,9 @@ NSString *kCellID = @"cellID";
     return [[self appDelegate] isLoggedIn];
 }
 -(void) addConcert {
+    [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
     [Flurry logEvent:@"Tapped_Add_Concert" withParameters:[self flurryParam]];
+    
     if(self.isLoggedIn) {
         UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"confirm_add_title", nil) message:NSLocalizedString(@"confirm_add_message", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"cancel", nil) otherButtonTitles:NSLocalizedString(@"add", nil), nil];
         alert.tag = AddConcertConfirmTag;
@@ -281,6 +287,7 @@ NSString *kCellID = @"cellID";
 }
 
 -(void) removeConcert {
+    [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
     if (self.isLoggedIn) {
         [Flurry logEvent:@"Tapped_Remove_Concert" withParameters:[self flurryParam]];
         UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"confirm_remove_title", nil) message:NSLocalizedString(@"confirm_remove_message", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"cancel", nil) otherButtonTitles:NSLocalizedString(@"remove", nil), nil];
@@ -410,6 +417,8 @@ NSString *kCellID = @"cellID";
 }
 
 -(void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
+    
     [self.collectionView deselectItemAtIndexPath:indexPath animated:YES];
     ECPostViewController * postVC = [[ECPostViewController alloc] init];
     postVC.post = [self.posts objectAtIndex:indexPath.item];

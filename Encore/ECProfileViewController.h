@@ -8,8 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "FBProfilePictureView.h"
-#import "ECFeedbackViewController.h"
-@interface ECProfileViewController : UIViewController <UIAlertViewDelegate,ECFeedbackViewControllerDelegate, UITableViewDelegate, UITableViewDataSource> {
+@interface ECProfileViewController : UIViewController <UIAlertViewDelegate, UITableViewDelegate, UITableViewDataSource> {
     NSString* userID;
 }
 

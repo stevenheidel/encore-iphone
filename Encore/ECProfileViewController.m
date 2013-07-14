@@ -18,7 +18,9 @@
 #import "UIFont+Encore.h"
 
 #import "UIImage+GaussBlur.h"
-#import "TestFlight.h"
+
+#import "ATConnect.h"
+#import "ATAppRatingFlow.h"
 
 #import "ECJSONFetcher.h"
 #import "MBProgressHUD.h"
@@ -60,7 +62,8 @@
     self.view.clipsToBounds = YES;
     [self.tableView setIndicatorStyle:UIScrollViewIndicatorStyleWhite];
     [self.tableView setSeparatorColor:[UIColor separatorColor]];
-     
+    
+    [[ATAppRatingFlow sharedRatingFlow] showRatingFlowFromViewControllerIfConditionsAreMet:self];
 }
 
 - (void) setUpBackButton {
@@ -138,7 +141,7 @@
 
 -(void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [self setupTestflightFeedback];
+    [self setupFeedback];
     [self fetchEvents];
 }
 
@@ -209,6 +212,7 @@
 
 #pragma mark - Logout
 -(void) logoutTapped {
+    [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"logout_alert_title",nil) message:NSLocalizedString(@"logout_alert_message", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"cancel", nil) otherButtonTitles:NSLocalizedString(@"logout", nil), nil];
     alertView.tag = LogoutTag;
     [alertView show];
@@ -232,8 +236,8 @@
 
 }
 
-#pragma mark - TestFlight Feedback solicitation
--(void) setupTestflightFeedback {
+#pragma mark - Feedback solicitation
+-(void) setupFeedback {
     //    UIButton* feedback = [[UIButton alloc] initWithFrame:self.navigationItem.titleView.frame];
     UIButton* feedback = [UIButton buttonWithType:UIButtonTypeCustom];
     UIImage* image = [UIImage imageNamed:@"feedback.png"];
@@ -244,19 +248,8 @@
 }
 
 -(void) openFeedback {
-    ECFeedbackViewController* feedbackVC = [ECFeedbackViewController new];
-    feedbackVC.delegate = self;
-    [self presentViewController:feedbackVC animated:YES completion:nil];
-}
-
-#pragma mark ECFeedbackViewControllerDelegate method
--(void) feedbackSent {
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
-    hud.labelText = NSLocalizedString(@"Feedback_Sent", nil);
-    hud.mode = MBProgressHUDModeText;
-    hud.removeFromSuperViewOnHide = YES;
-    hud.userInteractionEnabled = YES;
-    [hud hide:YES afterDelay:FLAG_HUD_DELAY];
+    ATConnect *connection = [ATConnect sharedConnection];
+    [connection presentMessageCenterFromViewController: self];
 }
 
 

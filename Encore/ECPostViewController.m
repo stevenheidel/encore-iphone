@@ -12,6 +12,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "EncoreURL.h"
 #import <FacebookSDK/FacebookSDK.h>
+#import "ATAppRatingFlow.h"
 
 #import "MBProgressHUD.h"
 
@@ -97,6 +98,7 @@ typedef enum {
     [self.view addGestureRecognizer:recognizerTap];
 }
 -(void) tapPost {
+    [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
     
     NSString* logKey = self.containerView.alpha == 1.0 ? @"Hide" : @"Show";
     [Flurry logEvent:[NSString stringWithFormat:@"Tapped_Post_To_%@_Details",logKey]];
@@ -147,6 +149,8 @@ typedef enum {
 }
 
 -(void) gesture: (NSInteger) direction {
+    [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
+    
     NSDictionary* dic = [self.delegate requestPost: direction currentIndex: self.itemNumber];
     if(dic) {
         self.post = [dic objectForKey:@"dic"];
@@ -160,6 +164,8 @@ typedef enum {
 }
 
 -(IBAction) flagPhoto {
+    [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
+    
     NSString* flagPhotoTitle = NSLocalizedString(@"flag_post_title", nil);
     NSString* cancel = NSLocalizedString(@"cancel", nil);
     
@@ -199,7 +205,7 @@ typedef enum {
 }
 
 -(void) shareTapped {
-    //TODO: Check if user can present share dialogs and if not switch to using web to share
+    [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
     
     //baseurl + /posts/:Id
     NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:SharePostURL,self.postID]];

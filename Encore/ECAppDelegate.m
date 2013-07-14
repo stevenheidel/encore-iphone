@@ -12,6 +12,10 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import "ECJSONPoster.h"
 
+#import "ATConnect.h"
+#import "ATAppRatingFlow.h"
+#import "defines.h"
+
 #import "UIFont+Encore.h"
 
 #import "TestFlight.h"
@@ -52,11 +56,17 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
 
     [Flurry setEventLoggingEnabled:YES];
 
+    ATConnect * connection = [ATConnect sharedConnection];
+    connection.apiKey = kApptentiveAPIKey;
+    
+    ATAppRatingFlow *sharedFlow = [ATAppRatingFlow sharedRatingFlow];
+    sharedFlow.appID = kApptentiveAppID;
     
     if(IN_BETA){
         [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
+        [TestFlight takeOff:@"019687e0-0d30-4959-bf90-f52ba008c834"];
     }
-    [TestFlight takeOff:@"019687e0-0d30-4959-bf90-f52ba008c834"];
+
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -94,7 +104,7 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
 
 #pragma mark - Login management
 -(void) openSession {
-    
+    [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
     [FBSession openActiveSessionWithReadPermissions:nil
                                        allowLoginUI:YES
                                   completionHandler:
@@ -170,6 +180,8 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
 -(void) loginLater {
     loggedIn = NO;
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    
+    [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
 }
 -(void) showLoginView: (BOOL) animated {
     UIViewController *topViewController = [self.navigationController topViewController];
