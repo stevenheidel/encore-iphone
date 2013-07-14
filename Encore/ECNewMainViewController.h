@@ -42,7 +42,6 @@
 @property(nonatomic, strong) NSArray* pastConcerts;
 @property(nonatomic, strong) NSArray* futureConcerts;
 
-//@property(nonatomic, strong) NSMutableArray *arrTodaysImages;
 @property(nonatomic, readonly) NSArray *searchResultsEvents;
 @property(nonatomic, readonly) NSDictionary *searchedArtistDic;
 @property(nonatomic, readonly) NSArray *otherArtists;
