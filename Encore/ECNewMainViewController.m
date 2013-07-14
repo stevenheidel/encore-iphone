@@ -24,6 +24,8 @@
 #import "UIImage+GaussBlur.h"
 #import <QuartzCore/QuartzCore.h>
 
+#import "JBKenBurnsView.h"
+
 #import "ECAlertTags.h"
 #define SearchCellIdentifier @"ECSearchResultCell"
 #define ConcertCellIdentifier @"ECConcertCellView"
@@ -223,6 +225,19 @@ typedef enum {
     return [[self appDelegate] isLoggedIn];
 }
 
+- (void) setBackgroundImage {
+    //    if (self.hasSearched && self.searchResultsEvents.count>0 && self.currentSearchType != ECSearchTypeToday) {
+    //        UIImage *background = [[UIImage imageWithData:[NSData dataWithContentsOfURL:[[self.searchResultsEvents objectAtIndex:0] imageURL]]] imageWithGaussianBlur];
+    //        [self.imgBackground setImage:background];
+    //    }
+    //    else {
+    NSArray* urls = [[self currentEventArray] valueForKey: @"image_url"];
+    [self.kenBurnsView animateWithURLs:urls transitionDuration:10.0 loop:YES isLandscape:NO];
+//    UIImage *background = [[UIImage imageWithData:[NSData dataWithContentsOfURL:[[[self currentEventArray] objectAtIndex:0] imageURL]]] imageWithGaussianBlur];
+//    [self.imgBackground setImage:background];
+    //    }
+}
+
 #pragma mark - Buttons
 -(void)profileTapped {
     [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
@@ -382,6 +397,9 @@ typedef enum {
 }
 
 -(NSArray*) currentEventArray {
+    if(self.hasSearched /*&& self.currentSearchType != ECSearchTypeToday8*/) {
+        return self.searchResultsEvents;
+    }
     switch (self.currentSearchType) {
         case ECSearchTypePast:
             return self.pastConcerts;
@@ -446,16 +464,6 @@ typedef enum {
     return nil;
 }
 
-- (void) setBackgroundImage {
-    if (self.hasSearched && self.searchResultsEvents.count>0 && self.currentSearchType != ECSearchTypeToday) {
-        UIImage *background = [[UIImage imageWithData:[NSData dataWithContentsOfURL:[[self.searchResultsEvents objectAtIndex:0] imageURL]]] imageWithGaussianBlur];
-        [self.imgBackground setImage:background];
-    }
-    else {
-        UIImage *background = [[UIImage imageWithData:[NSData dataWithContentsOfURL:[[[self currentEventArray] objectAtIndex:0] imageURL]]] imageWithGaussianBlur];
-        [self.imgBackground setImage:background];
-    }
-}
 -(CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
 //    if (self.hasSearched && section == ECSearchResultSection && self.searchResultsEvents.count>0) {
 //        return 117.0;

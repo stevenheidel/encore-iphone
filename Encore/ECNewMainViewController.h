@@ -10,13 +10,16 @@
 #import "ECProfileViewController.h"
 #import "ECSearchType.h"
 
-@class MBProgressHUD;
+@class MBProgressHUD,KenBurnsView;
 
 @interface ECNewMainViewController : UIViewController <UIAlertViewDelegate, UITableViewDataSource,UITableViewDelegate>
 
 - (IBAction)dismissKeyboard:(id)sender;
 - (IBAction)openLastFM:(id)sender;
+
+@property (nonatomic,strong) IBOutlet KenBurnsView* kenBurnsView;
 @property(nonatomic, strong) IBOutlet UIImageView *imgBackground;
+
 @property(nonatomic, strong) IBOutlet UILabel *lblTodaysDate;
 @property(nonatomic, strong) IBOutlet UITableView *tableView;
 @property (nonatomic, readonly) BOOL isLoggedIn; //Getter that pulls from app delegate

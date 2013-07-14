@@ -160,9 +160,9 @@ NSString *kCellID = @"cellID";
         
         if (regImage) {
             self.imgArtist.image = regImage;
-            self.imgBackground.image = [regImage imageWithGaussianBlur];// imageWithGaussianBlur];
+            self.imgBackground.image = [regImage imageWithGaussianBlur];
         } else {
-            self.imgBackground.image = [UIImage imageNamed:@"Black"];// imageWithGaussianBlur];
+            self.imgBackground.image = [UIImage imageNamed:@"Black"];
             self.imgArtist.image = [UIImage imageNamed:@"placeholder.jpg"];
         }
     } else {
