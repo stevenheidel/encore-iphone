@@ -61,6 +61,10 @@
 		D4A7980917921BCD0029F469 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4A7980817921BCD0029F469 /* StoreKit.framework */; };
 		D4A7980B17921BD20029F469 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4A7980A17921BD20029F469 /* SystemConfiguration.framework */; };
 		D4A7980D17921EE40029F469 /* ATAppRatingFlow.h in Resources */ = {isa = PBXBuildFile; fileRef = D4A7980C17921EE40029F469 /* ATAppRatingFlow.h */; };
+		D4A798111792FA2A0029F469 /* topgradient.png in Resources */ = {isa = PBXBuildFile; fileRef = D4A798101792FA2A0029F469 /* topgradient.png */; };
+		D4A798131792FB4E0029F469 /* fullgradient.png in Resources */ = {isa = PBXBuildFile; fileRef = D4A798121792FB4D0029F469 /* fullgradient.png */; };
+		D4A7981517930F4B0029F469 /* ECLocationSetterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4A7981417930F4B0029F469 /* ECLocationSetterView.xib */; };
+		D4A7981817930F9B0029F469 /* ECLocationSetterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A7981717930F9B0029F469 /* ECLocationSetterViewController.m */; };
 		D4A7BEA8177B2F3B00C22D91 /* UIImage+Orientation.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A7BEA7177B2F3B00C22D91 /* UIImage+Orientation.m */; };
 		D4A8DDB8176A133B005E9847 /* NSDictionary+Posts.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A8DDAC176A133B005E9847 /* NSDictionary+Posts.m */; };
 		D4A8DDB9176A133B005E9847 /* ECConcertDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A8DDAD176A133B005E9847 /* ECConcertDetailViewController.m */; };
@@ -145,9 +149,21 @@
 		D4AC2E07178FD2E200F292CA /* Black~568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AC2E04178FD2E200F292CA /* Black~568h@2x.png */; };
 		D4AC35F91768C5850087B1E9 /* NSDictionary+ConcertList.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AC35F81768C5850087B1E9 /* NSDictionary+ConcertList.m */; };
 		D4AC35FC1768C8B20087B1E9 /* ECJSONFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AC35FB1768C8B20087B1E9 /* ECJSONFetcher.m */; };
+		D4AC901117934250008F5FF0 /* oval.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AC900717934250008F5FF0 /* oval.png */; };
+		D4AC901217934250008F5FF0 /* oval@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AC900817934250008F5FF0 /* oval@2x.png */; };
+		D4AC901317934250008F5FF0 /* plane.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AC900917934250008F5FF0 /* plane.png */; };
+		D4AC901417934250008F5FF0 /* plane@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AC900A17934250008F5FF0 /* plane@2x.png */; };
+		D4AC901517934250008F5FF0 /* walkingman.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AC900B17934250008F5FF0 /* walkingman.png */; };
+		D4AC901617934250008F5FF0 /* walkingman@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AC900C17934250008F5FF0 /* walkingman@2x.png */; };
+		D4AC901E17934519008F5FF0 /* slider_maximum.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AC901A17934519008F5FF0 /* slider_maximum.png */; };
+		D4AC901F17934519008F5FF0 /* slider_maximum@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AC901B17934519008F5FF0 /* slider_maximum@2x.png */; };
+		D4AC902017934519008F5FF0 /* slider_minimum.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AC901C17934519008F5FF0 /* slider_minimum.png */; };
+		D4AC902117934519008F5FF0 /* slider_minimum@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AC901D17934519008F5FF0 /* slider_minimum@2x.png */; };
+		D4AC9027179345AE008F5FF0 /* locationmarker.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AC9023179345AE008F5FF0 /* locationmarker.png */; };
+		D4AC9028179345AE008F5FF0 /* locationmarker@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AC9024179345AE008F5FF0 /* locationmarker@2x.png */; };
+		D4AC9029179345AE008F5FF0 /* locationmarkerbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AC9025179345AE008F5FF0 /* locationmarkerbutton.png */; };
+		D4AC902A179345AE008F5FF0 /* locationmarkerbutton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AC9026179345AE008F5FF0 /* locationmarkerbutton@2x.png */; };
 		D4B0AC4717727FDA00DC4DD2 /* ECPostPlaceholder.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4B0AC4617727FDA00DC4DD2 /* ECPostPlaceholder.xib */; };
-		D4B6707A176F57E000A80BA3 /* ECTodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4B67078176F57E000A80BA3 /* ECTodayViewController.m */; };
-		D4B6707B176F57E000A80BA3 /* ECTodayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4B67079176F57E000A80BA3 /* ECTodayViewController.xib */; };
 		D4C9C085177A090800F864FC /* instagram.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D4C9C084177A090800F864FC /* instagram.jpg */; };
 /* End PBXBuildFile section */
 
@@ -262,6 +278,11 @@
 		D4A7980817921BCD0029F469 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		D4A7980A17921BD20029F469 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		D4A7980C17921EE40029F469 /* ATAppRatingFlow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ATAppRatingFlow.h; path = "../apptentive-ios/ApptentiveConnect/source/Rating Flow/ATAppRatingFlow.h"; sourceTree = "<group>"; };
+		D4A798101792FA2A0029F469 /* topgradient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topgradient.png; sourceTree = "<group>"; };
+		D4A798121792FB4D0029F469 /* fullgradient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fullgradient.png; sourceTree = "<group>"; };
+		D4A7981417930F4B0029F469 /* ECLocationSetterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECLocationSetterView.xib; sourceTree = "<group>"; };
+		D4A7981617930F9B0029F469 /* ECLocationSetterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECLocationSetterViewController.h; sourceTree = "<group>"; };
+		D4A7981717930F9B0029F469 /* ECLocationSetterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECLocationSetterViewController.m; sourceTree = "<group>"; };
 		D4A7BEA6177B2F3B00C22D91 /* UIImage+Orientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Orientation.h"; sourceTree = "<group>"; };
 		D4A7BEA7177B2F3B00C22D91 /* UIImage+Orientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Orientation.m"; sourceTree = "<group>"; };
 		D4A7BEA9177B713400C22D91 /* EncoreURL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EncoreURL.h; sourceTree = "<group>"; };
@@ -370,10 +391,21 @@
 		D4AC35F81768C5850087B1E9 /* NSDictionary+ConcertList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+ConcertList.m"; sourceTree = "<group>"; };
 		D4AC35FA1768C8B20087B1E9 /* ECJSONFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECJSONFetcher.h; sourceTree = "<group>"; };
 		D4AC35FB1768C8B20087B1E9 /* ECJSONFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECJSONFetcher.m; sourceTree = "<group>"; };
+		D4AC900717934250008F5FF0 /* oval.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = oval.png; sourceTree = "<group>"; };
+		D4AC900817934250008F5FF0 /* oval@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "oval@2x.png"; sourceTree = "<group>"; };
+		D4AC900917934250008F5FF0 /* plane.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plane.png; sourceTree = "<group>"; };
+		D4AC900A17934250008F5FF0 /* plane@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plane@2x.png"; sourceTree = "<group>"; };
+		D4AC900B17934250008F5FF0 /* walkingman.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = walkingman.png; sourceTree = "<group>"; };
+		D4AC900C17934250008F5FF0 /* walkingman@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "walkingman@2x.png"; sourceTree = "<group>"; };
+		D4AC901A17934519008F5FF0 /* slider_maximum.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = slider_maximum.png; sourceTree = "<group>"; };
+		D4AC901B17934519008F5FF0 /* slider_maximum@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "slider_maximum@2x.png"; sourceTree = "<group>"; };
+		D4AC901C17934519008F5FF0 /* slider_minimum.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = slider_minimum.png; sourceTree = "<group>"; };
+		D4AC901D17934519008F5FF0 /* slider_minimum@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "slider_minimum@2x.png"; sourceTree = "<group>"; };
+		D4AC9023179345AE008F5FF0 /* locationmarker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = locationmarker.png; sourceTree = "<group>"; };
+		D4AC9024179345AE008F5FF0 /* locationmarker@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "locationmarker@2x.png"; sourceTree = "<group>"; };
+		D4AC9025179345AE008F5FF0 /* locationmarkerbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = locationmarkerbutton.png; sourceTree = "<group>"; };
+		D4AC9026179345AE008F5FF0 /* locationmarkerbutton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "locationmarkerbutton@2x.png"; sourceTree = "<group>"; };
 		D4B0AC4617727FDA00DC4DD2 /* ECPostPlaceholder.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECPostPlaceholder.xib; sourceTree = "<group>"; };
-		D4B67077176F57E000A80BA3 /* ECTodayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECTodayViewController.h; sourceTree = "<group>"; };
-		D4B67078176F57E000A80BA3 /* ECTodayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECTodayViewController.m; sourceTree = "<group>"; };
-		D4B67079176F57E000A80BA3 /* ECTodayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECTodayViewController.xib; sourceTree = "<group>"; };
 		D4C9C084177A090800F864FC /* instagram.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = instagram.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -410,16 +442,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		D428A45C1781097600101F12 /* Today */ = {
-			isa = PBXGroup;
-			children = (
-				D4B67077176F57E000A80BA3 /* ECTodayViewController.h */,
-				D4B67078176F57E000A80BA3 /* ECTodayViewController.m */,
-				D4B67079176F57E000A80BA3 /* ECTodayViewController.xib */,
-			);
-			name = Today;
-			sourceTree = "<group>";
-		};
 		D45DBD621783EDF4000ED3C1 /* App Icons */ = {
 			isa = PBXGroup;
 			children = (
@@ -542,6 +564,8 @@
 		D4A8DDD1176A44A0005E9847 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				D4AC9022179345AE008F5FF0 /* location toggle button */,
+				D4AC900417934250008F5FF0 /* location uislider */,
 				A068AE6F1790621800FA1BF4 /* lastfmAttr.png */,
 				A068AE701790621800FA1BF4 /* lastfmAttr@2x.png */,
 				D4AC2E02178FD2E200F292CA /* Black.png */,
@@ -551,6 +575,8 @@
 				D4AC2DF8178F854600F292CA /* accessory@2x.png */,
 				D4A9B311178DFCC9008B5504 /* search bar */,
 				A02661F7178DF01F00741C9A /* gradient.png */,
+				D4A798101792FA2A0029F469 /* topgradient.png */,
+				D4A798121792FB4D0029F469 /* fullgradient.png */,
 				D4A9B2D6178DC3EE008B5504 /* noimage.png */,
 				D4A9B2FC178DDABD008B5504 /* Segmented Control */,
 				D4A9B2D1178DBB83008B5504 /* Topbar */,
@@ -815,7 +841,9 @@
 				D491F80D178B595D002E00E5 /* ECNewMainViewController.h */,
 				D491F80E178B595D002E00E5 /* ECNewMainViewController.m */,
 				D4A9B32D178E6587008B5504 /* SearchResultsSectionHeader.xib */,
-				D428A45C1781097600101F12 /* Today */,
+				D4A7981417930F4B0029F469 /* ECLocationSetterView.xib */,
+				D4A7981617930F9B0029F469 /* ECLocationSetterViewController.h */,
+				D4A7981717930F9B0029F469 /* ECLocationSetterViewController.m */,
 				A022AAA417779BB50009244C /* ECConcertCellView.h */,
 				A022AAA517779BB50009244C /* ECConcertCellView.m */,
 				A022AAA717779BDF0009244C /* ECConcertCellView.xib */,
@@ -824,6 +852,34 @@
 				A02661E3178C9F6200741C9A /* ECSearchResultCell.xib */,
 			);
 			name = "Main View";
+			sourceTree = "<group>";
+		};
+		D4AC900417934250008F5FF0 /* location uislider */ = {
+			isa = PBXGroup;
+			children = (
+				D4AC901A17934519008F5FF0 /* slider_maximum.png */,
+				D4AC901B17934519008F5FF0 /* slider_maximum@2x.png */,
+				D4AC901C17934519008F5FF0 /* slider_minimum.png */,
+				D4AC901D17934519008F5FF0 /* slider_minimum@2x.png */,
+				D4AC900717934250008F5FF0 /* oval.png */,
+				D4AC900817934250008F5FF0 /* oval@2x.png */,
+				D4AC900917934250008F5FF0 /* plane.png */,
+				D4AC900A17934250008F5FF0 /* plane@2x.png */,
+				D4AC900B17934250008F5FF0 /* walkingman.png */,
+				D4AC900C17934250008F5FF0 /* walkingman@2x.png */,
+			);
+			path = "location uislider";
+			sourceTree = "<group>";
+		};
+		D4AC9022179345AE008F5FF0 /* location toggle button */ = {
+			isa = PBXGroup;
+			children = (
+				D4AC9023179345AE008F5FF0 /* locationmarker.png */,
+				D4AC9024179345AE008F5FF0 /* locationmarker@2x.png */,
+				D4AC9025179345AE008F5FF0 /* locationmarkerbutton.png */,
+				D4AC9026179345AE008F5FF0 /* locationmarkerbutton@2x.png */,
+			);
+			path = "location toggle button";
 			sourceTree = "<group>";
 		};
 		D4C9C08A177A51BB00F864FC /* Font */ = {
@@ -999,7 +1055,6 @@
 				D4A8DDF0176AB650005E9847 /* home_background@2x.jpg in Resources */,
 				A0FF1C53176CC88000433768 /* LoginInfoPages.plist in Resources */,
 				A0848C0B176D1F0D009BBB38 /* ECLoginPageView.xib in Resources */,
-				D4B6707B176F57E000A80BA3 /* ECTodayViewController.xib in Resources */,
 				D4B0AC4717727FDA00DC4DD2 /* ECPostPlaceholder.xib in Resources */,
 				A022AAA2177605900009244C /* Hero Light.otf in Resources */,
 				A022AAA3177605900009244C /* Hero.otf in Resources */,
@@ -1081,6 +1136,23 @@
 				A068AE721790621800FA1BF4 /* lastfmAttr@2x.png in Resources */,
 				D4A798001792189B0029F469 /* ATConnect.h in Resources */,
 				D4A7980D17921EE40029F469 /* ATAppRatingFlow.h in Resources */,
+				D4A798111792FA2A0029F469 /* topgradient.png in Resources */,
+				D4A798131792FB4E0029F469 /* fullgradient.png in Resources */,
+				D4A7981517930F4B0029F469 /* ECLocationSetterView.xib in Resources */,
+				D4AC901117934250008F5FF0 /* oval.png in Resources */,
+				D4AC901217934250008F5FF0 /* oval@2x.png in Resources */,
+				D4AC901317934250008F5FF0 /* plane.png in Resources */,
+				D4AC901417934250008F5FF0 /* plane@2x.png in Resources */,
+				D4AC901517934250008F5FF0 /* walkingman.png in Resources */,
+				D4AC901617934250008F5FF0 /* walkingman@2x.png in Resources */,
+				D4AC901E17934519008F5FF0 /* slider_maximum.png in Resources */,
+				D4AC901F17934519008F5FF0 /* slider_maximum@2x.png in Resources */,
+				D4AC902017934519008F5FF0 /* slider_minimum.png in Resources */,
+				D4AC902117934519008F5FF0 /* slider_minimum@2x.png in Resources */,
+				D4AC9027179345AE008F5FF0 /* locationmarker.png in Resources */,
+				D4AC9028179345AE008F5FF0 /* locationmarker@2x.png in Resources */,
+				D4AC9029179345AE008F5FF0 /* locationmarkerbutton.png in Resources */,
+				D4AC902A179345AE008F5FF0 /* locationmarkerbutton@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1156,7 +1228,6 @@
 				D4A8DDCA176A39BA005E9847 /* NSDate+JSON.m in Sources */,
 				D4A8DDCE176A405D005E9847 /* ECPostViewController.m in Sources */,
 				A0848C11176D25D5009BBB38 /* ECLoginPageView.m in Sources */,
-				D4B6707A176F57E000A80BA3 /* ECTodayViewController.m in Sources */,
 				A022AAA617779BB50009244C /* ECConcertCellView.m in Sources */,
 				A022AABF1779E8380009244C /* UIImage+GaussBlur.m in Sources */,
 				D4A7BEA8177B2F3B00C22D91 /* UIImage+Orientation.m in Sources */,
@@ -1171,6 +1242,7 @@
 				D491F80F178B595D002E00E5 /* ECNewMainViewController.m in Sources */,
 				A02661E0178C937200741C9A /* ECSearchResultCell.m in Sources */,
 				D4AC2DFF178FA64E00F292CA /* ECProfileConcertCell.m in Sources */,
+				D4A7981817930F9B0029F469 /* ECLocationSetterViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
