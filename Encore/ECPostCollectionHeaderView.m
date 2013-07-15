@@ -17,9 +17,11 @@
         NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"ECPostCollectionHeaderView" owner:owner options:nil];
         self = [subviewArray objectAtIndex:0];
         self.frame = frame;
+        
     }
     return self;
 }
+
 
 /*
 // Only override drawRect: if you perform custom drawing.

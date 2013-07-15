@@ -4,27 +4,27 @@
 <array>
 	<dict>
 		<key>header</key>
-		<string></string>
+		<string>Encore tracks down all the photos and videos created at concerts</string>
 		<key>text</key>
-		<string>Discover concerts to go to with friends, see what everyone is already sharing, show your night out to your friends, and keep it for yourself on your profile.</string>
+		<string>So you can relive your shows whenever you want</string>
 		<key>image</key>
-		<string>login1.png</string>
+		<string>login1</string>
 	</dict>
 	<dict>
 		<key>header</key>
-		<string>Header 1</string>
+		<string>We&apos;ll find all the local gigs around you</string>
 		<key>text</key>
-		<string>Description text 1</string>
+		<string>Never miss your favourite artist again</string>
 		<key>image</key>
-		<string>login2.png</string>
+		<string>login2</string>
 	</dict>
 	<dict>
 		<key>header</key>
-		<string>Header 2</string>
+		<string>Live music experiences are better with friends, and your concert app is too</string>
 		<key>text</key>
-		<string>Description Text 2</string>
+		<string>Share your concerts with your friends</string>
 		<key>image</key>
-		<string>login3.png</string>
+		<string>login3</string>
 	</dict>
 </array>
 </plist>

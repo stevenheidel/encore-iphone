@@ -52,6 +52,7 @@
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RbE-gN-6Tm" userLabel="Location Button">
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="27" id="AZF-Xr-Fph"/>
+                                                <constraint firstAttribute="height" constant="26" type="user" id="huH-gD-XLx"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                             <state key="normal" image="locationmarkerbutton.png">
@@ -76,7 +77,7 @@
                                         </label>
                                         <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hXC-Wo-Qyy" userLabel="LastFM Button">
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="13" id="gS4-RD-BX5"/>
+                                                <constraint firstAttribute="height" constant="13" type="user" id="gS4-RD-BX5"/>
                                                 <constraint firstAttribute="width" constant="120" id="vQC-JV-lyd"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -94,18 +95,19 @@
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
-                                        <constraint firstItem="hXC-Wo-Qyy" firstAttribute="top" secondItem="UU0-XP-3u7" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="CKg-Kn-OFj"/>
+                                        <constraint firstItem="RbE-gN-6Tm" firstAttribute="centerY" secondItem="UU0-XP-3u7" secondAttribute="centerY" type="user" id="0ah-Mj-Nk7"/>
+                                        <constraint firstItem="Aq3-2n-a8G" firstAttribute="top" secondItem="BPv-ov-Jp0" secondAttribute="bottom" constant="22" type="user" id="51N-fw-bnp"/>
+                                        <constraint firstAttribute="centerX" secondItem="Aq3-2n-a8G" secondAttribute="centerX" type="user" id="DtR-b3-ncC"/>
                                         <constraint firstItem="BPv-ov-Jp0" firstAttribute="top" secondItem="E96-RF-aMq" secondAttribute="top" constant="10" type="user" id="G8o-h9-ghT"/>
-                                        <constraint firstAttribute="bottom" secondItem="Aq3-2n-a8G" secondAttribute="bottom" constant="32" id="NHB-Wg-OmU"/>
+                                        <constraint firstItem="hXC-Wo-Qyy" firstAttribute="top" secondItem="UU0-XP-3u7" secondAttribute="bottom" constant="8" type="user" id="Mzy-Xm-BZY"/>
                                         <constraint firstAttribute="trailing" secondItem="RbE-gN-6Tm" secondAttribute="trailing" constant="5" id="SzW-l0-rUy"/>
-                                        <constraint firstItem="UU0-XP-3u7" firstAttribute="bottom" secondItem="RbE-gN-6Tm" secondAttribute="bottom" type="default" id="YMB-cc-9h4"/>
                                         <constraint firstAttribute="centerX" secondItem="hXC-Wo-Qyy" secondAttribute="centerX" type="user" id="Ymj-Pz-Hwq"/>
+                                        <constraint firstItem="UU0-XP-3u7" firstAttribute="top" secondItem="BPv-ov-Jp0" secondAttribute="bottom" constant="20" type="user" id="Zh0-O1-ZR7"/>
                                         <constraint firstItem="Aq3-2n-a8G" firstAttribute="baseline" secondItem="UU0-XP-3u7" secondAttribute="baseline" type="default" id="fFf-4Z-gN5"/>
-                                        <constraint firstAttribute="bottom" secondItem="hXC-Wo-Qyy" secondAttribute="bottom" constant="8" id="jQ4-Dj-tzB"/>
-                                        <constraint firstItem="Aq3-2n-a8G" firstAttribute="leading" secondItem="E96-RF-aMq" secondAttribute="leading" constant="20" symbolic="YES" type="user" id="nJo-b4-RNd"/>
-                                        <constraint firstItem="BPv-ov-Jp0" firstAttribute="centerX" secondItem="Aq3-2n-a8G" secondAttribute="centerX" type="default" id="sRO-DD-cKV"/>
+                                        <constraint firstAttribute="centerX" secondItem="BPv-ov-Jp0" secondAttribute="centerX" type="user" id="glO-dK-h9o"/>
+                                        <constraint firstAttribute="centerX" secondItem="Aq3-2n-a8G" secondAttribute="centerX" type="user" id="ryf-gX-GiH"/>
                                         <constraint firstItem="UU0-XP-3u7" firstAttribute="centerX" secondItem="Aq3-2n-a8G" secondAttribute="centerX" type="user" id="wMK-ev-uGC"/>
-                                        <constraint firstItem="UU0-XP-3u7" firstAttribute="top" secondItem="RbE-gN-6Tm" secondAttribute="top" type="default" id="yH7-rY-UlQ"/>
+                                        <constraint firstItem="UU0-XP-3u7" firstAttribute="top" secondItem="RbE-gN-6Tm" secondAttribute="top" type="user" id="yH7-rY-UlQ"/>
                                     </constraints>
                                 </view>
                                 <prototypes>
@@ -184,6 +186,7 @@
                 <relationship kind="action" name="dismissKeyboard:"/>
                 <relationship kind="action" name="openLastFM:"/>
                 <relationship kind="action" name="openLocationSetter"/>
+                <relationship kind="action" name="switchedSelection:"/>
                 <relationship kind="outlet" name="imgBackground" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="imgLastfmAttr" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="lblTodaysDate" candidateClass="UILabel"/>

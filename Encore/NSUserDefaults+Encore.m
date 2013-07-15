@@ -27,8 +27,8 @@
 +(NSURL*) facebookProfileImageURL {
     return [[NSUserDefaults standardUserDefaults] URLForKey:@"facebook_image_url"];
 }
-+(void) setFacebookProfileImageURL: (NSURL*) url {
-    [[NSUserDefaults standardUserDefaults] setURL: url forKey:@"facebook_image_url"];
++(void) setFacebookProfileImageURL: (NSString*) url {
+    [[NSUserDefaults standardUserDefaults] setURL: [NSURL URLWithString:url] forKey:@"facebook_image_url"];
 }
 
 +(NSString*) userCity {

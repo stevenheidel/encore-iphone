@@ -50,7 +50,7 @@
 							<bytes key="NSWhite">MAA</bytes>
 						</object>
 						<int key="IBUIContentMode">2</int>
-						<bool key="IBUIUserInteractionEnabled">NO</bool>
+						<int key="IBUITag">36</int>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
 					<object class="IBUILabel" id="318651063">

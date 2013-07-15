@@ -32,7 +32,6 @@
 #import "ECAlertTags.h"
 
 #import "ECAppDelegate.h"
-#import "AGMedallionView.h"
 
 @interface ECProfileViewController ()
 
@@ -119,9 +118,8 @@
     //    self.imgProfile.layer.borderColor = [UIColor profileImageBorderColor].CGColor;
     
     NSURL *imageURL = [NSUserDefaults facebookProfileImageURL];
-    UIImage *profileImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:@"https://fbcdn-sphotos-f-a.akamaihd.net/hphotos-ak-frc1/998891_4529532090329_1021113322_n.jpg"]]];
+    UIImage *profileImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL]];
     self.imgBackground.image = [profileImage imageWithGaussianBlur];
-    self.imgProfile2.image = profileImage;
     
     self.lblName.text = [[NSUserDefaults userName] uppercaseString];
     

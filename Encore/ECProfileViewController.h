@@ -19,7 +19,6 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *imgBackground;
 @property (weak, nonatomic) IBOutlet FBProfilePictureView *imgProfile;
-@property (weak, nonatomic) IBOutlet AGMedallionView *imgProfile2;
 
 @property (weak, nonatomic) IBOutlet UILabel *lblName;
 @property (weak, nonatomic) IBOutlet UILabel *lblLocation;

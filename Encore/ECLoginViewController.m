@@ -25,15 +25,20 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+       
     }
     return self;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
+    NSLog(@"scroll view %@",NSStringFromCGRect(self.descScrollView.frame));
     self.navigationController.navigationBarHidden = YES;
-
+    if ([[UIScreen mainScreen] bounds].size.height != 568) {
+        self.descScrollView.contentSize = CGSizeMake(320*3,297);
+    }
+    else self.descScrollView.contentSize = CGSizeMake(320*3,385);
+    self.descScrollView.translatesAutoresizingMaskIntoConstraints = NO;
     for (int i = 0; i < arrPages.count; i++) {
         
         NSDictionary *currPageItem = [arrPages objectAtIndex:i];
@@ -43,10 +48,10 @@
         frame.origin.x = self.descScrollView.frame.size.width * i;
         frame.origin.y = 0.0f;
         frame.size = self.descScrollView.frame.size;
-        
+        NSLog(@"frame %@",NSStringFromCGRect(frame));
         ECLoginPageView *subview = [[ECLoginPageView alloc] initWithFrame:frame];
         [subview SetUpPageforItem:currPageItem];
-        
+        subview.translatesAutoresizingMaskIntoConstraints = NO;
         [self.descScrollView addSubview:subview];
     }
 }
@@ -64,6 +69,16 @@
     arrPages = [[NSArray alloc]initWithContentsOfFile:myListPath];
     
     self.descScrollView.contentSize = CGSizeMake(descScrollView.frame.size.width * arrPages.count, descScrollView.frame.size.height);
+    
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    
+    if (screenRect.size.height == 568)
+    {
+        self.backgroundImage.image = [UIImage imageNamed:@"loginbackground-568h"];
+    }
+    else {
+        self.backgroundImage.image = [UIImage imageNamed:@"loginbackground"];
+    }
 }
 
 - (void)viewDidUnload {

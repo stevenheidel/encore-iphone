@@ -9,7 +9,6 @@
 #import "ECLoginPageView.h"
 
 @interface ECLoginPageView ()
-
 @end
 
 @implementation ECLoginPageView
@@ -24,18 +23,28 @@
         NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"ECLoginPageView" owner:self options:nil];
         UIView *mainView = [subviewArray objectAtIndex:0];
         [self addSubview:mainView];
+        image.translatesAutoresizingMaskIntoConstraints = NO;
+        lblHeader.translatesAutoresizingMaskIntoConstraints = NO;
+        lblText.translatesAutoresizingMaskIntoConstraints = NO;
     }
     return self;
 }
 
+NSString* iPhone4() {
+    if ([[UIScreen mainScreen] bounds].size.height != 568)
+    {
+        return @"iphone4";
+    }
+    return @"";
+}
 - (void)SetUpPageforItem:(NSDictionary *)currPageItem  {
-    self.backgroundColor = [UIColor blackColor];
     
-    [image setImage:[UIImage imageNamed:[currPageItem objectForKey:@"image"]]];
-    CGFloat imageX = self.frame.size.width/2 - self.frame.size.width/2;
-    CGFloat imageY = self.frame.size.height/2 - image.frame.size.height;
-    [image setFrame:CGRectMake(imageX, imageY, image.frame.size.width, image.frame.size.height)];
-    
+    NSString* imagePath = [NSString stringWithFormat:@"%@%@",[currPageItem objectForKey:@"image"],iPhone4()];
+    [image setImage:[UIImage imageNamed:imagePath]];
+//    CGFloat imageX = self.frame.size.width/2 - self.frame.size.width/2;
+//    CGFloat imageY = self.frame.size.height/2 - image.frame.size.height;
+//    [image setFrame:CGRectMake(0, 0, image.frame.size.width, image.frame.size.height)];
+    [image setBounds:CGRectMake(0, 0, 320, 50)];
     self.lblHeader.backgroundColor = self.backgroundColor;
     self.lblHeader.textColor = [UIColor whiteColor];
     self.lblHeader.text = [currPageItem objectForKey:@"header"];

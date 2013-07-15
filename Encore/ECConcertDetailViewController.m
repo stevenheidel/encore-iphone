@@ -70,6 +70,11 @@ NSString *kCellID = @"cellID";
 }
 
 #pragma mark - View Setup
+
+-(void) tapArtistPhoto {
+    [Flurry logEvent:@"Tapped_Artist_Photo_DetailVC"];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -78,6 +83,13 @@ NSString *kCellID = @"cellID";
     UIImageView* encoreLogo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo.png"]];
     self.navigationItem.titleView = encoreLogo;
     self.headerView = [[ECPostCollectionHeaderView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.collectionView.frame.size.width, HEADER_HEIGHT) andOwner:self];
+    
+    UITapGestureRecognizer* recognizerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapArtistPhoto)];
+    recognizerTap.numberOfTapsRequired = 1;
+    recognizerTap.numberOfTouchesRequired = 1;
+    [self.imgArtist addGestureRecognizer:recognizerTap];
+    
+    
     [self setupArtistUIAttributes];
     
     self.isOnProfile = FALSE;

@@ -16,7 +16,7 @@
 +(void) setUserID: (NSString*) userID;
 
 +(NSURL*) facebookProfileImageURL;
-+(void) setFacebookProfileImageURL: (NSURL*) url;
++(void) setFacebookProfileImageURL: (NSString*) url;
 
 +(NSString*) userCity;
 +(void) setUserCity: (NSString*) city;
