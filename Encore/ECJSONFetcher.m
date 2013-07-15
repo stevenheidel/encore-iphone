@@ -63,7 +63,7 @@ NSString* pathForSearchType (ECSearchType searchType) {
     NSNumber* latitude = [NSNumber numberWithDouble:location.coordinate.latitude];
     NSNumber* longitude = [NSNumber numberWithDouble:location.coordinate.longitude];
     
-    NSDictionary * parameters = [NSDictionary dictionaryWithObjectsAndKeys:latitude,@"latitude", longitude, @"longitude",nil];
+    NSDictionary * parameters = [NSDictionary dictionaryWithObjectsAndKeys:latitude,@"latitude", longitude, @"longitude", @"Toronto", @"city",nil];
     
     NSURL * url = [NSURL URLWithString:BaseURL];
     AFHTTPClient * client = [[AFHTTPClient alloc] initWithBaseURL:url];
@@ -150,7 +150,7 @@ NSString* pathForSearchType (ECSearchType searchType) {
     
     NSNumber* latitude = [NSNumber numberWithDouble:location.coordinate.latitude];
     NSNumber* longitude = [NSNumber numberWithDouble:location.coordinate.longitude];
-    NSDictionary * parameters = [NSDictionary dictionaryWithObjectsAndKeys:latitude,@"latitude",longitude, @"longitude", searchStr, @"term", tenseString, @"tense", nil];
+    NSDictionary * parameters = [NSDictionary dictionaryWithObjectsAndKeys:latitude,@"latitude",longitude, @"longitude", searchStr, @"term", tenseString, @"tense", @"Toronto", @"city",nil]; //TODO remove
     
     [client getPath:ArtistCombinedSearchURL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if (RETURN_TEST_DATA) {
