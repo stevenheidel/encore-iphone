@@ -80,7 +80,7 @@ typedef enum {
     self.view.clipsToBounds = YES;
     
     [self setupRefreshControl];
-    
+    [self fetchConcerts];
     [[ATAppRatingFlow sharedRatingFlow] showRatingFlowFromViewControllerIfConditionsAreMet:self];
 }
 
