@@ -14,6 +14,7 @@
 }
 - (void)loginFailed;
 @property (nonatomic, retain) IBOutlet UIScrollView *descScrollView;
+
 @property (nonatomic, retain) IBOutlet UIPageControl *pageControl;
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundImage;
 

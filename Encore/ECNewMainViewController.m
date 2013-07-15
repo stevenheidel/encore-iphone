@@ -81,7 +81,6 @@ typedef enum {
     
     [self setupRefreshControl];
     [self fetchConcerts];
-    [[ATAppRatingFlow sharedRatingFlow] showRatingFlowFromViewControllerIfConditionsAreMet:self];
 }
 
 -(void) initializeSearchLocation: (CLLocation*) currentSearchLocation {
@@ -151,6 +150,7 @@ typedef enum {
 
 -(void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [[ATAppRatingFlow sharedRatingFlow] showRatingFlowFromViewControllerIfConditionsAreMet:self];
 }
 
 //Set up left bar button for going to profile and right bar button for sharing

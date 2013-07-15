@@ -60,6 +60,7 @@
 		D46D8F95179479A300011C5C /* login1iphone4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D46D8F92179479A200011C5C /* login1iphone4@2x.png */; };
 		D46D8F96179479A300011C5C /* login2iphone4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D46D8F93179479A300011C5C /* login2iphone4@2x.png */; };
 		D46D8F97179479A300011C5C /* login3iphone4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D46D8F94179479A300011C5C /* login3iphone4@2x.png */; };
+		D46D8F991794A9FC00011C5C /* ECLoginPageViewiphone4.xib in Resources */ = {isa = PBXBuildFile; fileRef = D46D8F981794A9FC00011C5C /* ECLoginPageViewiphone4.xib */; };
 		D491F807178B54C9002E00E5 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = D491F805178B54C9002E00E5 /* logo.png */; };
 		D491F808178B54C9002E00E5 /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D491F806178B54C9002E00E5 /* logo@2x.png */; };
 		D491F80C178B57C1002E00E5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D491F80B178B57C1002E00E5 /* Main.storyboard */; };
@@ -283,6 +284,7 @@
 		D46D8F92179479A200011C5C /* login1iphone4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login1iphone4@2x.png"; sourceTree = "<group>"; };
 		D46D8F93179479A300011C5C /* login2iphone4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login2iphone4@2x.png"; sourceTree = "<group>"; };
 		D46D8F94179479A300011C5C /* login3iphone4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login3iphone4@2x.png"; sourceTree = "<group>"; };
+		D46D8F981794A9FC00011C5C /* ECLoginPageViewiphone4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECLoginPageViewiphone4.xib; sourceTree = "<group>"; };
 		D491F805178B54C9002E00E5 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		D491F806178B54C9002E00E5 /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@2x.png"; sourceTree = "<group>"; };
 		D491F80B178B57C1002E00E5 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -851,6 +853,7 @@
 				A0848C0F176D25D5009BBB38 /* ECLoginPageView.h */,
 				A0848C10176D25D5009BBB38 /* ECLoginPageView.m */,
 				A0848C0A176D1F0D009BBB38 /* ECLoginPageView.xib */,
+				D46D8F981794A9FC00011C5C /* ECLoginPageViewiphone4.xib */,
 			);
 			name = Login;
 			sourceTree = "<group>";
@@ -1182,6 +1185,7 @@
 				D46D8F95179479A300011C5C /* login1iphone4@2x.png in Resources */,
 				D46D8F96179479A300011C5C /* login2iphone4@2x.png in Resources */,
 				D46D8F97179479A300011C5C /* login3iphone4@2x.png in Resources */,
+				D46D8F991794A9FC00011C5C /* ECLoginPageViewiphone4.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

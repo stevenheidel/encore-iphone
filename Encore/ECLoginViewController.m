@@ -8,7 +8,6 @@
 
 #import "ECLoginViewController.h"
 #import "ECAppDelegate.h"
-//#import "ECMainViewController.h"
 #import "ECJSONPoster.h"
 #import "ECLoginPageView.h"
 @interface ECLoginViewController ()
@@ -36,8 +35,13 @@
     self.navigationController.navigationBarHidden = YES;
     if ([[UIScreen mainScreen] bounds].size.height != 568) {
         self.descScrollView.contentSize = CGSizeMake(320*3,297);
+        self.descScrollView.frame = CGRectMake(0,self.descScrollView.frame.origin.y, 320,297);
     }
-    else self.descScrollView.contentSize = CGSizeMake(320*3,385);
+    else {
+        self.descScrollView.contentSize = CGSizeMake(320*3,385);
+        self.descScrollView.frame = CGRectMake(0,self.descScrollView.frame.origin.y, 320,385);
+    }
+    
     self.descScrollView.translatesAutoresizingMaskIntoConstraints = NO;
     for (int i = 0; i < arrPages.count; i++) {
         
@@ -51,9 +55,10 @@
         NSLog(@"frame %@",NSStringFromCGRect(frame));
         ECLoginPageView *subview = [[ECLoginPageView alloc] initWithFrame:frame];
         [subview SetUpPageforItem:currPageItem];
-        subview.translatesAutoresizingMaskIntoConstraints = NO;
+//        subview.translatesAutoresizingMaskIntoConstraints = NO;
         [self.descScrollView addSubview:subview];
     }
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -79,6 +84,8 @@
     else {
         self.backgroundImage.image = [UIImage imageNamed:@"loginbackground"];
     }
+    
+    
 }
 
 - (void)viewDidUnload {
