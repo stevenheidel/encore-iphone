@@ -232,14 +232,12 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
     
     loggedIn = YES;
     
-#warning UNTESTED
     [ECJSONPoster postUser:user completion:^(NSDictionary *response) {
         NSURL* defaultURL = [NSUserDefaults facebookProfileImageURL];
         if (!defaultURL || ![defaultURL isEqual:[response objectForKey:@"facebook_image_url"]]) {
-            [NSUserDefaults setFacebookProfileImageURL:[response objectForKey:@"facebook_image_url"]];
+            [NSUserDefaults setFacebookProfileImageURL:[response objectForKey:@"facebook_image_url"]]; //expecting a string -- converts to URL inside nsuserdefaults
             [NSUserDefaults synchronize];
         }
-
         [self.navigationController dismissViewControllerAnimated:YES completion:nil];
     }];
     [self saveUserInfoToDefaults:user];
