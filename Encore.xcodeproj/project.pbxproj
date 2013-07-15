@@ -164,6 +164,7 @@
 		D4AC9029179345AE008F5FF0 /* locationmarkerbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AC9025179345AE008F5FF0 /* locationmarkerbutton.png */; };
 		D4AC902A179345AE008F5FF0 /* locationmarkerbutton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AC9026179345AE008F5FF0 /* locationmarkerbutton@2x.png */; };
 		D4B0AC4717727FDA00DC4DD2 /* ECPostPlaceholder.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4B0AC4617727FDA00DC4DD2 /* ECPostPlaceholder.xib */; };
+		D4B31DE91793D03300822228 /* NSUserDefaults+Encore.m in Sources */ = {isa = PBXBuildFile; fileRef = D4B31DE81793D03300822228 /* NSUserDefaults+Encore.m */; };
 		D4C9C085177A090800F864FC /* instagram.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D4C9C084177A090800F864FC /* instagram.jpg */; };
 /* End PBXBuildFile section */
 
@@ -406,6 +407,8 @@
 		D4AC9025179345AE008F5FF0 /* locationmarkerbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = locationmarkerbutton.png; sourceTree = "<group>"; };
 		D4AC9026179345AE008F5FF0 /* locationmarkerbutton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "locationmarkerbutton@2x.png"; sourceTree = "<group>"; };
 		D4B0AC4617727FDA00DC4DD2 /* ECPostPlaceholder.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECPostPlaceholder.xib; sourceTree = "<group>"; };
+		D4B31DE71793D03300822228 /* NSUserDefaults+Encore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSUserDefaults+Encore.h"; sourceTree = "<group>"; };
+		D4B31DE81793D03300822228 /* NSUserDefaults+Encore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSUserDefaults+Encore.m"; sourceTree = "<group>"; };
 		D4C9C084177A090800F864FC /* instagram.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = instagram.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -896,6 +899,8 @@
 		D4C9C08B177A51C600F864FC /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				D4B31DE71793D03300822228 /* NSUserDefaults+Encore.h */,
+				D4B31DE81793D03300822228 /* NSUserDefaults+Encore.m */,
 				D428A4591781085500101F12 /* UIColor+EncoreUI.h */,
 				D428A45A1781085500101F12 /* UIColor+EncoreUI.m */,
 				D4A7BEA6177B2F3B00C22D91 /* UIImage+Orientation.h */,
@@ -1243,6 +1248,7 @@
 				A02661E0178C937200741C9A /* ECSearchResultCell.m in Sources */,
 				D4AC2DFF178FA64E00F292CA /* ECProfileConcertCell.m in Sources */,
 				D4A7981817930F9B0029F469 /* ECLocationSetterViewController.m in Sources */,
+				D4B31DE91793D03300822228 /* NSUserDefaults+Encore.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

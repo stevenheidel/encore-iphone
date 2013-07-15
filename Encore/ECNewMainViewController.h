@@ -22,26 +22,23 @@
 @property (nonatomic, assign) CLLocation* currentSearchLocation;
 @property (nonatomic, assign) NSNumber* currentSearchRadius;
 
-@property(nonatomic, strong) IBOutlet UIImageView *imgBackground;
+@property(nonatomic, weak) IBOutlet UIImageView *imgBackground;
 @property (nonatomic, strong) ECLocationSetterViewController* locationSetterView;
 
-@property(nonatomic, strong) IBOutlet UILabel *lblTodaysDate;
-@property(nonatomic, strong) IBOutlet UITableView *tableView;
+@property(nonatomic, weak) IBOutlet UILabel *lblTodaysDate;
+@property(nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, readonly) BOOL isLoggedIn; //Getter that pulls from app delegate
 
 @property (assign, nonatomic) BOOL hasSearched; //Flag for whether use has performed a search
 
 @property (strong, nonatomic) UITapGestureRecognizer *tap;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
-@property (strong, nonatomic) IBOutlet UITextField *searchBar;
-@property (strong, nonatomic) IBOutlet UIImageView *imgLastfmAttr;
+@property (weak, nonatomic) IBOutlet UITextField *searchBar;
+@property (weak, nonatomic) IBOutlet UIImageView *imgLastfmAttr;
 
 @property (nonatomic, assign) ECSearchType currentSearchType;
 
 @property (strong, nonatomic) UINavigationController *profileViewController;
-@property (strong, nonatomic) NSString * facebook_id;
-@property (strong, nonatomic) NSString * userName;
-@property (strong, nonatomic) NSString * userCity;
 
 @property(nonatomic, strong) NSArray* todaysConcerts;
 @property(nonatomic, strong) NSArray* pastConcerts;

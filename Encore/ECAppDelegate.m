@@ -17,6 +17,7 @@
 #import "defines.h"
 
 #import "UIFont+Encore.h"
+#import "NSUserDefaults+Encore.h"
 
 //#if IN_BETA
 #import "TestFlight.h"
@@ -228,20 +229,15 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
 -(void) loginCompletedWithUser:(NSDictionary <FBGraphUser>*) user {
     NSString* userid = user.id;
     NSLog(@"Logged in user with id: %@",userid);
-    self.mainViewController.facebook_id = userid;
-    self.mainViewController.userName = user.name;
-    self.mainViewController.userCity = @"Toronto";  //user.location.location.city;
     
     loggedIn = YES;
     
+#warning UNTESTED
     [ECJSONPoster postUser:user completion:^(NSDictionary *response) {
-        NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-        
-        NSString* imageURLKey = @"facebook_image_url";
-        NSString* defaultID = [defaults stringForKey:imageURLKey];
-        if (!defaultID || ![defaultID isEqualToString:[response objectForKey:imageURLKey]]) {
-            [defaults setObject:[response objectForKey:imageURLKey] forKey:imageURLKey];
-            [defaults synchronize];
+        NSURL* defaultURL = [NSUserDefaults facebookProfileImageURL];
+        if (!defaultURL || ![defaultURL isEqual:[response objectForKey:@"facebook_image_url"]]) {
+            [NSUserDefaults setFacebookProfileImageURL:[response objectForKey:@"facebook_image_url"]];
+            [NSUserDefaults synchronize];
         }
 
         [self.navigationController dismissViewControllerAnimated:YES completion:nil];
@@ -250,28 +246,25 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
 }
 
 -(void) saveUserInfoToDefaults: (NSDictionary <FBGraphUser> *) userInfo {
-    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    
-    NSString* userIDKey = NSLocalizedString(@"user_id", nil);
-    NSString* defaultID = [defaults stringForKey:userIDKey];
+    NSString* defaultID = [NSUserDefaults userID];
     if (!defaultID || ![defaultID isEqualToString:userInfo.id]) {
-        [defaults setObject:userInfo.id forKey:userIDKey];
+        [NSUserDefaults setUserID:userInfo.id];
     }
     else !defaultID ? NSLog(@"No default ID saved") : NSLog(@"No change in User ID. Defaults not changed");
     
-    NSString* usernameKey = @"user_name";
-    NSString* defaultName = [defaults stringForKey:usernameKey];
+    NSString* defaultName = [NSUserDefaults userName];
     if (!defaultName || ![defaultName isEqualToString:userInfo.name]) {
-        [defaults setObject:userInfo.name forKey:usernameKey];
+        [NSUserDefaults setUsername:userInfo.name];
     }
-//    NSString* userLocationKey = @"user_city";
-//    NSString* defaultLocation = [defaults stringForKey:userLocationKey];
-//    if (!defaultLocation || ![defaultLocation isEqualToString:userInfo.location.location.city]) {
-//        [defaults setObject:userInfo.location.location.city forKey:userLocationKey];
-//
-//    }
     
-    [defaults synchronize];
+    NSString* defaultCity = [NSUserDefaults userCity];
+    if(!defaultCity || ![defaultCity isEqualToString:userInfo.location.location.city]) {
+        [NSUserDefaults setUserCity:userInfo.location.location.city];
+    }
+    
+    [NSUserDefaults synchronize];
+    
+
 }
 
 #pragma mark - location
@@ -311,11 +304,10 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
 
 -(void) saveLocationToUserDefaults: (CLLocation *) location {
     
-    NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
     double latitude = location.coordinate.latitude;
     double longitude = location.coordinate.longitude;
-    [defaults setDouble:latitude forKey:@"latitude"];
-    [defaults setDouble:longitude forKey:@"longitude"];
+    [NSUserDefaults setLongitude:longitude latitude:latitude];
+    [NSUserDefaults synchronize];
     
     [Flurry setLatitude:latitude longitude:longitude horizontalAccuracy:location.horizontalAccuracy verticalAccuracy:location.verticalAccuracy];
 }

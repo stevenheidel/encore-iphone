@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "FBProfilePictureView.h"
+@class AGMedallionView;
 @interface ECProfileViewController : UIViewController <UIAlertViewDelegate, UITableViewDelegate, UITableViewDataSource> {
     NSString* userID;
 }
@@ -16,13 +17,15 @@
 
 @property(nonatomic, strong) NSArray *arrPastConcerts;
 
-@property (strong, nonatomic) IBOutlet UIImageView *imgBackground;
-@property (strong, nonatomic) IBOutlet FBProfilePictureView *imgProfile;
-@property (strong, nonatomic) IBOutlet UILabel *lblName;
-@property (strong, nonatomic) IBOutlet UILabel *lblLocation;
-@property (strong, nonatomic) IBOutlet UILabel *lblConcerts;
-@property (strong, nonatomic) IBOutlet UIImageView *imgLocationMarker;
-@property (strong, nonatomic) IBOutlet UIImageView *imgStubs;
+@property (weak, nonatomic) IBOutlet UIImageView *imgBackground;
+@property (weak, nonatomic) IBOutlet FBProfilePictureView *imgProfile;
+@property (weak, nonatomic) IBOutlet AGMedallionView *imgProfile2;
+
+@property (weak, nonatomic) IBOutlet UILabel *lblName;
+@property (weak, nonatomic) IBOutlet UILabel *lblLocation;
+@property (weak, nonatomic) IBOutlet UILabel *lblConcerts;
+@property (weak, nonatomic) IBOutlet UIImageView *imgLocationMarker;
+@property (weak, nonatomic) IBOutlet UIImageView *imgStubs;
 
 @property (nonatomic, readonly) NSArray* pastEvents;
 @property (nonatomic, readonly) NSArray* futureEvents;

@@ -7,6 +7,7 @@
 //
 
 #import "ECLocationSetterViewController.h"
+#import "NSUserDefaults+Encore.h"
 
 @implementation ECLocationSetterViewController
 
@@ -24,7 +25,7 @@
     [self.locationSlider setThumbImage:[UIImage imageNamed:@"oval"] forState:UIControlStateNormal];
     [self.locationSlider setMinimumTrackImage:[UIImage imageNamed:@"slider_minimum"] forState:UIControlStateNormal];
     [self.locationSlider setMaximumTrackImage:[UIImage imageNamed:@"slider_maximum"] forState:UIControlStateNormal];
-    self.locationSearchBar.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"user_city"];
+    self.locationSearchBar.text = [NSUserDefaults userCity];
     
 }
 -(IBAction) touchedOutsideTextField: (id) sender {

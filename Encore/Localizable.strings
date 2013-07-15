@@ -42,12 +42,6 @@
 "TodayTableTitle" = "Today's Concerts in Your Area";
 "today" = "TODAY";
 
-//user defaults
-"user" = "user";
-"image_url" = "facebook_image_url";
-"user_id" = "user_id";
-"user_name" = "user_name";
-
 //Photo picker
 "new_from_camera" = "Take new picture";
 "pick_from_lib" = "Select from photo library";

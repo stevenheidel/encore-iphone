@@ -26,7 +26,7 @@
 #import "ECAppDelegate.h"
 
 #import "UIImage+GaussBlur.h"
-
+#import "NSUserDefaults+Encore.h"
 #import "MBProgressHUD.h"
 
 #import "ECPictureViewController.h"
@@ -125,7 +125,7 @@ NSString *kCellID = @"cellID";
     [self clearCollectionView];
     [self loadArtistDetails];
     [self loadImages];
-    NSString * userID = self.userID;
+    NSString * userID = [NSUserDefaults userID];
     [ECJSONFetcher checkIfConcert:[self.concert eventID] isOnProfile:userID completion:^(BOOL isOnProfile) {
         self.isOnProfile = isOnProfile;
         [self setImageForConcertStatusButton];
@@ -579,9 +579,6 @@ NSString *kCellID = @"cellID";
     return [self.concert eventID];
 }
 
--(NSString*) userID {
-    return [[NSUserDefaults standardUserDefaults] stringForKey:NSLocalizedString(@"user_id", nil)];
-}
 
 -(ECAppDelegate*) appDelegate {
     return (ECAppDelegate *)[UIApplication sharedApplication].delegate;

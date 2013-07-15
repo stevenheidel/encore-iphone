@@ -243,16 +243,8 @@ typedef enum {
 }
 
 - (void) setBackgroundImage {
-    //    if (self.hasSearched && self.searchResultsEvents.count>0 && self.currentSearchType != ECSearchTypeToday) {
-    //        UIImage *background = [[UIImage imageWithData:[NSData dataWithContentsOfURL:[[self.searchResultsEvents objectAtIndex:0] imageURL]]] imageWithGaussianBlur];
-    //        [self.imgBackground setImage:background];
-    //    }
-    //    else {
-//    NSArray* urls = [[self currentEventArray] valueForKey: @"image_url"];
-//    [self.kenBurnsView animateWithURLs:urls transitionDuration:10.0 loop:YES isLandscape:NO];
     UIImage *background = [[UIImage imageWithData:[NSData dataWithContentsOfURL:[[[self currentEventArray] objectAtIndex:0] imageURL]]] imageWithGaussianBlur];
     [self.imgBackground setImage:background];
-    //    }
 }
 
 #pragma mark - Buttons

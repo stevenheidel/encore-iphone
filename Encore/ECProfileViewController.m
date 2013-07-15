@@ -18,6 +18,7 @@
 #import "UIFont+Encore.h"
 
 #import "UIImage+GaussBlur.h"
+#import "NSUserDefaults+Encore.h"
 
 #import "ATConnect.h"
 #import "ATAppRatingFlow.h"
@@ -31,6 +32,7 @@
 #import "ECAlertTags.h"
 
 #import "ECAppDelegate.h"
+#import "AGMedallionView.h"
 
 @interface ECProfileViewController ()
 
@@ -108,31 +110,24 @@
     self.lblName.textColor = [UIColor whiteColor];
     self.lblConcerts.font = [UIFont heroFontWithSize: 12.0];
     self.lblConcerts.textColor = [UIColor whiteColor];
-    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    
-    NSString* userIDKey = NSLocalizedString(@"user_id", nil);
-    userID = [defaults stringForKey:userIDKey];
+        
+    userID = [NSUserDefaults userID];
     self.imgProfile.profileID = userID;
-    self.imgProfile.layer.cornerRadius = 50.0;
+    self.imgProfile.layer.cornerRadius = 56.0;
     self.imgProfile.layer.masksToBounds = YES;
     //    self.imgProfile.layer.borderWidth = 1.0;
     //    self.imgProfile.layer.borderColor = [UIColor profileImageBorderColor].CGColor;
     
-    NSString* userImageUrl = NSLocalizedString(@"image_url", nil);
-    NSURL *imageURL = [NSURL URLWithString:[defaults stringForKey:userImageUrl]];
-    UIImage *profileImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL]];
+    NSURL *imageURL = [NSUserDefaults facebookProfileImageURL];
+    UIImage *profileImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:@"https://fbcdn-sphotos-f-a.akamaihd.net/hphotos-ak-frc1/998891_4529532090329_1021113322_n.jpg"]]];
     self.imgBackground.image = [profileImage imageWithGaussianBlur];
+    self.imgProfile2.image = profileImage;
     
-    NSString* userNameKey = NSLocalizedString(@"user_name", nil);
-    NSString* userName = [defaults stringForKey:userNameKey];
-    self.lblName.text = [userName uppercaseString];
+    self.lblName.text = [[NSUserDefaults userName] uppercaseString];
     
-    NSString* userLocationKey = NSLocalizedString(@"user_location", nil);
-    NSString* userLocation = [defaults stringForKey:userLocationKey];
-    NSLog(@"userLocation:%@", userLocation);
-    self.lblLocation.text = @"Toronto, ON";//userLocation;
+    self.lblLocation.text = [NSUserDefaults userCity];
     
-    self.lblConcerts.text = [self.arrPastConcerts count] == 1 ? [NSString stringWithFormat:@"%d Concert", [self.arrPastConcerts count]] : [NSString stringWithFormat:@"%d Concerts", [self.arrPastConcerts count]];
+    [self updateHeader];
 }
 
 - (void) updateHeader {
