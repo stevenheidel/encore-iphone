@@ -29,7 +29,6 @@
     
 }
 -(IBAction) touchedOutsideTextField: (id) sender {
-    NSLog(@"here");
     [self.view endEditing:YES];
 }
 #define kOFFSET_FOR_KEYBOARD 200.0
