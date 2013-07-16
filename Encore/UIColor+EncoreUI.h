@@ -26,6 +26,7 @@
 +(UIColor*) imageBorderColor;
 
 +(UIColor*) profileImageBorderColor;
++(UIColor*) unselectedSegmentedControlColor;
 
 //HUDs
 +(UIColor*) lightBlueHUDConfirmationColor;

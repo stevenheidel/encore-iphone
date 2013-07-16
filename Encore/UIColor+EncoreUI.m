@@ -18,15 +18,15 @@ UIColor* colorWithHSB(float hue, float saturation, float brightness, float alpha
 }
 
 +(UIColor*) lightGrayTableColor {
-    return [UIColor colorWithRed:246.0/255.0 green:248.0/255.0 blue:250.0/255.0 alpha:1.0];
+    return colorWithRGB(246.0f,248.0f,250.0f,1.0f);
 }
 
 +(UIColor*) lightGrayHeaderColor {
-    return [UIColor colorWithRed:225.0/255.0 green:224.0/255.0 blue:225.0/255.0 alpha:1.0];
+    return colorWithRGB(225.0f,224.0f,225.0f,1.0);
 }
 
 +(UIColor*) encoreDarkGreenColorWithAlpha: (CGFloat) alpha {
-    return [UIColor colorWithRed:8.0/255.0 green:56.0/255.0 blue:76.0/255.0 alpha:alpha];
+    return colorWithRGB(8.0f,56.0f,76.0f,alpha);
 }
 
 +(UIColor*) encoreDarkGreenColor {
@@ -34,39 +34,40 @@ UIColor* colorWithHSB(float hue, float saturation, float brightness, float alpha
 }
 
 +(UIColor*) darkTextColorWithAlpha: (CGFloat) alpha {
-   return [UIColor colorWithRed:28.0/255.0 green:29.0/255.0 blue:31.0/255.0 alpha:alpha];
+   return colorWithRGB(28.0f,29.0f,31.0f,alpha);
 }
 
 +(UIColor*) imageBorderColor {
-    return [UIColor colorWithRed:0.529 green:0.808 blue:0.922 alpha:1]; // color equivalent is #87ceeb
+    return colorWithRGB(135.0f, 206.0f, 235.0f, 1.0f); // color equivalent is #87ceeb
 }
 +(UIColor*) profileImageBorderColor {
-    return [UIColor colorWithRed:160.0/255.0 green:165.0/255.0 blue:170.0/255.0 alpha:1.0];
+    return colorWithRGB(160.0f,165.0f,170.0f,1.0);
 }
-
 
 #pragma mark - HUD
 +(UIColor*) lightBlueHUDConfirmationColor {
-    return [UIColor colorWithRed:0.0/255.0 green:176.0/255.0 blue:227.0/255.0 alpha:0.90];
+    return colorWithRGB(0.0f,176.0f,227.0f,0.90);
 }
 
 +(UIColor*) redHUDConfirmationColor {
-    return [UIColor colorWithRed:255.0/255.0 green:51.0/255.0 blue:51.0/255.0 alpha:0.90];
+    return colorWithRGB(255.0f,51.0f,51.0f,0.90f);
 }
 
 #pragma mark - Horizontal select
 +(UIColor*) horizontalSelectTextColor {
-    return [UIColor colorWithRed:160.0/255.0 green:164.0/255.0 blue:167.0/255.0 alpha:1.0];
+    return colorWithRGB(160.0f, 164.0f, 167.0f, 1.0f);
 }
 
 +(UIColor*) horizontalSelectTodayCellColor {
-    return [UIColor colorWithRed:0.0 green:176.0/255.0 blue:227.0/255.0 alpha:1.0];
+    return colorWithRGB(0.0f, 176.0f, 227.0f, 1.0f);
 }
 
 +(UIColor*) horizontalSelectGrayCellColor {
-    return [UIColor colorWithRed:246.0/255.0 green:248.0/255.0 blue:250.0/255.0 alpha:1.0];
+    return colorWithRGB(246.0f,248.0f,250.0f,1.0f);
 }
-
++(UIColor*) unselectedSegmentedControlColor {
+    return colorWithRGB(255.0f, 255.0f, 255.0f, 0.5f);
+}
 #pragma mark - Nav bar
 +(UIColor*) lightBlueNavBarColor {
     return colorWithHSB(193.0f, 0.99f, 0.8f, 0.8f); 
@@ -81,6 +82,6 @@ UIColor* colorWithHSB(float hue, float saturation, float brightness, float alpha
 }
 
 +(UIColor*) separatorColor {
-    return colorWithRGB(255.0, 255.0, 255.0, 0.20);
+    return colorWithRGB(255.0f, 255.0f, 255.0f, 0.2f);
 }
 @end
