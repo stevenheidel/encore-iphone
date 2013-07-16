@@ -33,6 +33,12 @@
 
 #import "ECAppDelegate.h"
 
+typedef enum {
+    PastSection,
+    FutureSection,
+    NumberOfSections
+} ProfileTableViewSections;
+
 @interface ECProfileViewController ()
 
 @end
@@ -165,7 +171,7 @@
     static NSString *myIdentifier = @"ECProfileConcertCell";
     
     ECProfileConcertCell *cell = [tableView dequeueReusableCellWithIdentifier:myIdentifier forIndexPath:indexPath];
-    NSDictionary * concertDic = [self.arrPastConcerts objectAtIndex:indexPath.row];
+    NSDictionary * concertDic = [[self arrayForSection:indexPath.section] objectAtIndex:indexPath.row];
     [cell setUpCellForConcert:concertDic];
     [cell.imageArtist setImageWithURL:[concertDic imageURL] placeholderImage:nil];
 
@@ -177,18 +183,45 @@
 //    }
     return cell;
 }
+
+-(NSString*) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    if (section == PastSection) {
+        return NSLocalizedString(@"Past Events", @"User's past events for section header on profile");
+    }
+    else return NSLocalizedString(@"Future Events", @"User's future/upcoming events for section header on profile");
+}
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return CONCERT_CELL_HEIGHT;
 }
 
+-(NSArray*) arrayForSection: (NSInteger) section {
+    switch (section) {
+        case PastSection:
+            return self.pastEvents;
+        case FutureSection:
+            return self.futureEvents;
+        default:
+            return nil;
+    }
+    return nil;
+}
+
+-(NSInteger) rowCountForSection: (NSInteger) section {
+    return [[self arrayForSection:section] count];
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.arrPastConcerts.count;
+    return [self rowCountForSection: section];
+}
+
+- (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
+    return NumberOfSections;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    NSDictionary* concert = [self.arrPastConcerts objectAtIndex:indexPath.row];
+    NSDictionary* concert = [[self arrayForSection:indexPath.section] objectAtIndex:indexPath.row];
     ECConcertDetailViewController * concertDetail = [[ECConcertDetailViewController alloc] initWithConcert:concert];
     
     //[Flurry logEvent:@"Selected_Popular_Today_Concert" withParameters:concert];
