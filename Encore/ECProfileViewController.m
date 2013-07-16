@@ -104,6 +104,9 @@ typedef enum {
     return footerView;
 }
 
+-(void) tappedProfilePhoto {
+    [Flurry logEvent:@"Tapped_Profile_Photo"];
+}
 - (void) setUpHeaderView {
     
     ECProfileHeader * header = [[ECProfileHeader alloc] initWithFrame:CGRectMake(0.0, 0.0, self.tableView.frame.size.width, HEADER_HEIGHT) andOwner:self];
@@ -120,6 +123,13 @@ typedef enum {
     self.imgProfile.profileID = userID;
     self.imgProfile.layer.cornerRadius = 56.0;
     self.imgProfile.layer.masksToBounds = YES;
+    
+    UITapGestureRecognizer* tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedProfilePhoto)];
+    self.imgProfile.userInteractionEnabled = YES;
+    tapRecognizer.numberOfTapsRequired = 1;
+    tapRecognizer.numberOfTouchesRequired = 1;
+    [self.imgProfile addGestureRecognizer:tapRecognizer];
+
     //    self.imgProfile.layer.borderWidth = 1.0;
     //    self.imgProfile.layer.borderColor = [UIColor profileImageBorderColor].CGColor;
     
@@ -176,11 +186,6 @@ typedef enum {
     [cell.imageArtist setImageWithURL:[concertDic imageURL] placeholderImage:nil];
 
     cell.contentView.backgroundColor = [UIColor clearColor];
-//    if ([indexPath row] % 2) {
-//        cell.contentView.backgroundColor = [UIColor whiteColor];
-//    } else {
-//        cell.contentView.backgroundColor = [UIColor lightGrayTableColor];
-//    }
     return cell;
 }
 
@@ -223,11 +228,13 @@ typedef enum {
     
     NSDictionary* concert = [[self arrayForSection:indexPath.section] objectAtIndex:indexPath.row];
     ECConcertDetailViewController * concertDetail = [[ECConcertDetailViewController alloc] initWithConcert:concert];
-    
-    //[Flurry logEvent:@"Selected_Popular_Today_Concert" withParameters:concert];
+
+    //flurry log
+    NSMutableDictionary* dic = [NSMutableDictionary dictionaryWithDictionary:concert];
+    [dic addEntriesFromDictionary:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:indexPath.row], @"row", indexPath.section == PastSection ? @"Past": @"Future", @"Tense", nil]];
+    [Flurry logEvent:@"Selected_Event_On_Profile" withParameters:dic];
     
     [self.navigationController pushViewController:concertDetail animated:YES];
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -274,6 +281,7 @@ typedef enum {
 }
 
 -(void) openFeedback {
+    [Flurry logEvent:@"Opened_Feedback" withParameters:[NSDictionary dictionaryWithObject:@"Profile" forKey:@"source"]];
     ATConnect *connection = [ATConnect sharedConnection];
     [connection presentMessageCenterFromViewController: self];
 }
