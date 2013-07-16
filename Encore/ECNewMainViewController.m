@@ -210,7 +210,7 @@ typedef enum {
                                       [UIFont heroFontWithSize:16.0f], UITextAttributeFont,
                                        nil];
     NSDictionary* unselectedTextAttr = [NSDictionary dictionaryWithObjectsAndKeys:
-                                        [UIColor whiteColor], UITextAttributeTextColor,
+                                        [UIColor unselectedSegmentedControlColor], UITextAttributeTextColor,
                                         [UIColor clearColor], UITextAttributeTextShadowColor,
                                         [NSValue valueWithUIOffset:UIOffsetMake(0, 0)], UITextAttributeTextShadowOffset,
                                         [UIFont heroFontWithSize:16.0f], UITextAttributeFont,
