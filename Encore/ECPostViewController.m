@@ -217,7 +217,7 @@ typedef enum {
                                        handler:^(FBAppCall *call, NSDictionary *results, NSError *error) {
                                            if(error) {
                                                NSLog(@"Error posting to FB: %@", error.description);
-                                               [Flurry logEvent:@"Post_Share_To_FB_Fail" withParameters:[NSDictionary dictionaryWithObject:url.absoluteString forKey:@"url"]];
+                                               [Flurry logEvent:@"Post_Share_To_FB_Fail" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:url.absoluteString, @"url",error.description,@"error",nil]];
                                            } else {
                                                [Flurry logEvent:@"Post_Share_To_FB_Success" withParameters:[NSDictionary dictionaryWithObject:url.absoluteString forKey:@"url"]];
                                            }

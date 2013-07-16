@@ -250,7 +250,7 @@ NSString *kCellID = @"cellID";
                                       handler:^(FBAppCall *call, NSDictionary *results, NSError *error) {
                                           if(error) {
                                               NSLog(@"Error sharing concert: %@", error.description);
-                                              [Flurry logEvent:@"Concert_Share_To_FB_Fail" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:url.absoluteString, @"url", nil]];
+                                              [Flurry logEvent:@"Concert_Share_To_FB_Fail" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:url.absoluteString, @"url", error.description, @"error", nil]];
                                           } else {
                                               NSLog(@"Success sharing concert!");
                                               [Flurry logEvent:@"Concert_Share_To_FB_Success" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:url.absoluteString, @"url", nil]];
