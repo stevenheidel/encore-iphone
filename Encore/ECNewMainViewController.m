@@ -69,7 +69,7 @@ typedef enum {
         [self fetchConcerts];
     
     self.currentSearchType = [ECNewMainViewController searchTypeForSegmentIndex:self.segmentedControl.selectedSegmentIndex];
-    [self displayViewsAccordingToSearchType];
+//    [self displayViewsAccordingToSearchType];
     
     [self setupHUD];
     [self setupSearchBar];
@@ -198,7 +198,6 @@ typedef enum {
     
     [[UISegmentedControl appearance] setBackgroundImage:unselected forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
     [[UISegmentedControl appearance] setBackgroundImage:selected forState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
-
     
     [[UISegmentedControl appearance] setDividerImage:dividerLeftActive forLeftSegmentState:UIControlStateSelected rightSegmentState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
     [[UISegmentedControl appearance] setDividerImage:dividerRightActive forLeftSegmentState:UIControlStateNormal rightSegmentState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
@@ -312,17 +311,15 @@ typedef enum {
     
     UISegmentedControl* control = (UISegmentedControl*)sender;
     self.currentSearchType = [ECNewMainViewController searchTypeForSegmentIndex:control.selectedSegmentIndex];
-    
+    self.hasSearched = FALSE;
     
     //reload data/images
-    [self displayViewsAccordingToSearchType];
+//    [self displayViewsAccordingToSearchType];
     [self.tableView reloadData];
     [self setBackgroundImage];
-    if(self.currentSearchType == ECSearchTypeToday) {
-        [self resetTableHeaderView]; //remove artist image that appears during search results
-    }
+    [self resetTableHeaderView]; //remove artist image that appears during search results
     
-    self.hasSearched = FALSE;
+
     
     [Flurry logEvent:@"Switched_Selection" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[self currentSearchTypeString], @"Search_Type",nil]];
 }
@@ -551,10 +548,14 @@ typedef enum {
         self.tableView.tableHeaderView = header;
     }
 }
+
+-(ECSearchType) tenseForSearchType {
+    return self.currentSearchType == ECSearchTypeToday ? ECSearchTypeFuture : ECSearchTypePast;
+}
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
     if ([textField.text length] > 0) { //don't search empty searches
-        [ECJSONFetcher fetchArtistsForString:textField.text withSearchType:self.currentSearchType forLocation:self.currentSearchLocation completion:^(NSDictionary * comboDic) { //TODO load actual location
+        [ECJSONFetcher fetchArtistsForString:textField.text withSearchType:[self tenseForSearchType] forLocation:self.currentSearchLocation completion:^(NSDictionary * comboDic) { //TODO load actual location
             [self fetchedConcertsForSearch:comboDic];
         }];
 
