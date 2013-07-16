@@ -34,8 +34,8 @@
 #import "ECAppDelegate.h"
 
 typedef enum {
-    PastSection,
     FutureSection,
+    PastSection,
     NumberOfSections
 } ProfileTableViewSections;
 
@@ -189,14 +189,28 @@ typedef enum {
     return cell;
 }
 
--(NSString*) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    if (section == PastSection) {
-        return NSLocalizedString(@"Past Events", @"User's past events for section header on profile");
+//-(NSString*) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+//    return [ECProfileViewController titleForSection:section];
+//}
+
++(NSString*) titleForSection: (NSInteger) section {
+    switch (section) {
+        case PastSection:
+            return NSLocalizedString(@"Past Events", @"User's past events for section header on profile");
+        case FutureSection:
+            return NSLocalizedString(@"Future Events", @"User's future/upcoming events for section header on profile");
+        default:
+            return nil;
     }
-    else return NSLocalizedString(@"Future Events", @"User's future/upcoming events for section header on profile");
 }
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return CONCERT_CELL_HEIGHT;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 16.0;
 }
 
 -(NSArray*) arrayForSection: (NSInteger) section {
@@ -223,6 +237,15 @@ typedef enum {
     return NumberOfSections;
 }
 
+-(UIView*) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"ECProfileSectionHeaderView" owner:nil options:nil];
+    UIView* headerView = [subviewArray objectAtIndex:0];
+    UILabel* label = (UILabel*)[headerView viewWithTag:87];
+    [label setFont:[UIFont heroFontWithSize:14.0f]];
+    [label setText:[[ECProfileViewController titleForSection: section] uppercaseString]];
+    
+    return headerView;
+}
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     
