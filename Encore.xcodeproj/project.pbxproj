@@ -170,6 +170,9 @@
 		D4AC9028179345AE008F5FF0 /* locationmarker@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AC9024179345AE008F5FF0 /* locationmarker@2x.png */; };
 		D4AC9029179345AE008F5FF0 /* locationmarkerbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AC9025179345AE008F5FF0 /* locationmarkerbutton.png */; };
 		D4AC902A179345AE008F5FF0 /* locationmarkerbutton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AC9026179345AE008F5FF0 /* locationmarkerbutton@2x.png */; };
+		D4AE47401795A013006AF663 /* ECProfileSectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4AE473F1795A013006AF663 /* ECProfileSectionHeaderView.xib */; };
+		D4AE47451795A179006AF663 /* profileSectionHeader.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AE47431795A179006AF663 /* profileSectionHeader.png */; };
+		D4AE47461795A179006AF663 /* profileSectionHeader@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AE47441795A179006AF663 /* profileSectionHeader@2x.png */; };
 		D4B0AC4717727FDA00DC4DD2 /* ECPostPlaceholder.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4B0AC4617727FDA00DC4DD2 /* ECPostPlaceholder.xib */; };
 		D4B31DE91793D03300822228 /* NSUserDefaults+Encore.m in Sources */ = {isa = PBXBuildFile; fileRef = D4B31DE81793D03300822228 /* NSUserDefaults+Encore.m */; };
 		D4C9C085177A090800F864FC /* instagram.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D4C9C084177A090800F864FC /* instagram.jpg */; };
@@ -420,6 +423,9 @@
 		D4AC9024179345AE008F5FF0 /* locationmarker@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "locationmarker@2x.png"; sourceTree = "<group>"; };
 		D4AC9025179345AE008F5FF0 /* locationmarkerbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = locationmarkerbutton.png; sourceTree = "<group>"; };
 		D4AC9026179345AE008F5FF0 /* locationmarkerbutton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "locationmarkerbutton@2x.png"; sourceTree = "<group>"; };
+		D4AE473F1795A013006AF663 /* ECProfileSectionHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECProfileSectionHeaderView.xib; sourceTree = "<group>"; };
+		D4AE47431795A179006AF663 /* profileSectionHeader.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profileSectionHeader.png; sourceTree = "<group>"; };
+		D4AE47441795A179006AF663 /* profileSectionHeader@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profileSectionHeader@2x.png"; sourceTree = "<group>"; };
 		D4B0AC4617727FDA00DC4DD2 /* ECPostPlaceholder.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECPostPlaceholder.xib; sourceTree = "<group>"; };
 		D4B31DE71793D03300822228 /* NSUserDefaults+Encore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSUserDefaults+Encore.h"; sourceTree = "<group>"; };
 		D4B31DE81793D03300822228 /* NSUserDefaults+Encore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSUserDefaults+Encore.m"; sourceTree = "<group>"; };
@@ -587,6 +593,7 @@
 		D4A8DDD1176A44A0005E9847 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				D4AE47421795A179006AF663 /* divider */,
 				D4AC9022179345AE008F5FF0 /* location toggle button */,
 				D4AC900417934250008F5FF0 /* location uislider */,
 				A068AE6F1790621800FA1BF4 /* lastfmAttr.png */,
@@ -840,6 +847,7 @@
 				D4AC2DFD178FA64D00F292CA /* ECProfileConcertCell.h */,
 				D4AC2DFE178FA64E00F292CA /* ECProfileConcertCell.m */,
 				D4AC2E00178FA6BC00F292CA /* ECProfileConcertCell.xib */,
+				D4AE473F1795A013006AF663 /* ECProfileSectionHeaderView.xib */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -904,6 +912,15 @@
 				D4AC9026179345AE008F5FF0 /* locationmarkerbutton@2x.png */,
 			);
 			path = "location toggle button";
+			sourceTree = "<group>";
+		};
+		D4AE47421795A179006AF663 /* divider */ = {
+			isa = PBXGroup;
+			children = (
+				D4AE47431795A179006AF663 /* profileSectionHeader.png */,
+				D4AE47441795A179006AF663 /* profileSectionHeader@2x.png */,
+			);
+			path = divider;
 			sourceTree = "<group>";
 		};
 		D4C9C08A177A51BB00F864FC /* Font */ = {
@@ -1186,6 +1203,9 @@
 				D46D8F96179479A300011C5C /* login2iphone4@2x.png in Resources */,
 				D46D8F97179479A300011C5C /* login3iphone4@2x.png in Resources */,
 				D46D8F991794A9FC00011C5C /* ECLoginPageViewiphone4.xib in Resources */,
+				D4AE47401795A013006AF663 /* ECProfileSectionHeaderView.xib in Resources */,
+				D4AE47451795A179006AF663 /* profileSectionHeader.png in Resources */,
+				D4AE47461795A179006AF663 /* profileSectionHeader@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
