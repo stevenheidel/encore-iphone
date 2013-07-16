@@ -19,7 +19,9 @@
     NSURL * url = [NSURL URLWithString:fullConcertsUrl];
     NSURLRequest * request = [NSURLRequest requestWithURL:url];
     AFJSONRequestOperation * operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        
         concertList = (NSDictionary*) [(NSDictionary*)JSON objectForKey:@"events"];
+        NSLog(@"%@: Successfully fetched %d past and %d future concerts for profile %@", NSStringFromClass([ECJSONFetcher class]),[[concertList objectForKey:@"past"] count], [[concertList objectForKey:@"future"] count], fbID);
         if (completion) {
             completion(concertList);
         }
