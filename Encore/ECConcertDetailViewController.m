@@ -68,7 +68,9 @@ NSString *kCellID = @"cellID";
     }
     return self;
 }
-
+-(NSString*) userID {
+    return [NSUserDefaults userID];
+}
 #pragma mark - View Setup
 
 -(void) tapArtistPhoto {
@@ -137,8 +139,7 @@ NSString *kCellID = @"cellID";
     [self clearCollectionView];
     [self loadArtistDetails];
     [self loadImages];
-    NSString * userID = [NSUserDefaults userID];
-    [ECJSONFetcher checkIfConcert:[self.concert eventID] isOnProfile:userID completion:^(BOOL isOnProfile) {
+    [ECJSONFetcher checkIfConcert:[self.concert eventID] isOnProfile:self.userID completion:^(BOOL isOnProfile) {
         self.isOnProfile = isOnProfile;
         [self setImageForConcertStatusButton];
     }];
