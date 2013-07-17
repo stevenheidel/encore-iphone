@@ -76,8 +76,8 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [self startAnalytics];
-//    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
+//  self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+//  Override point for customization after application launch.
     
     self.navigationController = (UINavigationController*)self.window.rootViewController;
     self.mainViewController = (ECNewMainViewController*)[[self.navigationController viewControllers] objectAtIndex:0];
