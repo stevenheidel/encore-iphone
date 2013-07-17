@@ -68,7 +68,6 @@ typedef enum {
     [self setUpHeaderView];
     self.view.clipsToBounds = YES;
     [self.tableView setIndicatorStyle:UIScrollViewIndicatorStyleWhite];
-    [self.tableView setSeparatorColor:[UIColor separatorColor]];
     
     [[ATAppRatingFlow sharedRatingFlow] showRatingFlowFromViewControllerIfConditionsAreMet:self];
 }
