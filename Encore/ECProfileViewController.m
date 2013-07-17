@@ -238,6 +238,9 @@ typedef enum {
 }
 
 -(UIView*) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    if([[self arrayForSection:section] count]==0){
+        return [UIView new];
+    }
     NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"ECProfileSectionHeaderView" owner:nil options:nil];
     UIView* headerView = [subviewArray objectAtIndex:0];
     UILabel* label = (UILabel*)[headerView viewWithTag:87];
