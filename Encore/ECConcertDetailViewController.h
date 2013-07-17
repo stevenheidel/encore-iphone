@@ -13,13 +13,18 @@
 
 @class ECPlaceHolderView,ECToolbar,ECPostCollectionHeaderView;
 
-@interface ECConcertDetailViewController : UIViewController <UICollectionViewDataSource,UICollectionViewDelegate/*, UICollectionViewDelegateFlowLayout*/,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,ECPostViewControllerDelegate,UIAlertViewDelegate,ECPictureViewControllerDelegate>
+@interface ECConcertDetailViewController : UIViewController <UICollectionViewDataSource,UICollectionViewDelegate/*, UICollectionViewDelegateFlowLayout*/,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,ECPostViewControllerDelegate,UIAlertViewDelegate,ECPictureViewControllerDelegate> {
+}
 
 -(IBAction)addPhoto;
 -(void) shareTapped;
 -(id) initWithConcert:(NSDictionary*) concert;
 -(void) setConcert:(NSDictionary *)concert andUpdate: (BOOL) update;
 -(void) updateView;
+
+
+@property (weak, nonatomic) IBOutlet UIView *footerIsPopulatingView;
+@property (nonatomic,strong) NSTimer* timer;
 
 @property (nonatomic, readonly) BOOL isLoggedIn;
 @property (nonatomic, assign) ECSearchType searchType;

@@ -75,11 +75,14 @@ NSString *kCellID = @"cellID";
 
 -(void) tapArtistPhoto {
     [Flurry logEvent:@"Tapped_Artist_Photo_DetailVC"];
+    [self togglePopulatingIndicator];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.isOnProfile = FALSE;
+    self.isPopulating = FALSE;
     
     [self.collectionView registerClass:[Cell class] forCellWithReuseIdentifier:@"generic"];
     UIImageView* encoreLogo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo.png"]];
@@ -94,8 +97,7 @@ NSString *kCellID = @"cellID";
     
     [self setupArtistUIAttributes];
     
-    self.isOnProfile = FALSE;
-    self.isPopulating = FALSE;
+
     [self setUpNavBarButtons];
 
     [self updateView];
@@ -107,6 +109,31 @@ NSString *kCellID = @"cellID";
              forControlEvents:UIControlEventValueChanged];
     [self.collectionView addSubview:self.refreshControl];
     self.refreshControl.tintColor = [UIColor lightBlueNavBarColor];
+}
+
+//check if concert is populating and setup 
+-(void) checkIfPopulating {
+    [ECJSONFetcher checkIfEventIsPopulating:[self.concert eventID] completion:^(BOOL isPopulating) {
+        self.isPopulating = isPopulating;
+        [self togglePopulatingIndicator];
+        [self updatePlaceholderText];
+        if(!self.isPopulating) {
+            [self.timer invalidate];
+            self.timer = nil;
+        }
+    }];
+}
+
+-(void) timerFire {
+    NSLog(@"Timer Fired");
+    [self checkIfPopulating];
+}
+
+-(void) togglePopulatingIndicator {
+    [UIView animateWithDuration:0.5 animations:^{
+        self.footerIsPopulatingView.alpha = self.isPopulating ? 1.0 : 0.0;
+    } completion:nil];
+    
 }
 
 -(void) setConcert:(NSDictionary *)concert andUpdate: (BOOL) update {
@@ -203,11 +230,10 @@ NSString *kCellID = @"cellID";
         [self.placeholderView removeFromSuperview];
     }
     else {
-        [ECJSONFetcher checkIfEventIsPopulating:[self.concert eventID] completion:^(BOOL isPopulating) {
-            self.isPopulating = isPopulating;
-            [self setUpPlaceholderView];
-        }];
+        [self setUpPlaceholderView];
     }
+    [self checkIfPopulating];
+    
     [self.collectionView reloadData];
     [self.collectionView setContentOffset:CGPointZero animated:NO];
     if (self.refreshControl.refreshing) {
@@ -336,10 +362,12 @@ NSString *kCellID = @"cellID";
                     [ECJSONPoster addConcert:eventID toUser:userID completion:^{
                         [self completedAddingConcert];
                         [Flurry logEvent:@"Completed_Adding_Concert" withParameters:[self flurryParam]];
-                        [ECJSONFetcher checkIfEventIsPopulating:[self.concert eventID] completion:^(BOOL isPopulating) {
-                            self.isPopulating = isPopulating;
-                            [self updatePlaceholderText];
-                        }];
+                        [self checkIfPopulating];
+                        self.timer = [NSTimer scheduledTimerWithTimeInterval:5.0
+                                                         target:self
+                                                       selector:@selector(timerFire)
+                                                       userInfo:nil
+                                                        repeats:YES];
                         
                     }];
                     break;
