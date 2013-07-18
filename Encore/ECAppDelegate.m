@@ -305,7 +305,7 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
     
     double latitude = location.coordinate.latitude;
     double longitude = location.coordinate.longitude;
-    [NSUserDefaults setLongitude:longitude latitude:latitude];
+    [NSUserDefaults setUserCoordinate:location];
     [NSUserDefaults synchronize];
     
     [Flurry setLatitude:latitude longitude:longitude horizontalAccuracy:location.horizontalAccuracy verticalAccuracy:location.verticalAccuracy];

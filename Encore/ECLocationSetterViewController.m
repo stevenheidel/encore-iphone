@@ -10,6 +10,7 @@
 #import "NSUserDefaults+Encore.h"
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
+#import "ECAlertTags.h"
 
 @implementation ECLocationSetterViewController
 
@@ -22,14 +23,55 @@
     return self;
 }
 
+NSString* locationStringForPlacemark(MKPlacemark* placemark) {
+    return [NSString stringWithFormat:@"%@, %@, %@",placemark.locality,placemark.administrativeArea,placemark.country];
+}
+-(void) getDefaults {
+    float lastSearchRadius = [NSUserDefaults lastSearchRadius];
+    if (lastSearchRadius == 0) {// nsuserdefaults will return 0 if the key doesn't already exist.
+        self.radius = 0.5f;
+        [NSUserDefaults setLastSearchRadius:lastSearchRadius];
+        [NSUserDefaults synchronize];
+    }
+    
+    CLLocation* lastSearchLocation = [NSUserDefaults lastSearchLocation];
+    
+    if (lastSearchLocation) {
+        self.location = lastSearchLocation;
+    }
+    
+    else self.location = [NSUserDefaults userCoordinate];
+    
+    if (self.location != nil) { //userCoordinate method returns nil if lat or long are 0. In theory should never happen though
+        CLGeocoder* geocoder = [CLGeocoder new];
+        [geocoder reverseGeocodeLocation:self.location completionHandler:^(NSArray *placemarks, NSError *error) {
+            if (error) {
+                NSLog(@"Error reverse geocoding: %@", error.description);
+            }
+            
+            NSLog(@"%@", [[placemarks objectAtIndex:0] locality]);
+            self.locationSearchBar.text = locationStringForPlacemark([placemarks objectAtIndex:0]);
+        }];
+    }
+
+}
 -(void) viewDidLoad {
     [super viewDidLoad];
     [self.locationSlider setThumbImage:[UIImage imageNamed:@"oval"] forState:UIControlStateNormal];
     [self.locationSlider setMinimumTrackImage:[UIImage imageNamed:@"slider_minimum"] forState:UIControlStateNormal];
     [self.locationSlider setMaximumTrackImage:[UIImage imageNamed:@"slider_maximum"] forState:UIControlStateNormal];
-    self.locationSearchBar.text = [NSUserDefaults userCity];
-    
 }
+
+-(void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self getDefaults];
+}
+
+-(void) setRadius:(float)radius {
+    _radius = radius;
+    self.locationSlider.value = radius;
+}
+
 -(IBAction) touchedOutsideTextField: (id) sender {
     [self.view endEditing:YES];
 }
@@ -63,31 +105,47 @@
 
 -(BOOL) textFieldShouldReturn:(UITextField *)textField {
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-    if ([textField isFirstResponder]) {
-        [textField resignFirstResponder];
-    }
+
     [geocoder geocodeAddressString:textField.text completionHandler:^(NSArray *placemarks, NSError *error) {
         if (error) {
             NSLog(@"Geocode failed with error: %@", error);
             return;
         }
+        
+        
         MKPlacemark *placemark = [placemarks objectAtIndex:0];
         NSLog(@"%d places found",placemarks.count);
-        NSLog(@"%@ %@ %@",placemark.locality,placemark.administrativeArea,placemark.country);
-        [self.delegate updateSearchLocation: placemark.location radius:self.locationSlider.value];
+        NSString* locationString = locationStringForPlacemark(placemark);
+         NSLog(@"%@",locationString);
+        self.location = placemark.location;
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Location", @"Title for an alert asking the user if the geocoded location is correct")
+                                                        message: [NSString stringWithFormat:NSLocalizedString(@"Did you mean %@? If that's not correct, please try again with more details, such as the state, province, or country", @"Prompt user to ask whether the geocoded location is correct"),locationString]
+                                                       delegate:self
+                                              cancelButtonTitle:NSLocalizedString(@"Redo", nil)
+                                              otherButtonTitles:NSLocalizedString(@"Set", nil),nil];
+        alert.tag = LocationSetterRightAlert;
+        [alert show];
+        
     }];
     return YES;
 }
 
-//- (NSInteger)getKeyBoardHeight:(NSNotification *)notification
-//{
-//    NSDictionary* keyboardInfo = [notification userInfo];
-//    NSValue* keyboardFrameBegin = [keyboardInfo valueForKey:UIKeyboardFrameBeginUserInfoKey];
-//    CGRect keyboardFrameBeginRect = [keyboardFrameBegin CGRectValue];
-//    NSInteger keyboardHeight = keyboardFrameBeginRect.size.height;
-//    return keyboardHeight;
-//}
-
+-(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (alertView.tag == LocationSetterRightAlert) {
+        if (buttonIndex == alertView.cancelButtonIndex) {
+            
+        }
+        else if (buttonIndex == alertView.firstOtherButtonIndex) {
+            if ([self.locationSearchBar isFirstResponder]) {
+                [self.locationSearchBar resignFirstResponder];
+            }
+            [NSUserDefaults setLastSearchRadius:self.radius];
+            [NSUserDefaults setLastSearchLocation:self.location];
+            [NSUserDefaults synchronize];
+            [self.delegate updateSearchLocation:self.location radius:self.radius];
+        }
+    }
+}
 
 -(void) moveUp {
     [self setViewMovedUp:YES];
@@ -124,28 +182,12 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-//    // register for keyboard notifications
-//    [[NSNotificationCenter defaultCenter] addObserver:self
-//                                             selector:@selector(keyboardWillShow:)
-//                                                 name:UIKeyboardWillShowNotification
-//                                               object:nil];
-//    
-//    [[NSNotificationCenter defaultCenter] addObserver:self
-//                                             selector:@selector(keyboardWillHide:)
-//                                                 name:UIKeyboardWillHideNotification
-//                                               object:nil];
+    [super viewWillAppear:animated];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-//    // unregister for keyboard notifications while not visible.
-//    [[NSNotificationCenter defaultCenter] removeObserver:self
-//                                                    name:UIKeyboardWillShowNotification
-//                                                  object:nil];
-//    
-//    [[NSNotificationCenter defaultCenter] removeObserver:self
-//                                                    name:UIKeyboardWillHideNotification
-//                                                  object:nil];
+    [super viewWillDisappear:animated];
 }
 
 @end

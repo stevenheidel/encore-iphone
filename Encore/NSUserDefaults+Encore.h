@@ -20,10 +20,9 @@
 
 +(NSString*) userCity;
 +(void) setUserCity: (NSString*) city;
-+(double) latitude;
-+(double) longitude;
++(CLLocation*) userCoordinate;
++(void) setUserCoordinate:(CLLocation*) location;
 
-+(void) setLongitude:(double)longitude latitude: (double) latitude;
 
 +(float) lastSearchRadius;
 +(void) setLastSearchRadius: (float) searchRadius;

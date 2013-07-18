@@ -45,9 +45,18 @@
 +(double) longitude {
     return [[NSUserDefaults standardUserDefaults] doubleForKey:@"longitude"];
 }
+
++(CLLocation*) userCoordinate {
+    return [[CLLocation alloc] initWithLatitude:[NSUserDefaults latitude] longitude:[NSUserDefaults longitude]];
+}
+            
 +(void) setLongitude:(double)longitude latitude: (double) latitude{
     [[NSUserDefaults standardUserDefaults] setDouble:longitude forKey:@"longitude"];
     [[NSUserDefaults standardUserDefaults] setDouble:latitude forKey:@"latitude"];
+}
+
++(void) setUserCoordinate: (CLLocation*) location {
+    [NSUserDefaults setLongitude:location.coordinate.longitude latitude:location.coordinate.latitude];
 }
 
 +(float) lastSearchRadius {
@@ -61,7 +70,9 @@
 +(CLLocation*) lastSearchLocation {
     double latitude = [[NSUserDefaults standardUserDefaults] doubleForKey:@"last_search_latitude"];
     double longitude = [[NSUserDefaults standardUserDefaults] doubleForKey:@"last_search_longitude"];
-    
+    if (latitude == 0 || longitude == 0) {
+        return nil;
+    }
     return [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
 }
 

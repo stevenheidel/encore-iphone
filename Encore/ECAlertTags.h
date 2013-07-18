@@ -14,7 +14,8 @@ typedef enum {
     PhotoSourcePickerTag,
     AddConcertConfirmTag,
     RemoveConcertConfirmTag,
-    LogoutTag
+    LogoutTag,
+    LocationSetterRightAlert
 }ECAlertTags;
 
 #endif

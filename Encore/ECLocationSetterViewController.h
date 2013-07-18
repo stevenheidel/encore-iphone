@@ -9,8 +9,11 @@
 #import <UIKit/UIKit.h>
 @class CLLocation;
 @protocol ECLocationSetterDelegate;
-@interface ECLocationSetterViewController : UIViewController <UITextFieldDelegate>
+@interface ECLocationSetterViewController : UIViewController <UITextFieldDelegate,UIAlertViewDelegate>
 - (IBAction)touchedOutsideTextField:(id)sender;
+
+@property (nonatomic, assign) float radius;
+@property (nonatomic, assign) CLLocation* location;
 
 @property (weak, nonatomic) IBOutlet UISlider *locationSlider;
 @property (weak, nonatomic) IBOutlet UITextField *locationSearchBar;
