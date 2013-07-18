@@ -111,6 +111,11 @@ NSString *kCellID = @"cellID";
     self.refreshControl.tintColor = [UIColor lightBlueNavBarColor];
 }
 
+-(void) viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.timer invalidate];
+}
+
 //check if concert is populating and setup 
 -(void) checkIfPopulating {
     [ECJSONFetcher checkIfEventIsPopulating:[self.concert eventID] completion:^(BOOL isPopulating) {
