@@ -21,8 +21,8 @@
 -(id) initWithConcert:(NSDictionary*) concert;
 -(void) setConcert:(NSDictionary *)concert andUpdate: (BOOL) update;
 -(void) updateView;
-
-
+@property (nonatomic,weak) IBOutlet UIActivityIndicatorView* footerActivityIndicator;
+@property (nonatomic, assign) CGPoint savedPosition;
 @property (weak, nonatomic) IBOutlet UIView *footerIsPopulatingView;
 @property (nonatomic,strong) NSTimer* timer;
 

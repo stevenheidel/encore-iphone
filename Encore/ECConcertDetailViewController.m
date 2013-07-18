@@ -94,9 +94,7 @@ NSString *kCellID = @"cellID";
     recognizerTap.numberOfTouchesRequired = 1;
     [self.imgArtist addGestureRecognizer:recognizerTap];
     
-    
     [self setupArtistUIAttributes];
-    
 
     [self setUpNavBarButtons];
 
@@ -110,10 +108,13 @@ NSString *kCellID = @"cellID";
     [self.collectionView addSubview:self.refreshControl];
     self.refreshControl.tintColor = [UIColor lightBlueNavBarColor];
 }
+-(void) viewWillAppear:(BOOL)animated {
+    [self togglePopulatingIndicator];
+}
 
 -(void) viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [self.timer invalidate];
+    [self stopTimer];
 }
 
 //check if concert is populating and setup 
@@ -123,8 +124,7 @@ NSString *kCellID = @"cellID";
         [self togglePopulatingIndicator];
         [self updatePlaceholderText];
         if(!self.isPopulating) {
-            [self.timer invalidate];
-            self.timer = nil;
+            [self stopTimer];
         }
     }];
 }
@@ -132,13 +132,23 @@ NSString *kCellID = @"cellID";
 -(void) timerFire {
     NSLog(@"Timer Fired");
     [self checkIfPopulating];
+    if (self.posts.count>0) {
+        self.savedPosition = self.collectionView.contentOffset;
+    }
+    
+    [self loadImages];
 }
 
 -(void) togglePopulatingIndicator {
     [UIView animateWithDuration:0.5 animations:^{
         self.footerIsPopulatingView.alpha = self.isPopulating ? 1.0 : 0.0;
     } completion:nil];
-    
+    if(self.isPopulating) {
+        [self.footerActivityIndicator startAnimating];
+    }
+    if (self.isPopulating && self.timer == nil) {
+        [self startTimer];
+    }
 }
 
 -(void) setConcert:(NSDictionary *)concert andUpdate: (BOOL) update {
@@ -241,6 +251,10 @@ NSString *kCellID = @"cellID";
     
     [self.collectionView reloadData];
     [self.collectionView setContentOffset:CGPointZero animated:NO];
+    if([self.posts count] > 0 && self.savedPosition.y != 0) {
+        //retain scroll position of view
+        [self.collectionView scrollToItemAtIndexPath:[self.collectionView indexPathForItemAtPoint:self.savedPosition] atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
+    }
     if (self.refreshControl.refreshing) {
         [self.refreshControl endRefreshing];
     }
@@ -266,6 +280,19 @@ NSString *kCellID = @"cellID";
 
 -(void) backButtonWasPressed {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(void) startTimer {
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:5.0
+                                                  target:self
+                                                selector:@selector(timerFire)
+                                                userInfo:nil
+                                                 repeats:YES];
+}
+
+-(void) stopTimer {
+    [self.timer invalidate];
+    self.timer = nil;
 }
 
 #pragma mark - FB Sharing
@@ -368,11 +395,7 @@ NSString *kCellID = @"cellID";
                         [self completedAddingConcert];
                         [Flurry logEvent:@"Completed_Adding_Concert" withParameters:[self flurryParam]];
                         [self checkIfPopulating];
-                        self.timer = [NSTimer scheduledTimerWithTimeInterval:5.0
-                                                         target:self
-                                                       selector:@selector(timerFire)
-                                                       userInfo:nil
-                                                        repeats:YES];
+                        [self startTimer];
                         
                     }];
                     break;
@@ -641,6 +664,7 @@ NSString *kCellID = @"cellID";
         self = [subviewArray objectAtIndex:0];
         self.frame = frame;
         self.label1.font = [UIFont heroFontWithSize: 18.0];
+        
 //        self.label2.font = [UIFont heroFontWithSize: 18.0];
         
 //        self.label1.text = NSLocalizedString(@"POST_PLACEHOLDER_TEXT_1", nil);
