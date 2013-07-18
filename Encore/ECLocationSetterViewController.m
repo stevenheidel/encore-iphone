@@ -8,6 +8,8 @@
 
 #import "ECLocationSetterViewController.h"
 #import "NSUserDefaults+Encore.h"
+#import <CoreLocation/CoreLocation.h>
+#import <MapKit/MapKit.h>
 
 @implementation ECLocationSetterViewController
 
@@ -56,6 +58,24 @@
     {
         [self moveUp];
     }
+    return YES;
+}
+
+-(BOOL) textFieldShouldReturn:(UITextField *)textField {
+    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+    if ([textField isFirstResponder]) {
+        [textField resignFirstResponder];
+    }
+    [geocoder geocodeAddressString:textField.text completionHandler:^(NSArray *placemarks, NSError *error) {
+        if (error) {
+            NSLog(@"Geocode failed with error: %@", error);
+            return;
+        }
+        MKPlacemark *placemark = [placemarks objectAtIndex:0];
+        NSLog(@"%d places found",placemarks.count);
+        NSLog(@"%@ %@ %@",placemark.locality,placemark.administrativeArea,placemark.country);
+        [self.delegate updateSearchLocation: placemark.location radius:self.locationSlider.value];
+    }];
     return YES;
 }
 

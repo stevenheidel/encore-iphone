@@ -9,10 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "ECProfileViewController.h"
 #import "ECSearchType.h"
+#import "ECLocationSetterViewController.h"
+
 @class CLLocation;
 @class MBProgressHUD, ECLocationSetterViewController;
 
-@interface ECNewMainViewController : UIViewController <UIAlertViewDelegate, UITableViewDataSource,UITableViewDelegate>
+@interface ECNewMainViewController : UIViewController <UIAlertViewDelegate, UITableViewDataSource,UITableViewDelegate, ECLocationSetterDelegate>
 
 - (IBAction)dismissKeyboard:(id)sender;
 - (IBAction)openLastFM:(id)sender;

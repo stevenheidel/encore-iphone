@@ -7,10 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class CLLocation;
+@protocol ECLocationSetterDelegate;
 @interface ECLocationSetterViewController : UIViewController <UITextFieldDelegate>
 - (IBAction)touchedOutsideTextField:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UISlider *locationSlider;
 @property (weak, nonatomic) IBOutlet UITextField *locationSearchBar;
+@property (nonatomic, unsafe_unretained) id <ECLocationSetterDelegate> delegate;
+@end
+
+@protocol ECLocationSetterDelegate <NSObject>
+
+@required
+-(void) updateSearchLocation:(CLLocation *)location radius: (float) radius;
+
 @end

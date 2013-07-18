@@ -5,9 +5,9 @@
 //  Created by Shimmy on 2013-07-15.
 //  Copyright (c) 2013 Encore. All rights reserved.
 //
-
-#import <Foundation/Foundation.h>
 @class CLLocation;
+#import <Foundation/Foundation.h>
+
 @interface NSUserDefaults (Encore)
 +(NSString*) userName;
 +(void) setUsername: (NSString*) username;
@@ -25,10 +25,10 @@
 
 +(void) setLongitude:(double)longitude latitude: (double) latitude;
 
-+(int) lastSearchRadius;
-+(void) setLastSearchRadius: (NSInteger) searchRadius;
++(float) lastSearchRadius;
++(void) setLastSearchRadius: (float) searchRadius;
 
-+(NSString*) lastSearchLocation;
-+(void) setLastSearchLocation: (NSString*) lastSearchLocation;
++(CLLocation*) lastSearchLocation;
++(void) setLastSearchLocation: (CLLocation*) lastSearchLocation;
 +(void) synchronize;
 @end

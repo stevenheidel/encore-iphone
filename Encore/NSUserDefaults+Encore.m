@@ -4,7 +4,7 @@
 //
 //  Created by Shimmy on 2013-07-15.
 //  Copyright (c) 2013 Encore. All rights reserved.
-//
+//  Note that the set functions don't synchronize automatically, since you may want to do several sets at once.
 
 #import "NSUserDefaults+Encore.h"
 #import <CoreLocation/CoreLocation.h>
@@ -50,20 +50,24 @@
     [[NSUserDefaults standardUserDefaults] setDouble:latitude forKey:@"latitude"];
 }
 
-+(NSInteger) lastSearchRadius {
-    return [[NSUserDefaults standardUserDefaults] integerForKey:@"last_search_radius"];
++(float) lastSearchRadius {
+    return [[NSUserDefaults standardUserDefaults] floatForKey:@"last_search_radius"];
 }
 
-+(void) setLastSearchRadius: (NSInteger) searchRadius {
-    [[NSUserDefaults standardUserDefaults] setInteger:searchRadius forKey:@"last_search_radius"];
++(void) setLastSearchRadius: (float) searchRadius {
+    [[NSUserDefaults standardUserDefaults] setFloat:searchRadius forKey:@"last_search_radius"];
 }
 
-+(NSString*) lastSearchLocation {
-    return [[NSUserDefaults standardUserDefaults] stringForKey:@"last_search_location"];
++(CLLocation*) lastSearchLocation {
+    double latitude = [[NSUserDefaults standardUserDefaults] doubleForKey:@"last_search_latitude"];
+    double longitude = [[NSUserDefaults standardUserDefaults] doubleForKey:@"last_search_longitude"];
+    
+    return [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
 }
 
-+(void) setLastSearchLocation: (NSString*) lastSearchLocation {
-    [[NSUserDefaults standardUserDefaults] setObject:lastSearchLocation forKey:@"last_search_location"];
++(void) setLastSearchLocation: (CLLocation*) lastSearchLocation {
+    [[NSUserDefaults standardUserDefaults] setDouble:lastSearchLocation.coordinate.latitude forKey:@"last_search_latitude"];
+    [[NSUserDefaults standardUserDefaults] setDouble:lastSearchLocation.coordinate.longitude  forKey:@"last_search_longitude"];
 }
 
 +(void) synchronize {

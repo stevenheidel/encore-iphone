@@ -29,6 +29,8 @@
 #import "ECAlertTags.h"
 #import "ECLocationSetterViewController.h"
 
+#import "NSUserDefaults+Encore.h"
+
 #define SearchCellIdentifier @"ECSearchResultCell"
 #define ConcertCellIdentifier @"ECConcertCellView"
 #define ALERT_HIDE_DELAY 2.0
@@ -270,13 +272,21 @@ typedef enum {
 }
 
 - (IBAction)openLocationSetter {
-    if (self.locationSetterView == nil)
+    if (self.locationSetterView == nil) {
         self.locationSetterView = [[ECLocationSetterViewController alloc] init];
-    
+        self.locationSetterView.delegate = self;
+    }
     [self presentSemiViewController:self.locationSetterView withOptions:@{
      KNSemiModalOptionKeys.pushParentBack : @(NO),
      KNSemiModalOptionKeys.parentAlpha : @(0.8)
 	 }];
+}
+
+#pragma mark ECLocationSetterDelegate Method
+-(void) updateSearchLocation:(CLLocation *)location radius: (float) radius {
+    self.currentSearchLocation = location;
+    [NSUserDefaults setLastSearchLocation:location];
+    [NSUserDefaults setLastSearchRadius:radius];
 }
 
 -(void) hideLocationSetter {
