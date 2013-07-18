@@ -19,7 +19,7 @@
 - (IBAction)openLocationSetter;
 -(void) initializeSearchLocation: (CLLocation*) currentSearchLocation;
 
-@property (nonatomic, assign) CLLocation* currentSearchLocation;
+@property (nonatomic, strong) CLLocation* currentSearchLocation;
 @property (nonatomic, assign) NSNumber* currentSearchRadius;
 
 @property(nonatomic, weak) IBOutlet UIImageView *imgBackground;

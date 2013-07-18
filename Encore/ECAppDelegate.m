@@ -277,10 +277,11 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
         _locationManager.distanceFilter = 5000;
         self.locationManager=_locationManager;
     }
-}
-- (void)getUserLocation {
     [self.locationManager startUpdatingLocation];
 }
+//- (void)getUserLocation {
+//    [self.locationManager startUpdatingLocation];
+//}
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
     //Ensure location update is recent
