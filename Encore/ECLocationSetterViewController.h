@@ -13,7 +13,7 @@
 - (IBAction)touchedOutsideTextField:(id)sender;
 
 @property (nonatomic, assign) float radius;
-@property (nonatomic, assign) CLLocation* location;
+@property (nonatomic, strong) CLLocation* location;
 
 @property (weak, nonatomic) IBOutlet UISlider *locationSlider;
 @property (weak, nonatomic) IBOutlet UITextField *locationSearchBar;

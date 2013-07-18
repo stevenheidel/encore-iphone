@@ -287,6 +287,10 @@ typedef enum {
     self.currentSearchLocation = location;
     [NSUserDefaults setLastSearchLocation:location];
     [NSUserDefaults setLastSearchRadius:radius];
+    [NSUserDefaults synchronize];
+    [self hideLocationSetter];
+    
+    //TODO update all the popular concerts according to the new location
 }
 
 -(void) hideLocationSetter {

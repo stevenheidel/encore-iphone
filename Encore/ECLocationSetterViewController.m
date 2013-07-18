@@ -118,6 +118,7 @@ NSString* locationStringForPlacemark(MKPlacemark* placemark) {
         NSString* locationString = locationStringForPlacemark(placemark);
          NSLog(@"%@",locationString);
         self.location = placemark.location;
+        NSLog(@"%f %f",self.location.coordinate.latitude,self.location.coordinate.longitude);
         UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Location", @"Title for an alert asking the user if the geocoded location is correct")
                                                         message: [NSString stringWithFormat:NSLocalizedString(@"Did you mean %@? If that's not correct, please try again with more details, such as the state, province, or country", @"Prompt user to ask whether the geocoded location is correct"),locationString]
                                                        delegate:self
@@ -139,10 +140,7 @@ NSString* locationStringForPlacemark(MKPlacemark* placemark) {
             if ([self.locationSearchBar isFirstResponder]) {
                 [self.locationSearchBar resignFirstResponder];
             }
-            [NSUserDefaults setLastSearchRadius:self.radius];
-            [NSUserDefaults setLastSearchLocation:self.location];
-            [NSUserDefaults synchronize];
-            [self.delegate updateSearchLocation:self.location radius:self.radius];
+            [self.delegate updateSearchLocation:self.location radius:self.radius]; //this will dismiss the view
         }
     }
 }
