@@ -18,7 +18,7 @@
 
 #import "UIFont+Encore.h"
 #import "ECJSONPoster.h"
-
+#import "NSUserDefaults+Encore.h"
 #define FLAG_HUD_DELAY 1.0
 
 typedef enum {
@@ -178,7 +178,9 @@ typedef enum {
     actionSheet.tag = FlagPhoto;
     [actionSheet showInView:self.view];
 }
-
+-(NSString*) userID {
+    return [NSUserDefaults userID];
+}
 -(void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (actionSheet.tag == FlagPhoto) {
         if(buttonIndex != actionSheet.cancelButtonIndex){
@@ -187,7 +189,7 @@ typedef enum {
             NSMutableDictionary* params = [NSMutableDictionary dictionaryWithObjectsAndKeys:flag,@"flag",[NSNumber numberWithInt:buttonIndex], @"button_index",nil];
             [params addEntriesFromDictionary:self.post];
             
-            [ECJSONPoster flagPost:self.postID withFlag:flag completion:^(BOOL success) {
+            [ECJSONPoster flagPost:self.postID withFlag:flag fromUser: [self userID] completion:^(BOOL success) {
                 [params setObject:[NSNumber numberWithBool:success] forKey:@"success"];
                 [Flurry logEvent:@"Flagged_Post" withParameters:params];
                 MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];

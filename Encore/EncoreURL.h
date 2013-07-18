@@ -33,6 +33,7 @@
 #define SONGKICK_ID_DEF "songkick_id"
 #define COMBINED_SEARCH_DEF "combined_search"
 #define POPULATING_DEF "populating.json"
+#define FLAG_DEF "flag"
 
 #define MAX_ERROR_LEN 200
 
@@ -65,7 +66,7 @@ static NSString *const ArtistCombinedSearchURL = @ARTISTS_DEF "/" COMBINED_SEARC
 
 //Posts
 static NSString *const ConcertPostsURL = @BASE_URL_DEF EVENTS_DEF "/%@/" POSTS_DEF ; //,concertID
-static NSString *const FlagPostURL = @POSTS_DEF "/%@/"; //,postID
+static NSString *const FlagPostURL = @POSTS_DEF "/%@/" FLAG_DEF JSON_DEF; //,postID
 //Concert Check
 static NSString *const CheckConcertOnProfileURL = @USERS_DEF "/%@/" EVENTS_DEF JSON_DEF;
 

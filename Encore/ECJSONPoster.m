@@ -138,19 +138,21 @@
     [operation start];
 }
 
-+(void) flagPost:(NSString *)postID withFlag:(NSString *)flag completion:(void (^)(BOOL success))completion {
++(void) flagPost:(NSString *)postID withFlag:(NSString *)flag fromUser: (NSString*) userID completion:(void (^)(BOOL success))completion {
     NSString * urlString = [NSString stringWithFormat:FlagPostURL,postID];
     
-    NSDictionary * parameters = [NSDictionary dictionaryWithObject:flag forKey:@"flag"];
+    NSDictionary * parameters = [NSDictionary dictionaryWithObjectsAndKeys:flag,@"flag",userID, @"facebook_id",nil];
     AFHTTPClient * client = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:BaseURL]];
     
     [client registerHTTPOperationClass:[AFJSONRequestOperation class]];
     [client setDefaultHeader:@"Accept" value:@"application/json"];
     
     [client postPath:urlString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"%@: Success flagging post %@. Response: %@", NSStringFromClass([self class]),postID,[responseObject description]);
+        NSString* returnValue = [responseObject objectForKey:@"response"];
+        NSLog(@"%@: Success flagging post %@. Response: %@", NSStringFromClass([self class]),postID,returnValue);
+
         if (completion) {
-            completion(TRUE);
+            completion([returnValue isEqualToString:@"success"]);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@: ERROR flagging post %@: %@...",NSStringFromClass([self class]), postID,[[error description] substringToIndex:MAX_ERROR_LEN]);

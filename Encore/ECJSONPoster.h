@@ -16,6 +16,6 @@
 
 +(void) postImage:(NSDictionary*)imageDic completion:(void (^)())completion;
 
-+(void) flagPost:(NSString *)postID withFlag:(NSString *)flag completion:(void (^)(BOOL success))completion;
++(void) flagPost:(NSString *)postID withFlag:(NSString *)flag fromUser: (NSString*) userID completion:(void (^)(BOOL success))completion;
 
 @end
