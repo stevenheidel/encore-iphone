@@ -80,7 +80,6 @@ typedef enum {
     self.view.clipsToBounds = YES;
     
     [self setupRefreshControl];
-    [self fetchConcerts];
 }
 
 -(void) initializeSearchLocation: (CLLocation*) currentSearchLocation {
@@ -135,17 +134,10 @@ typedef enum {
     self.searchBar.leftView = paddingView;
     self.searchBar.leftViewMode = UITextFieldViewModeAlways;
     self.searchBar.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-    self.searchBar.font = [UIFont heroFontWithSize:14.0f];
-    UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
-    
-    [button setImage:[UIImage imageNamed:@"xbutton"] forState:UIControlStateNormal];
-    button.frame = CGRectMake(0,0,26,30);
-    [button addTarget:self action:@selector(clearSearchBar) forControlEvents:UIControlEventTouchUpInside];
-    self.searchBar.rightView = button;
-    self.searchBar.rightViewMode = UITextFieldViewModeAlways;
+    self.searchBar.font = [UIFont heroFontWithSize:18.0f];
     
     self.searchBar.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
-    [self.searchBar setTextColor:[UIColor blueArtistTextColor]];
+    [self.searchBar setTextColor:[UIColor blackColor]];
 }
 
 -(void) viewWillAppear:(BOOL)animated {
@@ -206,13 +198,13 @@ typedef enum {
                                       [UIColor whiteColor], UITextAttributeTextColor,
                                       [UIColor clearColor], UITextAttributeTextShadowColor,
                                       [NSValue valueWithUIOffset:UIOffsetMake(0, 0)], UITextAttributeTextShadowOffset,
-                                      [UIFont heroFontWithSize:16.0f], UITextAttributeFont,
+                                      [UIFont heroFontWithSize:17.0f], UITextAttributeFont,
                                        nil];
     NSDictionary* unselectedTextAttr = [NSDictionary dictionaryWithObjectsAndKeys:
                                         [UIColor unselectedSegmentedControlColor], UITextAttributeTextColor,
                                         [UIColor clearColor], UITextAttributeTextShadowColor,
                                         [NSValue valueWithUIOffset:UIOffsetMake(0, 0)], UITextAttributeTextShadowOffset,
-                                        [UIFont heroFontWithSize:16.0f], UITextAttributeFont,
+                                        [UIFont heroFontWithSize:17.0f], UITextAttributeFont,
                                         nil];
 
     [[UISegmentedControl appearance] setTitleTextAttributes:selectedTextAttr forState:UIControlStateSelected];
@@ -243,8 +235,11 @@ typedef enum {
 }
 
 - (void) setBackgroundImage {
-    UIImage *background = [[UIImage imageWithData:[NSData dataWithContentsOfURL:[[[self currentEventArray] objectAtIndex:0] imageURL]]] imageWithGaussianBlur];
-    [self.imgBackground setImage:background];
+    if ([[self currentEventArray] count] > 0) {
+        UIImage *background = [[UIImage imageWithData:[NSData dataWithContentsOfURL:[[[self currentEventArray] objectAtIndex:0] imageURL]]] imageWithGaussianBlur];
+        [self.imgBackground setImage:background];
+    }
+    else [self.imgBackground setImage:nil];
 }
 
 #pragma mark - Buttons
@@ -306,7 +301,7 @@ typedef enum {
 -(IBAction) switchedSelection: (id) sender {
     [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
     
-    self.searchBar.text = @""; // clear search bar - will show placeholder
+//    self.searchBar.text = @""; // clear search bar - will show placeholder
     [self.searchBar resignFirstResponder]; //hide keyboard in case it was visible
     
     UISegmentedControl* control = (UISegmentedControl*)sender;
@@ -529,7 +524,7 @@ typedef enum {
         self.searchHeaderView.clipsToBounds =YES;
         CGRect headerFrame = self.tableView.tableHeaderView.frame;
         
-        self.searchHeaderView.frame = CGRectMake(0,headerFrame.size.height,320,98);
+        self.searchHeaderView.frame = CGRectMake(0,headerFrame.size.height,320,SEARCH_HEADER_HEIGHT);
         headerFrame.size.height = headerFrame.size.height + SEARCH_HEADER_HEIGHT;
         UIView* header = self.tableView.tableHeaderView;
         header.frame = headerFrame;

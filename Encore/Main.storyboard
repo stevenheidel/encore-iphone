@@ -21,60 +21,71 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="HlE-VT-IbH">
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="E96-RF-aMq" userLabel="Header">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="115"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="158"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="BPv-ov-Jp0" userLabel="Segmented Control">
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="30" type="user" id="51j-nW-7Ra"/>
-                                                <constraint firstAttribute="width" constant="205" type="user" id="OTt-cL-kbJ"/>
+                                                <constraint firstAttribute="width" constant="300" type="user" id="6L4-qm-QpD"/>
+                                                <constraint firstAttribute="height" constant="35" type="user" id="XHk-3f-e3j"/>
                                             </constraints>
                                             <segments>
                                                 <segment title="PAST"/>
                                                 <segment title="TODAY"/>
+                                                <segment title="FUTURE"/>
                                             </segments>
                                             <connections>
                                                 <action selector="switchedSelection:" destination="8hQ-DB-bIb" eventType="valueChanged" id="anV-ke-fVB"/>
                                             </connections>
                                         </segmentedControl>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Artist search..." clearsOnBeginEditing="YES" minimumFontSize="17" background="search.png" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="UU0-XP-3u7" userLabel="Search">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zAo-rd-fKL">
+                                            <subviews>
+                                                <view alpha="0.58999999999999997" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="14l-k4-vqw">
+                                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                </view>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Artist search..." minimumFontSize="17" background="searchbar.png" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="UU0-XP-3u7" userLabel="Search">
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="250" id="WnO-GE-CGK"/>
+                                                        <constraint firstAttribute="height" constant="35" id="lnP-Fq-6zr"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <textInputTraits key="textInputTraits" returnKeyType="search"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="8hQ-DB-bIb" id="ez6-fH-gFb"/>
+                                                    </connections>
+                                                </textField>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RbE-gN-6Tm" userLabel="Location Button">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="27" type="user" id="jjP-yd-aYi"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                    <state key="normal" image="locationmakerwhite.png">
+                                                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <state key="highlighted">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="openLocationSetter" destination="8hQ-DB-bIb" eventType="touchUpInside" id="Tfg-wK-FhX"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="26" type="user" id="u8F-6Y-EY8"/>
-                                                <constraint firstAttribute="width" constant="250" type="user" id="xqA-2r-8SQ"/>
+                                                <constraint firstItem="14l-k4-vqw" firstAttribute="top" secondItem="zAo-rd-fKL" secondAttribute="top" type="default" id="1dh-6Y-e41"/>
+                                                <constraint firstItem="UU0-XP-3u7" firstAttribute="centerY" secondItem="RbE-gN-6Tm" secondAttribute="centerY" type="default" id="5c6-Lh-7r7"/>
+                                                <constraint firstAttribute="trailing" secondItem="RbE-gN-6Tm" secondAttribute="trailing" constant="9" id="9gN-ce-axa"/>
+                                                <constraint firstAttribute="height" constant="65" type="user" id="Pmn-P3-QPd"/>
+                                                <constraint firstItem="14l-k4-vqw" firstAttribute="bottom" secondItem="zAo-rd-fKL" secondAttribute="bottom" type="default" id="TFm-0w-gDN"/>
+                                                <constraint firstItem="RbE-gN-6Tm" firstAttribute="top" secondItem="zAo-rd-fKL" secondAttribute="top" constant="20" symbolic="YES" type="default" id="WWz-0O-lcd"/>
+                                                <constraint firstItem="14l-k4-vqw" firstAttribute="trailing" secondItem="zAo-rd-fKL" secondAttribute="trailing" type="default" id="Xmk-dm-w7I"/>
+                                                <constraint firstItem="14l-k4-vqw" firstAttribute="leading" secondItem="zAo-rd-fKL" secondAttribute="leading" type="default" id="l0A-Nq-VAL"/>
+                                                <constraint firstAttribute="bottom" secondItem="RbE-gN-6Tm" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="lAT-Un-GhZ"/>
+                                                <constraint firstItem="UU0-XP-3u7" firstAttribute="leading" secondItem="zAo-rd-fKL" secondAttribute="leading" constant="8" id="zgz-hY-AAk"/>
                                             </constraints>
-                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                            <textInputTraits key="textInputTraits" returnKeyType="search"/>
-                                            <connections>
-                                                <outlet property="delegate" destination="8hQ-DB-bIb" id="ez6-fH-gFb"/>
-                                            </connections>
-                                        </textField>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RbE-gN-6Tm" userLabel="Location Button">
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="27" id="AZF-Xr-Fph"/>
-                                                <constraint firstAttribute="height" constant="26" type="user" id="huH-gD-XLx"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                            <state key="normal" image="locationmarkerbutton.png">
-                                                <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
-                                            <state key="highlighted">
-                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
-                                            <connections>
-                                                <action selector="openLocationSetter" destination="8hQ-DB-bIb" eventType="touchUpInside" id="Tfg-wK-FhX"/>
-                                            </connections>
-                                        </button>
-                                        <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="JULY 28, 2013" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aq3-2n-a8G" userLabel="Date">
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="280" type="user" id="SN3-Jn-cd7"/>
-                                                <constraint firstAttribute="height" constant="21" type="user" id="Zd0-xj-X68"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
+                                        </view>
                                         <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hXC-Wo-Qyy" userLabel="LastFM Button">
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="13" type="user" id="gS4-RD-BX5"/>
@@ -95,24 +106,18 @@
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
-                                        <constraint firstItem="RbE-gN-6Tm" firstAttribute="centerY" secondItem="UU0-XP-3u7" secondAttribute="centerY" type="user" id="0ah-Mj-Nk7"/>
-                                        <constraint firstItem="Aq3-2n-a8G" firstAttribute="top" secondItem="BPv-ov-Jp0" secondAttribute="bottom" constant="22" type="user" id="51N-fw-bnp"/>
-                                        <constraint firstAttribute="centerX" secondItem="Aq3-2n-a8G" secondAttribute="centerX" type="user" id="DtR-b3-ncC"/>
-                                        <constraint firstItem="BPv-ov-Jp0" firstAttribute="top" secondItem="E96-RF-aMq" secondAttribute="top" constant="10" type="user" id="G8o-h9-ghT"/>
-                                        <constraint firstItem="hXC-Wo-Qyy" firstAttribute="top" secondItem="UU0-XP-3u7" secondAttribute="bottom" constant="8" type="user" id="Mzy-Xm-BZY"/>
-                                        <constraint firstAttribute="trailing" secondItem="RbE-gN-6Tm" secondAttribute="trailing" constant="5" id="SzW-l0-rUy"/>
+                                        <constraint firstItem="hXC-Wo-Qyy" firstAttribute="top" secondItem="zAo-rd-fKL" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="EJU-dF-fgT"/>
+                                        <constraint firstItem="zAo-rd-fKL" firstAttribute="top" secondItem="BPv-ov-Jp0" secondAttribute="bottom" constant="8" symbolic="YES" type="user" id="OH4-CF-XzW"/>
                                         <constraint firstAttribute="centerX" secondItem="hXC-Wo-Qyy" secondAttribute="centerX" type="user" id="Ymj-Pz-Hwq"/>
-                                        <constraint firstItem="UU0-XP-3u7" firstAttribute="top" secondItem="BPv-ov-Jp0" secondAttribute="bottom" constant="20" type="user" id="Zh0-O1-ZR7"/>
-                                        <constraint firstItem="Aq3-2n-a8G" firstAttribute="baseline" secondItem="UU0-XP-3u7" secondAttribute="baseline" type="default" id="fFf-4Z-gN5"/>
-                                        <constraint firstAttribute="centerX" secondItem="BPv-ov-Jp0" secondAttribute="centerX" type="user" id="glO-dK-h9o"/>
-                                        <constraint firstAttribute="centerX" secondItem="Aq3-2n-a8G" secondAttribute="centerX" type="user" id="ryf-gX-GiH"/>
-                                        <constraint firstItem="UU0-XP-3u7" firstAttribute="centerX" secondItem="Aq3-2n-a8G" secondAttribute="centerX" type="user" id="wMK-ev-uGC"/>
-                                        <constraint firstItem="UU0-XP-3u7" firstAttribute="top" secondItem="RbE-gN-6Tm" secondAttribute="top" type="user" id="yH7-rY-UlQ"/>
+                                        <constraint firstItem="zAo-rd-fKL" firstAttribute="leading" secondItem="BPv-ov-Jp0" secondAttribute="leading" type="default" id="f19-PU-mik"/>
+                                        <constraint firstItem="BPv-ov-Jp0" firstAttribute="top" secondItem="E96-RF-aMq" secondAttribute="top" constant="10" type="user" id="rrE-tc-61K"/>
+                                        <constraint firstAttribute="centerX" secondItem="BPv-ov-Jp0" secondAttribute="centerX" type="user" id="yhx-B8-jXh"/>
+                                        <constraint firstAttribute="centerX" secondItem="zAo-rd-fKL" secondAttribute="centerX" type="user" id="zEc-XP-arK"/>
                                     </constraints>
                                 </view>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" restorationIdentifier="Cell" selectionStyle="blue" indentationWidth="10" reuseIdentifier="Cell" id="7Fj-8N-9kC" customClass="ECSearchResultCell">
-                                        <rect key="frame" x="0.0" y="137" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="180" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -146,7 +151,6 @@
                     <navigationItem key="navigationItem" id="hU3-8N-dbJ"/>
                     <connections>
                         <outlet property="imgBackground" destination="SOM-DW-RgO" id="9JC-84-F7Y"/>
-                        <outlet property="lblTodaysDate" destination="Aq3-2n-a8G" id="cEH-Mc-vax"/>
                         <outlet property="searchBar" destination="UU0-XP-3u7" id="dl6-xV-dhp"/>
                         <outlet property="segmentedControl" destination="BPv-ov-Jp0" id="Mca-YI-uBY"/>
                         <outlet property="tableView" destination="HlE-VT-IbH" id="NtG-Dl-PID"/>
@@ -176,8 +180,8 @@
     <resources>
         <image name="fullgradient.png" width="1" height="1007"/>
         <image name="lastfmAttr.png" width="98" height="13"/>
-        <image name="locationmarkerbutton.png" width="30" height="24"/>
-        <image name="search.png" width="454" height="47"/>
+        <image name="locationmakerwhite.png" width="15" height="21"/>
+        <image name="searchbar.png" width="239" height="32"/>
     </resources>
     <classes>
         <class className="ECNewMainViewController" superclassName="UIViewController">
@@ -186,7 +190,6 @@
                 <relationship kind="action" name="dismissKeyboard:"/>
                 <relationship kind="action" name="openLastFM:"/>
                 <relationship kind="action" name="openLocationSetter"/>
-                <relationship kind="action" name="switchedSelection:"/>
                 <relationship kind="outlet" name="imgBackground" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="imgLastfmAttr" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="lblTodaysDate" candidateClass="UILabel"/>
