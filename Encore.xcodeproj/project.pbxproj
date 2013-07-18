@@ -175,6 +175,7 @@
 		D4AE47461795A179006AF663 /* profileSectionHeader@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AE47441795A179006AF663 /* profileSectionHeader@2x.png */; };
 		D4B0AC4717727FDA00DC4DD2 /* ECPostPlaceholder.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4B0AC4617727FDA00DC4DD2 /* ECPostPlaceholder.xib */; };
 		D4B31DE91793D03300822228 /* NSUserDefaults+Encore.m in Sources */ = {isa = PBXBuildFile; fileRef = D4B31DE81793D03300822228 /* NSUserDefaults+Encore.m */; };
+		D4B7083A1797A7A300CF3A9D /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4B708371797A53C00CF3A9D /* MapKit.framework */; };
 		D4C9C085177A090800F864FC /* instagram.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D4C9C084177A090800F864FC /* instagram.jpg */; };
 		D4E16CA817973BF100A9DC99 /* locationmakerwhite.png in Resources */ = {isa = PBXBuildFile; fileRef = D4E16CA617973BF100A9DC99 /* locationmakerwhite.png */; };
 		D4E16CA917973BF100A9DC99 /* locationmakerwhite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4E16CA717973BF100A9DC99 /* locationmakerwhite@2x.png */; };
@@ -433,6 +434,7 @@
 		D4B0AC4617727FDA00DC4DD2 /* ECPostPlaceholder.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECPostPlaceholder.xib; sourceTree = "<group>"; };
 		D4B31DE71793D03300822228 /* NSUserDefaults+Encore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSUserDefaults+Encore.h"; sourceTree = "<group>"; };
 		D4B31DE81793D03300822228 /* NSUserDefaults+Encore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSUserDefaults+Encore.m"; sourceTree = "<group>"; };
+		D4B708371797A53C00CF3A9D /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		D4C9C084177A090800F864FC /* instagram.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = instagram.jpg; sourceTree = "<group>"; };
 		D4E16CA617973BF100A9DC99 /* locationmakerwhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = locationmakerwhite.png; sourceTree = "<group>"; };
 		D4E16CA717973BF100A9DC99 /* locationmakerwhite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "locationmakerwhite@2x.png"; sourceTree = "<group>"; };
@@ -445,6 +447,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4B7083A1797A7A300CF3A9D /* MapKit.framework in Frameworks */,
 				D4A7980B17921BD20029F469 /* SystemConfiguration.framework in Frameworks */,
 				D4A7980917921BCD0029F469 /* StoreKit.framework in Frameworks */,
 				D4A7980717921BC50029F469 /* CoreTelephony.framework in Frameworks */,
@@ -773,6 +776,7 @@
 		D4AA4CF11766B374009B0635 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D4B708371797A53C00CF3A9D /* MapKit.framework */,
 				D4A7980A17921BD20029F469 /* SystemConfiguration.framework */,
 				D4A7980817921BCD0029F469 /* StoreKit.framework */,
 				D4A7980617921BC50029F469 /* CoreTelephony.framework */,
