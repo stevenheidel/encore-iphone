@@ -26,7 +26,7 @@
 #import "ECJSONFetcher.h"
 #import "MBProgressHUD.h"
 
-#define HEADER_HEIGHT 170.0
+#define HEADER_HEIGHT 154.0  //height in nib is actually 170, but for some reason that leaves extra space at bottom
 #define FLAG_HUD_DELAY 2.0
 
 #import "ECAlertTags.h"
