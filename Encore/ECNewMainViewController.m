@@ -367,7 +367,6 @@ typedef enum {
 - (void)displayViewsAccordingToSearchType {
     self.searchContainer.hidden = self.currentSearchType == ECSearchTypeToday;
     self.searchContainer.userInteractionEnabled = self.currentSearchType != ECSearchTypeToday;
-//    self.searchBar.enabled = self.currentSearchType == ECSearchTypeToday;
 }
 
 - (void)didReceiveMemoryWarning
