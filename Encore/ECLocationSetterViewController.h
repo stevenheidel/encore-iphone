@@ -12,6 +12,7 @@
 @interface ECLocationSetterViewController : UIViewController <UITextFieldDelegate,UIAlertViewDelegate>
 - (IBAction)touchedOutsideTextField:(id)sender;
 
+- (IBAction)infoButtonTapped;
 @property (nonatomic, assign) float radius;
 @property (nonatomic, strong) CLLocation* location;
 

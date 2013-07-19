@@ -75,6 +75,14 @@ NSString* locationStringForPlacemark(MKPlacemark* placemark) {
 -(IBAction) touchedOutsideTextField: (id) sender {
     [self.view endEditing:YES];
 }
+
+- (IBAction)infoButtonTapped {
+    [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
+    
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Search Location" message:@"Set the search location by typing in a city in the search bar. Be more specific by including the state or province and/or country." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alert show];
+    [Flurry logEvent:@"Info_Button_Tapped"];
+}
 #define kOFFSET_FOR_KEYBOARD 200.0
 
 
