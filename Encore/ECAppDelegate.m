@@ -279,16 +279,12 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
     }
     [self.locationManager startUpdatingLocation];
 }
-//- (void)getUserLocation {
-//    [self.locationManager startUpdatingLocation];
-//}
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
     //Ensure location update is recent
     NSDate* eventDate = newLocation.timestamp;
     NSTimeInterval howRecent = [eventDate timeIntervalSinceNow];
-    if (abs(howRecent) < 15.0)
-    {
+    if (abs(howRecent) < 15.0) {
         if(newLocation.horizontalAccuracy < 1000.0){
             //Ensure location is accurate to the nearest kilometer
             NSLog(@"latitude %+.6f, longitude %+.6f\n", newLocation.coordinate.latitude, newLocation.coordinate.longitude);
@@ -302,7 +298,6 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
 }
 
 -(void) saveLocationToUserDefaults: (CLLocation *) location {
-    
     double latitude = location.coordinate.latitude;
     double longitude = location.coordinate.longitude;
     [NSUserDefaults setUserCoordinate:location];
