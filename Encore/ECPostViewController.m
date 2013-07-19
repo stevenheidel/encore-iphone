@@ -17,6 +17,8 @@
 #import "MBProgressHUD.h"
 
 #import "UIFont+Encore.h"
+#import "UIColor+EncoreUI.h"
+
 #import "ECJSONPoster.h"
 #import "NSUserDefaults+Encore.h"
 #define FLAG_HUD_DELAY 1.0
@@ -25,7 +27,8 @@ typedef enum {
     FlagPhoto
 }ActionSheetTags;
 @interface ECPostViewController ()
-
+@property (weak, nonatomic) IBOutlet UILabel *artistLabel;
+@property (weak, nonatomic) IBOutlet UILabel *venueAndDateLabel;
 @end
 
 @implementation ECPostViewController
@@ -53,11 +56,24 @@ typedef enum {
     self.userNameLabel.font = [UIFont lightHeroFontWithSize: 18.0f];
 
     [self setupNavBar];
-
+    [self setupHeaderLabels];
     [self setupGestureRecgonizers];
     self.containerView.alpha = 0.0;
     self.flagPostButton.alpha = 0.0;
     self.flagPostButton.enabled = NO;
+}
+
+-(void) setupHeaderLabels {
+    [self.artistLabel setFont:[UIFont heroFontWithSize:18.0f]];
+    [self.artistLabel setTextColor:[UIColor blueArtistTextColor]];
+     
+    [self.venueAndDateLabel setFont:[UIFont heroFontWithSize:11.0f]];
+}
+
+-(void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    self.artistLabel.text = [self.artist uppercaseString];
+    self.venueAndDateLabel.text = [self.venueAndDate uppercaseString];
 }
 
 -(void) setupNavBar {
@@ -65,7 +81,7 @@ typedef enum {
     self.navigationItem.titleView = encoreLogo;
     
     UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    UIImage *leftButImage = [UIImage imageNamed:@"backButton.png"]; //stretchableImageWithLeftCapWidth:10 topCapHeight:10];
+    UIImage *leftButImage = [UIImage imageNamed:@"backButton.png"];
     [leftButton setBackgroundImage:leftButImage forState:UIControlStateNormal];
     [leftButton addTarget:self action:@selector(backButtonWasPressed) forControlEvents:UIControlEventTouchUpInside];
     leftButton.frame = CGRectMake(0, 0, leftButImage.size.width, leftButImage.size.height);
@@ -73,7 +89,7 @@ typedef enum {
     self.navigationItem.leftBarButtonItem = backButton;
     
     UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    UIImage *rightButImage = [UIImage imageNamed:@"shareButton.png"]; //stretchableImageWithLeftCapWidth:10 topCapHeight:10];
+    UIImage *rightButImage = [UIImage imageNamed:@"shareButton.png"];
     [rightButton setBackgroundImage:rightButImage forState:UIControlStateNormal];
     [rightButton addTarget:self action:@selector(shareTapped) forControlEvents:UIControlEventTouchUpInside];
     rightButton.frame = CGRectMake(0, 0, rightButImage.size.width, rightButImage.size.height);
@@ -97,6 +113,7 @@ typedef enum {
     recognizerTap.numberOfTouchesRequired = 1;
     [self.view addGestureRecognizer:recognizerTap];
 }
+
 -(void) tapPost {
     [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
     

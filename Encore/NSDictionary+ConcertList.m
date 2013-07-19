@@ -28,6 +28,9 @@ static NSString * const kDateFormat = @"yyyy-MM-dd";
    return [self objectForKey:@"venue_name"];
 }
 
+-(NSString*) venueAndDate {
+    return [NSString stringWithFormat:@"%@, %@", [self venueName], [self niceDate]];
+}
 -(NSString*) serverID {
     return [self eventID];
 }

@@ -13,6 +13,7 @@
 -(NSString *) niceDate;
 -(NSString *) artistName;
 -(NSString *) venueName;
+-(NSString*) venueAndDate; //string with both, separated by comma
 
 -(NSString *) serverID;
 -(NSString*) eventID;

@@ -9,9 +9,11 @@
 #import <UIKit/UIKit.h>
 @protocol ECPostViewControllerDelegate;
 @interface ECPostViewController : UIViewController <UIActionSheetDelegate>
-
 -(IBAction)flagPhoto;
+
 @property (nonatomic,strong) NSDictionary * post;
+@property (copy, nonatomic) NSString *artist;
+@property (copy, nonatomic) NSString* venueAndDate;
 
 @property (nonatomic,strong) IBOutlet UIImageView * postImage;
 @property (nonatomic,strong) IBOutlet UIImageView * profilePicture;
