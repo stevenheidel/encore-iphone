@@ -33,9 +33,6 @@
     self.imageArtist.image = [UIImage imageNamed:@"placeholder.jpg"];
     self.imageArtist.layer.cornerRadius = 5.0;
     self.imageArtist.layer.masksToBounds = YES;
-    //    self.imageArtist.layer.borderWidth = 1.0;
-    //    self.imageArtist.layer.borderColor = [UIColor imageBorderColor].CGColor;
-    
     
     self.selectionStyle = UITableViewCellSelectionStyleNone; //TODO: custom selection style?
     self.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"accessory"]];
