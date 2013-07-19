@@ -136,7 +136,12 @@ typedef enum {
 }
 -(void) setupSearchBar {
     //Add padding for search bar
-    UIView* paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 20)];
+    
+    UIView* paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+    UIImageView* magnifyingGlass = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 11, 11)];
+    magnifyingGlass.image = [UIImage imageNamed:@"magnifyingglass"];
+    [paddingView addSubview:magnifyingGlass];
+    
     self.searchBar.leftView = paddingView;
     self.searchBar.leftViewMode = UITextFieldViewModeAlways;
     self.searchBar.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
@@ -144,6 +149,8 @@ typedef enum {
     
     self.searchBar.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
     [self.searchBar setTextColor:[UIColor blackColor]];
+    
+
 }
 
 -(void) viewWillAppear:(BOOL)animated {

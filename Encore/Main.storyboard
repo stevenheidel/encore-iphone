@@ -188,7 +188,6 @@
         <class className="ECNewMainViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ECNewMainViewController.h"/>
             <relationships>
-                <relationship kind="action" name="dismissKeyboard:"/>
                 <relationship kind="action" name="openLastFM:"/>
                 <relationship kind="action" name="openLocationSetter"/>
                 <relationship kind="action" name="switchedSelection:"/>
