@@ -11,6 +11,9 @@
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
 #import "ECAlertTags.h"
+#import "ATAppRatingFlow.h"
+#import "Flurry.h"
+
 
 @implementation ECLocationSetterViewController
 
@@ -110,6 +113,33 @@ NSString* locationStringForPlacemark(MKPlacemark* placemark) {
     }
     return YES;
 }
+
+-(BOOL) textFieldShouldReturn:(UITextField *)textField {
+    [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
+
+    
+    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+
+    [geocoder geocodeAddressString:textField.text completionHandler:^(NSArray *placemarks, NSError *error) {
+        MKPlacemark *placemark = [placemarks objectAtIndex:0];
+        
+        [Flurry logEvent:@"Set_Search_Location" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:textField.text,@"search_string",[NSNumber numberWithFloat:self.locationSlider.value],@"search_radius",error ? @"error":@"no_error", @"wasError", nil]];
+        if (error || placemark.locality == nil || placemark.country == nil) {\
+            //eg if you search "Canada" you'll get a nil locality, and the coordinate is in the middle of nowhere.
+            NSLog(@"%@: Geocode failed with error: %@", NSStringFromClass(self.class),error);
+            [self alertForFailedGeocode];
+            return;
+        }
+        
+        NSLog(@"%d places found",placemarks.count);
+        [self alertForConfirmGeocode:locationStringForPlacemark(placemark)];
+        self.location = placemark.location;
+        NSLog(@"%f %f",self.location.coordinate.latitude,self.location.coordinate.longitude);
+        
+    }];
+    return YES;
+}
+
 -(void) alertForFailedGeocode {
     UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"That location doesn't cut it. Please try again.", @"The location entered was invalid or caused an unexpected error, so prompt the user to try again") delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
     alert.tag = FailedGeocodeAlert;
@@ -124,29 +154,6 @@ NSString* locationStringForPlacemark(MKPlacemark* placemark) {
                                           otherButtonTitles:NSLocalizedString(@"Set", nil),nil];
     alert.tag = LocationSetterRightAlert;
     [alert show];
-}
--(BOOL) textFieldShouldReturn:(UITextField *)textField {
-    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-
-    [geocoder geocodeAddressString:textField.text completionHandler:^(NSArray *placemarks, NSError *error) {
-        if (error) {
-            NSLog(@"Geocode failed with error: %@", error);
-            [self alertForFailedGeocode];
-            return;
-        }
-        
-        MKPlacemark *placemark = [placemarks objectAtIndex:0];
-        NSLog(@"%d places found",placemarks.count);
-        [self alertForConfirmGeocode:locationStringForPlacemark(placemark)];
-        self.location = placemark.location;
-        NSLog(@"%f %f",self.location.coordinate.latitude,self.location.coordinate.longitude);
-        
-        if (placemark.locality == nil) {
-            NSLog(@"NULL STRING");
-        }
-        
-    }];
-    return YES;
 }
 
 -(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
