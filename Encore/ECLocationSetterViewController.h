@@ -15,6 +15,7 @@
 - (IBAction)infoButtonTapped;
 @property (nonatomic, assign) float radius;
 @property (nonatomic, strong) CLLocation* location;
+@property (nonatomic, assign) BOOL isUsingCurrentLocation;
 
 @property (weak, nonatomic) IBOutlet UISlider *locationSlider;
 @property (weak, nonatomic) IBOutlet UITextField *locationSearchBar;

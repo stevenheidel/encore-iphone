@@ -40,6 +40,16 @@
 
     return [NSString stringWithFormat:@"%@, %@, %@",placemark.locality,provinceOrStateAbbreviated,placemark.ISOcountryCode];
 }
+-(void) reverseGeocodeLocation {
+    CLGeocoder* geocoder = [CLGeocoder new];
+    [geocoder reverseGeocodeLocation:self.location completionHandler:^(NSArray *placemarks, NSError *error) {
+        if (error) {
+            NSLog(@"Error reverse geocoding: %@", error.description);
+        }
+        
+        self.locationSearchBar.text = [self locationStringForPlacemark:[placemarks objectAtIndex:0]];
+    }];
+}
 -(void) getDefaults {
     float lastSearchRadius = [NSUserDefaults lastSearchRadius];
     if (lastSearchRadius == 0) {// nsuserdefaults will return 0 if the key doesn't already exist.
@@ -54,17 +64,13 @@
         self.location = lastSearchLocation;
     }
     
-    else self.location = [NSUserDefaults userCoordinate];
+    else {
+        self.location = [NSUserDefaults userCoordinate];
+        self.isUsingCurrentLocation = YES;
+    }
     
     if (self.location != nil) { //userCoordinate method returns nil if lat or long are 0. In theory should never happen though
-        CLGeocoder* geocoder = [CLGeocoder new];
-        [geocoder reverseGeocodeLocation:self.location completionHandler:^(NSArray *placemarks, NSError *error) {
-            if (error) {
-                NSLog(@"Error reverse geocoding: %@", error.description);
-            }
-            
-            self.locationSearchBar.text = [self locationStringForPlacemark:[placemarks objectAtIndex:0]];
-        }];
+        [self reverseGeocodeLocation];
     }
 
 }
@@ -83,15 +89,25 @@
 }
 
 -(void) setupLocationSearchBar {
-    UIButton* locationButton = [[UIButton alloc] initWithFrame:CGRectMake(5, 5, 10, 10)];
+    UIButton* locationButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [locationButton setFrame:CGRectMake(2, 4, 13, 13)];
+    [locationButton setImage:[UIImage imageNamed:@"mylocationindicator"] forState:UIControlStateNormal];
+    
     [locationButton addTarget:self action:@selector(resetLocation) forControlEvents:UIControlEventTouchUpInside];
-    UIView* paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 20, 30)];
+    UIView* paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
     [paddingView addSubview:locationButton];
+    self.locationSearchBar.leftViewMode = UITextFieldViewModeAlways;
     self.locationSearchBar.leftView = paddingView;
 }
 
 -(void) resetLocation {
-    NSLog(@"Reset location tapped");
+    [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
+//    [Flurry logEvent:@"Tapped_Reset_Location" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[self ], nil]]
+        self.isUsingCurrentLocation = YES;
+        self.location = [NSUserDefaults userCoordinate]; //TODO error handling if no location
+        [NSUserDefaults setLastSearchLocation:self.location];
+        [NSUserDefaults synchronize];
+        [self reverseGeocodeLocation];
 }
 
 -(void) viewDidAppear:(BOOL)animated {
@@ -152,7 +168,7 @@
         MKPlacemark *placemark = [placemarks objectAtIndex:0];
         
         [Flurry logEvent:@"Set_Search_Location" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:textField.text,@"search_string",[NSNumber numberWithFloat:self.locationSlider.value],@"search_radius",error ? @"error":@"no_error", @"wasError", nil]];
-        if (error || placemark.locality == nil || placemark.country == nil) {\
+        if (error || placemark.locality == nil || placemark.country == nil) {
             //eg if you search "Canada" you'll get a nil locality, and the coordinate is in the middle of nowhere.
             NSLog(@"%@: Geocode failed with error: %@", NSStringFromClass(self.class),error);
             [self alertForFailedGeocode];
@@ -162,8 +178,7 @@
         NSLog(@"%d places found",placemarks.count);
         [self alertForConfirmGeocode:[self locationStringForPlacemark:placemark]];
         self.location = placemark.location;
-        NSLog(@"%f %f",self.location.coordinate.latitude,self.location.coordinate.longitude);
-        
+        self.isUsingCurrentLocation = FALSE;
     }];
     return YES;
 }
