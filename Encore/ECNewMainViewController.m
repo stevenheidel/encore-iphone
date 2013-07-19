@@ -66,7 +66,7 @@ typedef enum {
     
     self.tap = [[UITapGestureRecognizer alloc]
                                    initWithTarget:self
-                                   action:@selector(dismissKeyboard:)];
+                                   action:@selector(dismissKeyboard)];
     if(self.currentSearchLocation)
         [self fetchConcerts];
     
