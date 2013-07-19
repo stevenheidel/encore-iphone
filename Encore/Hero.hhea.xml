@@ -32,8 +32,8 @@
 <hheaTable
 	versionMajor="1"
 	versionMinor="0"
-	ascender="750"
-	descender="0"
+	ascender="800"
+	descender="-50"
 	lineGap="9"
 	advanceWidthMax="1170"
 	minLeftSideBearing="-44"
