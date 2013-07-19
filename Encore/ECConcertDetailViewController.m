@@ -102,12 +102,19 @@ NSString *kCellID = @"cellID";
     self.view.clipsToBounds = YES;
     self.collectionView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
     
+    [(UILabel*)[self.footerIsPopulatingView viewWithTag:49] setFont:[UIFont heroFontWithSize:14]];
+    
+    [self setupRefreshControl];
+}
+
+-(void) setupRefreshControl {
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(loadImages)
-             forControlEvents:UIControlEventValueChanged];
+                  forControlEvents:UIControlEventValueChanged];
     [self.collectionView addSubview:self.refreshControl];
     self.refreshControl.tintColor = [UIColor lightBlueNavBarColor];
 }
+
 -(void) viewWillAppear:(BOOL)animated {
     [self togglePopulatingIndicator];
 }
