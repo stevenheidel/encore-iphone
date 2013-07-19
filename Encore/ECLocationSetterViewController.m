@@ -116,7 +116,6 @@ NSString* locationStringForPlacemark(MKPlacemark* placemark) {
         MKPlacemark *placemark = [placemarks objectAtIndex:0];
         NSLog(@"%d places found",placemarks.count);
         NSString* locationString = locationStringForPlacemark(placemark);
-         NSLog(@"%@",locationString);
         self.location = placemark.location;
         NSLog(@"%f %f",self.location.coordinate.latitude,self.location.coordinate.longitude);
         UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Location", @"Title for an alert asking the user if the geocoded location is correct")
