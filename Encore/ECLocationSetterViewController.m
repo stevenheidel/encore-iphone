@@ -14,6 +14,10 @@
 #import "ATAppRatingFlow.h"
 #import "Flurry.h"
 
+@interface ECLocationSetterViewController () {
+    NSDictionary* abbrvDic;
+}
+@end
 
 @implementation ECLocationSetterViewController
 
@@ -22,12 +26,19 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        NSString * plistPath = [[NSBundle mainBundle] pathForResource:@"ProvinceStateAbbrv" ofType:@"plist"];
+        abbrvDic = [NSDictionary dictionaryWithContentsOfFile:plistPath];
     }
     return self;
 }
 
-NSString* locationStringForPlacemark(MKPlacemark* placemark) {
-    return [NSString stringWithFormat:@"%@, %@, %@",placemark.locality,placemark.administrativeArea,placemark.country];
+-(NSString*) locationStringForPlacemark: (MKPlacemark*) placemark {
+    NSString* provinceOrStateAbbreviated =  placemark.administrativeArea;
+    if([placemark.ISOcountryCode isEqualToString:@"CA"] || [placemark.ISOcountryCode isEqualToString:@"US"]){ //use standard abbreviations for US and Canada.
+        provinceOrStateAbbreviated = [[abbrvDic objectForKey:[placemark.administrativeArea lowercaseString]] uppercaseString]; //search by lowercase for consistency, display as uppercase
+    }
+
+    return [NSString stringWithFormat:@"%@, %@, %@",placemark.locality,provinceOrStateAbbreviated,placemark.ISOcountryCode];
 }
 -(void) getDefaults {
     float lastSearchRadius = [NSUserDefaults lastSearchRadius];
@@ -52,17 +63,35 @@ NSString* locationStringForPlacemark(MKPlacemark* placemark) {
                 NSLog(@"Error reverse geocoding: %@", error.description);
             }
             
-            NSLog(@"%@", [[placemarks objectAtIndex:0] locality]);
-            self.locationSearchBar.text = locationStringForPlacemark([placemarks objectAtIndex:0]);
+            self.locationSearchBar.text = [self locationStringForPlacemark:[placemarks objectAtIndex:0]];
         }];
     }
 
 }
 -(void) viewDidLoad {
     [super viewDidLoad];
+
+    
+    [self setupLocationSlider];
+    [self setupLocationSearchBar];
+}
+
+-(void) setupLocationSlider {
     [self.locationSlider setThumbImage:[UIImage imageNamed:@"oval"] forState:UIControlStateNormal];
     [self.locationSlider setMinimumTrackImage:[UIImage imageNamed:@"slider_minimum"] forState:UIControlStateNormal];
     [self.locationSlider setMaximumTrackImage:[UIImage imageNamed:@"slider_maximum"] forState:UIControlStateNormal];
+}
+
+-(void) setupLocationSearchBar {
+    UIButton* locationButton = [[UIButton alloc] initWithFrame:CGRectMake(5, 5, 10, 10)];
+    [locationButton addTarget:self action:@selector(resetLocation) forControlEvents:UIControlEventTouchUpInside];
+    UIView* paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 20, 30)];
+    [paddingView addSubview:locationButton];
+    self.locationSearchBar.leftView = paddingView;
+}
+
+-(void) resetLocation {
+    NSLog(@"Reset location tapped");
 }
 
 -(void) viewDidAppear:(BOOL)animated {
@@ -87,7 +116,6 @@ NSString* locationStringForPlacemark(MKPlacemark* placemark) {
     [Flurry logEvent:@"Info_Button_Tapped"];
 }
 #define kOFFSET_FOR_KEYBOARD 200.0
-
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
@@ -132,7 +160,7 @@ NSString* locationStringForPlacemark(MKPlacemark* placemark) {
         }
         
         NSLog(@"%d places found",placemarks.count);
-        [self alertForConfirmGeocode:locationStringForPlacemark(placemark)];
+        [self alertForConfirmGeocode:[self locationStringForPlacemark:placemark]];
         self.location = placemark.location;
         NSLog(@"%f %f",self.location.coordinate.latitude,self.location.coordinate.longitude);
         

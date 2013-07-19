@@ -178,6 +178,7 @@
 		D4B7083A1797A7A300CF3A9D /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4B708371797A53C00CF3A9D /* MapKit.framework */; };
 		D4B7A8B41799EA4B001C14BE /* magnifyingglass.png in Resources */ = {isa = PBXBuildFile; fileRef = D4B7A8B21799EA4B001C14BE /* magnifyingglass.png */; };
 		D4B7A8B51799EA4B001C14BE /* magnifyingglass@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4B7A8B31799EA4B001C14BE /* magnifyingglass@2x.png */; };
+		D4B7A8BA1799F7AF001C14BE /* ProvinceStateAbbrv.plist in Resources */ = {isa = PBXBuildFile; fileRef = D4B7A8B61799F428001C14BE /* ProvinceStateAbbrv.plist */; };
 		D4C9C085177A090800F864FC /* instagram.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D4C9C084177A090800F864FC /* instagram.jpg */; };
 		D4E16CA817973BF100A9DC99 /* locationmakerwhite.png in Resources */ = {isa = PBXBuildFile; fileRef = D4E16CA617973BF100A9DC99 /* locationmakerwhite.png */; };
 		D4E16CA917973BF100A9DC99 /* locationmakerwhite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4E16CA717973BF100A9DC99 /* locationmakerwhite@2x.png */; };
@@ -439,6 +440,7 @@
 		D4B708371797A53C00CF3A9D /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		D4B7A8B21799EA4B001C14BE /* magnifyingglass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = magnifyingglass.png; sourceTree = "<group>"; };
 		D4B7A8B31799EA4B001C14BE /* magnifyingglass@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "magnifyingglass@2x.png"; sourceTree = "<group>"; };
+		D4B7A8B61799F428001C14BE /* ProvinceStateAbbrv.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = ProvinceStateAbbrv.plist; path = EncoreTests/ProvinceStateAbbrv.plist; sourceTree = SOURCE_ROOT; };
 		D4C9C084177A090800F864FC /* instagram.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = instagram.jpg; sourceTree = "<group>"; };
 		D4E16CA617973BF100A9DC99 /* locationmakerwhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = locationmakerwhite.png; sourceTree = "<group>"; };
 		D4E16CA717973BF100A9DC99 /* locationmakerwhite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "locationmakerwhite@2x.png"; sourceTree = "<group>"; };
@@ -1017,6 +1019,7 @@
 		D4C9C08D177A51E500F864FC /* plist */ = {
 			isa = PBXGroup;
 			children = (
+				D4B7A8B61799F428001C14BE /* ProvinceStateAbbrv.plist */,
 				D4AA4CFA1766B374009B0635 /* Encore-Info.plist */,
 				A0FF1C52176CC88000433768 /* LoginInfoPages.plist */,
 			);
@@ -1258,6 +1261,7 @@
 				D4E16CAE1797419100A9DC99 /* searchbar@2x.png in Resources */,
 				D4B7A8B41799EA4B001C14BE /* magnifyingglass.png in Resources */,
 				D4B7A8B51799EA4B001C14BE /* magnifyingglass@2x.png in Resources */,
+				D4B7A8BA1799F7AF001C14BE /* ProvinceStateAbbrv.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
