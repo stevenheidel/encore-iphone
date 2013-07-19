@@ -16,11 +16,12 @@
 
 @interface ECNewMainViewController : UIViewController <UIAlertViewDelegate, UITableViewDataSource,UITableViewDelegate, ECLocationSetterDelegate>
 
-- (IBAction)dismissKeyboard:(id)sender;
+- (void)dismissKeyboard;
 - (IBAction)openLastFM:(id)sender;
 - (IBAction)openLocationSetter;
 -(void) initializeSearchLocation: (CLLocation*) currentSearchLocation;
 
+@property (weak, nonatomic) IBOutlet UIView *searchContainer;
 @property (nonatomic, strong) CLLocation* currentSearchLocation;
 @property (nonatomic, assign) NSNumber* currentSearchRadius;
 

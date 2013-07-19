@@ -273,13 +273,18 @@ typedef enum {
 
 - (IBAction)openLocationSetter {
     if (self.locationSetterView == nil) {
-        self.locationSetterView = [[ECLocationSetterViewController alloc] init];
+        self.locationSetterView = [ECLocationSetterViewController new];
         self.locationSetterView.delegate = self;
     }
     [self presentSemiViewController:self.locationSetterView withOptions:@{
      KNSemiModalOptionKeys.pushParentBack : @(NO),
      KNSemiModalOptionKeys.parentAlpha : @(0.8)
 	 }];
+    [self dismissKeyboard]; //dismiss the keyboard, otherwise it will obstruct the location setter view
+}
+
+-(void) hideLocationSetter {
+    [self dismissSemiModalView];
 }
 
 #pragma mark ECLocationSetterDelegate Method
@@ -291,10 +296,6 @@ typedef enum {
     [self hideLocationSetter];
     
     //TODO update all the popular concerts according to the new location
-}
-
--(void) hideLocationSetter {
-    [self dismissSemiModalView];
 }
 
 #pragma mark Alert View Delegate
@@ -314,21 +315,18 @@ typedef enum {
 #pragma mark Segmented Control
 -(IBAction) switchedSelection: (id) sender {
     [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
-    
-//    self.searchBar.text = @""; // clear search bar - will show placeholder
+
     [self.searchBar resignFirstResponder]; //hide keyboard in case it was visible
     
     UISegmentedControl* control = (UISegmentedControl*)sender;
     self.currentSearchType = [ECNewMainViewController searchTypeForSegmentIndex:control.selectedSegmentIndex];
-    self.hasSearched = FALSE;
+    self.hasSearched = FALSE; //TODO this flagging system is prone to error, fix it.
     
     //reload data/images
 //    [self displayViewsAccordingToSearchType];
     [self.tableView reloadData];
     [self setBackgroundImage];
     [self resetTableHeaderView]; //remove artist image that appears during search results
-    
-
     
     [Flurry logEvent:@"Switched_Selection" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[self currentSearchTypeString], @"Search_Type",nil]];
 }
@@ -362,13 +360,9 @@ typedef enum {
 }
 
 - (void)displayViewsAccordingToSearchType {
-    if (self.currentSearchType) {
-        self.searchBar.hidden = YES;
-        self.lblTodaysDate.hidden = NO;
-    } else {
-        self.searchBar.hidden = NO;
-        self.lblTodaysDate.hidden = YES;
-    }
+    self.searchContainer.hidden = self.currentSearchType == ECSearchTypeToday;
+    self.searchContainer.userInteractionEnabled = self.currentSearchType == ECSearchTypeToday;
+//    self.searchBar.enabled = self.currentSearchType == ECSearchTypeToday;
 }
 
 - (void)didReceiveMemoryWarning
@@ -424,6 +418,11 @@ typedef enum {
     }
     
     return nil;
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    [self dismissKeyboard];
 }
 
 -(NSArray*) currentEventArray {
@@ -620,8 +619,9 @@ typedef enum {
     [self addArtistImageToHeader];
 }
 
-- (IBAction)dismissKeyboard:(id)sender {
-    [self.searchBar resignFirstResponder];
+- (void)dismissKeyboard {
+    if([self.searchBar isFirstResponder])
+        [self.searchBar resignFirstResponder];
     [self.view removeGestureRecognizer:self.tap];
 }
 

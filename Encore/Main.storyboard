@@ -38,7 +38,7 @@
                                                 <action selector="switchedSelection:" destination="8hQ-DB-bIb" eventType="valueChanged" id="anV-ke-fVB"/>
                                             </connections>
                                         </segmentedControl>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zAo-rd-fKL">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zAo-rd-fKL" userLabel="Search View">
                                             <subviews>
                                                 <view alpha="0.58999999999999997" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="14l-k4-vqw">
                                                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -152,6 +152,7 @@
                     <connections>
                         <outlet property="imgBackground" destination="SOM-DW-RgO" id="9JC-84-F7Y"/>
                         <outlet property="searchBar" destination="UU0-XP-3u7" id="dl6-xV-dhp"/>
+                        <outlet property="searchContainer" destination="zAo-rd-fKL" id="bKP-SY-rAK"/>
                         <outlet property="segmentedControl" destination="BPv-ov-Jp0" id="Mca-YI-uBY"/>
                         <outlet property="tableView" destination="HlE-VT-IbH" id="NtG-Dl-PID"/>
                         <outlet property="view" destination="r8f-Xx-36C" id="iNS-MP-tOe"/>
@@ -190,10 +191,12 @@
                 <relationship kind="action" name="dismissKeyboard:"/>
                 <relationship kind="action" name="openLastFM:"/>
                 <relationship kind="action" name="openLocationSetter"/>
+                <relationship kind="action" name="switchedSelection:"/>
                 <relationship kind="outlet" name="imgBackground" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="imgLastfmAttr" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="lblTodaysDate" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="searchBar" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="searchContainer" candidateClass="UIView"/>
                 <relationship kind="outlet" name="segmentedControl" candidateClass="UISegmentedControl"/>
                 <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
             </relationships>
