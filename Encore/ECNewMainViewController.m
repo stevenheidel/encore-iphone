@@ -100,6 +100,10 @@ typedef enum {
         //default is today, so don't
         //TODO: remember what was last selected state of
     }];
+    
+    [ECJSONFetcher fetchPopularConcertsWithSearchType:ECSearchTypeFuture location: self.currentSearchLocation completion:^(NSArray *concerts) {
+        self.futureConcerts = concerts;
+    }];
 }
 
 -(void) setupHUD {
@@ -320,10 +324,10 @@ typedef enum {
     
     UISegmentedControl* control = (UISegmentedControl*)sender;
     self.currentSearchType = [ECNewMainViewController searchTypeForSegmentIndex:control.selectedSegmentIndex];
-    self.hasSearched = FALSE; //TODO this flagging system is prone to error, fix it.
+    self.hasSearched = FALSE; //TODO this flagging system is prone to human error, clean it up.
     
     //reload data/images
-//    [self displayViewsAccordingToSearchType];
+    [self displayViewsAccordingToSearchType];
     [self.tableView reloadData];
     [self setBackgroundImage];
     [self resetTableHeaderView]; //remove artist image that appears during search results
@@ -347,12 +351,13 @@ typedef enum {
 }
 
 +(ECSearchType) searchTypeForSegmentIndex: (NSInteger) index {
-    //TODO change if adding future
     switch (index) {
         case 0:
             return ECSearchTypePast;
         case 1:
             return ECSearchTypeToday;
+        case 2:
+            return ECSearchTypeFuture;
         default:
             return ECSearchTypeToday;
     }
