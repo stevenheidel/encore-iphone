@@ -254,7 +254,6 @@ NSString *kCellID = @"cellID";
     else {
         [self setUpPlaceholderView];
     }
-    [self checkIfPopulating];
     
     [self.collectionView reloadData];
     [self.collectionView setContentOffset:CGPointZero animated:NO];
