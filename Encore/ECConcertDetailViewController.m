@@ -551,7 +551,7 @@ NSString *kCellID = @"cellID";
         placeHolderText = @"Add the concert to your profile by clicking the + sign above in order to get images.";
     }
     else if (self.isPopulating) {
-        placeHolderText = @"Images are still loading, please check back again soon! Tap here to check again.";
+        placeHolderText = nil;//@"Images are still loading, please check back again soon! Tap here to check again.";
     }
     else {
         placeHolderText = @"Sorry, no content for this concert yet :(";
