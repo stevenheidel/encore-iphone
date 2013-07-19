@@ -186,6 +186,9 @@ NSString* locationStringForPlacemark(MKPlacemark* placemark) {
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    if ([self.locationSearchBar isFirstResponder]){
+        [self.locationSearchBar resignFirstResponder];
+    }
 }
 
 @end
