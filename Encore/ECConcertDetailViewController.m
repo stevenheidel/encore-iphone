@@ -259,7 +259,7 @@ NSString *kCellID = @"cellID";
     [self.collectionView setContentOffset:CGPointZero animated:NO];
     if([self.posts count] > 0 && self.savedPosition.y != 0) {
         //retain scroll position of view
-        [self.collectionView scrollToItemAtIndexPath:[self.collectionView indexPathForItemAtPoint:self.savedPosition] atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
+        self.collectionView.contentOffset = self.savedPosition;
     }
     if (self.refreshControl.refreshing) {
         [self.refreshControl endRefreshing];
