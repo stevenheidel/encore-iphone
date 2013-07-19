@@ -495,10 +495,12 @@ NSString *kCellID = @"cellID";
     [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
     
     [self.collectionView deselectItemAtIndexPath:indexPath animated:YES];
-    ECPostViewController * postVC = [[ECPostViewController alloc] init];
+    ECPostViewController * postVC = [[ECPostViewController alloc]init];
     postVC.post = [self.posts objectAtIndex:indexPath.item];
     postVC.itemNumber = indexPath.item;
     postVC.delegate = self;
+    postVC.artist = [self.concert artistName];
+    postVC.venueAndDate = [self.concert venueAndDate];
     [self.navigationController pushViewController:postVC animated:YES];
 }
 
