@@ -102,29 +102,40 @@ NSString* locationStringForPlacemark(MKPlacemark* placemark) {
     }
     return YES;
 }
+-(void) alertForFailedGeocode {
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"That location doesn't cut it. Please try again.", @"The location entered was invalid or caused an unexpected error, so prompt the user to try again") delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    alert.tag = FailedGeocodeAlert;
+    [alert show];
+}
 
+-(void) alertForConfirmGeocode: (NSString*) locationString {
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Location", @"Title for an alert asking the user if the geocoded location is correct")
+                                                    message: [NSString stringWithFormat:NSLocalizedString(@"Did you mean %@? If that's not correct, please try again with more details, such as the state, province, or country", @"Prompt user to ask whether the geocoded location is correct"),locationString]
+                                                   delegate:self
+                                          cancelButtonTitle:NSLocalizedString(@"Redo", nil)
+                                          otherButtonTitles:NSLocalizedString(@"Set", nil),nil];
+    alert.tag = LocationSetterRightAlert;
+    [alert show];
+}
 -(BOOL) textFieldShouldReturn:(UITextField *)textField {
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
 
     [geocoder geocodeAddressString:textField.text completionHandler:^(NSArray *placemarks, NSError *error) {
         if (error) {
             NSLog(@"Geocode failed with error: %@", error);
+            [self alertForFailedGeocode];
             return;
         }
         
-        
         MKPlacemark *placemark = [placemarks objectAtIndex:0];
         NSLog(@"%d places found",placemarks.count);
-        NSString* locationString = locationStringForPlacemark(placemark);
+        [self alertForConfirmGeocode:locationStringForPlacemark(placemark)];
         self.location = placemark.location;
         NSLog(@"%f %f",self.location.coordinate.latitude,self.location.coordinate.longitude);
-        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Location", @"Title for an alert asking the user if the geocoded location is correct")
-                                                        message: [NSString stringWithFormat:NSLocalizedString(@"Did you mean %@? If that's not correct, please try again with more details, such as the state, province, or country", @"Prompt user to ask whether the geocoded location is correct"),locationString]
-                                                       delegate:self
-                                              cancelButtonTitle:NSLocalizedString(@"Redo", nil)
-                                              otherButtonTitles:NSLocalizedString(@"Set", nil),nil];
-        alert.tag = LocationSetterRightAlert;
-        [alert show];
+        
+        if (placemark.locality == nil) {
+            NSLog(@"NULL STRING");
+        }
         
     }];
     return YES;
