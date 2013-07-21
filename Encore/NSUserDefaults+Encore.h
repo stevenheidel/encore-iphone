@@ -5,8 +5,11 @@
 //  Created by Shimmy on 2013-07-15.
 //  Copyright (c) 2013 Encore. All rights reserved.
 //
+
 @class CLLocation;
 #import <Foundation/Foundation.h>
+
+#import "ECSearchType.h"
 
 @interface NSUserDefaults (Encore)
 +(NSString*) userName;
@@ -29,5 +32,9 @@
 
 +(CLLocation*) lastSearchLocation;
 +(void) setLastSearchLocation: (CLLocation*) lastSearchLocation;
+
++(ECSearchType) lastSearchType;
++(void) setLastSearchType: (ECSearchType) searchType;
+
 +(void) synchronize;
 @end

@@ -55,7 +55,6 @@ typedef enum {
     [super viewDidLoad];
     self.searchHeaderView = nil;
     self.hasSearched = FALSE;
-    showingSearchBar = NO;
     self.comboSearchResultsDic = nil;
     [self.tableView registerNib:[UINib nibWithNibName:@"ECSearchResultCell" bundle:nil]
          forCellReuseIdentifier:SearchCellIdentifier];
@@ -73,8 +72,14 @@ typedef enum {
     if(self.currentSearchLocation)
         [self fetchConcerts];
     
-    self.currentSearchType = [ECNewMainViewController searchTypeForSegmentIndex:self.segmentedControl.selectedSegmentIndex]; //TODO load from user defaults
-
+    self.currentSearchType = [NSUserDefaults lastSearchType];//[ECNewMainViewController searchTypeForSegmentIndex:self.segmentedControl.selectedSegmentIndex]; //TODO load from user defaults
+    if (self.currentSearchType == 0) {
+        self.currentSearchType = ECSearchTypeToday;
+    }
+    
+    NSLog(@"%d %d %d",ECSearchTypeToday,ECSearchTypePast,ECSearchTypeFuture);
+    [self.segmentedControl setSelectedSegmentIndex:[ECNewMainViewController segmentIndexForSearchType:self.currentSearchType]];
+    showingSearchBar = NO; //by default hidden (see storyboard)
     
     [self setupHUD];
     [self setupSearchBar];
@@ -86,11 +91,19 @@ typedef enum {
     
     [self setupRefreshControl];
     [self displayViewsAccordingToSearchType];
+    
 }
 
 -(void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [[ATAppRatingFlow sharedRatingFlow] showRatingFlowFromViewControllerIfConditionsAreMet:self];
+
+}
+
+-(void) viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [NSUserDefaults setLastSearchType: self.currentSearchType];
+    [NSUserDefaults synchronize];
 }
 
 -(void) initializeSearchLocation: (CLLocation*) currentSearchLocation {
@@ -99,19 +112,29 @@ typedef enum {
 }
 
 -(void) fetchConcerts {
+    //TODO add radius
     [ECJSONFetcher fetchPopularConcertsWithSearchType:ECSearchTypeToday location: self.currentSearchLocation completion:^(NSArray *concerts) {
         self.todaysConcerts = concerts;
-        [self.tableView reloadData];
-        [self setBackgroundImage];
+        if (self.segmentedControl.selectedSegmentIndex == [ECNewMainViewController segmentIndexForSearchType:self.currentSearchType]) {
+            [self.tableView reloadData];
+            [self setBackgroundImage];
+        }
+        
     }];
     [ECJSONFetcher fetchPopularConcertsWithSearchType:ECSearchTypePast location: self.currentSearchLocation completion:^(NSArray *concerts) {
         self.pastConcerts = concerts;
-        //default is today, so don't
-        //TODO: remember what was last selected state of
+        if (self.segmentedControl.selectedSegmentIndex == [ECNewMainViewController segmentIndexForSearchType:self.currentSearchType]) {
+            [self.tableView reloadData];
+            [self setBackgroundImage];
+        }
     }];
     
     [ECJSONFetcher fetchPopularConcertsWithSearchType:ECSearchTypeFuture location: self.currentSearchLocation completion:^(NSArray *concerts) {
         self.futureConcerts = concerts;
+        if (self.segmentedControl.selectedSegmentIndex == [ECNewMainViewController segmentIndexForSearchType:self.currentSearchType]) {
+            [self.tableView reloadData];
+            [self setBackgroundImage];
+        }
     }];
 }
 
@@ -306,12 +329,14 @@ typedef enum {
 #pragma mark ECLocationSetterDelegate Method
 -(void) updateSearchLocation:(CLLocation *)location radius: (float) radius {
     self.currentSearchLocation = location;
+    self.currentSearchRadius = [NSNumber numberWithFloat:radius];
     [NSUserDefaults setLastSearchLocation:location];
     [NSUserDefaults setLastSearchRadius:radius];
     [NSUserDefaults synchronize];
     [self hideLocationSetter];
     
     //TODO update all the popular concerts according to the new location
+    [self fetchConcerts];
 }
 
 #pragma mark Alert View Delegate
@@ -337,13 +362,14 @@ typedef enum {
     UISegmentedControl* control = (UISegmentedControl*)sender;
     self.currentSearchType = [ECNewMainViewController searchTypeForSegmentIndex:control.selectedSegmentIndex];
     self.hasSearched = FALSE; //TODO this flagging system is prone to human error, clean it up.
-    
+    [self setBackgroundImage];
+    [self resetTableHeaderView]; //remove artist image that appears during search results
+
     //reload data/images
     [self displayViewsAccordingToSearchType];
     [self.tableView reloadData];
-    [self setBackgroundImage];
-    [self resetTableHeaderView]; //remove artist image that appears during search results
     
+        
     [Flurry logEvent:@"Switched_Selection" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[self currentSearchTypeString], @"Search_Type",nil]];
 }
 
@@ -361,7 +387,18 @@ typedef enum {
             return nil;
     }
 }
-
++(NSInteger) segmentIndexForSearchType:(ECSearchType) searchType {
+    switch (searchType) {
+        case ECSearchTypePast:
+            return 0;
+        case ECSearchTypeFuture:
+            return 2;
+        case ECSearchTypeToday:
+            return 1;
+        default:
+            break;
+    }
+}
 +(ECSearchType) searchTypeForSegmentIndex: (NSInteger) index {
     switch (index) {
         case 0:
@@ -379,13 +416,12 @@ typedef enum {
 -(BOOL) shouldShowSearchBar {
     return self.currentSearchType != ECSearchTypeToday;
 }
+#define SEARCH_CONTAINER_HEIGHT 65.0 // HACK
 - (void)displayViewsAccordingToSearchType {
-    self.searchContainer.hidden = self.currentSearchType == ECSearchTypeToday;
-    self.searchContainer.userInteractionEnabled = self.currentSearchType != ECSearchTypeToday;
     
     if (![self shouldShowSearchBar] && showingSearchBar) {
         CGRect frame = self.tableView.tableHeaderView.frame;
-        frame.size.height = frame.size.height - self.searchContainer.frame.size.height - 10; //the 10 was arbitrary, fix if needed
+        frame.size.height = frame.size.height - SEARCH_CONTAINER_HEIGHT - 10; //the 10 was arbitrary, fix if needed
         UIView* view = self.tableView.tableHeaderView;
         [view setFrame:frame];
         self.tableView.tableHeaderView = view;
@@ -394,13 +430,19 @@ typedef enum {
     else if(!showingSearchBar && [self shouldShowSearchBar]){
         //        [UIView animateWithDuration:1.0 animations:^{
         CGRect frame = self.tableView.tableHeaderView.frame;
-        frame.size.height = frame.size.height + self.searchContainer.frame.size.height + 10;
+                        NSLog(@"%@",NSStringFromCGRect(frame));
+        frame.size.height = frame.size.height + SEARCH_CONTAINER_HEIGHT + 10;
         UIView* view = self.tableView.tableHeaderView;
+
         [view setFrame:frame];
+
         self.tableView.tableHeaderView = view;
         showingSearchBar = YES;
+        NSLog(@"%@",NSStringFromCGRect(frame));
         //        }];
     }
+    self.searchContainer.hidden = self.currentSearchType == ECSearchTypeToday;
+    self.searchContainer.userInteractionEnabled = self.currentSearchType != ECSearchTypeToday;
 }
 
 - (void)didReceiveMemoryWarning

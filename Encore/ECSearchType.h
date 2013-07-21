@@ -10,7 +10,7 @@
 #define Encore_ECSearchType_h
 
 typedef enum {
-    ECSearchTypePast,
+    ECSearchTypePast = 1,
     ECSearchTypeFuture,
     ECSearchTypeToday
 } ECSearchType;

@@ -81,6 +81,14 @@
     [[NSUserDefaults standardUserDefaults] setDouble:lastSearchLocation.coordinate.longitude  forKey:@"last_search_longitude"];
 }
 
++(ECSearchType) lastSearchType {
+    return [[NSUserDefaults standardUserDefaults] integerForKey:@"Last_Search_Type"];
+}
+
++(void) setLastSearchType:(ECSearchType)searchType {
+    [[NSUserDefaults standardUserDefaults] setInteger:searchType forKey:@"Last_Search_Type"];
+}
+
 +(void) synchronize {
     if([[NSUserDefaults standardUserDefaults] synchronize]) {
         NSLog(@"User defaults synchronized successfully");
