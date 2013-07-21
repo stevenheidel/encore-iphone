@@ -139,8 +139,6 @@ typedef enum {
     self.lblName.text = [[NSUserDefaults userName] uppercaseString];
     
     self.lblLocation.text = [NSUserDefaults userCity];
-    
-    [self updateHeader];
 }
 
 - (void) updateHeader {
