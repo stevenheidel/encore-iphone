@@ -77,7 +77,6 @@ typedef enum {
         self.currentSearchType = ECSearchTypeToday;
     }
     
-    NSLog(@"%d %d %d",ECSearchTypeToday,ECSearchTypePast,ECSearchTypeFuture);
     [self.segmentedControl setSelectedSegmentIndex:[ECNewMainViewController segmentIndexForSearchType:self.currentSearchType]];
     showingSearchBar = NO; //by default hidden (see storyboard)
     
@@ -430,7 +429,6 @@ typedef enum {
     else if(!showingSearchBar && [self shouldShowSearchBar]){
         //        [UIView animateWithDuration:1.0 animations:^{
         CGRect frame = self.tableView.tableHeaderView.frame;
-                        NSLog(@"%@",NSStringFromCGRect(frame));
         frame.size.height = frame.size.height + SEARCH_CONTAINER_HEIGHT + 10;
         UIView* view = self.tableView.tableHeaderView;
 
@@ -438,7 +436,6 @@ typedef enum {
 
         self.tableView.tableHeaderView = view;
         showingSearchBar = YES;
-        NSLog(@"%@",NSStringFromCGRect(frame));
         //        }];
     }
     self.searchContainer.hidden = self.currentSearchType == ECSearchTypeToday;
