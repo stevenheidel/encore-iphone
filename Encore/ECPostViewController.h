@@ -9,9 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @protocol ECPostViewControllerDelegate;
-@interface ECPostViewController : UIViewController <UIActionSheetDelegate>
+@interface ECPostViewController : UIViewController <UIActionSheetDelegate> 
 -(IBAction)flagPhoto;
+-(IBAction) tapPlayButton;
+-(id) initWithPost: (NSDictionary*) post;
 
+@property (weak, nonatomic) IBOutlet UIButton *playButton;
 @property (nonatomic,strong) NSDictionary * post;
 @property (copy, nonatomic) NSString *artist;
 @property (copy, nonatomic) NSString* venueAndDate;

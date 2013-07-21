@@ -22,6 +22,7 @@
 #import "ECJSONPoster.h"
 #import "NSUserDefaults+Encore.h"
 #define FLAG_HUD_DELAY 1.0
+#import "ECYouTubeViewController.h"
 
 typedef enum {
     FlagPhoto
@@ -44,6 +45,14 @@ typedef enum {
     return self;
 }
 
+-(id) initWithPost:(NSDictionary *)post {
+    self = [super init];
+    if (self) {
+        self.post = post;
+    }
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -61,7 +70,28 @@ typedef enum {
     [self setupGestureRecgonizers];
     self.containerView.alpha = 0.0;
     self.flagPostButton.alpha = 0.0;
+    self.artistLabel.alpha = 0.0;
+    self.venueAndDateLabel.alpha = 0.0;
     self.flagPostButton.enabled = NO;
+
+    
+    [self updatePlayButton];
+}
+
+-(IBAction) tapPlayButton {
+    [Flurry logEvent:@"Tapped_Play_Button" withParameters:self.post];
+    [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
+    
+    [self openYouTube];
+}
+
+-(void) openYouTube {
+    ECYouTubeViewController* youtubeVC = [[ECYouTubeViewController alloc] initWithLink:[self.post youtubeLink]];
+    [self presentViewController:youtubeVC animated:YES completion:nil];
+}
+-(void) updatePlayButton {
+    self.playButton.hidden = [self.post postType] ==ECPhotoPost;
+    self.playButton.enabled = [self.post postType] ==ECVideoPost;
 }
 
 -(void) setupHeaderLabels {
@@ -127,6 +157,8 @@ typedef enum {
                      animations:^{
                          self.containerView.alpha = self.containerView.alpha == 0.0 ? 1.0 : 0.0;
                          self.flagPostButton.alpha = self.flagPostButton.alpha == 0.0 ? 1.0 : 0.0;
+                         self.artistLabel.alpha = self.artistLabel.alpha == 0.0 ? 1.0 : 0.0;
+                         self.venueAndDateLabel.alpha = self.venueAndDateLabel.alpha == 0.0 ? 1.0 : 0.0;
                      }
                      completion:^(BOOL finished){
                          self.flagPostButton.enabled = self.flagPostButton.alpha == 1.0;
@@ -142,14 +174,23 @@ typedef enum {
                           delay:0.0
                         options:UIViewAnimationOptionCurveEaseInOut animations:^{
                             self.postImage.alpha = 0.0;
+                            self.playButton.alpha = 0.0;
                         } completion:^(BOOL finished) {
+                            [self updatePlayButton];
                             self.userNameLabel.text = [self.post userName];
                             self.captionLabel.text = [self.post caption];
                             [self.postImage setImageWithURL:[self.post imageURL]];
                             [self.profilePicture setImageWithURL:[self.post profilePictureURL] placeholderImage:[UIImage imageNamed:@"placeholder.jpg"]];
-                            [UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{self.postImage.alpha = 1.0; }completion:nil];
+                            [UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                                self.postImage.alpha = 1.0;
+                                self.playButton.alpha = 1.0;
+                            }completion: ^(BOOL finished){
+
+                            }];
                         }
      ];
+    
+
 
 }
 
