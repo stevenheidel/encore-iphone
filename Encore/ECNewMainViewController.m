@@ -73,7 +73,7 @@ typedef enum {
         [self fetchConcerts];
     
     self.currentSearchType = [NSUserDefaults lastSearchType];//[ECNewMainViewController searchTypeForSegmentIndex:self.segmentedControl.selectedSegmentIndex]; //TODO load from user defaults
-    if (self.currentSearchType == 0) {
+    if (self.currentSearchType == 0) { //default if nothing saved is 0, which is invalid.
         self.currentSearchType = ECSearchTypeToday;
     }
     
