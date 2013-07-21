@@ -31,7 +31,6 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    NSLog(@"scroll view %@",NSStringFromCGRect(self.descScrollView.frame));
     self.navigationController.navigationBarHidden = YES;
     if ([[UIScreen mainScreen] bounds].size.height != 568) {
         self.descScrollView.contentSize = CGSizeMake(320*3,297);
@@ -52,7 +51,6 @@
         frame.origin.x = self.descScrollView.frame.size.width * i;
         frame.origin.y = 0.0f;
         frame.size = self.descScrollView.frame.size;
-        NSLog(@"frame %@",NSStringFromCGRect(frame));
         ECLoginPageView *subview = [[ECLoginPageView alloc] initWithFrame:frame];
         [subview SetUpPageforItem:currPageItem];
 //        subview.translatesAutoresizingMaskIntoConstraints = NO;
