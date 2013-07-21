@@ -120,7 +120,7 @@ typedef enum {
         
     userID = [NSUserDefaults userID];
     self.imgProfile.profileID = userID;
-    self.imgProfile.layer.cornerRadius = 56.0;
+    self.imgProfile.layer.cornerRadius = self.imgProfile.frame.size.width/2;
     self.imgProfile.layer.masksToBounds = YES;
     
     UITapGestureRecognizer* tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedProfilePhoto)];
@@ -128,9 +128,6 @@ typedef enum {
     tapRecognizer.numberOfTapsRequired = 1;
     tapRecognizer.numberOfTouchesRequired = 1;
     [self.imgProfile addGestureRecognizer:tapRecognizer];
-
-    //    self.imgProfile.layer.borderWidth = 1.0;
-    //    self.imgProfile.layer.borderColor = [UIColor profileImageBorderColor].CGColor;
     
     NSURL *imageURL = [NSUserDefaults facebookProfileImageURL];
     UIImage *profileImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL]];
