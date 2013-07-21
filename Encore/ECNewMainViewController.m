@@ -42,6 +42,7 @@ typedef enum {
     ECNumberOfSearchSections //always have this one last
 }ECSearchSection;
 
+
 @interface ECNewMainViewController ()
 
 @end
@@ -71,7 +72,7 @@ typedef enum {
         [self fetchConcerts];
     
     self.currentSearchType = [ECNewMainViewController searchTypeForSegmentIndex:self.segmentedControl.selectedSegmentIndex];
-//    [self displayViewsAccordingToSearchType];
+    [self displayViewsAccordingToSearchType];
     
     [self setupHUD];
     [self setupSearchBar];
@@ -82,6 +83,11 @@ typedef enum {
     self.view.clipsToBounds = YES;
     
     [self setupRefreshControl];
+}
+
+-(void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [[ATAppRatingFlow sharedRatingFlow] showRatingFlowFromViewControllerIfConditionsAreMet:self];
 }
 
 -(void) initializeSearchLocation: (CLLocation*) currentSearchLocation {
@@ -150,12 +156,8 @@ typedef enum {
     self.searchBar.autocapitalizationType = UITextAutocapitalizationTypeAllCharacters;
     [self.searchBar setTextColor:[UIColor blackColor]];
     
-
-}
-
--(void) viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [[ATAppRatingFlow sharedRatingFlow] showRatingFlowFromViewControllerIfConditionsAreMet:self];
+    UIColor *color = [UIColor darkGrayColor];
+    self.searchBar.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Artist search..." attributes:@{NSForegroundColorAttributeName: color}];
 }
 
 //Set up left bar button for going to profile and right bar button for sharing
