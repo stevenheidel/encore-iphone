@@ -16,4 +16,5 @@
 -(NSString *) caption;
 -(NSString *) postID;
 -(ECPostType) postType;
+-(NSURL*) youtubeLink;
 @end

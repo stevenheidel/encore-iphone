@@ -48,4 +48,8 @@
     }
     return ECPhotoPost;// default
 }
+
+-(NSURL*) youtubeLink {
+    return [NSURL URLWithString:[self objectForKey:@"link"]];
+}
 @end
