@@ -21,7 +21,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="HlE-VT-IbH">
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="E96-RF-aMq" userLabel="Header">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="145"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="74"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="BPv-ov-Jp0" userLabel="Segmented Control">
@@ -106,10 +106,10 @@
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
-                                        <constraint firstItem="hXC-Wo-Qyy" firstAttribute="top" secondItem="zAo-rd-fKL" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="OBD-Bs-sDh"/>
-                                        <constraint firstItem="zAo-rd-fKL" firstAttribute="top" secondItem="BPv-ov-Jp0" secondAttribute="bottom" constant="8" symbolic="YES" type="user" id="OH4-CF-XzW"/>
+                                        <constraint firstItem="hXC-Wo-Qyy" firstAttribute="top" secondItem="E96-RF-aMq" secondAttribute="top" constant="54" id="Goz-MX-wLF"/>
+                                        <constraint firstItem="hXC-Wo-Qyy" firstAttribute="centerX" secondItem="BPv-ov-Jp0" secondAttribute="centerX" type="default" id="GtG-Bn-KLr"/>
                                         <constraint firstItem="zAo-rd-fKL" firstAttribute="leading" secondItem="BPv-ov-Jp0" secondAttribute="leading" type="default" id="f19-PU-mik"/>
-                                        <constraint firstItem="hXC-Wo-Qyy" firstAttribute="leading" secondItem="E96-RF-aMq" secondAttribute="leading" constant="99" id="qFm-a8-gZy"/>
+                                        <constraint firstItem="zAo-rd-fKL" firstAttribute="top" secondItem="E96-RF-aMq" secondAttribute="top" constant="74" id="gFw-6w-bbL"/>
                                         <constraint firstItem="BPv-ov-Jp0" firstAttribute="top" secondItem="E96-RF-aMq" secondAttribute="top" constant="10" type="user" id="rrE-tc-61K"/>
                                         <constraint firstAttribute="centerX" secondItem="BPv-ov-Jp0" secondAttribute="centerX" type="user" id="yhx-B8-jXh"/>
                                         <constraint firstAttribute="centerX" secondItem="zAo-rd-fKL" secondAttribute="centerX" type="user" id="zEc-XP-arK"/>
@@ -117,7 +117,7 @@
                                 </view>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" restorationIdentifier="Cell" selectionStyle="blue" indentationWidth="10" reuseIdentifier="Cell" id="7Fj-8N-9kC" customClass="ECSearchResultCell">
-                                        <rect key="frame" x="0.0" y="167" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="96" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -151,6 +151,7 @@
                     <navigationItem key="navigationItem" id="hU3-8N-dbJ"/>
                     <connections>
                         <outlet property="imgBackground" destination="SOM-DW-RgO" id="9JC-84-F7Y"/>
+                        <outlet property="lastFMButton" destination="hXC-Wo-Qyy" id="L8g-xb-OuV"/>
                         <outlet property="searchBar" destination="UU0-XP-3u7" id="dl6-xV-dhp"/>
                         <outlet property="searchContainer" destination="zAo-rd-fKL" id="bKP-SY-rAK"/>
                         <outlet property="segmentedControl" destination="BPv-ov-Jp0" id="Mca-YI-uBY"/>
@@ -192,7 +193,7 @@
                 <relationship kind="action" name="openLocationSetter"/>
                 <relationship kind="action" name="switchedSelection:"/>
                 <relationship kind="outlet" name="imgBackground" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="imgLastfmAttr" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="lastFMButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="lblTodaysDate" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="searchBar" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="searchContainer" candidateClass="UIView"/>

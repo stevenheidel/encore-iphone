@@ -42,8 +42,9 @@ typedef enum {
     ECNumberOfSearchSections //always have this one last
 }ECSearchSection;
 
-
-@interface ECNewMainViewController ()
+@interface ECNewMainViewController () {
+    BOOL showingSearchBar;
+}
 
 @end
 
@@ -54,6 +55,7 @@ typedef enum {
     [super viewDidLoad];
     self.searchHeaderView = nil;
     self.hasSearched = FALSE;
+    showingSearchBar = NO;
     self.comboSearchResultsDic = nil;
     [self.tableView registerNib:[UINib nibWithNibName:@"ECSearchResultCell" bundle:nil]
          forCellReuseIdentifier:SearchCellIdentifier];
@@ -71,8 +73,8 @@ typedef enum {
     if(self.currentSearchLocation)
         [self fetchConcerts];
     
-    self.currentSearchType = [ECNewMainViewController searchTypeForSegmentIndex:self.segmentedControl.selectedSegmentIndex];
-    [self displayViewsAccordingToSearchType];
+    self.currentSearchType = [ECNewMainViewController searchTypeForSegmentIndex:self.segmentedControl.selectedSegmentIndex]; //TODO load from user defaults
+
     
     [self setupHUD];
     [self setupSearchBar];
@@ -83,6 +85,7 @@ typedef enum {
     self.view.clipsToBounds = YES;
     
     [self setupRefreshControl];
+    [self displayViewsAccordingToSearchType];
 }
 
 -(void) viewWillAppear:(BOOL)animated {
@@ -373,9 +376,31 @@ typedef enum {
     return ECSearchTypeToday;
 }
 
+-(BOOL) shouldShowSearchBar {
+    return self.currentSearchType != ECSearchTypeToday;
+}
 - (void)displayViewsAccordingToSearchType {
     self.searchContainer.hidden = self.currentSearchType == ECSearchTypeToday;
     self.searchContainer.userInteractionEnabled = self.currentSearchType != ECSearchTypeToday;
+    
+    if (![self shouldShowSearchBar] && showingSearchBar) {
+        CGRect frame = self.tableView.tableHeaderView.frame;
+        frame.size.height = frame.size.height - self.searchContainer.frame.size.height - 10; //the 10 was arbitrary, fix if needed
+        UIView* view = self.tableView.tableHeaderView;
+        [view setFrame:frame];
+        self.tableView.tableHeaderView = view;
+        showingSearchBar = NO;
+    }
+    else if(!showingSearchBar && [self shouldShowSearchBar]){
+        //        [UIView animateWithDuration:1.0 animations:^{
+        CGRect frame = self.tableView.tableHeaderView.frame;
+        frame.size.height = frame.size.height + self.searchContainer.frame.size.height + 10;
+        UIView* view = self.tableView.tableHeaderView;
+        [view setFrame:frame];
+        self.tableView.tableHeaderView = view;
+        showingSearchBar = YES;
+        //        }];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -421,6 +446,7 @@ typedef enum {
         ECConcertCellView *cell = [tableView dequeueReusableCellWithIdentifier:ConcertCellIdentifier forIndexPath:indexPath];
         NSArray* concerts = [self currentEventArray];
         NSDictionary * concertDic = [concerts objectAtIndex:indexPath.row];
+        
 
         [cell setUpCellForConcert:concertDic];
         
@@ -486,31 +512,11 @@ typedef enum {
     }
 }
 -(UIView*) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-//    if (self.hasSearched && self.searchResultsEvents.count>0) {
-//        if (section == ECSearchResultSection) {
-//            NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"SearchResultsSectionHeader" owner:nil options:nil];
-//            UIView *mainView = [subviewArray objectAtIndex:0];
-////            [(UILabel*)[mainView viewWithTag:20] setText:[[self.searchResultsEvents objectAtIndex:0] artistName]];
-//            UIImageView *artistImage = (UIImageView*)[mainView viewWithTag:10];
-//            UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[[self.searchResultsEvents objectAtIndex:0] imageURL]]];
-//            //[artistImage setFrame:CGRectMake(0, 0, image.size.width, image.size.height)];
-//            [artistImage setImage:image];
-//            artistImage.layer.cornerRadius = 35.0;
-//            artistImage.layer.masksToBounds = YES;
-//
-//            mainView.clipsToBounds =YES;
-//            return mainView;
-//        }
-//    }
-    
     return nil;
 }
 
 -(CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-//    if (self.hasSearched && section == ECSearchResultSection && self.searchResultsEvents.count>0) {
-//        return 117.0;
-//    }
-    return 0.0;
+    return 0;
 }
 
 #pragma mark - Search Text Field
