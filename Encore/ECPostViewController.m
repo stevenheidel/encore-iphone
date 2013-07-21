@@ -26,6 +26,7 @@
 typedef enum {
     FlagPhoto
 }ActionSheetTags;
+
 @interface ECPostViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *artistLabel;
 @property (weak, nonatomic) IBOutlet UILabel *venueAndDateLabel;

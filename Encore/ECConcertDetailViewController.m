@@ -487,6 +487,8 @@ NSString *kCellID = @"cellID";
         NSDictionary * postDic = [self.posts objectAtIndex:indexPath.row];
         NSURL *imageToLoad = [postDic imageURL];
         [cell.image setImageWithURL:imageToLoad];
+        
+        cell.postType = [postDic postType];
     }
     return cell;
 }

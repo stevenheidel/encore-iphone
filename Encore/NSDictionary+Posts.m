@@ -37,4 +37,15 @@
 -(NSString*) postID {
     return [self objectForKey:@"id"];
 }
+
+-(ECPostType) postType {
+    NSString* type =  [self objectForKey:@"type"];
+    if ([type isEqualToString:@"photo"]) {
+        return ECPhotoPost;
+    }
+    if ([type isEqualToString:@"video"]){
+        return ECVideoPost;
+    }
+    return ECPhotoPost;// default
+}
 @end

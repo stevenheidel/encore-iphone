@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ECPostType.h"
 
 @interface NSDictionary (Posts)
 -(NSURL *) imageURL;
@@ -14,4 +15,5 @@
 -(NSURL *) profilePictureURL;
 -(NSString *) caption;
 -(NSString *) postID;
+-(ECPostType) postType;
 @end

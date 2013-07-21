@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+
 @protocol ECPostViewControllerDelegate;
 @interface ECPostViewController : UIViewController <UIActionSheetDelegate>
 -(IBAction)flagPhoto;
