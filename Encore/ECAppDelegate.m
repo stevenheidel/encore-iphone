@@ -290,7 +290,6 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
             NSLog(@"Horizontal Accuracy:%f", newLocation.horizontalAccuracy);
             //turn off location services once we've gotten a good location
             [manager stopUpdatingLocation];
-            [self.mainViewController initializeSearchLocation:newLocation];
             [self saveLocationToUserDefaults:newLocation];
         }
     }

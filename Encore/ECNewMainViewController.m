@@ -70,8 +70,9 @@ typedef enum {
     self.tap = [[UITapGestureRecognizer alloc]
                                    initWithTarget:self
                                    action:@selector(dismissKeyboard)];
-    if(self.currentSearchLocation)
-        [self fetchConcerts];
+    
+    [self initializeSearchLocation];
+    [self fetchConcerts];
     
     self.currentSearchType = [NSUserDefaults lastSearchType];//[ECNewMainViewController searchTypeForSegmentIndex:self.segmentedControl.selectedSegmentIndex]; //TODO load from user defaults
     if (self.currentSearchType == 0) { //default if nothing saved is 0, which is invalid.
@@ -117,35 +118,46 @@ typedef enum {
     [NSUserDefaults synchronize];
 }
 
--(void) initializeSearchLocation: (CLLocation*) currentSearchLocation {
-    self.currentSearchLocation = currentSearchLocation;
+-(void) initializeSearchLocation{
+    self.currentSearchLocation = [NSUserDefaults lastSearchLocation];
     self.currentSearchRadius = [NSUserDefaults lastSearchRadius];
-    [self fetchConcerts];
+}
+
+-(void) setEventArray: (NSArray*) concerts forType: (ECSearchType) searchType {
+    switch (searchType) {
+        case ECSearchTypeToday:
+            self.todaysConcerts = concerts;
+            break;
+        case ECSearchTypeFuture:
+            self.futureConcerts = concerts;
+            break;
+        case ECSearchTypePast:
+            self.pastConcerts = concerts;
+            break;
+        default:
+            break;
+    }
+}
+
+-(void) fetchedPopularConcerts: (NSArray*) concerts forType: (ECSearchType) searchType {
+    [self setEventArray: concerts forType: searchType];
+    if (self.segmentedControl.selectedSegmentIndex == [ECNewMainViewController segmentIndexForSearchType:searchType]) {
+        [self.tableView reloadData];
+        [self setBackgroundImage];
+    }
 }
 
 -(void) fetchConcerts {
     [ECJSONFetcher fetchPopularConcertsWithSearchType:ECSearchTypeToday location: self.currentSearchLocation radius: [NSNumber numberWithFloat:self.currentSearchRadius] completion:^(NSArray *concerts) {
-        self.todaysConcerts = concerts;
-        if (self.segmentedControl.selectedSegmentIndex == [ECNewMainViewController segmentIndexForSearchType:self.currentSearchType]) {
-            [self.tableView reloadData];
-            [self setBackgroundImage];
-        }
-        
+        [self fetchedPopularConcerts: concerts forType:ECSearchTypeToday];
     }];
+    
     [ECJSONFetcher fetchPopularConcertsWithSearchType:ECSearchTypePast location: self.currentSearchLocation radius: [NSNumber numberWithFloat:self.currentSearchRadius] completion:^(NSArray *concerts) {
-        self.pastConcerts = concerts;
-        if (self.segmentedControl.selectedSegmentIndex == [ECNewMainViewController segmentIndexForSearchType:self.currentSearchType]) {
-            [self.tableView reloadData];
-            [self setBackgroundImage];
-        }
+        [self fetchedPopularConcerts:concerts forType:ECSearchTypePast];
     }];
     
     [ECJSONFetcher fetchPopularConcertsWithSearchType:ECSearchTypeFuture location: self.currentSearchLocation radius: [NSNumber numberWithFloat:self.currentSearchRadius] completion:^(NSArray *concerts) {
-        self.futureConcerts = concerts;
-        if (self.segmentedControl.selectedSegmentIndex == [ECNewMainViewController segmentIndexForSearchType:self.currentSearchType]) {
-            [self.tableView reloadData];
-            [self setBackgroundImage];
-        }
+        [self fetchedPopularConcerts:concerts forType:ECSearchTypeFuture];
     }];
 }
 
