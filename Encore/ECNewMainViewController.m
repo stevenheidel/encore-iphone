@@ -671,7 +671,7 @@ typedef enum {
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
-    [self.view addGestureRecognizer:self.tap];
+    [self.view addGestureRecognizer:self.tap]; //for dismissing the keyboard if tap outside
 }
 
 - (void)fetchedConcertsForSearch:(NSDictionary *)comboDic {
