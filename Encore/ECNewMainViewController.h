@@ -23,7 +23,7 @@
 
 @property (weak, nonatomic) IBOutlet UIView *searchContainer;
 @property (nonatomic, strong) CLLocation* currentSearchLocation;
-@property (nonatomic, assign) NSNumber* currentSearchRadius;
+@property (nonatomic, assign) float currentSearchRadius;
 
 @property(nonatomic, weak) IBOutlet UIImageView *imgBackground;
 @property (nonatomic, strong) ECLocationSetterViewController* locationSetterView;

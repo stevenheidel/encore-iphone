@@ -330,6 +330,7 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     [NSUserDefaults setLastSearchType:self.mainViewController.currentSearchType];
+    [NSUserDefaults setLastSearchRadius:self.mainViewController.currentSearchRadius];
     [NSUserDefaults synchronize];
     
     [Flurry logEvent:@"Application_Did_Enter_Background"];
@@ -350,6 +351,9 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     [Flurry logEvent:@"Application_Will_Terminate"];
+    [NSUserDefaults setLastSearchType:self.mainViewController.currentSearchType];
+    [NSUserDefaults setLastSearchRadius:self.mainViewController.currentSearchRadius];
+    [NSUserDefaults synchronize];
 }
 
 @end

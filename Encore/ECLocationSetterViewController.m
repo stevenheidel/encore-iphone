@@ -52,11 +52,8 @@
 }
 -(void) getDefaults {
     float lastSearchRadius = [NSUserDefaults lastSearchRadius];
-    if (lastSearchRadius == 0) {// nsuserdefaults will return 0 if the key doesn't already exist.
-        self.radius = 0.5f;
-        [NSUserDefaults setLastSearchRadius:lastSearchRadius];
-        [NSUserDefaults synchronize];
-    }
+    NSLog(@"%f",lastSearchRadius);
+    self.radius = lastSearchRadius;
     
     CLLocation* lastSearchLocation = [NSUserDefaults lastSearchLocation];
     
@@ -121,16 +118,20 @@
         [self reverseGeocodeLocation];
 }
 
--(void) viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+-(void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [self getDefaults];
 }
 
 -(void) setRadius:(float)radius {
     _radius = radius;
-    self.locationSlider.value = radius;
+    [self.locationSlider setValue:radius];
 }
 
+-(IBAction) doneMovingSlider { //linked to touch up inside/outside
+    _radius = self.locationSlider.value;
+    [self.delegate updateRadius: self.locationSlider.value];
+}
 -(IBAction) touchedOutsideTextField: (id) sender {
     [self.view endEditing:YES];
 }
@@ -214,7 +215,7 @@
             if ([self.locationSearchBar isFirstResponder]) {
                 [self.locationSearchBar resignFirstResponder];
             }
-            [self.delegate updateSearchLocation:self.location radius:self.radius]; //this will dismiss the view
+            [self.delegate updateSearchLocation:self.location radius:self.locationSlider.value]; //this will dismiss the view
         }
     }
 }
@@ -251,11 +252,6 @@
     [UIView commitAnimations];
 }
 
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-}
 
 - (void)viewWillDisappear:(BOOL)animated
 {

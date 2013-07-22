@@ -72,12 +72,12 @@ NSString* stringForSearchType(ECSearchType searchType) {
     }
     return nil;
 }
-+(void)fetchPopularConcertsWithSearchType:(ECSearchType)searchType location: (CLLocation*) location completion: (void (^)(NSArray* concerts)) completion {
++(void)fetchPopularConcertsWithSearchType:(ECSearchType)searchType location: (CLLocation*) location radius: (NSNumber*) radius completion: (void (^)(NSArray* concerts)) completion {
     __block NSArray * concertList;
     NSNumber* latitude = [NSNumber numberWithDouble:location.coordinate.latitude];
     NSNumber* longitude = [NSNumber numberWithDouble:location.coordinate.longitude];
     
-    NSDictionary * parameters = [NSDictionary dictionaryWithObjectsAndKeys:latitude,@"latitude", longitude, @"longitude", @"Toronto", @"city",nil];
+    NSDictionary * parameters = [NSDictionary dictionaryWithObjectsAndKeys:latitude,@"latitude", longitude, @"longitude", radius, @"radius",nil];
     
     NSURL * url = [NSURL URLWithString:BaseURL];
     AFHTTPClient * client = [[AFHTTPClient alloc] initWithBaseURL:url];
@@ -146,7 +146,7 @@ NSString* stringForSearchType(ECSearchType searchType) {
 }
 
 //using combined search
-+(void)fetchArtistsForString:(NSString*)searchStr withSearchType:(ECSearchType)searchType forLocation:(CLLocation*)location completion:(void (^)(NSDictionary* artists)) completion {
++(void)fetchArtistsForString:(NSString*)searchStr withSearchType:(ECSearchType)searchType forLocation:(CLLocation*)location radius: (NSNumber*) radius completion:(void (^)(NSDictionary* artists)) completion {
     
     __block NSDictionary * artistConcertComboList;
 
@@ -164,7 +164,7 @@ NSString* stringForSearchType(ECSearchType searchType) {
     
     NSNumber* latitude = [NSNumber numberWithDouble:location.coordinate.latitude];
     NSNumber* longitude = [NSNumber numberWithDouble:location.coordinate.longitude];
-    NSDictionary * parameters = [NSDictionary dictionaryWithObjectsAndKeys:latitude,@"latitude",longitude, @"longitude", searchStr, @"term", tenseString, @"tense"/*, @"Toronto", @"city"*/,nil]; //TODO remove
+    NSDictionary * parameters = [NSDictionary dictionaryWithObjectsAndKeys:latitude,@"latitude",longitude, @"longitude", searchStr, @"term", tenseString, @"tense",radius, @"radius",nil];
     
     [client getPath:ArtistCombinedSearchURL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"Successfully fetched Artists and Concerts for string. %@", searchStr);
@@ -198,6 +198,7 @@ NSString* stringForSearchType(ECSearchType searchType) {
     }];
 }
 
+//not currently being used anywhere
 +(void) fetchConcertsForArtistID:(NSNumber *)artistID withSearchType:(ECSearchType)searchType completion: (void (^)(NSArray* concerts)) completion {
     __block NSArray * concertList;
     NSString *userLocation = @"Toronto"; //TODO: Get location dynamically from app delegate

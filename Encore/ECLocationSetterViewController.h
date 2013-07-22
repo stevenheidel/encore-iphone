@@ -26,5 +26,5 @@
 
 @required
 -(void) updateSearchLocation:(CLLocation *)location radius: (float) radius;
-
+-(void) updateRadius: (float) radius;
 @end

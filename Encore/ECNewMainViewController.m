@@ -119,12 +119,12 @@ typedef enum {
 
 -(void) initializeSearchLocation: (CLLocation*) currentSearchLocation {
     self.currentSearchLocation = currentSearchLocation;
+    self.currentSearchRadius = [NSUserDefaults lastSearchRadius];
     [self fetchConcerts];
 }
 
 -(void) fetchConcerts {
-    //TODO add radius
-    [ECJSONFetcher fetchPopularConcertsWithSearchType:ECSearchTypeToday location: self.currentSearchLocation completion:^(NSArray *concerts) {
+    [ECJSONFetcher fetchPopularConcertsWithSearchType:ECSearchTypeToday location: self.currentSearchLocation radius: [NSNumber numberWithFloat:self.currentSearchRadius] completion:^(NSArray *concerts) {
         self.todaysConcerts = concerts;
         if (self.segmentedControl.selectedSegmentIndex == [ECNewMainViewController segmentIndexForSearchType:self.currentSearchType]) {
             [self.tableView reloadData];
@@ -132,7 +132,7 @@ typedef enum {
         }
         
     }];
-    [ECJSONFetcher fetchPopularConcertsWithSearchType:ECSearchTypePast location: self.currentSearchLocation completion:^(NSArray *concerts) {
+    [ECJSONFetcher fetchPopularConcertsWithSearchType:ECSearchTypePast location: self.currentSearchLocation radius: [NSNumber numberWithFloat:self.currentSearchRadius] completion:^(NSArray *concerts) {
         self.pastConcerts = concerts;
         if (self.segmentedControl.selectedSegmentIndex == [ECNewMainViewController segmentIndexForSearchType:self.currentSearchType]) {
             [self.tableView reloadData];
@@ -140,7 +140,7 @@ typedef enum {
         }
     }];
     
-    [ECJSONFetcher fetchPopularConcertsWithSearchType:ECSearchTypeFuture location: self.currentSearchLocation completion:^(NSArray *concerts) {
+    [ECJSONFetcher fetchPopularConcertsWithSearchType:ECSearchTypeFuture location: self.currentSearchLocation radius: [NSNumber numberWithFloat:self.currentSearchRadius] completion:^(NSArray *concerts) {
         self.futureConcerts = concerts;
         if (self.segmentedControl.selectedSegmentIndex == [ECNewMainViewController segmentIndexForSearchType:self.currentSearchType]) {
             [self.tableView reloadData];
@@ -168,8 +168,7 @@ typedef enum {
 }
 -(void) reloadData {
     [Flurry logEvent:@"Used_Refresh_Control_Main_View" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[self currentSearchTypeString], @"search_type", nil]];
-    
-    [ECJSONFetcher fetchPopularConcertsWithSearchType:self.currentSearchType location: self.currentSearchLocation completion:^(NSArray *concerts) {
+    [ECJSONFetcher fetchPopularConcertsWithSearchType:self.currentSearchType location: self.currentSearchLocation radius: [NSNumber numberWithFloat:self.currentSearchRadius] completion:^(NSArray *concerts) {
         NSArray* currentArray = [self currentEventArray];
         currentArray = concerts;
         [self.tableView reloadData];
@@ -327,6 +326,10 @@ typedef enum {
         self.locationSetterView = [ECLocationSetterViewController new];
         self.locationSetterView.delegate = self;
     }
+    
+    [NSUserDefaults setLastSearchRadius:self.currentSearchRadius];
+    [NSUserDefaults synchronize];
+    
     [self presentSemiViewController:self.locationSetterView withOptions:@{
      KNSemiModalOptionKeys.pushParentBack : @(NO),
      KNSemiModalOptionKeys.parentAlpha : @(0.8)
@@ -340,8 +343,9 @@ typedef enum {
 
 #pragma mark ECLocationSetterDelegate Method
 -(void) updateSearchLocation:(CLLocation *)location radius: (float) radius {
+    NSLog(@"new radius %f",radius);
     self.currentSearchLocation = location;
-    self.currentSearchRadius = [NSNumber numberWithFloat:radius];
+    self.currentSearchRadius = radius;
     [NSUserDefaults setLastSearchLocation:location];
     [NSUserDefaults setLastSearchRadius:radius];
     [NSUserDefaults synchronize];
@@ -349,6 +353,11 @@ typedef enum {
     
     //TODO update all the popular concerts according to the new location
     [self fetchConcerts];
+}
+
+-(void) updateRadius:(float)radius {
+    NSLog(@"Radius updated");
+    self.currentSearchRadius = radius;
 }
 
 #pragma mark Alert View Delegate
@@ -634,7 +643,7 @@ typedef enum {
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
     if ([textField.text length] > 0) { //don't search empty searches
-        [ECJSONFetcher fetchArtistsForString:textField.text withSearchType:[self tenseForSearchType] forLocation:self.currentSearchLocation completion:^(NSDictionary * comboDic) { //TODO load actual location
+        [ECJSONFetcher fetchArtistsForString:textField.text withSearchType:[self tenseForSearchType] forLocation:self.currentSearchLocation radius: [NSNumber numberWithFloat:self.currentSearchRadius] completion:^(NSDictionary * comboDic) {
             [self fetchedConcertsForSearch:comboDic];
         }];
 
