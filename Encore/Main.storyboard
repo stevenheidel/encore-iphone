@@ -163,10 +163,10 @@
             </objects>
             <point key="canvasLocation" x="435" y="-20"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Custom Nav Controller-->
         <scene sceneID="sgR-27-kM6">
             <objects>
-                <navigationController definesPresentationContext="YES" id="aaM-Mm-ejq" sceneMemberID="viewController">
+                <navigationController definesPresentationContext="YES" id="aaM-Mm-ejq" customClass="ECCustomNavController" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="adX-lm-cjI">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -186,6 +186,9 @@
         <image name="searchbar.png" width="239" height="32"/>
     </resources>
     <classes>
+        <class className="ECCustomNavController" superclassName="UINavigationController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ECCustomNavController.h"/>
+        </class>
         <class className="ECNewMainViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ECNewMainViewController.h"/>
             <relationships>

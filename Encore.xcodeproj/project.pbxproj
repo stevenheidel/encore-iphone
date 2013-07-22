@@ -181,8 +181,8 @@
 		D4B7A8BD1799FD68001C14BE /* mylocationindicator.png in Resources */ = {isa = PBXBuildFile; fileRef = D4B7A8BB1799FD68001C14BE /* mylocationindicator.png */; };
 		D4B7A8BE1799FD68001C14BE /* mylocationindicator@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4B7A8BC1799FD68001C14BE /* mylocationindicator@2x.png */; };
 		D4B8DECD179C663E00239A08 /* playbutton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4B8DECC179C663E00239A08 /* playbutton@2x.png */; };
-		D4B8DED2179C82D200239A08 /* ECYouTubeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4B8DED0179C82D200239A08 /* ECYouTubeViewController.m */; };
-		D4B8DED3179C82D200239A08 /* ECYouTubeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4B8DED1179C82D200239A08 /* ECYouTubeViewController.xib */; };
+		D4BB7E09179CCF4E0098BCF4 /* ECCustomNavController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4BB7E08179CCF4E0098BCF4 /* ECCustomNavController.m */; };
+		D4BB7E0B179CD4B30098BCF4 /* navbarlandscape@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4BB7E0A179CD4B30098BCF4 /* navbarlandscape@2x.png */; };
 		D4C9C085177A090800F864FC /* instagram.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D4C9C084177A090800F864FC /* instagram.jpg */; };
 		D4E16CA817973BF100A9DC99 /* locationmakerwhite.png in Resources */ = {isa = PBXBuildFile; fileRef = D4E16CA617973BF100A9DC99 /* locationmakerwhite.png */; };
 		D4E16CA917973BF100A9DC99 /* locationmakerwhite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4E16CA717973BF100A9DC99 /* locationmakerwhite@2x.png */; };
@@ -447,9 +447,9 @@
 		D4B7A8BB1799FD68001C14BE /* mylocationindicator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mylocationindicator.png; sourceTree = "<group>"; };
 		D4B7A8BC1799FD68001C14BE /* mylocationindicator@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mylocationindicator@2x.png"; sourceTree = "<group>"; };
 		D4B8DECC179C663E00239A08 /* playbutton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "playbutton@2x.png"; sourceTree = "<group>"; };
-		D4B8DECF179C82D200239A08 /* ECYouTubeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECYouTubeViewController.h; sourceTree = "<group>"; };
-		D4B8DED0179C82D200239A08 /* ECYouTubeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECYouTubeViewController.m; sourceTree = "<group>"; };
-		D4B8DED1179C82D200239A08 /* ECYouTubeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECYouTubeViewController.xib; sourceTree = "<group>"; };
+		D4BB7E07179CCF4E0098BCF4 /* ECCustomNavController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECCustomNavController.h; sourceTree = "<group>"; };
+		D4BB7E08179CCF4E0098BCF4 /* ECCustomNavController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECCustomNavController.m; sourceTree = "<group>"; };
+		D4BB7E0A179CD4B30098BCF4 /* navbarlandscape@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navbarlandscape@2x.png"; sourceTree = "<group>"; };
 		D4C9C084177A090800F864FC /* instagram.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = instagram.jpg; sourceTree = "<group>"; };
 		D4E16CA617973BF100A9DC99 /* locationmakerwhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = locationmakerwhite.png; sourceTree = "<group>"; };
 		D4E16CA717973BF100A9DC99 /* locationmakerwhite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "locationmakerwhite@2x.png"; sourceTree = "<group>"; };
@@ -606,12 +606,11 @@
 		D4A8DDD0176A4272005E9847 /* Post detail */ = {
 			isa = PBXGroup;
 			children = (
+				D4BB7E07179CCF4E0098BCF4 /* ECCustomNavController.h */,
+				D4BB7E08179CCF4E0098BCF4 /* ECCustomNavController.m */,
 				D4A8DDCB176A405D005E9847 /* ECPostViewController.h */,
 				D4A8DDCC176A405D005E9847 /* ECPostViewController.m */,
 				D4A8DDCD176A405D005E9847 /* ECPostViewController.xib */,
-				D4B8DECF179C82D200239A08 /* ECYouTubeViewController.h */,
-				D4B8DED0179C82D200239A08 /* ECYouTubeViewController.m */,
-				D4B8DED1179C82D200239A08 /* ECYouTubeViewController.xib */,
 			);
 			name = "Post detail";
 			sourceTree = "<group>";
@@ -662,6 +661,7 @@
 		D4A9B2D1178DBB83008B5504 /* Topbar */ = {
 			isa = PBXGroup;
 			children = (
+				D4BB7E0A179CD4B30098BCF4 /* navbarlandscape@2x.png */,
 				D4A9B2D2178DBE83008B5504 /* navbar.png */,
 				D4A9B2D3178DBE83008B5504 /* navbar@2x.png */,
 				D491F805178B54C9002E00E5 /* logo.png */,
@@ -1279,7 +1279,7 @@
 				D4B7A8BE1799FD68001C14BE /* mylocationindicator@2x.png in Resources */,
 				2401A80B179BC74E00B881B7 /* playbutton.png in Resources */,
 				D4B8DECD179C663E00239A08 /* playbutton@2x.png in Resources */,
-				D4B8DED3179C82D200239A08 /* ECYouTubeViewController.xib in Resources */,
+				D4BB7E0B179CD4B30098BCF4 /* navbarlandscape@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1370,7 +1370,7 @@
 				D4AC2DFF178FA64E00F292CA /* ECProfileConcertCell.m in Sources */,
 				D4A7981817930F9B0029F469 /* ECLocationSetterViewController.m in Sources */,
 				D4B31DE91793D03300822228 /* NSUserDefaults+Encore.m in Sources */,
-				D4B8DED2179C82D200239A08 /* ECYouTubeViewController.m in Sources */,
+				D4BB7E09179CCF4E0098BCF4 /* ECCustomNavController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

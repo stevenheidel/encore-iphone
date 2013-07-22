@@ -22,8 +22,6 @@
 #import "ECJSONPoster.h"
 #import "NSUserDefaults+Encore.h"
 #define FLAG_HUD_DELAY 1.0
-#import "ECYouTubeViewController.h"
-
 typedef enum {
     FlagPhoto
 }ActionSheetTags;
@@ -73,25 +71,70 @@ typedef enum {
     self.artistLabel.alpha = 0.0;
     self.venueAndDateLabel.alpha = 0.0;
     self.flagPostButton.enabled = NO;
-
+    self.youtubeShowing = NO;
     
-    [self updatePlayButton];
 }
 
--(IBAction) tapPlayButton {
-    [Flurry logEvent:@"Tapped_Play_Button" withParameters:self.post];
-    [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
+-(BOOL)shouldAutorotate{
+//    if ([self presentedViewController] != nil) {
+//        return YES;
+//    }
+//    else return self.interfaceOrientation == UIInterfaceOrientationMaskPortrait;
+    return NO;
+}
+
+-(NSUInteger)supportedInterfaceOrientations{
+//    if ([self presentedViewController] != nil) {
+//        return UIInterfaceOrientationMaskAllButUpsideDown;
+//    }
+//    else return UIInterfaceOrientationMaskPortrait;
+    return UIInterfaceOrientationMaskPortrait;
+}
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation{
+//    if([self presentedViewController] != nil){
+//        return UIInterfaceOrientationLandscapeLeft;
+//    }
+//    return UIInterfaceOrientationPortrait;
+    return UIInterfaceOrientationPortrait;
+}
+
+//-(IBAction) tapPlayButton {
+//    [Flurry logEvent:@"Tapped_Play_Button" withParameters:self.post];
+//    [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
+//    
+////    [self openYouTube];
+//}
+
+//-(void) openYouTube {
+//    ECYouTubeViewController* youtubeVC = [[ECYouTubeViewController alloc] initWithLink:[self.post youtubeLink]];
+//    [self presentViewController:youtubeVC animated:YES completion:nil];
+//    
+//}
+
+-(void) setViewForCurrentType {
+    NSLog(@"updatePlayButton called");
+    ECPostType postType = [self.post postType];
+//    self.playButton.hidden = YES;//postType ==ECPhotoPost;
+//    self.playButton.enabled = postType ==ECVideoPost;
+    self.youtubeWebView.hidden = postType == ECPhotoPost;
+    self.postImage.hidden = postType == ECVideoPost;
     
-    [self openYouTube];
+    if (postType == ECVideoPost) {
+        [self setupWebView];
+    }
 }
 
--(void) openYouTube {
-    ECYouTubeViewController* youtubeVC = [[ECYouTubeViewController alloc] initWithLink:[self.post youtubeLink]];
-    [self presentViewController:youtubeVC animated:YES completion:nil];
-}
--(void) updatePlayButton {
-    self.playButton.hidden = [self.post postType] ==ECPhotoPost;
-    self.playButton.enabled = [self.post postType] ==ECVideoPost;
+-(void) setupWebView {
+    NSString* link =  [[self.post youtubeLink] absoluteString];
+    // Do any additional setup after loading the view from its nib.
+    NSString *htmlString = [NSString stringWithFormat:@"<html><head><meta name = \"viewport\" content = \"initial-scale = 1.0, user-scalable = no, width = 320\"/></head><body style=\"background:#000;margin-top:0px;margin-left:0px\"><div><object width=\"320\" height=\"320\"><param name=\"movie\" value=\"%@\"></param><param name=\"wmode\"value=\"transparent\"></param><embed src=\"%@\"type=\"application/x-shockwave-flash\" wmode=\"transparent\" width=\"320\" height=\"320\"></embed></object></div></body></html>",link,link];
+    
+    self.youtubeWebView.scrollView.scrollEnabled = FALSE;
+    self.youtubeWebView.contentMode = UIViewContentModeScaleAspectFit;
+    self.youtubeWebView.scalesPageToFit = YES;
+    self.youtubeWebView.autoresizingMask = (UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth);
+    [self.youtubeWebView loadHTMLString:htmlString baseURL:nil];
+
 }
 
 -(void) setupHeaderLabels {
@@ -174,22 +217,23 @@ typedef enum {
                           delay:0.0
                         options:UIViewAnimationOptionCurveEaseInOut animations:^{
                             self.postImage.alpha = 0.0;
-                            self.playButton.alpha = 0.0;
+//                            self.playButton.alpha = 0.0;
+                            self.youtubeWebView.alpha = 0.0;
                         } completion:^(BOOL finished) {
-                            [self updatePlayButton];
+                            [self setViewForCurrentType];
                             self.userNameLabel.text = [self.post userName];
                             self.captionLabel.text = [self.post caption];
                             [self.postImage setImageWithURL:[self.post imageURL]];
                             [self.profilePicture setImageWithURL:[self.post profilePictureURL] placeholderImage:[UIImage imageNamed:@"placeholder.jpg"]];
                             [UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
                                 self.postImage.alpha = 1.0;
-                                self.playButton.alpha = 1.0;
+//                                self.playButton.alpha = 1.0;
+                                self.youtubeWebView.alpha = 1.0;
                             }completion: ^(BOOL finished){
 
                             }];
                         }
      ];
-    
 
 
 }

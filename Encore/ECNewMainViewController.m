@@ -30,6 +30,7 @@
 #import "ECLocationSetterViewController.h"
 
 #import "NSUserDefaults+Encore.h"
+#import "ECCustomNavController.h"
 
 #define SearchCellIdentifier @"ECSearchResultCell"
 #define ConcertCellIdentifier @"ECConcertCellView"
@@ -91,6 +92,17 @@ typedef enum {
     [self setupRefreshControl];
     [self displayViewsAccordingToSearchType];
     
+}
+
+-(BOOL)shouldAutorotate{
+    return NO;
+}
+
+-(NSUInteger)supportedInterfaceOrientations{
+    return UIInterfaceOrientationMaskPortrait;
+}
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation{
+    return UIInterfaceOrientationPortrait;
 }
 
 -(void) viewWillAppear:(BOOL)animated {
@@ -211,7 +223,8 @@ typedef enum {
 }
 
 -(void) setNavBarAppearance {
-    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navbar.png"] forBarMetrics:UIBarMetricsDefault];
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navbar"] forBarMetrics:UIBarMetricsDefault];
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navbarlandscape"] forBarMetrics:UIBarMetricsLandscapePhone];  //TODO: figure out what this isn't loading in on rotate.
     
     [[UINavigationBar appearance] setTintColor:[UIColor clearColor]];
     [[UINavigationBar appearance] setBackgroundColor:[UIColor clearColor]];
@@ -289,7 +302,7 @@ typedef enum {
     if (self.isLoggedIn){
         if (self.profileViewController == nil) {
             ECProfileViewController* profileViewController = [ECProfileViewController new];
-            self.profileViewController = [[UINavigationController alloc] initWithRootViewController:profileViewController];
+            self.profileViewController = [[ECCustomNavController alloc] initWithRootViewController:profileViewController];
             
             //        self.profileViewController.arrPastConcerts = [self.concerts objectForKey:@"past"];
         }

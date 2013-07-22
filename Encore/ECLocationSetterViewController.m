@@ -82,6 +82,17 @@
     [self setupLocationSearchBar];
 }
 
+-(BOOL)shouldAutorotate{
+    return NO;
+}
+
+-(NSUInteger)supportedInterfaceOrientations{
+    return UIInterfaceOrientationMaskPortrait;
+}
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation{
+    return UIInterfaceOrientationPortrait;
+}
+
 -(void) setupLocationSlider {
     [self.locationSlider setThumbImage:[UIImage imageNamed:@"oval"] forState:UIControlStateNormal];
     [self.locationSlider setMinimumTrackImage:[UIImage imageNamed:@"slider_minimum"] forState:UIControlStateNormal];
@@ -132,11 +143,6 @@
     [Flurry logEvent:@"Info_Button_Tapped"];
 }
 #define kOFFSET_FOR_KEYBOARD 200.0
-
--(void)textFieldDidBeginEditing:(UITextField *)textField
-{
-  
-}
 
 -(BOOL) textFieldShouldEndEditing:(UITextField *)textField {
     [self resignFirstResponder];

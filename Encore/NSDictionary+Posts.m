@@ -50,6 +50,6 @@
 }
 
 -(NSURL*) youtubeLink {
-    return [NSURL URLWithString:[self objectForKey:@"link"]];
+    return [NSURL URLWithString:[self objectForKey:@"youtube_link"]];
 }
 @end

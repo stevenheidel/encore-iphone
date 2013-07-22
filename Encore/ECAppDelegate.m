@@ -85,11 +85,9 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
     loggedIn = NO;
     
     [self setUpLocationManager];
-    
-    self.navigationController   = [[UINavigationController alloc] initWithRootViewController:self.mainViewController];
+
     [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], UITextAttributeTextColor, [UIColor clearColor], UITextAttributeTextShadowColor, [NSValue valueWithUIOffset:UIOffsetMake(0.0f,1.0f)],UITextAttributeTextShadowOffset, [UIFont heroFontWithSize:24.0f], UITextAttributeFont, nil]];
     
-    self.window.rootViewController = self.navigationController;
     self.window.backgroundColor = [UIColor blackColor];
     [self.window makeKeyAndVisible];
     [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;

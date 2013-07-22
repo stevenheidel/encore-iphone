@@ -22,7 +22,7 @@
 -(void) loginLater;
 -(void) showLoginView: (BOOL) animated;
 -(BOOL) isLoggedIn;
-
+@property (nonatomic,assign) BOOL fullScreenVideoPlaying;
 @property (strong, nonatomic) UIWindow *window;
 
 @property (strong,nonatomic) ECLoginViewController * loginViewController;
