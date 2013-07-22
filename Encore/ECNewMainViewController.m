@@ -108,7 +108,6 @@ typedef enum {
 -(void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [[ATAppRatingFlow sharedRatingFlow] showRatingFlowFromViewControllerIfConditionsAreMet:self];
-
 }
 
 -(void) viewWillDisappear:(BOOL)animated {
