@@ -136,8 +136,11 @@
     [self.view addSubview:selectedModeButton];
 
     // Nav bar button
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(didFinish)];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(didCancel)];
+#warning SIMON modified this on July 22 2013
+      self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Skip" style:UIBarButtonItemStyleDone target:self action:@selector(didFinish)];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(didFinish)];
+    
+      self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(didCancel)];
   }
   return self;
 }
@@ -232,6 +235,8 @@
     self.searchTextField.tag = 1;
     [self.searchTextField resignFirstResponder];
   }
+#warning Modified by Simon July 22 2013
+    self.navigationItem.rightBarButtonItem.title = self.selectedItems.count>0  ? @"Next" : @"Skip";
 
   // Delegate callback
   if (item.selected) {
