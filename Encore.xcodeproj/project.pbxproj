@@ -598,8 +598,6 @@
 		D4A8DDD0176A4272005E9847 /* Post detail */ = {
 			isa = PBXGroup;
 			children = (
-				D4BB7E07179CCF4E0098BCF4 /* ECCustomNavController.h */,
-				D4BB7E08179CCF4E0098BCF4 /* ECCustomNavController.m */,
 				D4A8DDCB176A405D005E9847 /* ECPostViewController.h */,
 				D4A8DDCC176A405D005E9847 /* ECPostViewController.m */,
 				D4A8DDCD176A405D005E9847 /* ECPostViewController.xib */,
@@ -807,6 +805,8 @@
 			children = (
 				D4AA4D011766B374009B0635 /* ECAppDelegate.h */,
 				D4AA4D021766B374009B0635 /* ECAppDelegate.m */,
+				D4BB7E07179CCF4E0098BCF4 /* ECCustomNavController.h */,
+				D4BB7E08179CCF4E0098BCF4 /* ECCustomNavController.m */,
 				D4AA4D321766BA8F009B0635 /* Login */,
 				D4AA632C1780BAFB008111C6 /* Main View */,
 				D4AA4D2C1766B9B0009B0635 /* Profile */,
