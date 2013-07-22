@@ -10,7 +10,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "NSDictionary+ConcertList.h"
 #import "UIImage+GaussBlur.h"
-#import "NSMutableDictionary+ConcertImages.h"
+//#import "NSMutableDictionary+ConcertImages.h"
 
 #import "UIColor+EncoreUI.h"
 #import "UIFont+Encore.h"
