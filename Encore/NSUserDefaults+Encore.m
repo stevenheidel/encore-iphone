@@ -75,7 +75,7 @@
     double latitude = [[NSUserDefaults standardUserDefaults] doubleForKey:@"last_search_latitude"];
     double longitude = [[NSUserDefaults standardUserDefaults] doubleForKey:@"last_search_longitude"];
     if (latitude == 0 || longitude == 0) {
-        return nil;
+        return [NSUserDefaults userCoordinate];
     }
     return [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
 }
