@@ -10,10 +10,13 @@
 #import "ECPostViewController.h"
 #import "ECPictureViewController.h"
 #import "ECSearchType.h"
+#import "FBConnect.h"
+#import "KNMultiItemSelector.h"
 
-@class ECPlaceHolderView,ECToolbar,ECPostCollectionHeaderView;
+@class ECPlaceHolderView,ECToolbar,ECPostCollectionHeaderView,FBFriendPickerViewController;
 
-@interface ECConcertDetailViewController : UIViewController <UICollectionViewDataSource,UICollectionViewDelegate/*, UICollectionViewDelegateFlowLayout*/,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,ECPostViewControllerDelegate,UIAlertViewDelegate,ECPictureViewControllerDelegate> {
+@interface ECConcertDetailViewController : UIViewController <UICollectionViewDataSource,UICollectionViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,ECPostViewControllerDelegate,UIAlertViewDelegate, KNMultiItemSelectorDelegate,ECPictureViewControllerDelegate,FBRequestDelegate> {
+    NSMutableArray* friends;
 }
 
 -(IBAction)addPhoto;
@@ -21,6 +24,8 @@
 -(id) initWithConcert:(NSDictionary*) concert;
 -(void) setConcert:(NSDictionary *)concert andUpdate: (BOOL) update;
 -(void) updateView;
+
+@property (nonatomic,strong) FBFriendPickerViewController* friendPickerController;
 @property (nonatomic,weak) IBOutlet UIActivityIndicatorView* footerActivityIndicator;
 @property (nonatomic, assign) CGPoint savedPosition;
 @property (weak, nonatomic) IBOutlet UIView *footerIsPopulatingView;

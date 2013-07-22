@@ -8,20 +8,24 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import "FBConnect.h"
+
+#define ApplicationDelegate ((ECAppDelegate *)[UIApplication sharedApplication].delegate)
 
 @class ECLoginViewController;
 @class ECNewMainViewController;
 @protocol FBGraphUser;
 
-@interface ECAppDelegate : UIResponder <UIApplicationDelegate,UINavigationControllerDelegate, CLLocationManagerDelegate> {
-    BOOL loggedIn;
+@interface ECAppDelegate : UIResponder <UIApplicationDelegate,UINavigationControllerDelegate, CLLocationManagerDelegate,FBSessionDelegate> {
 }
-
+-(void)beginFacebookAuthorization;
 -(void) loginCompletedWithUser: (NSDictionary <FBGraphUser> *) user;
 -(void) openSession;
 -(void) loginLater;
 -(void) showLoginView: (BOOL) animated;
 -(BOOL) isLoggedIn;
+
+@property (strong, nonatomic) Facebook *facebook;
 @property (nonatomic,assign) BOOL fullScreenVideoPlaying;
 @property (strong, nonatomic) UIWindow *window;
 

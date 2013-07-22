@@ -111,7 +111,8 @@
    // [self.spinner startAnimating];  //TODO: Spinner
     [Flurry logEvent:@"Perform_Login"];
     ECAppDelegate* appDelegate = (ECAppDelegate*)[UIApplication sharedApplication].delegate;
-    [appDelegate openSession];
+//    [appDelegate openSession];
+    [ApplicationDelegate beginFacebookAuthorization];
 }
 
 -(IBAction)loginLater {

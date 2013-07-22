@@ -36,21 +36,23 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation {
     
-    // Facebook SDK * login flow *
-    // Attempt to handle URLs to complete any auth (e.g., SSO) flow.
-    return [FBAppCall handleOpenURL:url sourceApplication:sourceApplication fallbackHandler:^(FBAppCall *call) {
-        // Facebook SDK * App Linking *
-        // For simplicity, this sample will ignore the link if the session is already
-        // open but a more advanced app could support features like user switching.
-        if (call.accessTokenData) {
-            if ([FBSession activeSession].isOpen) {
-                NSLog(@"INFO: Ignoring app link because current session is open.");
-            }
-            else {
-                [self handleAppLink:call.accessTokenData];
-            }
-        }
-    }];
+//    // Facebook SDK * login flow *
+//    // Attempt to handle URLs to complete any auth (e.g., SSO) flow.
+//    return [FBAppCall handleOpenURL:url sourceApplication:sourceApplication fallbackHandler:^(FBAppCall *call) {
+//        // Facebook SDK * App Linking *
+//        // For simplicity, this sample will ignore the link if the session is already
+//        // open but a more advanced app could support features like user switching.
+//        if (call.accessTokenData) {
+//            if ([FBSession activeSession].isOpen) {
+//                NSLog(@"INFO: Ignoring app link because current session is open.");
+//            }
+//            else {
+//                [self handleAppLink:call.accessTokenData];
+//            }
+//        }
+//    }];
+
+      return [self.facebook handleOpenURL:url];
 }
 
 -(void) startAnalytics {
@@ -82,7 +84,6 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
     
     self.navigationController = (UINavigationController*)self.window.rootViewController;
     self.mainViewController = (ECNewMainViewController*)[[self.navigationController viewControllers] objectAtIndex:0];
-    loggedIn = NO;
     
     [self setUpLocationManager];
 
@@ -92,21 +93,66 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
     [self.window makeKeyAndVisible];
     [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
     
-    // See if the app has a valid token for the current state.
-    if (FBSession.activeSession.state == FBSessionStateCreatedTokenLoaded) {
-        [self openSession];
-    } else {
-        // No, display the login page.
-        
-        [self showLoginView: NO];
+    
+    self.facebook = [[Facebook alloc] initWithAppId:@"170378959802810" andDelegate:self];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([defaults objectForKey:@"FBAccessTokenKey"] && [defaults objectForKey:@"FBExpirationDateKey"]) {
+        self.facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
+        self.facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
     }
     
+    // See if the app has a valid token for the current state.
+//    if (FBSession.activeSession.state == FBSessionStateCreatedTokenLoaded) {
+//        [self openSession];
+//    } else {
+//        // No, display the login page.
+//        
+//        [self showLoginView: NO];
+//    }
+    
+    //TODO switchover to using Facebook object for connection based on KNFBFriendSelectorDemo
+    // Intro screen, connect to Facebook
+    
+    if (![self.facebook isSessionValid]) {
+        [self showLoginView:NO];
+    }
 
     return YES;
 }
 
+//TODO complete switchover to using Facebook object for managing login etc
+//doesn't actually use these
+- (void)fbDidNotLogin:(BOOL)cancelled {
+    NSLog(@"Delegate fbDidNotLogin");
+}
+- (void)fbDidLogin {
+    NSLog(@"fbDidLogin");
+    [self.window.rootViewController dismissViewControllerAnimated:NO completion:nil];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:[self.facebook accessToken] forKey:@"FBAccessTokenKey"];
+    [defaults setObject:[self.facebook expirationDate] forKey:@"FBExpirationDateKey"];
+    [defaults synchronize];
+}
+- (void)fbDidLogout {
+    if(!self.loginViewController) {
+        self.loginViewController = [[ECLoginViewController alloc] init];
+    }
+    [self.window.rootViewController presentViewController:self.loginViewController animated:YES completion:nil];
+}
+- (void)fbSessionInvalidated {}
+- (void)fbDidExtendToken:(NSString *)accessToken expiresAt:(NSDate *)expiresAt {
+    NSLog(@"TOKEN EXTENDED");
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:accessToken forKey:@"FBAccessTokenKey"];
+    [defaults setObject:expiresAt forKey:@"FBExpirationDateKey"];
+    [defaults synchronize];
+}
+-(void)beginFacebookAuthorization {
+    [self.facebook authorize:[NSArray arrayWithObjects:@"user_about_me",@"friends_about_me", nil]];
+}
+
 #pragma mark - Login management
--(void) openSession {
+- (void) openSession {
     [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
     [FBSession openActiveSessionWithReadPermissions:nil
                                        allowLoginUI:YES
@@ -121,8 +167,7 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
 - (void)sessionStateChanged:(FBSession *)session
                       state:(FBSessionState) state
                       error:(NSError *)error {
-    
-//    UIViewController *topViewController;
+
     
     switch (state) {
         case FBSessionStateOpen: {
@@ -133,12 +178,6 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
                     [self loginCompletedWithUser:result];
                 }
             }];
-//            topViewController = [self.navigationController topViewController];
-//            if ([[topViewController presentedViewController] isKindOfClass:[ECLoginViewController class]]) {
-//                [topViewController dismissViewControllerAnimated:YES completion:nil];
-//            }
-//            if (![topViewController isKindOfClass:[ECNewMainViewController class]]) {
-//            }
             break;
         }
         case FBSessionStateClosed: //no break on purpose
@@ -177,11 +216,10 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
     }
 }
 -(BOOL) isLoggedIn {
-    return loggedIn;
+    return [self.facebook isSessionValid];
 }
 
 -(void) loginLater {
-    loggedIn = NO;
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
     
     [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
@@ -228,8 +266,6 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
 -(void) loginCompletedWithUser:(NSDictionary <FBGraphUser>*) user {
     NSString* userid = user.id;
     NSLog(@"Logged in user with id: %@",userid);
-    
-    loggedIn = YES;
     
     [ECJSONPoster postUser:user completion:^(NSDictionary *response) {
         NSURL* defaultURL = [NSUserDefaults facebookProfileImageURL];
@@ -342,7 +378,8 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    [FBSession.activeSession handleDidBecomeActive];
+//    [FBSession.activeSession handleDidBecomeActive];
+    [self.facebook extendAccessTokenIfNeeded];
 }
 
 

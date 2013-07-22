@@ -296,7 +296,8 @@ typedef enum {
 -(void) logout {
     [Flurry logEvent: @"Logged_out_facebook"];
     [self dismissViewControllerAnimated:NO completion:nil]; //necessary to get rid of the profile modal view controller first
-    [FBSession.activeSession closeAndClearTokenInformation];
+    [ApplicationDelegate.facebook logout];
+//    [FBSession.activeSession closeAndClearTokenInformation];
 
 }
 

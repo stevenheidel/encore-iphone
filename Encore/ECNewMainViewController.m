@@ -288,12 +288,8 @@ typedef enum {
      self.lblTodaysDate.text = [[formatter stringFromDate:[NSDate date]] uppercaseString];
 }
 
--(ECAppDelegate*) appDelegate  {
-    return (ECAppDelegate*)[UIApplication sharedApplication].delegate;
-}
-
 -(BOOL) isLoggedIn {
-    return [[self appDelegate] isLoggedIn];
+    return [ApplicationDelegate isLoggedIn];
 }
 
 - (void) setBackgroundImage {
@@ -374,14 +370,14 @@ typedef enum {
 -(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (alertView.tag == ECNotLoggedInAlert) {
         if (buttonIndex == alertView.firstOtherButtonIndex) {
-            [[self appDelegate] openSession];
+            [ApplicationDelegate beginFacebookAuthorization];
         }
         [Flurry logEvent:@"Login_Alert_Selection" withParameters:[NSDictionary dictionaryWithObjectsAndKeys: @"Main_View", @"Current_View", buttonIndex == alertView.firstOtherButtonIndex ? @"Login":@"Cancel",@"Selection", nil]];
     }
 }
 
 -(void) showLogin {
-    [[self appDelegate] showLoginView: YES];
+    [ApplicationDelegate showLoginView: YES];
 }
 
 #pragma mark Segmented Control

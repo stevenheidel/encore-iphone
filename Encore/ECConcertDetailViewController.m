@@ -36,15 +36,16 @@
 
 #import "ECAlertTags.h"
 
+#import "UIViewController+KNSemiModal.h"
+#import "KNMultiItemSelector.h"
+
 #define HUD_DELAY 0.9
 #define HEADER_HEIGHT 160.0
-
-//#import "SGSStaggeredFlowLayout.h"
+#import "ECAppDelegate.h"
 
 NSString *kCellID = @"cellID";
 
 @interface ECConcertDetailViewController (){
-//    SGSStaggeredFlowLayout* _flowLayout;
 
 }
 
@@ -105,6 +106,28 @@ NSString *kCellID = @"cellID";
     [(UILabel*)[self.footerIsPopulatingView viewWithTag:49] setFont:[UIFont heroFontWithSize:14]];
     
     [self setupRefreshControl];
+    
+    friends = [[NSMutableArray alloc] init];
+    [ApplicationDelegate.facebook requestWithGraphPath:@"me/friends" andDelegate:self];
+}
+
+#pragma mark - Handle Facebook request data
+
+- (void)request:(FBRequest *)request didFailWithError:(NSError *)error {
+    NSLog(@"Facebook request error: %@",error.debugDescription);
+    
+}
+
+
+- (void)request:(FBRequest *)request didLoad:(id)result {
+    NSDictionary * rawObject = result;
+    NSArray * dataArray = [rawObject objectForKey:@"data"];
+    for (NSDictionary * f in dataArray) {
+        [friends addObject:[[KNSelectorItem alloc] initWithDisplayValue:[f objectForKey:@"name"]
+                                                            selectValue:[f objectForKey:@"id"]
+                                                               imageUrl:[NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?type=square", [f objectForKey:@"id"]]]];
+    }
+    [friends sortUsingSelector:@selector(compareByDisplayValue:)];
 }
 
 -(BOOL)shouldAutorotate{
@@ -315,6 +338,34 @@ NSString *kCellID = @"cellID";
 #pragma mark - FB Sharing
 -(void) shareTapped {
     [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
+    KNMultiItemSelector * selector = [[KNMultiItemSelector alloc] initWithItems:friends
+                                                               preselectedItems:nil
+                                                                          title:@"Select friends"
+                                                                placeholderText:@"Search by name"
+                                                                       delegate:self];
+    selector.allowSearchControl = YES;
+    selector.useTableIndex      = YES;
+    selector.useRecentItems     = YES;
+    selector.maxNumberOfRecentItems = 4;
+//    selector.allowModeButtons = NO;
+    UINavigationController * uinav = [[UINavigationController alloc] initWithRootViewController:selector];
+    uinav.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    uinav.modalPresentationStyle = UIModalPresentationFormSheet;
+    [self presentViewController:uinav animated:YES completion:nil];
+//    if (!self.friendPickerController) {
+//        // Create friend picker, and get data loaded into it.
+//        self.friendPickerController = [[FBFriendPickerViewController alloc] init];
+//        self.friendPickerController.title = @"Pick Friends";
+//        self.friendPickerController.delegate = self;
+//    }
+//    [self.friendPickerController loadData];
+//    [self.friendPickerController clearSelection];
+
+//    [self presentSemiViewController:selector withOptions:@{
+//     KNSemiModalOptionKeys.pushParentBack : @(NO),
+//     KNSemiModalOptionKeys.parentAlpha : @(0.8)
+//	 }];
+    
     
     NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:ShareConcertURL,self.eventID]];
     
@@ -393,7 +444,7 @@ NSString *kCellID = @"cellID";
     if (alertView.tag == ECNotLoggedInAlert) {
 //        [self.navigationController popToRootViewControllerAnimated:NO];
         if (buttonIndex == alertView.firstOtherButtonIndex) {
-            [[self appDelegate] showLoginView:YES];
+            [ApplicationDelegate beginFacebookAuthorization];
         }
         [Flurry logEvent:@"Login_Alert_Selection" withParameters:[NSDictionary dictionaryWithObjectsAndKeys: @"Detail_View", @"Current_View", buttonIndex == alertView.firstOtherButtonIndex ? @"Login":@"Cancel",@"Selection", nil]];
         return; //don't process other alerts
