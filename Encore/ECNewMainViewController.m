@@ -92,7 +92,6 @@ typedef enum {
     
     [self setupRefreshControl];
     [self displayViewsAccordingToSearchType];
-    
 }
 
 -(BOOL)shouldAutorotate{
