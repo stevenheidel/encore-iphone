@@ -65,7 +65,7 @@
 "logout" = "Log out";
 
 //Post flags
-"flag_post_title" = "Report photo";
+"flag_post_title" = "Report post";
 "flag_1" = "Inappropriate";
 "flag_2" = "Not From Show";
 "flag_other" = "Other";
