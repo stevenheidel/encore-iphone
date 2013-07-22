@@ -1,7 +1,8 @@
 #!/bin/sh
+set -e
 
-RESOURCES_TO_COPY=${PODS_ROOT}/resources-to-copy.txt
-touch "$RESOURCES_TO_COPY"
+RESOURCES_TO_COPY=${PODS_ROOT}/resources-to-copy-${TARGETNAME}.txt
+> "$RESOURCES_TO_COPY"
 
 install_resource()
 {
@@ -15,8 +16,10 @@ install_resource()
       ibtool --reference-external-strings-file --errors --warnings --notices --output-format human-readable-text --compile "${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/`basename \"$1\" .xib`.nib" "${PODS_ROOT}/$1" --sdk "${SDKROOT}"
       ;;
     *.framework)
-      echo "rsync -rp ${PODS_ROOT}/$1 ${CONFIGURATION_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}"
-      rsync -rp "${PODS_ROOT}/$1" "${CONFIGURATION_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}"
+      echo "mkdir -p ${CONFIGURATION_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}"
+      mkdir -p "${CONFIGURATION_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}"
+      echo "cp -fpR ${PODS_ROOT}/$1 ${CONFIGURATION_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}"
+      cp -fpR "${PODS_ROOT}/$1" "${CONFIGURATION_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}"
       ;;
     *.xcdatamodeld)
       echo "xcrun momc ${PODS_ROOT}/$1 ${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/`basename $1 .xcdatamodeld`.momd"
@@ -30,6 +33,12 @@ install_resource()
 }
 install_resource 'Facebook-iOS-SDK/src/FacebookSDKResources.bundle'
 install_resource 'Facebook-iOS-SDK/src/FBUserSettingsViewResources.bundle'
+install_resource 'KNMultiItemSelector/KNMultiItemSelector/Images/KNDefaultImage.png'
+install_resource 'KNMultiItemSelector/KNMultiItemSelector/Images/KNDefaultImage@2x.png'
+install_resource 'KNMultiItemSelector/KNMultiItemSelector/Images/KNSelectorTip.png'
+install_resource 'KNMultiItemSelector/KNMultiItemSelector/Images/KNSelectorTip@2x.png'
+install_resource 'KNMultiItemSelector/KNMultiItemSelector/Images/KNZoomIcon.png'
+install_resource 'KNMultiItemSelector/KNMultiItemSelector/Images/KNZoomIcon@2x.png'
 
 rsync -avr --no-relative --exclude '*/.svn/*' --files-from="$RESOURCES_TO_COPY" / "${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"
 rm "$RESOURCES_TO_COPY"

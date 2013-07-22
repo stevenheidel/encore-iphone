@@ -4,6 +4,7 @@ pod 'AFNetworking',	'~> 1.3'
 pod 'Facebook-iOS-SDK', :inhibit_warnings => true
 pod 'MBProgressHUD'
 pod 'TestFlightSDK', '1.2.6'
-pod 'FlurrySDK'
+pod 'FlurrySDK', '4.2.1'
 #pod 'JBKenBurnsView'
 pod 'KNSemiModalViewController', '~> 0.3'
+pod 'KNMultiItemSelector'

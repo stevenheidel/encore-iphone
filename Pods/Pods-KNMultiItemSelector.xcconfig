@@ -1,0 +1,1 @@
+PODS_KNMULTIITEMSELECTOR_OTHER_LDFLAGS = -framework CoreGraphics -framework ImageIO
