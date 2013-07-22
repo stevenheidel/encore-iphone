@@ -233,7 +233,7 @@ typedef enum {
 
 -(void) setNavBarAppearance {
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navbar"] forBarMetrics:UIBarMetricsDefault];
-    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navbarlandscape"] forBarMetrics:UIBarMetricsLandscapePhone];  //TODO: figure out what this isn't loading in on rotate.
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navbarlandscape"] forBarMetrics:UIBarMetricsLandscapePhone];  //TODO: figure out what this isn't loading in on rotate for youtube.
     
     [[UINavigationBar appearance] setTintColor:[UIColor clearColor]];
     [[UINavigationBar appearance] setBackgroundColor:[UIColor clearColor]];
