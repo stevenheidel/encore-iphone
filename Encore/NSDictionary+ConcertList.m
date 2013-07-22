@@ -7,6 +7,7 @@
 //
 
 #import "NSDictionary+ConcertList.h"
+#import <CoreLocation/CoreLocation.h>
 static NSString * const kDateFormat = @"yyyy-MM-dd";
 
 @implementation NSDictionary (ConcertList)
@@ -27,7 +28,32 @@ static NSString * const kDateFormat = @"yyyy-MM-dd";
 -(NSString*) venueName {
    return [self objectForKey:@"venue_name"];
 }
+-(NSDictionary*) venueDetails {
+    return [self objectForKey:@"venue"];
+}
 
+-(NSString*) city {
+    return  [[self venueDetails] objectForKey:@"city"];
+}
+
+-(NSString*) postalCode {
+    return [[self venueDetails] objectForKey:@"postalcode"];
+}
+
+-(NSString*) street {
+    return  [[self venueDetails] objectForKey:@"street"];
+}
+
+-(NSString*) country {
+    return [[self venueDetails] objectForKey:@"country"];
+}
+
+-(CLLocation*) coordinates {
+    NSArray* locationArr = [[self venueDetails] objectForKey: @"coordinates"];
+    double latitude = [(NSString*)[locationArr objectAtIndex:0] doubleValue];
+    double longitude = [(NSString*)[locationArr objectAtIndex:1] doubleValue];
+    return [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
+}
 -(NSString*) venueAndDate {
     return [NSString stringWithFormat:@"%@, %@", [self venueName], [self niceDate]];
 }

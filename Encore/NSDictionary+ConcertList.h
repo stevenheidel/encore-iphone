@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+@class CLLocation;
 @interface NSDictionary (ConcertList)
 
 -(NSString *) niceDate;
@@ -31,4 +31,11 @@
 
 -(BOOL) isLive;
 -(BOOL) beforeToday;
+
+-(CLLocation*) coordinates;
+-(NSString*) country;
+-(NSString*) street;
+-(NSString*) postalCode;
+-(NSString*) city;
+-(NSDictionary*) venueDetails;
 @end
