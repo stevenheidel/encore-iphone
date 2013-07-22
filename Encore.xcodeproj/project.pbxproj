@@ -14,8 +14,6 @@
 		A00402C5177F6B0900B998CF /* backButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A00402C3177F6B0900B998CF /* backButton@2x.png */; };
 		A00402CC177F704B00B998CF /* postButton.png in Resources */ = {isa = PBXBuildFile; fileRef = A00402CA177F704B00B998CF /* postButton.png */; };
 		A00402CD177F704B00B998CF /* postButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A00402CB177F704B00B998CF /* postButton@2x.png */; };
-		A00A7F4A1784BD2A00839EFD /* ECFutureConcertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A00A7F481784BD2A00839EFD /* ECFutureConcertViewController.m */; };
-		A00A7F4B1784BD2A00839EFD /* ECFutureConcertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A00A7F491784BD2A00839EFD /* ECFutureConcertViewController.xib */; };
 		A022AAA2177605900009244C /* Hero Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = A022AAA0177605900009244C /* Hero Light.otf */; };
 		A022AAA3177605900009244C /* Hero.otf in Resources */ = {isa = PBXBuildFile; fileRef = A022AAA1177605900009244C /* Hero.otf */; };
 		A022AAA617779BB50009244C /* ECConcertCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = A022AAA517779BB50009244C /* ECConcertCellView.m */; };
@@ -245,9 +243,6 @@
 		A00402C3177F6B0900B998CF /* backButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "backButton@2x.png"; sourceTree = "<group>"; };
 		A00402CA177F704B00B998CF /* postButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = postButton.png; sourceTree = "<group>"; };
 		A00402CB177F704B00B998CF /* postButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "postButton@2x.png"; sourceTree = "<group>"; };
-		A00A7F471784BD2A00839EFD /* ECFutureConcertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECFutureConcertViewController.h; sourceTree = "<group>"; };
-		A00A7F481784BD2A00839EFD /* ECFutureConcertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECFutureConcertViewController.m; sourceTree = "<group>"; };
-		A00A7F491784BD2A00839EFD /* ECFutureConcertViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECFutureConcertViewController.xib; sourceTree = "<group>"; };
 		A022AAA0177605900009244C /* Hero Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Hero Light.otf"; sourceTree = "<group>"; };
 		A022AAA1177605900009244C /* Hero.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Hero.otf; sourceTree = "<group>"; };
 		A022AAA417779BB50009244C /* ECConcertCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECConcertCellView.h; sourceTree = "<group>"; };
@@ -596,9 +591,6 @@
 				D4ABD2E9177E2C8900DC691F /* ECPictureViewController.m */,
 				D4ABD2EA177E2C8900DC691F /* ECPictureViewController.xib */,
 				D4A8DDD0176A4272005E9847 /* Post detail */,
-				A00A7F471784BD2A00839EFD /* ECFutureConcertViewController.h */,
-				A00A7F481784BD2A00839EFD /* ECFutureConcertViewController.m */,
-				A00A7F491784BD2A00839EFD /* ECFutureConcertViewController.xib */,
 			);
 			name = Concert;
 			sourceTree = "<group>";
@@ -1192,7 +1184,6 @@
 				D45DBD611783C5DF000ED3C1 /* Icon.png in Resources */,
 				D4A99EDA1784EEC400F4FB46 /* feedback.png in Resources */,
 				D4A99EDB1784EEC400F4FB46 /* feedback@2x.png in Resources */,
-				A00A7F4B1784BD2A00839EFD /* ECFutureConcertViewController.xib in Resources */,
 				D491F807178B54C9002E00E5 /* logo.png in Resources */,
 				D491F808178B54C9002E00E5 /* logo@2x.png in Resources */,
 				D491F80C178B57C1002E00E5 /* Main.storyboard in Resources */,
@@ -1364,7 +1355,6 @@
 				A00402BD177F4F7300B998CF /* ECProfileHeader.m in Sources */,
 				D428A45B1781085500101F12 /* UIColor+EncoreUI.m in Sources */,
 				D4AB1B0A178213FF002A29B9 /* UIFont+Encore.m in Sources */,
-				A00A7F4A1784BD2A00839EFD /* ECFutureConcertViewController.m in Sources */,
 				D491F80F178B595D002E00E5 /* ECNewMainViewController.m in Sources */,
 				A02661E0178C937200741C9A /* ECSearchResultCell.m in Sources */,
 				D4AC2DFF178FA64E00F292CA /* ECProfileConcertCell.m in Sources */,
