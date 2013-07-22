@@ -687,7 +687,7 @@ typedef enum {
             alert.labelText = NSLocalizedString(@"No events found", nil);
             alert.mode = MBProgressHUDModeText;
             alert.removeFromSuperViewOnHide = YES;
-            [alert hide:YES afterDelay:ALERT_HIDE_DELAY]; //TODO use #define for delay
+            [alert hide:YES afterDelay:ALERT_HIDE_DELAY];
             alert.labelFont = [UIFont heroFontWithSize:18.0f];
             alert.color = [UIColor redHUDConfirmationColor];
             alert.userInteractionEnabled = NO;
