@@ -79,7 +79,8 @@ static NSString* const RemoveConcertFromUserURL = @USERS_DEF "/%@/" EVENTS_DEF "
 static NSString* const PostImageURL = @EVENTS_DEF "/%@/" POSTS_DEF;
 
 #pragma mark - Check populating
-static NSString* const CheckEventPopulatingURL = @BASE_URL_DEF EVENTS_DEF "/%@/" POPULATING_DEF; //,eventID
+static NSString* const CheckEventPopulatingURL = @BASE_URL_DEF "events/%@/populating.json"; //,eventID
+static NSString* const PopulateEventURL = @BASE_URL_DEF "events/%@/populate.json"; //, eventID
 
 #pragma mark - Components
 static NSString *const UsersURL = @USERS_DEF;
