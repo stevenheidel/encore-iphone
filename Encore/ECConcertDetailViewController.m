@@ -338,64 +338,123 @@ NSString *kCellID = @"cellID";
 #pragma mark - FB Sharing
 -(void) shareTapped {
     [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
+    [Flurry logEvent:@"Share_Tapped_Concert"];
     KNMultiItemSelector * selector = [[KNMultiItemSelector alloc] initWithItems:friends
                                                                preselectedItems:nil
-                                                                          title:@"Select friends"
+                                                                          title:@"Tag friends"
                                                                 placeholderText:@"Search by name"
                                                                        delegate:self];
     selector.allowSearchControl = YES;
     selector.useTableIndex      = YES;
     selector.useRecentItems     = YES;
     selector.maxNumberOfRecentItems = 4;
-//    selector.allowModeButtons = NO;
     UINavigationController * uinav = [[UINavigationController alloc] initWithRootViewController:selector];
     uinav.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     uinav.modalPresentationStyle = UIModalPresentationFormSheet;
     [self presentViewController:uinav animated:YES completion:nil];
-//    if (!self.friendPickerController) {
-//        // Create friend picker, and get data loaded into it.
-//        self.friendPickerController = [[FBFriendPickerViewController alloc] init];
-//        self.friendPickerController.title = @"Pick Friends";
-//        self.friendPickerController.delegate = self;
-//    }
-//    [self.friendPickerController loadData];
-//    [self.friendPickerController clearSelection];
-
-//    [self presentSemiViewController:selector withOptions:@{
-//     KNSemiModalOptionKeys.pushParentBack : @(NO),
-//     KNSemiModalOptionKeys.parentAlpha : @(0.8)
-//	 }];
-    
-    
+}
+-(void) shareWithTaggedFriends: (NSArray*) taggedFriends {
+    NSLog(@"Sharing with Facebook from Concert detail view controller");
     NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:ShareConcertURL,self.eventID]];
     
     FBShareDialogParams* params = [[FBShareDialogParams alloc] init];
     params.link = url;
+    [params setFriends:[taggedFriends valueForKey:@"id"]];
+//    params.description =  [NSString stringWithFormat:@"Check out photos and videos from %@'s %@ show in %@ at the %@ on Encore.",[self.concert artistName], [self.concert niceDate], [self.concert city], [self.concert venueName]];
     if ([FBDialogs canPresentShareDialogWithParams:params]) {
-        [FBDialogs presentShareDialogWithLink:url
-                                      handler:^(FBAppCall *call, NSDictionary *results, NSError *error) {
-                                          if(error) {
-                                              NSLog(@"Error sharing concert: %@", error.description);
-                                              [Flurry logEvent:@"Concert_Share_To_FB_Fail" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:url.absoluteString, @"url", error.description, @"error", nil]];
-                                          } else {
-                                              NSLog(@"Success sharing concert!");
-                                              [Flurry logEvent:@"Concert_Share_To_FB_Success" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:url.absoluteString, @"url", nil]];
-                                          }
-                                      }];
+        [FBDialogs presentShareDialogWithParams:params clientState:nil handler:^(FBAppCall *call, NSDictionary *results, NSError *error) {
+            if(error) {
+                NSLog(@"Error sharing concert: %@", error.description);
+                [Flurry logEvent:@"Concert_Share_To_FB_Fail" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:url.absoluteString, @"url", error.description, @"error", nil]];
+            } else {
+                NSLog(@"Success sharing concert!");
+                [Flurry logEvent:@"Concert_Share_To_FB_Success" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:url.absoluteString, @"url", nil]];
+            }
+
+        }];
     }
     else {
-        NSArray* items = [NSArray arrayWithObjects:url,[NSString stringWithFormat:@"Check out %@ on Encore",[self.concert artistName]],nil];
-        UIActivityViewController* activityVC = [[UIActivityViewController alloc] initWithActivityItems: items applicationActivities:nil];
-        activityVC.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypePostToWeibo, UIActivityTypeSaveToCameraRoll,UIActivityTypeAssignToContact];
-        activityVC.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-        activityVC.completionHandler = ^(NSString* activityType, BOOL completed){
-            [Flurry logEvent:@"Concert_Share_With_ActivityVC" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:completed], @"completed", activityType, @"activity_type", url.absoluteString, @"url",nil]];
-        };
-        [self presentViewController:activityVC animated:YES completion:nil];
-
+        NSMutableDictionary *params2 =
+        [NSMutableDictionary dictionaryWithObjectsAndKeys:
+         [NSString stringWithFormat:@"%@ on Encore",[self.concert artistName]], @"name",
+         [NSString stringWithFormat:@"Check out photos and videos from %@'s %@ show on Encore.",[self.concert artistName], [self.concert niceDate]], @"caption",
+         @"Encore is a free iPhone concert app that collects photos and videos from live shows and helps you keep track of upcoming shows in your area.",@"description",
+         [NSString stringWithFormat:ShareConcertURL,self.eventID], @"link",
+         [NSString stringWithFormat:@"%@",[self.concert imageURL].absoluteString], @"picture",
+         nil];
+        [FBWebDialogs presentFeedDialogModallyWithSession:nil
+                                               parameters:params2
+                                                  handler:
+         ^(FBWebDialogResult result, NSURL *resultURL, NSError *error) {
+             if (error) {
+                 // Error launching the dialog or publishing a story.
+                 NSLog(@"Error publishing story.");
+             } else {
+                 if (result == FBWebDialogResultDialogNotCompleted) {
+                     // User clicked the "x" icon
+                     NSLog(@"User canceled story publishing.");
+                 } else {
+                     // Handle the publish feed callback
+                     NSDictionary *urlParams = [self parseURLParams:[resultURL query]];
+                     if (![urlParams valueForKey:@"post_id"]) {
+                         // User clicked the Cancel button
+                         NSLog(@"User canceled story publishing.");
+                     } else {
+                         // User clicked the Share button
+                         NSString *msg = @"Posted to facebook";
+                         NSLog(@"%@", msg);
+                         [Flurry logEvent:@"Successfully_Posted_To_Facebook_With_Feed_Dialog"]; //TODO update so merges flurry events together
+                         
+                         // Show the result in an alert
+                         [[[UIAlertView alloc] initWithTitle:@"Result"  //TODO: replace with HUD
+                                                     message:msg
+                                                    delegate:nil
+                                           cancelButtonTitle:@"OK!"
+                                           otherButtonTitles:nil]
+                          show];
+                     }
+                 }
+             }
+         }];
     }
 }
 
+/**
+ * A function for parsing URL parameters.
+ */
+- (NSDictionary*)parseURLParams:(NSString *)query {
+    NSArray *pairs = [query componentsSeparatedByString:@"&"];
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    for (NSString *pair in pairs) {
+        NSArray *kv = [pair componentsSeparatedByString:@"="];
+        NSString *val =
+        [kv[1] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        params[kv[0]] = val;
+    }
+    return params;
+}
+
+#pragma mark - KNMultiItemSelectorDelegate methods
+-(void)selectorDidCancelSelection {
+    [self dismissViewControllerAnimated:YES completion:^{
+        [Flurry logEvent:@"Cancelled_Sharing_From_Friend_Picker"];
+    }];
+}
+-(void) selectorDidFinishSelectionWithItems:(NSArray *)selectedItems {
+    [self dismissViewControllerAnimated:YES completion:^{
+//        [ECJSONPoster postFriends: selectedItems ofUser: self.userID forConcert: self.concert];
+        NSLog(@"Sharing: Tagged %d friends",selectedItems.count);
+        if (selectedItems.count == 0) {
+            [self shareWithTaggedFriends:nil];
+            return;
+        }
+        NSMutableArray* taggedFriends = [[NSMutableArray alloc] initWithCapacity:selectedItems.count];
+        for (KNSelectorItem * i in selectedItems) {
+            [taggedFriends addObject:[NSDictionary dictionaryWithObjectsAndKeys:i.selectValue, @"id", i.displayValue, @"name", nil]];
+        }
+        [self shareWithTaggedFriends:taggedFriends];
+    }];
+}
 #pragma mark - Adding/Removing Concerts
 
 -(IBAction) addToProfile {
