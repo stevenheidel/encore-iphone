@@ -74,16 +74,13 @@ NSString *kCellID = @"cellID";
 -(NSString*) userID {
     return [NSUserDefaults userID];
 }
-#pragma mark - View Setup
-
 -(void) tapArtistPhoto {
     [Flurry logEvent:@"Tapped_Artist_Photo_DetailVC"];
     [self togglePopulatingIndicator];
 }
 
 #pragma mark - View Setup
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     self.isOnProfile = FALSE;
     self.isPopulating = FALSE;
@@ -111,7 +108,6 @@ NSString *kCellID = @"cellID";
     [self setupRefreshControl];
     friends = [[NSMutableArray alloc] init];
 }
-
 
 -(BOOL)shouldAutorotate{
     return NO;
@@ -141,19 +137,35 @@ NSString *kCellID = @"cellID";
     [self stopTimer];
 }
 
-
+-(void) updateView {
+    [self clearCollectionView];
+    [self loadArtistDetails];
+    [self loadImages];
+    if (ApplicationDelegate.isLoggedIn) {
+        [ECJSONFetcher checkIfConcert:[self.concert eventID] isOnProfile:self.userID completion:^(BOOL isOnProfile) {
+            self.isOnProfile = isOnProfile;
+            [self setImageForConcertStatusButton];
+            [self updatePlaceholderText];
+        }];
+    }
+}
 
 #pragma mark -
 //check if concert is populating and setup 
 -(void) checkIfPopulating {
-    [ECJSONFetcher checkIfEventIsPopulating:[self.concert eventID] completion:^(BOOL isPopulating) {
-        self.isPopulating = isPopulating;
-        [self togglePopulatingIndicator];
-        [self updatePlaceholderText];
-        if(!self.isPopulating) {
-            [self stopTimer];
-        }
-    }];
+    if(self.tense != ECSearchTypeFuture) { //don't search for posts if the event hasn't happened yet
+        [ECJSONFetcher checkIfEventIsPopulating:[self.concert eventID] completion:^(BOOL isPopulating) {
+            self.isPopulating = isPopulating;
+            [self togglePopulatingIndicator];
+            [self updatePlaceholderText];
+            if(!self.isPopulating) {
+                [self stopTimer];
+            }
+        }];
+    }
+    else {
+        NSLog(@"ECConcertDetailViewController: Not checking if populating because concert is in the future");
+    }
 }
 
 -(void) timerFire {
@@ -204,19 +216,6 @@ NSString *kCellID = @"cellID";
     self.imgArtist.layer.borderWidth = 0.1;
 }
 
--(void) updateView {
-    [self clearCollectionView];
-    [self loadArtistDetails];
-    [self loadImages];
-    if (ApplicationDelegate.isLoggedIn) {
-        [ECJSONFetcher checkIfConcert:[self.concert eventID] isOnProfile:self.userID completion:^(BOOL isOnProfile) {
-            self.isOnProfile = isOnProfile;
-            [self setImageForConcertStatusButton];
-        }];
-    }
-
-}
-
 //Toggle whether or not the profile is on the user's profile.
 -(void) toggleOnProfileState {
     self.isOnProfile = !self.isOnProfile;
@@ -259,9 +258,11 @@ NSString *kCellID = @"cellID";
 -(void) loadImages {
     NSString* serverID = [self.concert eventID];
     if (serverID) {
-        [ECJSONFetcher fetchPostsForConcertWithID:serverID completion:^(NSArray *fetchedPosts) {
-            [self fetchedPosts:fetchedPosts];
-        }];
+        if (self.tense != ECSearchTypeFuture) {
+            [ECJSONFetcher fetchPostsForConcertWithID:serverID completion:^(NSArray *fetchedPosts) {
+                [self fetchedPosts:fetchedPosts];
+            }];
+        }
     }
     else {
         NSLog(@"%@: Can't load images, object doesn't have a server_id", NSStringFromClass([self class]));
@@ -534,10 +535,22 @@ NSString *kCellID = @"cellID";
 
 
 -(void) selectFriends {
-
+    
+    NSString* title = nil;
+    switch (self.tense) {
+        case ECSearchTypeToday:
+        case ECSearchTypeFuture:
+            title = @"Who else is going?";
+            break;
+        case ECSearchTypePast:
+            title = @"Who else went?";
+            break;
+        default:
+            break;
+    }
     KNMultiItemSelector * selector = [[KNMultiItemSelector alloc] initWithItems:friends
                                                                preselectedItems:nil
-                                                                          title:@"Who else went?"
+                                                                          title:title
                                                                 placeholderText:@"Search by name"
                                                                        delegate:self];
     
@@ -767,13 +780,19 @@ NSString *kCellID = @"cellID";
     }
 }
 -(void) updatePlaceholderText {
+    NSLog(@"ECConcertDetailViewController: update placeholder text called");
     NSString* placeHolderText = nil;
     
-//    if (self.isFuture) {
-//        placeHolderText = @"Add the concert to your profile by clicking the + sign above.";
-//    }
     if (!self.isOnProfile) {
-        placeHolderText = @"Add the concert to your profile by clicking the + sign above in order to get images.";
+        if(self.tense == ECSearchTypePast){
+            placeHolderText = @"Add the concert to your profile by clicking the + sign above in order to get photos and videos from the show.";
+        }
+        if (self.tense == ECSearchTypeFuture) {
+            placeHolderText = @"Add this concert to your profile by clicking the + sign above and check back again soon for some awesome stuff";
+        }
+        if (self.tense == ECSearchTypeToday) {
+            placeHolderText = @"Concert is today! Hooray! I can almost smell the photos and videos. Oh wait, that's BO.";
+        }
     }
     else if (self.isPopulating) {
         placeHolderText = nil;//@"Images are still loading, please check back again soon! Tap here to check again.";

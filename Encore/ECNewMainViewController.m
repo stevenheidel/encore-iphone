@@ -569,12 +569,14 @@ typedef enum {
         }
         else {
             ECConcertDetailViewController* detailVC = [[ECConcertDetailViewController alloc] initWithConcert:[self.searchResultsEvents objectAtIndex:indexPath.row]];
+            detailVC.tense = self.currentSearchType;
             [self.navigationController pushViewController:detailVC animated:YES];
         }
     }
     else {
         NSArray* events = [self currentEventArray];
         ECConcertDetailViewController* detailVC = [[ECConcertDetailViewController alloc] initWithConcert:[events objectAtIndex:indexPath.row]];
+        detailVC.tense = self.currentSearchType;
         [self.navigationController pushViewController:detailVC animated:YES];
     }
 }
