@@ -263,7 +263,6 @@ typedef enum {
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSLog(@"row count for section %d",[self rowCountForSection:section]);
     return [self rowCountForSection: section];
 }
 
