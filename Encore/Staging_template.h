@@ -10,9 +10,11 @@
 #define Encore_Staging_h
 
 #define STAGING 1
-
-#endif
+//#define PRODUCTION 0
 
 #define RETURN_TEST_DATA 0
 #define FLURRY_LOGGING 0
 #define IN_BETA 1
+
+#endif
+
