@@ -136,7 +136,23 @@ typedef enum {
     self.lblName.text = [[NSUserDefaults userName] uppercaseString];
     
     self.lblLocation.text = [NSUserDefaults userCity];
+    
+    [self setupRefreshControl];
 }
+
+-(void) setupRefreshControl {
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(reloadConcerts)
+                  forControlEvents:UIControlEventValueChanged];
+    [self.tableView addSubview:self.refreshControl];
+    self.refreshControl.tintColor = [UIColor lightBlueNavBarColor];
+}
+
+-(void) reloadConcerts {
+    [Flurry logEvent:@"Used_Refresh_On_Profile"];
+    [self fetchEvents];
+}
+
 
 -(BOOL)shouldAutorotate{
     return NO;
@@ -174,6 +190,9 @@ typedef enum {
         self.arrPastConcerts = [self.events objectForKey:@"past"];
         [self updateHeader];
         [self.tableView reloadData];
+        if([self.refreshControl isRefreshing]){
+            [self.refreshControl endRefreshing];
+        }
     }];
 }
 
