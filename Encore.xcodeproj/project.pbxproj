@@ -43,6 +43,10 @@
 		A0A2B0DB177E333900518B6C /* ECProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0A2B0D9177E333900518B6C /* ECProfileViewController.xib */; };
 		A0A2B0DD177E3B5A00518B6C /* ECProfileHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0A2B0DC177E3B5A00518B6C /* ECProfileHeader.xib */; };
 		A0FF1C53176CC88000433768 /* LoginInfoPages.plist in Resources */ = {isa = PBXBuildFile; fileRef = A0FF1C52176CC88000433768 /* LoginInfoPages.plist */; };
+		D41489F9179F1F6900EE643F /* invite.png in Resources */ = {isa = PBXBuildFile; fileRef = D41489F7179F1F6900EE643F /* invite.png */; };
+		D41489FA179F1F6900EE643F /* invite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D41489F8179F1F6900EE643F /* invite@2x.png */; };
+		D41489FE179F1FDF00EE643F /* findstuffbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = D41489FC179F1FDF00EE643F /* findstuffbutton.png */; };
+		D41489FF179F1FDF00EE643F /* findstuffbutton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D41489FD179F1FDF00EE643F /* findstuffbutton@2x.png */; };
 		D428A45B1781085500101F12 /* UIColor+EncoreUI.m in Sources */ = {isa = PBXBuildFile; fileRef = D428A45A1781085500101F12 /* UIColor+EncoreUI.m */; };
 		D45DBD5D1783C57D000ED3C1 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D45DBD5C1783C57D000ED3C1 /* Icon@2x.png */; };
 		D45DBD5F1783C5C5000ED3C1 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D45DBD5E1783C5C5000ED3C1 /* Icon-Small@2x.png */; };
@@ -282,6 +286,10 @@
 		A0A2B0DC177E3B5A00518B6C /* ECProfileHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECProfileHeader.xib; sourceTree = "<group>"; };
 		A0FF1C52176CC88000433768 /* LoginInfoPages.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = LoginInfoPages.plist; sourceTree = "<group>"; };
 		B56B831D22E04C90BC664348 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
+		D41489F7179F1F6900EE643F /* invite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = invite.png; sourceTree = "<group>"; };
+		D41489F8179F1F6900EE643F /* invite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "invite@2x.png"; sourceTree = "<group>"; };
+		D41489FC179F1FDF00EE643F /* findstuffbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = findstuffbutton.png; sourceTree = "<group>"; };
+		D41489FD179F1FDF00EE643F /* findstuffbutton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "findstuffbutton@2x.png"; sourceTree = "<group>"; };
 		D428A4591781085500101F12 /* UIColor+EncoreUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+EncoreUI.h"; sourceTree = "<group>"; };
 		D428A45A1781085500101F12 /* UIColor+EncoreUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+EncoreUI.m"; sourceTree = "<group>"; };
 		D45DBD5C1783C57D000ED3C1 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
@@ -619,6 +627,10 @@
 				D4B8DECC179C663E00239A08 /* playbutton@2x.png */,
 				D4B7A8BB1799FD68001C14BE /* mylocationindicator.png */,
 				D4B7A8BC1799FD68001C14BE /* mylocationindicator@2x.png */,
+				D41489F7179F1F6900EE643F /* invite.png */,
+				D41489F8179F1F6900EE643F /* invite@2x.png */,
+				D41489FC179F1FDF00EE643F /* findstuffbutton.png */,
+				D41489FD179F1FDF00EE643F /* findstuffbutton@2x.png */,
 				D4AE47421795A179006AF663 /* divider */,
 				D4AC9022179345AE008F5FF0 /* location toggle button */,
 				D4AC900417934250008F5FF0 /* location uislider */,
@@ -1283,6 +1295,10 @@
 				D4BB7E0B179CD4B30098BCF4 /* navbarlandscape@2x.png in Resources */,
 				D4BB7E0E179DAECE0098BCF4 /* navbarlandscape-568h@2x.png in Resources */,
 				D4BB7E0F179DAECE0098BCF4 /* navbarlandscape.png in Resources */,
+				D41489F9179F1F6900EE643F /* invite.png in Resources */,
+				D41489FA179F1F6900EE643F /* invite@2x.png in Resources */,
+				D41489FE179F1FDF00EE643F /* findstuffbutton.png in Resources */,
+				D41489FF179F1FDF00EE643F /* findstuffbutton@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
