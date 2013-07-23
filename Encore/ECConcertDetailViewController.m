@@ -82,6 +82,7 @@ NSString *kCellID = @"cellID";
 #pragma mark - View Setup
 - (void)viewDidLoad {
     [super viewDidLoad];
+    NSLog(@"%@: did load",NSStringFromClass(self.class));
     self.isOnProfile = FALSE;
     self.isPopulating = FALSE;
     

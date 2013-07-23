@@ -66,6 +66,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    NSLog(@"%@: did load",NSStringFromClass(self.class));
     // Do any additional setup after loading the view from its nib.
     
     NSString *myListPath = [[NSBundle mainBundle] pathForResource:@"LoginInfoPages" ofType:@"plist"];
@@ -110,8 +111,6 @@
 -(IBAction)performLogin:(id)sender{
    // [self.spinner startAnimating];  //TODO: Spinner
     [Flurry logEvent:@"Perform_Login"];
-    ECAppDelegate* appDelegate = (ECAppDelegate*)[UIApplication sharedApplication].delegate;
-//    [appDelegate openSession];
     [ApplicationDelegate beginFacebookAuthorization];
 }
 

@@ -54,6 +54,7 @@ typedef enum {
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    NSLog(@"%@: did load",NSStringFromClass(self.class));
     // Do any additional setup after loading the view from its nib.
     [self setupPost];
     self.profilePicture.layer.cornerRadius = 30.0;

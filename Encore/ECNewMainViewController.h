@@ -19,7 +19,6 @@
 - (void)dismissKeyboard;
 - (IBAction)openLastFM:(id)sender;
 - (IBAction)openLocationSetter;
--(void) initializeSearchLocation: (CLLocation*) currentSearchLocation;
 
 @property (weak, nonatomic) IBOutlet UIView *searchContainer;
 @property (nonatomic, strong) CLLocation* currentSearchLocation;
