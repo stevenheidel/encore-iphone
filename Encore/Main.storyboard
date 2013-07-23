@@ -21,7 +21,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="HlE-VT-IbH">
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="E96-RF-aMq" userLabel="Header">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="74"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="75"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="BPv-ov-Jp0" userLabel="Segmented Control">
@@ -46,8 +46,8 @@
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Artist search..." minimumFontSize="17" background="searchbar.png" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="UU0-XP-3u7" userLabel="Search">
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
+                                                        <constraint firstAttribute="height" constant="35" id="LtC-ZU-Xok"/>
                                                         <constraint firstAttribute="width" constant="250" id="WnO-GE-CGK"/>
-                                                        <constraint firstAttribute="height" constant="35" id="lnP-Fq-6zr"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <textInputTraits key="textInputTraits" returnKeyType="search"/>
@@ -57,7 +57,7 @@
                                                 </textField>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RbE-gN-6Tm" userLabel="Location Button">
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="27" type="user" id="jjP-yd-aYi"/>
+                                                        <constraint firstAttribute="width" constant="34" id="Cih-ip-JKy"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                     <state key="normal" image="locationmakerwhite.png">
@@ -75,15 +75,15 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstItem="14l-k4-vqw" firstAttribute="top" secondItem="zAo-rd-fKL" secondAttribute="top" type="default" id="1dh-6Y-e41"/>
-                                                <constraint firstItem="UU0-XP-3u7" firstAttribute="centerY" secondItem="RbE-gN-6Tm" secondAttribute="centerY" type="default" id="5c6-Lh-7r7"/>
-                                                <constraint firstAttribute="trailing" secondItem="RbE-gN-6Tm" secondAttribute="trailing" constant="9" id="9gN-ce-axa"/>
+                                                <constraint firstItem="RbE-gN-6Tm" firstAttribute="centerY" secondItem="UU0-XP-3u7" secondAttribute="centerY" type="default" id="49D-Fi-sVs"/>
+                                                <constraint firstItem="RbE-gN-6Tm" firstAttribute="leading" secondItem="UU0-XP-3u7" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="7UK-oh-jun"/>
                                                 <constraint firstAttribute="height" constant="65" type="user" id="Pmn-P3-QPd"/>
                                                 <constraint firstItem="14l-k4-vqw" firstAttribute="bottom" secondItem="zAo-rd-fKL" secondAttribute="bottom" type="default" id="TFm-0w-gDN"/>
-                                                <constraint firstItem="RbE-gN-6Tm" firstAttribute="top" secondItem="zAo-rd-fKL" secondAttribute="top" constant="20" symbolic="YES" type="default" id="WWz-0O-lcd"/>
                                                 <constraint firstItem="14l-k4-vqw" firstAttribute="trailing" secondItem="zAo-rd-fKL" secondAttribute="trailing" type="default" id="Xmk-dm-w7I"/>
+                                                <constraint firstItem="RbE-gN-6Tm" firstAttribute="top" secondItem="zAo-rd-fKL" secondAttribute="top" type="default" id="f56-rT-qOX"/>
                                                 <constraint firstItem="14l-k4-vqw" firstAttribute="leading" secondItem="zAo-rd-fKL" secondAttribute="leading" type="default" id="l0A-Nq-VAL"/>
-                                                <constraint firstAttribute="bottom" secondItem="RbE-gN-6Tm" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="lAT-Un-GhZ"/>
-                                                <constraint firstItem="UU0-XP-3u7" firstAttribute="leading" secondItem="zAo-rd-fKL" secondAttribute="leading" constant="8" id="zgz-hY-AAk"/>
+                                                <constraint firstItem="RbE-gN-6Tm" firstAttribute="trailing" secondItem="zAo-rd-fKL" secondAttribute="trailing" type="default" id="orh-AO-gDe"/>
+                                                <constraint firstItem="RbE-gN-6Tm" firstAttribute="bottom" secondItem="zAo-rd-fKL" secondAttribute="bottom" type="default" id="pur-7j-efT"/>
                                             </constraints>
                                         </view>
                                         <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hXC-Wo-Qyy" userLabel="LastFM Button">
@@ -117,7 +117,7 @@
                                 </view>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" restorationIdentifier="Cell" selectionStyle="blue" indentationWidth="10" reuseIdentifier="Cell" id="7Fj-8N-9kC" customClass="ECSearchResultCell">
-                                        <rect key="frame" x="0.0" y="96" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="97" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -194,7 +194,6 @@
             <relationships>
                 <relationship kind="action" name="openLastFM:"/>
                 <relationship kind="action" name="openLocationSetter"/>
-                <relationship kind="action" name="switchedSelection:"/>
                 <relationship kind="outlet" name="imgBackground" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="lastFMButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="lblTodaysDate" candidateClass="UILabel"/>
