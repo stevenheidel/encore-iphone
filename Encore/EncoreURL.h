@@ -42,16 +42,16 @@ static NSString *const BaseURL = @BASE_URL_DEF;
 //URLS
 
 //Sharing
-static NSString *const ShareConcertURL = @BASE_URL_PUBLIC_DEF EVENTS_DEF "/%@";
-static NSString *const SharePostURL = @BASE_URL_PUBLIC_DEF POSTS_DEF "/%@";
+static NSString *const ShareConcertURL = @BASE_URL_PUBLIC_DEF "events/%@"; //,event id
+static NSString *const SharePostURL = @BASE_URL_PUBLIC_DEF "posts/%@"; //,post id
 
 //User's concerts
-static NSString *const UserConcertsURL = @BASE_URL_DEF USERS_DEF "/%@/" EVENTS_DEF; //,facebook id
+static NSString *const UserConcertsURL = @BASE_URL_DEF "users/%@/events"; //,facebook id
 
 //Popular concerts
-static NSString *const PastPopularConcertsURL = @EVENTS_DEF "/" PAST_DEF JSON_DEF;
-static NSString *const FuturePopularConcertsURL = @EVENTS_DEF "/" FUTURE_DEF JSON_DEF;
-static NSString *const TodayPopularConcertsURL = @EVENTS_DEF "/" TODAY_DEF JSON_DEF;
+static NSString *const PastPopularConcertsURL = @"events/past.json";
+static NSString *const FuturePopularConcertsURL = @"events/future.json";
+static NSString *const TodayPopularConcertsURL = @"events/today.json";
 
 //Artists and Concerts combo
 static NSString *const ArtistConcertComboURL = @ARTISTS_DEF "/" SEARCH_DEF JSON_DEF;
