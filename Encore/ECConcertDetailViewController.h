@@ -22,9 +22,9 @@
 -(IBAction)addPhoto;
 -(void) shareTapped;
 -(id) initWithConcert:(NSDictionary*) concert;
--(void) setConcert:(NSDictionary *)concert andUpdate: (BOOL) update;
--(void) updateView;
 
+@property (weak, nonatomic) IBOutlet UIButton *getStuffButton;
+- (IBAction)getStuff;
 @property (nonatomic, assign) ECSearchType tense;
 @property (nonatomic,strong) FBFriendPickerViewController* friendPickerController;
 @property (nonatomic,weak) IBOutlet UIActivityIndicatorView* footerActivityIndicator;

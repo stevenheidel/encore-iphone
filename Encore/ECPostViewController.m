@@ -113,10 +113,7 @@ typedef enum {
 //}
 
 -(void) setViewForCurrentType {
-    NSLog(@"updatePlayButton called");
     ECPostType postType = [self.post postType];
-//    self.playButton.hidden = YES;//postType ==ECPhotoPost;
-//    self.playButton.enabled = postType ==ECVideoPost;
     self.youtubeWebView.hidden = postType == ECPhotoPost;
     self.postImage.hidden = postType == ECVideoPost;
     

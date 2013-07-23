@@ -164,5 +164,27 @@
     }];
 }
 
++(void) populateConcert: (NSString*) eventID completion: (void(^)(BOOL success)) completion {
+    NSString * urlString = [NSString stringWithFormat:PopulateEventURL,eventID];
+    AFHTTPClient * client = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:BaseURL]];
+    
+    [client registerHTTPOperationClass:[AFJSONRequestOperation class]];
+    [client setDefaultHeader:@"Accept" value:@"application/json"];
+    
+    [client postPath:urlString parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSString* returnValue = [responseObject objectForKey:@"response"];
+        NSLog(@"%@: Success asking server to populate event %@. Response: %@", NSStringFromClass([self class]),eventID,returnValue);
+        
+        if (completion) {
+            completion([returnValue isEqualToString:@"success"]);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"%@: ERROR asking server to populate event %@: %@...",NSStringFromClass([self class]), eventID,[[error description] substringToIndex:MAX_ERROR_LEN]);
+        
+        if (completion) {
+            completion(FALSE);
+        }
+    }];
 
+}
 @end

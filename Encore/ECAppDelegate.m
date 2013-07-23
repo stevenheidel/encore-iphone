@@ -169,7 +169,6 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
     [self saveUserInfoToDefaults:user];
 }
 
-
 - (void)fbDidLogout {
     if(!self.loginViewController) {
         self.loginViewController = [[ECLoginViewController alloc] init];

@@ -18,6 +18,6 @@
 
 +(void) flagPost:(NSString *)postID withFlag:(NSString *)flag fromUser: (NSString*) userID completion:(void (^)(BOOL success))completion;
 
-+(void) populateConcert: (NSString*) concertID completion: (void(^)(BOOL success)) completion;
++(void) populateConcert: (NSString*) eventID completion: (void(^)(BOOL success)) completion;
 
 @end

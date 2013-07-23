@@ -294,6 +294,11 @@ typedef enum {
 
 - (void) setBackgroundImage {
     if ([[self currentEventArray] count] > 0) {
+        if(self.hasSearched) {
+            UIImage *background = [[UIImage imageWithData: [NSData dataWithContentsOfURL:[self.searchedArtistDic imageURL]]] imageWithGaussianBlur];
+            [self.imgBackground setImage: background];
+            return;
+        }
         UIImage *background = [[UIImage imageWithData:[NSData dataWithContentsOfURL:[[[self currentEventArray] objectAtIndex:0] imageURL]]] imageWithGaussianBlur];
         [self.imgBackground setImage:background];
     }

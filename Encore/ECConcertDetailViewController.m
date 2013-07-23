@@ -39,7 +39,7 @@
 #import "UIViewController+KNSemiModal.h"
 #import "KNMultiItemSelector.h"
 
-#define HUD_DELAY 0.9
+#define HUD_DELAY 1.0
 #define HEADER_HEIGHT 160.0
 #import "ECAppDelegate.h"
 
@@ -74,10 +74,6 @@ NSString *kCellID = @"cellID";
 -(NSString*) userID {
     return [NSUserDefaults userID];
 }
--(void) tapArtistPhoto {
-    [Flurry logEvent:@"Tapped_Artist_Photo_DetailVC"];
-    [self togglePopulatingIndicator];
-}
 
 #pragma mark - View Setup
 - (void)viewDidLoad {
@@ -99,8 +95,20 @@ NSString *kCellID = @"cellID";
     [self setupArtistUIAttributes];
 
     [self setUpNavBarButtons];
-
-    [self updateView];
+    [self loadArtistDetails];
+    [self setUpPlaceholderView];
+    if (self.tense != ECSearchTypeFuture) {
+        [self loadImages];
+    }
+    
+    if (ApplicationDelegate.isLoggedIn) {
+        [ECJSONFetcher checkIfConcert:[self.concert eventID] isOnProfile:self.userID completion:^(BOOL isOnProfile) {
+            self.isOnProfile = isOnProfile;
+            [self setImageForConcertStatusButton];
+            [self updatePlaceholderText];
+        }];
+    }
+    
     self.view.clipsToBounds = YES;
     self.collectionView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
     
@@ -110,23 +118,45 @@ NSString *kCellID = @"cellID";
     friends = [[NSMutableArray alloc] init];
 }
 
--(BOOL)shouldAutorotate{
-    return NO;
-}
-
--(NSUInteger)supportedInterfaceOrientations{
-    return UIInterfaceOrientationMaskPortrait;
-}
-- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation{
-    return UIInterfaceOrientationPortrait;
-}
-
 -(void) setupRefreshControl {
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(loadImages)
                   forControlEvents:UIControlEventValueChanged];
     [self.collectionView addSubview:self.refreshControl];
     self.refreshControl.tintColor = [UIColor lightBlueNavBarColor];
+}
+
+-(void) setupArtistUIAttributes {
+    //    [self.artistNameLabel setAdjustsFontSizeToFitWidth:YES];
+    self.artistNameLabel.font = [UIFont heroFontWithSize: 16.0];
+    self.artistNameLabel.textColor = [UIColor blueArtistTextColor];
+    
+    //    [self.venueNameLabel setAdjustsFontSizeToFitWidth:YES];
+    self.venueNameLabel.font = [UIFont heroFontWithSize: 14.0];
+    self.dateLabel.font = [UIFont heroFontWithSize: 12.0];
+    self.imgArtist.layer.cornerRadius = 5.0;
+    self.imgArtist.layer.masksToBounds = YES;
+    self.imgArtist.layer.borderColor = [UIColor grayColor].CGColor;
+    self.imgArtist.layer.borderWidth = 0.1;
+}
+
+
+-(void) setUpNavBarButtons {
+    UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIImage *leftButImage = [UIImage imageNamed:@"backButton.png"]; //stretchableImageWithLeftCapWidth:10 topCapHeight:10];
+    [leftButton setBackgroundImage:leftButImage forState:UIControlStateNormal];
+    [leftButton addTarget:self action:@selector(backButtonWasPressed) forControlEvents:UIControlEventTouchUpInside];
+    leftButton.frame = CGRectMake(0, 0, leftButImage.size.width, leftButImage.size.height);
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
+    self.navigationItem.leftBarButtonItem = backButton;
+    
+    UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIImage *rightButImage = [UIImage imageNamed:@"shareButton.png"]; //stretchableImageWithLeftCapWidth:10 topCapHeight:10];
+    [rightButton setBackgroundImage:rightButImage forState:UIControlStateNormal];
+    [rightButton addTarget:self action:@selector(shareTapped) forControlEvents:UIControlEventTouchUpInside];
+    rightButton.frame = CGRectMake(0, 0, rightButImage.size.width, rightButImage.size.height);
+    self.shareButton = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
+    self.navigationItem.rightBarButtonItem = self.shareButton;
 }
 
 -(void) viewWillAppear:(BOOL)animated {
@@ -138,107 +168,16 @@ NSString *kCellID = @"cellID";
     [self stopTimer];
 }
 
--(void) updateView {
-    [self clearCollectionView];
-    [self loadArtistDetails];
-    [self loadImages];
-    if (ApplicationDelegate.isLoggedIn) {
-        [ECJSONFetcher checkIfConcert:[self.concert eventID] isOnProfile:self.userID completion:^(BOOL isOnProfile) {
-            self.isOnProfile = isOnProfile;
-            [self setImageForConcertStatusButton];
-            [self updatePlaceholderText];
-        }];
-    }
-}
-
-#pragma mark -
-//check if concert is populating and setup 
--(void) checkIfPopulating {
-    if(self.tense != ECSearchTypeFuture) { //don't search for posts if the event hasn't happened yet
-        [ECJSONFetcher checkIfEventIsPopulating:[self.concert eventID] completion:^(BOOL isPopulating) {
-            self.isPopulating = isPopulating;
-            [self togglePopulatingIndicator];
-            [self updatePlaceholderText];
-            if(!self.isPopulating) {
-                [self stopTimer];
-            }
-        }];
-    }
-    else {
-        NSLog(@"ECConcertDetailViewController: Not checking if populating because concert is in the future");
-    }
-}
-
--(void) timerFire {
-    NSLog(@"Timer Fired");
-    [self checkIfPopulating];
-    if (self.posts.count>0) {
-        self.savedPosition = self.collectionView.contentOffset;
-    }
-    
-    [self loadImages];
-}
-
--(void) togglePopulatingIndicator {
-    [UIView animateWithDuration:0.5 animations:^{
-        self.footerIsPopulatingView.alpha = self.isPopulating ? 1.0 : 0.0;
-    } completion:nil];
-    if(self.isPopulating) {
-        [self.footerActivityIndicator startAnimating];
-    }
-    if (self.isPopulating && self.timer == nil) {
-        [self startTimer];
-    }
-}
-
--(void) setConcert:(NSDictionary *)concert andUpdate: (BOOL) update {
-    self.concert = concert;
-    if (update) {
-        [self updateView];
-    }
-}
-
--(void) clearCollectionView {
-    self.posts = nil;
-    [self.collectionView reloadData];
-}
-
--(void) setupArtistUIAttributes {
-//    [self.artistNameLabel setAdjustsFontSizeToFitWidth:YES];
-    self.artistNameLabel.font = [UIFont heroFontWithSize: 16.0];
-    self.artistNameLabel.textColor = [UIColor blueArtistTextColor];
-    
-//    [self.venueNameLabel setAdjustsFontSizeToFitWidth:YES];
-    self.venueNameLabel.font = [UIFont heroFontWithSize: 14.0];
-    self.dateLabel.font = [UIFont heroFontWithSize: 12.0];
-    self.imgArtist.layer.cornerRadius = 5.0;
-    self.imgArtist.layer.masksToBounds = YES;
-    self.imgArtist.layer.borderColor = [UIColor grayColor].CGColor;
-    self.imgArtist.layer.borderWidth = 0.1;
-}
-
-//Toggle whether or not the profile is on the user's profile.
--(void) toggleOnProfileState {
-    self.isOnProfile = !self.isOnProfile;
-    [self setImageForConcertStatusButton];
-    [self updatePlaceholderText];
-}
-
--(void) setImageForConcertStatusButton {
-    if (self.isOnProfile) {
-        [self.concertStausButton setImage:[UIImage imageNamed:@"removeEventButton"] forState:UIControlStateNormal];
-    }
-    else {
-        [self.concertStausButton setImage:[UIImage imageNamed:@"addEventButton.png"] forState:UIControlStateNormal];
-    }
+-(void) backButtonWasPressed {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void) loadArtistDetails {
     self.artistNameLabel.text = [[self.concert artistName] uppercaseString];
     self.venueNameLabel.text = [self.concert venueName];
-
+    
     self.dateLabel.text = [NSString stringWithFormat:@"%@, %@", [self.concert venueName], [self.concert niceDate]];
-
+    
     NSURL *imageURL = [self.concert imageURL];
     if (imageURL) {
         UIImage *regImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL]];
@@ -259,15 +198,12 @@ NSString *kCellID = @"cellID";
 -(void) loadImages {
     NSString* serverID = [self.concert eventID];
     if (serverID) {
-        if (self.tense != ECSearchTypeFuture) {
-            [ECJSONFetcher fetchPostsForConcertWithID:serverID completion:^(NSArray *fetchedPosts) {
-                [self fetchedPosts:fetchedPosts];
-            }];
-        }
+        [ECJSONFetcher fetchPostsForConcertWithID:serverID completion:^(NSArray *fetchedPosts) {
+            [self fetchedPosts:fetchedPosts];
+        }];
     }
     else {
         NSLog(@"%@: Can't load images, object doesn't have a server_id", NSStringFromClass([self class]));
-        [self setUpPlaceholderView];
     }
 }
 
@@ -291,28 +227,61 @@ NSString *kCellID = @"cellID";
     }
 }
 
--(void) setUpNavBarButtons {
-    UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    UIImage *leftButImage = [UIImage imageNamed:@"backButton.png"]; //stretchableImageWithLeftCapWidth:10 topCapHeight:10];
-    [leftButton setBackgroundImage:leftButImage forState:UIControlStateNormal];
-    [leftButton addTarget:self action:@selector(backButtonWasPressed) forControlEvents:UIControlEventTouchUpInside];
-    leftButton.frame = CGRectMake(0, 0, leftButImage.size.width, leftButImage.size.height);
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
-    self.navigationItem.leftBarButtonItem = backButton;
-    
-    UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    UIImage *rightButImage = [UIImage imageNamed:@"shareButton.png"]; //stretchableImageWithLeftCapWidth:10 topCapHeight:10];
-    [rightButton setBackgroundImage:rightButImage forState:UIControlStateNormal];
-    [rightButton addTarget:self action:@selector(shareTapped) forControlEvents:UIControlEventTouchUpInside];
-    rightButton.frame = CGRectMake(0, 0, rightButImage.size.width, rightButImage.size.height);
-    self.shareButton = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
-    self.navigationItem.rightBarButtonItem = self.shareButton;
+
+#pragma mark -
+//check if concert is populating and setup 
+-(void) checkIfPopulating {
+    if(self.tense != ECSearchTypeFuture) { //don't search for posts if the event hasn't happened yet
+        [ECJSONFetcher checkIfEventIsPopulating:[self.concert eventID] completion:^(BOOL isPopulating) {
+            self.isPopulating = isPopulating;
+            [self togglePopulatingIndicator];
+            [self updatePlaceholderText];
+            if(!self.isPopulating) {
+                [self stopTimer];
+                if(!self.posts.count >0)
+                    [self.getStuffButton setEnabled:YES];
+            }
+        }];
+    }
+    else {
+        NSLog(@"ECConcertDetailViewController: Not checking if populating because concert is in the future");
+    }
 }
 
--(void) backButtonWasPressed {
-    [self.navigationController popViewControllerAnimated:YES];
+-(void) togglePopulatingIndicator {
+    [UIView animateWithDuration:0.5 animations:^{
+        self.footerIsPopulatingView.alpha = self.isPopulating ? 1.0 : 0.0;
+    } completion:nil];
+    if(self.isPopulating) {
+        [self.footerActivityIndicator startAnimating];
+    }
+    if (self.isPopulating && self.timer == nil) {
+        [self startTimer];
+    }
 }
 
+-(void) clearCollectionView { //old
+    self.posts = nil;
+    [self.collectionView reloadData];
+}
+
+//Toggle whether or not the profile is on the user's profile.
+-(void) toggleOnProfileState {
+    self.isOnProfile = !self.isOnProfile;
+    [self setImageForConcertStatusButton];
+    [self updatePlaceholderText];
+}
+
+-(void) setImageForConcertStatusButton {
+    if (self.isOnProfile) {
+        [self.concertStausButton setImage:[UIImage imageNamed:@"removeEventButton"] forState:UIControlStateNormal];
+    }
+    else {
+        [self.concertStausButton setImage:[UIImage imageNamed:@"addEventButton.png"] forState:UIControlStateNormal];
+    }
+}
+
+#pragma mark - Timer (repeatedly checking populating/loading)
 -(void) startTimer {
     self.timer = [NSTimer scheduledTimerWithTimeInterval:5.0
                                                   target:self
@@ -326,7 +295,33 @@ NSString *kCellID = @"cellID";
     self.timer = nil;
 }
 
-#pragma mark - FB Sharing
+-(void) timerFire {
+    NSLog(@"Timer Fired");
+    [self checkIfPopulating];
+    if (self.posts.count>0) {
+        self.savedPosition = self.collectionView.contentOffset;
+    }
+    else {
+        
+    }
+    [self loadImages];
+}
+
+#pragma mark - Interactions
+-(void) tapArtistPhoto {
+    [Flurry logEvent:@"Tapped_Artist_Photo_DetailVC"];
+    [self togglePopulatingIndicator];
+}
+
+- (IBAction)getStuff {
+    [Flurry logEvent:@"Find_Photos_and_Videos_Pressed"];
+    [ECJSONPoster populateConcert:[self.concert eventID] completion:^(BOOL success) {
+        [self checkIfPopulating];
+        self.getStuffButton.enabled = NO;
+    }];
+}
+
+#pragma mark FB Sharing
 -(void) shareTapped {
     [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
     [Flurry logEvent:@"Share_Tapped_Concert"];
@@ -673,11 +668,11 @@ NSString *kCellID = @"cellID";
 	[HUD show:YES];
 	[HUD hide:YES afterDelay:HUD_DELAY];
     [self toggleOnProfileState];
-//    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, HUD_DELAY * NSEC_PER_SEC);
-//    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (HUD_DELAY-0.2) * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         //code to be executed on the main queue after delay
         [self loadAndSelectFriends];
-//    });
+    });
 
 }
 
@@ -770,7 +765,9 @@ NSString *kCellID = @"cellID";
     }
     
     [self updatePlaceholderText];
-
+    self.getStuffButton.hidden = self.tense == ECSearchTypeFuture;
+    self.getStuffButton.enabled = self.tense != ECSearchTypeFuture;
+    
     if(!self.placeholderView.superview) {
         [self.view addSubview:self.placeholderView];
     }
@@ -786,7 +783,7 @@ NSString *kCellID = @"cellID";
     
     if (!self.isOnProfile) {
         if(self.tense == ECSearchTypePast){
-            placeHolderText = @"Add the concert to your profile by clicking the + sign above in order to get photos and videos from the show.";
+            placeHolderText = @"Add the concert to your profile by clicking the + sign above.";
         }
         if (self.tense == ECSearchTypeFuture) {
             placeHolderText = @"Add this concert to your profile by clicking the + sign above and check back again soon for some awesome stuff";
@@ -804,7 +801,7 @@ NSString *kCellID = @"cellID";
     self.placeholderView.label1.text = placeHolderText;
 }
 
-#pragma mark - adding photos
+#pragma mark - ADDING PHOTOS (currently not used)
 -(IBAction)addPhoto {
     [Flurry logEvent:@"Tapped_Add_Photo" withParameters:[self flurryParam]];
     UIActionSheet* actionSheet = [[UIActionSheet alloc] initWithTitle:@"Post photo" delegate:self cancelButtonTitle:NSLocalizedString(@"cancel", nil) destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"pick_from_lib", nil),[UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] ? NSLocalizedString(@"new_from_camera", nil):nil, nil];
@@ -875,7 +872,7 @@ NSString *kCellID = @"cellID";
 -(NSDictionary*) flurryParam {
     return self.concert;
 }
-#pragma mark - post view controller delegate
+#pragma mark - PostViewControllerDelegate (swipe transitions between posts)
 
 -(NSDictionary*) requestPost:(NSInteger)direction currentIndex:(NSInteger)index {
     if(self.posts.count <= 1) { //if only one or zero posts, no need to switch
@@ -902,6 +899,18 @@ NSString *kCellID = @"cellID";
 
 -(ECAppDelegate*) appDelegate {
     return (ECAppDelegate *)[UIApplication sharedApplication].delegate;
+}
+
+#pragma mark Autorotation
+-(BOOL)shouldAutorotate{
+    return NO;
+}
+
+-(NSUInteger)supportedInterfaceOrientations{
+    return UIInterfaceOrientationMaskPortrait;
+}
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation{
+    return UIInterfaceOrientationPortrait;
 }
 
 @end
