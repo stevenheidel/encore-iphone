@@ -52,7 +52,6 @@
 }
 -(void) getDefaults {
     float lastSearchRadius = [NSUserDefaults lastSearchRadius];
-    NSLog(@"%f",lastSearchRadius);
     self.radius = lastSearchRadius;
     
     CLLocation* lastSearchLocation = [NSUserDefaults lastSearchLocation];
