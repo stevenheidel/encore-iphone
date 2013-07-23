@@ -59,17 +59,21 @@ typedef enum {
     [super viewDidLoad];
     [self setUpBackButton];
     [self setupLogoutButton];
+    [self setUpHeaderView];
+    [self setupRefreshControl];
     
     self.tableView.tableFooterView = [UIView new];
-   // self.tableView.tableFooterView = [self footerView]; //Commented out Songkick attribution
    
     [self.tableView registerNib:[UINib nibWithNibName:@"ECProfileConcertCell" bundle:nil]
          forCellReuseIdentifier:@"ECProfileConcertCell"];
-    [self setUpHeaderView];
+    
     self.view.clipsToBounds = YES;
     [self.tableView setIndicatorStyle:UIScrollViewIndicatorStyleWhite];
-    
+
     [[ATAppRatingFlow sharedRatingFlow] showRatingFlowFromViewControllerIfConditionsAreMet:self];
+    
+    self.tableView.sectionHeaderHeight = 0;
+    self.tableView.sectionFooterHeight = 0;
 }
 
 - (void) setUpBackButton {
@@ -136,8 +140,6 @@ typedef enum {
     self.lblName.text = [[NSUserDefaults userName] uppercaseString];
     
     self.lblLocation.text = [NSUserDefaults userCity];
-    
-    [self setupRefreshControl];
 }
 
 -(void) setupRefreshControl {
@@ -153,7 +155,6 @@ typedef enum {
     [self fetchEvents];
 }
 
-
 -(BOOL)shouldAutorotate{
     return NO;
 }
@@ -161,6 +162,7 @@ typedef enum {
 -(NSUInteger)supportedInterfaceOrientations{
     return UIInterfaceOrientationMaskPortrait;
 }
+
 - (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation{
     return UIInterfaceOrientationPortrait;
 }
@@ -212,9 +214,9 @@ typedef enum {
     return cell;
 }
 
-//-(NSString*) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-//    return [ECProfileViewController titleForSection:section];
-//}
+-(NSString*) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    return nil;
+}
 
 +(NSString*) titleForSection: (NSInteger) section {
     switch (section) {
@@ -233,7 +235,14 @@ typedef enum {
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
+    if ([self tableView: tableView numberOfRowsInSection:section]==0){
+        return 0;
+    }
     return 16.0;
+}
+
+-(CGFloat) tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 0;
 }
 
 -(NSArray*) arrayForSection: (NSInteger) section {
@@ -253,6 +262,7 @@ typedef enum {
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    NSLog(@"row count for section %d",[self rowCountForSection:section]);
     return [self rowCountForSection: section];
 }
 
@@ -262,7 +272,7 @@ typedef enum {
 
 -(UIView*) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     if([[self arrayForSection:section] count]==0){
-        return [UIView new];
+        return nil;//[UIView new];
     }
     NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"ECProfileSectionHeaderView" owner:nil options:nil];
     UIView* headerView = [subviewArray objectAtIndex:0];
