@@ -53,6 +53,7 @@ NSString *kCellID = @"cellID";
 
 @implementation ECConcertDetailViewController
 
+#pragma mark Inits
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -69,6 +70,7 @@ NSString *kCellID = @"cellID";
     }
     return self;
 }
+
 -(NSString*) userID {
     return [NSUserDefaults userID];
 }
@@ -79,6 +81,7 @@ NSString *kCellID = @"cellID";
     [self togglePopulatingIndicator];
 }
 
+#pragma mark - View Setup
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -106,29 +109,9 @@ NSString *kCellID = @"cellID";
     [(UILabel*)[self.footerIsPopulatingView viewWithTag:49] setFont:[UIFont heroFontWithSize:14]];
     
     [self setupRefreshControl];
-    
     friends = [[NSMutableArray alloc] init];
-    [ApplicationDelegate.facebook requestWithGraphPath:@"me/friends" andDelegate:self];
 }
 
-#pragma mark - Handle Facebook request data
-
-- (void)request:(FBRequest *)request didFailWithError:(NSError *)error {
-    NSLog(@"Facebook request error: %@",error.debugDescription);
-    
-}
-
-
-- (void)request:(FBRequest *)request didLoad:(id)result {
-    NSDictionary * rawObject = result;
-    NSArray * dataArray = [rawObject objectForKey:@"data"];
-    for (NSDictionary * f in dataArray) {
-        [friends addObject:[[KNSelectorItem alloc] initWithDisplayValue:[f objectForKey:@"name"]
-                                                            selectValue:[f objectForKey:@"id"]
-                                                               imageUrl:[NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?type=square", [f objectForKey:@"id"]]]];
-    }
-    [friends sortUsingSelector:@selector(compareByDisplayValue:)];
-}
 
 -(BOOL)shouldAutorotate{
     return NO;
@@ -158,6 +141,9 @@ NSString *kCellID = @"cellID";
     [self stopTimer];
 }
 
+
+
+#pragma mark -
 //check if concert is populating and setup 
 -(void) checkIfPopulating {
     [ECJSONFetcher checkIfEventIsPopulating:[self.concert eventID] completion:^(BOOL isPopulating) {
@@ -222,10 +208,13 @@ NSString *kCellID = @"cellID";
     [self clearCollectionView];
     [self loadArtistDetails];
     [self loadImages];
-    [ECJSONFetcher checkIfConcert:[self.concert eventID] isOnProfile:self.userID completion:^(BOOL isOnProfile) {
-        self.isOnProfile = isOnProfile;
-        [self setImageForConcertStatusButton];
-    }];
+    if (ApplicationDelegate.isLoggedIn) {
+        [ECJSONFetcher checkIfConcert:[self.concert eventID] isOnProfile:self.userID completion:^(BOOL isOnProfile) {
+            self.isOnProfile = isOnProfile;
+            [self setImageForConcertStatusButton];
+        }];
+    }
+
 }
 
 //Toggle whether or not the profile is on the user's profile.
@@ -339,19 +328,11 @@ NSString *kCellID = @"cellID";
 -(void) shareTapped {
     [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
     [Flurry logEvent:@"Share_Tapped_Concert"];
-    KNMultiItemSelector * selector = [[KNMultiItemSelector alloc] initWithItems:friends
-                                                               preselectedItems:nil
-                                                                          title:@"Tag friends"
-                                                                placeholderText:@"Search by name"
-                                                                       delegate:self];
-    selector.allowSearchControl = YES;
-    selector.useTableIndex      = YES;
-    selector.useRecentItems     = YES;
-    selector.maxNumberOfRecentItems = 4;
-    UINavigationController * uinav = [[UINavigationController alloc] initWithRootViewController:selector];
-    uinav.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-    uinav.modalPresentationStyle = UIModalPresentationFormSheet;
-    [self presentViewController:uinav animated:YES completion:nil];
+    [self share];
+}
+
+-(void) share {
+    [self shareWithTaggedFriends:nil];
 }
 -(void) shareWithTaggedFriends: (NSArray*) taggedFriends {
     NSLog(@"Sharing with Facebook from Concert detail view controller");
@@ -359,8 +340,10 @@ NSString *kCellID = @"cellID";
     
     FBShareDialogParams* params = [[FBShareDialogParams alloc] init];
     params.link = url;
-    [params setFriends:[taggedFriends valueForKey:@"id"]];
-//    params.description =  [NSString stringWithFormat:@"Check out photos and videos from %@'s %@ show in %@ at the %@ on Encore.",[self.concert artistName], [self.concert niceDate], [self.concert city], [self.concert venueName]];
+    if(taggedFriends)
+        [params setFriends:[taggedFriends valueForKey:@"id"]];
+
+    //    params.description =  [NSString stringWithFormat:@"Check out photos and videos from %@'s %@ show in %@ at the %@ on Encore.",[self.concert artistName], [self.concert niceDate], [self.concert city], [self.concert venueName]];
     if ([FBDialogs canPresentShareDialogWithParams:params]) {
         [FBDialogs presentShareDialogWithParams:params clientState:nil handler:^(FBAppCall *call, NSDictionary *results, NSError *error) {
             if(error) {
@@ -434,30 +417,12 @@ NSString *kCellID = @"cellID";
     return params;
 }
 
-#pragma mark - KNMultiItemSelectorDelegate methods
--(void)selectorDidCancelSelection {
-    [self dismissViewControllerAnimated:YES completion:^{
-        [Flurry logEvent:@"Cancelled_Sharing_From_Friend_Picker"];
-    }];
-}
--(void) selectorDidFinishSelectionWithItems:(NSArray *)selectedItems {
-    [self dismissViewControllerAnimated:YES completion:^{
-//        [ECJSONPoster postFriends: selectedItems ofUser: self.userID forConcert: self.concert];
-        NSLog(@"Sharing: Tagged %d friends",selectedItems.count);
-        if (selectedItems.count == 0) {
-            [self shareWithTaggedFriends:nil];
-            return;
-        }
-        NSMutableArray* taggedFriends = [[NSMutableArray alloc] initWithCapacity:selectedItems.count];
-        for (KNSelectorItem * i in selectedItems) {
-            [taggedFriends addObject:[NSDictionary dictionaryWithObjectsAndKeys:i.selectValue, @"id", i.displayValue, @"name", nil]];
-        }
-        [self shareWithTaggedFriends:taggedFriends];
-    }];
-}
+
 #pragma mark - Adding/Removing Concerts
 
 -(IBAction) addToProfile {
+    [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
+    
     if (!self.isOnProfile) {
         [self addConcert];
     }
@@ -465,17 +430,24 @@ NSString *kCellID = @"cellID";
         [self removeConcert];
     }
 }
--(BOOL) isLoggedIn {
-    return [[self appDelegate] isLoggedIn];
-}
+
 -(void) addConcert {
-    [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
-    [Flurry logEvent:@"Tapped_Add_Concert" withParameters:[self flurryParam]];
-    
-    if(self.isLoggedIn) {
-        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"confirm_add_title", nil) message:NSLocalizedString(@"confirm_add_message", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"cancel", nil) otherButtonTitles:NSLocalizedString(@"add", nil), nil];
-        alert.tag = AddConcertConfirmTag;
-        [alert show];
+    if (ApplicationDelegate.isLoggedIn) {
+        //        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"confirm_add_title", nil) message:NSLocalizedString(@"confirm_add_message", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"cancel", nil) otherButtonTitles:NSLocalizedString(@"add", nil), nil];
+        //        alert.tag = AddConcertConfirmTag;
+        //        [alert show];
+        //
+        NSString * userID = self.userID;
+        NSString * eventID = [self.concert eventID];
+        NSLog(@"%@: Adding concert %@ to profile %@", NSStringFromClass(self.class), eventID, userID);
+        [Flurry logEvent:@"Added_Concert" withParameters:[self flurryParam]];
+        
+        [ECJSONPoster addConcert:eventID toUser:userID completion:^{
+            [self completedAddingConcert];
+            [Flurry logEvent:@"Completed_Adding_Concert" withParameters:[self flurryParam]];
+            [self checkIfPopulating];
+            [self startTimer];
+        }];
     }
     else {
         UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login", nil) message:NSLocalizedString(@"You must be logged in to add a concert to your profile", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Login", nil), nil];
@@ -486,7 +458,7 @@ NSString *kCellID = @"cellID";
 
 -(void) removeConcert {
     [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
-    if (self.isLoggedIn) {
+    if (ApplicationDelegate.isLoggedIn) {
         [Flurry logEvent:@"Tapped_Remove_Concert" withParameters:[self flurryParam]];
         UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"confirm_remove_title", nil) message:NSLocalizedString(@"confirm_remove_message", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"cancel", nil) otherButtonTitles:NSLocalizedString(@"remove", nil), nil];
         alert.tag = RemoveConcertConfirmTag;
@@ -497,6 +469,137 @@ NSString *kCellID = @"cellID";
         alert.tag = ECNotLoggedInAlert;
         [alert show];
     }
+}
+//-(void) addConcert {
+//
+//    [Flurry logEvent:@"Tapped_Add_Concert" withParameters:[self flurryParam]];
+//    
+//    if([ApplicationDelegate isLoggedIn];) {
+////        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"confirm_add_title", nil) message:NSLocalizedString(@"confirm_add_message", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"cancel", nil) otherButtonTitles:NSLocalizedString(@"add", nil), nil];
+////        alert.tag = AddConcertConfirmTag;
+////        [alert show];
+////
+//        KNMultiItemSelector * selector = [[KNMultiItemSelector alloc] initWithItems:friends
+//                                                                   preselectedItems:nil
+//                                                                              title:@"Who else went?"
+//                                                                    placeholderText:@"Search by name"
+//                                                                           delegate:self];
+//        
+//        [selector.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], UITextAttributeTextColor, [UIColor clearColor], UITextAttributeTextShadowColor, [NSValue valueWithUIOffset:UIOffsetMake(0.0f,1.0f)],UITextAttributeTextShadowOffset, [UIFont systemFontOfSize:12.0f], UITextAttributeFont, nil]];
+//        
+//        selector.allowSearchControl = YES;
+//        selector.useTableIndex      = YES;
+//        selector.useRecentItems     = YES;
+//        selector.maxNumberOfRecentItems = 4;
+//        UINavigationController * uinav = [[UINavigationController alloc] initWithRootViewController:selector];
+//        uinav.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+//        uinav.modalPresentationStyle = UIModalPresentationFormSheet;
+//        [self presentViewController:uinav animated:YES completion:nil];
+//    }
+//    else {
+//        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login", nil) message:NSLocalizedString(@"You must be logged in to add a concert to your profile", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Login", nil), nil];
+//        alert.tag = ECNotLoggedInAlert;
+//        [alert show];
+//    }
+//}
+-(void) loadAndSelectFriends {
+    if(friends.count ==0) {
+     [ApplicationDelegate.facebook requestWithGraphPath:@"me/friends" andDelegate:self];   
+    }
+    else {
+        [self selectFriends];
+    }
+    //TODO start HUD
+}
+
+#pragma mark - Handle Facebook request data (getting friends)
+
+- (void)request:(FBRequest *)request didFailWithError:(NSError *)error {
+    NSLog(@"Facebook request error: %@",error.debugDescription);
+    
+}
+
+
+- (void)request:(FBRequest *)request didLoad:(id)result {
+    NSDictionary * rawObject = result;
+    NSArray * dataArray = [rawObject objectForKey:@"data"];
+    for (NSDictionary * f in dataArray) {
+        [friends addObject:[[KNSelectorItem alloc] initWithDisplayValue:[f objectForKey:@"name"]
+                                                            selectValue:[f objectForKey:@"id"]
+                                                               imageUrl:[NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?type=square", [f objectForKey:@"id"]]]];
+    }
+    [friends sortUsingSelector:@selector(compareByDisplayValue:)];
+    [self selectFriends];
+}
+
+
+-(void) selectFriends {
+
+    KNMultiItemSelector * selector = [[KNMultiItemSelector alloc] initWithItems:friends
+                                                               preselectedItems:nil
+                                                                          title:@"Who else went?"
+                                                                placeholderText:@"Search by name"
+                                                                       delegate:self];
+    
+    [selector.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], UITextAttributeTextColor, [UIColor clearColor], UITextAttributeTextShadowColor, [NSValue valueWithUIOffset:UIOffsetMake(0.0f,1.0f)],UITextAttributeTextShadowOffset, [UIFont systemFontOfSize:12.0f], UITextAttributeFont, nil]];
+    
+    selector.allowSearchControl = YES;
+    selector.useTableIndex      = YES;
+    selector.useRecentItems     = YES;
+    selector.maxNumberOfRecentItems = 4;
+    UINavigationController * uinav = [[UINavigationController alloc] initWithRootViewController:selector];
+    uinav.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    uinav.modalPresentationStyle = UIModalPresentationFormSheet;
+    [self presentViewController:uinav animated:YES completion:nil];
+}
+
+#pragma mark KNMultiItemSelectorDelegate methods
+-(void)selectorDidCancelSelection {
+    [self dismissViewControllerAnimated:YES completion:^{
+        [Flurry logEvent:@"Cancelled_Sharing_From_Friend_Picker"];
+    }];
+}
+-(void) selectorDidFinishSelectionWithItems:(NSArray *)selectedItems {
+    [self dismissViewControllerAnimated:YES completion:^{
+        [Flurry logEvent:@"Added_Friends_To_Concert" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[self.concert artistName],@"artist", [self.concert eventID],@"eventID", [NSNumber numberWithInt: selectedItems.count], @"friend_count", nil]];
+        
+        NSLog(@"Sharing: Tagged %d friends",selectedItems.count);
+        if (selectedItems.count == 0) {
+            return;
+        }
+        NSMutableArray* taggedFriends = [[NSMutableArray alloc] initWithCapacity:selectedItems.count];
+        NSMutableDictionary* params =   [NSMutableDictionary dictionaryWithObjectsAndKeys:nil];
+        NSMutableString* ids = [NSMutableString stringWithString:@""];
+        for (KNSelectorItem * i in selectedItems) {
+            [taggedFriends addObject:[NSDictionary dictionaryWithObjectsAndKeys:i.selectValue, @"id", i.displayValue, @"name", nil]];
+            [ids appendString:[NSString stringWithFormat:@"%@,",i.selectValue]];
+        }
+        [params setObject:ids forKey:@"to"];
+        
+        
+        //https://developers.facebook.com/docs/concepts/requests/#invites
+        //TODO: Provide a filter in your request interface that only lists people that have not installed the game. If you use the Requests dialog, you can enable this with the app_non_users filter.
+        
+        [FBWebDialogs presentRequestsDialogModallyWithSession:nil
+                                                      message:[NSString stringWithFormat:@"I went to %@'s show at %@ on %@ with you", [self.concert artistName], [self.concert venueName], [self.concert niceDate]]
+                                                        title:nil
+                                                   parameters:params
+                                                      handler:^(FBWebDialogResult result, NSURL *resultURL, NSError *error) {
+                                                          if (error) {
+                                                              // Case A: Error launching the dialog or sending request.
+                                                              NSLog(@"Error sending request.");
+                                                          } else {
+                                                              if (result == FBWebDialogResultDialogNotCompleted) {
+                                                                  // Case B: User clicked the "x" icon
+                                                                  NSLog(@"User canceled request.");
+                                                                  [Flurry logEvent:@"Canceled_Tag_Friends_On_Dialog"];
+                                                                  
+                                                              } else {
+                                                                  NSLog(@"Request Sent.");
+                                                                  [Flurry logEvent:@"Successfully_Tagged_Friends"withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:taggedFriends.count],@"numFriends", nil]];
+                                                              }
+                                                          }}];
+    }];
 }
 
 -(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
@@ -515,16 +618,8 @@ NSString *kCellID = @"cellID";
             NSString * eventID = [self.concert eventID];
             switch (alertView.tag) {
                 case AddConcertConfirmTag: {
-                    NSLog(@"%@: Adding concert %@ to profile %@", NSStringFromClass(self.class), eventID, userID);
-                    [Flurry logEvent:@"Confirmed_Add_Concert" withParameters:[self flurryParam]];
-                    
-                    [ECJSONPoster addConcert:eventID toUser:userID completion:^{
-                        [self completedAddingConcert];
-                        [Flurry logEvent:@"Completed_Adding_Concert" withParameters:[self flurryParam]];
-                        [self checkIfPopulating];
-                        [self startTimer];
-                        
-                    }];
+                    [self addConcert];
+
                     break;
                 }
                 case RemoveConcertConfirmTag: {
@@ -564,6 +659,12 @@ NSString *kCellID = @"cellID";
 	[HUD show:YES];
 	[HUD hide:YES afterDelay:HUD_DELAY];
     [self toggleOnProfileState];
+//    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, HUD_DELAY * NSEC_PER_SEC);
+//    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        //code to be executed on the main queue after delay
+        [self loadAndSelectFriends];
+//    });
+
 }
 
 -(void) completedRemovingConcert {
