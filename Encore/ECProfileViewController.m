@@ -166,13 +166,13 @@ typedef enum {
 }
 
 - (void) updateHeader {
-    self.lblConcerts.text = [self.arrPastConcerts count] == 1 ? [NSString stringWithFormat:@"%d Concert", [self.arrPastConcerts count]] : [NSString stringWithFormat:@"%d Concerts", [self.arrPastConcerts count]];
+    self.lblConcerts.text = [self.pastEvents count] == 1 ? [NSString stringWithFormat:@"%d Past Concert", [self.pastEvents count]] : [NSString stringWithFormat:@"%d Past Concerts", [self.pastEvents count]];
 }
 
 -(void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self setupFeedback];
-    [self fetchEvents];
+    [self fetchEvents]; //TODO: only do this if requires refresh? 
 }
 
 //Custom getters
@@ -187,7 +187,6 @@ typedef enum {
     [ECJSONFetcher fetchConcertsForUserID:userID completion:^(NSDictionary *concerts) {
         //NSLog(@"%@: User Concerts response = %@", NSStringFromClass([self class]), concerts);
         self.events = concerts;
-        self.arrPastConcerts = [self.events objectForKey:@"past"];
         [self updateHeader];
         [self.tableView reloadData];
         if([self.refreshControl isRefreshing]){
@@ -275,16 +274,26 @@ typedef enum {
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    NSDictionary* concert = [[self arrayForSection:indexPath.section] objectAtIndex:indexPath.row];
+    NSUInteger section = indexPath.section;
+    NSDictionary* concert = [[self arrayForSection:section] objectAtIndex:indexPath.row];
     ECConcertDetailViewController * concertDetail = [[ECConcertDetailViewController alloc] initWithConcert:concert];
-
+    concertDetail.tense = [ECProfileViewController searchTypeForSection: section];
+    
     //flurry log
     NSMutableDictionary* dic = [NSMutableDictionary dictionaryWithDictionary:concert];
-    [dic addEntriesFromDictionary:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:indexPath.row], @"row", indexPath.section == PastSection ? @"Past": @"Future", @"Tense", nil]];
+    [dic addEntriesFromDictionary:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:indexPath.row], @"row", [ECProfileViewController tenseStringForSection:section], @"Tense", nil]];
     [Flurry logEvent:@"Selected_Event_On_Profile" withParameters:dic];
+
     
     [self.navigationController pushViewController:concertDetail animated:YES];
+}
+
++(NSString*) tenseStringForSection: (NSUInteger) section {
+    return section == PastSection ? @"Past": @"Future";
+}
+// Let concert detail know which kind of 
++(ECSearchType) searchTypeForSection: (NSUInteger) section {
+    return section == PastSection ? ECSearchTypePast : ECSearchTypeFuture;
 }
 
 - (void)didReceiveMemoryWarning

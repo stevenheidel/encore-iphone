@@ -16,8 +16,6 @@
 @property (nonatomic, strong) UIRefreshControl* refreshControl;
 @property(nonatomic, strong) IBOutlet UITableView *tableView;
 
-@property(nonatomic, strong) NSArray *arrPastConcerts;
-
 @property (weak, nonatomic) IBOutlet UIImageView *imgBackground;
 @property (weak, nonatomic) IBOutlet FBProfilePictureView *imgProfile;
 
