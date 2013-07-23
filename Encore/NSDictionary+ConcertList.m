@@ -49,9 +49,9 @@ static NSString * const kDateFormat = @"yyyy-MM-dd";
 }
 
 -(CLLocation*) coordinates {
-    NSArray* locationArr = [[self venueDetails] objectForKey: @"coordinates"];
-    double latitude = [(NSString*)[locationArr objectAtIndex:0] doubleValue];
-    double longitude = [(NSString*)[locationArr objectAtIndex:1] doubleValue];
+    NSDictionary* venueDeets = [self venueDetails];
+    double latitude = [(NSString*)[venueDeets objectForKey:@"latitude"] doubleValue];
+    double longitude = [(NSString*)[venueDeets objectForKey:@"longitude"] doubleValue];
     return [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
 }
 -(NSString*) venueAndDate {
