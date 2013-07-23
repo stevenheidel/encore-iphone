@@ -16,10 +16,10 @@
 @class ECNewMainViewController;
 @protocol FBGraphUser;
 
-@interface ECAppDelegate : UIResponder <UIApplicationDelegate,UINavigationControllerDelegate, CLLocationManagerDelegate,FBSessionDelegate> {
+@interface ECAppDelegate : UIResponder <UIApplicationDelegate,UINavigationControllerDelegate, CLLocationManagerDelegate,FBSessionDelegate, FBRequestDelegate> {
 }
 -(void)beginFacebookAuthorization;
--(void) loginCompletedWithUser: (NSDictionary <FBGraphUser> *) user;
+-(void) loginCompletedWithUser: (NSDictionary /*<FBGraphUser>*/ *) user;
 -(void) openSession;
 -(void) loginLater;
 -(void) showLoginView: (BOOL) animated;

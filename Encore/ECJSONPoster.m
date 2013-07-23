@@ -12,6 +12,7 @@
 #import "UIImage+Orientation.h"
 #import "EncoreURL.h"
 #import "AFNetworking.h"
+#import "ECAppDelegate.h"
 
 @implementation ECJSONPoster
 
@@ -26,12 +27,12 @@
     return [breakdownInfo year];
 }
 
-+(void) postUser:(NSDictionary<FBGraphUser> *)user completion: (void (^)(NSDictionary* response)) completion {
-    NSString * facebookID = user.id;
-    NSString * name = user.name;
++(void) postUser:(NSDictionary/*<FBGraphUser>*/ *)user completion: (void (^)(NSDictionary* response)) completion {
+    NSString * facebookID = [user objectForKey: @"id"];
+    NSString * name = [user objectForKey: @"name"];
     
-    NSString * oauth = FBSession.activeSession.accessTokenData.accessToken;
-    NSDate * expiryDate = FBSession.activeSession.accessTokenData.expirationDate;
+    NSString * oauth = ApplicationDelegate.facebook.accessToken; //FBSession.activeSession.accessTokenData.accessToken;
+    NSDate * expiryDate = ApplicationDelegate.facebook.expirationDate; //FBSession.activeSession.accessTokenData.expirationDate;
     NSString * jsonExpiryDateString = [expiryDate jsonString];
     
     NSDictionary * parameters = [NSDictionary dictionaryWithObjectsAndKeys:oauth, @"oauth",jsonExpiryDateString,@"expiration_date",facebookID, @"facebook_id",name,@"name",nil];

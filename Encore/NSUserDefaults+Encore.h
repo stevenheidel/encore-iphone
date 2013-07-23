@@ -37,4 +37,6 @@
 +(void) setLastSearchType: (ECSearchType) searchType;
 
 +(void) synchronize;
+
++(void) clearLoginDetails;
 @end

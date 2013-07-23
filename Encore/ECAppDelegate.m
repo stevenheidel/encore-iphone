@@ -87,7 +87,7 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
     
     [self setUpLocationManager];
 
-    [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], UITextAttributeTextColor, [UIColor clearColor], UITextAttributeTextShadowColor, [NSValue valueWithUIOffset:UIOffsetMake(0.0f,1.0f)],UITextAttributeTextShadowOffset, [UIFont heroFontWithSize:24.0f], UITextAttributeFont, nil]];
+    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], UITextAttributeTextColor, [UIColor clearColor], UITextAttributeTextShadowColor, [NSValue valueWithUIOffset:UIOffsetMake(0.0f,1.0f)],UITextAttributeTextShadowOffset, [UIFont heroFontWithSize:24.0f], UITextAttributeFont, nil]];
     
     self.window.backgroundColor = [UIColor blackColor];
     [self.window makeKeyAndVisible];
@@ -120,24 +120,62 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
     return YES;
 }
 
-//TODO complete switchover to using Facebook object for managing login etc
-//doesn't actually use these
 - (void)fbDidNotLogin:(BOOL)cancelled {
     NSLog(@"Delegate fbDidNotLogin");
 }
 - (void)fbDidLogin {
     NSLog(@"fbDidLogin");
-    [self.window.rootViewController dismissViewControllerAnimated:NO completion:nil];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:[self.facebook accessToken] forKey:@"FBAccessTokenKey"];
     [defaults setObject:[self.facebook expirationDate] forKey:@"FBExpirationDateKey"];
     [defaults synchronize];
+    [self.facebook requestWithGraphPath:@"me" andDelegate:self];
+//    [FBRequestConnection startForMeWithCompletionHandler:^(FBRequestConnection *connection, id<FBGraphUser> user, NSError *error) {
+//        if (error) {
+//            NSLog(@"ECAppDelegate Facebook request error: %@",error.debugDescription);
+//            [Flurry logEvent:@"Facebook_Request_Error" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:error.debugDescription,@"error", nil]];
+//        }
+//        else {
+//            [ECJSONPoster postUser:(NSDictionary<FBGraphUser>*)user completion:^(NSDictionary *response) {
+//                NSURL* defaultURL = [NSUserDefaults facebookProfileImageURL];
+//                if (!defaultURL || ![defaultURL isEqual:[response objectForKey:@"facebook_image_url"]]) {
+//                    [NSUserDefaults setFacebookProfileImageURL:[response objectForKey:@"facebook_image_url"]]; //expecting a string -- converts to URL inside nsuserdefaults
+//                    [NSUserDefaults synchronize];
+//                }
+//                [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+//            }];
+//            [self saveUserInfoToDefaults:(NSDictionary<FBGraphUser>*)user];
+//
+//        }
+//    }];
 }
+
+- (void)request:(FBRequest *)request didFailWithError:(NSError *)error {
+    NSLog(@"ECAppDelegate Facebook request error: %@",error.debugDescription);
+    [Flurry logEvent:@"Facebook_Request_Error" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:error.debugDescription,@"error", nil]];
+}
+
+
+- (void)request:(FBRequest *)request didLoad:(id)result {
+    NSDictionary* user = result;
+    [ECJSONPoster postUser:user completion:^(NSDictionary *response) {
+        NSURL* defaultURL = [NSUserDefaults facebookProfileImageURL];
+        if (!defaultURL || ![defaultURL isEqual:[response objectForKey:@"facebook_image_url"]]) {
+            [NSUserDefaults setFacebookProfileImageURL:[response objectForKey:@"facebook_image_url"]]; //expecting a string -- converts to URL inside nsuserdefaults
+            [NSUserDefaults synchronize];
+        }
+        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    }];
+    [self saveUserInfoToDefaults:user];
+}
+
+
 - (void)fbDidLogout {
     if(!self.loginViewController) {
         self.loginViewController = [[ECLoginViewController alloc] init];
     }
     [self.window.rootViewController presentViewController:self.loginViewController animated:YES completion:nil];
+    [NSUserDefaults clearLoginDetails];
 }
 - (void)fbSessionInvalidated {}
 - (void)fbDidExtendToken:(NSString *)accessToken expiresAt:(NSDate *)expiresAt {
@@ -148,7 +186,7 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
     [defaults synchronize];
 }
 -(void)beginFacebookAuthorization {
-    [self.facebook authorize:[NSArray arrayWithObjects:@"user_about_me",@"friends_about_me", nil]];
+    [self.facebook authorize:[NSArray arrayWithObjects:@"basic_info",@"user_birthday",@"email", nil]];
 }
 
 #pragma mark - Login management
@@ -278,22 +316,25 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
     [self saveUserInfoToDefaults:user];
 }
 
--(void) saveUserInfoToDefaults: (NSDictionary <FBGraphUser> *) userInfo {
+-(void) saveUserInfoToDefaults: (NSDictionary /*<FBGraphUser>*/ *) user {
     NSString* defaultID = [NSUserDefaults userID];
-    if (!defaultID || ![defaultID isEqualToString:userInfo.id]) {
-        [NSUserDefaults setUserID:userInfo.id];
+
+    NSString* userID = [user objectForKey: @"id"];
+    if (!defaultID || ![defaultID isEqualToString:userID]) {
+        [NSUserDefaults setUserID:userID];
     }
     else !defaultID ? NSLog(@"No default ID saved") : NSLog(@"No change in User ID. Defaults not changed");
     
     NSString* defaultName = [NSUserDefaults userName];
-    if (!defaultName || ![defaultName isEqualToString:userInfo.name]) {
-        [NSUserDefaults setUsername:userInfo.name];
+    NSString* userName = [user objectForKey:@"name"];
+    if (!defaultName || ![defaultName isEqualToString:userName]) {
+        [NSUserDefaults setUsername:userName];
     }
     
-    NSString* defaultCity = [NSUserDefaults userCity];
-    if(!defaultCity || ![defaultCity isEqualToString:userInfo.location.location.city]) {
-        [NSUserDefaults setUserCity:userInfo.location.location.city];
-    }
+//    NSString* defaultCity = [NSUserDefaults userCity];
+//    if(!defaultCity || ![defaultCity isEqualToString:userInfo.location.location.city]) {
+//        [NSUserDefaults setUserCity:userInfo.location.location.city];
+//    }
     
     [NSUserDefaults synchronize];
     

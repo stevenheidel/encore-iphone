@@ -56,7 +56,12 @@
 }
 
 +(void) setUserCoordinate: (CLLocation*) location {
-    [NSUserDefaults setLongitude:location.coordinate.longitude latitude:location.coordinate.latitude];
+    if (location) {
+        [NSUserDefaults setLongitude:location.coordinate.longitude latitude:location.coordinate.latitude];
+    }
+    else {
+        [NSUserDefaults setLongitude:0 latitude:0];
+    }
 }
 
 +(float) lastSearchRadius {
@@ -100,4 +105,10 @@
     else NSLog(@"User defaults failed to synchronize");
 }
 
++(void) clearLoginDetails {
+    [NSUserDefaults setUserID:nil];
+    [NSUserDefaults setUsername:nil];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"FBAccessTokenKey"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"FBExpirationDateKey"];
+}
 @end
