@@ -20,6 +20,7 @@
 - (IBAction)openLastFM:(id)sender;
 - (IBAction)openLocationSetter;
 
+@property (nonatomic, strong) UIView* noConcertsFooterView;
 @property (weak, nonatomic) IBOutlet UIView *searchContainer;
 @property (nonatomic, strong) CLLocation* currentSearchLocation;
 @property (nonatomic, assign) float currentSearchRadius;
@@ -54,6 +55,7 @@
 
 @property (strong,nonatomic) UIBarButtonItem* shareButton;
 
+//Note: This hud is used for multiple purposes.
 @property (strong, nonatomic) MBProgressHUD * hud;
 
 @property (strong, nonatomic) UIView* searchHeaderView;

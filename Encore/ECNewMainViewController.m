@@ -54,44 +54,53 @@ typedef enum {
 #pragma mark - View loading
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    //Initializations
     self.searchHeaderView = nil;
     self.hasSearched = FALSE;
     self.comboSearchResultsDic = nil;
+    showingSearchBar = NO; //by default hidden (see storyboard)
+    
     [self.tableView registerNib:[UINib nibWithNibName:@"ECSearchResultCell" bundle:nil]
          forCellReuseIdentifier:SearchCellIdentifier];
     [self.tableView registerNib:[UINib nibWithNibName:@"ECConcertCellView" bundle:nil]
          forCellReuseIdentifier:ConcertCellIdentifier];
     
+    //Setups
     [self setupBarButtons];
     [self setNavBarAppearance];
     [self setSegmentedControlAppearance];
     [self setDateLabel];
+    [self setupHUD];
+    [self setupSearchBar];
+    [self setupRefreshControl];
+    
     
     self.tap = [[UITapGestureRecognizer alloc]
                                    initWithTarget:self
                                    action:@selector(dismissKeyboard)];
     
     [self initializeSearchLocation];
-    [self fetchConcerts];
     
-    self.currentSearchType = [NSUserDefaults lastSearchType];//[ECNewMainViewController searchTypeForSegmentIndex:self.segmentedControl.selectedSegmentIndex]; //TODO load from user defaults
+    self.currentSearchType = [NSUserDefaults lastSearchType];
     if (self.currentSearchType == 0) { //default if nothing saved is 0, which is invalid.
         self.currentSearchType = ECSearchTypeToday;
     }
+    [self displayViewsAccordingToSearchType];
     
     [self.segmentedControl setSelectedSegmentIndex:[ECNewMainViewController segmentIndexForSearchType:self.currentSearchType]];
-    showingSearchBar = NO; //by default hidden (see storyboard)
     
-    [self setupHUD];
-    [self setupSearchBar];
+    
+
     
     self.view.backgroundColor = [UIColor blackColor];
     
     [self.tableView setIndicatorStyle:UIScrollViewIndicatorStyleWhite];
     self.view.clipsToBounds = YES;
     
-    [self setupRefreshControl];
-    [self displayViewsAccordingToSearchType];
+
+    
+    [self fetchConcerts];
 }
 
 -(BOOL)shouldAutorotate{
@@ -136,27 +145,56 @@ typedef enum {
             break;
     }
 }
+-(UIView*) noConcertsFooterView {
+    if(_noConcertsFooterView == nil) {
+        _noConcertsFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 30)];
+        _noConcertsFooterView.backgroundColor = [UIColor blackColor];
+        UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(5,5,315,20)];
+        label.textColor = [UIColor whiteColor];
+        label.textAlignment = NSTextAlignmentCenter;
+        label.backgroundColor = [UIColor blackColor];
+        label.text = @"No concerts found";
+        [_noConcertsFooterView addSubview:label];
+    }
+    return _noConcertsFooterView;
+}
+
+-(void) showLoadingHUD {
+    [self.hud show:YES];
+}
+
+-(void) fetchConcerts {
+    NSLog(@"fetch concerts called");
+    [self fetchPopularConcertsWithSearchType:ECSearchTypeToday];
+    [self fetchPopularConcertsWithSearchType:ECSearchTypePast];
+    [self fetchPopularConcertsWithSearchType:ECSearchTypeFuture];
+}
+
+-(void) fetchPopularConcertsWithSearchType: (ECSearchType) type {
+    if(self.currentSearchType == type) {
+        [self showLoadingHUD];
+    }
+    [ECJSONFetcher fetchPopularConcertsWithSearchType:type location:self.currentSearchLocation radius:[NSNumber numberWithFloat:self.currentSearchRadius] completion:^(NSArray *concerts) {
+        [self fetchedPopularConcerts:concerts forType:type];
+    }];
+}
 
 -(void) fetchedPopularConcerts: (NSArray*) concerts forType: (ECSearchType) searchType {
     [self setEventArray: concerts forType: searchType];
+    
+    if(searchType == self.currentSearchType){
+        if ([self currentEventArray].count == 0) {
+            self.tableView.tableFooterView = self.noConcertsFooterView;
+        }
+        else {
+            self.tableView.tableFooterView = [UIView new];
+        }
+        [self.hud hide:YES];
+    }
     if (self.segmentedControl.selectedSegmentIndex == [ECNewMainViewController segmentIndexForSearchType:searchType]) {
         [self.tableView reloadData];
         [self setBackgroundImage];
     }
-}
-
--(void) fetchConcerts {
-    [ECJSONFetcher fetchPopularConcertsWithSearchType:ECSearchTypeToday location: self.currentSearchLocation radius: [NSNumber numberWithFloat:self.currentSearchRadius] completion:^(NSArray *concerts) {
-        [self fetchedPopularConcerts: concerts forType:ECSearchTypeToday];
-    }];
-    
-    [ECJSONFetcher fetchPopularConcertsWithSearchType:ECSearchTypePast location: self.currentSearchLocation radius: [NSNumber numberWithFloat:self.currentSearchRadius] completion:^(NSArray *concerts) {
-        [self fetchedPopularConcerts:concerts forType:ECSearchTypePast];
-    }];
-    
-    [ECJSONFetcher fetchPopularConcertsWithSearchType:ECSearchTypeFuture location: self.currentSearchLocation radius: [NSNumber numberWithFloat:self.currentSearchRadius] completion:^(NSArray *concerts) {
-        [self fetchedPopularConcerts:concerts forType:ECSearchTypeFuture];
-    }];
 }
 
 -(void) setupHUD {
@@ -165,8 +203,8 @@ typedef enum {
     [self.view addSubview:self.hud];
     self.hud.labelText = NSLocalizedString(@"loading", nil);
     self.hud.color = [UIColor lightBlueHUDConfirmationColor];
-    self.hud.labelFont = [UIFont heroFontWithSize:self.hud.labelFont.pointSize];
-    self.hud.detailsLabelFont = [UIFont heroFontWithSize:self.hud.detailsLabelFont.pointSize];
+//    self.hud.labelFont = [UIFont heroFontWithSize:self.hud.labelFont.pointSize];
+//    self.hud.detailsLabelFont = [UIFont heroFontWithSize:self.hud.detailsLabelFont.pointSize];
 }
 
 -(void) setupRefreshControl {
