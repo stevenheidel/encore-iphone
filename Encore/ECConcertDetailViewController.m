@@ -235,7 +235,9 @@ NSString *kCellID = @"cellID";
         [ECJSONFetcher checkIfEventIsPopulating:[self.concert eventID] completion:^(BOOL isPopulating) {
             self.isPopulating = isPopulating;
             [self togglePopulatingIndicator];
-            [self updatePlaceholderText];
+            if(!self.posts.count>0){
+               [self updatePlaceholderText];
+            }
             if(!self.isPopulating) {
                 [self stopTimer];
                 if(!self.posts.count >0)
@@ -577,37 +579,38 @@ NSString *kCellID = @"cellID";
             return;
         }
         NSMutableArray* taggedFriends = [[NSMutableArray alloc] initWithCapacity:selectedItems.count];
-        NSMutableDictionary* params =   [NSMutableDictionary dictionaryWithObjectsAndKeys:nil];
-        NSMutableString* ids = [NSMutableString stringWithString:@""];
+//        NSMutableDictionary* params =   [NSMutableDictionary dictionaryWithObjectsAndKeys:nil];
+//        NSMutableString* ids = [NSMutableString stringWithString:@""];
         for (KNSelectorItem * i in selectedItems) {
             [taggedFriends addObject:[NSDictionary dictionaryWithObjectsAndKeys:i.selectValue, @"id", i.displayValue, @"name", nil]];
-            [ids appendString:[NSString stringWithFormat:@"%@,",i.selectValue]];
+//            [ids appendString:[NSString stringWithFormat:@"%@,",i.selectValue]];
         }
-        [params setObject:ids forKey:@"to"];
+//        [params setObject:ids forKey:@"to"];
         
-        
-        //https://developers.facebook.com/docs/concepts/requests/#invites
-        //TODO: Provide a filter in your request interface that only lists people that have not installed the game. If you use the Requests dialog, you can enable this with the app_non_users filter.
-        
-        [FBWebDialogs presentRequestsDialogModallyWithSession:nil
-                                                      message:[NSString stringWithFormat:@"I went to %@'s show at %@ on %@ with you", [self.concert artistName], [self.concert venueName], [self.concert niceDate]]
-                                                        title:nil
-                                                   parameters:params
-                                                      handler:^(FBWebDialogResult result, NSURL *resultURL, NSError *error) {
-                                                          if (error) {
-                                                              // Case A: Error launching the dialog or sending request.
-                                                              NSLog(@"Error sending request.");
-                                                          } else {
-                                                              if (result == FBWebDialogResultDialogNotCompleted) {
-                                                                  // Case B: User clicked the "x" icon
-                                                                  NSLog(@"User canceled request.");
-                                                                  [Flurry logEvent:@"Canceled_Tag_Friends_On_Dialog"];
-                                                                  
-                                                              } else {
-                                                                  NSLog(@"Request Sent.");
-                                                                  [Flurry logEvent:@"Successfully_Tagged_Friends"withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:taggedFriends.count],@"numFriends", nil]];
-                                                              }
-                                                          }}];
+        [self shareWithTaggedFriends:taggedFriends];
+
+//        //https://developers.facebook.com/docs/concepts/requests/#invites
+//        //TODO: Provide a filter in your request interface that only lists people that have not installed the game. If you use the Requests dialog, you can enable this with the app_non_users filter.
+//        
+//        [FBWebDialogs presentRequestsDialogModallyWithSession:nil
+//                                                      message:[NSString stringWithFormat:@"I went to %@'s show at %@ on %@ with you", [self.concert artistName], [self.concert venueName], [self.concert niceDate]]
+//                                                        title:nil
+//                                                   parameters:params
+//                                                      handler:^(FBWebDialogResult result, NSURL *resultURL, NSError *error) {
+//                                                          if (error) {
+//                                                              // Case A: Error launching the dialog or sending request.
+//                                                              NSLog(@"Error sending request.");
+//                                                          } else {
+//                                                              if (result == FBWebDialogResultDialogNotCompleted) {
+//                                                                  // Case B: User clicked the "x" icon
+//                                                                  NSLog(@"User canceled request.");
+//                                                                  [Flurry logEvent:@"Canceled_Tag_Friends_On_Dialog"];
+//                                                                  
+//                                                              } else {
+//                                                                  NSLog(@"Request Sent.");
+//                                                                  [Flurry logEvent:@"Successfully_Tagged_Friends"withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:taggedFriends.count],@"numFriends", nil]];
+//                                                              }
+//                                                          }}];
     }];
 }
 
@@ -668,7 +671,7 @@ NSString *kCellID = @"cellID";
 	[HUD show:YES];
 	[HUD hide:YES afterDelay:HUD_DELAY];
     [self toggleOnProfileState];
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (HUD_DELAY-0.2) * NSEC_PER_SEC);
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (HUD_DELAY-0.5) * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         //code to be executed on the main queue after delay
         [self loadAndSelectFriends];
