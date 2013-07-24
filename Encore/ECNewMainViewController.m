@@ -255,14 +255,40 @@ typedef enum {
     self.navigationItem.leftBarButtonItem = profileButton;
     
     UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    UIImage *rightButImage = [UIImage imageNamed:@"feedback"];
+    UIImage *rightButImage = [UIImage imageNamed:@"invite"];
     [rightButton setBackgroundImage:rightButImage forState:UIControlStateNormal];
-    [rightButton addTarget:self action:@selector(feedbackTapped) forControlEvents:UIControlEventTouchUpInside];
+    [rightButton addTarget:self action:@selector(inviteTapped) forControlEvents:UIControlEventTouchUpInside];
     rightButton.frame = CGRectMake(0, 0, rightButImage.size.width, rightButImage.size.height);
-    UIBarButtonItem *feedbackButton = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
-    self.navigationItem.rightBarButtonItem = feedbackButton;
+    UIBarButtonItem *inviteButton = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
+    self.navigationItem.rightBarButtonItem = inviteButton;
 }
 
+-(void) inviteTapped {
+     [Flurry logEvent:@"Tapped_Invite" withParameters:[NSDictionary dictionaryWithObject:@"MainView" forKey:@"source"]];
+    //        //https://developers.facebook.com/docs/concepts/requests/#invites
+    //        //TODO: Provide a filter in your request interface that only lists people that have not installed the game. If you use the Requests dialog, you can enable this with the app_non_users filter.
+    NSDictionary* params = nil;
+    [FBWebDialogs presentRequestsDialogModallyWithSession:ApplicationDelegate.facebook.session
+                                                  message:@"Check out Encore on iOS"
+                                                    title:@"Invite Friends to Encore"
+                                               parameters:params
+                                                  handler:^(FBWebDialogResult result, NSURL *resultURL, NSError *error) {
+                                                      if (error) {
+                                                          // Case A: Error launching the dialog or sending request.
+                                                          NSLog(@"Error sending request.");
+                                                      } else {
+                                                          if (result == FBWebDialogResultDialogNotCompleted) {
+                                                              // Case B: User clicked the "x" icon
+                                                              NSLog(@"User canceled request.");
+                                                              [Flurry logEvent:@"Canceled_Inviting_Friends_On_Dialog"];
+                                                              
+                                                          } else {
+                                                              NSLog(@"Request Sent.");
+                                                              [Flurry logEvent:@"Successfully_Invited_Friends"]; //TODO figure out how many friends were invited
+                                                          }
+                                                      }}];
+
+}
 -(void) feedbackTapped {
         [Flurry logEvent:@"Opened_Feedback" withParameters:[NSDictionary dictionaryWithObject:@"MainView" forKey:@"source"]];
     ATConnect *connection = [ATConnect sharedConnection];
