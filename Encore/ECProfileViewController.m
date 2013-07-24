@@ -65,7 +65,7 @@ typedef enum {
     [self setUpHeaderView];
     [self setupRefreshControl];
     [self setupHUD];
-    self.shouldUpdate = YES;
+    self.shouldUpdateView = YES;
 
     self.tableView.tableFooterView = [UIView new];
    
@@ -187,7 +187,7 @@ typedef enum {
     [super viewDidAppear:animated];
     [self setupFeedback];
     if(self.shouldUpdateView)
-        [self fetchEvents]; //TODO: only do this if requires refresh?
+        [self fetchEvents]; 
 }
 
 //Custom getters
