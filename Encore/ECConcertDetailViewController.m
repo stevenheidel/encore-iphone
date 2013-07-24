@@ -364,7 +364,7 @@ NSString *kCellID = @"cellID";
          [NSString stringWithFormat:ShareConcertURL,self.eventID], @"link",
          [NSString stringWithFormat:@"%@",[self.concert imageURL].absoluteString], @"picture",
          nil];
-        [FBWebDialogs presentFeedDialogModallyWithSession:nil
+        [FBWebDialogs presentFeedDialogModallyWithSession:ApplicationDelegate.facebook.session
                                                parameters:params2
                                                   handler:
          ^(FBWebDialogResult result, NSURL *resultURL, NSError *error) {

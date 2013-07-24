@@ -21,6 +21,7 @@
 
 #import "ECJSONPoster.h"
 #import "NSUserDefaults+Encore.h"
+#import "ECAppDelegate.h"
 #define FLAG_HUD_DELAY 1.0
 typedef enum {
     FlagPhoto
@@ -304,7 +305,6 @@ typedef enum {
             [Flurry logEvent:@"Canceled_Flagging_Post" withParameters:self.post];
         }
     }
-    
 }
 
 -(void) shareTapped {
@@ -336,7 +336,7 @@ typedef enum {
           [NSString stringWithFormat:SharePostURL,self.postID], @"link",
           [NSString stringWithFormat:@"%@",[self.post imageURL].absoluteString], @"picture",
           nil];
-         [FBWebDialogs presentFeedDialogModallyWithSession:nil
+         [FBWebDialogs presentFeedDialogModallyWithSession:ApplicationDelegate.facebook.session
                                                 parameters:params2
                                                    handler:
           ^(FBWebDialogResult result, NSURL *resultURL, NSError *error) {
