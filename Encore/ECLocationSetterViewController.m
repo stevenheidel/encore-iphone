@@ -65,7 +65,7 @@
         self.isUsingCurrentLocation = YES;
     }
     
-    if (self.location != nil) { //userCoordinate method returns nil if lat or long are 0. In theory should never happen though
+    if (self.location.coordinate.longitude != 0 && self.location.coordinate.latitude != 0) { //userCoordinate method returns nil if lat or long are 0. In theory should never happen though
         [self reverseGeocodeLocation];
     }
 

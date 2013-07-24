@@ -186,8 +186,16 @@ typedef enum {
 -(void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self setupFeedback];
+    
+    //TODO: set shoudlupdateview to true when concert state change
     if(self.shouldUpdateView)
-        [self fetchEvents]; 
+        [self fetchEvents];
+    
+    // if the list is empty show HUD
+    if(self.events.count == 0)
+    {
+        [self.hud show:YES];
+    }
 }
 
 //Custom getters
@@ -199,7 +207,6 @@ typedef enum {
 }
 
 -(void) fetchEvents {
-    [self.hud show:YES];
     [ECJSONFetcher fetchConcertsForUserID:userID completion:^(NSDictionary *concerts) {
         //NSLog(@"%@: User Concerts response = %@", NSStringFromClass([self class]), concerts);
         self.events = concerts;

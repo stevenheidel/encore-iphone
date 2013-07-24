@@ -27,6 +27,8 @@
 #import "AFNetworking.h"
 
 #import "Staging.h"
+#define ECLocationAcquiredNotification  @"com.encoretheapp.Encore:ECLocationAcquiredNotification"
+#define ECLocationFailedNotification  @"com.encoretheapp.Encore:ECLocationFailed"
 
 NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:ECSessionStateChangedNotification";
 
@@ -42,7 +44,6 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
     self.navigationController = (UINavigationController*)self.window.rootViewController;
     self.mainViewController = (ECNewMainViewController*)[[self.navigationController viewControllers] objectAtIndex:0];
     
-    [self setUpLocationManager];
     
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], UITextAttributeTextColor, [UIColor clearColor], UITextAttributeTextShadowColor, [NSValue valueWithUIOffset:UIOffsetMake(0.0f,1.0f)],UITextAttributeTextShadowOffset, [UIFont heroFontWithSize:24.0f], UITextAttributeFont, nil]];
     
@@ -53,6 +54,10 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
    
     if (![self isLoggedIn])
         [self showLoginView:NO];
+    else
+        [self setUpLocationManager];
+
+    
    
     
     return YES;
@@ -104,7 +109,9 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
                         [NSUserDefaults synchronize];
                     }
                     [self.navigationController dismissViewControllerAnimated:YES completion:^{
-                    [self.hud hide:YES];
+                        [self.hud hide:YES];
+                        [self setUpLocationManager];
+
                 }];
             }];
             [self saveUserInfoToDefaults:user];
@@ -203,6 +210,8 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
 }
 
 -(void) loginLater {
+    [self setUpLocationManager];
+
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
     
     [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
@@ -259,10 +268,16 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
             //turn off location services once we've gotten a good location
             [manager stopUpdatingLocation];
             [self saveLocationToUserDefaults:newLocation];
+            [[NSNotificationCenter defaultCenter] postNotificationName:ECLocationAcquiredNotification object:nil];
+
         }
     }
 }
-
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
+    if ([error domain] == kCLErrorDomain) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:ECLocationFailedNotification object:nil];
+    }
+}
 -(void) saveLocationToUserDefaults: (CLLocation *) location {
     double latitude = location.coordinate.latitude;
     double longitude = location.coordinate.longitude;

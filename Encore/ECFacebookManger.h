@@ -16,7 +16,6 @@
 - (void)logout;
 
 - (void)fetchUserInformation:(void(^)(NSDictionary *userInfo))handler;
-- (void)requestWithGraphPath:(NSString*) path completionHandler:(void(^)(NSDictionary *userInfo))handler;
 
 - (BOOL)handleOpenURL:(NSURL *)url;
 - (void)handleDidBecomeActive;
@@ -25,5 +24,4 @@
 - (NSDate *)expirationDate;
 
 - (BOOL)isLoggedIn;
-- (void)displayShareDialogFrom:(id)controller initialText:(NSString*)text image:(UIImage*)image url:(NSURL*)url completionHandler:(void(^)(NSError* error))handler;
 @end

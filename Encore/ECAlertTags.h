@@ -16,7 +16,8 @@ typedef enum {
     RemoveConcertConfirmTag,
     LogoutTag,
     LocationSetterRightAlert,
-    FailedGeocodeAlert
+    FailedGeocodeAlert,
+    NoLocationAlert
 }ECAlertTags;
 
 #endif

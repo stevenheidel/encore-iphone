@@ -36,12 +36,15 @@
 #define ConcertCellIdentifier @"ECConcertCellView"
 #define ALERT_HIDE_DELAY 2.0
 #define SEARCH_HEADER_HEIGHT 98.0f
+#define ECLocationAcquiredNotification  @"com.encoretheapp.Encore:ECLocationAcquiredNotification"
+#define ECLocationFailedNotification  @"com.encoretheapp.Encore:ECLocationFailed"
 
 typedef enum {
     ECSearchResultSection,
     ECSearchLoadOtherSection,
     ECNumberOfSearchSections //always have this one last
 }ECSearchSection;
+
 
 @interface ECNewMainViewController () {
     BOOL showingSearchBar;
@@ -98,11 +101,38 @@ typedef enum {
     [self.tableView setIndicatorStyle:UIScrollViewIndicatorStyleWhite];
     self.view.clipsToBounds = YES;
     
-
     
-    [self fetchConcerts];
+    //if user already set location using select location controller don't listen to location changes 
+    if([NSUserDefaults lastSearchLocation].coordinate.latitude == 0 && [NSUserDefaults lastSearchLocation].coordinate.longitude == 0)
+    {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(LocationAcquired) name:ECLocationAcquiredNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(LocationFailed) name:ECLocationFailedNotification object:nil];
+    }else
+    {
+        [self fetchConcerts];
+    }
+  
 }
 
+-(void)LocationAcquired
+{
+    if([NSUserDefaults lastSearchLocation].coordinate.latitude != 0 && [NSUserDefaults lastSearchLocation].coordinate.longitude != 0)
+    {
+         [self fetchConcerts];
+    }
+}
+-(void)LocationFailed
+{
+    // Failed to get location using location services and there is no location saved
+    if([NSUserDefaults lastSearchLocation].coordinate.latitude == 0 && [NSUserDefaults lastSearchLocation].coordinate.longitude == 0)
+    {
+        //Show alert
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Location Needed", nil) message:NSLocalizedString(@"To re-enable, please go to Settings and turn on Location Service for this app or set location manually", nil) delegate:self cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Manually", nil),NSLocalizedString(@"OK", nil), nil];
+        alert.tag = NoLocationAlert;
+        [alert show];
+
+    }
+}
 -(BOOL)shouldAutorotate{
     return NO;
 }
@@ -447,6 +477,15 @@ typedef enum {
             [ApplicationDelegate beginFacebookAuthorization];
         }
         [Flurry logEvent:@"Login_Alert_Selection" withParameters:[NSDictionary dictionaryWithObjectsAndKeys: @"Main_View", @"Current_View", buttonIndex == alertView.firstOtherButtonIndex ? @"Login":@"Cancel",@"Selection", nil]];
+    }else if (alertView.tag == NoLocationAlert)
+    {
+        if(buttonIndex == alertView.firstOtherButtonIndex)
+        {
+            //Manually
+            //TODO : push the new location viewcontroller
+            [self openLocationSetter];
+
+        }
     }
 }
 
