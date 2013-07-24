@@ -834,6 +834,8 @@
 			children = (
 				D4AA4D011766B374009B0635 /* ECAppDelegate.h */,
 				D4AA4D021766B374009B0635 /* ECAppDelegate.m */,
+				D948FE70179F951B0035297A /* ECFacebookManger.h */,
+				D948FE71179F951B0035297A /* ECFacebookManger.m */,
 				D4BB7E07179CCF4E0098BCF4 /* ECCustomNavController.h */,
 				D4BB7E08179CCF4E0098BCF4 /* ECCustomNavController.m */,
 				D4AA4D321766BA8F009B0635 /* Login */,
@@ -865,8 +867,6 @@
 				D4A7BEAA177B731F00C22D91 /* Staging.h */,
 				D4A7BEA9177B713400C22D91 /* EncoreURL.h */,
 				D4A7BEAB177BFF3700C22D91 /* ECSearchType.h */,
-				D948FE70179F951B0035297A /* ECFacebookManger.h */,
-				D948FE71179F951B0035297A /* ECFacebookManger.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
