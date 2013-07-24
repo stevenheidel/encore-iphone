@@ -70,7 +70,7 @@
     [Flurry setGender:[[user objectForKey:@"gender"] substringToIndex:1]];
 }
 
-+(void) addConcert: (NSString *) concertID toUser: (NSString *) userID completion: (void (^)()) completion{
++(void) addConcert: (NSString *) concertID toUser: (NSString *) userID completion: (void (^)(BOOL success)) completion{
     //POST /users/:uuid/concerts     {'songkick_id': '1234578'}
     NSString * urlString = [NSString stringWithFormat:AddConcertToUserURL,userID];
     NSDictionary * parameters = [NSDictionary dictionaryWithObject:concertID forKey:LastfmIDURL];
@@ -81,31 +81,38 @@
 
     [client postPath:urlString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"%@: Success adding concert %@ to profile %@. Response: %@", NSStringFromClass([self class]),concertID,userID, [responseObject description]);
+        BOOL response = [[responseObject objectForKey:@"response"] isEqualToString:@"success"];
         if (completion) {
-            completion();
+            completion(response);
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@: ERROR removing concert %@ from profile %@: %@...",NSStringFromClass([self class]), concertID, userID,[[error description] substringToIndex:MAX_ERROR_LEN]);
+        if (completion) {
+            completion(FALSE);
+        }
     }];
 }
 
-+(void) removeConcert: (NSString *) concertID toUser: (NSString *) userID completion: (void (^)()) completion{
++(void) removeConcert: (NSString *) concertID toUser: (NSString *) userID completion: (void (^)(BOOL success)) completion{
     //POST /users/:uuid/concerts
     NSString * urlString = [NSString stringWithFormat:RemoveConcertFromUserURL,userID,concertID];
-    NSDictionary * parameters = [NSDictionary dictionaryWithObject:concertID forKey:@"songkick_id"];
     AFHTTPClient * client = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:BaseURL]];
     
     [client registerHTTPOperationClass:[AFJSONRequestOperation class]];
     [client setDefaultHeader:@"Accept" value:@"application/json"];
     
-    [client deletePath:urlString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [client deletePath:urlString parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"%@: Success removing concert %@ from profile %@. Response: %@", NSStringFromClass([self class]),concertID,userID,[responseObject description]);
+        BOOL response = [[responseObject objectForKey:@"response"] isEqualToString:@"success"];
         if (completion) {
-            completion();
+            completion(response);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@: ERROR removing concert %@ from profile %@: %@...",NSStringFromClass([self class]), concertID, userID,[[error description] substringToIndex:MAX_ERROR_LEN]);
+        if (completion) {
+            completion(FALSE);
+        }
     }];
     
 }

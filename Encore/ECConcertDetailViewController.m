@@ -247,6 +247,7 @@ NSString *kCellID = @"cellID";
     }
     else {
         NSLog(@"ECConcertDetailViewController: Not checking if populating because concert is in the future");
+        [self stopTimer];
     }
 }
 
@@ -441,11 +442,16 @@ NSString *kCellID = @"cellID";
         NSLog(@"%@: Adding concert %@ to profile %@", NSStringFromClass(self.class), eventID, userID);
         [Flurry logEvent:@"Added_Concert" withParameters:[self flurryParam]];
         
-        [ECJSONPoster addConcert:eventID toUser:userID completion:^{
-            [self completedAddingConcert];
-            [Flurry logEvent:@"Completed_Adding_Concert" withParameters:[self flurryParam]];
-            [self checkIfPopulating];
-            [self startTimer];
+        [ECJSONPoster addConcert:eventID toUser:userID completion:^(BOOL success) {
+            if (success) {
+                [self completedAddingConcert];
+                [Flurry logEvent:@"Completed_Adding_Concert" withParameters:[self flurryParam]];
+                [self checkIfPopulating];
+                [self startTimer];
+            }
+            else {
+                [self alertError];
+            }
         }];
     }
     else {
@@ -503,7 +509,7 @@ NSString *kCellID = @"cellID";
 //}
 -(void) loadAndSelectFriends {
     if(friends.count ==0) {
-         [[FBRequest requestForMyFriends]  startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+        [[FBRequest requestForMyFriends]  startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
              if(!error)
              {
                  NSDictionary * rawObject = result;
@@ -612,8 +618,13 @@ NSString *kCellID = @"cellID";
                     [Flurry logEvent:@"Confirmed_Remove_Concert" withParameters:[self flurryParam]];
                     
                     NSLog(@"%@: Removing a concert %@ from profile %@", NSStringFromClass(self.class), eventID, userID);
-                    [ECJSONPoster removeConcert:eventID toUser:userID completion:^{
-                        [self completedRemovingConcert];
+                    [ECJSONPoster removeConcert:eventID toUser:userID completion:^(BOOL success) {
+                        if(success) {
+                            [self completedRemovingConcert];
+                        }
+                        else {
+                            [self alertError];
+                        }
                         [Flurry logEvent:@"Completed_Removing_Concert" withParameters:[self flurryParam]];
                     }];
                     break;
@@ -627,6 +638,11 @@ NSString *kCellID = @"cellID";
         }
         return;
     }
+}
+
+-(void) alertError {
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"Sorry, an error occured and your request was not processed.", nil) delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alert show];
 }
 
 -(void) completedAddingConcert {

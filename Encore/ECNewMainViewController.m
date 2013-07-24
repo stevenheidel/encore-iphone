@@ -48,6 +48,7 @@ typedef enum {
 
 @interface ECNewMainViewController () {
     BOOL showingSearchBar;
+    UIView* emptyView;
 }
 
 @end
@@ -57,8 +58,8 @@ typedef enum {
 #pragma mark - View loading
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    //Initializations
+    emptyView = [UIView new];
+    //Initializations;
     self.searchHeaderView = nil;
     self.hasSearched = FALSE;
     self.comboSearchResultsDic = nil;
@@ -93,14 +94,11 @@ typedef enum {
     
     [self.segmentedControl setSelectedSegmentIndex:[ECNewMainViewController segmentIndexForSearchType:self.currentSearchType]];
     
-    
-
-    
     self.view.backgroundColor = [UIColor blackColor];
     
     [self.tableView setIndicatorStyle:UIScrollViewIndicatorStyleWhite];
     self.view.clipsToBounds = YES;
-    
+
     
     //if user already set location using select location controller don't listen to location changes 
     if([NSUserDefaults lastSearchLocation].coordinate.latitude == 0 && [NSUserDefaults lastSearchLocation].coordinate.longitude == 0)
@@ -155,7 +153,7 @@ typedef enum {
     [NSUserDefaults synchronize];
 }
 
--(void) initializeSearchLocation{
+-(void) initializeSearchLocation {
     self.currentSearchLocation = [NSUserDefaults lastSearchLocation];
     self.currentSearchRadius = [NSUserDefaults lastSearchRadius];
 }
@@ -183,7 +181,7 @@ typedef enum {
         label.textColor = [UIColor whiteColor];
         label.textAlignment = NSTextAlignmentCenter;
         label.backgroundColor = [UIColor blackColor];
-        label.text = @"No concerts found";
+        label.text = NSLocalizedString(@"No shows in your area. Change location?", @"If no results for popular shows, this appears in the table footer view");
         [_noConcertsFooterView addSubview:label];
     }
     return _noConcertsFooterView;
@@ -219,7 +217,7 @@ typedef enum {
             self.tableView.tableFooterView = self.noConcertsFooterView;
         }
         else {
-            self.tableView.tableFooterView = [UIView new];
+            self.tableView.tableFooterView = emptyView;
         }
         [self.hud hide:YES];
     }
@@ -298,7 +296,8 @@ typedef enum {
 -(void) inviteTapped {
      [Flurry logEvent:@"Tapped_Invite" withParameters:[NSDictionary dictionaryWithObject:@"MainView" forKey:@"source"]];
     //        //https://developers.facebook.com/docs/concepts/requests/#invites
-    //        //TODO: Provide a filter in your request interface that only lists people that have not installed the game. If you use the Requests dialog, you can enable this with the app_non_users filter.
+    //        //TODO: filter out people that have not installed it
+    //Provide a filter in your request interface that only lists people that have not installed the game. If you use the Requests dialog, you can enable this with the app_non_users filter.
     NSDictionary* params = nil;
     [FBWebDialogs presentRequestsDialogModallyWithSession:[FBSession activeSession]
                                                   message:@"Check out Encore on iOS"
@@ -452,16 +451,17 @@ typedef enum {
 }
 
 #pragma mark ECLocationSetterDelegate Method
--(void) updateSearchLocation:(CLLocation *)location radius: (float) radius {
+-(void) updateSearchLocation:(CLLocation *)location radius: (float) radius area: (NSString*) area {
     NSLog(@"new radius %f",radius);
     self.currentSearchLocation = location;
     self.currentSearchRadius = radius;
+    self.currentSearchAreaString = area;
     [NSUserDefaults setLastSearchLocation:location];
     [NSUserDefaults setLastSearchRadius:radius];
+    [NSUserDefaults setLastSearchArea: area];
     [NSUserDefaults synchronize];
     [self hideLocationSetter];
     
-    //TODO update all the popular concerts according to the new location
     [self fetchConcerts];
 }
 
@@ -504,11 +504,16 @@ typedef enum {
     self.hasSearched = FALSE; //TODO this flagging system is prone to human error, clean it up.
     [self setBackgroundImage];
     [self resetTableHeaderView]; //remove artist image that appears during search results
-
+    
     //reload data/images
     [self displayViewsAccordingToSearchType];
     [self.tableView reloadData];
-    
+    if ([self currentEventArray].count != 0) {
+        self.tableView.tableFooterView = emptyView;
+    }
+    else {
+        self.tableView.tableFooterView = self.noConcertsFooterView;
+    }
         
     [Flurry logEvent:@"Switched_Selection" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[self currentSearchTypeString], @"Search_Type",nil]];
 }
@@ -773,7 +778,7 @@ typedef enum {
         self.hud.detailsLabelText = [NSString stringWithFormat:NSLocalizedString(@"hudSearchArtist", nil), [textField text]];
         [self.hud show:YES];
         
-        [Flurry logEvent:@"Searched_Artist" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:textField.text, @"search_text", [self currentSearchTypeString], @"Search_Type", nil]];
+        [Flurry logEvent:@"Searched_Artist" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:textField.text, @"search_text", [self currentSearchTypeString], @"Search_Type", [NSNumber numberWithDouble:self.currentSearchLocation.coordinate.latitude], @"latitude", [NSNumber numberWithDouble:self.currentSearchLocation.coordinate.longitude],@"longitude", [NSNumber numberWithFloat:self.currentSearchRadius], @"radius", self.currentSearchAreaString, @"area_string", nil]];
     }
     [self.view removeGestureRecognizer:self.tap];
     [textField resignFirstResponder];
@@ -787,7 +792,7 @@ typedef enum {
 - (void)fetchedConcertsForSearch:(NSDictionary *)comboDic {
     [self.hud hide:YES];
     [self resetTableHeaderView];
-    self.tableView.tableFooterView = [UIView new];
+    self.tableView.tableFooterView = emptyView;
     if (comboDic) {
         self.hasSearched = TRUE;
         self.comboSearchResultsDic = comboDic;

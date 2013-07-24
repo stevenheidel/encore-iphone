@@ -64,16 +64,16 @@ static NSString *const TodayPopularConcertsURL = @"events/today.json";
 static NSString *const ArtistCombinedSearchURL = @"artists/combined_search.json";
 
 //Posts
-static NSString *const ConcertPostsURL = @BASE_URL_DEF EVENTS_DEF "/%@/" POSTS_DEF ; //,concertID
-static NSString *const FlagPostURL = @POSTS_DEF "/%@/" FLAG_DEF JSON_DEF; //,postID
+static NSString *const ConcertPostsURL = @BASE_URL_DEF "events/%@/posts" ; //,concertID
+static NSString *const FlagPostURL = @"posts/%@/flag.json"; //,postID
 //Concert Check
-static NSString *const CheckConcertOnProfileURL = @USERS_DEF "/%@/" EVENTS_DEF JSON_DEF;
+static NSString *const CheckConcertOnProfileURL = @"users/%@/events.json"; //,userID
 
 #pragma mark - Posting
 //static NSString *const ;
 //Add concert to User
-static NSString* const AddConcertToUserURL = @USERS_DEF "/%@/" EVENTS_DEF; //,userID
-static NSString* const RemoveConcertFromUserURL = @USERS_DEF "/%@/" EVENTS_DEF "/%@"; //,userID, concertID
+static NSString* const AddConcertToUserURL = @"users/%@/events.json"; //,userID
+static NSString* const RemoveConcertFromUserURL = @"users/%@/events/%@.json"; //,userID, concertID
 static NSString* const PostImageURL = @EVENTS_DEF "/%@/" POSTS_DEF;
 
 #pragma mark - Check populating
