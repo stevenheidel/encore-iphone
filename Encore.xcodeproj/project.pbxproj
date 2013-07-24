@@ -122,6 +122,8 @@
 		D4A9B323178E5486008B5504 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = D4A9B321178E5486008B5504 /* Default.png */; };
 		D4A9B324178E5486008B5504 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4A9B322178E5486008B5504 /* Default@2x.png */; };
 		D4A9B32E178E6588008B5504 /* SearchResultsSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4A9B32D178E6587008B5504 /* SearchResultsSectionHeader.xib */; };
+		D4AA34FA17A069980015D79A /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4AA34F917A069980015D79A /* MediaPlayer.framework */; };
+		D4AA34FD17A0699F0015D79A /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4AA34FC17A0699F0015D79A /* AVFoundation.framework */; };
 		D4AA4CF31766B374009B0635 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4AA4CF21766B374009B0635 /* UIKit.framework */; };
 		D4AA4CF51766B374009B0635 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4AA4CF41766B374009B0635 /* Foundation.framework */; };
 		D4AA4CF71766B374009B0635 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4AA4CF61766B374009B0635 /* CoreGraphics.framework */; };
@@ -381,6 +383,8 @@
 		D4A9B322178E5486008B5504 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		D4A9B32D178E6587008B5504 /* SearchResultsSectionHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchResultsSectionHeader.xib; sourceTree = "<group>"; };
 		D4A9B330178E7DAC008B5504 /* ECAlertTags.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECAlertTags.h; sourceTree = "<group>"; };
+		D4AA34F917A069980015D79A /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		D4AA34FC17A0699F0015D79A /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D4AA4CEF1766B374009B0635 /* Encore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Encore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4AA4CF21766B374009B0635 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D4AA4CF41766B374009B0635 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -476,6 +480,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4AA34FD17A0699F0015D79A /* AVFoundation.framework in Frameworks */,
+				D4AA34FA17A069980015D79A /* MediaPlayer.framework in Frameworks */,
 				D4BB7E11179DC26C0098BCF4 /* ImageIO.framework in Frameworks */,
 				D4B7083A1797A7A300CF3A9D /* MapKit.framework in Frameworks */,
 				D4A7980B17921BD20029F469 /* SystemConfiguration.framework in Frameworks */,
@@ -810,6 +816,8 @@
 		D4AA4CF11766B374009B0635 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D4AA34FC17A0699F0015D79A /* AVFoundation.framework */,
+				D4AA34F917A069980015D79A /* MediaPlayer.framework */,
 				D948FE6D179F93EE0035297A /* FacebookSDK.framework */,
 				D4BB7E10179DC26C0098BCF4 /* ImageIO.framework */,
 				D4B708371797A53C00CF3A9D /* MapKit.framework */,
