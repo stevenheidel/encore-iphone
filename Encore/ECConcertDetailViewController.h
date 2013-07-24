@@ -10,7 +10,7 @@
 #import "ECPostViewController.h"
 #import "ECPictureViewController.h"
 #import "ECSearchType.h"
-#import "FBConnect.h"
+#import <FacebookSDK/FacebookSDK.h>
 #import "KNMultiItemSelector.h"
 
 @class ECPlaceHolderView,ECToolbar,ECPostCollectionHeaderView,FBFriendPickerViewController;

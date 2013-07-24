@@ -365,7 +365,7 @@ NSString *kCellID = @"cellID";
          [NSString stringWithFormat:ShareConcertURL,self.eventID], @"link",
          [NSString stringWithFormat:@"%@",[self.concert imageURL].absoluteString], @"picture",
          nil];
-        [FBWebDialogs presentFeedDialogModallyWithSession:ApplicationDelegate.facebook.session
+        [FBWebDialogs presentFeedDialogModallyWithSession:[FBSession activeSession]
                                                parameters:params2
                                                   handler:
          ^(FBWebDialogResult result, NSURL *resultURL, NSError *error) {
@@ -503,7 +503,22 @@ NSString *kCellID = @"cellID";
 //}
 -(void) loadAndSelectFriends {
     if(friends.count ==0) {
-     [ApplicationDelegate.facebook requestWithGraphPath:@"me/friends" andDelegate:self];   
+         [[FBRequest requestForMyFriends]  startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+             if(!error)
+             {
+                 NSDictionary * rawObject = result;
+                 NSArray * dataArray = [rawObject objectForKey:@"data"];
+                 for (NSDictionary * f in dataArray) {
+                     [friends addObject:[[KNSelectorItem alloc] initWithDisplayValue:[f objectForKey:@"name"]
+                                                                         selectValue:[f objectForKey:@"id"]
+                                                                            imageUrl:[NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?type=square", [f objectForKey:@"id"]]]];
+                 }
+                 [friends sortUsingSelector:@selector(compareByDisplayValue:)];
+                 [self selectFriends];
+             }else{
+                 NSLog(@"Facebook request error: %@",error.debugDescription);
+             }
+         }];
     }
     else {
         [self selectFriends];
@@ -511,25 +526,6 @@ NSString *kCellID = @"cellID";
     //TODO start HUD
 }
 
-#pragma mark - Handle Facebook request data (getting friends)
-
-- (void)request:(FBRequest *)request didFailWithError:(NSError *)error {
-    NSLog(@"Facebook request error: %@",error.debugDescription);
-    
-}
-
-
-- (void)request:(FBRequest *)request didLoad:(id)result {
-    NSDictionary * rawObject = result;
-    NSArray * dataArray = [rawObject objectForKey:@"data"];
-    for (NSDictionary * f in dataArray) {
-        [friends addObject:[[KNSelectorItem alloc] initWithDisplayValue:[f objectForKey:@"name"]
-                                                            selectValue:[f objectForKey:@"id"]
-                                                               imageUrl:[NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?type=square", [f objectForKey:@"id"]]]];
-    }
-    [friends sortUsingSelector:@selector(compareByDisplayValue:)];
-    [self selectFriends];
-}
 
 
 -(void) selectFriends {

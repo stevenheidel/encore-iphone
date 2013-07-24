@@ -32,6 +32,7 @@
 #import "ECAlertTags.h"
 
 #import "ECAppDelegate.h"
+#import "MBProgressHUD.h"
 
 typedef enum {
     FutureSection,
@@ -41,6 +42,7 @@ typedef enum {
 
 @interface ECProfileViewController ()
 
+@property (strong,atomic) MBProgressHUD* hud;
 @end
 
 @implementation ECProfileViewController
@@ -62,7 +64,8 @@ typedef enum {
     [self setupLogoutButton];
     [self setUpHeaderView];
     [self setupRefreshControl];
-    
+    [self setupHUD];
+
     self.tableView.tableFooterView = [UIView new];
    
     [self.tableView registerNib:[UINib nibWithNibName:@"ECProfileConcertCell" bundle:nil]
@@ -77,6 +80,13 @@ typedef enum {
     self.tableView.sectionFooterHeight = 0;
 }
 
+-(void) setupHUD {
+    //add hud progress indicator
+    self.hud = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.view addSubview:self.hud];
+    self.hud.labelText = NSLocalizedString(@"loading", nil);
+    self.hud.color = [UIColor lightBlueHUDConfirmationColor];
+}
 - (void) setUpBackButton {
     UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
     UIImage *leftButImage = [UIImage imageNamed:@"backButton.png"];     [leftButton setBackgroundImage:leftButImage forState:UIControlStateNormal];
@@ -187,6 +197,7 @@ typedef enum {
 }
 
 -(void) fetchEvents {
+    [self.hud show:YES];
     [ECJSONFetcher fetchConcertsForUserID:userID completion:^(NSDictionary *concerts) {
         //NSLog(@"%@: User Concerts response = %@", NSStringFromClass([self class]), concerts);
         self.events = concerts;
@@ -195,6 +206,7 @@ typedef enum {
         if([self.refreshControl isRefreshing]){
             [self.refreshControl endRefreshing];
         }
+        [self.hud hide:YES];
     }];
 }
 
@@ -334,7 +346,7 @@ typedef enum {
 -(void) logout {
     [Flurry logEvent: @"Logged_out_facebook"];
     [self dismissViewControllerAnimated:NO completion:nil]; //necessary to get rid of the profile modal view controller first
-    [ApplicationDelegate.facebook logout];
+    [ApplicationDelegate logout];
 //    [FBSession.activeSession closeAndClearTokenInformation];
 
 }

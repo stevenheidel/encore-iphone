@@ -270,7 +270,7 @@ typedef enum {
     //        //https://developers.facebook.com/docs/concepts/requests/#invites
     //        //TODO: Provide a filter in your request interface that only lists people that have not installed the game. If you use the Requests dialog, you can enable this with the app_non_users filter.
     NSDictionary* params = nil;
-    [FBWebDialogs presentRequestsDialogModallyWithSession:ApplicationDelegate.facebook.session
+    [FBWebDialogs presentRequestsDialogModallyWithSession:[FBSession activeSession]
                                                   message:@"Check out Encore on iOS"
                                                     title:@"Invite Friends to Encore"
                                                parameters:params

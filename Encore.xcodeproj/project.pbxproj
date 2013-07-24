@@ -193,6 +193,8 @@
 		D4E16CA917973BF100A9DC99 /* locationmakerwhite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4E16CA717973BF100A9DC99 /* locationmakerwhite@2x.png */; };
 		D4E16CAD1797419100A9DC99 /* searchbar.png in Resources */ = {isa = PBXBuildFile; fileRef = D4E16CAB1797419100A9DC99 /* searchbar.png */; };
 		D4E16CAE1797419100A9DC99 /* searchbar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4E16CAC1797419100A9DC99 /* searchbar@2x.png */; };
+		D948FE6E179F93EE0035297A /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D948FE6D179F93EE0035297A /* FacebookSDK.framework */; };
+		D948FE72179F951B0035297A /* ECFacebookManger.m in Sources */ = {isa = PBXBuildFile; fileRef = D948FE71179F951B0035297A /* ECFacebookManger.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -464,6 +466,9 @@
 		D4E16CA717973BF100A9DC99 /* locationmakerwhite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "locationmakerwhite@2x.png"; sourceTree = "<group>"; };
 		D4E16CAB1797419100A9DC99 /* searchbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = searchbar.png; sourceTree = "<group>"; };
 		D4E16CAC1797419100A9DC99 /* searchbar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "searchbar@2x.png"; sourceTree = "<group>"; };
+		D948FE6D179F93EE0035297A /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
+		D948FE70179F951B0035297A /* ECFacebookManger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECFacebookManger.h; sourceTree = "<group>"; };
+		D948FE71179F951B0035297A /* ECFacebookManger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECFacebookManger.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -485,6 +490,7 @@
 				D4AA4CF51766B374009B0635 /* Foundation.framework in Frameworks */,
 				D4AA4CF71766B374009B0635 /* CoreGraphics.framework in Frameworks */,
 				255A9AF4A1C64F71B97704C8 /* libPods.a in Frameworks */,
+				D948FE6E179F93EE0035297A /* FacebookSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -804,6 +810,7 @@
 		D4AA4CF11766B374009B0635 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D948FE6D179F93EE0035297A /* FacebookSDK.framework */,
 				D4BB7E10179DC26C0098BCF4 /* ImageIO.framework */,
 				D4B708371797A53C00CF3A9D /* MapKit.framework */,
 				D4A7980A17921BD20029F469 /* SystemConfiguration.framework */,
@@ -858,6 +865,8 @@
 				D4A7BEAA177B731F00C22D91 /* Staging.h */,
 				D4A7BEA9177B713400C22D91 /* EncoreURL.h */,
 				D4A7BEAB177BFF3700C22D91 /* ECSearchType.h */,
+				D948FE70179F951B0035297A /* ECFacebookManger.h */,
+				D948FE71179F951B0035297A /* ECFacebookManger.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1389,6 +1398,7 @@
 				D4A7981817930F9B0029F469 /* ECLocationSetterViewController.m in Sources */,
 				D4B31DE91793D03300822228 /* NSUserDefaults+Encore.m in Sources */,
 				D4BB7E09179CCF4E0098BCF4 /* ECCustomNavController.m in Sources */,
+				D948FE72179F951B0035297A /* ECFacebookManger.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1511,6 +1521,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B56B831D22E04C90BC664348 /* Pods.xcconfig */;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Encore/Encore-Prefix.pch";
 				INFOPLIST_FILE = "Encore/Encore-Info.plist";
@@ -1555,6 +1569,10 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Encore/Encore-Prefix.pch";
 				INFOPLIST_FILE = "Encore/Encore-Info.plist";

@@ -23,6 +23,8 @@
 #import "NSUserDefaults+Encore.h"
 #import "ECAppDelegate.h"
 #define FLAG_HUD_DELAY 1.0
+#import "ECFacebookManger.h"
+
 typedef enum {
     FlagPhoto
 }ActionSheetTags;
@@ -336,7 +338,7 @@ typedef enum {
           [NSString stringWithFormat:SharePostURL,self.postID], @"link",
           [NSString stringWithFormat:@"%@",[self.post imageURL].absoluteString], @"picture",
           nil];
-         [FBWebDialogs presentFeedDialogModallyWithSession:ApplicationDelegate.facebook.session
+         [FBWebDialogs presentFeedDialogModallyWithSession:[FBSession activeSession]
                                                 parameters:params2
                                                    handler:
           ^(FBWebDialogResult result, NSURL *resultURL, NSError *error) {

@@ -13,6 +13,7 @@
 #import "EncoreURL.h"
 #import "AFNetworking.h"
 #import "ECAppDelegate.h"
+#import "ECFacebookManger.h"
 
 @implementation ECJSONPoster
 
@@ -31,8 +32,8 @@
     NSString * facebookID = [user objectForKey: @"id"];
     NSString * name = [user objectForKey: @"name"];
     
-    NSString * oauth = ApplicationDelegate.facebook.accessToken; //FBSession.activeSession.accessTokenData.accessToken;
-    NSDate * expiryDate = ApplicationDelegate.facebook.expirationDate; //FBSession.activeSession.accessTokenData.expirationDate;
+    NSString * oauth = [ECFacebookManger sharedFacebookManger].accessToken; //FBSession.activeSession.accessTokenData.accessToken;
+    NSDate * expiryDate = [ECFacebookManger sharedFacebookManger].expirationDate; //FBSession.activeSession.accessTokenData.expirationDate;
     NSString * jsonExpiryDateString = [expiryDate jsonString];
     
     NSDictionary * parameters = [NSDictionary dictionaryWithObjectsAndKeys:oauth, @"oauth",jsonExpiryDateString,@"expiration_date",facebookID, @"facebook_id",name,@"name",nil];

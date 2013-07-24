@@ -9,7 +9,8 @@
 #import "ECAppDelegate.h"
 #import "ECNewMainViewController.h"
 #import "ECLoginViewController.h"
-#import <FacebookSDK/FacebookSDK.h>
+#import "ECFacebookManger.h"
+
 #import "ECJSONPoster.h"
 
 #import "ATConnect.h"
@@ -31,31 +32,38 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
 
 @implementation ECAppDelegate
 
-- (BOOL)application:(UIApplication *)application
-            openURL:(NSURL *)url
-  sourceApplication:(NSString *)sourceApplication
-         annotation:(id)annotation {
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    [self startAnalytics];
     
-//    // Facebook SDK * login flow *
-//    // Attempt to handle URLs to complete any auth (e.g., SSO) flow.
-//    return [FBAppCall handleOpenURL:url sourceApplication:sourceApplication fallbackHandler:^(FBAppCall *call) {
-//        // Facebook SDK * App Linking *
-//        // For simplicity, this sample will ignore the link if the session is already
-//        // open but a more advanced app could support features like user switching.
-//        if (call.accessTokenData) {
-//            if ([FBSession activeSession].isOpen) {
-//                NSLog(@"INFO: Ignoring app link because current session is open.");
-//            }
-//            else {
-//                [self handleAppLink:call.accessTokenData];
-//            }
-//        }
-//    }];
-
-      return [self.facebook handleOpenURL:url];
+    //  self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    //  Override point for customization after application launch.
+    
+    self.navigationController = (UINavigationController*)self.window.rootViewController;
+    self.mainViewController = (ECNewMainViewController*)[[self.navigationController viewControllers] objectAtIndex:0];
+    
+    [self setUpLocationManager];
+    
+    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], UITextAttributeTextColor, [UIColor clearColor], UITextAttributeTextShadowColor, [NSValue valueWithUIOffset:UIOffsetMake(0.0f,1.0f)],UITextAttributeTextShadowOffset, [UIFont heroFontWithSize:24.0f], UITextAttributeFont, nil]];
+    
+    self.window.backgroundColor = [UIColor blackColor];
+    [self.window makeKeyAndVisible];
+    [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
+    
+   
+    if (![self isLoggedIn])
+        [self showLoginView:NO];
+   
+    
+    return YES;
+}
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+{
+    return  [[ECFacebookManger sharedFacebookManger] handleOpenURL:url];
 }
 
--(void) startAnalytics {
+-(void) startAnalytics
+{
     [Flurry setDebugLogEnabled:FLURRY_LOGGING];
     [Flurry setAppVersion:[NSString stringWithFormat:@"%@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]]];
     [Flurry startSession:@"GM2TRR7TWT9DRX9N9PG9"];
@@ -75,119 +83,109 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
 
 }
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-    [self startAnalytics];
-    
-//  self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-//  Override point for customization after application launch.
-    
-    self.navigationController = (UINavigationController*)self.window.rootViewController;
-    self.mainViewController = (ECNewMainViewController*)[[self.navigationController viewControllers] objectAtIndex:0];
-    
-    [self setUpLocationManager];
 
-    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], UITextAttributeTextColor, [UIColor clearColor], UITextAttributeTextShadowColor, [NSValue valueWithUIOffset:UIOffsetMake(0.0f,1.0f)],UITextAttributeTextShadowOffset, [UIFont heroFontWithSize:24.0f], UITextAttributeFont, nil]];
-    
-    self.window.backgroundColor = [UIColor blackColor];
-    [self.window makeKeyAndVisible];
-    [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
-    
-    
-    self.facebook = [[Facebook alloc] initWithAppId:@"170378959802810" andDelegate:self];
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if ([defaults objectForKey:@"FBAccessTokenKey"] && [defaults objectForKey:@"FBExpirationDateKey"]) {
-        self.facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
-        self.facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
-    }
-    
-    // See if the app has a valid token for the current state.
-//    if (FBSession.activeSession.state == FBSessionStateCreatedTokenLoaded) {
-//        [self openSession];
-//    } else {
-//        // No, display the login page.
-//        
-//        [self showLoginView: NO];
-//    }
-    
-    //TODO switchover to using Facebook object for connection based on KNFBFriendSelectorDemo
-    // Intro screen, connect to Facebook
-    
-    if (![self.facebook isSessionValid]) {
-        [self showLoginView:NO];
-    }
+#pragma mark - Login management
 
-    return YES;
-}
 
 - (void)fbDidNotLogin:(BOOL)cancelled {
     NSLog(@"Delegate fbDidNotLogin");
 }
-- (void)fbDidLogin {
-    NSLog(@"fbDidLogin");
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:[self.facebook accessToken] forKey:@"FBAccessTokenKey"];
-    [defaults setObject:[self.facebook expirationDate] forKey:@"FBExpirationDateKey"];
-    [defaults synchronize];
-    [self.facebook requestWithGraphPath:@"me" andDelegate:self];
-//    [FBRequestConnection startForMeWithCompletionHandler:^(FBRequestConnection *connection, id<FBGraphUser> user, NSError *error) {
-//        if (error) {
-//            NSLog(@"ECAppDelegate Facebook request error: %@",error.debugDescription);
-//            [Flurry logEvent:@"Facebook_Request_Error" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:error.debugDescription,@"error", nil]];
-//        }
-//        else {
-//            [ECJSONPoster postUser:(NSDictionary<FBGraphUser>*)user completion:^(NSDictionary *response) {
-//                NSURL* defaultURL = [NSUserDefaults facebookProfileImageURL];
-//                if (!defaultURL || ![defaultURL isEqual:[response objectForKey:@"facebook_image_url"]]) {
-//                    [NSUserDefaults setFacebookProfileImageURL:[response objectForKey:@"facebook_image_url"]]; //expecting a string -- converts to URL inside nsuserdefaults
-//                    [NSUserDefaults synchronize];
-//                }
-//                [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-//            }];
-//            [self saveUserInfoToDefaults:(NSDictionary<FBGraphUser>*)user];
-//
-//        }
-//    }];
-}
-
-- (void)request:(FBRequest *)request didFailWithError:(NSError *)error {
-    NSLog(@"ECAppDelegate Facebook request error: %@",error.debugDescription);
-    [Flurry logEvent:@"Facebook_Request_Error" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:error.debugDescription,@"error", nil]];
-}
-
-
-- (void)request:(FBRequest *)request didLoad:(id)result {
-    NSDictionary* user = result;
-    [ECJSONPoster postUser:user completion:^(NSDictionary *response) {
-        NSURL* defaultURL = [NSUserDefaults facebookProfileImageURL];
-        if (!defaultURL || ![defaultURL isEqual:[response objectForKey:@"facebook_image_url"]]) {
-            [NSUserDefaults setFacebookProfileImageURL:[response objectForKey:@"facebook_image_url"]]; //expecting a string -- converts to URL inside nsuserdefaults
-            [NSUserDefaults synchronize];
+- (void)fetchUserinfo
+{
+    //Get user's facebook data
+    [[ECFacebookManger sharedFacebookManger] fetchUserInformation:^(NSDictionary *user) {
+        if(user)
+        {
+            //Post to Encore server
+            [ECJSONPoster postUser:user completion:^(NSDictionary *response) {
+                    NSURL* defaultURL = [NSUserDefaults facebookProfileImageURL];
+                    if (!defaultURL || ![defaultURL isEqual:[response objectForKey:@"facebook_image_url"]]) {
+                        [NSUserDefaults setFacebookProfileImageURL:[response objectForKey:@"facebook_image_url"]]; //expecting a string -- converts to URL inside nsuserdefaults
+                        [NSUserDefaults synchronize];
+                    }
+                    [self.navigationController dismissViewControllerAnimated:YES completion:^{
+                    [self.hud hide:YES];
+                }];
+            }];
+            [self saveUserInfoToDefaults:user];
+        }else{
+            //TODO: error message
+             [self.hud hide:YES];
         }
-        [self.navigationController dismissViewControllerAnimated:YES completion:^{
-            [self.hud hide:YES];
-        }];
+        
     }];
-    [self saveUserInfoToDefaults:user];
+    
 }
 
-- (void)fbDidLogout {
+-(void) saveUserInfoToDefaults: (NSDictionary /*<FBGraphUser>*/ *) user {
+    NSString* defaultID = [NSUserDefaults userID];
+    
+    NSString* userID = [user objectForKey: @"id"];
+    if (!defaultID || ![defaultID isEqualToString:userID]) {
+        [NSUserDefaults setUserID:userID];
+    }
+    else !defaultID ? NSLog(@"No default ID saved") : NSLog(@"No change in User ID. Defaults not changed");
+    
+    NSString* defaultName = [NSUserDefaults userName];
+    NSString* userName = [user objectForKey:@"name"];
+    if (!defaultName || ![defaultName isEqualToString:userName]) {
+        [NSUserDefaults setUsername:userName];
+    }
+    
+    //    NSString* defaultCity = [NSUserDefaults userCity];
+    //    if(!defaultCity || ![defaultCity isEqualToString:userInfo.location.location.city]) {
+    //        [NSUserDefaults setUserCity:userInfo.location.location.city];
+    //    }
+    
+    [NSUserDefaults synchronize];
+}
+
+
+-(void)beginFacebookAuthorization
+{
+    [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
+
+    [[ECFacebookManger sharedFacebookManger] loginUserWithCompletionHandler:^(NSError* error) {
+        if(error)
+            [self handleAuthError:error];
+        else
+            [self fetchUserinfo];
+        
+    }];
+}
+- (void)logout
+{
     if(!self.loginViewController) {
         self.loginViewController = [[ECLoginViewController alloc] init];
     }
     [self.window.rootViewController presentViewController:self.loginViewController animated:YES completion:nil];
+    [[ECFacebookManger sharedFacebookManger] logout];
     [NSUserDefaults clearLoginDetails];
 }
-- (void)fbSessionInvalidated {}
-- (void)fbDidExtendToken:(NSString *)accessToken expiresAt:(NSDate *)expiresAt {
-    NSLog(@"TOKEN EXTENDED");
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:accessToken forKey:@"FBAccessTokenKey"];
-    [defaults setObject:expiresAt forKey:@"FBExpirationDateKey"];
-    [defaults synchronize];
-}
--(void)beginFacebookAuthorization {
-    [self.facebook authorize:[NSArray arrayWithObjects:@"basic_info",@"user_birthday",@"email", nil]];
+
+- (void)handleAuthError:(NSError *)error{
+    NSString *alertMessage, *alertTitle;
+    [self.hud hide:YES];
+    
+    if (error.fberrorShouldNotifyUser) {
+        alertTitle = @"Something Went Wrong";
+        alertMessage = error.fberrorUserMessage;
+    } else if (error.fberrorCategory == FBErrorCategoryUserCancelled) {
+        NSLog(@"user cancelled login");
+    } else {
+        // For simplicity, this sample treats other errors blindly.
+        alertTitle  = @"Unknown Error";
+        alertMessage = @"Error. Please try again later.";
+        NSLog(@"Unexpected error:%@", error);
+    }
+    
+    if (alertMessage) {
+        [[[UIAlertView alloc] initWithTitle:alertTitle
+                                    message:alertMessage
+                                   delegate:nil
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil] show];
+    }
 }
 -(void) showLoginHUD {
     if(!self.hud) {
@@ -197,71 +195,11 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
     [self.hud show:YES];
 }
 #pragma mark - Login management
-- (void) openSession {
-    [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
-    [FBSession openActiveSessionWithReadPermissions:nil
-                                       allowLoginUI:YES
-                                  completionHandler:
-     ^(FBSession *session,
-       FBSessionState state, NSError *error) {
-         [self sessionStateChanged:session state:state error:error];
-     }];
-}
 
-
-- (void)sessionStateChanged:(FBSession *)session
-                      state:(FBSessionState) state
-                      error:(NSError *)error {
-
+-(BOOL) isLoggedIn
+{
     
-    switch (state) {
-        case FBSessionStateOpen: {
-            NSDictionary* params = [NSDictionary dictionaryWithObject:@"id,gender,name,username,age_range,birthday" forKey:@"fields"];
-            FBRequest* request = [FBRequest requestWithGraphPath:@"me" parameters:params HTTPMethod:nil];
-            [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-                if(!error){
-                    [self loginCompletedWithUser:result];
-                }
-            }];
-            break;
-        }
-        case FBSessionStateClosed: //no break on purpose
-            
-        case FBSessionStateClosedLoginFailed: {
-            // Once the user has logged in, we want them to
-            // be looking at the root view.
-            [self.navigationController popToRootViewControllerAnimated:NO];
-            
-            [FBSession.activeSession closeAndClearTokenInformation];
-            [self showLoginView: YES];
-            break;
-        }
-        default:{
-            break;
-        }
-    }
-    
-    if (state == FBSessionStateClosed) {
-        [Flurry logEvent:@"FBSessionClosed"];
-    }
-    else if (state == FBSessionStateClosedLoginFailed) {
-        [Flurry logEvent:@"FBSessionStateClosedLoginFailed"];
-    }
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:ECSessionStateChangedNotification object:session];
-    
-    if (error) {
-        UIAlertView *alertView = [[UIAlertView alloc]
-                                  initWithTitle:@"Error"
-                                  message:error.localizedDescription
-                                  delegate:nil
-                                  cancelButtonTitle:@"OK"
-                                  otherButtonTitles:nil];
-        [alertView show];
-    }
-}
--(BOOL) isLoggedIn {
-    return [self.facebook isSessionValid];
+    return [[ECFacebookManger sharedFacebookManger] isLoggedIn];
 }
 
 -(void) loginLater {
@@ -289,66 +227,10 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
     }
 }
 
-// Helper method to wrap logic for handling app links.
-- (void)handleAppLink:(FBAccessTokenData *)appLinkToken {
-    // Initialize a new blank session instance...
-    FBSession *appLinkSession = [[FBSession alloc] initWithAppID:nil
-                                                     permissions:nil
-                                                 defaultAudience:FBSessionDefaultAudienceNone
-                                                 urlSchemeSuffix:nil
-                                              tokenCacheStrategy:[FBSessionTokenCachingStrategy nullCacheInstance] ];
-    [FBSession setActiveSession:appLinkSession];
-    // ... and open it from the App Link's Token.
-    [appLinkSession openFromAccessTokenData:appLinkToken
-                          completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
-                              // Forward any errors to the FBLoginView delegate.
-                              if (error) {
-//                                  [self.loginViewController loginView:nil handleError:error];
-                              }
-                          }];
-}
 
--(void) loginCompletedWithUser:(NSDictionary <FBGraphUser>*) user {
-    NSString* userid = user.id;
-    NSLog(@"Logged in user with id: %@",userid);
-    
-    [ECJSONPoster postUser:user completion:^(NSDictionary *response) {
-        NSURL* defaultURL = [NSUserDefaults facebookProfileImageURL];
-        if (!defaultURL || ![defaultURL isEqual:[response objectForKey:@"facebook_image_url"]]) {
-            [NSUserDefaults setFacebookProfileImageURL:[response objectForKey:@"facebook_image_url"]]; //expecting a string -- converts to URL inside nsuserdefaults
-            [NSUserDefaults synchronize];
-        }
-        [self.navigationController dismissViewControllerAnimated:YES completion:^{
-            [self.hud hide:YES];
-        }];
-    }];
-    [self saveUserInfoToDefaults:user];
-}
 
--(void) saveUserInfoToDefaults: (NSDictionary /*<FBGraphUser>*/ *) user {
-    NSString* defaultID = [NSUserDefaults userID];
 
-    NSString* userID = [user objectForKey: @"id"];
-    if (!defaultID || ![defaultID isEqualToString:userID]) {
-        [NSUserDefaults setUserID:userID];
-    }
-    else !defaultID ? NSLog(@"No default ID saved") : NSLog(@"No change in User ID. Defaults not changed");
-    
-    NSString* defaultName = [NSUserDefaults userName];
-    NSString* userName = [user objectForKey:@"name"];
-    if (!defaultName || ![defaultName isEqualToString:userName]) {
-        [NSUserDefaults setUsername:userName];
-    }
-    
-//    NSString* defaultCity = [NSUserDefaults userCity];
-//    if(!defaultCity || ![defaultCity isEqualToString:userInfo.location.location.city]) {
-//        [NSUserDefaults setUserCity:userInfo.location.location.city];
-//    }
-    
-    [NSUserDefaults synchronize];
-    
 
-}
 
 #pragma mark - location
 
@@ -428,14 +310,14 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-//    [FBSession.activeSession handleDidBecomeActive];
-    [self.facebook extendAccessTokenIfNeeded];
+    [[ECFacebookManger sharedFacebookManger] handleDidBecomeActive];
 }
-
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    [FBSession.activeSession close];
+
     [Flurry logEvent:@"Application_Will_Terminate"];
     [NSUserDefaults setLastSearchType:self.mainViewController.currentSearchType];
     [NSUserDefaults setLastSearchRadius:self.mainViewController.currentSearchRadius];
