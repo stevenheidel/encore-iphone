@@ -60,7 +60,7 @@ static NSString *const FuturePopularConcertsURL = @"events/future.json";
 static NSString *const TodayPopularConcertsURL = @"events/today.json";
 
 //Artists and Concerts combo
-static NSString *const ArtistConcertComboURL = @ARTISTS_DEF "/" SEARCH_DEF JSON_DEF;
+static NSString *const ArtistConcertComboURL = @"artists/search.json";
 
 //Artists
 static NSString *const ArtistSearchURL = @BASE_URL_DEF ARTISTS_DEF "/" SEARCH_DEF TERM_DEF "%@"; //, searchStr
