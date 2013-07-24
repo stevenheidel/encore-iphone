@@ -43,6 +43,8 @@
 #define HEADER_HEIGHT 160.0
 #import "ECAppDelegate.h"
 
+#import "SAMRateLimit.h"
+
 NSString *kCellID = @"cellID";
 
 @interface ECConcertDetailViewController (){
@@ -319,10 +321,13 @@ NSString *kCellID = @"cellID";
 - (IBAction)getStuff {
     numTimesGetStuffPressed++;
     [Flurry logEvent:@"Find_Photos_and_Videos_Pressed" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[self.concert eventID],@"eventID", [NSNumber numberWithInteger:numTimesGetStuffPressed], @"num_times_pressed", nil]];
-    [ECJSONPoster populateConcert:[self.concert eventID] completion:^(BOOL success) {
-        [self checkIfPopulating];
-        self.getStuffButton.enabled = NO;
-    }];
+    [SAMRateLimit executeBlock:^{
+        NSLog(@"here");
+        [ECJSONPoster populateConcert:[self.concert eventID] completion:^(BOOL success) {
+            [self checkIfPopulating];
+            self.getStuffButton.enabled = NO;
+        }];
+    } name:@"GetStuff" limit:5.0];
 }
 
 #pragma mark FB Sharing
