@@ -160,6 +160,8 @@ typedef enum {
 }
 
 -(void) showLoadingHUD {
+    self.hud.detailsLabelText = nil;
+    self.hud.labelText = NSLocalizedString(@"Loading",nil);
     [self.hud show:YES];
 }
 
@@ -359,7 +361,10 @@ typedef enum {
 - (void) setBackgroundImage {
     if ([[self currentEventArray] count] > 0) {
         if(self.hasSearched) {
-            UIImage *background = [[UIImage imageWithData: [NSData dataWithContentsOfURL:[self.searchedArtistDic imageURL]]] imageWithGaussianBlur];
+            NSURL* imageURL = [self.searchedArtistDic imageURL];
+            if(!imageURL)
+                imageURL = [[self.searchResultsEvents objectAtIndex:0] imageURL];
+            UIImage *background = [[UIImage imageWithData: [NSData dataWithContentsOfURL:imageURL]] imageWithGaussianBlur];
             [self.imgBackground setImage: background];
             return;
         }
@@ -718,13 +723,10 @@ typedef enum {
     }
 }
 
--(ECSearchType) tenseForSearchType {
-    return self.currentSearchType == ECSearchTypeToday ? ECSearchTypeFuture : ECSearchTypePast;
-}
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
     if ([textField.text length] > 0) { //don't search empty searches
-        [ECJSONFetcher fetchArtistsForString:textField.text withSearchType:[self tenseForSearchType] forLocation:self.currentSearchLocation radius: [NSNumber numberWithFloat:self.currentSearchRadius] completion:^(NSDictionary * comboDic) {
+        [ECJSONFetcher fetchArtistsForString:textField.text withSearchType:self.currentSearchType forLocation:self.currentSearchLocation radius: [NSNumber numberWithFloat:self.currentSearchRadius] completion:^(NSDictionary * comboDic) {
             [self fetchedConcertsForSearch:comboDic];
         }];
 
