@@ -748,6 +748,7 @@ typedef enum {
 - (void)fetchedConcertsForSearch:(NSDictionary *)comboDic {
     [self.hud hide:YES];
     [self resetTableHeaderView];
+    self.tableView.tableFooterView = [UIView new];
     if (comboDic) {
         self.hasSearched = TRUE;
         self.comboSearchResultsDic = comboDic;
