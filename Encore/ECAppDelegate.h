@@ -19,8 +19,8 @@
 @interface ECAppDelegate : UIResponder <UIApplicationDelegate,UINavigationControllerDelegate, CLLocationManagerDelegate> {
 }
 -(void)beginFacebookAuthorization;
--(void) loginCompletedWithUser: (NSDictionary /*<FBGraphUser>*/ *) user;
--(void) openSession;
+//-(void) loginCompletedWithUser: (NSDictionary /*<FBGraphUser>*/ *) user;
+//-(void) openSession;
 -(void) loginLater;
 -(void) logout;
 -(void) showLoginView: (BOOL) animated;

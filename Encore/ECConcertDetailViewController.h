@@ -15,7 +15,7 @@
 
 @class ECPlaceHolderView,ECToolbar,ECPostCollectionHeaderView,FBFriendPickerViewController;
 
-@interface ECConcertDetailViewController : UIViewController <UICollectionViewDataSource,UICollectionViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,ECPostViewControllerDelegate,UIAlertViewDelegate, KNMultiItemSelectorDelegate,ECPictureViewControllerDelegate,FBRequestDelegate> {
+@interface ECConcertDetailViewController : UIViewController <UICollectionViewDataSource,UICollectionViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,ECPostViewControllerDelegate,UIAlertViewDelegate, KNMultiItemSelectorDelegate,ECPictureViewControllerDelegate/*,FBRequestDelegate*/> {
     NSMutableArray* friends;
 }
 
