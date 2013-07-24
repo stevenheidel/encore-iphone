@@ -46,7 +46,7 @@
 NSString *kCellID = @"cellID";
 
 @interface ECConcertDetailViewController (){
-
+    NSInteger numTimesGetStuffPressed;
 }
 
 @end
@@ -81,7 +81,7 @@ NSString *kCellID = @"cellID";
     NSLog(@"%@: did load",NSStringFromClass(self.class));
     self.isOnProfile = FALSE;
     self.isPopulating = FALSE;
-    
+    numTimesGetStuffPressed = 0;
     [self.collectionView registerClass:[Cell class] forCellWithReuseIdentifier:@"generic"];
     UIImageView* encoreLogo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo.png"]];
     self.navigationItem.titleView = encoreLogo;
@@ -316,7 +316,8 @@ NSString *kCellID = @"cellID";
 }
 
 - (IBAction)getStuff {
-    [Flurry logEvent:@"Find_Photos_and_Videos_Pressed"];
+    numTimesGetStuffPressed++;
+    [Flurry logEvent:@"Find_Photos_and_Videos_Pressed" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[self.concert eventID],@"eventID", [NSNumber numberWithInteger:numTimesGetStuffPressed], @"num_times_pressed", nil]];
     [ECJSONPoster populateConcert:[self.concert eventID] completion:^(BOOL success) {
         [self checkIfPopulating];
         self.getStuffButton.enabled = NO;
