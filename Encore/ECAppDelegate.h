@@ -9,11 +9,11 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import "FBConnect.h"
-
 #define ApplicationDelegate ((ECAppDelegate *)[UIApplication sharedApplication].delegate)
 
 @class ECLoginViewController;
 @class ECNewMainViewController;
+@class MBProgressHUD;
 @protocol FBGraphUser;
 
 @interface ECAppDelegate : UIResponder <UIApplicationDelegate,UINavigationControllerDelegate, CLLocationManagerDelegate,FBSessionDelegate, FBRequestDelegate> {
@@ -23,8 +23,10 @@
 -(void) openSession;
 -(void) loginLater;
 -(void) showLoginView: (BOOL) animated;
+-(void) showLoginHUD;
 -(BOOL) isLoggedIn;
 
+@property (strong,nonatomic) MBProgressHUD* hud;
 @property (strong, nonatomic) Facebook *facebook;
 @property (nonatomic,assign) BOOL fullScreenVideoPlaying;
 @property (strong, nonatomic) UIWindow *window;

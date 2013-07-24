@@ -109,8 +109,8 @@
 }
 
 -(IBAction)performLogin:(id)sender{
-   // [self.spinner startAnimating];  //TODO: Spinner
     [Flurry logEvent:@"Perform_Login"];
+    [ApplicationDelegate showLoginHUD];
     [ApplicationDelegate beginFacebookAuthorization];
 }
 

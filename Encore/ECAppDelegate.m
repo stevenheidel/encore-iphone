@@ -18,7 +18,7 @@
 
 #import "UIFont+Encore.h"
 #import "NSUserDefaults+Encore.h"
-
+#import "MBProgressHUD.h"
 //#if IN_BETA
 #import "TestFlight.h"
 //#endif
@@ -164,7 +164,9 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
             [NSUserDefaults setFacebookProfileImageURL:[response objectForKey:@"facebook_image_url"]]; //expecting a string -- converts to URL inside nsuserdefaults
             [NSUserDefaults synchronize];
         }
-        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+        [self.navigationController dismissViewControllerAnimated:YES completion:^{
+            [self.hud hide:YES];
+        }];
     }];
     [self saveUserInfoToDefaults:user];
 }
@@ -187,7 +189,13 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
 -(void)beginFacebookAuthorization {
     [self.facebook authorize:[NSArray arrayWithObjects:@"basic_info",@"user_birthday",@"email", nil]];
 }
-
+-(void) showLoginHUD {
+    if(!self.hud) {
+        self.hud = [[MBProgressHUD alloc] initWithView:self.loginViewController.view];
+        [self.loginViewController.view addSubview:self.hud];
+    }
+    [self.hud show:YES];
+}
 #pragma mark - Login management
 - (void) openSession {
     [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
@@ -270,14 +278,14 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
     // displayed, then getting back here means the login in progress did not successfully
     // complete. In that case, notify the login view so it can update its UI appropriately.
     if (![modalViewController isKindOfClass:[ECLoginViewController class]]) {
-        ECLoginViewController* loginViewController = [[ECLoginViewController alloc]
+        self.loginViewController = [[ECLoginViewController alloc]
                                                       initWithNibName:@"ECLoginViewController"
                                                       bundle:nil];
-        loginViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-        [topViewController presentViewController:loginViewController animated:animated completion:nil];
+        self.loginViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+        [topViewController presentViewController:self.loginViewController animated:animated completion:nil];
     } else {
-        ECLoginViewController* loginViewController = (ECLoginViewController*)modalViewController;
-        [loginViewController loginFailed];
+        self.loginViewController = (ECLoginViewController*)modalViewController;
+        [self.loginViewController loginFailed];
     }
 }
 
@@ -310,7 +318,9 @@ NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:EC
             [NSUserDefaults setFacebookProfileImageURL:[response objectForKey:@"facebook_image_url"]]; //expecting a string -- converts to URL inside nsuserdefaults
             [NSUserDefaults synchronize];
         }
-        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+        [self.navigationController dismissViewControllerAnimated:YES completion:^{
+            [self.hud hide:YES];
+        }];
     }];
     [self saveUserInfoToDefaults:user];
 }
