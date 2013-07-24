@@ -54,6 +54,12 @@
 #define COCOAPODS_VERSION_MINOR_TestFlightSDK 2
 #define COCOAPODS_VERSION_PATCH_TestFlightSDK 6
 
+// XCDYouTubeVideoPlayerViewController
+#define COCOAPODS_POD_AVAILABLE_XCDYouTubeVideoPlayerViewController
+#define COCOAPODS_VERSION_MAJOR_XCDYouTubeVideoPlayerViewController 1
+#define COCOAPODS_VERSION_MINOR_XCDYouTubeVideoPlayerViewController 0
+#define COCOAPODS_VERSION_PATCH_XCDYouTubeVideoPlayerViewController 0
+
 // libwebp
 #define COCOAPODS_POD_AVAILABLE_libwebp
 #define COCOAPODS_VERSION_MAJOR_libwebp 0

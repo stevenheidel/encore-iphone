@@ -20,6 +20,7 @@ PODS:
   - SDWebImage/MapKit (3.3):
     - libwebp
   - TestFlightSDK (1.2.6)
+  - XCDYouTubeVideoPlayerViewController (1.0.0)
 
 DEPENDENCIES:
   - AFNetworking (~> 1.3)
@@ -28,6 +29,7 @@ DEPENDENCIES:
   - KNSemiModalViewController (~> 0.3)
   - MBProgressHUD
   - TestFlightSDK (= 1.2.6)
+  - XCDYouTubeVideoPlayerViewController
 
 SPEC CHECKSUMS:
   AFNetworking: 9ec8aafb9269236a7630bd8d9838ce2ba30fa2a0
@@ -38,5 +40,6 @@ SPEC CHECKSUMS:
   MBProgressHUD: 1fd8591a2216d5dec6de24e09187bb03bcbe9946
   SDWebImage: 79a8bac9ccf85b269100b294f7b43684dab8bf8a
   TestFlightSDK: 7d9abce62f5a17191c4df84fd88e05797e6776e0
+  XCDYouTubeVideoPlayerViewController: 507a2c59bc1ed6912793de105e2c933085a379f5
 
-COCOAPODS: 0.22.2
+COCOAPODS: 0.22.3
