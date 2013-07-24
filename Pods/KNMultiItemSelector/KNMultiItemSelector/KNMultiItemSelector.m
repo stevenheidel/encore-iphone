@@ -434,6 +434,18 @@
 
 #pragma mark - Other memory stuff
 
+#warning Modified by simon tuesday july 23
+-(BOOL)shouldAutorotate{
+    return NO;
+}
+
+-(NSUInteger)supportedInterfaceOrientations{
+    return UIInterfaceOrientationMaskPortrait;
+}
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation{
+    return UIInterfaceOrientationPortrait;
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
   return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }

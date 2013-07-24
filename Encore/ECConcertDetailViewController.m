@@ -38,7 +38,7 @@
 
 #import "UIViewController+KNSemiModal.h"
 #import "KNMultiItemSelector.h"
-
+#import  "ECCustomNavController.h"
 #define HUD_DELAY 1.0
 #define HEADER_HEIGHT 160.0
 #import "ECAppDelegate.h"
@@ -557,7 +557,7 @@ NSString *kCellID = @"cellID";
     selector.useTableIndex      = YES;
     selector.useRecentItems     = YES;
     selector.maxNumberOfRecentItems = 4;
-    UINavigationController * uinav = [[UINavigationController alloc] initWithRootViewController:selector];
+    ECCustomNavController * uinav = [[ECCustomNavController alloc] initWithRootViewController:selector];
     uinav.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
     uinav.modalPresentationStyle = UIModalPresentationFormSheet;
     [self presentViewController:uinav animated:YES completion:nil];
@@ -588,28 +588,6 @@ NSString *kCellID = @"cellID";
         
         [self shareWithTaggedFriends:taggedFriends];
 
-//        //https://developers.facebook.com/docs/concepts/requests/#invites
-//        //TODO: Provide a filter in your request interface that only lists people that have not installed the game. If you use the Requests dialog, you can enable this with the app_non_users filter.
-//        
-//        [FBWebDialogs presentRequestsDialogModallyWithSession:nil
-//                                                      message:[NSString stringWithFormat:@"I went to %@'s show at %@ on %@ with you", [self.concert artistName], [self.concert venueName], [self.concert niceDate]]
-//                                                        title:nil
-//                                                   parameters:params
-//                                                      handler:^(FBWebDialogResult result, NSURL *resultURL, NSError *error) {
-//                                                          if (error) {
-//                                                              // Case A: Error launching the dialog or sending request.
-//                                                              NSLog(@"Error sending request.");
-//                                                          } else {
-//                                                              if (result == FBWebDialogResultDialogNotCompleted) {
-//                                                                  // Case B: User clicked the "x" icon
-//                                                                  NSLog(@"User canceled request.");
-//                                                                  [Flurry logEvent:@"Canceled_Tag_Friends_On_Dialog"];
-//                                                                  
-//                                                              } else {
-//                                                                  NSLog(@"Request Sent.");
-//                                                                  [Flurry logEvent:@"Successfully_Tagged_Friends"withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:taggedFriends.count],@"numFriends", nil]];
-//                                                              }
-//                                                          }}];
     }];
 }
 
