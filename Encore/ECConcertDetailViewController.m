@@ -385,8 +385,7 @@ NSString *kCellID = @"cellID";
                          // User clicked the Share button
                          NSString *msg = @"Posted to facebook";
                          NSLog(@"%@", msg);
-                         [Flurry logEvent:@"Successfully_Posted_To_Facebook_With_Feed_Dialog"]; //TODO update so merges flurry events together
-                         
+                         [Flurry logEvent:@"Successfully_Posted_To_Facebook_With_Feed_Dialog" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"Concert",@"type", nil]];                         
                          // Show the result in an alert
                          [[[UIAlertView alloc] initWithTitle:@"Result"  //TODO: replace with HUD
                                                      message:msg

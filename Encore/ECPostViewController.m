@@ -328,17 +328,65 @@ typedef enum {
     //    }
      }
      else {
-         NSArray* items = [NSArray arrayWithObjects:url,[NSString stringWithFormat:@"Check out this picture on Encore"],self.postImage.image, nil];
-         UIActivityViewController* activityVC = [[UIActivityViewController alloc] initWithActivityItems: items applicationActivities:nil];
-         activityVC.excludedActivityTypes = @[UIActivityTypePrint, UIActivityTypePostToWeibo, UIActivityTypeSaveToCameraRoll,UIActivityTypeAssignToContact];
-         activityVC.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-         activityVC.completionHandler = ^(NSString* activityType, BOOL completed){
-             [Flurry logEvent:@"Post_Share_With_ActivityVC" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:completed], @"completed", activityType, @"activity_type", url.absoluteString, @"url",nil]];
-         };
-
-         [self presentViewController:activityVC animated:YES completion:nil];
+         NSMutableDictionary *params2 =
+         [NSMutableDictionary dictionaryWithObjectsAndKeys:
+          [NSString stringWithFormat:@"%@ on Encore",self.artist], @"name",
+           [NSString stringWithFormat:@"Check out this %@ from %@'s show (%@) on Encore.",[self.post postType] == ECPhotoPost ? @"photo" : @"video", self.artist, self.venueAndDate], @"caption",
+          @"Encore is a free iPhone concert app that collects photos and videos from live shows and helps you keep track of upcoming shows in your area.",@"description",
+          [NSString stringWithFormat:SharePostURL,self.postID], @"link",
+          [NSString stringWithFormat:@"%@",[self.post imageURL].absoluteString], @"picture",
+          nil];
+         [FBWebDialogs presentFeedDialogModallyWithSession:nil
+                                                parameters:params2
+                                                   handler:
+          ^(FBWebDialogResult result, NSURL *resultURL, NSError *error) {
+              if (error) {
+                  // Error launching the dialog or publishing a story.
+                  NSLog(@"Error publishing story.");
+              } else {
+                  if (result == FBWebDialogResultDialogNotCompleted) {
+                      // User clicked the "x" icon
+                      NSLog(@"User canceled story publishing.");
+                  } else {
+                      // Handle the publish feed callback
+                      NSDictionary *urlParams = [self parseURLParams:[resultURL query]];
+                      if (![urlParams valueForKey:@"post_id"]) {
+                          // User clicked the Cancel button
+                          NSLog(@"User canceled story publishing.");
+                      } else {
+                          // User clicked the Share button
+                          NSString *msg = @"Posted to facebook";
+                          NSLog(@"%@", msg);
+                          [Flurry logEvent:@"Successfully_Posted_To_Facebook_With_Feed_Dialog" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"post",@"type", nil]]; //TODO update so merges flurry events together
+                          
+                          // Show the result in an alert
+                          [[[UIAlertView alloc] initWithTitle:@"Result"  //TODO: replace with HUD
+                                                      message:msg
+                                                     delegate:nil
+                                            cancelButtonTitle:@"OK!"
+                                            otherButtonTitles:nil]
+                           show];
+                      }
+                  }
+              }
+          }];
 
      }
+}
+
+/**
+ * A function for parsing URL parameters.
+ */
+- (NSDictionary*)parseURLParams:(NSString *)query {
+    NSArray *pairs = [query componentsSeparatedByString:@"&"];
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    for (NSString *pair in pairs) {
+        NSArray *kv = [pair componentsSeparatedByString:@"="];
+        NSString *val =
+        [kv[1] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        params[kv[0]] = val;
+    }
+    return params;
 }
 
 #pragma mark - Getters
