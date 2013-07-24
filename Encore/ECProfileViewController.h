@@ -29,4 +29,5 @@
 @property (nonatomic, readonly) NSArray* futureEvents;
 @property (nonatomic, strong) NSDictionary* events;
 
+@property(assign) BOOL shouldUpdateView;
 @end
