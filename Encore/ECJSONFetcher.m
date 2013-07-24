@@ -117,34 +117,6 @@ NSString* stringForSearchType(ECSearchType searchType) {
     }];
 }
 
-#pragma mark - Searching by Artist
-+(void)fetchArtistsForString:(NSString*) searchStr completion:(void (^)(NSArray* artists)) completion {
-    __block NSArray * artistList;
-    NSString *  artistSearchUrl = [NSString stringWithFormat:ArtistSearchURL, searchStr];
-    NSString *escapedDataString = [artistSearchUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    
-    NSURL * url = [NSURL URLWithString:escapedDataString];
-    NSURLRequest * request = [NSURLRequest requestWithURL:url];
-    AFJSONRequestOperation * operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-        artistList = (NSArray*) [(NSDictionary*)JSON objectForKey:@"artists"];
-        NSLog(@"Successfully fetched %d Artists for string. %@", artistList.count, searchStr);
-        if (completion) {
-            completion(artistList);
-        }
-    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-        NSLog(@"ERROR fetching artists for string %@: %@...",searchStr,[[error description] substringToIndex:MAX_ERROR_LEN]);
-        if (RETURN_TEST_DATA) {
-            NSDictionary * artist1 = [NSDictionary dictionaryWithObjectsAndKeys:@"Test Artist 1",@"name", @"1234", @"songkick_id", nil];
-            NSDictionary * artist2 = [NSDictionary dictionaryWithObjectsAndKeys:@"Test Artist 2",@"name", @"4321", @"songkick_id", nil];
-            if(completion){
-                completion([NSArray arrayWithObjects:artist1,artist2, nil]);
-            }
-        }
-    }];
-    
-    [operation start];
-}
-
 //using combined search
 +(void)fetchArtistsForString:(NSString*)searchStr withSearchType:(ECSearchType)searchType forLocation:(CLLocation*)location radius: (NSNumber*) radius completion:(void (^)(NSDictionary* artists)) completion {
     
@@ -196,45 +168,6 @@ NSString* stringForSearchType(ECSearchType searchType) {
             completion(nil);
         }
     }];
-}
-
-//not currently being used anywhere
-+(void) fetchConcertsForArtistID:(NSNumber *)artistID withSearchType:(ECSearchType)searchType completion: (void (^)(NSArray* concerts)) completion {
-    __block NSArray * concertList;
-    NSString *userLocation = @"Toronto"; //TODO: Get location dynamically from app delegate
-    NSString *  artistConcertsUrl;
-    if (searchType == ECSearchTypePast) {
-        artistConcertsUrl = [NSString stringWithFormat:ArtistConcertSearchPastURL, [artistID stringValue], userLocation];
-    } else {
-        artistConcertsUrl = [NSString stringWithFormat:ArtistConcertSearchFutureURL, [artistID stringValue], userLocation];
-    }
-    
-    NSString *escapedDataString = [artistConcertsUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSURL * url = [NSURL URLWithString:escapedDataString];
-    NSURLRequest * request = [NSURLRequest requestWithURL:url];
-    AFJSONRequestOperation * operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-        concertList = (NSArray*) [(NSDictionary*)JSON objectForKey:@"events"];
-        NSLog(@"Successfully fetched concerts for artist with id: %@", [artistID description]);
-        if(completion){
-            completion(concertList);
-        }
-    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-        NSLog(@"ERROR fetching concerts for artist with ID %@: %@...",[artistID description],[[error description] substringToIndex:MAX_ERROR_LEN]);
-        
-        if (RETURN_TEST_DATA) {
-            NSDictionary * concert1 = [NSDictionary dictionaryWithObjectsAndKeys:@"Test Venue Name 1", @"venue_name", @"1989-02-16", @"date",@"Simon and the Destroyers", @"name",[NSNumber numberWithInt:99], @"server_id", nil];
-            NSDictionary * concert2 = [NSDictionary dictionaryWithObjectsAndKeys:@"Test Venue Name 2", @"venue_name", @"1999-03-26", @"date",@"Simon and the Destroyers", @"name",[NSNumber numberWithInt:55], @"server_id", nil];
-            NSArray * testConcertList = [NSArray arrayWithObjects:concert1,concert2, nil];
-            if(completion){
-                completion(testConcertList);
-            }
-        }
-        else if (completion){
-            completion(nil);
-        }
-    }];
-    
-    [operation start];
 }
 
 +(void) fetchPostsForConcertWithID: (NSString *) concertID completion: (void (^)(NSArray* fetchedPosts)) completion{

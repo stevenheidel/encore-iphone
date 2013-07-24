@@ -60,16 +60,8 @@ static NSString *const FuturePopularConcertsURL = @"events/future.json";
 static NSString *const TodayPopularConcertsURL = @"events/today.json";
 
 //Artists and Concerts combo
-static NSString *const ArtistConcertComboURL = @"artists/search.json";
-
-//Artists
-static NSString *const ArtistSearchURL = @BASE_URL_DEF ARTISTS_DEF "/" SEARCH_DEF TERM_DEF "%@"; //, searchStr
-static NSString *const ArtistConcertSearchPastURL = @BASE_URL_DEF ARTISTS_DEF "/%@/" EVENTS_DEF "/" PAST_DEF "?" CITY_DEF "%@"; //, artistID, userLocation
-static NSString *const ArtistConcertSearchFutureURL = @BASE_URL_DEF ARTISTS_DEF "/%@/" EVENTS_DEF "/" FUTURE_DEF "?" CITY_DEF "%@"; //artistID, , userLocation
-
-
 //purposely left out base url, get is initialized with base url
-static NSString *const ArtistCombinedSearchURL = @ARTISTS_DEF "/" COMBINED_SEARCH_DEF JSON_DEF;
+static NSString *const ArtistCombinedSearchURL = @"artists/combined_search.json";
 
 //Posts
 static NSString *const ConcertPostsURL = @BASE_URL_DEF EVENTS_DEF "/%@/" POSTS_DEF ; //,concertID
