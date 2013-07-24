@@ -9,8 +9,8 @@
 #ifndef Encore_Staging_h
 #define Encore_Staging_h
 
-#define STAGING 1
-//#define PRODUCTION 0
+#define STAGING 0
+#define PRODUCTION 1
 
 #define RETURN_TEST_DATA 0
 #define FLURRY_LOGGING 0

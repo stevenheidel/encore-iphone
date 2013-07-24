@@ -11,11 +11,16 @@
 #define Encore_EncoreURL_h
 
 #if STAGING
-
 #define BASE_URL_PUBLIC_DEF "http://encore-backend-staging.herokuapp.com/"
+#else
+#if PRODUCTION
+#define BASE_URL_PUBLIC_DEF "http://on.encore.fm/"
 #else
 #define BASE_URL_PUBLIC_DEF "http://192.168.11.15:3000/"
 #endif
+#endif
+
+
 
 #define BASE_URL_DEF BASE_URL_PUBLIC_DEF "api/v1/"
 
