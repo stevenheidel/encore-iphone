@@ -14,6 +14,7 @@ PODS:
   - libwebp/utils (0.3.0-rc7)
   - libwebp/webp (0.3.0-rc7)
   - MBProgressHUD (0.7)
+  - SAMRateLimit (0.2.0)
   - SDWebImage (3.3):
     - libwebp
     - SDWebImage/MapKit
@@ -25,9 +26,10 @@ PODS:
 DEPENDENCIES:
   - AFNetworking (~> 1.3)
   - FlurrySDK (= 4.2.2)
-  - KNMultiItemSelector
+  - KNMultiItemSelector (= 1.0)
   - KNSemiModalViewController (~> 0.3)
   - MBProgressHUD
+  - SAMRateLimit
   - TestFlightSDK (= 1.2.6)
   - XCDYouTubeVideoPlayerViewController
 
@@ -38,6 +40,7 @@ SPEC CHECKSUMS:
   KNSemiModalViewController: 976b739f57aa595359a2cfdf6aadde991ada8f99
   libwebp: 40517fa1fd3716eded73b4696c45fc0b66e4b414
   MBProgressHUD: 1fd8591a2216d5dec6de24e09187bb03bcbe9946
+  SAMRateLimit: 22b0ba0fafa8a9c438b7f76e4182914ef704c701
   SDWebImage: 79a8bac9ccf85b269100b294f7b43684dab8bf8a
   TestFlightSDK: 7d9abce62f5a17191c4df84fd88e05797e6776e0
   XCDYouTubeVideoPlayerViewController: 507a2c59bc1ed6912793de105e2c933085a379f5
