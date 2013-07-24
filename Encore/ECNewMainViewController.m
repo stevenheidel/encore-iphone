@@ -264,7 +264,8 @@ typedef enum {
 -(void) inviteTapped {
      [Flurry logEvent:@"Tapped_Invite" withParameters:[NSDictionary dictionaryWithObject:@"MainView" forKey:@"source"]];
     //        //https://developers.facebook.com/docs/concepts/requests/#invites
-    //        //TODO: Provide a filter in your request interface that only lists people that have not installed the game. If you use the Requests dialog, you can enable this with the app_non_users filter.
+    //        //TODO: filter out people that have not installed it
+    //Provide a filter in your request interface that only lists people that have not installed the game. If you use the Requests dialog, you can enable this with the app_non_users filter.
     NSDictionary* params = nil;
     [FBWebDialogs presentRequestsDialogModallyWithSession:[FBSession activeSession]
                                                   message:@"Check out Encore on iOS"
@@ -462,11 +463,10 @@ typedef enum {
     self.hasSearched = FALSE; //TODO this flagging system is prone to human error, clean it up.
     [self setBackgroundImage];
     [self resetTableHeaderView]; //remove artist image that appears during search results
-
+    
     //reload data/images
     [self displayViewsAccordingToSearchType];
     [self.tableView reloadData];
-    
     if ([self currentEventArray].count != 0) {
         self.tableView.tableFooterView = emptyView;
     }
