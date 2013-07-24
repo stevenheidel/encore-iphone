@@ -32,7 +32,7 @@
     return self;
 }
 
--(NSString*) locationStringForPlacemark: (MKPlacemark*) placemark {
+-(NSString*) locationStringForPlacemark: (CLPlacemark*) placemark {
     NSString* provinceOrStateAbbreviated =  placemark.administrativeArea;
     if([placemark.ISOcountryCode isEqualToString:@"CA"] || [placemark.ISOcountryCode isEqualToString:@"US"]){ //use standard abbreviations for US and Canada.
         provinceOrStateAbbreviated = [[abbrvDic objectForKey:[placemark.administrativeArea lowercaseString]] uppercaseString]; //search by lowercase for consistency, display as uppercase
@@ -171,10 +171,10 @@
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
 
     [geocoder geocodeAddressString:textField.text completionHandler:^(NSArray *placemarks, NSError *error) {
-        MKPlacemark *placemark = [placemarks objectAtIndex:0];
+        self.placemark = [placemarks objectAtIndex:0];
         
-        [Flurry logEvent:@"Set_Search_Location" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:textField.text,@"search_string",[NSNumber numberWithFloat:self.locationSlider.value],@"search_radius",error ? @"error":@"no_error", @"wasError", nil]];
-        if (error || placemark.locality == nil || placemark.country == nil) {
+        [Flurry logEvent:@"Set_Search_Location" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:textField.text,@"search_string",[NSNumber numberWithFloat:self.locationSlider.value],@"search_radius",error ? @"error":@"no_error", @"wasError", [self locationStringForPlacemark:self.placemark], @"geocode_result",nil]];
+        if (error || self.placemark.locality == nil || self.placemark.country == nil) {
             //eg if you search "Canada" you'll get a nil locality, and the coordinate is in the middle of nowhere.
             NSLog(@"%@: Geocode failed with error: %@", NSStringFromClass(self.class),error);
             [self alertForFailedGeocode];
@@ -182,8 +182,8 @@
         }
         
         NSLog(@"%d places found",placemarks.count);
-        [self alertForConfirmGeocode:[self locationStringForPlacemark:placemark]];
-        self.location = placemark.location;
+        [self alertForConfirmGeocode:[self locationStringForPlacemark:self.placemark]];
+        self.location = self.placemark.location;
         self.isUsingCurrentLocation = FALSE;
     }];
     return YES;
@@ -208,13 +208,13 @@
 -(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (alertView.tag == LocationSetterRightAlert) {
         if (buttonIndex == alertView.cancelButtonIndex) {
-            
+            return;
         }
         else if (buttonIndex == alertView.firstOtherButtonIndex) {
             if ([self.locationSearchBar isFirstResponder]) {
                 [self.locationSearchBar resignFirstResponder];
             }
-            [self.delegate updateSearchLocation:self.location radius:self.locationSlider.value]; //this will dismiss the view
+            [self.delegate updateSearchLocation:self.location radius:self.locationSlider.value area:[self locationStringForPlacemark:self.placemark]]; //this will dismiss the view
         }
     }
 }

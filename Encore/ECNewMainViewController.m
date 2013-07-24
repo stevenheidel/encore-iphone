@@ -422,16 +422,17 @@ typedef enum {
 }
 
 #pragma mark ECLocationSetterDelegate Method
--(void) updateSearchLocation:(CLLocation *)location radius: (float) radius {
+-(void) updateSearchLocation:(CLLocation *)location radius: (float) radius area: (NSString*) area {
     NSLog(@"new radius %f",radius);
     self.currentSearchLocation = location;
     self.currentSearchRadius = radius;
+    self.currentSearchAreaString = area;
     [NSUserDefaults setLastSearchLocation:location];
     [NSUserDefaults setLastSearchRadius:radius];
+    [NSUserDefaults setLastSearchArea: area];
     [NSUserDefaults synchronize];
     [self hideLocationSetter];
     
-    //TODO update all the popular concerts according to the new location
     [self fetchConcerts];
 }
 
@@ -734,7 +735,7 @@ typedef enum {
         self.hud.detailsLabelText = [NSString stringWithFormat:NSLocalizedString(@"hudSearchArtist", nil), [textField text]];
         [self.hud show:YES];
         
-        [Flurry logEvent:@"Searched_Artist" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:textField.text, @"search_text", [self currentSearchTypeString], @"Search_Type", nil]];
+        [Flurry logEvent:@"Searched_Artist" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:textField.text, @"search_text", [self currentSearchTypeString], @"Search_Type", [NSNumber numberWithDouble:self.currentSearchLocation.coordinate.latitude], @"latitude", [NSNumber numberWithDouble:self.currentSearchLocation.coordinate.longitude],@"longitude", [NSNumber numberWithFloat:self.currentSearchRadius], @"radius", self.currentSearchAreaString, @"area_string", nil]];
     }
     [self.view removeGestureRecognizer:self.tap];
     [textField resignFirstResponder];

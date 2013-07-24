@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-@class CLLocation;
+@class CLLocation,CLPlacemark;
 @protocol ECLocationSetterDelegate;
 @interface ECLocationSetterViewController : UIViewController <UITextFieldDelegate,UIAlertViewDelegate>
 - (IBAction)touchedOutsideTextField:(id)sender;
@@ -15,6 +15,7 @@
 - (IBAction)infoButtonTapped;
 @property (nonatomic, assign) float radius;
 @property (nonatomic, strong) CLLocation* location;
+@property (nonatomic, strong) CLPlacemark* placemark;
 @property (nonatomic, assign) BOOL isUsingCurrentLocation;
 
 @property (weak, nonatomic) IBOutlet UISlider *locationSlider;
@@ -25,6 +26,6 @@
 @protocol ECLocationSetterDelegate <NSObject>
 
 @required
--(void) updateSearchLocation:(CLLocation *)location radius: (float) radius;
+-(void) updateSearchLocation:(CLLocation *)location radius: (float) radius area: (NSString*) area;
 -(void) updateRadius: (float) radius;
 @end
