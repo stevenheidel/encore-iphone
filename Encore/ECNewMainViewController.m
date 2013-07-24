@@ -45,6 +45,7 @@ typedef enum {
 
 @interface ECNewMainViewController () {
     BOOL showingSearchBar;
+    UIView* emptyView;
 }
 
 @end
@@ -54,8 +55,8 @@ typedef enum {
 #pragma mark - View loading
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    //Initializations
+    emptyView = [UIView new];
+    //Initializations;
     self.searchHeaderView = nil;
     self.hasSearched = FALSE;
     self.comboSearchResultsDic = nil;
@@ -90,16 +91,11 @@ typedef enum {
     
     [self.segmentedControl setSelectedSegmentIndex:[ECNewMainViewController segmentIndexForSearchType:self.currentSearchType]];
     
-    
-
-    
     self.view.backgroundColor = [UIColor blackColor];
     
     [self.tableView setIndicatorStyle:UIScrollViewIndicatorStyleWhite];
     self.view.clipsToBounds = YES;
-    
 
-    
     [self fetchConcerts];
 }
 
@@ -125,7 +121,7 @@ typedef enum {
     [NSUserDefaults synchronize];
 }
 
--(void) initializeSearchLocation{
+-(void) initializeSearchLocation {
     self.currentSearchLocation = [NSUserDefaults lastSearchLocation];
     self.currentSearchRadius = [NSUserDefaults lastSearchRadius];
 }
@@ -153,7 +149,7 @@ typedef enum {
         label.textColor = [UIColor whiteColor];
         label.textAlignment = NSTextAlignmentCenter;
         label.backgroundColor = [UIColor blackColor];
-        label.text = @"No concerts found";
+        label.text = NSLocalizedString(@"No shows in your area. Change location?", @"If no results for popular shows, this appears in the table footer view");
         [_noConcertsFooterView addSubview:label];
     }
     return _noConcertsFooterView;
@@ -189,7 +185,7 @@ typedef enum {
             self.tableView.tableFooterView = self.noConcertsFooterView;
         }
         else {
-            self.tableView.tableFooterView = [UIView new];
+            self.tableView.tableFooterView = emptyView;
         }
         [self.hud hide:YES];
     }
@@ -471,6 +467,12 @@ typedef enum {
     [self displayViewsAccordingToSearchType];
     [self.tableView reloadData];
     
+    if ([self currentEventArray].count != 0) {
+        self.tableView.tableFooterView = emptyView;
+    }
+    else {
+        self.tableView.tableFooterView = self.noConcertsFooterView;
+    }
         
     [Flurry logEvent:@"Switched_Selection" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[self currentSearchTypeString], @"Search_Type",nil]];
 }
@@ -749,7 +751,7 @@ typedef enum {
 - (void)fetchedConcertsForSearch:(NSDictionary *)comboDic {
     [self.hud hide:YES];
     [self resetTableHeaderView];
-    self.tableView.tableFooterView = [UIView new];
+    self.tableView.tableFooterView = emptyView;
     if (comboDic) {
         self.hasSearched = TRUE;
         self.comboSearchResultsDic = comboDic;
