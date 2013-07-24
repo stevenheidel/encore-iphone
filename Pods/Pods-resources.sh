@@ -31,8 +31,6 @@ install_resource()
       ;;
   esac
 }
-install_resource 'Facebook-iOS-SDK/src/FacebookSDKResources.bundle'
-install_resource 'Facebook-iOS-SDK/src/FBUserSettingsViewResources.bundle'
 install_resource 'KNMultiItemSelector/KNMultiItemSelector/Images/KNDefaultImage.png'
 install_resource 'KNMultiItemSelector/KNMultiItemSelector/Images/KNDefaultImage@2x.png'
 install_resource 'KNMultiItemSelector/KNMultiItemSelector/Images/KNSelectorTip.png'
