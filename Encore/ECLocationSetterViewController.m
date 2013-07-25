@@ -167,18 +167,40 @@
 -(BOOL) textFieldShouldReturn:(UITextField *)textField {
     [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
 
-    
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
 
     [geocoder geocodeAddressString:textField.text completionHandler:^(NSArray *placemarks, NSError *error) {
-        self.placemark = [placemarks objectAtIndex:0];
-        
+        self.placemark = [[MKPlacemark alloc] initWithPlacemark:[placemarks objectAtIndex:0]];
+        NSLog(@"%@", textField.text);
         [Flurry logEvent:@"Set_Search_Location" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:textField.text,@"search_string",[NSNumber numberWithFloat:self.locationSlider.value],@"search_radius",error ? @"error":@"no_error", @"wasError", [self locationStringForPlacemark:self.placemark], @"geocode_result",nil]];
-        if (error || self.placemark.locality == nil || self.placemark.country == nil) {
-            //eg if you search "Canada" you'll get a nil locality, and the coordinate is in the middle of nowhere.
-            NSLog(@"%@: Geocode failed with error: %@", NSStringFromClass(self.class),error);
+        if (error) {
+            NSLog(@"Geocode error %@",error.debugDescription);
             [self alertForFailedGeocode];
             return;
+        }
+        if (self.placemark.locality == nil || self.placemark.country == nil) {
+            //eg if you search "Canada" you'll get a nil locality, and the coordinate is in the middle of nowhere.
+            
+            if (self.placemark.location) {
+                [geocoder reverseGeocodeLocation:self.placemark.location completionHandler:^(NSArray *placemarks, NSError *error) {
+                    if (error) {
+                        [self alertForFailedGeocode];
+                        return;
+                    }
+                    
+                    self.placemark = [placemarks objectAtIndex:0];
+                    [self alertForConfirmGeocode:[self locationStringForPlacemark:self.placemark]];
+                    self.location = self.placemark.location;
+                    self.isUsingCurrentLocation = FALSE;
+                    return;
+                }];
+                return;
+            }
+            else {
+                NSLog(@"Geocode failed BECAUSE nil locality or country or both");
+                [self alertForFailedGeocode];
+                return;
+            }
         }
         
         NSLog(@"%d places found",placemarks.count);

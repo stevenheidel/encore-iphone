@@ -15,7 +15,7 @@
 - (IBAction)infoButtonTapped;
 @property (nonatomic, assign) float radius;
 @property (nonatomic, strong) CLLocation* location;
-@property (nonatomic, strong) CLPlacemark* placemark;
+@property (nonatomic, copy) CLPlacemark* placemark;
 @property (nonatomic, assign) BOOL isUsingCurrentLocation;
 
 @property (weak, nonatomic) IBOutlet UISlider *locationSlider;
