@@ -47,7 +47,9 @@
 }
 - (void)logout
 {
-     [[FBSession activeSession] closeAndClearTokenInformation];
+    [[FBSession activeSession] closeAndClearTokenInformation];
+    [[FBSession activeSession] close];
+    [FBSession  setActiveSession:nil];
 }
 
 - (void)fetchUserInformation:(void (^)(NSDictionary *))handler
