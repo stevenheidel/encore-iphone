@@ -9,7 +9,10 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import <FacebookSDK/FacebookSDK.h>
+
 #define ApplicationDelegate ((ECAppDelegate *)[UIApplication sharedApplication].delegate)
+#define ECLocationAcquiredNotification  @"com.encoretheapp.Encore:ECLocationAcquiredNotification"
+#define ECLocationFailedNotification  @"com.encoretheapp.Encore:ECLocationFailed"
 
 @class ECLoginViewController;
 @class ECNewMainViewController;

@@ -36,8 +36,6 @@
 #define ConcertCellIdentifier @"ECConcertCellView"
 #define ALERT_HIDE_DELAY 2.0
 #define SEARCH_HEADER_HEIGHT 98.0f
-#define ECLocationAcquiredNotification  @"com.encoretheapp.Encore:ECLocationAcquiredNotification"
-#define ECLocationFailedNotification  @"com.encoretheapp.Encore:ECLocationFailed"
 
 typedef enum {
     ECSearchResultSection,

@@ -27,10 +27,6 @@
 #import "AFNetworking.h"
 
 #import "Staging.h"
-#define ECLocationAcquiredNotification  @"com.encoretheapp.Encore:ECLocationAcquiredNotification"
-#define ECLocationFailedNotification  @"com.encoretheapp.Encore:ECLocationFailed"
-
-NSString *const ECSessionStateChangedNotification = @"com.encoretheapp.Encore:ECSessionStateChangedNotification";
 
 @implementation ECAppDelegate
 
