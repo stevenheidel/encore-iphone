@@ -491,32 +491,47 @@ typedef enum {
     [ApplicationDelegate showLoginView: YES];
 }
 
+-(MBProgressHUD*) switchingHUD {
+    if (!_switchingHUD) {
+        _switchingHUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+        [self.navigationController.view addSubview:_switchingHUD];
+    }
+    return _switchingHUD;
+}
 #pragma mark Segmented Control
--(IBAction) switchedSelection: (id) sender {
-    [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
 
+-(IBAction) switchedSelection: (id) sender {
+    [self.switchingHUD show:YES];
+    [self performSelector:@selector(reloadTableViewForSwitchedSelection) withObject:nil afterDelay:0.1];
+}
+
+-(void) reloadTableViewForSwitchedSelection {
+    [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
+    
     [self.searchBar resignFirstResponder]; //hide keyboard in case it was visible
     
-    UISegmentedControl* control = (UISegmentedControl*)sender;
+    UISegmentedControl* control = self.segmentedControl;
     self.currentSearchType = [ECNewMainViewController searchTypeForSegmentIndex:control.selectedSegmentIndex];
     self.hasSearched = FALSE; //TODO this flagging system is prone to human error, clean it up.
-    [self setBackgroundImage];
+    
     [self resetTableHeaderView]; //remove artist image that appears during search results
     
     //reload data/images
-    [self displayViewsAccordingToSearchType];
     [self.tableView reloadData];
+    
+    [self setBackgroundImage];
+    [self displayViewsAccordingToSearchType];
+    
     if ([self currentEventArray].count != 0) {
         self.tableView.tableFooterView = emptyView;
     }
-    else {
+    else if (self.currentSearchType != ECSearchTypePast) {
         self.tableView.tableFooterView = self.noConcertsFooterView;
     }
-        
+    
     [Flurry logEvent:@"Switched_Selection" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[self currentSearchTypeString], @"Search_Type",nil]];
+    [self.switchingHUD hide:YES];
 }
-
-
 //return a string based on the current search type for logging to Flurry etc
 -(NSString*) currentSearchTypeString {
     switch (self.currentSearchType) {

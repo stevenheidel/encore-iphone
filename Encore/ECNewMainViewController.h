@@ -58,6 +58,7 @@
 
 //Note: This hud is used for multiple purposes.
 @property (strong, nonatomic) MBProgressHUD * hud;
+@property (strong, nonatomic) MBProgressHUD * switchingHUD;
 
 @property (strong, nonatomic) UIView* searchHeaderView;
 
