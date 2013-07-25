@@ -17,7 +17,8 @@ typedef enum {
     LogoutTag,
     LocationSetterRightAlert,
     FailedGeocodeAlert,
-    NoLocationAlert
+    NoLocationAlert,
+    ECInviteNotLoggedInAlert
 }ECAlertTags;
 
 #endif

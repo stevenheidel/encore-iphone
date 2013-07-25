@@ -295,6 +295,10 @@ typedef enum {
 }
 
 -(void) inviteTapped {
+    
+    if (self.isLoggedIn){
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:ECLoginCompletedNotification object:nil];
+
      [Flurry logEvent:@"Tapped_Invite" withParameters:[NSDictionary dictionaryWithObject:@"MainView" forKey:@"source"]];
     //        //https://developers.facebook.com/docs/concepts/requests/#invites
     //        //TODO: filter out people that have not installed it
@@ -319,6 +323,12 @@ typedef enum {
                                                               [Flurry logEvent:@"Successfully_Invited_Friends"]; //TODO figure out how many friends were invited
                                                           }
                                                       }}];
+    }else
+    {
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login", nil) message:NSLocalizedString(@"To invite your friends, you must first login", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Login", nil), nil];
+        alert.tag = ECInviteNotLoggedInAlert;
+        [alert show];        
+    }
 
 }
 -(void) feedbackTapped {
@@ -409,6 +419,7 @@ typedef enum {
     [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
     [Flurry logEvent:@"Profile_Button_Pressed" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:self.isLoggedIn ? @"Logged_In" : @"Not_Logged_In",@"Logged_In_State",[self currentSearchTypeString],@"Search_Type", nil]];
     if (self.isLoggedIn){
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:ECLoginCompletedNotification object:nil];
         if (self.profileViewController == nil) {
             ECProfileViewController* profileViewController = [ECProfileViewController new];
             self.profileViewController = [[ECCustomNavController alloc] initWithRootViewController:profileViewController];
@@ -476,6 +487,8 @@ typedef enum {
     if (alertView.tag == ECNotLoggedInAlert) {
         if (buttonIndex == alertView.firstOtherButtonIndex) {
             [ApplicationDelegate beginFacebookAuthorization];
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(profileTapped) name:ECLoginCompletedNotification object:nil];
+
         }
         [Flurry logEvent:@"Login_Alert_Selection" withParameters:[NSDictionary dictionaryWithObjectsAndKeys: @"Main_View", @"Current_View", buttonIndex == alertView.firstOtherButtonIndex ? @"Login":@"Cancel",@"Selection", nil]];
     }else if (alertView.tag == NoLocationAlert)
@@ -486,6 +499,12 @@ typedef enum {
             //TODO : push the new location viewcontroller
             [self openLocationSetter];
 
+        }
+    }else if (alertView.tag == ECInviteNotLoggedInAlert)
+    {
+        if (buttonIndex == alertView.firstOtherButtonIndex) {
+            [ApplicationDelegate beginFacebookAuthorization];
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(inviteTapped) name:ECLoginCompletedNotification object:nil];
         }
     }
 }

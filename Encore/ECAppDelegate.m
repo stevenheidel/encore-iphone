@@ -105,6 +105,9 @@
                         [self setUpLocationManager];
 
                 }];
+                [[NSNotificationCenter defaultCenter] postNotificationName:ECLoginCompletedNotification object:nil];
+
+                
             }];
             [self saveUserInfoToDefaults:user];
         }else{

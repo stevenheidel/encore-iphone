@@ -13,6 +13,7 @@
 #define ApplicationDelegate ((ECAppDelegate *)[UIApplication sharedApplication].delegate)
 #define ECLocationAcquiredNotification  @"com.encoretheapp.Encore:ECLocationAcquiredNotification"
 #define ECLocationFailedNotification  @"com.encoretheapp.Encore:ECLocationFailed"
+#define ECLoginCompletedNotification  @"com.encoretheapp.Encore:ECLoginCompletedNotification"
 
 @class ECLoginViewController;
 @class ECNewMainViewController;
