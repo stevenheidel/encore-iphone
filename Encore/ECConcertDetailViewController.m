@@ -175,7 +175,7 @@ NSString *kCellID = @"cellID";
 }
 
 -(void) loadArtistDetails {
-    self.artistNameLabel.text = [[self.concert artistName] uppercaseString];
+    self.artistNameLabel.text = [[self.concert eventName] uppercaseString];
     self.venueNameLabel.text = [self.concert venueName];
     
     self.dateLabel.text = [NSString stringWithFormat:@"%@, %@", [self.concert venueName], [self.concert niceDate]];
@@ -365,8 +365,8 @@ NSString *kCellID = @"cellID";
     else {
         NSMutableDictionary *params2 =
         [NSMutableDictionary dictionaryWithObjectsAndKeys:
-         [NSString stringWithFormat:@"%@ on Encore",[self.concert artistName]], @"name",
-         [NSString stringWithFormat:@"Check out photos and videos from %@'s %@ show on Encore.",[self.concert artistName], [self.concert niceDate]], @"caption",
+         [NSString stringWithFormat:@"%@ on Encore",[self.concert eventName]], @"name",
+         [NSString stringWithFormat:@"Check out photos and videos from %@'s %@ show on Encore.",[self.concert eventName], [self.concert niceDate]], @"caption",
          @"Encore is a free iPhone concert app that collects photos and videos from live shows and helps you keep track of upcoming shows in your area.",@"description",
          [NSString stringWithFormat:ShareConcertURL,self.eventID], @"link",
          [NSString stringWithFormat:@"%@",[self.concert imageURL].absoluteString], @"picture",
@@ -579,7 +579,7 @@ NSString *kCellID = @"cellID";
 }
 -(void) selectorDidFinishSelectionWithItems:(NSArray *)selectedItems {
     [self dismissViewControllerAnimated:YES completion:^{
-        [Flurry logEvent:@"Added_Friends_To_Concert" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[self.concert artistName],@"artist", [self.concert eventID],@"eventID", [NSNumber numberWithInt: selectedItems.count], @"friend_count", nil]];
+        [Flurry logEvent:@"Added_Friends_To_Concert" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[self.concert eventName],@"artist", [self.concert eventID],@"eventID", [NSNumber numberWithInt: selectedItems.count], @"friend_count", nil]];
         
         NSLog(@"Sharing: Tagged %d friends",selectedItems.count);
         if (selectedItems.count == 0) {
@@ -729,7 +729,7 @@ NSString *kCellID = @"cellID";
     ECPostViewController * postVC = [[ECPostViewController alloc]initWithPost: [self.posts objectAtIndex:indexPath.item]];
     postVC.itemNumber = indexPath.item;
     postVC.delegate = self;
-    postVC.artist = [self.concert artistName];
+    postVC.artist = [self.concert eventName];
     postVC.venueAndDate = [self.concert venueAndDate];
     [self.navigationController pushViewController:postVC animated:YES];
 }

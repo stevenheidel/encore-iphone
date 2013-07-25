@@ -10,7 +10,6 @@
 #import <QuartzCore/QuartzCore.h>
 #import "NSDictionary+ConcertList.h"
 #import "UIImage+GaussBlur.h"
-//#import "NSMutableDictionary+ConcertImages.h"
 
 #import "UIColor+EncoreUI.h"
 #import "UIFont+Encore.h"
@@ -22,7 +21,7 @@
     self.lblDate.text = [concertDic niceDate];
     self.lblDate.font = [UIFont heroFontWithSize: 11.0];
     self.lblDate.textColor = [UIColor whiteColor];
-    self.lblName.text = [[concertDic artistName] uppercaseString];
+    self.lblName.text = [[concertDic eventName] uppercaseString];
     self.lblName.font = [UIFont heroFontWithSize: 16.0];
     self.lblName.textColor = [UIColor blueArtistTextColor];
     self.lblLocation.text = [[concertDic venueName] uppercaseString];

@@ -21,7 +21,7 @@ static NSString * const kDateFormat = @"yyyy-MM-dd";
     return [[dateFormat stringFromDate:date] uppercaseString];
 }
 
--(NSString *) artistName {
+-(NSString *) eventName {
     return [self objectForKey:@"name"];
 }
 

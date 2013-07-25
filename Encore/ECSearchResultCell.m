@@ -14,7 +14,7 @@
 - (void)setupCellForEvent:(NSDictionary *)concertDic {
     
     self.selectionStyle = UITableViewCellSelectionStyleNone;
-    self.lblEventTitle.text = [[concertDic artistName]uppercaseString];
+    self.lblEventTitle.text = [[concertDic eventName]uppercaseString];
     self.lblEventTitle.textColor = [UIColor blueArtistTextColor];
     
     self.lblDate.text = [concertDic niceDate];

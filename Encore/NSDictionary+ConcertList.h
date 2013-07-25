@@ -11,7 +11,7 @@
 @interface NSDictionary (ConcertList)
 
 -(NSString *) niceDate;
--(NSString *) artistName;
+-(NSString *) eventName;
 -(NSString *) venueName;
 -(NSString*) venueAndDate; //string with both, separated by comma
 
