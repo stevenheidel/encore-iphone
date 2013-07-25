@@ -333,15 +333,23 @@ NSString *kCellID = @"cellID";
 }
 
 - (IBAction)getStuff {
-    numTimesGetStuffPressed++;
-    [Flurry logEvent:@"Find_Photos_and_Videos_Pressed" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[self.concert eventID],@"eventID", [NSNumber numberWithInteger:numTimesGetStuffPressed], @"num_times_pressed", nil]];
-    [SAMRateLimit executeBlock:^{
-        NSLog(@"here");
-        [ECJSONPoster populateConcert:[self.concert eventID] completion:^(BOOL success) {
-            [self checkIfPopulating];
-            self.getStuffButton.enabled = NO;
-        }];
-    } name:@"GetStuff" limit:5.0];
+    if(self.tense == ECSearchTypeFuture)
+    {
+        //TODO: Buy ticket
+        NSLog(@"Buy ticket");
+    }else
+    {
+        
+        numTimesGetStuffPressed++;
+        [Flurry logEvent:@"Find_Photos_and_Videos_Pressed" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[self.concert eventID],@"eventID", [NSNumber numberWithInteger:numTimesGetStuffPressed], @"num_times_pressed", nil]];
+        [SAMRateLimit executeBlock:^{
+            NSLog(@"here");
+            [ECJSONPoster populateConcert:[self.concert eventID] completion:^(BOOL success) {
+                [self checkIfPopulating];
+                self.getStuffButton.enabled = NO;
+            }];
+        } name:@"GetStuff" limit:5.0];
+    }
 }
 
 #pragma mark FB Sharing
@@ -811,15 +819,21 @@ NSString *kCellID = @"cellID";
     }
     
     [self updatePlaceholderText];
-    self.getStuffButton.hidden = self.tense == ECSearchTypeFuture;
-    self.getStuffButton.enabled = self.tense != ECSearchTypeFuture;
+    if(self.tense == ECSearchTypeFuture)
+    {
+        [self.getStuffButton setImage:[UIImage imageNamed:@"ticketsbutton"] forState:UIControlStateNormal];
+        [self.getStuffButton setImage:[UIImage imageNamed:@"ticketsbutton"] forState:UIControlStateHighlighted];
+
+    }
+    //self.getStuffButton.hidden = self.tense == ECSearchTypeFuture;
+    self.getStuffButton.enabled = YES;
     
     if(!self.placeholderView.superview) {
         [self.view addSubview:self.placeholderView];
     }
 }
 -(void) tapPlaceholder {
-    if (self.isPopulating) {
+   if (self.isPopulating) {
         [self loadImages];
     }
 }

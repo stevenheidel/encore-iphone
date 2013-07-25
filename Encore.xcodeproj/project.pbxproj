@@ -178,6 +178,8 @@
 		D4E16CAE1797419100A9DC99 /* searchbar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4E16CAC1797419100A9DC99 /* searchbar@2x.png */; };
 		D948FE6E179F93EE0035297A /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D948FE6D179F93EE0035297A /* FacebookSDK.framework */; };
 		D948FE72179F951B0035297A /* ECFacebookManger.m in Sources */ = {isa = PBXBuildFile; fileRef = D948FE71179F951B0035297A /* ECFacebookManger.m */; };
+		D956550A17A177BD00B7DA59 /* ticketsbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = D956550817A177BD00B7DA59 /* ticketsbutton.png */; };
+		D956550B17A177BD00B7DA59 /* ticketsbutton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D956550917A177BD00B7DA59 /* ticketsbutton@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -434,6 +436,8 @@
 		D948FE6D179F93EE0035297A /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		D948FE70179F951B0035297A /* ECFacebookManger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECFacebookManger.h; sourceTree = "<group>"; };
 		D948FE71179F951B0035297A /* ECFacebookManger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECFacebookManger.m; sourceTree = "<group>"; };
+		D956550817A177BD00B7DA59 /* ticketsbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ticketsbutton.png; sourceTree = "<group>"; };
+		D956550917A177BD00B7DA59 /* ticketsbutton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ticketsbutton@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -507,6 +511,8 @@
 		D45DBD641783EE14000ED3C1 /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
+				D956550817A177BD00B7DA59 /* ticketsbutton.png */,
+				D956550917A177BD00B7DA59 /* ticketsbutton@2x.png */,
 				D4A9B31A178E5410008B5504 /* loginbutton */,
 				D4A9B328178E551A008B5504 /* Add + Remove Event */,
 				D4A9B327178E5514008B5504 /* Feedback */,
@@ -1223,6 +1229,8 @@
 				D41489FA179F1F6900EE643F /* invite@2x.png in Resources */,
 				D41489FE179F1FDF00EE643F /* findstuffbutton.png in Resources */,
 				D41489FF179F1FDF00EE643F /* findstuffbutton@2x.png in Resources */,
+				D956550A17A177BD00B7DA59 /* ticketsbutton.png in Resources */,
+				D956550B17A177BD00B7DA59 /* ticketsbutton@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
