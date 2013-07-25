@@ -247,15 +247,13 @@
     NSDate* eventDate = newLocation.timestamp;
     NSTimeInterval howRecent = [eventDate timeIntervalSinceNow];
     if (abs(howRecent) < 15.0) {
-        if(newLocation.horizontalAccuracy < 1000.0){
-            //Ensure location is accurate to the nearest kilometer
+        if(newLocation.horizontalAccuracy < 2000.0){ //in meters. If a person's wifi is off the accuracy can go way down, we don't care that much about the accuracy
             NSLog(@"latitude %+.6f, longitude %+.6f\n", newLocation.coordinate.latitude, newLocation.coordinate.longitude);
             NSLog(@"Horizontal Accuracy:%f", newLocation.horizontalAccuracy);
             //turn off location services once we've gotten a good location
             [manager stopUpdatingLocation];
             [self saveLocationToUserDefaults:newLocation];
             [[NSNotificationCenter defaultCenter] postNotificationName:ECLocationAcquiredNotification object:nil];
-
         }
     }
 }
