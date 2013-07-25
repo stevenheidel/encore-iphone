@@ -176,6 +176,7 @@ NSString* stringForSearchType(ECSearchType searchType) {
     NSURL * url = [NSURL URLWithString:fullPostsUrl];
     NSURLRequest * request = [NSURLRequest requestWithURL:url];
     AFJSONRequestOperation * operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        NSLog(@"%@",JSON);
         posts = (NSArray*) [(NSDictionary*)JSON objectForKey:@"posts"];
         if(completion) {
             completion(posts);

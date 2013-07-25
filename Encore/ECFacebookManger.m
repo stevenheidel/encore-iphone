@@ -81,7 +81,12 @@
 }
 - (BOOL)isLoggedIn
 {
-    if( [[FBSession activeSession] state] == FBSessionStateCreatedTokenLoaded || [[FBSession activeSession] state] == FBSessionStateOpen )
+    if( [[FBSession activeSession] state] == FBSessionStateCreatedTokenLoaded)
+    {
+        [FBSession.activeSession openWithCompletionHandler:nil];
+        return  YES;
+
+    }else if([[FBSession activeSession] state] == FBSessionStateOpen )
         return YES;
     else
          return NO;

@@ -346,9 +346,18 @@ NSString *kCellID = @"cellID";
 
 #pragma mark FB Sharing
 -(void) shareTapped {
-    [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
-    [Flurry logEvent:@"Share_Tapped_Concert"];
-    [self share];
+    if([ApplicationDelegate isLoggedIn])
+    {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:ECLoginCompletedNotification object:nil];
+        [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
+        [Flurry logEvent:@"Share_Tapped_Concert"];
+        [self share];
+    }else{
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login", nil) message:NSLocalizedString(@"To share this concert, you must first login", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Login", nil), nil];
+        alert.tag = ECShareNotLoggedInAlert;
+        [alert show];
+
+    }
 }
 
 -(void) share {
@@ -452,6 +461,8 @@ NSString *kCellID = @"cellID";
 
 -(void) addConcert {
     if (ApplicationDelegate.isLoggedIn) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:ECLoginCompletedNotification object:nil];
+
         //        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"confirm_add_title", nil) message:NSLocalizedString(@"confirm_add_message", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"cancel", nil) otherButtonTitles:NSLocalizedString(@"add", nil), nil];
         //        alert.tag = AddConcertConfirmTag;
         //        [alert show];
@@ -483,6 +494,8 @@ NSString *kCellID = @"cellID";
 -(void) removeConcert {
     [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
     if (ApplicationDelegate.isLoggedIn) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:ECLoginCompletedNotification object:nil];
+
         [Flurry logEvent:@"Tapped_Remove_Concert" withParameters:[self flurryParam]];
         UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"confirm_remove_title", nil) message:NSLocalizedString(@"confirm_remove_message", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"cancel", nil) otherButtonTitles:NSLocalizedString(@"remove", nil), nil];
         alert.tag = RemoveConcertConfirmTag;
@@ -618,10 +631,20 @@ NSString *kCellID = @"cellID";
 //        [self.navigationController popToRootViewControllerAnimated:NO];
         if (buttonIndex == alertView.firstOtherButtonIndex) {
             [ApplicationDelegate beginFacebookAuthorization];
+           // [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addToProfile) name:ECLoginCompletedNotification object:nil];
+
         }
         [Flurry logEvent:@"Login_Alert_Selection" withParameters:[NSDictionary dictionaryWithObjectsAndKeys: @"Detail_View", @"Current_View", buttonIndex == alertView.firstOtherButtonIndex ? @"Login":@"Cancel",@"Selection", nil]];
         return; //don't process other alerts
+    }else if (alertView.tag == ECShareNotLoggedInAlert)
+    {
+        if (buttonIndex == alertView.firstOtherButtonIndex) {
+            [ApplicationDelegate beginFacebookAuthorization];
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(shareTapped) name:ECLoginCompletedNotification object:nil];
+            
+        }
     }
+    
     
     if (alertView.tag == AddConcertConfirmTag || alertView.tag == RemoveConcertConfirmTag) {
         if (buttonIndex == alertView.firstOtherButtonIndex) {

@@ -15,10 +15,10 @@
 -(id) initWithPost: (NSDictionary*) post;
 @property (nonatomic, assign) BOOL youtubeShowing;
 //@property (weak, nonatomic) IBOutlet UIButton *playButton;
-@property (weak, nonatomic) IBOutlet UIWebView *youtubeWebView;
 @property (nonatomic,strong) NSDictionary * post;
 @property (copy, nonatomic) NSString *artist;
 @property (copy, nonatomic) NSString* venueAndDate;
+@property (weak, nonatomic) IBOutlet UIView *youtubeView;
 
 @property (nonatomic,strong) IBOutlet UIImageView * postImage;
 @property (nonatomic,strong) IBOutlet UIImageView * profilePicture;

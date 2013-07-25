@@ -24,6 +24,7 @@
 #import "ECAppDelegate.h"
 #define FLAG_HUD_DELAY 1.0
 #import "ECFacebookManger.h"
+#import "XCDYouTubeVideoPlayerViewController.h"
 
 typedef enum {
     FlagPhoto
@@ -32,6 +33,7 @@ typedef enum {
 @interface ECPostViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *artistLabel;
 @property (weak, nonatomic) IBOutlet UILabel *venueAndDateLabel;
+@property (strong) XCDYouTubeVideoPlayerViewController *videoPlayerViewController;
 @end
 
 @implementation ECPostViewController
@@ -60,12 +62,16 @@ typedef enum {
     NSLog(@"%@: did load",NSStringFromClass(self.class));
     // Do any additional setup after loading the view from its nib.
     [self setupPost];
+    self.videoPlayerViewController = [[XCDYouTubeVideoPlayerViewController alloc] init];
+    [self.videoPlayerViewController presentInView:self.youtubeView];
+
     self.profilePicture.layer.cornerRadius = 30.0;
     self.profilePicture.layer.masksToBounds = YES;
     self.profilePicture.layer.borderColor = [UIColor grayColor].CGColor;
     self.profilePicture.layer.borderWidth = 3.0;
     self.captionLabel.font = [UIFont heroFontWithSize: 12.0f];
     self.userNameLabel.font = [UIFont lightHeroFontWithSize: 18.0f];
+    
 
     [self setupNavBar];
     [self setupHeaderLabels];
@@ -117,26 +123,34 @@ typedef enum {
 
 -(void) setViewForCurrentType {
     ECPostType postType = [self.post postType];
-    self.youtubeWebView.hidden = postType == ECPhotoPost;
+    self.youtubeView.hidden = postType == ECPhotoPost;
     self.postImage.hidden = postType == ECVideoPost;
     
     if (postType == ECVideoPost) {
-        [self setupWebView];
+        [self changeYoutubeURL];
     }
 }
 
 -(void) setupWebView {
     NSString* link =  [[self.post youtubeLink] absoluteString];
-    // Do any additional setup after loading the view from its nib.
-    NSString *htmlString = [NSString stringWithFormat:@"<html><head><meta name = \"viewport\" content = \"initial-scale = 1.0, user-scalable = no, width = 320\"/></head><body style=\"background:#000;margin-top:0px;margin-left:0px\"><div><object width=\"320\" height=\"320\"><param name=\"movie\" value=\"%@\"></param><param name=\"wmode\"value=\"transparent\"></param><embed src=\"%@\"type=\"application/x-shockwave-flash\" wmode=\"transparent\" width=\"320\" height=\"320\"></embed></object></div></body></html>",link,link];
+//    // Do any additional setup after loading the view from its nib.
+//    NSString *htmlString = [NSString stringWithFormat:@"<html><head><meta name = \"viewport\" content = \"initial-scale = 1.0, user-scalable = no, width = 320\"/></head><body style=\"background:#000;margin-top:0px;margin-left:0px\"><div><object width=\"320\" height=\"320\"><param name=\"movie\" value=\"%@\"></param><param name=\"wmode\"value=\"transparent\"></param><embed src=\"%@\"type=\"application/x-shockwave-flash\" wmode=\"transparent\" width=\"320\" height=\"320\"></embed></object></div></body></html>",link,link];
+//    
+//    self.youtubeWebView.scrollView.scrollEnabled = FALSE;
+//    self.youtubeWebView.contentMode = UIViewContentModeScaleAspectFit;
+//    self.youtubeWebView.scalesPageToFit = YES;
+//    self.youtubeWebView.autoresizingMask = (UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth);
+//    [self.youtubeWebView loadHTMLString:htmlString baseURL:nil];
+
     
-    self.youtubeWebView.scrollView.scrollEnabled = FALSE;
-    self.youtubeWebView.contentMode = UIViewContentModeScaleAspectFit;
-    self.youtubeWebView.scalesPageToFit = YES;
-    self.youtubeWebView.autoresizingMask = (UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth);
-    [self.youtubeWebView loadHTMLString:htmlString baseURL:nil];
+}
+-(void)changeYoutubeURL
+{
+    NSString* link =  [[self.post youtubeLink] absoluteString];
+    [self.videoPlayerViewController setVideoIdentifier:[self extractYoutubeID:link]];
 
 }
+
 
 -(void) setupHeaderLabels {
     [self.artistLabel setFont:[UIFont heroFontWithSize:18.0f]];
@@ -219,7 +233,7 @@ typedef enum {
                         options:UIViewAnimationOptionCurveEaseInOut animations:^{
                             self.postImage.alpha = 0.0;
 //                            self.playButton.alpha = 0.0;
-                            self.youtubeWebView.alpha = 0.0;
+                            self.youtubeView.alpha = 0.0;
                         } completion:^(BOOL finished) {
                             [self setViewForCurrentType];
                             self.userNameLabel.text = [self.post userName];
@@ -229,7 +243,7 @@ typedef enum {
                             [UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
                                 self.postImage.alpha = 1.0;
 //                                self.playButton.alpha = 1.0;
-                                self.youtubeWebView.alpha = 1.0;
+                                self.youtubeView.alpha = 1.0;
                             }completion: ^(BOOL finished){
 
                             }];
@@ -240,6 +254,7 @@ typedef enum {
 }
 
 -(void) showGestureForSwipeRecognizer: (UISwipeGestureRecognizer*) recognizer {
+    [self.videoPlayerViewController.moviePlayer stop];
     int direction = 0;
     if (recognizer.direction == UISwipeGestureRecognizerDirectionLeft) {
         direction = +1;
@@ -391,6 +406,22 @@ typedef enum {
     return params;
 }
 
+
+-(NSString *)extractYoutubeID:(NSString *)youtubeURL
+{
+    NSError *error = NULL;
+    NSString *regexString = @"(?<=v(=|/))([-a-zA-Z0-9_]+)|(?<=youtu.be/)([-a-zA-Z0-9_]+)";
+
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:regexString options:NSRegularExpressionCaseInsensitive error:&error];
+    NSRange rangeOfFirstMatch = [regex rangeOfFirstMatchInString:youtubeURL options:0 range:NSMakeRange(0, [youtubeURL length])];
+    if(!NSEqualRanges(rangeOfFirstMatch, NSMakeRange(NSNotFound, 0)))
+    {
+        NSString *substringForFirstMatch = [NSString stringWithString:[youtubeURL substringWithRange:rangeOfFirstMatch]];
+        
+        return substringForFirstMatch;
+    }
+    return nil;
+}
 #pragma mark - Getters
 -(NSString*) postID {
     return [self.post postID];
