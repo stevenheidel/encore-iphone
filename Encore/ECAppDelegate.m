@@ -20,9 +20,8 @@
 #import "UIFont+Encore.h"
 #import "NSUserDefaults+Encore.h"
 #import "MBProgressHUD.h"
-//#if IN_BETA
+
 #import "TestFlight.h"
-//#endif
 
 #import "AFNetworking.h"
 
@@ -52,9 +51,6 @@
         [self showLoginView:NO];
     else
         [self setUpLocationManager];
-
-    
-   
     
     return YES;
 }
@@ -201,7 +197,6 @@
 
 -(BOOL) isLoggedIn
 {
-    
     return [[ECFacebookManger sharedFacebookManger] isLoggedIn];
 }
 
@@ -231,11 +226,6 @@
         [self.loginViewController loginFailed];
     }
 }
-
-
-
-
-
 
 #pragma mark - location
 
