@@ -38,4 +38,8 @@
 -(NSString*) postalCode;
 -(NSString*) city;
 -(NSDictionary*) venueDetails;
+
+-(NSString *) headliner;
+-(NSArray *) artists;
+
 @end

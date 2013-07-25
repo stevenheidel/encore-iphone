@@ -37,12 +37,17 @@
 @property (nonatomic,strong) IBOutlet UILabel * artistNameLabel;
 @property (nonatomic,strong) IBOutlet UILabel * venueNameLabel;
 @property (nonatomic,strong) IBOutlet UILabel * dateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *headlinerLabel;
+@property (weak, nonatomic) IBOutlet UILabel *artistsLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *artistLabelConstraint;
+
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (nonatomic,strong) IBOutlet UIImageView *imgArtist;
 @property (nonatomic,strong) IBOutlet UIImageView *imgBackground;
 @property (nonatomic,strong) IBOutlet UIImageView *imgLiveNow;
 @property (nonatomic, strong) IBOutlet UIButton *concertStausButton;
 
+- (IBAction)artistsLabelTapped:(id)sender;
 @property (nonatomic, strong) NSArray * posts;
 
 @property (nonatomic, readonly) NSString * userID;

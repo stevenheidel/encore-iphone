@@ -40,7 +40,10 @@
 #import "KNMultiItemSelector.h"
 #import  "ECCustomNavController.h"
 #define HUD_DELAY 1.0
-#define HEADER_HEIGHT 160.0
+#define HEADER_HEIGHT 150.0
+#define HEADER_HEIGHT_PLUS_ONE_LINE 172.0
+#define HEADER_HEIGHT_PLUS_TWO_LINES 195.0
+
 #import "ECAppDelegate.h"
 
 #import "SAMRateLimit.h"
@@ -50,7 +53,7 @@ NSString *kCellID = @"cellID";
 @interface ECConcertDetailViewController (){
     NSInteger numTimesGetStuffPressed;
 }
-
+@property (assign) BOOL isExpanded;
 @end
 
 @implementation ECConcertDetailViewController
@@ -83,6 +86,7 @@ NSString *kCellID = @"cellID";
     NSLog(@"%@: did load",NSStringFromClass(self.class));
     self.isOnProfile = FALSE;
     self.isPopulating = FALSE;
+    self.isExpanded = FALSE;
     numTimesGetStuffPressed = 0;
     [self.collectionView registerClass:[Cell class] forCellWithReuseIdentifier:@"generic"];
     UIImageView* encoreLogo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo.png"]];
@@ -177,7 +181,17 @@ NSString *kCellID = @"cellID";
 -(void) loadArtistDetails {
     self.artistNameLabel.text = [[self.concert eventName] uppercaseString];
     self.venueNameLabel.text = [self.concert venueName];
+    self.artistsLabel.text = [[self.concert artists] componentsJoinedByString:@","];
+
+    if([[self.concert eventName] isEqualToString:[self.concert headliner]])
+       [self.headlinerLabel removeFromSuperview];
+    else
+        self.headlinerLabel.text = [self.concert headliner];
+
     
+    if([self.artistsLabel.text isEqualToString:@""])
+        [self.artistsLabel removeFromSuperview];
+
     self.dateLabel.text = [NSString stringWithFormat:@"%@, %@", [self.concert venueName], [self.concert niceDate]];
     
     NSURL *imageURL = [self.concert imageURL];
@@ -744,9 +758,20 @@ NSString *kCellID = @"cellID";
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
+    CGFloat height = HEADER_HEIGHT_PLUS_TWO_LINES;
+    if((!self.artistsLabel && self.headlinerLabel) || (self.artistsLabel && !self.headlinerLabel))
+        height = HEADER_HEIGHT_PLUS_ONE_LINE;
+    else if (!self.artistsLabel && !self.headlinerLabel)
+        height = HEADER_HEIGHT;
     
+    if(self.isExpanded)
+        height +=[self.artistsLabel.text sizeWithFont:[UIFont systemFontOfSize:12]
+                                    constrainedToSize:CGSizeMake(280, 100)
+                                        lineBreakMode:NSLineBreakByTruncatingTail].height;
+
+        
     //Manually set to desired height
-    return CGSizeMake(self.collectionView.frame.size.width, HEADER_HEIGHT);
+    return CGSizeMake(self.collectionView.frame.size.width, height);
 }
 
 -(void) setUpPlaceholderView {
@@ -911,6 +936,38 @@ NSString *kCellID = @"cellID";
     return UIInterfaceOrientationPortrait;
 }
 
+- (IBAction)artistsLabelTapped:(id)sender {
+        
+    CGSize artistTextSize = [self.artistsLabel.text sizeWithFont:[UIFont systemFontOfSize:12]
+                                                  constrainedToSize:CGSizeMake(280, 100)
+                                                      lineBreakMode:NSLineBreakByTruncatingTail];
+    
+    //if the size of the text is bigger than the label size EXPAND 
+    if(!self.isExpanded && (artistTextSize.height > self.artistsLabel.bounds.size.height))
+    {
+        self.isExpanded = TRUE;
+       
+        [UIView animateWithDuration:0.4 animations:^{
+            [self.artistsLabel setNumberOfLines:0];
+            [self.artistLabelConstraint setConstant:artistTextSize.height];
+         }];
+        [self.collectionView reloadData];
+
+    }else if(self.isExpanded)
+    {
+        
+        self.isExpanded = FALSE;
+        [UIView animateWithDuration:0.2 animations:^{
+            [self.artistsLabel setNumberOfLines:0];
+            [self.artistLabelConstraint setConstant:21];
+        }];
+        [self.collectionView reloadData];
+
+    }
+    
+    
+
+}
 @end
 
 #pragma mark -

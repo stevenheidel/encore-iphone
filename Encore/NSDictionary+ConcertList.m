@@ -133,4 +133,20 @@ static NSString * const kDateFormat = @"yyyy-MM-dd";
 -(NSArray *) future {
     return [self objectForKey:@"future"];
 }
+
+-(NSString *) headliner
+{
+    return  [self objectForKey:@"headliner"];
+}
+-(NSArray *) artists
+{
+    NSMutableArray* artists =[[NSMutableArray alloc] initWithCapacity:[[self objectForKey:@"artists"] count]];
+    
+    for( NSDictionary* artist in[self objectForKey:@"artists"])
+    {
+        if(![[artist objectForKey:@"artist"] isEqualToString:[self headliner]]) //remove headliner
+            [artists addObject:[artist objectForKey:@"artist"]];
+    }
+    return  [NSArray arrayWithArray:artists];;
+}
 @end
