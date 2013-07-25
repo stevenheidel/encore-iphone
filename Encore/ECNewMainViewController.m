@@ -77,7 +77,6 @@ typedef enum {
     [self setupSearchBar];
     [self setupRefreshControl];
     
-    
     self.tap = [[UITapGestureRecognizer alloc]
                                    initWithTarget:self
                                    action:@selector(dismissKeyboard)];
@@ -112,21 +111,25 @@ typedef enum {
 
 -(void)LocationAcquired
 {
-    if([NSUserDefaults lastSearchLocation].coordinate.latitude != 0 && [NSUserDefaults lastSearchLocation].coordinate.longitude != 0)
-    {
-         [self fetchConcerts];
-    }
+    NSLog(@"Location acquired");
+    [self initializeSearchLocation];// automatically figures out if there's a saved one and if not returns the user coordinate
+    [self fetchConcerts];
 }
 -(void)LocationFailed
 {
+    NSLog(@"Location failed");
     // Failed to get location using location services and there is no location saved
-    if([NSUserDefaults lastSearchLocation].coordinate.latitude == 0 && [NSUserDefaults lastSearchLocation].coordinate.longitude == 0)
+    if ([NSUserDefaults lastSearchLocation].coordinate.latitude == 0 && [NSUserDefaults lastSearchLocation].coordinate.longitude == 0)
     {
         //Show alert
         UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Location Needed", nil) message:NSLocalizedString(@"To re-enable, please go to Settings and turn on Location Service for this app or set location manually", nil) delegate:self cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Manually", nil),NSLocalizedString(@"OK", nil), nil];
         alert.tag = NoLocationAlert;
         [alert show];
-
+        
+    }
+    else { //there is a saved location
+        [self initializeSearchLocation];
+        [self fetchConcerts];
     }
 }
 -(BOOL)shouldAutorotate{
@@ -490,7 +493,6 @@ typedef enum {
 -(void) showLogin {
     [ApplicationDelegate showLoginView: YES];
 }
-
 -(MBProgressHUD*) switchingHUD {
     if (!_switchingHUD) {
         _switchingHUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
