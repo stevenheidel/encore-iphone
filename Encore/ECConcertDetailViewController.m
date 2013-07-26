@@ -88,7 +88,10 @@ NSString *kCellID = @"cellID";
     self.isPopulating = FALSE;
     self.isExpanded = FALSE;
     numTimesGetStuffPressed = 0;
+    
+    [self.collectionView setScrollEnabled:NO];
     [self.collectionView registerClass:[Cell class] forCellWithReuseIdentifier:@"generic"];
+    
     UIImageView* encoreLogo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo.png"]];
     self.navigationItem.titleView = encoreLogo;
     self.headerView = [[ECPostCollectionHeaderView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.collectionView.frame.size.width, HEADER_HEIGHT) andOwner:self];
@@ -120,7 +123,6 @@ NSString *kCellID = @"cellID";
     
     [(UILabel*)[self.footerIsPopulatingView viewWithTag:49] setFont:[UIFont heroFontWithSize:14]];
     
-    [self setupRefreshControl];
     friends = [[NSMutableArray alloc] init];
 }
 
@@ -226,9 +228,14 @@ NSString *kCellID = @"cellID";
 -(void) fetchedPosts: (NSArray *) posts {
     self.posts = posts;
     if ([self.posts count] > 0) {
+        [self setupRefreshControl];
         [self.placeholderView removeFromSuperview];
+        [self.collectionView setScrollEnabled:YES];
+
     }
     else {
+        [self.collectionView setScrollEnabled:NO];
+        [self.refreshControl removeFromSuperview];
         [self setUpPlaceholderView];
     }
     
@@ -977,10 +984,10 @@ NSString *kCellID = @"cellID";
 }
 
 - (IBAction)artistsLabelTapped:(id)sender {
-        
     CGSize artistTextSize = [self.artistsLabel.text sizeWithFont:[UIFont systemFontOfSize:12]
                                                   constrainedToSize:CGSizeMake(280, 100)
                                                       lineBreakMode:NSLineBreakByTruncatingTail];
+   
     
     //if the size of the text is bigger than the label size EXPAND 
     if(!self.isExpanded && (artistTextSize.height > self.artistsLabel.bounds.size.height))
@@ -990,8 +997,10 @@ NSString *kCellID = @"cellID";
         [UIView animateWithDuration:0.4 animations:^{
             [self.artistsLabel setNumberOfLines:0];
             [self.artistLabelConstraint setConstant:artistTextSize.height];
-         }];
+             [self.placeholderView setFrame:CGRectMake(0.0, HEADER_HEIGHT+ artistTextSize.height, self.collectionView.frame.size.width, self.collectionView.frame.size.height-HEADER_HEIGHT+artistTextSize.height)];
+        }];
         [self.collectionView reloadData];
+        
 
     }else if(self.isExpanded)
     {
@@ -1000,12 +1009,15 @@ NSString *kCellID = @"cellID";
         [UIView animateWithDuration:0.2 animations:^{
             [self.artistsLabel setNumberOfLines:0];
             [self.artistLabelConstraint setConstant:21];
+            [self.placeholderView setFrame:CGRectMake(0.0, HEADER_HEIGHT, self.collectionView.frame.size.width, self.collectionView.frame.size.height-HEADER_HEIGHT)];
         }];
         [self.collectionView reloadData];
 
     }
+   
+
     
-    
+
 
 }
 @end

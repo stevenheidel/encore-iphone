@@ -176,8 +176,7 @@ typedef enum {
 -(void)openYoutube
 {
     NSString* link =  [[self.post youtubeLink] absoluteString];
-    XCDYouTubeVideoPlayerViewController *videoPlayerViewController = [[XCDYouTubeVideoPlayerViewController alloc] init];
-    [videoPlayerViewController setVideoIdentifier:[self extractYoutubeID:link]];
+    XCDYouTubeVideoPlayerViewController *videoPlayerViewController = [[XCDYouTubeVideoPlayerViewController alloc] initWithVideoIdentifier:[self extractYoutubeID:link]];
     [self presentMoviePlayerViewControllerAnimated:videoPlayerViewController];
 }
 
