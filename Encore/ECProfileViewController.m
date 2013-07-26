@@ -40,12 +40,12 @@ typedef enum {
     NumberOfSections
 } ProfileTableViewSections;
 
-@interface ECProfileViewController ()
+@interface ECProfileViewController ()<ECConcertDetailViewDelegate>
 
 @property (strong,atomic) MBProgressHUD* hud;
 @end
 
-@implementation ECProfileViewController
+@implementation ECProfileViewController 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -219,7 +219,10 @@ typedef enum {
         self.shouldUpdateView = NO;
     }];
 }
-
+- (void) concertUpdated
+{
+    self.shouldUpdateView = YES;
+}
 -(void) backButtonWasPressed {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -310,6 +313,7 @@ typedef enum {
     NSDictionary* concert = [[self arrayForSection:section] objectAtIndex:indexPath.row];
     ECConcertDetailViewController * concertDetail = [[ECConcertDetailViewController alloc] initWithConcert:concert];
     concertDetail.tense = [ECProfileViewController searchTypeForSection: section];
+    [concertDetail setConcertStateDelegate:self];
     
     //flurry log
     NSMutableDictionary* dic = [NSMutableDictionary dictionaryWithDictionary:concert];

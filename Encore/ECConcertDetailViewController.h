@@ -12,6 +12,9 @@
 #import "ECSearchType.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import "KNMultiItemSelector.h"
+@protocol ECConcertDetailViewDelegate <NSObject>
+- (void) concertUpdated;
+@end
 
 @class ECPlaceHolderView,ECToolbar,ECPostCollectionHeaderView,FBFriendPickerViewController;
 
@@ -61,6 +64,7 @@
 @property (nonatomic,strong) UIImagePickerController* imagePickerController;
 
 @property (nonatomic,unsafe_unretained) id <ECPostViewControllerDelegate> delegate;
+@property (nonatomic,unsafe_unretained) id <ECConcertDetailViewDelegate> concertStateDelegate;
 
 @property (nonatomic, strong) ECPostCollectionHeaderView* headerView;
 

@@ -475,12 +475,14 @@ NSString *kCellID = @"cellID";
     else {
         [self removeConcert];
     }
+    
+
 }
 
 -(void) addConcert {
     if (ApplicationDelegate.isLoggedIn) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:ECLoginCompletedNotification object:nil];
-
+        
         //        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"confirm_add_title", nil) message:NSLocalizedString(@"confirm_add_message", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"cancel", nil) otherButtonTitles:NSLocalizedString(@"add", nil), nil];
         //        alert.tag = AddConcertConfirmTag;
         //        [alert show];
@@ -496,6 +498,9 @@ NSString *kCellID = @"cellID";
                 [Flurry logEvent:@"Completed_Adding_Concert" withParameters:[self flurryParam]];
                 [self checkIfPopulating];
                 [self startTimer];
+                
+                if([self.concertStateDelegate respondsToSelector:@selector(concertUpdated)])
+                    [self.concertStateDelegate concertUpdated];
             }
             else {
                 [self alertError];
@@ -681,6 +686,9 @@ NSString *kCellID = @"cellID";
                     [ECJSONPoster removeConcert:eventID toUser:userID completion:^(BOOL success) {
                         if(success) {
                             [self completedRemovingConcert];
+                            if([self.concertStateDelegate respondsToSelector:@selector(concertUpdated)])
+                                [self.concertStateDelegate concertUpdated];
+
                         }
                         else {
                             [self alertError];
