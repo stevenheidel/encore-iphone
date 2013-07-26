@@ -216,7 +216,7 @@ typedef enum {
     [self setEventArray: concerts forType: searchType];
     
     if(searchType == self.currentSearchType){
-        if ([self currentEventArray].count == 0) {
+        if ([self currentEventArray].count == 0 && self.currentSearchType != ECSearchTypePast) {
             self.tableView.tableFooterView = self.noConcertsFooterView;
         }
         else {
