@@ -73,6 +73,10 @@ static NSString * const kDateFormat = @"yyyy-MM-dd";
     return [NSURL URLWithString:[self objectForKey:@"image_url"] ];
 }
 
+-(NSURL *) lastfmURL {
+    return [NSURL URLWithString:[self objectForKey:@"lastfm_url"]];
+}
+
 -(NSString *) month {
     NSString * dateStr = [self objectForKey:@"date"];
     NSDateFormatter * dateFormat =  [NSDateFormatter new];

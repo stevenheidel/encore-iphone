@@ -337,8 +337,11 @@ NSString *kCellID = @"cellID";
     {
         //TODO: Buy ticket
         NSLog(@"Buy ticket");
-    }else
-    {
+        [Flurry logEvent:@"Clicked_Buy_Ticket" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[self.concert eventName], @"eventName",[self.concert eventID], @"eventID", [self.concert headliner], @"headliner", nil]];
+        NSURL* lastfmURL = [self.concert lastfmURL];
+        [[UIApplication sharedApplication] openURL:lastfmURL];
+    }
+    else {
         
         numTimesGetStuffPressed++;
         [Flurry logEvent:@"Find_Photos_and_Videos_Pressed" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[self.concert eventID],@"eventID", [NSNumber numberWithInteger:numTimesGetStuffPressed], @"num_times_pressed", nil]];

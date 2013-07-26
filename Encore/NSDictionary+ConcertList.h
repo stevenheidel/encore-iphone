@@ -20,6 +20,7 @@
 
 -(NSURL *) backgroundURL;
 -(NSURL *) imageURL;
+-(NSURL *) lastfmURL;
 
 -(NSString *) month;
 -(NSString *) day;
