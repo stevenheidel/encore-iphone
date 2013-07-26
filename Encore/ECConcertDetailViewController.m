@@ -105,9 +105,10 @@ NSString *kCellID = @"cellID";
 
     [self setUpNavBarButtons];
     [self loadArtistDetails];
-    [self setUpPlaceholderView];
     if (self.tense != ECSearchTypeFuture) {
         [self loadImages];
+    }else{
+        [self setUpPlaceholderView];
     }
     
     if (ApplicationDelegate.isLoggedIn) {
