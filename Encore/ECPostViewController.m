@@ -231,10 +231,29 @@ typedef enum {
     int direction = 0;
     if (recognizer.direction == UISwipeGestureRecognizerDirectionLeft) {
         direction = +1;
+        CATransition *animation = [CATransition animation];
+        [animation setDelegate:self];
+        [animation setType:kCATransitionPush];
+        [animation setSubtype:kCATransitionFromRight];
+        [animation setDuration:0.50];
+        [animation setTimingFunction:
+         [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+        [self.postImage.layer addAnimation:animation forKey:kCATransition];
+
     }
     else {
         direction = -1;
+        CATransition *animation = [CATransition animation];
+        [animation setDelegate:self];
+        [animation setType:kCATransitionPush];
+        [animation setSubtype:kCATransitionFromLeft];
+        [animation setDuration:0.50];
+        [animation setTimingFunction:
+         [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+        [self.postImage.layer addAnimation:animation forKey:kCATransition];
+
     }
+
     [Flurry logEvent:@"Swiped_On_Post" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:direction], @"direction", nil]];
     [self gesture:direction];
     
