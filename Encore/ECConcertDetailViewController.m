@@ -764,7 +764,7 @@ NSString *kCellID = @"cellID";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath;
 {
-    Cell *cell = (Cell*)[cv dequeueReusableCellWithReuseIdentifier:@"generic" forIndexPath:indexPath];
+   __weak Cell *cell = (Cell*)[cv dequeueReusableCellWithReuseIdentifier:@"generic" forIndexPath:indexPath];
     
     
     // load the image for this cell
@@ -778,9 +778,16 @@ NSString *kCellID = @"cellID";
     if(self.posts.count > 0) {
         NSDictionary * postDic = [self.posts objectAtIndex:indexPath.row];
         NSURL *imageToLoad = [postDic imageURL];
-        [cell.image setImageWithURL:imageToLoad];
-        
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:imageToLoad];
+        [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
         cell.postType = [postDic postType];
+        
+        [cell.image setImageWithURLRequest:request placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+            cell.image.image = image;
+            cell.playButton.hidden = cell.postType == ECPhotoPost;
+
+        } failure:nil];
+
     }
     return cell;
 }

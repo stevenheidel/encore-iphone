@@ -23,7 +23,7 @@
         [self addSubview:self.playButton];
         [self bringSubviewToFront:self.playButton];
     }
-            self.playButton.hidden = postType == ECPhotoPost;
+            self.playButton.hidden = YES;
 
 }
 @end
