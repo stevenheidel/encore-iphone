@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Encore. All rights reserved.
 //
 #define IS_IPHONE_5 ( fabs( ( double )[ [ UIScreen mainScreen ] bounds ].size.height - ( double )568 ) < DBL_EPSILON )
-
+#import <MediaPlayer/MediaPlayer.h>
 #import "UIColor+EncoreUI.h"
 #import "UIFont+Encore.h"
 
@@ -342,9 +342,12 @@ typedef enum {
 -(void) setNavBarAppearance {
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navbar"] forBarMetrics:UIBarMetricsDefault];
     if( IS_IPHONE_5 )
-        [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navbarlandscape-568h"] forBarMetrics:UIBarMetricsLandscapePhone];  //TODO: figure out what this isn't loading in on rotate for youtube.
+        [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navbarlandscape-568h"] forBarMetrics:UIBarMetricsLandscapePhone];
     else
-        [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navbarlandscape"] forBarMetrics:UIBarMetricsLandscapePhone];  //TODO: figure out what this isn't loading in on rotate for youtube.
+        [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navbarlandscape"] forBarMetrics:UIBarMetricsLandscapePhone];
+    
+    //Use default navbar in youtube player
+    [[UINavigationBar appearanceWhenContainedIn:[MPMoviePlayerViewController class], nil] setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
     
     [[UINavigationBar appearance] setTintColor:[UIColor clearColor]];
     [[UINavigationBar appearance] setBackgroundColor:[UIColor clearColor]];
