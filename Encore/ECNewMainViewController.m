@@ -483,6 +483,13 @@ typedef enum {
     [self hideLocationSetter];
     
     [self fetchConcerts];
+    if (self.hasSearched) {
+        //redo search with new location
+        [ECJSONFetcher fetchArtistsForString:self.searchBar.text withSearchType:self.currentSearchType forLocation:self.currentSearchLocation radius:[NSNumber numberWithFloat:self.currentSearchRadius] completion:^(NSDictionary *artists) {
+            [self fetchedConcertsForSearch:artists];
+        }];
+    }
+
 }
 
 -(void) updateRadius:(float)radius {
