@@ -33,7 +33,6 @@ typedef enum {
 @interface ECPostViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *artistLabel;
 @property (weak, nonatomic) IBOutlet UILabel *venueAndDateLabel;
-@property (strong) XCDYouTubeVideoPlayerViewController *videoPlayerViewController;
 @end
 
 @implementation ECPostViewController
@@ -62,8 +61,6 @@ typedef enum {
     NSLog(@"%@: did load",NSStringFromClass(self.class));
     // Do any additional setup after loading the view from its nib.
     [self setupPost];
-    self.videoPlayerViewController = [[XCDYouTubeVideoPlayerViewController alloc] init];
-    [self.videoPlayerViewController presentInView:self.youtubeView];
 
     self.profilePicture.layer.cornerRadius = 30.0;
     self.profilePicture.layer.masksToBounds = YES;
@@ -108,47 +105,16 @@ typedef enum {
     return UIInterfaceOrientationPortrait;
 }
 
-//-(IBAction) tapPlayButton {
-//    [Flurry logEvent:@"Tapped_Play_Button" withParameters:self.post];
-//    [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
-//    
-////    [self openYouTube];
-//}
 
-//-(void) openYouTube {
-//    ECYouTubeViewController* youtubeVC = [[ECYouTubeViewController alloc] initWithLink:[self.post youtubeLink]];
-//    [self presentViewController:youtubeVC animated:YES completion:nil];
-//    
-//}
 
 -(void) setViewForCurrentType {
     ECPostType postType = [self.post postType];
-    self.youtubeView.hidden = postType == ECPhotoPost;
-    self.postImage.hidden = postType == ECVideoPost;
+    self.playButton.hidden = postType == ECPhotoPost;
+    //self.postImage.hidden = postType == ECVideoPost;
     
-    if (postType == ECVideoPost) {
-        [self changeYoutubeURL];
-    }
-}
-
--(void) setupWebView {
-    NSString* link =  [[self.post youtubeLink] absoluteString];
-//    // Do any additional setup after loading the view from its nib.
-//    NSString *htmlString = [NSString stringWithFormat:@"<html><head><meta name = \"viewport\" content = \"initial-scale = 1.0, user-scalable = no, width = 320\"/></head><body style=\"background:#000;margin-top:0px;margin-left:0px\"><div><object width=\"320\" height=\"320\"><param name=\"movie\" value=\"%@\"></param><param name=\"wmode\"value=\"transparent\"></param><embed src=\"%@\"type=\"application/x-shockwave-flash\" wmode=\"transparent\" width=\"320\" height=\"320\"></embed></object></div></body></html>",link,link];
-//    
-//    self.youtubeWebView.scrollView.scrollEnabled = FALSE;
-//    self.youtubeWebView.contentMode = UIViewContentModeScaleAspectFit;
-//    self.youtubeWebView.scalesPageToFit = YES;
-//    self.youtubeWebView.autoresizingMask = (UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth);
-//    [self.youtubeWebView loadHTMLString:htmlString baseURL:nil];
-
-    
-}
--(void)changeYoutubeURL
-{
-    NSString* link =  [[self.post youtubeLink] absoluteString];
-    [self.videoPlayerViewController setVideoIdentifier:[self extractYoutubeID:link]];
-
+//    if (postType == ECVideoPost) {
+//        [self changeYoutubeURL];
+//    }
 }
 
 
@@ -203,9 +169,20 @@ typedef enum {
     [self.view addGestureRecognizer:recognizerTap];
 }
 
+- (IBAction)playButtonTapped:(id)sender {
+    [self openYoutube];
+}
+
+-(void)openYoutube
+{
+    NSString* link =  [[self.post youtubeLink] absoluteString];
+    XCDYouTubeVideoPlayerViewController *videoPlayerViewController = [[XCDYouTubeVideoPlayerViewController alloc] init];
+    [videoPlayerViewController setVideoIdentifier:[self extractYoutubeID:link]];
+    [self presentMoviePlayerViewControllerAnimated:videoPlayerViewController];
+}
+
 -(void) tapPost {
     [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
-    
     NSString* logKey = self.containerView.alpha == 1.0 ? @"Hide" : @"Show";
     [Flurry logEvent:[NSString stringWithFormat:@"Tapped_Post_To_%@_Details",logKey]];
     
@@ -232,8 +209,7 @@ typedef enum {
                           delay:0.0
                         options:UIViewAnimationOptionCurveEaseInOut animations:^{
                             self.postImage.alpha = 0.0;
-//                            self.playButton.alpha = 0.0;
-                            self.youtubeView.alpha = 0.0;
+                            self.playButton.alpha = 0.0;
                         } completion:^(BOOL finished) {
                             [self setViewForCurrentType];
                             self.userNameLabel.text = [self.post userName];
@@ -242,8 +218,7 @@ typedef enum {
                             [self.profilePicture setImageWithURL:[self.post profilePictureURL] placeholderImage:[UIImage imageNamed:@"placeholder.jpg"]];
                             [UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
                                 self.postImage.alpha = 1.0;
-//                                self.playButton.alpha = 1.0;
-                                self.youtubeView.alpha = 1.0;
+                                self.playButton.alpha = 1.0;
                             }completion: ^(BOOL finished){
 
                             }];
@@ -254,7 +229,6 @@ typedef enum {
 }
 
 -(void) showGestureForSwipeRecognizer: (UISwipeGestureRecognizer*) recognizer {
-    [self.videoPlayerViewController.moviePlayer stop];
     int direction = 0;
     if (recognizer.direction == UISwipeGestureRecognizerDirectionLeft) {
         direction = +1;
@@ -426,5 +400,6 @@ typedef enum {
 -(NSString*) postID {
     return [self.post postID];
 }
+
 
 @end

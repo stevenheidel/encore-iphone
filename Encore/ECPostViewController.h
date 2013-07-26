@@ -18,7 +18,7 @@
 @property (nonatomic,strong) NSDictionary * post;
 @property (copy, nonatomic) NSString *artist;
 @property (copy, nonatomic) NSString* venueAndDate;
-@property (weak, nonatomic) IBOutlet UIView *youtubeView;
+@property (weak, nonatomic) IBOutlet UIButton *playButton;
 
 @property (nonatomic,strong) IBOutlet UIImageView * postImage;
 @property (nonatomic,strong) IBOutlet UIImageView * profilePicture;
@@ -30,6 +30,8 @@
 @property (nonatomic,strong) IBOutlet UIView* containerView;
 @property (nonatomic,readonly) NSString * postID;
 @property (nonatomic,unsafe_unretained) id <ECPostViewControllerDelegate> delegate;
+- (IBAction)playButtonTapped:(id)sender;
+
 @end
 
 @protocol ECPostViewControllerDelegate <NSObject>
