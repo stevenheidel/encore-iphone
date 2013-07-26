@@ -357,23 +357,23 @@ NSString *kCellID = @"cellID";
 
 #pragma mark FB Sharing
 -(void) shareTapped {
-    if([ApplicationDelegate isLoggedIn])
-    {
+    if([ApplicationDelegate isLoggedIn]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:ECLoginCompletedNotification object:nil];
         [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
         [Flurry logEvent:@"Share_Tapped_Concert"];
         [self share];
-    }else{
+    }
+    else {
         UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login", nil) message:NSLocalizedString(@"To share this concert, you must first login", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Login", nil), nil];
         alert.tag = ECShareNotLoggedInAlert;
         [alert show];
-
     }
 }
 
 -(void) share {
     [self shareWithTaggedFriends:nil];
 }
+
 -(void) shareWithTaggedFriends: (NSArray*) taggedFriends {
     NSLog(@"Sharing with Facebook from Concert detail view controller");
     NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:ShareConcertURL,self.eventID]];
