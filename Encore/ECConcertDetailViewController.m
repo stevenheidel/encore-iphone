@@ -491,7 +491,7 @@ NSString *kCellID = @"cellID";
         NSString * userID = self.userID;
         NSString * eventID = [self.concert eventID];
         NSLog(@"%@: Adding concert %@ to profile %@", NSStringFromClass(self.class), eventID, userID);
-        [Flurry logEvent:@"Added_Concert" withParameters:[self flurryParam]];
+        
         
         [ECJSONPoster addConcert:eventID toUser:userID completion:^(BOOL success) {
             if (success) {
@@ -505,6 +505,7 @@ NSString *kCellID = @"cellID";
             }
             else {
                 [self alertError];
+                [Flurry logEvent:@"Failed_Adding_Concert" withParameters:[self flurryParam]];
             }
         }];
     }
