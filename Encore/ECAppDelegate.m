@@ -49,8 +49,10 @@
    
     if (![self isLoggedIn])
         [self showLoginView:NO];
-    else
+    else {
         [self setUpLocationManager];
+        [Flurry setUserID:[NSUserDefaults userID]];
+    }
     
     return YES;
 }
