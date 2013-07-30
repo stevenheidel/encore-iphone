@@ -483,11 +483,7 @@ NSString *kCellID = @"cellID";
 -(void) addConcert {
     if (ApplicationDelegate.isLoggedIn) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:ECLoginCompletedNotification object:nil];
-        
-        //        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"confirm_add_title", nil) message:NSLocalizedString(@"confirm_add_message", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"cancel", nil) otherButtonTitles:NSLocalizedString(@"add", nil), nil];
-        //        alert.tag = AddConcertConfirmTag;
-        //        [alert show];
-        //
+
         NSString * userID = self.userID;
         NSString * eventID = [self.concert eventID];
         NSLog(@"%@: Adding concert %@ to profile %@", NSStringFromClass(self.class), eventID, userID);
