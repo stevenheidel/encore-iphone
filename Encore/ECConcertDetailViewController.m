@@ -795,8 +795,11 @@ NSString *kCellID = @"cellID";
 
 -(void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
+
     
     [self.collectionView deselectItemAtIndexPath:indexPath animated:YES];
+    NSDictionary* post = [self.posts objectAtIndex:indexPath.item];
+    [Flurry logEvent:@"Tapped_Post_Concert_Detail" withParameters:post];
     ECPostViewController * postVC = [[ECPostViewController alloc]initWithPost: [self.posts objectAtIndex:indexPath.item]];
     postVC.itemNumber = indexPath.item;
     postVC.delegate = self;
