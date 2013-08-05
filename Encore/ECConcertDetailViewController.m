@@ -184,7 +184,7 @@ NSString *kCellID = @"cellID";
 -(void) loadArtistDetails {
     self.artistNameLabel.text = [[self.concert eventName] uppercaseString];
     self.venueNameLabel.text = [self.concert venueName];
-    self.artistsLabel.text = [[self.concert artists] componentsJoinedByString:@","];
+    self.artistsLabel.text = [[self.concert artists] componentsJoinedByString:@", "];
 
     if([[self.concert eventName] isEqualToString:[self.concert headliner]])
        [self.headlinerLabel removeFromSuperview];
