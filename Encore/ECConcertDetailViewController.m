@@ -48,6 +48,8 @@
 
 #import "SAMRateLimit.h"
 
+#import "ECLineupViewController.h"
+
 NSString *kCellID = @"cellID";
 
 @interface ECConcertDetailViewController (){
@@ -149,7 +151,6 @@ NSString *kCellID = @"cellID";
     self.imgArtist.layer.borderWidth = 0.1;
 }
 
-
 -(void) setUpNavBarButtons {
     UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
     UIImage *leftButImage = [UIImage imageNamed:@"backButton.png"]; //stretchableImageWithLeftCapWidth:10 topCapHeight:10];
@@ -181,21 +182,29 @@ NSString *kCellID = @"cellID";
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+-(IBAction) tappedLineup {
+    NSLog(@"tapped lineup");
+    [Flurry logEvent:@"Tapped_Lineup" withParameters:self.concert];
+    ECLineupViewController* lineupVC = [ECLineupViewController new];
+    lineupVC.artists = self.concert.artists;
+    lineupVC.headliner = self.concert.headliner;
+    [self.navigationController pushViewController:lineupVC animated:YES];
+}
 -(void) loadArtistDetails {
     self.artistNameLabel.text = [[self.concert eventName] uppercaseString];
     self.venueNameLabel.text = [self.concert venueName];
-    self.artistsLabel.text = [[self.concert artists] componentsJoinedByString:@", "];
+     self.artistsLabel.text = [[self.concert artists] componentsJoinedByString:@", "];
 
     if([[self.concert eventName] isEqualToString:[self.concert headliner]])
        [self.headlinerLabel removeFromSuperview];
     else
-        self.headlinerLabel.text = [self.concert headliner];
+        self.headlinerLabel.text = [NSString stringWithFormat:@"Headliner: %@",[self.concert headliner]];
 
     
     if([self.artistsLabel.text isEqualToString:@""])
         [self.artistsLabel removeFromSuperview];
 
-    self.dateLabel.text = [NSString stringWithFormat:@"%@, %@", [self.concert venueName], [self.concert niceDate]];
+    self.dateLabel.text = [NSString stringWithFormat:@"%@, %@", [self.concert venueName], [[self.concert niceDate] capitalizedString]];
     
     NSURL *imageURL = [self.concert imageURL];
     if (imageURL) {
@@ -354,7 +363,6 @@ NSString *kCellID = @"cellID";
         numTimesGetStuffPressed++;
         [Flurry logEvent:@"Find_Photos_and_Videos_Pressed" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[self.concert eventID],@"eventID", [NSNumber numberWithInteger:numTimesGetStuffPressed], @"num_times_pressed", nil]];
         [SAMRateLimit executeBlock:^{
-            NSLog(@"here");
             [ECJSONPoster populateConcert:[self.concert eventID] completion:^(BOOL success) {
                 [self checkIfPopulating];
                 self.getStuffButton.enabled = NO;
@@ -826,7 +834,7 @@ NSString *kCellID = @"cellID";
                                     constrainedToSize:CGSizeMake(280, 100)
                                         lineBreakMode:NSLineBreakByTruncatingTail].height;
 
-        
+    
     //Manually set to desired height
     return CGSizeMake(self.collectionView.frame.size.width, height);
 }
@@ -848,7 +856,6 @@ NSString *kCellID = @"cellID";
     if(self.tense == ECSearchTypeFuture)
     {
         [self.getStuffButton setImage:[UIImage imageNamed:@"ticketsbutton"] forState:UIControlStateNormal];
-        [self.getStuffButton setImage:[UIImage imageNamed:@"ticketsbutton"] forState:UIControlStateHighlighted];
 
     }
     //self.getStuffButton.hidden = self.tense == ECSearchTypeFuture;
@@ -1000,41 +1007,38 @@ NSString *kCellID = @"cellID";
 }
 
 - (IBAction)artistsLabelTapped:(id)sender {
-    CGSize artistTextSize = [self.artistsLabel.text sizeWithFont:[UIFont systemFontOfSize:12]
-                                                  constrainedToSize:CGSizeMake(280, 100)
-                                                      lineBreakMode:NSLineBreakByTruncatingTail];
+    [self tappedLineup];
+    //    CGSize artistTextSize = [self.artistsLabel.text sizeWithFont:[UIFont systemFontOfSize:12]
+//                                                  constrainedToSize:CGSizeMake(280, 100)
+//                                                      lineBreakMode:NSLineBreakByTruncatingTail];
+//   
+//    
+//    //if the size of the text is bigger than the label size EXPAND 
+//    if(!self.isExpanded && (artistTextSize.height > self.artistsLabel.bounds.size.height))
+//    {
+//        self.isExpanded = TRUE;
+//       
+//        [UIView animateWithDuration:0.4 animations:^{
+//            [self.artistsLabel setNumberOfLines:0];
+//            [self.artistLabelConstraint setConstant:artistTextSize.height];
+//             [self.placeholderView setFrame:CGRectMake(0.0, HEADER_HEIGHT+ artistTextSize.height, self.collectionView.frame.size.width, self.collectionView.frame.size.height-HEADER_HEIGHT+artistTextSize.height)];
+//        }];
+//        [self.collectionView reloadData];
+//        
+//
+//    }else if(self.isExpanded)
+//    {
+//        
+//        self.isExpanded = FALSE;
+//        [UIView animateWithDuration:0.2 animations:^{
+//            [self.artistsLabel setNumberOfLines:0];
+//            [self.artistLabelConstraint setConstant:21];
+//            [self.placeholderView setFrame:CGRectMake(0.0, HEADER_HEIGHT, self.collectionView.frame.size.width, self.collectionView.frame.size.height-HEADER_HEIGHT)];
+//        }];
+//        [self.collectionView reloadData];
+//
+//    }
    
-    
-    //if the size of the text is bigger than the label size EXPAND 
-    if(!self.isExpanded && (artistTextSize.height > self.artistsLabel.bounds.size.height))
-    {
-        self.isExpanded = TRUE;
-       
-        [UIView animateWithDuration:0.4 animations:^{
-            [self.artistsLabel setNumberOfLines:0];
-            [self.artistLabelConstraint setConstant:artistTextSize.height];
-             [self.placeholderView setFrame:CGRectMake(0.0, HEADER_HEIGHT+ artistTextSize.height, self.collectionView.frame.size.width, self.collectionView.frame.size.height-HEADER_HEIGHT+artistTextSize.height)];
-        }];
-        [self.collectionView reloadData];
-        
-
-    }else if(self.isExpanded)
-    {
-        
-        self.isExpanded = FALSE;
-        [UIView animateWithDuration:0.2 animations:^{
-            [self.artistsLabel setNumberOfLines:0];
-            [self.artistLabelConstraint setConstant:21];
-            [self.placeholderView setFrame:CGRectMake(0.0, HEADER_HEIGHT, self.collectionView.frame.size.width, self.collectionView.frame.size.height-HEADER_HEIGHT)];
-        }];
-        [self.collectionView reloadData];
-
-    }
-   
-
-    
-
-
 }
 @end
 

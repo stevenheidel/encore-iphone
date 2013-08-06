@@ -33,6 +33,7 @@
 
 #import "NSUserDefaults+Encore.h"
 #import "ECCustomNavController.h"
+#import "ECUpcomingViewController.h"
 
 #define SearchCellIdentifier @"ECSearchResultCell"
 #define ConcertCellIdentifier @"ECConcertCellView"
@@ -735,16 +736,34 @@ typedef enum {
             [self setBackgroundImage];
         }
         else {
-            ECConcertDetailViewController* detailVC = [[ECConcertDetailViewController alloc] initWithConcert:[self.searchResultsEvents objectAtIndex:indexPath.row]];
-            detailVC.tense = self.currentSearchType;
-            [self.navigationController pushViewController:detailVC animated:YES];
+            if (self.currentSearchType == ECSearchTypePast) {
+                ECConcertDetailViewController* detailVC = [[ECConcertDetailViewController alloc] initWithConcert:[self.searchResultsEvents objectAtIndex:indexPath.row]];
+                detailVC.tense = self.currentSearchType;
+                [self.navigationController pushViewController:detailVC animated:YES];
+            }
+            else {
+                UIStoryboard* sb = [UIStoryboard storyboardWithName:@"ECUpcomingStoryboard" bundle:nil];
+                ECUpcomingViewController * vc = [sb instantiateInitialViewController];
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+            
         }
     }
     else {
         NSArray* events = [self currentEventArray];
-        ECConcertDetailViewController* detailVC = [[ECConcertDetailViewController alloc] initWithConcert:[events objectAtIndex:indexPath.row]];
-        detailVC.tense = self.currentSearchType;
-        [self.navigationController pushViewController:detailVC animated:YES];
+        NSDictionary* concert = [events objectAtIndex:indexPath.row];
+        if (self.currentSearchType == ECSearchTypePast) {
+            ECConcertDetailViewController* detailVC = [[ECConcertDetailViewController alloc] initWithConcert:concert];
+            detailVC.tense = self.currentSearchType;
+            [self.navigationController pushViewController:detailVC animated:YES];
+        }
+        else {
+            UIStoryboard* sb = [UIStoryboard storyboardWithName:@"ECUpcomingStoryboard" bundle:nil];
+            ECUpcomingViewController * vc = [sb instantiateInitialViewController];
+            vc.tense = self.currentSearchType;
+            vc.concert = concert;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
     }
 }
 -(UIView*) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {

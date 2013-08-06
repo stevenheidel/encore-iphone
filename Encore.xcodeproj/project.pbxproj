@@ -92,6 +92,9 @@
 		D4A8DDD5176AAA99005E9847 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4A8DDD4176AAA98005E9847 /* QuartzCore.framework */; };
 		D4A99EDA1784EEC400F4FB46 /* feedback.png in Resources */ = {isa = PBXBuildFile; fileRef = D4A99ED81784EEC400F4FB46 /* feedback.png */; };
 		D4A99EDB1784EEC400F4FB46 /* feedback@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4A99ED91784EEC400F4FB46 /* feedback@2x.png */; };
+		D4A9A70E17B02945007E8A80 /* ECLineupCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4A9A70D17B02945007E8A80 /* ECLineupCell.xib */; };
+		D4A9A71317B03D65007E8A80 /* ECUpcomingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A9A71117B03D65007E8A80 /* ECUpcomingViewController.m */; };
+		D4A9A71617B03DC5007E8A80 /* ECUpcomingStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4A9A71517B03DC5007E8A80 /* ECUpcomingStoryboard.storyboard */; };
 		D4A9B2D4178DBE83008B5504 /* navbar.png in Resources */ = {isa = PBXBuildFile; fileRef = D4A9B2D2178DBE83008B5504 /* navbar.png */; };
 		D4A9B2D5178DBE83008B5504 /* navbar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4A9B2D3178DBE83008B5504 /* navbar@2x.png */; };
 		D4A9B2D7178DC3EE008B5504 /* noimage.png in Resources */ = {isa = PBXBuildFile; fileRef = D4A9B2D6178DC3EE008B5504 /* noimage.png */; };
@@ -162,6 +165,10 @@
 		D4AE47451795A179006AF663 /* profileSectionHeader.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AE47431795A179006AF663 /* profileSectionHeader.png */; };
 		D4AE47461795A179006AF663 /* profileSectionHeader@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AE47441795A179006AF663 /* profileSectionHeader@2x.png */; };
 		D4B0AC4717727FDA00DC4DD2 /* ECPostPlaceholder.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4B0AC4617727FDA00DC4DD2 /* ECPostPlaceholder.xib */; };
+		D4B2DDBC17B0101800836F53 /* ECArtistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4B2DDBA17B0101800836F53 /* ECArtistViewController.m */; };
+		D4B2DDBD17B0101800836F53 /* ECArtistViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4B2DDBB17B0101800836F53 /* ECArtistViewController.xib */; };
+		D4B2DDC217B01B0900836F53 /* ECLineupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4B2DDC017B01B0900836F53 /* ECLineupViewController.m */; };
+		D4B2DDC317B01B0900836F53 /* ECLineupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4B2DDC117B01B0900836F53 /* ECLineupViewController.xib */; };
 		D4B31DE91793D03300822228 /* NSUserDefaults+Encore.m in Sources */ = {isa = PBXBuildFile; fileRef = D4B31DE81793D03300822228 /* NSUserDefaults+Encore.m */; };
 		D4B7083A1797A7A300CF3A9D /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4B708371797A53C00CF3A9D /* MapKit.framework */; };
 		D4B7A8B41799EA4B001C14BE /* magnifyingglass.png in Resources */ = {isa = PBXBuildFile; fileRef = D4B7A8B21799EA4B001C14BE /* magnifyingglass.png */; };
@@ -336,6 +343,10 @@
 		D4A8DDD4176AAA98005E9847 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		D4A99ED81784EEC400F4FB46 /* feedback.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = feedback.png; sourceTree = "<group>"; };
 		D4A99ED91784EEC400F4FB46 /* feedback@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "feedback@2x.png"; sourceTree = "<group>"; };
+		D4A9A70D17B02945007E8A80 /* ECLineupCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ECLineupCell.xib; path = ../ECLineupCell.xib; sourceTree = "<group>"; };
+		D4A9A71017B03D65007E8A80 /* ECUpcomingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECUpcomingViewController.h; sourceTree = "<group>"; };
+		D4A9A71117B03D65007E8A80 /* ECUpcomingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECUpcomingViewController.m; sourceTree = "<group>"; };
+		D4A9A71517B03DC5007E8A80 /* ECUpcomingStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ECUpcomingStoryboard.storyboard; sourceTree = "<group>"; };
 		D4A9B2D2178DBE83008B5504 /* navbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navbar.png; sourceTree = "<group>"; };
 		D4A9B2D3178DBE83008B5504 /* navbar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navbar@2x.png"; sourceTree = "<group>"; };
 		D4A9B2D6178DC3EE008B5504 /* noimage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noimage.png; sourceTree = "<group>"; };
@@ -419,6 +430,12 @@
 		D4AE47431795A179006AF663 /* profileSectionHeader.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profileSectionHeader.png; sourceTree = "<group>"; };
 		D4AE47441795A179006AF663 /* profileSectionHeader@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profileSectionHeader@2x.png"; sourceTree = "<group>"; };
 		D4B0AC4617727FDA00DC4DD2 /* ECPostPlaceholder.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECPostPlaceholder.xib; sourceTree = "<group>"; };
+		D4B2DDB917B0101800836F53 /* ECArtistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECArtistViewController.h; sourceTree = "<group>"; };
+		D4B2DDBA17B0101800836F53 /* ECArtistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECArtistViewController.m; sourceTree = "<group>"; };
+		D4B2DDBB17B0101800836F53 /* ECArtistViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECArtistViewController.xib; sourceTree = "<group>"; };
+		D4B2DDBF17B01B0900836F53 /* ECLineupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECLineupViewController.h; sourceTree = "<group>"; };
+		D4B2DDC017B01B0900836F53 /* ECLineupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECLineupViewController.m; sourceTree = "<group>"; };
+		D4B2DDC117B01B0900836F53 /* ECLineupViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECLineupViewController.xib; sourceTree = "<group>"; };
 		D4B31DE71793D03300822228 /* NSUserDefaults+Encore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSUserDefaults+Encore.h"; sourceTree = "<group>"; };
 		D4B31DE81793D03300822228 /* NSUserDefaults+Encore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSUserDefaults+Encore.m"; sourceTree = "<group>"; };
 		D4B708371797A53C00CF3A9D /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -574,6 +591,9 @@
 		D4A8DDBF176A134B005E9847 /* Concert */ = {
 			isa = PBXGroup;
 			children = (
+				D4A9A71017B03D65007E8A80 /* ECUpcomingViewController.h */,
+				D4A9A71117B03D65007E8A80 /* ECUpcomingViewController.m */,
+				D4A9A71517B03DC5007E8A80 /* ECUpcomingStoryboard.storyboard */,
 				D4A8DDAE176A133B005E9847 /* ECConcertDetailViewController.h */,
 				D4A8DDAD176A133B005E9847 /* ECConcertDetailViewController.m */,
 				D4A8DDB1176A133B005E9847 /* ECConcertDetailViewController.xib */,
@@ -586,6 +606,10 @@
 				D4ABD2E8177E2C8800DC691F /* ECPictureViewController.h */,
 				D4ABD2E9177E2C8900DC691F /* ECPictureViewController.m */,
 				D4ABD2EA177E2C8900DC691F /* ECPictureViewController.xib */,
+				D4B2DDBF17B01B0900836F53 /* ECLineupViewController.h */,
+				D4B2DDC017B01B0900836F53 /* ECLineupViewController.m */,
+				D4B2DDC117B01B0900836F53 /* ECLineupViewController.xib */,
+				D4A9A70D17B02945007E8A80 /* ECLineupCell.xib */,
 				D4A8DDD0176A4272005E9847 /* Post detail */,
 			);
 			name = Concert;
@@ -792,6 +816,7 @@
 				D4AA4D321766BA8F009B0635 /* Login */,
 				D4AA632C1780BAFB008111C6 /* Main View */,
 				D4AA4D2C1766B9B0009B0635 /* Profile */,
+				D4B2DDBE17B0102200836F53 /* Artist */,
 				D4A8DDBF176A134B005E9847 /* Concert */,
 				D4AA4CF91766B374009B0635 /* Supporting Files */,
 			);
@@ -925,6 +950,16 @@
 				D4AE47441795A179006AF663 /* profileSectionHeader@2x.png */,
 			);
 			path = divider;
+			sourceTree = "<group>";
+		};
+		D4B2DDBE17B0102200836F53 /* Artist */ = {
+			isa = PBXGroup;
+			children = (
+				D4B2DDB917B0101800836F53 /* ECArtistViewController.h */,
+				D4B2DDBA17B0101800836F53 /* ECArtistViewController.m */,
+				D4B2DDBB17B0101800836F53 /* ECArtistViewController.xib */,
+			);
+			name = Artist;
 			sourceTree = "<group>";
 		};
 		D4B7A8AE1799DC39001C14BE /* Black background */ = {
@@ -1239,6 +1274,10 @@
 				D956550B17A177BD00B7DA59 /* ticketsbutton@2x.png in Resources */,
 				D401054917A20E6C006078D0 /* playbutton.png in Resources */,
 				D401054A17A20E6C006078D0 /* playbutton@2x.png in Resources */,
+				D4B2DDBD17B0101800836F53 /* ECArtistViewController.xib in Resources */,
+				D4B2DDC317B01B0900836F53 /* ECLineupViewController.xib in Resources */,
+				D4A9A70E17B02945007E8A80 /* ECLineupCell.xib in Resources */,
+				D4A9A71617B03DC5007E8A80 /* ECUpcomingStoryboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1329,6 +1368,9 @@
 				D4B31DE91793D03300822228 /* NSUserDefaults+Encore.m in Sources */,
 				D4BB7E09179CCF4E0098BCF4 /* ECCustomNavController.m in Sources */,
 				D948FE72179F951B0035297A /* ECFacebookManger.m in Sources */,
+				D4B2DDBC17B0101800836F53 /* ECArtistViewController.m in Sources */,
+				D4B2DDC217B01B0900836F53 /* ECLineupViewController.m in Sources */,
+				D4A9A71317B03D65007E8A80 /* ECUpcomingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
