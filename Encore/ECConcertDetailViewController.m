@@ -52,7 +52,8 @@
 
 NSString *kCellID = @"cellID";
 
-@interface ECConcertDetailViewController (){
+@interface ECConcertDetailViewController ()<UIGestureRecognizerDelegate>
+{
     NSInteger numTimesGetStuffPressed;
 }
 @property (assign) BOOL isExpanded;
@@ -849,7 +850,8 @@ NSString *kCellID = @"cellID";
         UITapGestureRecognizer* recognizerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapPlaceholder)];
         recognizerTap.numberOfTapsRequired = 1;
         recognizerTap.numberOfTouchesRequired = 1;
-        [self.placeholderView addGestureRecognizer:recognizerTap];
+        recognizerTap.delegate = self;
+        [self.artistsLabel addGestureRecognizer:recognizerTap];
     }
     
     [self updatePlaceholderText];
@@ -1061,5 +1063,8 @@ NSString *kCellID = @"cellID";
     }
     return self;
 }
-
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+{
+    return YES;
+}
 @end
