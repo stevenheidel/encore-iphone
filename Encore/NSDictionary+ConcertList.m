@@ -153,4 +153,10 @@ static NSString * const kDateFormat = @"yyyy-MM-dd";
     }
     return  [NSArray arrayWithArray:artists];;
 }
+-(NSArray*)lineup
+{
+    
+    return  [self objectForKey:@"artists"];
+ 
+}
 @end

@@ -42,5 +42,6 @@
 
 -(NSString *) headliner;
 -(NSArray *) artists;
+-(NSArray *) lineup;
 
 @end

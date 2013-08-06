@@ -28,6 +28,7 @@
 @end
 
 @interface LineupCell : UITableViewCell <UICollectionViewDataSource,UICollectionViewDelegate>
+@property (weak, nonatomic) IBOutlet UILabel *lineupLabel;
 @property (weak,nonatomic) IBOutlet UICollectionView* lineupCollectionView;
 @property (nonatomic,strong) NSArray* lineup;
 @end
@@ -39,6 +40,7 @@
 @end
 
 @interface LocationCell : UITableViewCell <MKMapViewDelegate>
+@property (weak, nonatomic) IBOutlet UILabel *locationLabel;
 @property (assign,nonatomic) CLLocationCoordinate2D location2D;
 @property (copy,nonatomic) NSString* venueName;
 @property (weak,nonatomic) IBOutlet UILabel* addressLabel;

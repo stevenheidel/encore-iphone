@@ -744,6 +744,8 @@ typedef enum {
             else {
                 UIStoryboard* sb = [UIStoryboard storyboardWithName:@"ECUpcomingStoryboard" bundle:nil];
                 ECUpcomingViewController * vc = [sb instantiateInitialViewController];
+                vc.tense = self.currentSearchType;
+                vc.concert = [self.searchResultsEvents objectAtIndex:indexPath.row];
                 [self.navigationController pushViewController:vc animated:YES];
             }
             

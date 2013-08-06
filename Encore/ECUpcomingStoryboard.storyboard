@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="kpA-lm-Rwt">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="13A524d" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="kpA-lm-Rwt">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -8,9 +8,9 @@
         <scene sceneID="XmS-SI-lZg">
             <objects>
                 <tableViewController id="kpA-lm-Rwt" customClass="ECUpcomingViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="55" sectionHeaderHeight="22" sectionFooterHeight="22" id="mQ7-OM-4Vl">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="55" sectionHeaderHeight="22" sectionFooterHeight="22" id="mQ7-OM-4Vl">
                         <rect key="frame" x="0.0" y="20" width="320" height="548"/>
-                        <color key="backgroundColor" white="1" alpha="0.69999999999999996" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.59999999999999998" colorSpace="calibratedWhite"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="XVm-2A-vG2">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="181"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -23,7 +23,7 @@
                                 </imageView>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="MACKLEMORE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ANH-Ol-4uw">
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="textColor" red="0.01176470588" green="0.69019607839999997" blue="0.89019607840000003" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Echo Beach, August 2, 2013" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mJ8-26-en9">
@@ -31,7 +31,7 @@
                                         <constraint firstAttribute="height" constant="21" id="dzA-r6-Zmc"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
@@ -55,13 +55,15 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="54"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aHB-Hj-xvc">
+                                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aHB-Hj-xvc">
+                                            <color key="backgroundColor" red="0.01176470588" green="0.69019607839999997" blue="0.89019607840000003" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
+                                                <constraint firstAttribute="height" constant="44" id="PfP-Zh-Ckg"/>
                                                 <constraint firstAttribute="width" constant="246" id="haa-dv-mGT"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                             <state key="normal" title="GRAB TICKETS">
-                                                <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                             <state key="highlighted">
@@ -96,7 +98,7 @@
                                                 <constraint firstAttribute="width" constant="46" id="Ppm-iw-UpR"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </label>
                                         <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="avh-by-3zJ">
@@ -105,7 +107,7 @@
                                                 <constraint firstAttribute="height" constant="96" id="vFY-WB-LjH"/>
                                             </constraints>
                                             <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="BZm-4q-wNm">
-                                                <size key="itemSize" width="50" height="50"/>
+                                                <size key="itemSize" width="90" height="90"/>
                                                 <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                 <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                                 <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -126,21 +128,21 @@
                                                             </imageView>
                                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="MACKLEMORE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y9Z-4P-s9f">
                                                                 <constraints>
-                                                                    <constraint firstAttribute="width" constant="121" id="0tP-dV-2os"/>
                                                                     <constraint firstAttribute="height" constant="21" id="2X2-B5-et8"/>
                                                                 </constraints>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                                <color key="textColor" red="0.1058823529" green="0.62352941179999999" blue="0.86274509799999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </view>
                                                     <constraints>
-                                                        <constraint firstAttribute="bottom" secondItem="nPV-Ep-Jld" secondAttribute="bottom" constant="20" type="default" id="Gbw-2A-tqa"/>
-                                                        <constraint firstItem="nPV-Ep-Jld" firstAttribute="centerX" secondItem="Y9Z-4P-s9f" secondAttribute="centerX" type="default" id="Ln6-xv-NkP"/>
-                                                        <constraint firstItem="Y9Z-4P-s9f" firstAttribute="bottom" secondItem="YGc-sr-dmU" secondAttribute="bottom" type="default" id="acL-uF-FOo"/>
-                                                        <constraint firstItem="Y9Z-4P-s9f" firstAttribute="centerX" secondItem="YGc-sr-dmU" secondAttribute="centerX" type="default" id="tBx-1s-sWx"/>
+                                                        <constraint firstItem="Y9Z-4P-s9f" firstAttribute="centerX" secondItem="nPV-Ep-Jld" secondAttribute="centerX" type="default" id="2TH-Hb-VNC"/>
+                                                        <constraint firstAttribute="bottom" secondItem="nPV-Ep-Jld" secondAttribute="bottom" constant="20" type="default" id="3F0-v4-f7p"/>
+                                                        <constraint firstItem="Y9Z-4P-s9f" firstAttribute="leading" secondItem="YGc-sr-dmU" secondAttribute="leading" type="default" id="dmO-Py-E9F"/>
+                                                        <constraint firstItem="Y9Z-4P-s9f" firstAttribute="bottom" secondItem="YGc-sr-dmU" secondAttribute="bottom" type="default" id="jvd-gW-8ZL"/>
+                                                        <constraint firstItem="Y9Z-4P-s9f" firstAttribute="trailing" secondItem="YGc-sr-dmU" secondAttribute="trailing" type="default" id="lGf-dg-uId"/>
                                                     </constraints>
                                                     <size key="customSize" width="90" height="90"/>
                                                     <connections>
@@ -167,6 +169,7 @@
                                 </constraints>
                                 <connections>
                                     <outlet property="lineupCollectionView" destination="avh-by-3zJ" id="txu-2w-KOK"/>
+                                    <outlet property="lineupLabel" destination="Y9x-J2-8sE" id="Cyy-u7-PYx"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="location" rowHeight="143" id="4ou-sL-lFG" customClass="LocationCell">
@@ -181,7 +184,7 @@
                                                 <constraint firstAttribute="height" constant="21" id="2cP-gK-hfT"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="91" translatesAutoresizingMaskIntoConstraints="NO" id="zba-7k-wSx" userLabel="address label">
@@ -190,7 +193,7 @@
                                                 <constraint firstAttribute="height" constant="64" id="whS-S3-ndf"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xZF-Ld-MAV" userLabel="phone label">
@@ -199,7 +202,7 @@
                                                 <constraint firstAttribute="height" constant="21" id="EYG-Ie-MhK"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </label>
                                         <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Heh-BN-YO4">
@@ -242,6 +245,7 @@
                                 </constraints>
                                 <connections>
                                     <outlet property="addressLabel" destination="zba-7k-wSx" id="dUq-AD-avR"/>
+                                    <outlet property="locationLabel" destination="Yyn-be-IwG" id="jOX-XS-eCe"/>
                                     <outlet property="mapView" destination="Heh-BN-YO4" id="UY3-al-Yzb"/>
                                     <outlet property="phoneLabel" destination="xZF-Ld-MAV" id="Ku1-w2-bV7"/>
                                 </connections>
@@ -261,7 +265,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z5x-FA-Vot" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="473" y="141"/>
+            <point key="canvasLocation" x="90" y="145"/>
         </scene>
     </scenes>
     <classes>
@@ -284,6 +288,7 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/LineupCell.h"/>
             <relationships>
                 <relationship kind="outlet" name="lineupCollectionView" candidateClass="UICollectionView"/>
+                <relationship kind="outlet" name="lineupLabel" candidateClass="UILabel"/>
             </relationships>
         </class>
         <class className="LineupCollectionCell" superclassName="UICollectionViewCell">
@@ -298,6 +303,7 @@
             <relationships>
                 <relationship kind="action" name="openBigMap"/>
                 <relationship kind="outlet" name="addressLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="locationLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
                 <relationship kind="outlet" name="phoneLabel" candidateClass="UILabel"/>
             </relationships>

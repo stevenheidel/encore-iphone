@@ -189,6 +189,7 @@
 		D948FE72179F951B0035297A /* ECFacebookManger.m in Sources */ = {isa = PBXBuildFile; fileRef = D948FE71179F951B0035297A /* ECFacebookManger.m */; };
 		D956550A17A177BD00B7DA59 /* ticketsbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = D956550817A177BD00B7DA59 /* ticketsbutton.png */; };
 		D956550B17A177BD00B7DA59 /* ticketsbutton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D956550917A177BD00B7DA59 /* ticketsbutton@2x.png */; };
+		D9963FD017B0D4E9003C3CC1 /* UIImage+Merge.m in Sources */ = {isa = PBXBuildFile; fileRef = D9963FCF17B0D4E9003C3CC1 /* UIImage+Merge.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -459,6 +460,8 @@
 		D948FE71179F951B0035297A /* ECFacebookManger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECFacebookManger.m; sourceTree = "<group>"; };
 		D956550817A177BD00B7DA59 /* ticketsbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ticketsbutton.png; sourceTree = "<group>"; };
 		D956550917A177BD00B7DA59 /* ticketsbutton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ticketsbutton@2x.png"; sourceTree = "<group>"; };
+		D9963FCE17B0D4E9003C3CC1 /* UIImage+Merge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Merge.h"; sourceTree = "<group>"; };
+		D9963FCF17B0D4E9003C3CC1 /* UIImage+Merge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Merge.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1018,6 +1021,8 @@
 				D4AC35F81768C5850087B1E9 /* NSDictionary+ConcertList.m */,
 				A022AABD1779E8380009244C /* UIImage+GaussBlur.h */,
 				A022AABE1779E8380009244C /* UIImage+GaussBlur.m */,
+				D9963FCE17B0D4E9003C3CC1 /* UIImage+Merge.h */,
+				D9963FCF17B0D4E9003C3CC1 /* UIImage+Merge.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -1371,6 +1376,7 @@
 				D4B2DDBC17B0101800836F53 /* ECArtistViewController.m in Sources */,
 				D4B2DDC217B01B0900836F53 /* ECLineupViewController.m in Sources */,
 				D4A9A71317B03D65007E8A80 /* ECUpcomingViewController.m in Sources */,
+				D9963FD017B0D4E9003C3CC1 /* UIImage+Merge.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
