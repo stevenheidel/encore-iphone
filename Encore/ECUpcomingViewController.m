@@ -96,7 +96,8 @@ typedef enum {
 @implementation GrabTicketsCell
 
 -(IBAction) grabTickets {
-    NSLog(@"Grab_Tickets!");
+    [[UIApplication sharedApplication] openURL:self.lastfmURL];
+
 }
 
 @end
@@ -258,12 +259,12 @@ typedef enum {
                 cell = [[LocationCell alloc] init];
             }
             //TODO : add real data
-            cell.addressLabel.text = @"address";
+            cell.addressLabel.text = [self.concert address];
             cell.phoneLabel.text = @"phone";
             
             cell.locationLabel.font = [UIFont lightHeroFontWithSize:14];
             cell.phoneLabel.font = [UIFont lightHeroFontWithSize:12];
-            cell.addressLabel.font = [UIFont lightHeroFontWithSize:12];
+            cell.addressLabel.font = [UIFont lightHeroFontWithSize:10];
 
             CLLocation* location = [self.concert coordinates];
             CLLocationCoordinate2D coord2D = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude);
@@ -302,12 +303,10 @@ typedef enum {
                 cell = [[GrabTicketsCell alloc] init];
 
             }
+            cell.lastfmURL = [self.concert lastfmURL];
             cell.grabTicketsButton.titleLabel.font = [UIFont heroFontWithSize:20];
             cell.grabTicketsButton.layer.cornerRadius = 5.0;
             cell.grabTicketsButton.layer.masksToBounds = YES;
-            
-            //TODO: add real data
-            //cell.ticketURL = nil;
             return cell;
         }
         default:

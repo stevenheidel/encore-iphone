@@ -21,7 +21,7 @@
 @end
 
 @interface GrabTicketsCell : UITableViewCell
-
+@property (strong,nonatomic) NSURL* lastfmURL;
 @property (weak, nonatomic) IBOutlet UIButton* grabTicketsButton;
 -(IBAction) grabTickets;
 

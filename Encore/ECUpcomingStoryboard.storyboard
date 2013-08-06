@@ -187,18 +187,17 @@
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="91" translatesAutoresizingMaskIntoConstraints="NO" id="zba-7k-wSx" userLabel="address label">
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="100" translatesAutoresizingMaskIntoConstraints="NO" id="zba-7k-wSx" userLabel="address label">
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="91" id="cR2-2f-qtP"/>
+                                                <constraint firstAttribute="width" constant="100" type="user" id="cR2-2f-qtP"/>
                                                 <constraint firstAttribute="height" constant="64" id="whS-S3-ndf"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xZF-Ld-MAV" userLabel="phone label">
+                                        <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xZF-Ld-MAV" userLabel="phone label">
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="42" id="5cx-cG-52x"/>
                                                 <constraint firstAttribute="height" constant="21" id="EYG-Ie-MhK"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -207,7 +206,7 @@
                                         </label>
                                         <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Heh-BN-YO4">
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="228" id="Tmg-sX-Wku"/>
+                                                <constraint firstAttribute="width" constant="200" type="user" id="Tmg-sX-Wku"/>
                                                 <constraint firstAttribute="height" constant="106" id="uCF-SD-RvA"/>
                                             </constraints>
                                             <connections>
@@ -231,14 +230,15 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <constraints>
-                                    <constraint firstItem="zba-7k-wSx" firstAttribute="leading" secondItem="4ou-sL-lFG" secondAttribute="leading" constant="20" type="default" id="G1m-Xb-nf1"/>
                                     <constraint firstAttribute="trailing" secondItem="Orf-R1-58V" secondAttribute="trailing" constant="20" type="default" id="HtS-8Y-vj7"/>
+                                    <constraint firstItem="zba-7k-wSx" firstAttribute="leading" secondItem="4ou-sL-lFG" secondAttribute="leading" constant="5" type="user" id="K8I-uc-BiQ"/>
                                     <constraint firstItem="Yyn-be-IwG" firstAttribute="top" secondItem="4ou-sL-lFG" secondAttribute="top" constant="5" id="N82-3f-RdT"/>
+                                    <constraint firstItem="zba-7k-wSx" firstAttribute="centerX" secondItem="xZF-Ld-MAV" secondAttribute="centerX" type="default" id="Qa4-8g-CFd"/>
                                     <constraint firstItem="Yyn-be-IwG" firstAttribute="leading" secondItem="4ou-sL-lFG" secondAttribute="leading" type="default" id="WgV-hS-Jzr"/>
+                                    <constraint firstAttribute="trailing" secondItem="Heh-BN-YO4" secondAttribute="trailing" constant="5" type="user" id="WtA-d3-nw6"/>
                                     <constraint firstItem="xZF-Ld-MAV" firstAttribute="top" secondItem="zba-7k-wSx" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="X6C-np-40J"/>
                                     <constraint firstItem="zba-7k-wSx" firstAttribute="top" secondItem="Yyn-be-IwG" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="ajS-2f-6jP"/>
                                     <constraint firstItem="xZF-Ld-MAV" firstAttribute="leading" secondItem="4ou-sL-lFG" secondAttribute="leading" constant="20" type="default" id="bHd-86-qMg"/>
-                                    <constraint firstItem="Heh-BN-YO4" firstAttribute="leading" secondItem="4ou-sL-lFG" secondAttribute="leading" constant="84" id="ttF-QY-Zx8"/>
                                     <constraint firstItem="Yyn-be-IwG" firstAttribute="trailing" secondItem="4ou-sL-lFG" secondAttribute="trailing" type="default" id="uAK-x7-ydp"/>
                                     <constraint firstItem="Orf-R1-58V" firstAttribute="bottom" secondItem="xZF-Ld-MAV" secondAttribute="bottom" type="default" id="ukN-Pl-7j0"/>
                                     <constraint firstItem="Heh-BN-YO4" firstAttribute="top" secondItem="4ou-sL-lFG" secondAttribute="top" constant="28" id="xJ3-om-eT4"/>
@@ -319,9 +319,6 @@
         </class>
         <class className="UICollectionViewFlowLayout" superclassName="UICollectionViewLayout">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewFlowLayout.h"/>
-        </class>
-        <class className="UICollectionViewLayout" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewLayout.h"/>
         </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

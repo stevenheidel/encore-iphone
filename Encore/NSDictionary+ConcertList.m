@@ -47,6 +47,15 @@ static NSString * const kDateFormat = @"yyyy-MM-dd";
 -(NSString*) country {
     return [[self venueDetails] objectForKey:@"country"];
 }
+-(NSString *) address
+{
+    NSMutableArray* address = [[NSMutableArray alloc] init];
+    [address addObject:[self street]];
+    [address addObject:[self city]];
+    [address addObject:[self country]];
+    [address removeObject:@""];
+    return [address componentsJoinedByString:@", "];
+}
 
 -(CLLocation*) coordinates {
     NSDictionary* venueDeets = [self venueDetails];
