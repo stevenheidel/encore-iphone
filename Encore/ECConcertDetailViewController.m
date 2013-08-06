@@ -102,7 +102,20 @@ NSString *kCellID = @"cellID";
     UITapGestureRecognizer* recognizerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapArtistPhoto)];
     recognizerTap.numberOfTapsRequired = 1;
     recognizerTap.numberOfTouchesRequired = 1;
+    recognizerTap.delegate = self;
     [self.imgArtist addGestureRecognizer:recognizerTap];
+    
+    UITapGestureRecognizer* headlinerLabelrecognizerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedLineup)];
+    headlinerLabelrecognizerTap.numberOfTapsRequired = 1;
+    headlinerLabelrecognizerTap.numberOfTouchesRequired = 1;
+    headlinerLabelrecognizerTap.delegate = self;
+    [self.headlinerLabel addGestureRecognizer:headlinerLabelrecognizerTap];
+    
+    UITapGestureRecognizer* artistLabelrecognizerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedLineup)];
+    artistLabelrecognizerTap.numberOfTapsRequired = 1;
+    artistLabelrecognizerTap.numberOfTouchesRequired = 1;
+    artistLabelrecognizerTap.delegate = self;
+    [self.artistsLabel addGestureRecognizer:artistLabelrecognizerTap];
     
     [self setupArtistUIAttributes];
 
@@ -851,7 +864,7 @@ NSString *kCellID = @"cellID";
         recognizerTap.numberOfTapsRequired = 1;
         recognizerTap.numberOfTouchesRequired = 1;
         recognizerTap.delegate = self;
-        [self.artistsLabel addGestureRecognizer:recognizerTap];
+        [self.placeholderView addGestureRecognizer:recognizerTap];
     }
     
     [self updatePlaceholderText];
@@ -1042,6 +1055,13 @@ NSString *kCellID = @"cellID";
 //    }
    
 }
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+{
+    return YES;
+}
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    return YES;
+}
 @end
 
 #pragma mark -
@@ -1063,8 +1083,6 @@ NSString *kCellID = @"cellID";
     }
     return self;
 }
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
-{
-    return YES;
-}
+
+
 @end
