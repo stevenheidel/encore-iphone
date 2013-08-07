@@ -64,7 +64,7 @@ static NSString * const kDateFormat = @"yyyy-MM-dd";
     return [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
 }
 -(NSString*) venueAndDate {
-    return [NSString stringWithFormat:@"%@, %@", [self venueName], [self niceDate]];
+    return [NSString stringWithFormat:@"%@, %@", [self venueName], [[self niceDate] capitalizedString]];
 }
 -(NSString*) serverID {
     return [self eventID];

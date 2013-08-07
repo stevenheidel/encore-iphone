@@ -12,6 +12,8 @@
 
 
 @interface ECUpcomingViewController : UITableViewController
+
+
 @property (weak, nonatomic) IBOutlet UIImageView *eventImage;
 @property (weak, nonatomic) IBOutlet UILabel *eventName;
 @property (weak, nonatomic) IBOutlet UILabel *eventVenueAndDate;
@@ -28,12 +30,15 @@
 @end
 
 @interface LineupCell : UITableViewCell <UICollectionViewDataSource,UICollectionViewDelegate>
+
+@property (nonatomic, strong) NSMutableArray* lineupImages;
 @property (weak, nonatomic) IBOutlet UILabel *lineupLabel;
 @property (weak,nonatomic) IBOutlet UICollectionView* lineupCollectionView;
 @property (nonatomic,strong) NSArray* lineup;
 @end
 
 @interface LineupCollectionCell : UICollectionViewCell
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (weak,nonatomic) IBOutlet UIImageView* artistImage;
 @property (weak,nonatomic) IBOutlet UILabel* artistLabel;
 

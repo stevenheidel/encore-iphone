@@ -23,6 +23,7 @@
 #import "ECAppDelegate.h"
 #import "EncoreURL.h"
 #import "ECAlertTags.h"
+#import "UIColor+EncoreUI.h"
 
 typedef enum {
     Tickets,
@@ -52,6 +53,7 @@ typedef enum {
 
 @implementation LocationCell
 -(IBAction) openBigMap {
+    [Flurry logEvent:@"Opened_Big_Map"];
     MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:self.location2D addressDictionary:nil];
     MKMapItem* mapItem = [[MKMapItem alloc] initWithPlacemark:placemark];
     [mapItem setName:self.venueName];
@@ -59,21 +61,53 @@ typedef enum {
 }
 @end
 
+#import "ECJSONFetcher.h"
+#import "NSUserDefaults+Encore.h"
 @implementation LineupCell
+
+-(void) setLineup:(NSArray *)lineup {
+    _lineup = lineup;
+    self.lineupImages = [[NSMutableArray alloc] initWithCapacity:self.lineup.count];
+    
+    for (int i = 0; i < self.lineup.count; i++) {
+        [self.lineupImages addObject:[NSNull null]];
+    }
+}
 -(UICollectionViewCell*) collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     NSInteger itemNumber = indexPath.row;
     NSDictionary* artist = [self.lineup objectAtIndex:itemNumber];
+    NSString* name = [artist objectForKey:@"artist"];
     
     __weak LineupCollectionCell *cell = (LineupCollectionCell*)[collectionView dequeueReusableCellWithReuseIdentifier:@"LineupCell" forIndexPath:indexPath];
+    [cell.artistImage setImage:nil];
+    
+    if([self.lineupImages objectAtIndex:indexPath.row] == [NSNull null]) {
+        [cell.activityIndicator startAnimating];
+        [ECJSONFetcher fetchArtistsForString:name withSearchType:ECSearchTypeFuture forLocation:[NSUserDefaults lastSearchLocation] radius:[NSNumber numberWithFloat:[NSUserDefaults lastSearchRadius]] completion:^(NSDictionary *artists) {
+            NSDictionary* artist1 = [artists objectForKey:@"artist"];
+            
+            NSURL* imageURL = [NSURL URLWithString:[artist1 objectForKey:@"image_url"]];
+            UIImage* image = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL]];
+            if (image) {
+                [self.lineupImages replaceObjectAtIndex:indexPath.row withObject:image];
+                [cell.artistImage setImage: image];
+            }
+            [cell.activityIndicator stopAnimating];
+        }];
+    }
+    else {
+        [cell.artistImage setImage:[self.lineupImages objectAtIndex:indexPath.row]];
+    }
+    
+    cell.artistLabel.text = [[artist objectForKey:@"artist"] uppercaseString];
     
     
-    cell.artistLabel.text = [artist objectForKey:@"artist"];
     
-    //[cell.artistImage setImageWithURL:[artist imageURL] placeholderImage:nil];
-    cell.artistImage.image = [UIImage imageNamed:@"placeholder"];
+//    [cell.artistImage setImageWithURL:[artist imageURL] placeholderImage:nil];
+//    cell.artistImage.image = [UIImage imageNamed:@"placeholder"];
     
-    cell.artistLabel.font = [UIFont heroFontWithSize:12];
+    cell.artistLabel.font = [UIFont heroFontWithSize:10];
     cell.artistImage.layer.cornerRadius = 5.0;
     cell.artistImage.layer.masksToBounds = YES;
     cell.artistImage.layer.borderColor = [UIColor grayColor].CGColor;
@@ -82,6 +116,7 @@ typedef enum {
     return cell;
 }
 -(NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    
     return self.lineup.count;
 }
 -(NSInteger) numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -122,16 +157,13 @@ typedef enum {
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.''
-    self.eventName.text = [self.concert eventName];
+    self.eventName.text = [[self.concert eventName] uppercaseString];
     self.eventVenueAndDate.text = [self.concert venueAndDate];
-    UIImageView* encoreLogo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo.png"]];
+    UIImageView* encoreLogo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
     self.navigationItem.titleView = encoreLogo;
-    [self setApperance];
+    [self setAppearance];
 }
--(void) setApperance
-{
-    
-    
+-(void) setAppearance {
     //Background
     [self.eventImage setImageWithURLRequest:[NSURLRequest requestWithURL:self.concert.imageURL]
                            placeholderImage:nil
@@ -142,6 +174,7 @@ typedef enum {
                                         
         UIImageView *tempImageView = [[UIImageView alloc] initWithImage:backgroundImage];
         [tempImageView setFrame:self.tableView.frame];
+        tempImageView.contentMode = UIViewContentModeScaleAspectFill;
         self.tableView.backgroundView = tempImageView;
 
                                     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
@@ -161,7 +194,7 @@ typedef enum {
     
     //Fonts
     [self.eventName setFont:[UIFont heroFontWithSize:16]];
-    [self.eventVenueAndDate setFont:[UIFont heroFontWithSize:14]];
+    [self.eventVenueAndDate setFont:[UIFont heroFontWithSize:11]];
 
     //Navigation bar
     UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -180,6 +213,7 @@ typedef enum {
     UIBarButtonItem* shareButton = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
     self.navigationItem.rightBarButtonItem = shareButton;    
 
+    self.tableView.separatorColor = [UIColor separatorColor];
 }
 
 -(void) backButtonWasPressed {
@@ -195,11 +229,11 @@ typedef enum {
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.row) {
         case Location:
-            return 143.0f;
+            return 146.0f;
         case Lineup:
-            return 122.0f;
+            return 142.0f;
         case Tickets:
-            return 55.0f;
+            return 60.0f;
         default:
             return 0.0f;
     }
@@ -225,19 +259,6 @@ typedef enum {
     }
 }
 
-+(UITableViewCell*) initCellForRow: (NSUInteger) row {
-    switch (row) {
-        case Location:
-            return [[LocationCell alloc] init];
-        case Lineup:
-            return [[LineupCell alloc] init];
-        case Tickets:
-            return [[GrabTicketsCell alloc] init];
-        default:
-            return nil;
-    }
-}
-
 // When a map annotation point is added, zoom to it (1500 range)
 - (void)mapView:(MKMapView *)mv didAddAnnotationViews:(NSArray *)views
 {
@@ -258,13 +279,11 @@ typedef enum {
             if (cell == nil) {
                 cell = [[LocationCell alloc] init];
             }
-            //TODO : add real data
-            cell.addressLabel.text = [self.concert address];
-            cell.phoneLabel.text = @"phone";
+            cell.addressLabel.text = [NSString stringWithFormat:@"%@\n%@",[self.concert venueName],[self.concert address]];
             
-            cell.locationLabel.font = [UIFont lightHeroFontWithSize:14];
-            cell.phoneLabel.font = [UIFont lightHeroFontWithSize:12];
-            cell.addressLabel.font = [UIFont lightHeroFontWithSize:10];
+            cell.locationLabel.font = [UIFont lightHeroFontWithSize:11];
+//            cell.phoneLabel.font = [UIFont lightHeroFontWithSize:12];
+            cell.addressLabel.font = [UIFont lightHeroFontWithSize:9];
 
             CLLocation* location = [self.concert coordinates];
             CLLocationCoordinate2D coord2D = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude);
@@ -290,9 +309,8 @@ typedef enum {
             LineupCell* cell = [tableView dequeueReusableCellWithIdentifier:identifier];
             if (cell == nil) {
                 cell = [[LineupCell alloc] init];
-
             }
-            cell.lineupLabel.font = [UIFont lightHeroFontWithSize:14];
+            cell.lineupLabel.font = [UIFont lightHeroFontWithSize:12];
             cell.lineup = self.concert.lineup;
             
             return cell;
