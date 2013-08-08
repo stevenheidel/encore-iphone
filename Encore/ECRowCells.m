@@ -92,7 +92,7 @@
 
 -(IBAction) grabTickets {
     [[UIApplication sharedApplication] openURL:self.lastfmURL];
-    
+    [Flurry logEvent:@"Tapped_Grab_Tickets" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:self.lastfmURL, @"URL", nil]];
 }
 
 @end

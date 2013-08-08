@@ -164,7 +164,7 @@
     if([ApplicationDelegate isLoggedIn]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:ECLoginCompletedNotification object:nil];
         [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
-        [Flurry logEvent:@"Share_Tapped_Concert"];
+        [Flurry logEvent:@"Share_Tapped_Concert" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"past_grid_vc",@"source",self.concert.eventID,@"eventID", self.concert.eventName, @"eventName", nil]];
         [self share];
     }
     else {

@@ -116,7 +116,7 @@ typedef enum {
 
     //Navigation bar
     UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    UIImage *leftButImage = [UIImage imageNamed:@"backButton.png"]; //stretchableImageWithLeftCapWidth:10 topCapHeight:10];
+    UIImage *leftButImage = [UIImage imageNamed:@"backButton"];
     [leftButton setBackgroundImage:leftButImage forState:UIControlStateNormal];
     [leftButton addTarget:self action:@selector(backButtonWasPressed) forControlEvents:UIControlEventTouchUpInside];
     leftButton.frame = CGRectMake(0, 0, leftButImage.size.width, leftButImage.size.height);
@@ -124,7 +124,7 @@ typedef enum {
     self.navigationItem.leftBarButtonItem = backButton;
     
     UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    UIImage *rightButImage = [UIImage imageNamed:@"shareButton.png"]; //stretchableImageWithLeftCapWidth:10 topCapHeight:10];
+    UIImage *rightButImage = [UIImage imageNamed:@"shareButton"];
     [rightButton setBackgroundImage:rightButImage forState:UIControlStateNormal];
     [rightButton addTarget:self action:@selector(shareTapped) forControlEvents:UIControlEventTouchUpInside];
     rightButton.frame = CGRectMake(0, 0, rightButImage.size.width, rightButImage.size.height);
@@ -264,7 +264,7 @@ typedef enum {
     if([ApplicationDelegate isLoggedIn]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:ECLoginCompletedNotification object:nil];
         [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
-        [Flurry logEvent:@"Share_Tapped_Concert"];
+        [Flurry logEvent:@"Share_Tapped_Concert" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"upcomingvc",@"source", self.concert.eventID,@"eventID", self.concert.eventName, @"eventName", nil]];
         [self share];
     }
     else {

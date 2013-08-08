@@ -142,17 +142,6 @@ typedef enum {
     }
 }
 
-// When a map annotation point is added, zoom to it (1500 range)
-- (void)mapView:(MKMapView *)mv didAddAnnotationViews:(NSArray *)views
-{
-	MKAnnotationView *annotationView = [views objectAtIndex:0];
-	id <MKAnnotation> mp = [annotationView annotation];
-	MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance([mp coordinate], 1500, 1500);
-	[mv setRegion:region animated:YES];
-	[mv selectAnnotation:mp animated:YES];
-    NSLog(@"This went");
-}
-
 -(UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString* identifier = [ECPastViewController identifierForRow:indexPath.row];
     
@@ -164,36 +153,6 @@ typedef enum {
             }
             [cell.detailsLabel setFont:[UIFont lightHeroFontWithSize:12]];
             cell.contentView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
-
-//            UITapGestureRecognizer* tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:cell action:@selector(openBigMap)];
-//            tapRecognizer.numberOfTapsRequired = 1;
-//            tapRecognizer.numberOfTouchesRequired = 1;
-//            [cell.mapView addGestureRecognizer:tapRecognizer];
-//            cell.addressLabel.text = [NSString stringWithFormat:@"%@\n%@",[self.concert venueName],[self.concert address]];
-//            cell.startTimeLabel.text = [self.concert startTime];
-//            
-//            cell.locationLabel.font = [UIFont lightHeroFontWithSize:12];
-//            //            cell.phoneLabel.font = [UIFont lightHeroFontWithSize:12];
-//            cell.addressLabel.font = [UIFont lightHeroFontWithSize:12];
-//            
-//            CLLocation* location = [self.concert coordinates];
-//            CLLocationCoordinate2D coord2D = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude);
-//            cell.location2D = coord2D;
-//            cell.venueName = self.concert.venueName;
-//            
-//            cell.startTimeLabel.text = self.concert.startTime;
-            
-//            MapViewAnnotation* annotation = [[MapViewAnnotation alloc] initWithTitle:[self.concert venueName] andCoordinate:coord2D];
-//            [cell.mapView setCenterCoordinate:coord2D];
-//            [cell.mapView addAnnotation:annotation];
-//            MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(coord2D, 9000, 9000);
-//            [cell.mapView setRegion:region animated:YES];
-//            [cell.mapView regionThatFits:region];
-//            
-//            cell.mapView.layer.borderColor = [UIColor blackColor].CGColor;
-//            cell.mapView.layer.borderWidth = 1;
-            
-            //            [cell.mapView selectAnnotation:annotation animated:YES];
             
             return cell;
         }
@@ -232,6 +191,7 @@ typedef enum {
     if ([[segue identifier] isEqualToString:@"PastViewControllerToGridViewController"]) {
         ECGridViewController* vc = [segue destinationViewController];
         vc.concert = self.concert;
+        [Flurry logEvent:@"Tapped_See_Photos_Past" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:self.concert.eventID, @"eventID", self.concert.eventName, @"eventName", nil]];
     }
 }
 #pragma mark FB Sharing
@@ -239,7 +199,7 @@ typedef enum {
     if([ApplicationDelegate isLoggedIn]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:ECLoginCompletedNotification object:nil];
         [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
-        [Flurry logEvent:@"Share_Tapped_Concert"];
+        [Flurry logEvent:@"Share_Tapped_Concert" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"pastvc",@"source",self.concert.eventID,@"eventID", self.concert.eventName, @"eventName", nil]];
         [self share];
     }
     else {
