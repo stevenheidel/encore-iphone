@@ -95,7 +95,6 @@ static NSString *const TenseURL = @TENSE_DEF;
 static NSString *const LastfmIDURL = @LASTFM_ID_DEF;
 static NSString *const SongkickIDURL = @SONGKICK_ID_DEF;
 
-//static NSString *const userLocation = @"Toronto"; //TODO: Get location dynamically from app delegate
 
 
 #endif
