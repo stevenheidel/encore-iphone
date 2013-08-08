@@ -163,6 +163,8 @@ typedef enum {
                 cell = [[DetailsCell alloc] init];
             }
             [cell.detailsLabel setFont:[UIFont lightHeroFontWithSize:12]];
+            cell.contentView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
+
 //            UITapGestureRecognizer* tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:cell action:@selector(openBigMap)];
 //            tapRecognizer.numberOfTapsRequired = 1;
 //            tapRecognizer.numberOfTouchesRequired = 1;
@@ -202,6 +204,8 @@ typedef enum {
             }
             cell.lineupLabel.font = [UIFont lightHeroFontWithSize:12];
             cell.lineup = self.concert.lineup;
+            cell.contentView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
+
             
             return cell;
         }
@@ -215,6 +219,8 @@ typedef enum {
             cell.grabPhotosButton.titleLabel.font = [UIFont heroFontWithSize:20];
             cell.grabPhotosButton.layer.cornerRadius = 5.0;
             cell.grabPhotosButton.layer.masksToBounds = YES;
+            cell.contentView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
+
             return cell;
         }
         default:

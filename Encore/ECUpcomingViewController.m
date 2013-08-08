@@ -205,7 +205,7 @@ typedef enum {
             cell.startTimeLabel.text = [self.concert startTime];
             
             cell.locationLabel.font = [UIFont lightHeroFontWithSize:12];
-//            cell.phoneLabel.font = [UIFont lightHeroFontWithSize:12];
+            cell.phoneLabel.font = [UIFont lightHeroFontWithSize:12];
             cell.addressLabel.font = [UIFont lightHeroFontWithSize:12];
 
             CLLocation* location = [self.concert coordinates];
@@ -213,7 +213,7 @@ typedef enum {
             cell.location2D = coord2D;
             cell.venueName = self.concert.venueName;
             
-            cell.startTimeLabel.text = self.concert.startTime;
+          //  cell.startTimeLabel.text = self.concert.startTime;
             
             MapViewAnnotation* annotation = [[MapViewAnnotation alloc] initWithTitle:[self.concert venueName] andCoordinate:coord2D];
             [cell.mapView setCenterCoordinate:coord2D];
@@ -224,7 +224,7 @@ typedef enum {
             
             cell.mapView.layer.borderColor = [UIColor blackColor].CGColor;
             cell.mapView.layer.borderWidth = 1;
-
+            cell.contentView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
 //            [cell.mapView selectAnnotation:annotation animated:YES];
             
             return cell;
@@ -236,7 +236,8 @@ typedef enum {
             }
             cell.lineupLabel.font = [UIFont lightHeroFontWithSize:12];
             cell.lineup = self.concert.lineup;
-            
+            cell.contentView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
+
             return cell;
         }
         case Tickets: {
@@ -249,6 +250,8 @@ typedef enum {
             cell.grabTicketsButton.titleLabel.font = [UIFont heroFontWithSize:20];
             cell.grabTicketsButton.layer.cornerRadius = 5.0;
             cell.grabTicketsButton.layer.masksToBounds = YES;
+            cell.contentView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
+
             return cell;
         }
         default:
