@@ -16,11 +16,14 @@
 
 @end
 
-@interface ECGridViewController : UICollectionViewController <ECPostViewControllerDelegate>
+@interface ECGridViewController : UIViewController <ECPostViewControllerDelegate>
 @property (nonatomic,strong) NSDictionary * concert;
 @property (nonatomic,strong) NSArray * posts;
 @property (nonatomic,strong) IBOutlet UILabel * eventLabel;
 @property (nonatomic,strong) IBOutlet UILabel * venueAndDateLabel;
+@property (weak, nonatomic) IBOutlet UICollectionView *postsCollectionView;
+@property (weak, nonatomic) IBOutlet UIView *footerView;
+@property (weak, nonatomic) IBOutlet UILabel *noPostsLabel;
 
 @end
 

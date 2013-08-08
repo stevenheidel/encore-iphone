@@ -36,6 +36,7 @@
 
 @interface ECGridViewController ()
 
+@property(strong) NSTimer* timer;
 @end
 
 @implementation ECGridViewController
@@ -52,17 +53,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
-    [ECJSONPoster populateConcert:self.concert.eventID completion:^(BOOL success) {
-        [ECJSONFetcher fetchPostsForConcertWithID:self.concert.eventID completion:^(NSArray *fetchedPosts) {
-            self.posts = fetchedPosts;
-            [self.collectionView reloadData];
-        }];
-    }];
+	// Do any additional setup after loading the view.    
+    [self askServerToPopulateConcert];
     
     UIImageView* encoreLogo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
     self.navigationItem.titleView = encoreLogo;
-    self.collectionView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
+    self.postsCollectionView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
     UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
     UIImage *leftButImage = [UIImage imageNamed:@"backButton"]; //stretchableImageWithLeftCapWidth:10 topCapHeight:10];
     [leftButton setBackgroundImage:leftButImage forState:UIControlStateNormal];
@@ -91,7 +87,7 @@
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"GridToPostViewController"]) {
         ECPostViewController* vc = (ECPostViewController*)[segue destinationViewController];
-        NSUInteger row = [[[self.collectionView indexPathsForSelectedItems] objectAtIndex:0] row];
+        NSUInteger row = [[[self.postsCollectionView indexPathsForSelectedItems] objectAtIndex:0] row];
         
         vc.post = [self.posts objectAtIndex:row];
         vc.artist = [self.concert eventName];
@@ -99,6 +95,84 @@
         vc.itemNumber = row;
         vc.delegate = self;
         }
+}
+#pragma mark Event Populating
+-(void) askServerToPopulateConcert{
+    [ECJSONPoster populateConcert:self.concert.eventID completion:^(BOOL success) {
+        //Check If concert finished Populating
+        [self checkConcertIfPopulating];
+        //Fire timer
+        [self startTimer];
+    }];
+}
+-(void) checkConcertIfPopulating {
+    [ECJSONFetcher checkIfEventIsPopulating:[self.concert eventID] completion:^(BOOL isPopulating) {
+
+        if(isPopulating)
+        {
+            //Show the footer
+            [self showFooter];
+        
+        }else
+        {
+            //Call get images method
+            [self loadConcertImages];
+            //Stop timer
+            [self stopTimer];
+            //Remove the footer once timer finished
+            [self hideFooter];
+
+        }
+        
+       
+    }];
+
+}
+
+
+-(void)loadConcertImages{
+  
+    [ECJSONFetcher fetchPostsForConcertWithID:self.concert.eventID completion:^(NSArray *fetchedPosts) {
+        if(fetchedPosts.count > 0){
+            self.posts = fetchedPosts;
+            [self.postsCollectionView reloadData];
+        }else{
+            //Add No posts found Label
+            [self showNoPostsLabel];
+        }
+    }];
+
+}
+#pragma mark - Timer (repeatedly checking populating/loading)
+-(void) startTimer {
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:10.0
+                                                  target:self
+                                                selector:@selector(checkConcertIfPopulating)
+                                                userInfo:nil
+                                                 repeats:YES];
+}
+
+-(void) stopTimer {
+    [self.timer invalidate];
+    self.timer = nil;
+}
+#pragma mark - Footer 
+-(void)showFooter{
+    [UIView animateWithDuration:0.3 animations:^{
+        [self.footerView setAlpha:1];
+    }];
+    
+}
+-(void)hideFooter{
+    [UIView animateWithDuration:0.3 animations:^{
+        [self.footerView setAlpha:0];
+    }];
+
+}
+-(void)showNoPostsLabel{
+    [UIView animateWithDuration:0.3 animations:^{
+        [self.noPostsLabel setAlpha:1];
+    }];
 }
 
 #pragma mark - collection view
@@ -259,6 +333,7 @@
     }
     return params;
 }
+
 
 
 @end
