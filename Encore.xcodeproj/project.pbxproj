@@ -40,6 +40,7 @@
 		A0FF1C53176CC88000433768 /* LoginInfoPages.plist in Resources */ = {isa = PBXBuildFile; fileRef = A0FF1C52176CC88000433768 /* LoginInfoPages.plist */; };
 		D401054917A20E6C006078D0 /* playbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = D401054717A20E6C006078D0 /* playbutton.png */; };
 		D401054A17A20E6C006078D0 /* playbutton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D401054817A20E6C006078D0 /* playbutton@2x.png */; };
+		D411CBE517B358FF006AF0C2 /* ECGridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D411CBE417B358FF006AF0C2 /* ECGridViewController.m */; };
 		D41489F9179F1F6900EE643F /* invite.png in Resources */ = {isa = PBXBuildFile; fileRef = D41489F7179F1F6900EE643F /* invite.png */; };
 		D41489FA179F1F6900EE643F /* invite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D41489F8179F1F6900EE643F /* invite@2x.png */; };
 		D41489FE179F1FDF00EE643F /* findstuffbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = D41489FC179F1FDF00EE643F /* findstuffbutton.png */; };
@@ -61,6 +62,9 @@
 		D46D8F96179479A300011C5C /* login2iphone4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D46D8F93179479A300011C5C /* login2iphone4@2x.png */; };
 		D46D8F97179479A300011C5C /* login3iphone4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D46D8F94179479A300011C5C /* login3iphone4@2x.png */; };
 		D46D8F991794A9FC00011C5C /* ECLoginPageViewiphone4.xib in Resources */ = {isa = PBXBuildFile; fileRef = D46D8F981794A9FC00011C5C /* ECLoginPageViewiphone4.xib */; };
+		D4719BA717B322250077AB46 /* ECPastViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4719BA617B322250077AB46 /* ECPastViewController.m */; };
+		D4719BAA17B322640077AB46 /* ECPastStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4719BA917B322640077AB46 /* ECPastStoryboard.storyboard */; };
+		D4719BAC17B340D20077AB46 /* ECRowCells.m in Sources */ = {isa = PBXBuildFile; fileRef = D4719BAB17B340D20077AB46 /* ECRowCells.m */; };
 		D491F807178B54C9002E00E5 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = D491F805178B54C9002E00E5 /* logo.png */; };
 		D491F808178B54C9002E00E5 /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D491F806178B54C9002E00E5 /* logo@2x.png */; };
 		D491F80C178B57C1002E00E5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D491F80B178B57C1002E00E5 /* Main.storyboard */; };
@@ -279,6 +283,8 @@
 		B56B831D22E04C90BC664348 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		D401054717A20E6C006078D0 /* playbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playbutton.png; sourceTree = "<group>"; };
 		D401054817A20E6C006078D0 /* playbutton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "playbutton@2x.png"; sourceTree = "<group>"; };
+		D411CBE317B358FF006AF0C2 /* ECGridViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECGridViewController.h; sourceTree = "<group>"; };
+		D411CBE417B358FF006AF0C2 /* ECGridViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECGridViewController.m; sourceTree = "<group>"; };
 		D41489F7179F1F6900EE643F /* invite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = invite.png; sourceTree = "<group>"; };
 		D41489F8179F1F6900EE643F /* invite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "invite@2x.png"; sourceTree = "<group>"; };
 		D41489FC179F1FDF00EE643F /* findstuffbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = findstuffbutton.png; sourceTree = "<group>"; };
@@ -301,6 +307,11 @@
 		D46D8F93179479A300011C5C /* login2iphone4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login2iphone4@2x.png"; sourceTree = "<group>"; };
 		D46D8F94179479A300011C5C /* login3iphone4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login3iphone4@2x.png"; sourceTree = "<group>"; };
 		D46D8F981794A9FC00011C5C /* ECLoginPageViewiphone4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECLoginPageViewiphone4.xib; sourceTree = "<group>"; };
+		D4719BA517B322250077AB46 /* ECPastViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECPastViewController.h; sourceTree = "<group>"; };
+		D4719BA617B322250077AB46 /* ECPastViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECPastViewController.m; sourceTree = "<group>"; };
+		D4719BA917B322640077AB46 /* ECPastStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ECPastStoryboard.storyboard; sourceTree = "<group>"; };
+		D4719BAB17B340D20077AB46 /* ECRowCells.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECRowCells.m; sourceTree = "<group>"; };
+		D4719BAD17B341020077AB46 /* ECRowCells.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECRowCells.h; sourceTree = "<group>"; };
 		D491F805178B54C9002E00E5 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		D491F806178B54C9002E00E5 /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@2x.png"; sourceTree = "<group>"; };
 		D491F80B178B57C1002E00E5 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -594,6 +605,13 @@
 		D4A8DDBF176A134B005E9847 /* Concert */ = {
 			isa = PBXGroup;
 			children = (
+				D4719BA517B322250077AB46 /* ECPastViewController.h */,
+				D4719BA617B322250077AB46 /* ECPastViewController.m */,
+				D4719BA917B322640077AB46 /* ECPastStoryboard.storyboard */,
+				D411CBE317B358FF006AF0C2 /* ECGridViewController.h */,
+				D411CBE417B358FF006AF0C2 /* ECGridViewController.m */,
+				D4719BAD17B341020077AB46 /* ECRowCells.h */,
+				D4719BAB17B340D20077AB46 /* ECRowCells.m */,
 				D4A9A71017B03D65007E8A80 /* ECUpcomingViewController.h */,
 				D4A9A71117B03D65007E8A80 /* ECUpcomingViewController.m */,
 				D4A9A71517B03DC5007E8A80 /* ECUpcomingStoryboard.storyboard */,
@@ -1283,6 +1301,7 @@
 				D4B2DDC317B01B0900836F53 /* ECLineupViewController.xib in Resources */,
 				D4A9A70E17B02945007E8A80 /* ECLineupCell.xib in Resources */,
 				D4A9A71617B03DC5007E8A80 /* ECUpcomingStoryboard.storyboard in Resources */,
+				D4719BAA17B322640077AB46 /* ECPastStoryboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1377,6 +1396,9 @@
 				D4B2DDC217B01B0900836F53 /* ECLineupViewController.m in Sources */,
 				D4A9A71317B03D65007E8A80 /* ECUpcomingViewController.m in Sources */,
 				D9963FD017B0D4E9003C3CC1 /* UIImage+Merge.m in Sources */,
+				D4719BA717B322250077AB46 /* ECPastViewController.m in Sources */,
+				D4719BAC17B340D20077AB46 /* ECRowCells.m in Sources */,
+				D411CBE517B358FF006AF0C2 /* ECGridViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

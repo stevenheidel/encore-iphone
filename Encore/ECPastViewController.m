@@ -1,16 +1,13 @@
 //
-//  ECUpcomingViewController.m
+//  ECPastViewController.m
 //  Encore
 //
-//  Created by Shimmy on 2013-08-05.
+//  Created by Shimmy on 2013-08-07.
 //  Copyright (c) 2013 Encore. All rights reserved.
 //
 
-#import "ECUpcomingViewController.h"
-
-#import <MapKit/MapKit.h>
+#import "ECPastViewController.h"
 #import <QuartzCore/QuartzCore.h>
-
 #import "UIimageView+AFNetworking.h"
 #import "NSDictionary+ConcertList.h"
 #import "UIImage+GaussBlur.h"
@@ -28,47 +25,15 @@
 #import "ECJSONFetcher.h"
 #import "NSUserDefaults+Encore.h"
 #import "ECRowCells.h"
-
+#import "ECGridViewController.h"
 typedef enum {
-    Tickets,
+    Photos,
     Lineup,
-    Location,
+    Details,
     NumberOfRows
-} ECUpcomingRow;
+} ECPastRow;
 
-
-@interface MapViewAnnotation : NSObject <MKAnnotation>
-@property (nonatomic, copy) NSString *title;
-@property (nonatomic, assign) CLLocationCoordinate2D coordinate;
-
-- (id)initWithTitle:(NSString *)ttl andCoordinate:(CLLocationCoordinate2D)c2d;
-@end
-
-@implementation MapViewAnnotation
-
-- (id)initWithTitle:(NSString *)ttl andCoordinate:(CLLocationCoordinate2D)c2d {
-	if (self = [super init]) {
-        self.title = ttl;
-        self.coordinate = c2d;
-    }
-	return self;
-}
-@end
-
-@interface ECUpcomingViewController ()
-
-@end
-
-@implementation ECUpcomingViewController
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
+@implementation ECPastViewController
 
 - (void)viewDidLoad
 {
@@ -86,23 +51,23 @@ typedef enum {
     [self.eventImage setImageWithURLRequest:[NSURLRequest requestWithURL:self.concert.imageURL]
                            placeholderImage:nil
                                     success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-        self.eventImage.image = image;
-        UIImage* backgroundImage = [UIImage mergeImage:[image imageWithGaussianBlur]
-                                             withImage:[UIImage imageNamed:@"fullgradient"]];
+                                        self.eventImage.image = image;
+                                        UIImage* backgroundImage = [UIImage mergeImage:[image imageWithGaussianBlur]
+                                                                             withImage:[UIImage imageNamed:@"fullgradient"]];
                                         
-        UIImageView *tempImageView = [[UIImageView alloc] initWithImage:backgroundImage];
-        [tempImageView setFrame:self.tableView.frame];
-        tempImageView.contentMode = UIViewContentModeScaleAspectFill;
-        self.tableView.backgroundView = tempImageView;
-
+                                        UIImageView *tempImageView = [[UIImageView alloc] initWithImage:backgroundImage];
+                                        [tempImageView setFrame:self.tableView.frame];
+                                        tempImageView.contentMode = UIViewContentModeScaleAspectFill;
+                                        self.tableView.backgroundView = tempImageView;
+                                        
                                     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
                                         
-        self.eventImage.image = [UIImage imageNamed:@"placeholder.jpg"];
-        UIImageView *tempImageView = [[UIImageView alloc] initWithImage:[[UIImage imageNamed:@"Black"] imageWithGaussianBlur] ];
-        [tempImageView setFrame:self.tableView.frame];
-         self.tableView.backgroundView = tempImageView;
-
-    }];
+                                        self.eventImage.image = [UIImage imageNamed:@"placeholder.jpg"];
+                                        UIImageView *tempImageView = [[UIImageView alloc] initWithImage:[[UIImage imageNamed:@"Black"] imageWithGaussianBlur] ];
+                                        [tempImageView setFrame:self.tableView.frame];
+                                        self.tableView.backgroundView = tempImageView;
+                                        
+                                    }];
     
     //Event image
     self.eventImage.layer.cornerRadius = 5.0;
@@ -113,7 +78,7 @@ typedef enum {
     //Fonts
     [self.eventName setFont:[UIFont heroFontWithSize:16]];
     [self.eventVenueAndDate setFont:[UIFont heroFontWithSize:12]];
-
+    
     //Navigation bar
     UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
     UIImage *leftButImage = [UIImage imageNamed:@"backButton.png"]; //stretchableImageWithLeftCapWidth:10 topCapHeight:10];
@@ -129,8 +94,8 @@ typedef enum {
     [rightButton addTarget:self action:@selector(shareTapped) forControlEvents:UIControlEventTouchUpInside];
     rightButton.frame = CGRectMake(0, 0, rightButImage.size.width, rightButImage.size.height);
     UIBarButtonItem* shareButton = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
-    self.navigationItem.rightBarButtonItem = shareButton;    
-
+    self.navigationItem.rightBarButtonItem = shareButton;
+    
     self.tableView.separatorColor = [UIColor separatorColor];
 }
 
@@ -146,11 +111,11 @@ typedef enum {
 
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.row) {
-        case Location:
+        case Details:
             return 146.0f;
         case Lineup:
             return 142.0f;
-        case Tickets:
+        case Photos:
             return 60.0f;
         default:
             return 0.0f;
@@ -166,12 +131,12 @@ typedef enum {
 
 +(NSString*) identifierForRow: (NSUInteger) row {
     switch (row) {
-        case Location:
-            return @"location";
+        case Details:
+            return @"details";
         case Lineup:
             return @"lineup";
-        case Tickets:
-            return @"tickets";
+        case Photos:
+            return @"photos";
         default:
             return nil;
     }
@@ -189,43 +154,44 @@ typedef enum {
 }
 
 -(UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString* identifier = [ECUpcomingViewController identifierForRow:indexPath.row];
+    NSString* identifier = [ECPastViewController identifierForRow:indexPath.row];
     
     switch (indexPath.row) {
-        case Location: {
-            LocationCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        case Details: {
+            DetailsCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier];
             if (cell == nil) {
-                cell = [[LocationCell alloc] init];
+                cell = [[DetailsCell alloc] init];
             }
-            UITapGestureRecognizer* tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:cell action:@selector(openBigMap)];
-            tapRecognizer.numberOfTapsRequired = 1;
-            tapRecognizer.numberOfTouchesRequired = 1;
-            [cell.mapView addGestureRecognizer:tapRecognizer];
-            cell.addressLabel.text = [NSString stringWithFormat:@"%@\n%@",[self.concert venueName],[self.concert address]];
-            cell.startTimeLabel.text = [self.concert startTime];
+            [cell.detailsLabel setFont:[UIFont lightHeroFontWithSize:12]];
+//            UITapGestureRecognizer* tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:cell action:@selector(openBigMap)];
+//            tapRecognizer.numberOfTapsRequired = 1;
+//            tapRecognizer.numberOfTouchesRequired = 1;
+//            [cell.mapView addGestureRecognizer:tapRecognizer];
+//            cell.addressLabel.text = [NSString stringWithFormat:@"%@\n%@",[self.concert venueName],[self.concert address]];
+//            cell.startTimeLabel.text = [self.concert startTime];
+//            
+//            cell.locationLabel.font = [UIFont lightHeroFontWithSize:12];
+//            //            cell.phoneLabel.font = [UIFont lightHeroFontWithSize:12];
+//            cell.addressLabel.font = [UIFont lightHeroFontWithSize:12];
+//            
+//            CLLocation* location = [self.concert coordinates];
+//            CLLocationCoordinate2D coord2D = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude);
+//            cell.location2D = coord2D;
+//            cell.venueName = self.concert.venueName;
+//            
+//            cell.startTimeLabel.text = self.concert.startTime;
             
-            cell.locationLabel.font = [UIFont lightHeroFontWithSize:12];
-//            cell.phoneLabel.font = [UIFont lightHeroFontWithSize:12];
-            cell.addressLabel.font = [UIFont lightHeroFontWithSize:12];
-
-            CLLocation* location = [self.concert coordinates];
-            CLLocationCoordinate2D coord2D = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude);
-            cell.location2D = coord2D;
-            cell.venueName = self.concert.venueName;
+//            MapViewAnnotation* annotation = [[MapViewAnnotation alloc] initWithTitle:[self.concert venueName] andCoordinate:coord2D];
+//            [cell.mapView setCenterCoordinate:coord2D];
+//            [cell.mapView addAnnotation:annotation];
+//            MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(coord2D, 9000, 9000);
+//            [cell.mapView setRegion:region animated:YES];
+//            [cell.mapView regionThatFits:region];
+//            
+//            cell.mapView.layer.borderColor = [UIColor blackColor].CGColor;
+//            cell.mapView.layer.borderWidth = 1;
             
-            cell.startTimeLabel.text = self.concert.startTime;
-            
-            MapViewAnnotation* annotation = [[MapViewAnnotation alloc] initWithTitle:[self.concert venueName] andCoordinate:coord2D];
-            [cell.mapView setCenterCoordinate:coord2D];
-            [cell.mapView addAnnotation:annotation];
-            MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(coord2D, 9000, 9000);
-            [cell.mapView setRegion:region animated:YES];
-            [cell.mapView regionThatFits:region];
-            
-            cell.mapView.layer.borderColor = [UIColor blackColor].CGColor;
-            cell.mapView.layer.borderWidth = 1;
-
-//            [cell.mapView selectAnnotation:annotation animated:YES];
+            //            [cell.mapView selectAnnotation:annotation animated:YES];
             
             return cell;
         }
@@ -239,16 +205,16 @@ typedef enum {
             
             return cell;
         }
-        case Tickets: {
-            GrabTicketsCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        case Photos: {
+            GetPhotosCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier];
             if (cell == nil) {
-                cell = [[GrabTicketsCell alloc] init];
-
+                cell = [[GetPhotosCell alloc] init];
+                
             }
-            cell.lastfmURL = [self.concert lastfmURL];
-            cell.grabTicketsButton.titleLabel.font = [UIFont heroFontWithSize:20];
-            cell.grabTicketsButton.layer.cornerRadius = 5.0;
-            cell.grabTicketsButton.layer.masksToBounds = YES;
+            
+            cell.grabPhotosButton.titleLabel.font = [UIFont heroFontWithSize:20];
+            cell.grabPhotosButton.layer.cornerRadius = 5.0;
+            cell.grabPhotosButton.layer.masksToBounds = YES;
             return cell;
         }
         default:
@@ -256,6 +222,12 @@ typedef enum {
     }
 }
 
+-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([[segue identifier] isEqualToString:@"PastViewControllerToGridViewController"]) {
+        ECGridViewController* vc = [segue destinationViewController];
+        vc.concert = self.concert;
+    }
+}
 #pragma mark FB Sharing
 -(void) shareTapped {
     if([ApplicationDelegate isLoggedIn]) {
@@ -374,7 +346,7 @@ typedef enum {
 
 -(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (alertView.tag == ECNotLoggedInAlert) {
-
+        
         if (buttonIndex == alertView.firstOtherButtonIndex) {
             [ApplicationDelegate beginFacebookAuthorization];
         }
@@ -392,7 +364,4 @@ typedef enum {
     
 }
 
-
-
 @end
-

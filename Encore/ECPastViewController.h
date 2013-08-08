@@ -1,8 +1,8 @@
 //
-//  ECUpcomingViewController.h
+//  ECPastViewController.h
 //  Encore
 //
-//  Created by Shimmy on 2013-08-05.
+//  Created by Shimmy on 2013-08-07.
 //  Copyright (c) 2013 Encore. All rights reserved.
 //
 
@@ -10,8 +10,7 @@
 #import "ECSearchType.h"
 
 
-@interface ECUpcomingViewController : UITableViewController
-
+@interface ECPastViewController : UITableViewController
 
 @property (weak, nonatomic) IBOutlet UIImageView *eventImage;
 @property (weak, nonatomic) IBOutlet UILabel *eventName;
@@ -19,5 +18,5 @@
 
 @property (nonatomic, assign) ECSearchType tense;
 @property (nonatomic,strong) NSDictionary * concert;
-@end
 
+@end
