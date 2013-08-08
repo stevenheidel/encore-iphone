@@ -10,6 +10,7 @@
 #import "NSDictionary+ConcertList.h"
 #import "NSDictionary+Posts.h"
 #import "ECJSONFetcher.h"
+#import "ECJSONPoster.h"
 #import "UIImageView+AFNetworking.h"
 #import "UIColor+EncoreUI.h"
 #import "UIFont+Encore.h"
@@ -48,15 +49,13 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    self.images = nil;
-    [ECJSONFetcher fetchPostsForConcertWithID:self.concert.eventID completion:^(NSArray *fetchedPosts) {
-        self.posts = fetchedPosts;
-        [self.collectionView reloadData];
-        self.images = [[NSMutableArray alloc] initWithCapacity:self.posts.count];
-        for (int i = 0; i<self.posts.count; i++) {
-            [self.images addObject:[NSNull null]];
-        }
+    [ECJSONPoster populateConcert:self.concert.eventID completion:^(BOOL success) {
+        [ECJSONFetcher fetchPostsForConcertWithID:self.concert.eventID completion:^(NSArray *fetchedPosts) {
+            self.posts = fetchedPosts;
+            [self.collectionView reloadData];
+        }];
     }];
+    
     UIImageView* encoreLogo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
     self.navigationItem.titleView = encoreLogo;
     self.collectionView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
@@ -103,15 +102,13 @@
     __weak ECPostCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"post" forIndexPath:indexPath];
     
     NSDictionary* post = [self.posts objectAtIndex:indexPath.row];
-    if ([self.images objectAtIndex:indexPath.row] == [NSNull null]) {
-//        UIImage* image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[post imageURL]]];
-//        [cell.postImageView setImage:image];
-        [cell.postImageView setImageWithURL:[post imageURL]];
-//        [self.images replaceObjectAtIndex:indexPath.row withObject:image];
-    }
-    else {
-        cell.postImageView.image = [self.images objectAtIndex:indexPath.row];
-    }
+    [cell.activityIndicator startAnimating];
+    [cell.postImageView setImageWithURLRequest:[NSURLRequest requestWithURL:[post imageURL]] placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+        cell.postImageView.image = image;
+        [cell.activityIndicator stopAnimating];
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+        [cell.activityIndicator stopAnimating];
+    }];
     
     cell.postType = [post postType];
     return cell;

@@ -19,13 +19,13 @@
 @interface ECGridViewController : UICollectionViewController <ECPostViewControllerDelegate>
 @property (nonatomic,strong) NSDictionary * concert;
 @property (nonatomic,strong) NSArray * posts;
-@property (nonatomic,strong) NSMutableArray * images;
 @property (nonatomic,strong) IBOutlet UILabel * eventLabel;
 @property (nonatomic,strong) IBOutlet UILabel * venueAndDateLabel;
 
 @end
 
 @interface ECPostCell : UICollectionViewCell
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (nonatomic,weak) IBOutlet UIImageView* postImageView;
 @property (nonatomic,assign) ECPostType postType;
 @property (strong, nonatomic) IBOutlet UIImageView *playButton;

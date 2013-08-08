@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="13A524d" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="nnw-kD-SbF">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="nnw-kD-SbF">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -251,18 +251,24 @@
                                                 <constraint firstAttribute="width" constant="52" id="gJg-ic-C3L"/>
                                             </constraints>
                                         </imageView>
+                                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="q6w-2R-CMc">
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </activityIndicatorView>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <constraints>
                                     <constraint firstAttribute="centerX" secondItem="Zro-4U-Orx" secondAttribute="centerX" type="user" id="0eh-Bh-v9j"/>
-                                    <constraint firstItem="8vG-EO-s7X" firstAttribute="bottom" secondItem="OsF-z2-d4A" secondAttribute="bottom" type="default" id="RIq-YH-6mj"/>
+                                    <constraint firstItem="q6w-2R-CMc" firstAttribute="centerY" secondItem="8vG-EO-s7X" secondAttribute="centerY" type="default" id="FBN-KQ-OnY"/>
                                     <constraint firstItem="8vG-EO-s7X" firstAttribute="leading" secondItem="OsF-z2-d4A" secondAttribute="leading" type="default" id="SYB-AL-VH0"/>
                                     <constraint firstItem="8vG-EO-s7X" firstAttribute="top" secondItem="OsF-z2-d4A" secondAttribute="top" type="default" id="Suf-xw-1R7"/>
+                                    <constraint firstItem="q6w-2R-CMc" firstAttribute="centerX" secondItem="8vG-EO-s7X" secondAttribute="centerX" type="default" id="VFS-w7-K8c"/>
                                     <constraint firstAttribute="centerY" secondItem="Zro-4U-Orx" secondAttribute="centerY" type="user" id="WRE-SZ-oPL"/>
-                                    <constraint firstItem="8vG-EO-s7X" firstAttribute="trailing" secondItem="OsF-z2-d4A" secondAttribute="trailing" type="default" id="iYo-J5-x7V"/>
+                                    <constraint firstItem="q6w-2R-CMc" firstAttribute="centerX" secondItem="OsF-z2-d4A" secondAttribute="centerX" type="default" id="nra-ip-CRN"/>
+                                    <constraint firstItem="q6w-2R-CMc" firstAttribute="centerY" secondItem="OsF-z2-d4A" secondAttribute="centerY" type="default" id="t5n-Dj-TKA"/>
                                 </constraints>
                                 <connections>
+                                    <outlet property="activityIndicator" destination="q6w-2R-CMc" id="RiV-is-Xns"/>
                                     <outlet property="playButton" destination="Zro-4U-Orx" id="iOm-3r-Ipk"/>
                                     <outlet property="postImageView" destination="8vG-EO-s7X" id="T53-BZ-LPA"/>
                                     <segue destination="utg-Ur-KTZ" kind="push" identifier="GridToPostViewController" id="qCK-gq-gdj"/>
@@ -494,6 +500,7 @@
         <class className="ECPostCell" superclassName="UICollectionViewCell">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ECPostCell.h"/>
             <relationships>
+                <relationship kind="outlet" name="activityIndicator" candidateClass="UIActivityIndicatorView"/>
                 <relationship kind="outlet" name="playButton" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="postImageView" candidateClass="UIImageView"/>
             </relationships>
@@ -550,9 +557,6 @@
         </class>
         <class className="UICollectionViewFlowLayout" superclassName="UICollectionViewLayout">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewFlowLayout.h"/>
-        </class>
-        <class className="UICollectionViewLayout" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewLayout.h"/>
         </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
