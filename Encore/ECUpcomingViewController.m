@@ -202,7 +202,7 @@ typedef enum {
             tapRecognizer.numberOfTouchesRequired = 1;
             [cell.mapView addGestureRecognizer:tapRecognizer];
             cell.addressLabel.text = [NSString stringWithFormat:@"%@\n%@",[self.concert venueName],[self.concert address]];
-            cell.startTimeLabel.text = [self.concert startTime];
+//            cell.startTimeLabel.text = [self.concert startTime];
             
             cell.locationLabel.font = [UIFont lightHeroFontWithSize:12];
             cell.phoneLabel.font = [UIFont lightHeroFontWithSize:12];
