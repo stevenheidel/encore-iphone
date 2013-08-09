@@ -26,6 +26,12 @@
 #import "NSUserDefaults+Encore.h"
 #import "ECRowCells.h"
 #import "ECGridViewController.h"
+#import "ECJSONPoster.h"
+
+#import "MBProgressHUD.h"
+
+
+#define HUD_DELAY 1.0
 typedef enum {
     Photos,
     Lineup,
@@ -35,8 +41,7 @@ typedef enum {
 
 @implementation ECPastViewController
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.''
     self.eventName.text = [[self.concert eventName] uppercaseString];
@@ -45,7 +50,11 @@ typedef enum {
     self.navigationItem.titleView = encoreLogo;
     self.tableView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
     [self setAppearance];
+    
+    self.statusManager = [[ECEventProfileStatusManager alloc] init];
+    [self.statusManager checkProfileState];
 }
+
 -(void) setAppearance {
     //Background
     [self.eventImage setImageWithURLRequest:[NSURLRequest requestWithURL:self.concert.imageURL]
@@ -81,7 +90,7 @@ typedef enum {
     
     //Navigation bar
     UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    UIImage *leftButImage = [UIImage imageNamed:@"backButton.png"]; //stretchableImageWithLeftCapWidth:10 topCapHeight:10];
+    UIImage *leftButImage = [UIImage imageNamed:@"backButton.png"];
     [leftButton setBackgroundImage:leftButImage forState:UIControlStateNormal];
     [leftButton addTarget:self action:@selector(backButtonWasPressed) forControlEvents:UIControlEventTouchUpInside];
     leftButton.frame = CGRectMake(0, 0, leftButImage.size.width, leftButImage.size.height);
@@ -89,7 +98,7 @@ typedef enum {
     self.navigationItem.leftBarButtonItem = backButton;
     
     UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    UIImage *rightButImage = [UIImage imageNamed:@"shareButton.png"]; //stretchableImageWithLeftCapWidth:10 topCapHeight:10];
+    UIImage *rightButImage = [UIImage imageNamed:@"shareButton.png"];
     [rightButton setBackgroundImage:rightButImage forState:UIControlStateNormal];
     [rightButton addTarget:self action:@selector(shareTapped) forControlEvents:UIControlEventTouchUpInside];
     rightButton.frame = CGRectMake(0, 0, rightButImage.size.width, rightButImage.size.height);
@@ -97,6 +106,12 @@ typedef enum {
     self.navigationItem.rightBarButtonItem = shareButton;
     
     self.tableView.separatorColor = [UIColor separatorColor];
+}
+
+#pragma mark - status delegate 
+-(void) profileState:(BOOL)isOnProfile {
+    self.iwasthereButton.titleLabel.text = isOnProfile ? @"YES" : @"NO";
+    
 }
 
 -(void) backButtonWasPressed {
@@ -116,7 +131,7 @@ typedef enum {
         case Lineup:
             return 142.0f;
         case Photos:
-            return 60.0f;
+            return 74.0f;
         default:
             return 0.0f;
     }
@@ -151,8 +166,12 @@ typedef enum {
             if (cell == nil) {
                 cell = [[DetailsCell alloc] init];
             }
-            [cell.detailsLabel setFont:[UIFont lightHeroFontWithSize:12]];
             cell.contentView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
+            cell.iwasthereButton.titleLabel.font = [UIFont heroFontWithSize:20];
+            cell.iwasthereButton.layer.cornerRadius = 5.0;
+            cell.iwasthereButton.layer.masksToBounds = YES;
+            [cell.iwasthereButton addTarget:self action:@selector(addToProfile) forControlEvents:UIControlEventTouchUpInside];
+            self.iwasthereButton = cell.iwasthereButton;
             
             return cell;
         }
@@ -165,21 +184,18 @@ typedef enum {
             cell.lineup = self.concert.lineup;
             cell.contentView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
 
-            
             return cell;
         }
         case Photos: {
             GetPhotosCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier];
             if (cell == nil) {
                 cell = [[GetPhotosCell alloc] init];
-                
             }
             
             cell.grabPhotosButton.titleLabel.font = [UIFont heroFontWithSize:20];
             cell.grabPhotosButton.layer.cornerRadius = 5.0;
             cell.grabPhotosButton.layer.masksToBounds = YES;
             cell.contentView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
-
             return cell;
         }
         default:
@@ -191,7 +207,7 @@ typedef enum {
     if ([[segue identifier] isEqualToString:@"PastViewControllerToGridViewController"]) {
         ECGridViewController* vc = [segue destinationViewController];
         vc.concert = self.concert;
-        [Flurry logEvent:@"Tapped_See_Photos_Past" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:self.concert.eventID, @"eventID", self.concert.eventName, @"eventName", nil]];
+        [Flurry logEvent:@"Tapped_See_Photos_Past" withParameters:[self flurryParam]];
     }
 }
 #pragma mark FB Sharing
@@ -222,7 +238,6 @@ typedef enum {
     if(taggedFriends)
         [params setFriends:[taggedFriends valueForKey:@"id"]];
     
-    //    params.description =  [NSString stringWithFormat:@"Check out photos and videos from %@'s %@ show in %@ at the %@ on Encore.",[self.concert artistName], [self.concert niceDate], [self.concert city], [self.concert venueName]];
     if ([FBDialogs canPresentShareDialogWithParams:params]) {
         [FBDialogs presentShareDialogWithParams:params clientState:nil handler:^(FBAppCall *call, NSDictionary *results, NSError *error) {
             if(error) {
@@ -317,9 +332,10 @@ typedef enum {
             [ApplicationDelegate beginFacebookAuthorization];
         }
         
-        [Flurry logEvent:@"Login_Alert_Selection" withParameters:[NSDictionary dictionaryWithObjectsAndKeys: @"Detail_View", @"Current_View", buttonIndex == alertView.firstOtherButtonIndex ? @"Login":@"Cancel",@"Selection", nil]];
+        [Flurry logEvent:@"Login_Alert_Selection" withParameters:[NSDictionary dictionaryWithObjectsAndKeys: @"Past_View", @"Current_View", buttonIndex == alertView.firstOtherButtonIndex ? @"Login":@"Cancel",@"Selection", nil]];
         return; //don't process other alerts
-    }else if (alertView.tag == ECShareNotLoggedInAlert)
+    }
+    else if (alertView.tag == ECShareNotLoggedInAlert)
     {
         if (buttonIndex == alertView.firstOtherButtonIndex) {
             [ApplicationDelegate beginFacebookAuthorization];
@@ -329,5 +345,39 @@ typedef enum {
     }
     
 }
+
+#pragma mark - Adding/Removing Concerts
+
+-(void) addToProfile { //or remove
+    if (ApplicationDelegate.isLoggedIn) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:ECLoginCompletedNotification object:nil];
+        
+        [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
+        [self.statusManager toggleProfileState];
+    }
+}
+
+-(NSString*) userID {
+    return [NSUserDefaults userID];
+}
+
+-(void) alertError {
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"Sorry, an error occured and your request was not processed.", nil) delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alert show];
+}
+
+-(void) toggleOnProfileState {
+    self.isOnProfile = !self.isOnProfile;
+    
+    //    NSIndexPath* indexPath = [NSIndexPath indexPathForItem:Details inSection:0];
+    //    DetailsCell* cell = (DetailsCell*)[self.tableView cellForRowAtIndexPath:indexPath];
+    //    cell.iwasthereButton.titleLabel.text = self.isOnProfile ? @"Yes" : @"No";
+}
+
+-(NSDictionary*) flurryParam {
+    return [NSDictionary dictionaryWithObjectsAndKeys:self.concert.eventID,@"eventID",self.concert.eventName,@"eventName", nil];
+}
+
+
 
 @end

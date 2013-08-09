@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="13A524d" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="nnw-kD-SbF">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="nnw-kD-SbF">
     <dependencies>
         <development version="4600" identifier="xcode"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
@@ -52,17 +52,16 @@
                             </constraints>
                         </view>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="photos" rowHeight="60" id="pju-yT-rbv" customClass="GetPhotosCell">
-                                <rect key="frame" x="0.0" y="229" width="320" height="60"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="photos" rowHeight="74" id="pju-yT-rbv" customClass="GetPhotosCell">
+                                <rect key="frame" x="0.0" y="229" width="320" height="74"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="59"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="73"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EvG-HA-7IO">
                                             <color key="backgroundColor" red="0.01176470588" green="0.69019607839999997" blue="0.89019607840000003" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="44" id="LuZ-FX-sAg"/>
                                                 <constraint firstAttribute="width" constant="246" id="eB3-ia-ySi"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -82,7 +81,8 @@
                                 </view>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="EvG-HA-7IO" firstAttribute="top" secondItem="pju-yT-rbv" secondAttribute="top" constant="8" id="y9t-fD-uDh"/>
+                                    <constraint firstItem="EvG-HA-7IO" firstAttribute="top" secondItem="pju-yT-rbv" secondAttribute="top" constant="15" type="user" id="aoT-6X-X7b"/>
+                                    <constraint firstItem="EvG-HA-7IO" firstAttribute="centerY" secondItem="pju-yT-rbv" secondAttribute="centerY" type="default" id="c4b-ke-cbz"/>
                                     <constraint firstAttribute="centerX" secondItem="EvG-HA-7IO" secondAttribute="centerX" type="user" id="zre-JB-svT"/>
                                 </constraints>
                                 <connections>
@@ -90,7 +90,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="lineup" rowHeight="142" id="WQC-18-eYh" customClass="LineupCell">
-                                <rect key="frame" x="0.0" y="289" width="320" height="142"/>
+                                <rect key="frame" x="0.0" y="303" width="320" height="142"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="141"/>
@@ -181,7 +181,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="details" rowHeight="146" id="tmc-SK-ANe" customClass="DetailsCell">
-                                <rect key="frame" x="0.0" y="431" width="320" height="146"/>
+                                <rect key="frame" x="0.0" y="445" width="320" height="146"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="145"/>
@@ -207,8 +207,11 @@
                                 </view>
                                 <constraints>
                                     <constraint firstItem="fsu-P6-AeE" firstAttribute="centerX" secondItem="tmc-SK-ANe" secondAttribute="centerX" type="default" id="1B5-c0-bV2"/>
-                                    <constraint firstItem="fsu-P6-AeE" firstAttribute="top" secondItem="tmc-SK-ANe" secondAttribute="top" constant="8" type="user" id="TJc-a6-ki0"/>
+                                    <constraint firstItem="fsu-P6-AeE" firstAttribute="top" secondItem="tmc-SK-ANe" secondAttribute="top" constant="15" type="user" id="TJc-a6-ki0"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="iwasthereButton" destination="fsu-P6-AeE" id="gFi-nA-GV2"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <sections/>
@@ -531,7 +534,7 @@
         <class className="DetailsCell" superclassName="UITableViewCell">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/DetailsCell.h"/>
             <relationships>
-                <relationship kind="outlet" name="detailsLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="iwasthereButton" candidateClass="UIButton"/>
             </relationships>
         </class>
         <class className="ECGridHeaderView" superclassName="UICollectionReusableView">

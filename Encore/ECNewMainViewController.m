@@ -738,11 +738,7 @@ typedef enum {
             [self setBackgroundImage];
         }
         else {
-            if (self.currentSearchType == ECSearchTypePast) {
-//                ECConcertDetailViewController* detailVC = [[ECConcertDetailViewController alloc] initWithConcert:[self.searchResultsEvents objectAtIndex:indexPath.row]];
-//                detailVC.tense = self.currentSearchType;
-//                [self.navigationController pushViewController:detailVC animated:YES];
-                
+            if (self.currentSearchType == ECSearchTypePast) {       
                 UIStoryboard* sb = [UIStoryboard storyboardWithName:@"ECPastStoryboard" bundle:nil];
                 ECPastViewController * vc = [sb instantiateInitialViewController];
                 vc.tense = self.currentSearchType;
@@ -763,9 +759,6 @@ typedef enum {
         NSArray* events = [self currentEventArray];
         NSDictionary* concert = [events objectAtIndex:indexPath.row];
         if (self.currentSearchType == ECSearchTypePast) {
-//            ECConcertDetailViewController* detailVC = [[ECConcertDetailViewController alloc] initWithConcert:concert];
-//            detailVC.tense = self.currentSearchType;
-//            [self.navigationController pushViewController:detailVC animated:YES];
             UIStoryboard* sb = [UIStoryboard storyboardWithName:@"ECPastStoryboard" bundle:nil];
             ECPastViewController * vc = [sb instantiateInitialViewController];
             vc.tense = self.currentSearchType;

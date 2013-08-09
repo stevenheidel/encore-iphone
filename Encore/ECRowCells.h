@@ -37,7 +37,7 @@
 @end
 
 @interface DetailsCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UILabel *detailsLabel;
+@property (weak, nonatomic) IBOutlet UIButton *iwasthereButton;
 @end
 
 @interface LocationCell : UITableViewCell <MKMapViewDelegate>

@@ -9,7 +9,10 @@
 #import "ECProfileViewController.h"
 #import "ECProfileHeader.h"
 #import "ECProfileConcertCell.h"
-#import "ECConcertDetailViewController.h"
+//#import "ECConcertDetailViewController.h"
+#import "ECPastViewController.h"
+#import "ECUpcomingViewController.h"
+
 #import "NSDictionary+ConcertList.h"
 #import <QuartzCore/QuartzCore.h>
 #import <FacebookSDK/FacebookSDK.h>
@@ -40,7 +43,7 @@ typedef enum {
     NumberOfSections
 } ProfileTableViewSections;
 
-@interface ECProfileViewController ()<ECConcertDetailViewDelegate>
+@interface ECProfileViewController ()//<ECConcertDetailViewDelegate>
 
 @property (strong,atomic) MBProgressHUD* hud;
 @end
@@ -311,17 +314,23 @@ typedef enum {
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     NSUInteger section = indexPath.section;
     NSDictionary* concert = [[self arrayForSection:section] objectAtIndex:indexPath.row];
-    ECConcertDetailViewController * concertDetail = [[ECConcertDetailViewController alloc] initWithConcert:concert];
-    concertDetail.tense = [ECProfileViewController searchTypeForSection: section];
-    [concertDetail setConcertStateDelegate:self];
     
-    //flurry log
-    NSMutableDictionary* dic = [NSMutableDictionary dictionaryWithDictionary:concert];
-    [dic addEntriesFromDictionary:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:indexPath.row], @"row", [ECProfileViewController tenseStringForSection:section], @"Tense", nil]];
-    [Flurry logEvent:@"Selected_Event_On_Profile" withParameters:dic];
+    if(indexPath.section == PastSection) {
+        UIStoryboard* sb = [UIStoryboard storyboardWithName:@"ECPastStoryboard" bundle:nil];
+        ECPastViewController * vc = [sb instantiateInitialViewController];
+        vc.tense = ECSearchTypePast;
+        vc.concert = concert;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    else {
+        UIStoryboard* sb = [UIStoryboard storyboardWithName:@"ECUpcomingStoryboard" bundle:nil];
+        ECUpcomingViewController * vc = [sb instantiateInitialViewController];
+        vc.tense = ECSearchTypeFuture;
+        vc.concert = concert;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    [Flurry logEvent:@"Selected_Event_On_Profile" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:concert.eventID, @"eventID",concert.eventName,@"eventName",[NSNumber numberWithInt:indexPath.row],@"row",[ECProfileViewController tenseStringForSection:section],@"Tense", nil]];
 
-    
-    [self.navigationController pushViewController:concertDetail animated:YES];
 }
 
 +(NSString*) tenseStringForSection: (NSUInteger) section {

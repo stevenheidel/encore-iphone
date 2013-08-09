@@ -168,6 +168,7 @@
 		D4AE47401795A013006AF663 /* ECProfileSectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4AE473F1795A013006AF663 /* ECProfileSectionHeaderView.xib */; };
 		D4AE47451795A179006AF663 /* profileSectionHeader.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AE47431795A179006AF663 /* profileSectionHeader.png */; };
 		D4AE47461795A179006AF663 /* profileSectionHeader@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4AE47441795A179006AF663 /* profileSectionHeader@2x.png */; };
+		D4AF581717B48413000FCA93 /* ECEventProfileStatusManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AF581617B48413000FCA93 /* ECEventProfileStatusManager.m */; };
 		D4B0AC4717727FDA00DC4DD2 /* ECPostPlaceholder.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4B0AC4617727FDA00DC4DD2 /* ECPostPlaceholder.xib */; };
 		D4B2DDBC17B0101800836F53 /* ECArtistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4B2DDBA17B0101800836F53 /* ECArtistViewController.m */; };
 		D4B2DDBD17B0101800836F53 /* ECArtistViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4B2DDBB17B0101800836F53 /* ECArtistViewController.xib */; };
@@ -441,6 +442,8 @@
 		D4AE473F1795A013006AF663 /* ECProfileSectionHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECProfileSectionHeaderView.xib; sourceTree = "<group>"; };
 		D4AE47431795A179006AF663 /* profileSectionHeader.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profileSectionHeader.png; sourceTree = "<group>"; };
 		D4AE47441795A179006AF663 /* profileSectionHeader@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profileSectionHeader@2x.png"; sourceTree = "<group>"; };
+		D4AF581517B48413000FCA93 /* ECEventProfileStatusManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECEventProfileStatusManager.h; sourceTree = "<group>"; };
+		D4AF581617B48413000FCA93 /* ECEventProfileStatusManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECEventProfileStatusManager.m; sourceTree = "<group>"; };
 		D4B0AC4617727FDA00DC4DD2 /* ECPostPlaceholder.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECPostPlaceholder.xib; sourceTree = "<group>"; };
 		D4B2DDB917B0101800836F53 /* ECArtistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECArtistViewController.h; sourceTree = "<group>"; };
 		D4B2DDBA17B0101800836F53 /* ECArtistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECArtistViewController.m; sourceTree = "<group>"; };
@@ -605,6 +608,8 @@
 		D4A8DDBF176A134B005E9847 /* Concert */ = {
 			isa = PBXGroup;
 			children = (
+				D4AF581517B48413000FCA93 /* ECEventProfileStatusManager.h */,
+				D4AF581617B48413000FCA93 /* ECEventProfileStatusManager.m */,
 				D4719BA517B322250077AB46 /* ECPastViewController.h */,
 				D4719BA617B322250077AB46 /* ECPastViewController.m */,
 				D4719BA917B322640077AB46 /* ECPastStoryboard.storyboard */,
@@ -1399,6 +1404,7 @@
 				D4719BA717B322250077AB46 /* ECPastViewController.m in Sources */,
 				D4719BAC17B340D20077AB46 /* ECRowCells.m in Sources */,
 				D411CBE517B358FF006AF0C2 /* ECGridViewController.m in Sources */,
+				D4AF581717B48413000FCA93 /* ECEventProfileStatusManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

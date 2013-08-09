@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import <FacebookSDK/FBProfilePictureView.h>
-@class AGMedallionView;
 @interface ECProfileViewController : UIViewController <UIAlertViewDelegate, UITableViewDelegate, UITableViewDataSource> {
     NSString* userID;
 }
