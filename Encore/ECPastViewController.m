@@ -51,10 +51,16 @@ typedef enum {
     self.tableView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
     [self setAppearance];
     
-    self.statusManager = [[ECEventProfileStatusManager alloc] init];
-    [self.statusManager checkProfileState];
 }
 
+-(void) viewWillAppear:(BOOL)animated {
+    if(!self.statusManager) {
+        self.statusManager = [[ECEventProfileStatusManager alloc] init];
+    }
+    self.statusManager.eventID = self.concert.eventID;
+    self.statusManager.userID = [self userID];
+    [self.statusManager checkProfileState];
+}
 -(void) setAppearance {
     //Background
     [self.eventImage setImageWithURLRequest:[NSURLRequest requestWithURL:self.concert.imageURL]

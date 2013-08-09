@@ -15,6 +15,7 @@
 -(void) checkProfileState {
     [ECJSONFetcher checkIfConcert:self.eventID isOnProfile:self.userID completion:^(BOOL isOnProfile) {
         [self.delegate profileState:isOnProfile];
+        self.isOnProfile = isOnProfile;
     }];
 }
 
