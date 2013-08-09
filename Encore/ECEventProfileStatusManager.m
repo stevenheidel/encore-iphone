@@ -9,11 +9,12 @@
 #import "ECEventProfileStatusManager.h"
 #import "ECJSONFetcher.h"
 #import "ECJSONPoster.h"
+#import "NSUserDefaults+Encore.h"
 
 @implementation ECEventProfileStatusManager
 
 -(void) checkProfileState {
-    [ECJSONFetcher checkIfConcert:self.eventID isOnProfile:self.userID completion:^(BOOL isOnProfile) {
+    [ECJSONFetcher checkIfConcert:self.eventID isOnProfile:[NSUserDefaults userID] completion:^(BOOL isOnProfile) {
         [self.delegate profileState:isOnProfile];
         self.isOnProfile = isOnProfile;
     }];
@@ -21,7 +22,7 @@
 
 -(void) toggleProfileState {
     if(self.isOnProfile) {
-        [ECJSONPoster removeConcert:self.eventID toUser:self.userID completion:^(BOOL success) {
+        [ECJSONPoster removeConcert:self.eventID toUser:[NSUserDefaults userID] completion:^(BOOL success) {
             if (success) {
                 self.isOnProfile = !self.isOnProfile;
                 [self.delegate successChangingState:self.isOnProfile];
@@ -32,7 +33,7 @@
         }];
     }
     else {
-        [ECJSONPoster addConcert:self.eventID toUser:self.userID completion:^(BOOL success) {
+        [ECJSONPoster addConcert:self.eventID toUser:[NSUserDefaults userID] completion:^(BOOL success) {
             if (success) {
                 self.isOnProfile = !self.isOnProfile;
                 [self.delegate successChangingState:self.isOnProfile];

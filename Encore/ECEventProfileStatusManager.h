@@ -18,7 +18,6 @@
 -(void) checkProfileState;
 -(void) toggleProfileState;
 
-@property (nonatomic, copy) NSString* userID;
 @property (nonatomic, copy) NSString* eventID;
 @property (nonatomic, unsafe_unretained) id <ECEventProfileStatusManagerDelegate> delegate;
 @property (nonatomic,assign) BOOL isOnProfile;

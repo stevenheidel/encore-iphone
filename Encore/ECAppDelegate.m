@@ -95,6 +95,7 @@
     [[ECFacebookManger sharedFacebookManger] fetchUserInformation:^(NSDictionary *user) {
         if(user)
         {
+            [self saveUserInfoToDefaults:user];
             //Post to Encore server
             [ECJSONPoster postUser:user completion:^(NSDictionary *response) {
                     NSURL* defaultURL = [NSUserDefaults facebookProfileImageURL];
@@ -111,7 +112,6 @@
 
                 
             }];
-            [self saveUserInfoToDefaults:user];
         }else{
             //TODO: error message
              [self.hud hide:YES];

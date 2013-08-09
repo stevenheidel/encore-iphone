@@ -8,7 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "ECSearchType.h"
-
+#import "ECEventProfileStatusManager.h"
+#import "ECChangeConcertStateButton.h"
+@protocol ECUpcomingViewControllerDelegate <NSObject>
+- (void) profileUpdated;
+@end
 
 @interface ECUpcomingViewController : UITableViewController
 
@@ -16,6 +20,9 @@
 @property (weak, nonatomic) IBOutlet UIImageView *eventImage;
 @property (weak, nonatomic) IBOutlet UILabel *eventName;
 @property (weak, nonatomic) IBOutlet UILabel *eventVenueAndDate;
+@property (nonatomic,weak) ECChangeConcertStateButton* iamgoingButton;
+@property (nonatomic,strong) ECEventProfileStatusManager* statusManager;
+@property (nonatomic,strong) id <ECUpcomingViewControllerDelegate> eventStateDelegate; //for profile
 
 @property (nonatomic, assign) ECSearchType tense;
 @property (nonatomic,strong) NSDictionary * concert;

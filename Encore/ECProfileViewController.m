@@ -43,7 +43,7 @@ typedef enum {
     NumberOfSections
 } ProfileTableViewSections;
 
-@interface ECProfileViewController ()//<ECConcertDetailViewDelegate>
+@interface ECProfileViewController ()<ECPastViewControllerDelegate,ECUpcomingViewControllerDelegate>
 
 @property (strong,atomic) MBProgressHUD* hud;
 @end
@@ -222,7 +222,7 @@ typedef enum {
         self.shouldUpdateView = NO;
     }];
 }
-- (void) concertUpdated
+- (void) profileUpdated;
 {
     self.shouldUpdateView = YES;
 }
@@ -320,6 +320,7 @@ typedef enum {
         ECPastViewController * vc = [sb instantiateInitialViewController];
         vc.tense = ECSearchTypePast;
         vc.concert = concert;
+        vc.eventStateDelegate = self;
         [self.navigationController pushViewController:vc animated:YES];
     }
     else {
@@ -327,6 +328,7 @@ typedef enum {
         ECUpcomingViewController * vc = [sb instantiateInitialViewController];
         vc.tense = ECSearchTypeFuture;
         vc.concert = concert;
+        vc.eventStateDelegate = self;
         [self.navigationController pushViewController:vc animated:YES];
     }
     [Flurry logEvent:@"Selected_Event_On_Profile" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:concert.eventID, @"eventID",concert.eventName,@"eventName",[NSNumber numberWithInt:indexPath.row],@"row",[ECProfileViewController tenseStringForSection:section],@"Tense", nil]];

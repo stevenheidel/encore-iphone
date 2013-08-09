@@ -434,8 +434,8 @@ typedef enum {
         if (self.profileViewController == nil) {
             ECProfileViewController* profileViewController = [ECProfileViewController new];
             self.profileViewController = [[ECCustomNavController alloc] initWithRootViewController:profileViewController];
-            
-            //        self.profileViewController.arrPastConcerts = [self.concerts objectForKey:@"past"];
+        }else{
+            [[self.profileViewController.viewControllers objectAtIndex:0] performSelector:@selector(profileUpdated)]; // Update profile
         }
         self.profileViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
         [self presentViewController:self.profileViewController animated:YES completion:nil];

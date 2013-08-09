@@ -19,6 +19,7 @@
 
 #import <FacebookSDK/FacebookSDK.h>
 #import "ATAppRatingFlow.h"
+#import <MBProgressHUD.h>
 
 #import "ECAppDelegate.h"
 #import "EncoreURL.h"
@@ -28,10 +29,12 @@
 #import "ECJSONFetcher.h"
 #import "NSUserDefaults+Encore.h"
 #import "ECRowCells.h"
+#define HUD_DELAY 1.0
 
 typedef enum {
     Tickets,
     Lineup,
+    Details,
     Location,
     NumberOfRows
 } ECUpcomingRow;
@@ -55,7 +58,7 @@ typedef enum {
 }
 @end
 
-@interface ECUpcomingViewController ()
+@interface ECUpcomingViewController ()<ECEventProfileStatusManagerDelegate>
 
 @end
 
@@ -80,6 +83,14 @@ typedef enum {
     self.navigationItem.titleView = encoreLogo;
     self.tableView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
     [self setAppearance];
+}
+-(void) viewWillAppear:(BOOL)animated {
+    if(!self.statusManager) {
+        self.statusManager = [[ECEventProfileStatusManager alloc] init];
+    }
+    self.statusManager.eventID = self.concert.eventID;
+    [self.statusManager setDelegate:self];
+    [self.statusManager checkProfileState];
 }
 -(void) setAppearance {
     //Background
@@ -150,6 +161,8 @@ typedef enum {
             return 146.0f;
         case Lineup:
             return 142.0f;
+        case Details:
+            return 60.0f;
         case Tickets:
             return 60.0f;
         default:
@@ -170,6 +183,8 @@ typedef enum {
             return @"location";
         case Lineup:
             return @"lineup";
+        case Details:
+            return @"details";
         case Tickets:
             return @"tickets";
         default:
@@ -238,6 +253,21 @@ typedef enum {
             cell.lineup = self.concert.lineup;
             cell.contentView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
 
+            return cell;
+        }
+        case Details: {
+            DetailsCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+            if (cell == nil) {
+                cell = [[DetailsCell alloc] init];
+            }
+            cell.contentView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
+            cell.changeStateButton.titleLabel.font = [UIFont heroFontWithSize:20];
+            cell.changeStateButton.layer.cornerRadius = 5.0;
+            cell.changeStateButton.layer.masksToBounds = YES;
+            [cell.changeStateButton addTarget:self action:@selector(addToProfile) forControlEvents:UIControlEventTouchUpInside];
+            self.iamgoingButton = cell.changeStateButton;
+            [self.iamgoingButton setButtonIsOnProfile:self.statusManager.isOnProfile];
+            
             return cell;
         }
         case Tickets: {
@@ -373,27 +403,107 @@ typedef enum {
     return UIInterfaceOrientationPortrait;
 }
 
-#pragma mark AlertView delegate
-
 -(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (alertView.tag == ECNotLoggedInAlert) {
-
+        
         if (buttonIndex == alertView.firstOtherButtonIndex) {
             [ApplicationDelegate beginFacebookAuthorization];
         }
         
-        [Flurry logEvent:@"Login_Alert_Selection" withParameters:[NSDictionary dictionaryWithObjectsAndKeys: @"Detail_View", @"Current_View", buttonIndex == alertView.firstOtherButtonIndex ? @"Login":@"Cancel",@"Selection", nil]];
+        [Flurry logEvent:@"Login_Alert_Selection" withParameters:[NSDictionary dictionaryWithObjectsAndKeys: @"Past_View", @"Current_View", buttonIndex == alertView.firstOtherButtonIndex ? @"Login":@"Cancel",@"Selection", nil]];
         return; //don't process other alerts
-    }else if (alertView.tag == ECShareNotLoggedInAlert)
+    }
+    else if (alertView.tag == ECShareNotLoggedInAlert)
     {
         if (buttonIndex == alertView.firstOtherButtonIndex) {
             [ApplicationDelegate beginFacebookAuthorization];
             [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(shareTapped) name:ECLoginCompletedNotification object:nil];
             
         }
+    }else if (alertView.tag == ECChangeStateNotLoggedInAlert)
+    {
+        if (buttonIndex == alertView.firstOtherButtonIndex) {
+            [ApplicationDelegate beginFacebookAuthorization];
+            [[NSNotificationCenter defaultCenter] addObserver:self.statusManager selector:@selector(checkProfileState) name:ECLoginCompletedNotification object:nil];
+
+        }
     }
     
 }
+
+#pragma mark - Adding/Removing Concerts
+
+-(void) addToProfile{
+    if (ApplicationDelegate.isLoggedIn) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self.statusManager name:ECLoginCompletedNotification object:nil];
+        
+        [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
+        [self.statusManager toggleProfileState];
+    }else
+    {
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login", nil) message:NSLocalizedString(@"To Add this concert to your profile, you must first login", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Login", nil), nil];
+        alert.tag = ECChangeStateNotLoggedInAlert;
+        [alert show];
+    }
+}
+
+-(void) profileState:(BOOL)isOnProfile {
+    [self.iamgoingButton setButtonIsOnProfile:isOnProfile];
+}
+
+-(void)successChangingState:(BOOL)isOnProfile
+{
+    [self.iamgoingButton setButtonIsOnProfile:isOnProfile];
+    [self concertStateChangedHUD];
+    
+    if([self.eventStateDelegate respondsToSelector:@selector(profileUpdated)])
+        [self.eventStateDelegate profileUpdated];
+    
+    [Flurry logEvent:@"Completed_Adding_Concert" withParameters:[self flurryParam]];
+    
+    
+}
+-(void) failedToChangeState: (BOOL) isOnProfile;
+{
+    [self alertError];
+    [self.iamgoingButton setButtonIsOnProfile:isOnProfile];
+    [Flurry logEvent:@"Failed_Adding_Concert" withParameters:[self flurryParam]];
+    
+}
+
+-(NSString*) userID {
+    return [NSUserDefaults userID];
+}
+
+-(void) alertError {
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"Sorry, an error occured and your request was not processed.", nil) delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alert show];
+}
+
+
+-(NSDictionary*) flurryParam {
+    return [NSDictionary dictionaryWithObjectsAndKeys:self.concert.eventID,@"eventID",self.concert.eventName,@"eventName", nil];
+}
+-(void) concertStateChangedHUD{
+    MBProgressHUD* HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+    [self.navigationController.view addSubview:HUD];
+    
+    HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
+    HUD.mode = MBProgressHUDModeCustomView;
+    
+    if(self.statusManager.isOnProfile){
+        HUD.labelText = NSLocalizedString(@"concert_added",nil);
+        HUD.color = [UIColor lightBlueHUDConfirmationColor];
+    }else{
+        HUD.labelText = NSLocalizedString(@"concert_removed", nil);
+        HUD.color = [UIColor redHUDConfirmationColor];
+    }
+    
+    [HUD show:YES];
+    [HUD hide:YES afterDelay:HUD_DELAY];
+    
+}
+
 
 
 

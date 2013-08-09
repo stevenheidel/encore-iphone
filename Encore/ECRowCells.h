@@ -7,7 +7,7 @@
 //
 
 #import <MapKit/MapKit.h>
-
+#import "ECChangeConcertStateButton.h"
 
 @interface GetPhotosCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIButton* grabPhotosButton;
@@ -37,7 +37,7 @@
 @end
 
 @interface DetailsCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UIButton *iwasthereButton;
+@property (weak, nonatomic) IBOutlet ECChangeConcertStateButton *changeStateButton;
 @end
 
 @interface LocationCell : UITableViewCell <MKMapViewDelegate>

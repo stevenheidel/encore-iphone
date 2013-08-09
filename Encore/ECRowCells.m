@@ -105,4 +105,5 @@
 
 @implementation DetailsCell
 
+
 @end

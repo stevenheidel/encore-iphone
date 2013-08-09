@@ -58,7 +58,7 @@ typedef enum {
         self.statusManager = [[ECEventProfileStatusManager alloc] init];
     }
     self.statusManager.eventID = self.concert.eventID;
-    self.statusManager.userID = [self userID];
+    [self.statusManager setDelegate:self];
     [self.statusManager checkProfileState];
 }
 -(void) setAppearance {
@@ -112,11 +112,13 @@ typedef enum {
     self.navigationItem.rightBarButtonItem = shareButton;
     
     self.tableView.separatorColor = [UIColor separatorColor];
+    
 }
 
 #pragma mark - status delegate 
 -(void) profileState:(BOOL)isOnProfile {
-    self.iwasthereButton.titleLabel.text = isOnProfile ? @"YES" : @"NO";
+    [self.iwasthereButton setButtonIsOnProfile:isOnProfile];
+   // self.iwasthereButton.titleLabel.text = isOnProfile ? @"YES" : @"NO";
     
 }
 
@@ -173,11 +175,12 @@ typedef enum {
                 cell = [[DetailsCell alloc] init];
             }
             cell.contentView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
-            cell.iwasthereButton.titleLabel.font = [UIFont heroFontWithSize:20];
-            cell.iwasthereButton.layer.cornerRadius = 5.0;
-            cell.iwasthereButton.layer.masksToBounds = YES;
-            [cell.iwasthereButton addTarget:self action:@selector(addToProfile) forControlEvents:UIControlEventTouchUpInside];
-            self.iwasthereButton = cell.iwasthereButton;
+            cell.changeStateButton.titleLabel.font = [UIFont heroFontWithSize:20];
+            cell.changeStateButton.layer.cornerRadius = 5.0;
+            cell.changeStateButton.layer.masksToBounds = YES;
+            [cell.changeStateButton addTarget:self action:@selector(addToProfile) forControlEvents:UIControlEventTouchUpInside];
+            self.iwasthereButton = cell.changeStateButton;
+            [self.iwasthereButton setButtonIsOnProfile:self.statusManager.isOnProfile];
             
             return cell;
         }
@@ -348,40 +351,83 @@ typedef enum {
             [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(shareTapped) name:ECLoginCompletedNotification object:nil];
             
         }
+    }else if (alertView.tag == ECChangeStateNotLoggedInAlert)
+    {
+        if (buttonIndex == alertView.firstOtherButtonIndex) {
+            [ApplicationDelegate beginFacebookAuthorization];
+            [[NSNotificationCenter defaultCenter] addObserver:self.statusManager selector:@selector(checkProfileState) name:ECLoginCompletedNotification object:nil];
+
+        }
     }
     
 }
 
 #pragma mark - Adding/Removing Concerts
 
--(void) addToProfile { //or remove
+-(void) addToProfile{
     if (ApplicationDelegate.isLoggedIn) {
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:ECLoginCompletedNotification object:nil];
+        [[NSNotificationCenter defaultCenter] removeObserver:self.statusManager name:ECLoginCompletedNotification object:nil];
         
         [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
         [self.statusManager toggleProfileState];
+    }else
+    {
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login", nil) message:NSLocalizedString(@"To Add this concert to your profile, you must first login", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Login", nil), nil];
+        alert.tag = ECChangeStateNotLoggedInAlert;
+        [alert show];
     }
 }
 
--(NSString*) userID {
-    return [NSUserDefaults userID];
+-(void)successChangingState:(BOOL)isOnProfile
+{
+    [self.iwasthereButton setButtonIsOnProfile:isOnProfile];
+    [self concertStateChangedHUD];
+    
+    if([self.eventStateDelegate respondsToSelector:@selector(profileUpdated)])
+        [self.eventStateDelegate profileUpdated];
+    
+    [Flurry logEvent:@"Completed_Adding_Concert" withParameters:[self flurryParam]];
+    
+
 }
+-(void) failedToChangeState: (BOOL) isOnProfile;
+{
+    [self alertError];
+    [self.iwasthereButton setButtonIsOnProfile:isOnProfile];
+    [Flurry logEvent:@"Failed_Adding_Concert" withParameters:[self flurryParam]];
+
+}
+
+
 
 -(void) alertError {
     UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"Sorry, an error occured and your request was not processed.", nil) delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alert show];
 }
 
--(void) toggleOnProfileState {
-    self.isOnProfile = !self.isOnProfile;
-    
-    //    NSIndexPath* indexPath = [NSIndexPath indexPathForItem:Details inSection:0];
-    //    DetailsCell* cell = (DetailsCell*)[self.tableView cellForRowAtIndexPath:indexPath];
-    //    cell.iwasthereButton.titleLabel.text = self.isOnProfile ? @"Yes" : @"No";
-}
+
 
 -(NSDictionary*) flurryParam {
     return [NSDictionary dictionaryWithObjectsAndKeys:self.concert.eventID,@"eventID",self.concert.eventName,@"eventName", nil];
+}
+-(void) concertStateChangedHUD{
+    MBProgressHUD* HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+    [self.navigationController.view addSubview:HUD];
+    
+    HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
+    HUD.mode = MBProgressHUDModeCustomView;
+    
+    if(self.statusManager.isOnProfile){
+        HUD.labelText = NSLocalizedString(@"concert_added",nil);
+        HUD.color = [UIColor lightBlueHUDConfirmationColor];
+    }else{
+        HUD.labelText = NSLocalizedString(@"concert_removed", nil);
+        HUD.color = [UIColor redHUDConfirmationColor];
+    }
+    
+    [HUD show:YES];
+    [HUD hide:YES afterDelay:HUD_DELAY];
+
 }
 
 

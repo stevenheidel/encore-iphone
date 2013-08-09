@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ECSearchType.h"
 #import "ECEventProfileStatusManager.h"
+#import "ECChangeConcertStateButton.h"
 
 @protocol ECPastViewControllerDelegate <NSObject>
 - (void) profileUpdated;
@@ -16,7 +17,7 @@
 
 @interface ECPastViewController : UITableViewController <UIAlertViewDelegate,ECEventProfileStatusManagerDelegate>
 @property (nonatomic,assign) BOOL isOnProfile;
-@property (nonatomic,weak) UIButton* iwasthereButton;
+@property (nonatomic,weak) ECChangeConcertStateButton* iwasthereButton;
 @property (weak, nonatomic) IBOutlet UIImageView *eventImage;
 @property (weak, nonatomic) IBOutlet UILabel *eventName;
 @property (weak, nonatomic) IBOutlet UILabel *eventVenueAndDate;

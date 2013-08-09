@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="13A524d" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="kpA-lm-Rwt">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="13A538g" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="kpA-lm-Rwt">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -179,8 +179,42 @@
                                     <outlet property="lineupLabel" destination="Y9x-J2-8sE" id="Cyy-u7-PYx"/>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="details" rowHeight="60" id="Ace-SN-CXj" customClass="DetailsCell">
+                                <rect key="frame" x="0.0" y="431" width="320" height="60"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="59"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yK4-gO-VCC" customClass="ECChangeConcertStateButton">
+                                            <color key="backgroundColor" red="0.01176470588" green="0.69019607839999997" blue="0.89019607840000003" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="246" id="Exn-aQ-xO9"/>
+                                                <constraint firstAttribute="height" constant="44" id="QJD-Fx-r7m"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                            <state key="normal" title="I'M GOING">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <state key="highlighted">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="yK4-gO-VCC" firstAttribute="top" secondItem="Ace-SN-CXj" secondAttribute="top" constant="8" id="Sui-t7-C8W"/>
+                                    <constraint firstAttribute="centerX" secondItem="yK4-gO-VCC" secondAttribute="centerX" type="user" id="rpW-O6-iez"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="changeStateButton" destination="yK4-gO-VCC" id="e6Q-Kq-tFK"/>
+                                </connections>
+                            </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="location" rowHeight="146" id="4ou-sL-lFG" customClass="LocationCell">
-                                <rect key="frame" x="0.0" y="431" width="320" height="146"/>
+                                <rect key="frame" x="0.0" y="491" width="320" height="146"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="145"/>
@@ -261,6 +295,15 @@
         </scene>
     </scenes>
     <classes>
+        <class className="DetailsCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DetailsCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="changeStateButton" candidateClass="ECChangeConcertStateButton"/>
+            </relationships>
+        </class>
+        <class className="ECChangeConcertStateButton" superclassName="UIButton">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ECChangeConcertStateButton.h"/>
+        </class>
         <class className="ECUpcomingViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ECUpcomingViewController.h"/>
             <relationships>

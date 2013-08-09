@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="nnw-kD-SbF">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="13A538g" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="nnw-kD-SbF">
     <dependencies>
         <development version="4600" identifier="xcode"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
@@ -10,7 +10,7 @@
             <objects>
                 <tableViewController id="nnw-kD-SbF" customClass="ECPastViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="55" sectionHeaderHeight="22" sectionFooterHeight="22" id="5ED-3r-WDw">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="s0g-FX-Ofe">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="207"/>
@@ -187,7 +187,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="145"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fsu-P6-AeE">
+                                        <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fsu-P6-AeE" customClass="ECChangeConcertStateButton">
                                             <color key="backgroundColor" red="0.20392156862745098" green="0.8784313725490196" blue="0.76078431372549016" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="246" type="user" id="6f0-f6-5bm"/>
@@ -210,7 +210,7 @@
                                     <constraint firstItem="fsu-P6-AeE" firstAttribute="top" secondItem="tmc-SK-ANe" secondAttribute="top" constant="15" type="user" id="TJc-a6-ki0"/>
                                 </constraints>
                                 <connections>
-                                    <outlet property="iwasthereButton" destination="fsu-P6-AeE" id="gFi-nA-GV2"/>
+                                    <outlet property="changeStateButton" destination="fsu-P6-AeE" id="z6O-od-Hjy"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -235,7 +235,7 @@
             <objects>
                 <viewController id="C6R-Rp-fJY" customClass="ECGridViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zRa-sd-kUO">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="4nW-7X-Iq4">
@@ -379,7 +379,7 @@
             <objects>
                 <viewController id="utg-Ur-KTZ" customClass="ECPostViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="s3D-w9-0TB">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Av-HW-8j1" userLabel="Post">
@@ -530,103 +530,9 @@
         <image name="navbar.png" width="320" height="44"/>
         <image name="playbutton.png" width="59" height="59"/>
     </resources>
-    <classes>
-        <class className="DetailsCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/DetailsCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="iwasthereButton" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="ECGridHeaderView" superclassName="UICollectionReusableView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ECGridHeaderView.h"/>
-            <relationships>
-                <relationship kind="outlet" name="eventLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="venueAndDateLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="ECGridViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ECGridViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="eventLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="footerView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="noPostsLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="postsCollectionView" candidateClass="UICollectionView"/>
-                <relationship kind="outlet" name="venueAndDateLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="ECPastViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ECPastViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="eventImage" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="eventName" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="eventVenueAndDate" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="ECPostCell" superclassName="UICollectionViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ECPostCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="activityIndicator" candidateClass="UIActivityIndicatorView"/>
-                <relationship kind="outlet" name="playButton" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="postImageView" candidateClass="UIImageView"/>
-            </relationships>
-        </class>
-        <class className="ECPostViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ECPostViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="flagPhoto"/>
-                <relationship kind="action" name="playButtonTapped:"/>
-                <relationship kind="outlet" name="artistLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="captionLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="containerView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="flagPostButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="playButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="postImage" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="profilePicture" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="userNameLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="venueAndDateLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="GetPhotosCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/GetPhotosCell.h"/>
-            <relationships>
-                <relationship kind="action" name="grabPhotos"/>
-                <relationship kind="outlet" name="grabPhotosButton" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="LineupCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/LineupCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="lineupCollectionView" candidateClass="UICollectionView"/>
-                <relationship kind="outlet" name="lineupLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="LineupCollectionCell" superclassName="UICollectionViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/LineupCollectionCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="activityIndicator" candidateClass="UIActivityIndicatorView"/>
-                <relationship kind="outlet" name="artistImage" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="artistLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="UICollectionReusableView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionReusableView.h"/>
-        </class>
-        <class className="UICollectionViewCell" superclassName="UICollectionReusableView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewCell.h"/>
-        </class>
-        <class className="UICollectionViewFlowLayout" superclassName="UICollectionViewLayout">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewFlowLayout.h"/>
-        </class>
-        <class className="UICollectionViewLayout" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewLayout.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
 </document>
