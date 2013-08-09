@@ -474,7 +474,7 @@ typedef enum {
 }
 
 #pragma mark ECLocationSetterDelegate Method
--(void) updateSearchLocation:(CLLocation *)location radius: (float) radius area: (NSString*) area {
+-(void) updateSearchLocation:(CLLocation *)location radius: (float) radius area: (NSString*) area shouldCloseView:(BOOL)closeView{
     NSLog(@"new radius %f",radius);
     self.currentSearchLocation = location;
     self.currentSearchRadius = radius;
@@ -483,7 +483,8 @@ typedef enum {
     [NSUserDefaults setLastSearchRadius:radius];
     [NSUserDefaults setLastSearchArea: area];
     [NSUserDefaults synchronize];
-    [self hideLocationSetter];
+    if(closeView)
+        [self hideLocationSetter];
     
     [self fetchConcerts];
     if (self.hasSearched) {

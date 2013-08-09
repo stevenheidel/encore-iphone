@@ -115,6 +115,8 @@
         [NSUserDefaults setLastSearchLocation:self.location];
         [NSUserDefaults synchronize];
         [self reverseGeocodeLocation];
+        [self.delegate updateSearchLocation:self.location radius:self.locationSlider.value area:[self locationStringForPlacemark:self.placemark ] shouldCloseView:NO]; //this will dismiss the view
+
 }
 
 -(void) viewWillAppear:(BOOL)animated {
@@ -236,7 +238,7 @@
             if ([self.locationSearchBar isFirstResponder]) {
                 [self.locationSearchBar resignFirstResponder];
             }
-            [self.delegate updateSearchLocation:self.location radius:self.locationSlider.value area:[self locationStringForPlacemark:self.placemark]]; //this will dismiss the view
+            [self.delegate updateSearchLocation:self.location radius:self.locationSlider.value area:[self locationStringForPlacemark:self.placemark] shouldCloseView:YES]; //this will dismiss the view
         }
     }
 }

@@ -26,6 +26,6 @@
 @protocol ECLocationSetterDelegate <NSObject>
 
 @required
--(void) updateSearchLocation:(CLLocation *)location radius: (float) radius area: (NSString*) area;
+-(void) updateSearchLocation:(CLLocation *)location radius: (float) radius area: (NSString*) area shouldCloseView:(BOOL)closeView ;
 -(void) updateRadius: (float) radius;
 @end
