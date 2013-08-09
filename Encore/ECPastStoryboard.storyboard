@@ -66,7 +66,7 @@
                                                 <constraint firstAttribute="width" constant="246" id="eB3-ia-ySi"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                            <state key="normal" title="SEE PHOTOS">
+                                            <state key="normal" title="SEE PHOTOS + VIDEOS">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
@@ -187,25 +187,28 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="145"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="details" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gcy-JU-Yuj">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fsu-P6-AeE">
+                                            <color key="backgroundColor" red="0.20392156862745098" green="0.8784313725490196" blue="0.76078431372549016" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="21" id="khj-eX-LVZ"/>
+                                                <constraint firstAttribute="width" constant="246" type="user" id="6f0-f6-5bm"/>
+                                                <constraint firstAttribute="height" constant="44" id="qKo-FW-S2D"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </label>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                            <state key="normal" title="I WAS THERE!">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <state key="highlighted">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                        </button>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <constraints>
-                                    <constraint firstItem="Gcy-JU-Yuj" firstAttribute="leading" secondItem="tmc-SK-ANe" secondAttribute="leading" type="default" id="39O-sb-Apx"/>
-                                    <constraint firstAttribute="centerX" secondItem="Gcy-JU-Yuj" secondAttribute="centerX" type="user" id="E2S-Bo-tX0"/>
-                                    <constraint firstItem="Gcy-JU-Yuj" firstAttribute="top" secondItem="tmc-SK-ANe" secondAttribute="top" type="default" id="VU4-OA-oIr"/>
+                                    <constraint firstItem="fsu-P6-AeE" firstAttribute="centerX" secondItem="tmc-SK-ANe" secondAttribute="centerX" type="default" id="1B5-c0-bV2"/>
+                                    <constraint firstItem="fsu-P6-AeE" firstAttribute="top" secondItem="tmc-SK-ANe" secondAttribute="top" constant="8" type="user" id="TJc-a6-ki0"/>
                                 </constraints>
-                                <connections>
-                                    <outlet property="detailsLabel" destination="Gcy-JU-Yuj" id="oXk-gy-QH9"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <sections/>
@@ -613,6 +616,9 @@
         </class>
         <class className="UICollectionViewFlowLayout" superclassName="UICollectionViewLayout">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewFlowLayout.h"/>
+        </class>
+        <class className="UICollectionViewLayout" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewLayout.h"/>
         </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
