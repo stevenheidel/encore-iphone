@@ -44,10 +44,7 @@
     
     if([self.lineupImages objectAtIndex:indexPath.row] == [NSNull null]) {
         [cell.activityIndicator startAnimating];
-        [ECJSONFetcher fetchArtistsForString:name withSearchType:ECSearchTypeFuture forLocation:[NSUserDefaults lastSearchLocation] radius:[NSNumber numberWithFloat:[NSUserDefaults lastSearchRadius]] completion:^(NSDictionary *artists) {
-            NSDictionary* artist1 = [artists objectForKey:@"artist"];
-            
-            NSURL* imageURL = [NSURL URLWithString:[artist1 objectForKey:@"image_url"]];
+        [ECJSONFetcher fetchPictureForArtist:name completion:^(NSURL *imageURL) {
             UIImage* image = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL]];
             if (image) {
                 [self.lineupImages replaceObjectAtIndex:indexPath.row withObject:image];
@@ -61,8 +58,6 @@
     }
     
     cell.artistLabel.text = [[artist objectForKey:@"artist"] uppercaseString];
-    
-    
     
     //    [cell.artistImage setImageWithURL:[artist imageURL] placeholderImage:nil];
     //    cell.artistImage.image = [UIImage imageNamed:@"placeholder"];

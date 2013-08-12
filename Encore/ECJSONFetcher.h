@@ -17,6 +17,8 @@
 
 +(void)fetchArtistsForString:(NSString*)searchStr withSearchType:(ECSearchType)searchType forLocation:(CLLocation   *)location radius: (NSNumber*) radius completion:(void (^)(NSDictionary* artists)) completion;
 
++(void)fetchPictureForArtist: (NSString*) artist completion: (void(^) (NSURL* imageURL)) completion;
+                                                              
 +(void)fetchPopularConcertsWithSearchType:(ECSearchType)searchType location: (CLLocation*) location radius: (NSNumber*) radius completion: (void (^)(NSArray* concerts)) completion;
 
 +(void) fetchPostsForConcertWithID: (NSString *) concertID completion: (void (^)(NSArray* fetchedPosts)) completion;

@@ -74,6 +74,7 @@
     rightButton.frame = CGRectMake(0, 0, rightButImage.size.width, rightButImage.size.height);
     UIBarButtonItem* shareButton = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
     self.navigationItem.rightBarButtonItem = shareButton;
+    [self loadConcertImages];
 }
 -(void) backButtonWasPressed {
     [self.navigationController popViewControllerAnimated:YES];

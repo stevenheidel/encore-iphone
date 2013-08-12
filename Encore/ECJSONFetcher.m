@@ -170,6 +170,25 @@ NSString* stringForSearchType(ECSearchType searchType) {
     }];
 }
 
+
++(void)fetchPictureForArtist: (NSString*) artist completion: (void(^) (NSURL* imageURL)) completion {
+    NSString* fullArtistPicURL = [NSString stringWithFormat:ArtistPictureURL,[artist stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    NSURL * url = [NSURL URLWithString:fullArtistPicURL];
+    NSURLRequest * request = [NSURLRequest requestWithURL:url];
+    AFJSONRequestOperation * operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        NSURL* imageURL = [NSURL URLWithString:[(NSDictionary*) JSON objectForKey:@"image_url"]];
+        if (completion) {
+            
+            completion(imageURL);
+        }
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        if (completion) {
+            completion(nil);
+        }
+    }];
+    [operation start];
+}
+
 +(void) fetchPostsForConcertWithID: (NSString *) concertID completion: (void (^)(NSArray* fetchedPosts)) completion{
     __block NSArray * posts;
     NSString * fullPostsUrl = [NSString stringWithFormat:ConcertPostsURL,concertID];
