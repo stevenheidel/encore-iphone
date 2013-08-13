@@ -220,4 +220,16 @@ static void *MoviePlayerKey = &MoviePlayerKey;
 	return nil;
 }
 
+-(BOOL)shouldAutorotate{
+        return YES;
+}
+
+-(NSUInteger)supportedInterfaceOrientations{
+
+  return UIInterfaceOrientationMaskAllButUpsideDown;
+}
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation{
+        return UIInterfaceOrientationLandscapeLeft;
+}
+
 @end

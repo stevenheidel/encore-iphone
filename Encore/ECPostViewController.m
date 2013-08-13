@@ -83,25 +83,22 @@ typedef enum {
 }
 
 -(BOOL)shouldAutorotate{
-//    if ([self presentedViewController] != nil) {
-//        return YES;
-//    }
-//    else return self.interfaceOrientation == UIInterfaceOrientationMaskPortrait;
-    return NO;
+    if ([self presentingViewController] != nil) {
+        return YES;
+    }
+    else return self.interfaceOrientation == UIInterfaceOrientationMaskPortrait;
 }
 
 -(NSUInteger)supportedInterfaceOrientations{
-//    if ([self presentedViewController] != nil) {
-//        return UIInterfaceOrientationMaskAllButUpsideDown;
-//    }
-//    else return UIInterfaceOrientationMaskPortrait;
-    return UIInterfaceOrientationMaskPortrait;
+    if ([self presentingViewController] != nil) {
+        return UIInterfaceOrientationMaskAllButUpsideDown;
+    }
+    else return UIInterfaceOrientationMaskPortrait;
 }
 - (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation{
-//    if([self presentedViewController] != nil){
-//        return UIInterfaceOrientationLandscapeLeft;
-//    }
-//    return UIInterfaceOrientationPortrait;
+    if([self presentingViewController] != nil){
+        return UIInterfaceOrientationLandscapeLeft;
+    }
     return UIInterfaceOrientationPortrait;
 }
 
@@ -110,11 +107,6 @@ typedef enum {
 -(void) setViewForCurrentType {
     ECPostType postType = [self.post postType];
     self.playButton.hidden = postType == ECPhotoPost;
-    //self.postImage.hidden = postType == ECVideoPost;
-    
-//    if (postType == ECVideoPost) {
-//        [self changeYoutubeURL];
-//    }
 }
 
 
@@ -177,8 +169,10 @@ typedef enum {
 {
     NSString* link =  [[self.post youtubeLink] absoluteString];
     XCDYouTubeVideoPlayerViewController *videoPlayerViewController = [[XCDYouTubeVideoPlayerViewController alloc] initWithVideoIdentifier:[self extractYoutubeID:link]];
+    //videoPlayerViewController.supportedInterfaceOrientations =UIInterfaceOrientationMaskLandscape;
     [self presentMoviePlayerViewControllerAnimated:videoPlayerViewController];
 }
+
 
 -(void) tapPost {
     [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
