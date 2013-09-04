@@ -293,8 +293,19 @@ typedef enum {
 -(void) reloadData {
     [Flurry logEvent:@"Used_Refresh_Control_Main_View" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[self currentSearchTypeString], @"search_type", nil]];
     [ECJSONFetcher fetchPopularConcertsWithSearchType:self.currentSearchType location: self.currentSearchLocation radius: [NSNumber numberWithFloat:self.currentSearchRadius] completion:^(NSArray *concerts) {
-        NSArray* currentArray = [self currentEventArray];
-        currentArray = concerts;
+        switch (self.currentSearchType) {
+            case ECSearchTypeFuture:
+                self.futureConcerts = concerts;
+                break;
+            case ECSearchTypePast:
+                self.pastConcerts = concerts;
+                break;
+            case ECSearchTypeToday:
+                self.todaysConcerts = concerts;
+                break;
+            default:
+                break;
+        }
         [self.tableView reloadData];
         [self setBackgroundImage];
         [self.refreshControl endRefreshing];
