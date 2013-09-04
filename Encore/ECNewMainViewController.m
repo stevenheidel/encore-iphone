@@ -51,7 +51,7 @@ typedef enum {
 
 @interface ECNewMainViewController () {
     BOOL showingSearchBar;
-    UIView* emptyView;
+    UIView* lastFMView;
 }
 
 @end
@@ -61,7 +61,7 @@ typedef enum {
 #pragma mark - View loading
 - (void)viewDidLoad {
     [super viewDidLoad];
-    emptyView = [UIView new];
+    
     //Initializations;
     self.searchHeaderView = nil;
     self.hasSearched = FALSE;
@@ -81,6 +81,8 @@ typedef enum {
     [self setupHUD];
     [self setupSearchBar];
     [self setupRefreshControl];
+    [self setupLastFMView];
+    
     self.locationLabel.font = [UIFont heroFontWithSize:16.0f];
     
     self.tap = [[UITapGestureRecognizer alloc]
@@ -117,6 +119,16 @@ typedef enum {
         self.locationLabel.text = city == nil ? @"Location not set" : city;
     }
   
+}
+
+-(void) setupLastFMView {
+    lastFMView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.tableView.frame.size.width,25.0f)];
+    UIButton* lastFMBUtton = [[UIButton alloc] initWithFrame:CGRectMake(100.0f, 6.0f, 98.0f, 13.0f)];
+    [lastFMBUtton addTarget:self action:@selector(openLastFM:) forControlEvents:UIControlEventTouchUpInside];
+    [lastFMBUtton setBackgroundImage:[UIImage imageNamed:@"lastfmAttr"] forState:UIControlStateNormal];
+    [lastFMBUtton setContentMode:UIViewContentModeScaleAspectFit];
+    [lastFMView addSubview: lastFMBUtton];
+    self.tableView.tableFooterView = lastFMView;
 }
 
 -(void)LocationAcquired
@@ -185,17 +197,39 @@ typedef enum {
             break;
     }
 }
+
 -(UIView*) noConcertsFooterView {
     if(_noConcertsFooterView == nil) {
-        _noConcertsFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 30)];
+        _noConcertsFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 200)];
         _noConcertsFooterView.backgroundColor = [UIColor blackColor];
-        UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(5,5,315,20)];
+        UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(5,5,315,150)];
         label.textColor = [UIColor whiteColor];
         label.textAlignment = NSTextAlignmentCenter;
         label.backgroundColor = [UIColor blackColor];
-        label.text = NSLocalizedString(@"No shows in your area. Change location?", @"If no results for popular shows, this appears in the table footer view");
+        label.numberOfLines = 0;
+        label.tag = 213;
+        
         [_noConcertsFooterView addSubview:label];
     }
+    
+    UILabel* label = (UILabel*)[_noConcertsFooterView viewWithTag:213];
+    NSString* message = nil;
+    switch (self.currentSearchType) {
+        case ECSearchTypePast:
+            message = @"No one has added a show in your area recently.\n\nSearch for a show above or try changing your location";
+            break;
+        case ECSearchTypeToday:
+            message = @"No shows are happening in %@ today\n\nRoadtrip? Try changing your location to a city nearby";
+            break;
+        case ECSearchTypeFuture:
+            message = @"Doesn't seem like %@ is into concerts.\n\nTry changing your location to a more happening city nearby or check back later.";
+            break;
+        default:
+            break;
+    }
+    
+    label.text = [NSString stringWithFormat:message,[NSUserDefaults searchCity]];
+    
     return _noConcertsFooterView;
 }
 
@@ -225,11 +259,11 @@ typedef enum {
     [self setEventArray: concerts forType: searchType];
     
     if(searchType == self.currentSearchType){
-        if ([self currentEventArray].count == 0 && self.currentSearchType != ECSearchTypePast) {
+        if ([self currentEventArray].count == 0) {
             self.tableView.tableFooterView = self.noConcertsFooterView;
         }
         else {
-            self.tableView.tableFooterView = emptyView;
+            self.tableView.tableFooterView = lastFMView;
         }
         [self.hud hide:YES];
     }
@@ -602,9 +636,9 @@ typedef enum {
     [self displayViewsAccordingToSearchType];
     
     if ([self currentEventArray].count != 0) {
-        self.tableView.tableFooterView = emptyView;
+        self.tableView.tableFooterView = lastFMView;
     }
-    else if (self.currentSearchType != ECSearchTypePast) {
+    else /*if (self.currentSearchType != ECSearchTypePast)*/ {
         self.tableView.tableFooterView = self.noConcertsFooterView;
     }
     
@@ -908,7 +942,7 @@ typedef enum {
 - (void)fetchedConcertsForSearch:(NSDictionary *)comboDic {
     [self.hud hide:YES];
     [self resetTableHeaderView];
-    self.tableView.tableFooterView = emptyView;
+    self.tableView.tableFooterView = lastFMView;
     if (comboDic) {
         self.hasSearched = TRUE;
         self.comboSearchResultsDic = comboDic;
