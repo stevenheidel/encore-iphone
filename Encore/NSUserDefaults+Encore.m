@@ -76,6 +76,16 @@
     [[NSUserDefaults standardUserDefaults] setFloat:searchRadius forKey:@"last_search_radius"];
 }
 
++(NSString*) searchCity {
+    NSString* city = [[NSUserDefaults standardUserDefaults] objectForKey:@"search_city"];
+//    if (city == nil) {
+//        city = [NSUserDefaults userCity];
+//    }
+    return city;
+}
++(void) setSearchCity: (NSString*) city {
+    [[NSUserDefaults standardUserDefaults] setObject:city forKey:@"search_city"];
+}
 //save the geocoded string for reference
 +(void) setLastSearchArea: (NSString*) area {
     [[NSUserDefaults standardUserDefaults] setObject:area forKey:@"last_search_area"];

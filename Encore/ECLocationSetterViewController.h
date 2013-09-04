@@ -13,6 +13,7 @@
 - (IBAction)touchedOutsideTextField:(id)sender;
 
 - (IBAction)infoButtonTapped;
+@property (nonatomic, readonly) NSString* areaStringForPlacemark;
 @property (nonatomic, assign) float radius;
 @property (nonatomic, strong) CLLocation* location;
 @property (nonatomic, copy) CLPlacemark* placemark;
@@ -26,6 +27,7 @@
 @protocol ECLocationSetterDelegate <NSObject>
 
 @required
--(void) updateSearchLocation:(CLLocation *)location radius: (float) radius area: (NSString*) area shouldCloseView:(BOOL)closeView ;
+//-(void) updateSearchLocation:(CLLocation *)location radius: (float) radius area: (NSString*) area shouldCloseView:(BOOL)closeView ;
+-(void) locationSetter: (ECLocationSetterViewController*) setter updateLocationAlsoCloseView: (BOOL) shouldClose;
 -(void) updateRadius: (float) radius;
 @end

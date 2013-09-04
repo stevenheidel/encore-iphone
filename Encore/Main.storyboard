@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="13A538g" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="aaM-Mm-ejq">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="aaM-Mm-ejq">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -21,7 +21,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="HlE-VT-IbH">
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="E96-RF-aMq" userLabel="Header">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="75"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="72"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="BPv-ov-Jp0" userLabel="Segmented Control">
@@ -48,7 +48,6 @@
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="35" id="LtC-ZU-Xok"/>
-                                                        <constraint firstAttribute="width" constant="250" id="WnO-GE-CGK"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <textInputTraits key="textInputTraits" returnKeyType="search"/>
@@ -56,69 +55,43 @@
                                                         <outlet property="delegate" destination="8hQ-DB-bIb" id="ez6-fH-gFb"/>
                                                     </connections>
                                                 </textField>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RbE-gN-6Tm" userLabel="Location Button">
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="34" id="Cih-ip-JKy"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                                    <state key="normal" image="locationmakerwhite.png">
-                                                        <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                    <state key="highlighted">
-                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="openLocationSetter" destination="8hQ-DB-bIb" eventType="touchUpInside" id="Tfg-wK-FhX"/>
-                                                    </connections>
-                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstItem="14l-k4-vqw" firstAttribute="top" secondItem="zAo-rd-fKL" secondAttribute="top" type="default" id="1dh-6Y-e41"/>
-                                                <constraint firstItem="RbE-gN-6Tm" firstAttribute="centerY" secondItem="UU0-XP-3u7" secondAttribute="centerY" type="default" id="49D-Fi-sVs"/>
-                                                <constraint firstItem="RbE-gN-6Tm" firstAttribute="leading" secondItem="UU0-XP-3u7" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="7UK-oh-jun"/>
+                                                <constraint firstItem="UU0-XP-3u7" firstAttribute="leading" secondItem="zAo-rd-fKL" secondAttribute="leading" constant="8" type="user" id="7yX-z0-FWr"/>
+                                                <constraint firstAttribute="bottom" secondItem="UU0-XP-3u7" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="N7D-o8-27S"/>
                                                 <constraint firstAttribute="height" constant="65" type="user" id="Pmn-P3-QPd"/>
                                                 <constraint firstItem="14l-k4-vqw" firstAttribute="bottom" secondItem="zAo-rd-fKL" secondAttribute="bottom" type="default" id="TFm-0w-gDN"/>
+                                                <constraint firstAttribute="trailing" secondItem="UU0-XP-3u7" secondAttribute="trailing" constant="8" type="user" id="XYX-SE-I3u"/>
                                                 <constraint firstItem="14l-k4-vqw" firstAttribute="trailing" secondItem="zAo-rd-fKL" secondAttribute="trailing" type="default" id="Xmk-dm-w7I"/>
-                                                <constraint firstItem="RbE-gN-6Tm" firstAttribute="top" secondItem="zAo-rd-fKL" secondAttribute="top" type="default" id="f56-rT-qOX"/>
                                                 <constraint firstItem="14l-k4-vqw" firstAttribute="leading" secondItem="zAo-rd-fKL" secondAttribute="leading" type="default" id="l0A-Nq-VAL"/>
-                                                <constraint firstItem="RbE-gN-6Tm" firstAttribute="trailing" secondItem="zAo-rd-fKL" secondAttribute="trailing" type="default" id="orh-AO-gDe"/>
-                                                <constraint firstItem="RbE-gN-6Tm" firstAttribute="bottom" secondItem="zAo-rd-fKL" secondAttribute="bottom" type="default" id="pur-7j-efT"/>
                                             </constraints>
                                         </view>
-                                        <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hXC-Wo-Qyy" userLabel="LastFM Button">
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Location" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0lz-Ia-CXc">
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="13" type="user" id="gS4-RD-BX5"/>
-                                                <constraint firstAttribute="width" constant="120" id="vQC-JV-lyd"/>
+                                                <constraint firstAttribute="height" constant="21" type="user" id="PSV-i2-N93"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                            <state key="normal" image="lastfmAttr.png">
-                                                <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
-                                            <state key="highlighted">
-                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
-                                            <connections>
-                                                <action selector="openLastFM:" destination="8hQ-DB-bIb" eventType="touchUpInside" id="Rdn-S0-z8j"/>
-                                            </connections>
-                                        </button>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
-                                        <constraint firstItem="hXC-Wo-Qyy" firstAttribute="top" secondItem="E96-RF-aMq" secondAttribute="top" constant="54" id="Goz-MX-wLF"/>
-                                        <constraint firstItem="hXC-Wo-Qyy" firstAttribute="centerX" secondItem="BPv-ov-Jp0" secondAttribute="centerX" type="default" id="GtG-Bn-KLr"/>
-                                        <constraint firstItem="zAo-rd-fKL" firstAttribute="leading" secondItem="BPv-ov-Jp0" secondAttribute="leading" type="default" id="f19-PU-mik"/>
-                                        <constraint firstItem="zAo-rd-fKL" firstAttribute="top" secondItem="E96-RF-aMq" secondAttribute="top" constant="74" id="gFw-6w-bbL"/>
-                                        <constraint firstItem="BPv-ov-Jp0" firstAttribute="top" secondItem="E96-RF-aMq" secondAttribute="top" constant="10" type="user" id="rrE-tc-61K"/>
+                                        <constraint firstItem="BPv-ov-Jp0" firstAttribute="leading" secondItem="0lz-Ia-CXc" secondAttribute="leading" type="default" id="FWj-Pt-y6O"/>
+                                        <constraint firstItem="zAo-rd-fKL" firstAttribute="leading" secondItem="BPv-ov-Jp0" secondAttribute="leading" type="user" id="f19-PU-mik"/>
+                                        <constraint firstItem="0lz-Ia-CXc" firstAttribute="top" secondItem="BPv-ov-Jp0" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="fz9-nU-BOa"/>
+                                        <constraint firstItem="BPv-ov-Jp0" firstAttribute="top" secondItem="E96-RF-aMq" secondAttribute="top" constant="10" id="gS9-kt-l7h"/>
+                                        <constraint firstItem="BPv-ov-Jp0" firstAttribute="trailing" secondItem="0lz-Ia-CXc" secondAttribute="trailing" type="default" id="i1N-Tl-bjp"/>
+                                        <constraint firstItem="zAo-rd-fKL" firstAttribute="top" secondItem="E96-RF-aMq" secondAttribute="top" constant="74" id="pwq-UG-zgR"/>
                                         <constraint firstAttribute="centerX" secondItem="BPv-ov-Jp0" secondAttribute="centerX" type="user" id="yhx-B8-jXh"/>
                                         <constraint firstAttribute="centerX" secondItem="zAo-rd-fKL" secondAttribute="centerX" type="user" id="zEc-XP-arK"/>
                                     </constraints>
                                 </view>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" restorationIdentifier="Cell" selectionStyle="blue" indentationWidth="10" reuseIdentifier="Cell" id="7Fj-8N-9kC" customClass="ECSearchResultCell">
-                                        <rect key="frame" x="0.0" y="97" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="94" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -149,10 +122,17 @@
                             <constraint firstItem="ewv-3k-71O" firstAttribute="trailing" secondItem="r8f-Xx-36C" secondAttribute="trailing" type="default" id="veB-s4-VFG"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="hU3-8N-dbJ"/>
+                    <navigationItem key="navigationItem" id="hU3-8N-dbJ">
+                        <barButtonItem key="rightBarButtonItem" image="locationmakerwhite.png" style="done" id="3PE-Cx-I2H">
+                            <connections>
+                                <action selector="openLocationSetter" destination="8hQ-DB-bIb" id="18D-2Z-acT"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="imgBackground" destination="SOM-DW-RgO" id="9JC-84-F7Y"/>
-                        <outlet property="lastFMButton" destination="hXC-Wo-Qyy" id="L8g-xb-OuV"/>
+                        <outlet property="locationBarButton" destination="3PE-Cx-I2H" id="Sxf-qn-rXw"/>
+                        <outlet property="locationLabel" destination="0lz-Ia-CXc" id="XZb-og-vSY"/>
                         <outlet property="searchBar" destination="UU0-XP-3u7" id="dl6-xV-dhp"/>
                         <outlet property="searchContainer" destination="zAo-rd-fKL" id="bKP-SY-rAK"/>
                         <outlet property="segmentedControl" destination="BPv-ov-Jp0" id="Mca-YI-uBY"/>
@@ -182,10 +162,44 @@
     </scenes>
     <resources>
         <image name="fullgradient.png" width="1" height="1007"/>
-        <image name="lastfmAttr.png" width="98" height="13"/>
         <image name="locationmakerwhite.png" width="15" height="21"/>
         <image name="searchbar.png" width="239" height="32"/>
     </resources>
+    <classes>
+        <class className="ECCustomNavController" superclassName="UINavigationController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ECCustomNavController.h"/>
+        </class>
+        <class className="ECNewMainViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ECNewMainViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="openLastFM:"/>
+                <relationship kind="action" name="openLocationSetter"/>
+                <relationship kind="outlet" name="imgBackground" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="lastFMButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="lblTodaysDate" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="locationBarButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="locationLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="searchBar" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="searchContainer" candidateClass="UIView"/>
+                <relationship kind="outlet" name="segmentedControl" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="ECSearchResultCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ECSearchResultCell.h"/>
+            <relationships>
+                <relationship kind="action" name="addToProfile"/>
+                <relationship kind="outlet" name="btnAdd" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="btnDisclosure" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="lblDate" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="lblEventTitle" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="lblVenue" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

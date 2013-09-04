@@ -31,16 +31,24 @@
     }
     return self;
 }
-
+BOOL anyNullPlacemarks (CLPlacemark* placemark) {
+    if ((placemark.locality == nil) && (placemark.ISOcountryCode == nil) && (placemark.administrativeArea == nil)) {
+        return YES;
+    }
+    return NO;
+}
 -(NSString*) locationStringForPlacemark: (CLPlacemark*) placemark {
     NSString* provinceOrStateAbbreviated =  placemark.administrativeArea;
     if([placemark.ISOcountryCode isEqualToString:@"CA"] || [placemark.ISOcountryCode isEqualToString:@"US"]){ //use standard abbreviations for US and Canada.
         provinceOrStateAbbreviated = [[abbrvDic objectForKey:[placemark.administrativeArea lowercaseString]] uppercaseString]; //search by lowercase for consistency, display as uppercase
     }
-
+    if (anyNullPlacemarks(placemark)){
+        return @"Please connect to the Internet";
+    }
+    
     return [NSString stringWithFormat:@"%@, %@, %@",placemark.locality,provinceOrStateAbbreviated,placemark.ISOcountryCode];
 }
--(void) reverseGeocodeLocation {
+-(void) reverseGeocodeLocation { //TODO rename/rewrite so it's more clear, currently this method modifies the search bar which doesn't fit with the method name
     CLGeocoder* geocoder = [CLGeocoder new];
     [geocoder reverseGeocodeLocation:self.location completionHandler:^(NSArray *placemarks, NSError *error) {
         if (error) {
@@ -115,7 +123,9 @@
         [NSUserDefaults setLastSearchLocation:self.location];
         [NSUserDefaults synchronize];
         [self reverseGeocodeLocation];
-        [self.delegate updateSearchLocation:self.location radius:self.locationSlider.value area:[self locationStringForPlacemark:self.placemark ] shouldCloseView:NO]; //this will dismiss the view
+        [self.delegate locationSetter: self updateLocationAlsoCloseView: NO];
+    
+//        [self.delegate updateSearchLocation:self.location radius:self.locationSlider.value area:[self locationStringForPlacemark:self.placemark ] shouldCloseView:NO]; //this will dismiss the view
 
 }
 
@@ -238,7 +248,8 @@
             if ([self.locationSearchBar isFirstResponder]) {
                 [self.locationSearchBar resignFirstResponder];
             }
-            [self.delegate updateSearchLocation:self.location radius:self.locationSlider.value area:[self locationStringForPlacemark:self.placemark] shouldCloseView:YES]; //this will dismiss the view
+//            [self.delegate updateSearchLocation:self.location radius:self.locationSlider.value area:[self locationStringForPlacemark:self.placemark] shouldCloseView:YES]; //this will dismiss the view
+            [self.delegate locationSetter:self updateLocationAlsoCloseView:YES];
         }
     }
 }
@@ -275,6 +286,10 @@
     [UIView commitAnimations];
 }
 
+
+-(NSString*) areaStringForPlacemark {
+    return [self locationStringForPlacemark:self.placemark];
+}
 
 - (void)viewWillDisappear:(BOOL)animated
 {

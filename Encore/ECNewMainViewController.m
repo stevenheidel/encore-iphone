@@ -81,6 +81,7 @@ typedef enum {
     [self setupHUD];
     [self setupSearchBar];
     [self setupRefreshControl];
+    self.locationLabel.font = [UIFont heroFontWithSize:16.0f];
     
     self.tap = [[UITapGestureRecognizer alloc]
                                    initWithTarget:self
@@ -107,9 +108,13 @@ typedef enum {
     {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(LocationAcquired) name:ECLocationAcquiredNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(LocationFailed) name:ECLocationFailedNotification object:nil];
-    }else
-    {
+    }
+    
+    else {
+        //TODO: Check network connection status before fetching anything
         [self fetchConcerts];
+        NSString* city = [NSUserDefaults searchCity];
+        self.locationLabel.text = city == nil ? @"Location not set" : city;
     }
   
 }
@@ -162,6 +167,7 @@ typedef enum {
 -(void) initializeSearchLocation {
     self.currentSearchLocation = [NSUserDefaults lastSearchLocation];
     self.currentSearchRadius = [NSUserDefaults lastSearchRadius];
+    self.locationLabel.text = [NSUserDefaults searchCity];
 }
 
 -(void) setEventArray: (NSArray*) concerts forType: (ECSearchType) searchType {
@@ -290,13 +296,15 @@ typedef enum {
     UIBarButtonItem *profileButton = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
     self.navigationItem.leftBarButtonItem = profileButton;
     
-    UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    UIImage *rightButImage = [UIImage imageNamed:@"invite"];
-    [rightButton setBackgroundImage:rightButImage forState:UIControlStateNormal];
-    [rightButton addTarget:self action:@selector(inviteTapped) forControlEvents:UIControlEventTouchUpInside];
-    rightButton.frame = CGRectMake(0, 0, rightButImage.size.width, rightButImage.size.height);
-    UIBarButtonItem *inviteButton = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
-    self.navigationItem.rightBarButtonItem = inviteButton;
+//    UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+//    
+////    UIImage *rightButImage = [UIImage imageNamed:@"locationmarkerwhite"];
+////    [rightButton setBackgroundImage:rightButImage forState:UIControlStateNormal];
+////    [rightButton addTarget:self action:@selector(openLocationSetter) forControlEvents:UIControlEventTouchUpInside];
+////    rightButton.frame = CGRectMake(0, 0, rightButImage.size.width, rightButImage.size.height);
+//    UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc] init];
+//    rightButtonItem.title = @"LOCATION";
+//    self.navigationItem.rightBarButtonItem = rightButtonItem;
 }
 
 -(void) inviteTapped {
@@ -474,16 +482,25 @@ typedef enum {
 }
 
 #pragma mark ECLocationSetterDelegate Method
--(void) updateSearchLocation:(CLLocation *)location radius: (float) radius area: (NSString*) area shouldCloseView:(BOOL)closeView{
+-(void) locationSetter:(ECLocationSetterViewController *)setter updateLocationAlsoCloseView:(BOOL)shouldClose {
+    float radius = setter.locationSlider.value;
+    NSString* area = setter.areaStringForPlacemark;
+    CLLocation* location = setter.location;
+    NSString* locality = setter.placemark.locality;
+    
     NSLog(@"new radius %f",radius);
     self.currentSearchLocation = location;
     self.currentSearchRadius = radius;
     self.currentSearchAreaString = area;
+    
+    self.locationLabel.text = setter.placemark.locality;
+    
     [NSUserDefaults setLastSearchLocation:location];
     [NSUserDefaults setLastSearchRadius:radius];
     [NSUserDefaults setLastSearchArea: area];
+    [NSUserDefaults setSearchCity:locality];
     [NSUserDefaults synchronize];
-    if(closeView)
+    if(shouldClose)
         [self hideLocationSetter];
     
     [self fetchConcerts];
@@ -495,6 +512,28 @@ typedef enum {
     }
 
 }
+//
+//-(void) updateSearchLocation:(CLLocation *)location radius: (float) radius area: (NSString*) area shouldCloseView:(BOOL)closeView{
+//    NSLog(@"new radius %f",radius);
+//    self.currentSearchLocation = location;
+//    self.currentSearchRadius = radius;
+//    self.currentSearchAreaString = area;
+//    [NSUserDefaults setLastSearchLocation:location];
+//    [NSUserDefaults setLastSearchRadius:radius];
+//    [NSUserDefaults setLastSearchArea: area];
+//    [NSUserDefaults synchronize];
+//    if(closeView)
+//        [self hideLocationSetter];
+//    
+//    [self fetchConcerts];
+//    if (self.hasSearched) {
+//        //redo search with new location
+//        [ECJSONFetcher fetchArtistsForString:self.searchBar.text withSearchType:self.currentSearchType forLocation:self.currentSearchLocation radius:[NSNumber numberWithFloat:self.currentSearchRadius] completion:^(NSDictionary *artists) {
+//            [self fetchedConcertsForSearch:artists];
+//        }];
+//    }
+//
+//}
 
 -(void) updateRadius:(float)radius {
     NSLog(@"Radius updated");

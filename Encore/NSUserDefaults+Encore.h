@@ -31,7 +31,8 @@
 +(void) setLastSearchRadius: (float) searchRadius;
 +(NSString*) lastSearchArea;
 +(void) setLastSearchArea: (NSString*) area;
-
++(NSString*) searchCity;
++(void) setSearchCity: (NSString*) city;
 +(CLLocation*) lastSearchLocation;
 +(void) setLastSearchLocation: (CLLocation*) lastSearchLocation;
 

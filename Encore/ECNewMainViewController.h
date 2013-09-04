@@ -20,6 +20,8 @@
 - (IBAction)openLastFM:(id)sender;
 - (IBAction)openLocationSetter;
 
+@property (weak, nonatomic) IBOutlet UILabel* locationLabel;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *locationBarButton;
 @property (nonatomic, strong) UIView* noConcertsFooterView;
 @property (weak, nonatomic) IBOutlet UIView *searchContainer;
 @property (nonatomic, strong) CLLocation* currentSearchLocation;
