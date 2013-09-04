@@ -149,6 +149,7 @@
         if(fetchedPosts.count > 0){
             self.posts = fetchedPosts;
             [self.postsCollectionView reloadData];
+            [self hideNoPostsLabel];
         }else{
             //Add No posts found Label
             [self showNoPostsLabel];
@@ -185,6 +186,12 @@
 -(void)showNoPostsLabel{
     [UIView animateWithDuration:0.3 animations:^{
         [self.noPostsLabel setAlpha:1];
+    }];
+}
+
+-(void)hideNoPostsLabel{
+    [UIView animateWithDuration:0.3 animations:^{
+        [self.noPostsLabel setAlpha:0];
     }];
 }
 
