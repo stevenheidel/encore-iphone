@@ -114,6 +114,11 @@ NSString* stringForSearchType(ECSearchType searchType) {
                 completion(testConcertList);
             }
         }
+    
+        else {
+            if(completion)
+                completion(nil);
+        }
     }];
 }
 
