@@ -15,10 +15,10 @@ PODS:
   - libwebp/webp (0.3.0-rc7)
   - MBProgressHUD (0.7)
   - SAMRateLimit (0.2.0)
-  - SDWebImage (3.3):
+  - SDWebImage (3.4):
     - libwebp
     - SDWebImage/MapKit
-  - SDWebImage/MapKit (3.3):
+  - SDWebImage/MapKit (3.4):
     - libwebp
   - TestFlightSDK (1.2.6)
   - XCDYouTubeVideoPlayerViewController (1.0.0)
@@ -41,8 +41,8 @@ SPEC CHECKSUMS:
   libwebp: 40517fa1fd3716eded73b4696c45fc0b66e4b414
   MBProgressHUD: 1fd8591a2216d5dec6de24e09187bb03bcbe9946
   SAMRateLimit: 22b0ba0fafa8a9c438b7f76e4182914ef704c701
-  SDWebImage: 79a8bac9ccf85b269100b294f7b43684dab8bf8a
+  SDWebImage: f13f791e411c632489824aa7f129e230b52bf5c4
   TestFlightSDK: 7d9abce62f5a17191c4df84fd88e05797e6776e0
   XCDYouTubeVideoPlayerViewController: 507a2c59bc1ed6912793de105e2c933085a379f5
 
-COCOAPODS: 0.22.3
+COCOAPODS: 0.24.0

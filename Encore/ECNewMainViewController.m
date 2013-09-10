@@ -36,6 +36,7 @@
 #import "ECUpcomingViewController.h"
 #import "ECPastViewController.h"
 
+#import "SPGooglePlacesAutocompleteViewController.h"
 
 #define SearchCellIdentifier @"ECSearchResultCell"
 #define ConcertCellIdentifier @"ECConcertCellView"
@@ -506,6 +507,42 @@ typedef enum {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.last.fm"]];
 }
 
+
+-(IBAction) modifySearchLocation {
+    SPGooglePlacesAutocompleteViewController* viewController = [SPGooglePlacesAutocompleteViewController new];
+    viewController.delegate = self;
+    [self presentViewController:viewController animated:YES completion:nil];
+}
+
+-(void) updatedSearchLocationToPlacemark:(CLPlacemark *)placemark{
+    float radius = 0.5f;
+    NSString* area = [NSString stringWithFormat:@"%@, %@",placemark.locality,placemark.administrativeArea];
+    
+    CLLocation* location = placemark.location;
+    NSString* locality = placemark.locality;
+    
+    NSLog(@"new radius %f",radius);
+    self.currentSearchLocation = location;
+    self.currentSearchRadius = radius;
+    self.currentSearchAreaString = area;
+    
+    self.locationLabel.text = locality;
+    
+    [NSUserDefaults setLastSearchLocation:location];
+    [NSUserDefaults setLastSearchRadius:radius];
+    [NSUserDefaults setLastSearchArea: area];
+    [NSUserDefaults setSearchCity:locality];
+    [NSUserDefaults synchronize];
+    
+    [self fetchConcerts];
+    if (self.hasSearched) {
+        //redo search with new location
+        [ECJSONFetcher fetchArtistsForString:self.searchBar.text withSearchType:self.currentSearchType forLocation:self.currentSearchLocation radius:[NSNumber numberWithFloat:self.currentSearchRadius] completion:^(NSDictionary *artists) {
+            [self fetchedConcertsForSearch:artists];
+        }];
+    }
+
+}
 - (IBAction)openLocationSetter {
     if (self.locationSetterView == nil) {
         self.locationSetterView = [ECLocationSetterViewController new];
@@ -538,7 +575,7 @@ typedef enum {
     self.currentSearchRadius = radius;
     self.currentSearchAreaString = area;
     
-    self.locationLabel.text = setter.placemark.locality;
+    self.locationLabel.text = locality;
     
     [NSUserDefaults setLastSearchLocation:location];
     [NSUserDefaults setLastSearchRadius:radius];
