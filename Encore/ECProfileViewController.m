@@ -43,6 +43,10 @@ typedef enum {
     NumberOfSections
 } ProfileTableViewSections;
 
+typedef enum {
+    SettingsActionSheet
+}ProfileActionSheetTags;
+
 @interface ECProfileViewController ()<ECPastViewControllerDelegate,ECUpcomingViewControllerDelegate>
 
 @property (strong,atomic) MBProgressHUD* hud;
@@ -64,12 +68,14 @@ typedef enum {
     [super viewDidLoad];
     NSLog(@"%@: did load",NSStringFromClass(self.class));
     [self setUpBackButton];
-    [self setupLogoutButton];
+//    [self setupLogoutButton];
+    [self setupSettingsButton];
     [self setUpHeaderView];
     [self setupRefreshControl];
     [self setupHUD];
     self.shouldUpdateView = YES;
-
+    [self setNavBarAppearance];
+    
     self.tableView.tableFooterView = [UIView new];
    
     [self.tableView registerNib:[UINib nibWithNibName:@"ECProfileConcertCell" bundle:nil]
@@ -82,6 +88,13 @@ typedef enum {
     
     self.tableView.sectionHeaderHeight = 0;
     self.tableView.sectionFooterHeight = 0;
+}
+
+-(void) setNavBarAppearance {
+    UIImageView* encoreLogo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo.png"]];
+    self.navigationItem.titleView = encoreLogo;
+    UIImage* image = [UIImage imageNamed:@"noimage"];
+    self.navigationController.navigationBar.shadowImage = image;
 }
 
 -(void) setupHUD {
@@ -99,7 +112,11 @@ typedef enum {
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
     self.navigationItem.leftBarButtonItem = backButton;
 }
-
+-(void) setupSettingsButton {
+    UIBarButtonItem* settingsButton = [[UIBarButtonItem alloc] initWithTitle:@"Settings" style:UIBarButtonItemStyleDone target:self action:@selector(settingsTapped)];
+    self.navigationItem.rightBarButtonItem = settingsButton;
+    
+}
 -(void) setupLogoutButton {
     UIButton* logoutButton = [UIButton buttonWithType:UIButtonTypeCustom];
     UIImage* image = [UIImage imageNamed:@"logout.png"];
@@ -188,7 +205,7 @@ typedef enum {
 
 -(void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [self setupFeedback];
+//    [self setupFeedback];
     
     //TODO: set shoudlupdateview to true when concert state change
     if(self.shouldUpdateView)
@@ -349,7 +366,26 @@ typedef enum {
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Logout
+#pragma mark - Logout / Settings
+-(void) settingsTapped {
+    UIActionSheet* actionSheet = [[UIActionSheet alloc] initWithTitle:@"Settings" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Logout" otherButtonTitles:@"Give Feedback", nil];
+    actionSheet.tag = SettingsActionSheet;
+    actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
+    [actionSheet showInView:self.view];
+}
+
+-(void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (actionSheet.tag == SettingsActionSheet) {
+        if (buttonIndex == actionSheet.destructiveButtonIndex) {
+            [self logoutTapped];
+        }
+        else if (buttonIndex == actionSheet.firstOtherButtonIndex) {
+            [self openFeedback];
+        }
+    }
+    
+}
+
 -(void) logoutTapped {
     [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"logout_alert_title",nil) message:NSLocalizedString(@"logout_alert_message", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"cancel", nil) otherButtonTitles:NSLocalizedString(@"logout", nil), nil];

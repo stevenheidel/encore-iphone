@@ -63,6 +63,8 @@
 
 -(void) startAnalytics
 {
+    
+//#if DO_ANALYTICS
     [Flurry setDebugLogEnabled:FLURRY_LOGGING];
     [Flurry setAppVersion:[NSString stringWithFormat:@"%@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]]];
     [Flurry startSession:@"GM2TRR7TWT9DRX9N9PG9"];
@@ -74,6 +76,7 @@
     
     ATAppRatingFlow *sharedFlow = [ATAppRatingFlow sharedRatingFlow];
     sharedFlow.appID = kApptentiveAppID;
+//#endif 
     
 #if IN_BETA
         [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];

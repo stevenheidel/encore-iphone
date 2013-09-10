@@ -144,8 +144,11 @@ NSString* stringForSearchType(ECSearchType searchType) {
     NSDictionary * parameters = [NSDictionary dictionaryWithObjectsAndKeys:latitude,@"latitude",longitude, @"longitude", searchStr, @"term", tenseString, @"tense",radius, @"radius",nil];
     
     [client getPath:ArtistCombinedSearchURL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSLog(@"Successfully fetched Artists and Concerts for string. %@", searchStr);
+
             artistConcertComboList = (NSDictionary*)responseObject;
+//        NSLog(@"%@",artistConcertComboList.description);
+        NSLog(@"Successfully fetched %d %@ Artists and Concerts for string. %@", [[artistConcertComboList objectForKey:@"events"] count],tenseString, searchStr);
+        
             if (completion) {
                 completion(artistConcertComboList);
             }
