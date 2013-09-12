@@ -122,16 +122,9 @@
                             <constraint firstItem="ewv-3k-71O" firstAttribute="trailing" secondItem="r8f-Xx-36C" secondAttribute="trailing" type="default" id="veB-s4-VFG"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="hU3-8N-dbJ">
-                        <barButtonItem key="rightBarButtonItem" image="locationmakerwhite.png" style="done" id="3PE-Cx-I2H">
-                            <connections>
-                                <action selector="modifySearchLocation" destination="8hQ-DB-bIb" id="tJa-I3-V3p"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="hU3-8N-dbJ"/>
                     <connections>
                         <outlet property="imgBackground" destination="SOM-DW-RgO" id="9JC-84-F7Y"/>
-                        <outlet property="locationBarButton" destination="3PE-Cx-I2H" id="Sxf-qn-rXw"/>
                         <outlet property="locationLabel" destination="0lz-Ia-CXc" id="XZb-og-vSY"/>
                         <outlet property="searchBar" destination="UU0-XP-3u7" id="dl6-xV-dhp"/>
                         <outlet property="searchContainer" destination="zAo-rd-fKL" id="bKP-SY-rAK"/>
@@ -143,80 +136,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n0N-t9-FCf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="435" y="-20"/>
-        </scene>
-        <!--Custom Nav Controller-->
-        <scene sceneID="0jp-vN-8sx">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="7te-Yq-oeO" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <navigationController definesPresentationContext="YES" id="ViC-pi-Vbg" customClass="ECCustomNavController" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Rev-Ia-jr3">
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="xDI-kh-KlC" kind="relationship" relationship="rootViewController" id="7Cd-sJ-9YY"/>
-                    </connections>
-                </navigationController>
-            </objects>
-            <point key="canvasLocation" x="863" y="-20"/>
-        </scene>
-        <!--Location Autocomplete View Controller-->
-        <scene sceneID="3Na-qS-fo0">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="j9f-ap-E3w" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="xDI-kh-KlC" customClass="ECLocationAutocompleteViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="d4T-Gj-cHG">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search for a city..." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="icQ-Ch-JwL">
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="216" id="6wF-fE-TgO"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="City" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mml-2L-Vc7">
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Current:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PcB-vn-tUd">
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Toronto, ON" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3qj-J4-4OB">
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="icQ-Ch-JwL" firstAttribute="top" secondItem="d4T-Gj-cHG" secondAttribute="top" constant="52" id="7lS-jP-624"/>
-                            <constraint firstItem="3qj-J4-4OB" firstAttribute="leading" secondItem="PcB-vn-tUd" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="AkD-2U-B0O"/>
-                            <constraint firstAttribute="trailing" secondItem="icQ-Ch-JwL" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="Ase-O7-h8L"/>
-                            <constraint firstItem="PcB-vn-tUd" firstAttribute="top" secondItem="d4T-Gj-cHG" secondAttribute="top" constant="20" symbolic="YES" type="default" id="Bjm-7a-QFL"/>
-                            <constraint firstItem="PcB-vn-tUd" firstAttribute="leading" secondItem="d4T-Gj-cHG" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="GhL-Xx-rSa"/>
-                            <constraint firstItem="mml-2L-Vc7" firstAttribute="leading" secondItem="d4T-Gj-cHG" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="ImT-ai-ahH"/>
-                            <constraint firstItem="3qj-J4-4OB" firstAttribute="top" secondItem="d4T-Gj-cHG" secondAttribute="top" constant="20" symbolic="YES" type="default" id="OWi-dt-Rf5"/>
-                            <constraint firstItem="mml-2L-Vc7" firstAttribute="top" secondItem="d4T-Gj-cHG" secondAttribute="top" constant="56" id="lXy-iq-T65"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="RnU-6b-wg9">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="iDt-EO-VSR">
-                            <connections>
-                                <action selector="cancel" destination="xDI-kh-KlC" id="TNj-UF-ylG"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Save" style="done" id="tjV-Ne-8Sn"/>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="_textField" destination="icQ-Ch-JwL" id="M3U-gM-ayE"/>
-                    </connections>
-                </viewController>
-            </objects>
-            <point key="canvasLocation" x="1228" y="-20"/>
         </scene>
         <!--Custom Nav Controller-->
         <scene sceneID="sgR-27-kM6">
@@ -236,19 +155,11 @@
     </scenes>
     <resources>
         <image name="fullgradient.png" width="1" height="1007"/>
-        <image name="locationmakerwhite.png" width="15" height="21"/>
         <image name="searchbar.png" width="239" height="32"/>
     </resources>
     <classes>
         <class className="ECCustomNavController" superclassName="UINavigationController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ECCustomNavController.h"/>
-        </class>
-        <class className="ECLocationAutocompleteViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ECLocationAutocompleteViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="cancel"/>
-                <relationship kind="outlet" name="_textField" candidateClass="UITextField"/>
-            </relationships>
         </class>
         <class className="ECNewMainViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ECNewMainViewController.h"/>

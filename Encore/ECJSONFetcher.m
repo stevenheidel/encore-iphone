@@ -27,7 +27,6 @@
         }
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         NSLog(@"ERROR fetching concerts for userID %@: %@...",fbID,[[error description] substringToIndex:MAX_ERROR_LEN]);
-        
         if (RETURN_TEST_DATA) {
             NSDictionary * past1 = [NSDictionary dictionaryWithObjectsAndKeys:@"2013-06-12", @"date", @"Test Venue 1", @"venue_name", @"My Artist", @"name", @"11", @"server_id", nil];
             NSDictionary * past2 = [NSDictionary dictionaryWithObjectsAndKeys:@"2012-05-11", @"date", @"Test Venue 2", @"venue_name", @"Go Artist", @"name", @"22", @"server_id", nil];
@@ -116,6 +115,10 @@ NSString* stringForSearchType(ECSearchType searchType) {
         }
     
         else {
+            if (searchType == ECSearchTypePast) {
+                UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Sorry, something went wrong. Please try again later." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                [alert show];
+            }
             if(completion)
                 completion(nil);
         }

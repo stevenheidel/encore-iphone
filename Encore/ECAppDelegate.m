@@ -47,12 +47,12 @@
     [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
     
    
-    if (![self isLoggedIn])
-        [self showLoginView:NO];
-    else {
+//    if (![self isLoggedIn])
+//        [self showLoginView:NO];
+//    else {
         [self setUpLocationManager];
         [Flurry setUserID:[NSUserDefaults userID]];
-    }
+//    }
     
     return YES;
 }
@@ -162,10 +162,10 @@
 }
 - (void)logout
 {
-    if(!self.loginViewController) {
-        self.loginViewController = [[ECLoginViewController alloc] init];
-    }
-    [self.window.rootViewController presentViewController:self.loginViewController animated:YES completion:nil];
+//    if(!self.loginViewController) {
+//        self.loginViewController = [[ECLoginViewController alloc] init];
+//    }
+//    [self.window.rootViewController presentViewController:self.loginViewController animated:YES completion:nil];
     [[ECFacebookManger sharedFacebookManger] logout];
     [NSUserDefaults clearLoginDetails];
 }

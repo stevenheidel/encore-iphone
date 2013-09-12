@@ -65,8 +65,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.    
-    [self askServerToPopulateConcert];
+	// Do any additional setup after loading the view.
+    [self loadConcertImages];
     
     UIImageView* encoreLogo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
     self.navigationItem.titleView = encoreLogo;
@@ -86,7 +86,6 @@
     rightButton.frame = CGRectMake(0, 0, rightButImage.size.width, rightButImage.size.height);
     UIBarButtonItem* shareButton = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
     self.navigationItem.rightBarButtonItem = shareButton;
-    [self loadConcertImages];
 }
 -(void) backButtonWasPressed {
     [self.navigationController popViewControllerAnimated:YES];
@@ -153,6 +152,7 @@
         }else{
             //Add No posts found Label
             [self showNoPostsLabel];
+            [self askServerToPopulateConcert];
         }
     }];
 
@@ -206,7 +206,7 @@
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     __weak ECPostCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"post" forIndexPath:indexPath];
-    
+    cell.postImageView.image = nil;
     NSDictionary* post = [self.posts objectAtIndex:indexPath.row];
     [cell.activityIndicator startAnimating];
     [cell.postImageView setImageWithURLRequest:[NSURLRequest requestWithURL:[post imageURL]] placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {

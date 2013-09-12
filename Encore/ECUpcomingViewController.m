@@ -134,13 +134,13 @@ typedef enum {
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
     self.navigationItem.leftBarButtonItem = backButton;
     
-    UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    UIImage *rightButImage = [UIImage imageNamed:@"shareButton"];
-    [rightButton setBackgroundImage:rightButImage forState:UIControlStateNormal];
-    [rightButton addTarget:self action:@selector(shareTapped) forControlEvents:UIControlEventTouchUpInside];
-    rightButton.frame = CGRectMake(0, 0, rightButImage.size.width, rightButImage.size.height);
-    UIBarButtonItem* shareButton = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
-    self.navigationItem.rightBarButtonItem = shareButton;    
+//    UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    UIImage *rightButImage = [UIImage imageNamed:@"shareButton"];
+//    [rightButton setBackgroundImage:rightButImage forState:UIControlStateNormal];
+//    [rightButton addTarget:self action:@selector(shareTapped) forControlEvents:UIControlEventTouchUpInside];
+//    rightButton.frame = CGRectMake(0, 0, rightButImage.size.width, rightButImage.size.height);
+//    UIBarButtonItem* shareButton = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
+//    self.navigationItem.rightBarButtonItem = shareButton;    
 
     self.tableView.separatorColor = [UIColor separatorColor];
 }
@@ -158,7 +158,7 @@ typedef enum {
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.row) {
         case Location:
-            return 146.0f;
+            return 198.0f;
         case Lineup:
             return 142.0f;
         case Details:
@@ -216,12 +216,11 @@ typedef enum {
             tapRecognizer.numberOfTapsRequired = 1;
             tapRecognizer.numberOfTouchesRequired = 1;
             [cell.mapView addGestureRecognizer:tapRecognizer];
-            cell.addressLabel.text = [NSString stringWithFormat:@"%@\n%@",[self.concert venueName],[self.concert address]];
-//            cell.startTimeLabel.text = [self.concert startTime];
+            cell.addressLabel.text = [NSString stringWithFormat:@"%@",[self.concert address]];
+            cell.startTimeLabel.text = [self.concert startTime];
             
-            cell.locationLabel.font = [UIFont lightHeroFontWithSize:12];
-            cell.phoneLabel.font = [UIFont lightHeroFontWithSize:12];
-            cell.addressLabel.font = [UIFont lightHeroFontWithSize:12];
+            cell.locationLabel.font = [UIFont lightHeroFontWithSize:16];
+//            cell.addressLabel.font = [UIFont lightHeroFontWithSize:16];
 
             CLLocation* location = [self.concert coordinates];
             CLLocationCoordinate2D coord2D = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude);
@@ -233,7 +232,7 @@ typedef enum {
             MapViewAnnotation* annotation = [[MapViewAnnotation alloc] initWithTitle:[self.concert venueName] andCoordinate:coord2D];
             [cell.mapView setCenterCoordinate:coord2D];
             [cell.mapView addAnnotation:annotation];
-            MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(coord2D, 9000, 9000);
+            MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(coord2D, 1000, 1000);
             [cell.mapView setRegion:region animated:YES];
             [cell.mapView regionThatFits:region];
             
@@ -249,7 +248,7 @@ typedef enum {
             if (cell == nil) {
                 cell = [[LineupCell alloc] init];
             }
-            cell.lineupLabel.font = [UIFont lightHeroFontWithSize:12];
+            cell.lineupLabel.font = [UIFont lightHeroFontWithSize:16];
             cell.lineup = self.concert.lineup;
             cell.contentView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
 
@@ -281,7 +280,7 @@ typedef enum {
             cell.grabTicketsButton.layer.cornerRadius = 5.0;
             cell.grabTicketsButton.layer.masksToBounds = YES;
             cell.contentView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
-
+            [cell.shareButton addTarget:self action:@selector(shareTapped) forControlEvents:UIControlEventTouchUpInside];
             return cell;
         }
         default:
@@ -291,17 +290,43 @@ typedef enum {
 
 #pragma mark FB Sharing
 -(void) shareTapped {
-    if([ApplicationDelegate isLoggedIn]) {
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:ECLoginCompletedNotification object:nil];
-        [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
-        [Flurry logEvent:@"Share_Tapped_Concert" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"upcomingvc",@"source", self.concert.eventID,@"eventID", self.concert.eventName, @"eventName", nil]];
-        [self share];
+    NSString* eventName = [self.concert eventName];
+    NSString* the = @"the ";
+    NSString* substring = [[eventName substringToIndex:3]lowercaseString];
+    if ([substring isEqualToString:@"the"]) {
+        the = @"";
     }
-    else {
-        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login", nil) message:NSLocalizedString(@"To share this concert, you must first login", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Login", nil), nil];
-        alert.tag = ECShareNotLoggedInAlert;
-        [alert show];
-    }
+    NSString* shareText = [NSString stringWithFormat: @"Encore: Who wants to come to %@%@ show at %@, %@?",the,[self.concert eventName],[self.concert venueName],[self.concert niceDate]];
+    NSURL* url = [self.concert lastfmURL];
+    NSArray *activityItems = [NSArray arrayWithObjects:shareText,url, self.eventImage.image, nil];
+    
+    UIActivityViewController* shareDrawer = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
+    shareDrawer.excludedActivityTypes = @[UIActivityTypePostToWeibo,UIActivityTypeAssignToContact,UIActivityTypeSaveToCameraRoll,UIActivityTypePrint];
+    
+    //TODO: do something with this completion handler, ie. analytics.
+    shareDrawer.completionHandler = ^(NSString *activityType, BOOL completed){
+        if (completed) {
+            NSLog(@"Selected activity was performed.");
+        } else {
+            if (activityType == NULL) {
+                NSLog(@"User dismissed the view controller without making a selection.");
+            } else {
+                NSLog(@"Activity was not performed.");
+            }
+        }
+    };
+    [self presentViewController:shareDrawer animated:YES completion:nil];
+    //    if([ApplicationDelegate isLoggedIn]) {
+//        [[NSNotificationCenter defaultCenter] removeObserver:self name:ECLoginCompletedNotification object:nil];
+//        [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
+//        [Flurry logEvent:@"Share_Tapped_Concert" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"upcomingvc",@"source", self.concert.eventID,@"eventID", self.concert.eventName, @"eventName", nil]];
+//        [self share];
+//    }
+//    else {
+//        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login", nil) message:NSLocalizedString(@"To share this concert, you must first login", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Login", nil), nil];
+//        alert.tag = ECShareNotLoggedInAlert;
+//        [alert show];
+//    }
 }
 
 -(void) share {

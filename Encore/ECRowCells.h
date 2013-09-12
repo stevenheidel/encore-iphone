@@ -11,12 +11,13 @@
 
 @interface GetPhotosCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIButton* grabPhotosButton;
--(IBAction) grabPhotos;
+@property (weak,nonatomic) IBOutlet UIButton* shareButton;
 @end
 
 @interface GrabTicketsCell : UITableViewCell
 @property (strong,nonatomic) NSURL* lastfmURL;
 @property (weak, nonatomic) IBOutlet UIButton* grabTicketsButton;
+@property (weak,nonatomic) IBOutlet UIButton* shareButton;
 -(IBAction) grabTickets;
 
 @end

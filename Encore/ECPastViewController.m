@@ -103,13 +103,13 @@ typedef enum {
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
     self.navigationItem.leftBarButtonItem = backButton;
     
-    UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    UIImage *rightButImage = [UIImage imageNamed:@"shareButton.png"];
-    [rightButton setBackgroundImage:rightButImage forState:UIControlStateNormal];
-    [rightButton addTarget:self action:@selector(shareTapped) forControlEvents:UIControlEventTouchUpInside];
-    rightButton.frame = CGRectMake(0, 0, rightButImage.size.width, rightButImage.size.height);
-    UIBarButtonItem* shareButton = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
-    self.navigationItem.rightBarButtonItem = shareButton;
+//    UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    UIImage *rightButImage = [UIImage imageNamed:@"shareButton.png"];
+//    [rightButton setBackgroundImage:rightButImage forState:UIControlStateNormal];
+//    [rightButton addTarget:self action:@selector(shareTapped) forControlEvents:UIControlEventTouchUpInside];
+//    rightButton.frame = CGRectMake(0, 0, rightButImage.size.width, rightButImage.size.height);
+//    UIBarButtonItem* shareButton = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
+//    self.navigationItem.rightBarButtonItem = shareButton;
     
     self.tableView.separatorColor = [UIColor separatorColor];
     
@@ -201,9 +201,12 @@ typedef enum {
                 cell = [[GetPhotosCell alloc] init];
             }
             
-            cell.grabPhotosButton.titleLabel.font = [UIFont heroFontWithSize:20];
+            cell.grabPhotosButton.titleLabel.font = [UIFont heroFontWithSize:16];
             cell.grabPhotosButton.layer.cornerRadius = 5.0;
             cell.grabPhotosButton.layer.masksToBounds = YES;
+            
+            [cell.shareButton addTarget:self action:@selector(shareTapped) forControlEvents:UIControlEventTouchUpInside];
+            
             cell.contentView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
             return cell;
         }
@@ -221,19 +224,46 @@ typedef enum {
 }
 #pragma mark FB Sharing
 -(void) shareTapped {
-    if([ApplicationDelegate isLoggedIn]) {
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:ECLoginCompletedNotification object:nil];
-        [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
-        [Flurry logEvent:@"Share_Tapped_Concert" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"pastvc",@"source",self.concert.eventID,@"eventID", self.concert.eventName, @"eventName", nil]];
-        [self share];
+    NSString* eventName = [self.concert eventName];
+    NSString* the = @"the ";
+    NSString* substring = [[eventName substringToIndex:3]lowercaseString];
+    if ([substring isEqualToString:@"the"]) {
+        the = @"";
     }
-    else {
-        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login", nil) message:NSLocalizedString(@"To share this concert, you must first login", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Login", nil), nil];
-        alert.tag = ECShareNotLoggedInAlert;
-        [alert show];
-    }
+    NSString* shareText = [NSString stringWithFormat: @"Check out these photos and videos on Encore from %@%@ show at %@, %@.",the,[self.concert eventName],[self.concert venueName],[self.concert niceDate]];
+    NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:ShareConcertURL,self.concert.eventID]];
+    NSArray *activityItems = [NSArray arrayWithObjects:shareText,url, self.eventImage.image, nil];
+    
+    UIActivityViewController* shareDrawer = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
+    shareDrawer.excludedActivityTypes = @[UIActivityTypePostToWeibo,UIActivityTypeAssignToContact,UIActivityTypeSaveToCameraRoll,UIActivityTypePrint];
+    
+    //TODO: do something with this completion handler, ie. analytics.
+    shareDrawer.completionHandler = ^(NSString *activityType, BOOL completed){
+        if (completed) {
+            NSLog(@"Selected activity was performed.");
+        } else {
+            if (activityType == NULL) {
+                NSLog(@"User dismissed the view controller without making a selection.");
+            } else {
+                NSLog(@"Activity was not performed.");
+            }
+        }
+    };
+    [self presentViewController:shareDrawer animated:YES completion:nil];
+//    if([ApplicationDelegate isLoggedIn]) {
+//        [[NSNotificationCenter defaultCenter] removeObserver:self name:ECLoginCompletedNotification object:nil];
+//        [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
+//        [Flurry logEvent:@"Share_Tapped_Concert" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"pastvc",@"source",self.concert.eventID,@"eventID", self.concert.eventName, @"eventName", nil]];
+//        [self share];
+//    }
+//    else {
+//        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login", nil) message:NSLocalizedString(@"To share this concert, you must first login", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Login", nil), nil];
+//        alert.tag = ECShareNotLoggedInAlert;
+//        [alert show];
+//    }
 }
 
+//currently not in use, replaced with multishare
 -(void) share {
     [self shareWithTaggedFriends:nil];
 }

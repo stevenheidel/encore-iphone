@@ -14,6 +14,7 @@
 -(NSString *) eventName;
 -(NSString *) venueName;
 -(NSString*) venueAndDate; //string with both, separated by comma
+-(NSString*) startTime;
 
 -(NSString *) serverID;
 -(NSString*) eventID;

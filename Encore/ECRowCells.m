@@ -93,9 +93,6 @@
 @end
 
 @implementation GetPhotosCell
--(IBAction) grabPhotos {
-    
-}
 @end
 
 @implementation DetailsCell

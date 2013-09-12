@@ -332,7 +332,7 @@ typedef enum {
     self.searchBar.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Artist search..." attributes:@{NSForegroundColorAttributeName: color}];
 }
 
-//Set up left bar button for going to profile and right bar button for sharing
+//Set up left bar button for going to profile and right bar button for location
 -(void) setupBarButtons {
     UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
     UIImage *leftButImage = [UIImage imageNamed:@"profileButton"];
@@ -342,15 +342,16 @@ typedef enum {
     UIBarButtonItem *profileButton = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
     self.navigationItem.leftBarButtonItem = profileButton;
     
-//    UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-//    
-////    UIImage *rightButImage = [UIImage imageNamed:@"locationmarkerwhite"];
-////    [rightButton setBackgroundImage:rightButImage forState:UIControlStateNormal];
-////    [rightButton addTarget:self action:@selector(openLocationSetter) forControlEvents:UIControlEventTouchUpInside];
-////    rightButton.frame = CGRectMake(0, 0, rightButImage.size.width, rightButImage.size.height);
-//    UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc] init];
-//    rightButtonItem.title = @"LOCATION";
-//    self.navigationItem.rightBarButtonItem = rightButtonItem;
+    UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    UIImage *rightButImage = [UIImage imageNamed:@"locationmarkerbutton"];
+    [rightButton setBackgroundImage:rightButImage forState:UIControlStateNormal];
+    [rightButton addTarget:self action:@selector(modifySearchLocation) forControlEvents:UIControlEventTouchUpInside];
+    [rightButton setBackgroundImage:rightButImage forState:UIControlStateNormal];
+    rightButton.frame = CGRectMake(0, 0, rightButImage.size.width, rightButImage.size.height);
+    
+    UIBarButtonItem* locationButton = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
+    self.navigationItem.rightBarButtonItem = locationButton;
 }
 
 -(void) inviteTapped {

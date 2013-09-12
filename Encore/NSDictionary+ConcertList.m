@@ -57,6 +57,18 @@ static NSString * const kDateFormat = @"yyyy-MM-dd";
     return [address componentsJoinedByString:@", "];
 }
 
+-(NSString*) startTime {
+    NSString* time = [self objectForKey:@"start_time"];
+    NSDateFormatter* formatter = [NSDateFormatter new];
+    [formatter setDateFormat:@"EE, d MMM yyyy HH:mm:ss"];
+    NSDate* date = [formatter dateFromString:time];
+    NSDateFormatter* formatter2 = [NSDateFormatter new];
+    formatter2.dateStyle  = NSDateFormatterMediumStyle;
+    formatter2.timeStyle = NSDateFormatterShortStyle;
+    time = [formatter2 stringFromDate:date];
+    return time;
+}
+
 -(CLLocation*) coordinates {
     NSDictionary* venueDeets = [self venueDetails];
     double latitude = [(NSString*)[venueDeets objectForKey:@"latitude"] doubleValue];
