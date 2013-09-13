@@ -34,7 +34,9 @@
 @end
 
 
-@interface ECGridViewController ()
+@interface ECGridViewController () {
+    BOOL _isPopulating;
+}
 
 @property(strong) NSTimer* timer;
 @end
@@ -67,7 +69,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     [self loadConcertImages];
-    
+    _isPopulating = NO;
     UIImageView* encoreLogo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
     self.navigationItem.titleView = encoreLogo;
     self.postsCollectionView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
@@ -119,23 +121,24 @@
 }
 -(void) checkConcertIfPopulating {
     [ECJSONFetcher checkIfEventIsPopulating:[self.concert eventID] completion:^(BOOL isPopulating) {
-
+        _isPopulating = isPopulating;
         if(isPopulating)
         {
             //Show the footer
             [self showFooter];
+            [self hideNoPostsLabel];
         
         }else
         {
             //Call get images method
-            [self loadConcertImages];
+
             //Stop timer
             [self stopTimer];
             //Remove the footer once timer finished
             [self hideFooter];
 
         }
-        
+        [self loadConcertImages];
        
     }];
 
@@ -151,7 +154,9 @@
             [self hideNoPostsLabel];
         }else{
             //Add No posts found Label
-            [self showNoPostsLabel];
+            if (!_isPopulating) {
+                [self showNoPostsLabel];
+            }
             [self askServerToPopulateConcert];
         }
     }];

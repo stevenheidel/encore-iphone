@@ -28,6 +28,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *lineupLabel;
 @property (weak,nonatomic) IBOutlet UICollectionView* lineupCollectionView;
 @property (nonatomic,strong) NSArray* lineup;
+@property (nonatomic,weak) UINavigationController* navController;
 @end
 
 @interface LineupCollectionCell : UICollectionViewCell

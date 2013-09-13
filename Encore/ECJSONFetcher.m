@@ -89,39 +89,17 @@ NSString* stringForSearchType(ECSearchType searchType) {
 
         concertList = (NSArray*) [(NSDictionary*)responseObject objectForKey:@"events"];
         NSLog(@"%@: Successfully fetched %d popular concerts for search type: %@ Location: %f %f", NSStringFromClass([ECJSONFetcher class]),concertList.count,stringForSearchType(searchType),location.coordinate.latitude,location.coordinate.longitude);
-        if (RETURN_TEST_DATA) {
-            NSDictionary * concert1 = [NSDictionary dictionaryWithObjectsAndKeys:@"Test Venue Name 1", @"venue_name", @"1989-02-16", @"date",@"Simon and the Destroyers", @"name",[NSNumber numberWithInt:99], LastfmIDURL, nil];
-            NSDictionary * concert2 = [NSDictionary dictionaryWithObjectsAndKeys:@"Test Venue Name 2", @"venue_name", @"1999-03-26", @"date",@"Simon and the Destroyers", @"name",[NSNumber numberWithInt:55], LastfmIDURL, nil];
-            NSArray * testConcertList = [NSArray arrayWithObjects:concert1,concert2, nil];
-            if (completion) {
-                completion(testConcertList);
-            }
-        }else {
-            if (completion) {
-                completion(concertList);
-            }
+        if (completion) {
+            completion(concertList);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"ERROR fetching popular concerts: %@...",[[error description] substringToIndex:MAX_ERROR_LEN]);
-        
-        
-        if (RETURN_TEST_DATA) {
-            NSDictionary * concert1 = [NSDictionary dictionaryWithObjectsAndKeys:@"Test Venue Name 1", @"venue_name", @"1989-02-16", @"date",@"Simon and the Destroyers", @"name",[NSNumber numberWithInt:99], LastfmIDURL, nil];
-            NSDictionary * concert2 = [NSDictionary dictionaryWithObjectsAndKeys:@"Test Venue Name 2", @"venue_name", @"1999-03-26", @"date",@"Simon and the Destroyers", @"name",[NSNumber numberWithInt:55], LastfmIDURL, nil];
-            NSArray * testConcertList = [NSArray arrayWithObjects:concert1,concert2, nil];
-            if (completion) {
-                completion(testConcertList);
-            }
+        if (searchType == ECSearchTypePast) {
+            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Sorry, something went wrong. Please try again later." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alert show];
         }
-    
-        else {
-            if (searchType == ECSearchTypePast) {
-                UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Sorry, something went wrong. Please try again later." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-                [alert show];
-            }
-            if(completion)
-                completion(nil);
-        }
+        if(completion)
+            completion(nil);
     }];
 }
 
@@ -137,9 +115,9 @@ NSString* stringForSearchType(ECSearchType searchType) {
     [client setDefaultHeader:@"Accept" value:@"application/json"];
     NSString *tenseString;
     if (searchType == ECSearchTypePast) {
-        tenseString = PastURL;
+        tenseString = @"past";
     } else {
-        tenseString = FutureURL;
+        tenseString = @"future";
     }
     
     NSNumber* latitude = [NSNumber numberWithDouble:location.coordinate.latitude];
@@ -200,6 +178,27 @@ NSString* stringForSearchType(ECSearchType searchType) {
     [operation start];
 }
 
++(void) fetchInfoForArtist:(NSString*) artist completion: (void(^) (NSDictionary* artistInfo)) completion {
+    NSString* infoURL = [NSString stringWithFormat:ArtistInfoURL,[artist stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    NSURL* url = [NSURL URLWithString:infoURL];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    __block NSDictionary* info;
+    AFJSONRequestOperation* operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        info = (NSDictionary*) JSON;
+        if (completion) {
+            completion(info);
+        }
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        NSLog(@"ERROR: failed to retrieve info for artist %@, %@",artist,[error.description substringToIndex:MAX_ERROR_LEN]);
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Sorry, something went wrong" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        if (completion) {
+            completion(nil);
+        }
+    }];
+    [operation start];
+}
+
 +(void) fetchPostsForConcertWithID: (NSString *) concertID completion: (void (^)(NSArray* fetchedPosts)) completion{
     __block NSArray * posts;
     NSString * fullPostsUrl = [NSString stringWithFormat:ConcertPostsURL,concertID];
@@ -221,7 +220,7 @@ NSString* stringForSearchType(ECSearchType searchType) {
 
 +(void) checkIfConcert: (NSString*) concertID isOnProfile: (NSString *) userID completion: (void (^)(BOOL isOnProfile)) completion  {
     
-    NSDictionary * parameters = [NSDictionary dictionaryWithObjectsAndKeys:concertID, LastfmIDURL,nil];
+    NSDictionary * parameters = [NSDictionary dictionaryWithObjectsAndKeys:concertID, @"lastfm_id",nil];
     
     NSURL * url = [NSURL URLWithString:BaseURL];
     AFHTTPClient * client = [[AFHTTPClient alloc] initWithBaseURL:url];

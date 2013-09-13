@@ -11,6 +11,7 @@
 #import "NSUserDefaults+Encore.h"
 #import <QuartzCore/QuartzCore.h>
 #import "UIFont+Encore.h"
+#import "ECArtistViewController.h"
 
 @implementation LocationCell
 -(IBAction) openBigMap {
@@ -76,6 +77,18 @@
 }
 -(NSInteger) numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 1;
+}
+
+-(void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    NSUInteger row = indexPath.row;
+    NSString* artist = [[self.lineup objectAtIndex:indexPath.row] objectForKey:@"artist"];
+    [Flurry logEvent:@"Tapped_Lineup_Artist" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:artist,@"artist", nil]];
+
+    UIStoryboard* sb = [UIStoryboard storyboardWithName:@"ECArtistView" bundle:nil];
+    ECArtistViewController * vc = [sb instantiateInitialViewController];
+    vc.artist = artist;
+    vc.artistImage = [self.lineupImages objectAtIndex:row];
+    [self.navController pushViewController:vc animated:YES];
 }
 @end
 

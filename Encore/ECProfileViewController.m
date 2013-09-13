@@ -106,15 +106,21 @@ typedef enum {
 }
 - (void) setUpBackButton {
     UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    UIImage *leftButImage = [UIImage imageNamed:@"backButton.png"];     [leftButton setBackgroundImage:leftButImage forState:UIControlStateNormal];
+    UIImage *leftButImage = [UIImage imageNamed:@"backButton.png"];
+    [leftButton setBackgroundImage:leftButImage forState:UIControlStateNormal];
     [leftButton addTarget:self action:@selector(backButtonWasPressed) forControlEvents:UIControlEventTouchUpInside];
     leftButton.frame = CGRectMake(0, 0, leftButImage.size.width, leftButImage.size.height);
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
     self.navigationItem.leftBarButtonItem = backButton;
 }
 -(void) setupSettingsButton {
-    UIBarButtonItem* settingsButton = [[UIBarButtonItem alloc] initWithTitle:@"Settings" style:UIBarButtonItemStyleDone target:self action:@selector(settingsTapped)];
-    self.navigationItem.rightBarButtonItem = settingsButton;
+    UIButton* rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIImage* rightButtonImage = [UIImage imageNamed:@"gearbutton"];
+    [rightButton setBackgroundImage:rightButtonImage forState:UIControlStateNormal];
+    [rightButton addTarget:self action:@selector(settingsTapped) forControlEvents:UIControlEventTouchUpInside];
+    rightButton.frame = CGRectMake(0, 0, rightButtonImage.size.width, rightButtonImage.size.height);
+    UIBarButtonItem* gearButton = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
+    self.navigationItem.rightBarButtonItem = gearButton;
     
 }
 -(void) setupLogoutButton {

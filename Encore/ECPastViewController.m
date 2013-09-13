@@ -189,10 +189,11 @@ typedef enum {
             if (cell == nil) {
                 cell = [[LineupCell alloc] init];
             }
-            cell.lineupLabel.font = [UIFont lightHeroFontWithSize:12];
+            cell.lineupLabel.font = [UIFont lightHeroFontWithSize:16];
             cell.lineup = self.concert.lineup;
             cell.contentView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
-
+            cell.navController = self.navigationController;
+            
             return cell;
         }
         case Photos: {

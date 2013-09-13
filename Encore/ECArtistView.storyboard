@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="PY5-5c-Zu6">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
+    </dependencies>
+    <scenes>
+        <!--Artist View Controller-->
+        <scene sceneID="Lcq-aS-ze6">
+            <objects>
+                <tableViewController id="PY5-5c-Zu6" customClass="ECArtistViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Cr9-lV-4kx">
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="ZK6-R2-kLT">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="199"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="aNy-9n-5b3">
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="130" id="C7R-4a-Apt"/>
+                                        <constraint firstAttribute="height" constant="130" id="yJf-aG-edy"/>
+                                    </constraints>
+                                </imageView>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aiJ-mx-rNN">
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="29" id="Vpv-5L-ABx"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" red="0.01176470588" green="0.69019607839999997" blue="0.89019607840000003" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="aiJ-mx-rNN" firstAttribute="leading" secondItem="ZK6-R2-kLT" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="AGb-yi-CcG"/>
+                                <constraint firstAttribute="bottom" secondItem="aiJ-mx-rNN" secondAttribute="bottom" constant="19" id="TA3-KJ-EHQ"/>
+                                <constraint firstItem="aiJ-mx-rNN" firstAttribute="centerX" secondItem="aNy-9n-5b3" secondAttribute="centerX" type="default" id="fzg-Oz-Uhy"/>
+                                <constraint firstItem="aNy-9n-5b3" firstAttribute="top" secondItem="ZK6-R2-kLT" secondAttribute="top" constant="20" symbolic="YES" type="default" id="nKy-iq-srM"/>
+                                <constraint firstAttribute="trailing" secondItem="aiJ-mx-rNN" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="uHe-5d-vux"/>
+                            </constraints>
+                        </view>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="eventcell" textLabel="TkE-qn-ar5" detailTextLabel="036-8M-Eub" style="IBUITableViewCellStyleSubtitle" id="6kP-PO-4td">
+                                <rect key="frame" x="0.0" y="221" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TkE-qn-ar5">
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Detail" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="036-8M-Eub">
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="PY5-5c-Zu6" id="hmr-Du-csc"/>
+                            <outlet property="delegate" destination="PY5-5c-Zu6" id="5ZG-zD-aNW"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <outlet property="artistImageView" destination="aNy-9n-5b3" id="wmY-Oc-b8m"/>
+                        <outlet property="artistNameLabel" destination="aiJ-mx-rNN" id="7ws-1K-zyM"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ep6-Fs-E1m" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="304" y="35"/>
+        </scene>
+    </scenes>
+    <classes>
+        <class className="ECArtistViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ECArtistViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="artistImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="artistNameLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+    </classes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>

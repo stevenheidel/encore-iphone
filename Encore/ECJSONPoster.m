@@ -44,7 +44,7 @@
     [client registerHTTPOperationClass:[AFJSONRequestOperation class]];
     [client setDefaultHeader:@"Accept" value:@"application/json"];
     
-    [client postPath:UsersURL parameters:parameters
+    [client postPath:@"users" parameters:parameters
              success:^(AFHTTPRequestOperation *operation, id responseObject) {
                  NSLog(@"%@: Successfully posted user %@",NSStringFromClass([self class]),facebookID);
                  NSDictionary *userDic = [responseObject objectForKey:@"user"];
@@ -73,7 +73,7 @@
 +(void) addConcert: (NSString *) concertID toUser: (NSString *) userID completion: (void (^)(BOOL success)) completion{
     //POST /users/:uuid/concerts     {'songkick_id': '1234578'}
     NSString * urlString = [NSString stringWithFormat:AddConcertToUserURL,userID];
-    NSDictionary * parameters = [NSDictionary dictionaryWithObject:concertID forKey:LastfmIDURL];
+    NSDictionary * parameters = [NSDictionary dictionaryWithObject:concertID forKey:@"lastfm_id"];
     AFHTTPClient * client = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:BaseURL]];
     
     [client registerHTTPOperationClass:[AFJSONRequestOperation class]];

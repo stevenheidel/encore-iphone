@@ -118,7 +118,6 @@
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="lineup" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uno-JA-zla">
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="QTT-aR-5Td"/>
-                                                <constraint firstAttribute="width" constant="46" id="R2j-zZ-T36"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -190,9 +189,10 @@
                                 <constraints>
                                     <constraint firstItem="UiD-xz-xtX" firstAttribute="trailing" secondItem="WQC-18-eYh" secondAttribute="trailing" type="default" id="CX8-nh-CB9"/>
                                     <constraint firstItem="Uno-JA-zla" firstAttribute="top" secondItem="WQC-18-eYh" secondAttribute="top" constant="5" id="Fo1-Uq-FP4"/>
-                                    <constraint firstItem="UiD-xz-xtX" firstAttribute="centerX" secondItem="Uno-JA-zla" secondAttribute="centerX" type="default" id="SVm-qv-dEi"/>
+                                    <constraint firstAttribute="trailing" secondItem="Uno-JA-zla" secondAttribute="trailing" constant="20" type="default" id="KMT-M6-4o9"/>
                                     <constraint firstItem="UiD-xz-xtX" firstAttribute="leading" secondItem="WQC-18-eYh" secondAttribute="leading" type="default" id="pOa-OW-leq"/>
                                     <constraint firstItem="UiD-xz-xtX" firstAttribute="top" secondItem="WQC-18-eYh" secondAttribute="top" constant="25" id="ugW-U6-bJx"/>
+                                    <constraint firstItem="Uno-JA-zla" firstAttribute="leading" secondItem="WQC-18-eYh" secondAttribute="leading" constant="20" type="default" id="zrd-09-CPf"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="lineupCollectionView" destination="UiD-xz-xtX" id="UjA-JR-IMA"/>
@@ -337,7 +337,7 @@
                                     <outlet property="delegate" destination="C6R-Rp-fJY" id="AGk-eo-nXU"/>
                                 </connections>
                             </collectionView>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bNr-nN-xjG" userLabel="Footer">
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bNr-nN-xjG" userLabel="Footer">
                                 <subviews>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="efn-fD-Gao"/>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="49" contentMode="left" text="Getting photos and videos taken by the crowd" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cvf-kh-lB5" userLabel="Footer label">

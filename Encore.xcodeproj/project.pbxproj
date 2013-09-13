@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2403C2C417E28A3100C518BF /* ECArtistView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2403C2C317E28A3100C518BF /* ECArtistView.storyboard */; };
+		245F1E9917E2E79400C7621D /* gearbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 245F1E9717E2E79400C7621D /* gearbutton.png */; };
+		245F1E9A17E2E79400C7621D /* gearbutton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 245F1E9817E2E79400C7621D /* gearbutton@2x.png */; };
 		24A4C8C817E240340022B56F /* locationmarkerbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 24A4C8C617E240340022B56F /* locationmarkerbutton.png */; };
 		24A4C8C917E240340022B56F /* locationmarkerbutton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24A4C8C717E240340022B56F /* locationmarkerbutton@2x.png */; };
 		24A730FA17DD2E46009CF164 /* SPGooglePlacesAutocompletePlace.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A730F317DD2E46009CF164 /* SPGooglePlacesAutocompletePlace.m */; };
@@ -185,7 +188,6 @@
 		D4AF581717B48413000FCA93 /* ECEventProfileStatusManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AF581617B48413000FCA93 /* ECEventProfileStatusManager.m */; };
 		D4B0AC4717727FDA00DC4DD2 /* ECPostPlaceholder.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4B0AC4617727FDA00DC4DD2 /* ECPostPlaceholder.xib */; };
 		D4B2DDBC17B0101800836F53 /* ECArtistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4B2DDBA17B0101800836F53 /* ECArtistViewController.m */; };
-		D4B2DDBD17B0101800836F53 /* ECArtistViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4B2DDBB17B0101800836F53 /* ECArtistViewController.xib */; };
 		D4B2DDC217B01B0900836F53 /* ECLineupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4B2DDC017B01B0900836F53 /* ECLineupViewController.m */; };
 		D4B2DDC317B01B0900836F53 /* ECLineupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4B2DDC117B01B0900836F53 /* ECLineupViewController.xib */; };
 		D4B31DE91793D03300822228 /* NSUserDefaults+Encore.m in Sources */ = {isa = PBXBuildFile; fileRef = D4B31DE81793D03300822228 /* NSUserDefaults+Encore.m */; };
@@ -259,6 +261,9 @@
 
 /* Begin PBXFileReference section */
 		2401A80C179BC8F300B881B7 /* ECPostType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECPostType.h; sourceTree = "<group>"; };
+		2403C2C317E28A3100C518BF /* ECArtistView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ECArtistView.storyboard; sourceTree = "<group>"; };
+		245F1E9717E2E79400C7621D /* gearbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gearbutton.png; sourceTree = "<group>"; };
+		245F1E9817E2E79400C7621D /* gearbutton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gearbutton@2x.png"; sourceTree = "<group>"; };
 		24A4C8C617E240340022B56F /* locationmarkerbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = locationmarkerbutton.png; sourceTree = "<group>"; };
 		24A4C8C717E240340022B56F /* locationmarkerbutton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "locationmarkerbutton@2x.png"; sourceTree = "<group>"; };
 		24A730F117DD2E46009CF164 /* APIKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIKey.h; sourceTree = "<group>"; };
@@ -482,7 +487,6 @@
 		D4B0AC4617727FDA00DC4DD2 /* ECPostPlaceholder.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECPostPlaceholder.xib; sourceTree = "<group>"; };
 		D4B2DDB917B0101800836F53 /* ECArtistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECArtistViewController.h; sourceTree = "<group>"; };
 		D4B2DDBA17B0101800836F53 /* ECArtistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECArtistViewController.m; sourceTree = "<group>"; };
-		D4B2DDBB17B0101800836F53 /* ECArtistViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECArtistViewController.xib; sourceTree = "<group>"; };
 		D4B2DDBF17B01B0900836F53 /* ECLineupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECLineupViewController.h; sourceTree = "<group>"; };
 		D4B2DDC017B01B0900836F53 /* ECLineupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECLineupViewController.m; sourceTree = "<group>"; };
 		D4B2DDC117B01B0900836F53 /* ECLineupViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECLineupViewController.xib; sourceTree = "<group>"; };
@@ -716,6 +720,8 @@
 		D4A8DDD1176A44A0005E9847 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				245F1E9717E2E79400C7621D /* gearbutton.png */,
+				245F1E9817E2E79400C7621D /* gearbutton@2x.png */,
 				24A4C8C617E240340022B56F /* locationmarkerbutton.png */,
 				24A4C8C717E240340022B56F /* locationmarkerbutton@2x.png */,
 				24B0D8DD17E15C9100B30612 /* shareiconbutton.png */,
@@ -1050,7 +1056,7 @@
 			children = (
 				D4B2DDB917B0101800836F53 /* ECArtistViewController.h */,
 				D4B2DDBA17B0101800836F53 /* ECArtistViewController.m */,
-				D4B2DDBB17B0101800836F53 /* ECArtistViewController.xib */,
+				2403C2C317E28A3100C518BF /* ECArtistView.storyboard */,
 			);
 			name = Artist;
 			sourceTree = "<group>";
@@ -1369,7 +1375,6 @@
 				D956550B17A177BD00B7DA59 /* ticketsbutton@2x.png in Resources */,
 				D401054917A20E6C006078D0 /* playbutton.png in Resources */,
 				D401054A17A20E6C006078D0 /* playbutton@2x.png in Resources */,
-				D4B2DDBD17B0101800836F53 /* ECArtistViewController.xib in Resources */,
 				D4B2DDC317B01B0900836F53 /* ECLineupViewController.xib in Resources */,
 				D4A9A70E17B02945007E8A80 /* ECLineupCell.xib in Resources */,
 				D4A9A71617B03DC5007E8A80 /* ECUpcomingStoryboard.storyboard in Resources */,
@@ -1383,6 +1388,9 @@
 				24B0D8E017E15C9100B30612 /* shareiconbutton@2x.png in Resources */,
 				24A4C8C817E240340022B56F /* locationmarkerbutton.png in Resources */,
 				24A4C8C917E240340022B56F /* locationmarkerbutton@2x.png in Resources */,
+				2403C2C417E28A3100C518BF /* ECArtistView.storyboard in Resources */,
+				245F1E9917E2E79400C7621D /* gearbutton.png in Resources */,
+				245F1E9A17E2E79400C7621D /* gearbutton@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
