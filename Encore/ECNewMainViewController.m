@@ -115,7 +115,14 @@ typedef enum {
     
     else {
         //TODO: Check network connection status before fetching anything
-        [self fetchConcerts];
+        if (![ApplicationDelegate connected]) {
+            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"No internets!" message:@"You must be connected to the internet to use Encore. Sorry pal." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"Try again", nil];
+            alert.tag = ECNoNetworkAlertTag;
+            [alert show];
+        }
+        else {
+         [self fetchConcerts];
+        }
         NSString* city = [NSUserDefaults searchCity];
         self.locationLabel.text = city == nil ? @"Location not set" : city;
     }
@@ -646,6 +653,18 @@ typedef enum {
         if (buttonIndex == alertView.firstOtherButtonIndex) {
             [ApplicationDelegate beginFacebookAuthorization];
             [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(inviteTapped) name:ECLoginCompletedNotification object:nil];
+        }
+    }
+    else if (alertView.tag == ECNoNetworkAlertTag) {
+        if (buttonIndex == alertView.firstOtherButtonIndex) {
+            if ([ApplicationDelegate connected]) {
+                [self fetchConcerts];
+            }
+            else {
+                UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"No Internet" message:@"Still not getting an internet connection." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"Try again", nil];
+                alert.tag = ECNoNetworkAlertTag;
+                [alert show];
+            }
         }
     }
 }

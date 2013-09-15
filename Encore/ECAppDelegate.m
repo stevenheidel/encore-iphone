@@ -26,15 +26,49 @@
 #import "AFNetworking.h"
 
 #import "Staging.h"
+#import "Reachability.h"
 
 @implementation ECAppDelegate
 
+
+-(void) checkReachability {
+    // Allocate a reachability object
+    Reachability* reach = [Reachability reachabilityWithHostname:@"www.google.com"];
+    
+    // Tell the reachability that we DON'T want to be reachable on 3G/EDGE/CDMA
+    reach.reachableOnWWAN = NO;
+    
+    // Here we set up a NSNotification observer. The Reachability that caused the notification
+    // is passed in the object parameter
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(reachabilityChanged:)
+                                                 name:kReachabilityChangedNotification
+                                               object:nil];
+    
+    [reach startNotifier];
+}
+
+-(BOOL) connected {
+    Reachability* reachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [reachability currentReachabilityStatus];
+    return !(networkStatus == NotReachable);
+}
+
+-(void) reachabilityChanged: (NSNotification*) notification {
+    NSLog(@"Reachability changed!");
+    Reachability* reach = (Reachability*)notification.object;
+    if (reach.isReachable) {
+        NSLog(@"REACHABLE!");
+    }
+    else {
+        NSLog(@"UNREACHABLE!");
+    }
+}
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [self startAnalytics];
     
-    //  self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    //  Override point for customization after application launch.
+    [self checkReachability];
+    [self startAnalytics];
     
     self.navigationController = (UINavigationController*)self.window.rootViewController;
     self.mainViewController = (ECNewMainViewController*)[[self.navigationController viewControllers] objectAtIndex:0];

@@ -20,7 +20,8 @@ typedef enum {
     NoLocationAlert,
     ECInviteNotLoggedInAlert,
     ECShareNotLoggedInAlert,
-    ECChangeStateNotLoggedInAlert
+    ECChangeStateNotLoggedInAlert,
+    ECNoNetworkAlertTag
 }ECAlertTags;
 
 #endif

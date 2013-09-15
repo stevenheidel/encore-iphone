@@ -23,7 +23,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *eventVenueAndDate;
 @property (nonatomic,strong) ECEventProfileStatusManager* statusManager;
 @property (nonatomic,strong) id <ECPastViewControllerDelegate> eventStateDelegate; //for profile
-
+@property (nonatomic,strong) NSString* previousArtist;
 @property (nonatomic, assign) ECSearchType tense;
 @property (nonatomic,strong) NSDictionary * concert;
 @end

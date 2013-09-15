@@ -23,7 +23,7 @@
 @property (nonatomic,weak) ECChangeConcertStateButton* iamgoingButton;
 @property (nonatomic,strong) ECEventProfileStatusManager* statusManager;
 @property (nonatomic,strong) id <ECUpcomingViewControllerDelegate> eventStateDelegate; //for profile
-
+@property (nonatomic,strong) NSString* previousArtist;
 @property (nonatomic, assign) ECSearchType tense;
 @property (nonatomic,strong) NSDictionary * concert;
 @end

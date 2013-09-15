@@ -29,6 +29,7 @@
 @property (weak,nonatomic) IBOutlet UICollectionView* lineupCollectionView;
 @property (nonatomic,strong) NSArray* lineup;
 @property (nonatomic,weak) UINavigationController* navController;
+@property (nonatomic, strong) NSString* previousArtist; // if you got to the current page from a previous page, will jus pop
 @end
 
 @interface LineupCollectionCell : UICollectionViewCell

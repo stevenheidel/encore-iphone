@@ -52,12 +52,14 @@ typedef enum {
         [self.tableView reloadData];
         [hud hide:YES];
     }];
-    self.artistImageView.image = self.artistImage;
-    self.artistImageView.layer.cornerRadius = 5.0;
-    self.artistImageView.layer.masksToBounds = YES;
-    self.artistImageView.layer.borderColor = [UIColor grayColor].CGColor;
-    self.artistImageView.layer.borderWidth = 0.1;
-    self.artistNameLabel.text = [self.artist uppercaseString];
+    if (self.artistImage != (id)[NSNull null]) {
+        self.artistImageView.image = self.artistImage;
+        self.artistImageView.layer.cornerRadius = 5.0;
+        self.artistImageView.layer.masksToBounds = YES;
+        self.artistImageView.layer.borderColor = [UIColor grayColor].CGColor;
+        self.artistImageView.layer.borderWidth = 0.1;
+    }
+        self.artistNameLabel.text = [self.artist uppercaseString];
     self.artistNameLabel.font = [UIFont heroFontWithSize:16.f];
     self.artistNameLabel.textColor = [UIColor blueArtistTextColor];
     UIImageView* encoreLogo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
@@ -80,6 +82,7 @@ typedef enum {
         ECPastViewController* pastVC =  (ECPastViewController*)[pastBoard instantiateInitialViewController];
         pastVC.concert = [self.pastEvents objectAtIndex:indexPath.row];
         pastVC.tense = ECSearchTypePast;
+        pastVC.previousArtist = self.artist;
         [self.navigationController pushViewController:pastVC animated:YES];
     }
     else if (section == ArtistInfoUpcomingSection){
@@ -87,6 +90,7 @@ typedef enum {
         ECUpcomingViewController* upcomingVC = (ECUpcomingViewController*) [upcomingBoard instantiateInitialViewController];
         upcomingVC.concert = [self.upcomingEvents objectAtIndex:indexPath.row];
         upcomingVC.tense = ECSearchTypeFuture;
+        upcomingVC.previousArtist = self.artist;
         [self.navigationController pushViewController:upcomingVC animated:YES];
     }
 }

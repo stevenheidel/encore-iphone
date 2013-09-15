@@ -68,8 +68,9 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    [self loadConcertImages];
     _isPopulating = NO;
+    [self loadConcertImages: YES];
+    
     UIImageView* encoreLogo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
     self.navigationItem.titleView = encoreLogo;
     self.postsCollectionView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
@@ -88,6 +89,10 @@
     rightButton.frame = CGRectMake(0, 0, rightButImage.size.width, rightButImage.size.height);
     UIBarButtonItem* shareButton = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
     self.navigationItem.rightBarButtonItem = shareButton;
+}
+
+-(void) viewWillDisappear:(BOOL)animated {
+    [self.timer invalidate];
 }
 -(void) backButtonWasPressed {
     [self.navigationController popViewControllerAnimated:YES];
@@ -122,8 +127,7 @@
 -(void) checkConcertIfPopulating {
     [ECJSONFetcher checkIfEventIsPopulating:[self.concert eventID] completion:^(BOOL isPopulating) {
         _isPopulating = isPopulating;
-        if(isPopulating)
-        {
+        if(isPopulating){
             //Show the footer
             [self showFooter];
             [self hideNoPostsLabel];
@@ -131,22 +135,21 @@
         }else
         {
             //Call get images method
-
+            [self loadConcertImages: NO];
             //Stop timer
             [self stopTimer];
             //Remove the footer once timer finished
             [self hideFooter];
 
         }
-        [self loadConcertImages];
+
+        
        
     }];
 
 }
 
-
--(void)loadConcertImages{
-  
+-(void)loadConcertImages: (BOOL) shouldAsk {
     [ECJSONFetcher fetchPostsForConcertWithID:self.concert.eventID completion:^(NSArray *fetchedPosts) {
         if(fetchedPosts.count > 0){
             self.posts = fetchedPosts;
@@ -157,11 +160,13 @@
             if (!_isPopulating) {
                 [self showNoPostsLabel];
             }
-            [self askServerToPopulateConcert];
+            if(shouldAsk) {
+             [self askServerToPopulateConcert];
+            }
         }
     }];
-
 }
+
 #pragma mark - Timer (repeatedly checking populating/loading)
 -(void) startTimer {
     self.timer = [NSTimer scheduledTimerWithTimeInterval:10.0

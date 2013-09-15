@@ -252,7 +252,7 @@ typedef enum {
             cell.lineup = self.concert.lineup;
             cell.contentView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
             cell.navController = self.navigationController;
-            
+            cell.previousArtist = self.previousArtist;
             return cell;
         }
         case Details: {

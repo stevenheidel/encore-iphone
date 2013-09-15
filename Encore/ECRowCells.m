@@ -83,12 +83,17 @@
     NSUInteger row = indexPath.row;
     NSString* artist = [[self.lineup objectAtIndex:indexPath.row] objectForKey:@"artist"];
     [Flurry logEvent:@"Tapped_Lineup_Artist" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:artist,@"artist", nil]];
-
-    UIStoryboard* sb = [UIStoryboard storyboardWithName:@"ECArtistView" bundle:nil];
-    ECArtistViewController * vc = [sb instantiateInitialViewController];
-    vc.artist = artist;
-    vc.artistImage = [self.lineupImages objectAtIndex:row];
-    [self.navController pushViewController:vc animated:YES];
+    
+    if ([artist isEqualToString:self.previousArtist]) {
+        [self.navController popViewControllerAnimated:YES];
+    }
+    else {
+        UIStoryboard* sb = [UIStoryboard storyboardWithName:@"ECArtistView" bundle:nil];
+        ECArtistViewController * vc = [sb instantiateInitialViewController];
+        vc.artist = artist;
+        vc.artistImage = [self.lineupImages objectAtIndex:row];
+        [self.navController pushViewController:vc animated:YES];
+    }
 }
 @end
 

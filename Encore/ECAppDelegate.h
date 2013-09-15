@@ -30,7 +30,7 @@
 -(void) showLoginView: (BOOL) animated;
 -(void) showLoginHUD;
 -(BOOL) isLoggedIn;
-
+-(BOOL) connected;
 @property (strong,nonatomic) MBProgressHUD* hud;
 @property (nonatomic,assign) BOOL fullScreenVideoPlaying;
 @property (strong, nonatomic) UIWindow *window;
