@@ -1,7 +1,7 @@
 //
 //  ECPictureViewController.h
 //  Encore
-//  Display image selected by photo picker
+//  Display image selected by photo picker (app doesn't use this right now)
 //  Created by Shimmy on 2013-06-28.
 //  Copyright (c) 2013 Encore. All rights reserved.
 //

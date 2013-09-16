@@ -38,7 +38,15 @@ typedef enum {
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIImage *leftButImage = [UIImage imageNamed:@"backButton"];
+    [leftButton setBackgroundImage:leftButImage forState:UIControlStateNormal];
+    [leftButton addTarget:self action:@selector(backButtonWasPressed) forControlEvents:UIControlEventTouchUpInside];
+    leftButton.frame = CGRectMake(0, 0, leftButImage.size.width, leftButImage.size.height);
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
+    self.navigationItem.leftBarButtonItem = backButton;
+
+
     MBProgressHUD* hud = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
 	[self.tableView addSubview:hud];
     hud.color = [UIColor lightBlueHUDConfirmationColor];
@@ -66,6 +74,10 @@ typedef enum {
     self.navigationItem.titleView = encoreLogo;
     self.tableView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
 
+}
+
+-(void) backButtonWasPressed {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning

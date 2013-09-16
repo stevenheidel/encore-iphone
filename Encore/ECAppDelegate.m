@@ -54,20 +54,20 @@
     return !(networkStatus == NotReachable);
 }
 
--(void) reachabilityChanged: (NSNotification*) notification {
-    NSLog(@"Reachability changed!");
-    Reachability* reach = (Reachability*)notification.object;
-    if (reach.isReachable) {
-        NSLog(@"REACHABLE!");
-    }
-    else {
-        NSLog(@"UNREACHABLE!");
-    }
-}
+//-(void) reachabilityChanged: (NSNotification*) notification {
+//    NSLog(@"Reachability changed!");
+//    Reachability* reach = (Reachability*)notification.object;
+//    if (reach.isReachable) {
+//        NSLog(@"REACHABLE!");
+//    }
+//    else {
+//        NSLog(@"UNREACHABLE!");
+//    }
+//}
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
-    [self checkReachability];
+//    [self checkReachability];
     [self startAnalytics];
     
     self.navigationController = (UINavigationController*)self.window.rootViewController;

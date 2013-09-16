@@ -157,7 +157,7 @@
             [self hideNoPostsLabel];
         }else{
             //Add No posts found Label
-            if (!_isPopulating) {
+            if (!_isPopulating && !shouldAsk) {
                 [self showNoPostsLabel];
             }
             if(shouldAsk) {

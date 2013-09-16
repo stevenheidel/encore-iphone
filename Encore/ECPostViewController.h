@@ -20,12 +20,11 @@
 @property (copy, nonatomic) NSString* venueAndDate;
 @property (weak, nonatomic) IBOutlet UIButton *playButton;
 
-@property (nonatomic,strong) IBOutlet UIImageView * postImage;
-@property (nonatomic,strong) IBOutlet UIImageView * profilePicture;
-@property (nonatomic,strong) IBOutlet UILabel * captionLabel;
-@property (nonatomic,strong) IBOutlet UILabel * userNameLabel;
-@property (nonatomic,strong) IBOutlet UIButton* flagPostButton;
-
+@property (nonatomic,weak) IBOutlet UIImageView * postImage;
+@property (nonatomic,weak) IBOutlet UIImageView * profilePicture;
+@property (nonatomic,weak) IBOutlet UILabel * captionLabel;
+@property (nonatomic,weak) IBOutlet UILabel * userNameLabel;
+@property (nonatomic,weak) IBOutlet UIButton* flagPostButton;
 @property (nonatomic,assign) NSInteger itemNumber;
 @property (nonatomic,strong) IBOutlet UIView* containerView;
 @property (nonatomic,readonly) NSString * postID;

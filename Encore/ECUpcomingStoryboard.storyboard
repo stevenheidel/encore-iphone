@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="kpA-lm-Rwt">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12F37" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="kpA-lm-Rwt">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -231,16 +231,16 @@
                                     <outlet property="changeStateButton" destination="yK4-gO-VCC" id="e6Q-Kq-tFK"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="location" rowHeight="198" id="4ou-sL-lFG" customClass="LocationCell">
-                                <rect key="frame" x="0.0" y="491" width="320" height="198"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="location" rowHeight="215" id="4ou-sL-lFG" customClass="LocationCell">
+                                <rect key="frame" x="0.0" y="491" width="320" height="215"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="197"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="214"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="details" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yyn-be-IwG">
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="21" id="exQ-Oe-qbj"/>
+                                                <constraint firstAttribute="height" constant="21" type="user" id="exQ-Oe-qbj"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -256,7 +256,7 @@
                                         </mapView>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="996 Ontario Place Blvd" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="285" translatesAutoresizingMaskIntoConstraints="NO" id="zba-7k-wSx" userLabel="address label">
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="20" id="zpR-fM-lR3"/>
+                                                <constraint firstAttribute="height" constant="44" id="pB8-QJ-ZJd"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -276,16 +276,16 @@
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="zba-7k-wSx" secondAttribute="trailing" constant="20" type="default" id="0SS-GY-pR3"/>
                                     <constraint firstItem="zba-7k-wSx" firstAttribute="leading" secondItem="4ou-sL-lFG" secondAttribute="leading" constant="15" type="user" id="25A-77-N8O"/>
-                                    <constraint firstItem="Yyn-be-IwG" firstAttribute="top" secondItem="4ou-sL-lFG" secondAttribute="top" type="default" id="CGB-SE-0a3"/>
                                     <constraint firstAttribute="trailing" secondItem="lpk-WE-HYa" secondAttribute="trailing" constant="20" type="default" id="JqX-F0-1aK"/>
+                                    <constraint firstItem="Heh-BN-YO4" firstAttribute="top" secondItem="lpk-WE-HYa" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="NRN-cF-x1o"/>
                                     <constraint firstItem="zba-7k-wSx" firstAttribute="leading" secondItem="lpk-WE-HYa" secondAttribute="leading" type="default" id="Roy-eb-NZK"/>
+                                    <constraint firstItem="lpk-WE-HYa" firstAttribute="top" secondItem="4ou-sL-lFG" secondAttribute="top" constant="57" id="Vov-hO-FxW"/>
                                     <constraint firstItem="Yyn-be-IwG" firstAttribute="leading" secondItem="4ou-sL-lFG" secondAttribute="leading" type="default" id="WgV-hS-Jzr"/>
-                                    <constraint firstItem="Heh-BN-YO4" firstAttribute="top" secondItem="4ou-sL-lFG" secondAttribute="top" constant="66" id="YMU-39-VTp"/>
+                                    <constraint firstItem="Yyn-be-IwG" firstAttribute="top" secondItem="4ou-sL-lFG" secondAttribute="top" constant="5" type="user" id="awZ-ce-cVk"/>
                                     <constraint firstAttribute="centerX" secondItem="Yyn-be-IwG" secondAttribute="centerX" type="user" id="db6-S7-05h"/>
+                                    <constraint firstItem="zba-7k-wSx" firstAttribute="top" secondItem="4ou-sL-lFG" secondAttribute="top" constant="20" type="default" id="h92-t5-7CV"/>
                                     <constraint firstItem="Heh-BN-YO4" firstAttribute="leading" secondItem="lpk-WE-HYa" secondAttribute="leading" type="default" id="i0h-jx-ArU"/>
-                                    <constraint firstItem="zba-7k-wSx" firstAttribute="top" secondItem="4ou-sL-lFG" secondAttribute="top" constant="20" type="default" id="j0C-PQ-aRV"/>
                                     <constraint firstAttribute="trailing" secondItem="Heh-BN-YO4" secondAttribute="trailing" constant="20" type="default" id="mKr-zO-hJX"/>
-                                    <constraint firstItem="lpk-WE-HYa" firstAttribute="top" secondItem="4ou-sL-lFG" secondAttribute="top" constant="39" id="nfl-tp-E6J"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="addressLabel" destination="zba-7k-wSx" id="dUq-AD-avR"/>
@@ -310,6 +310,20 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z5x-FA-Vot" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="136" y="-6"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="C2c-C7-vMZ">
+            <objects>
+                <viewController id="1uZ-Pb-NWq" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Smq-BD-Qv7">
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="V5q-D9-2XS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="136" y="10"/>
         </scene>
     </scenes>
     <resources>

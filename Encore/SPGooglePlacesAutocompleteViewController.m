@@ -27,8 +27,15 @@
 }
 
 -(IBAction) save {
-    [self dismissViewControllerAnimated:YES completion:nil];
-    [self.delegate updatedSearchLocationToPlacemark:self.savedPlacemark];
+    if (!self.savedPlacemark.locality && !self.savedPlacemark.subAdministrativeArea) {
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Location error" message:@"Please enter a valid city or locality and try again." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    }
+    else {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    
+        [self.delegate updatedSearchLocationToPlacemark:self.savedPlacemark];
+    }
 }
 
 -(BOOL)shouldAutorotate{
@@ -186,6 +193,7 @@
 - (void)handleSearchForSearchString:(NSString *)searchString {
     searchQuery.location = self.mapView.userLocation.coordinate;
     searchQuery.input = searchString;
+    
     [searchQuery fetchPlaces:^(NSArray *places, NSError *error) {
         if (error) {
             SPPresentAlertViewWithErrorAndTitle(error, @"Could not fetch Places");

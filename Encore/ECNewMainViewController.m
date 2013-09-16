@@ -53,6 +53,7 @@ typedef enum {
 @interface ECNewMainViewController () {
     BOOL showingSearchBar;
     UIView* lastFMView;
+    NSDictionary* abbrvDic;
 }
 
 @end
@@ -64,6 +65,7 @@ typedef enum {
     [super viewDidLoad];
     
     //Initializations;
+    abbrvDic = nil;
     self.searchHeaderView = nil;
     self.hasSearched = FALSE;
     self.comboSearchResultsDic = nil;
@@ -116,14 +118,15 @@ typedef enum {
     else {
         //TODO: Check network connection status before fetching anything
         if (![ApplicationDelegate connected]) {
-            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"No internets!" message:@"You must be connected to the internet to use Encore. Sorry pal." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"Try again", nil];
+            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"No connection!" message:@"You must be connected to the internet to use Encore. Sorry pal." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"Try again", nil];
             alert.tag = ECNoNetworkAlertTag;
             [alert show];
         }
         else {
          [self fetchConcerts];
         }
-        NSString* city = [NSUserDefaults searchCity];
+        NSString* city = [NSUserDefaults lastSearchArea];
+
         self.locationLabel.text = city == nil ? @"Location not set" : city;
     }
   
@@ -524,17 +527,25 @@ typedef enum {
 
 -(void) updatedSearchLocationToPlacemark:(CLPlacemark *)placemark{
     float radius = 0.5f;
-    NSString* area = [NSString stringWithFormat:@"%@, %@",placemark.locality,placemark.administrativeArea];
+    NSString* adminArea = placemark.administrativeArea;
+    if([placemark.ISOcountryCode isEqualToString:@"CA"] || [placemark.ISOcountryCode isEqualToString:@"US"]){ //use standard abbreviations for US and Canada.
+        if (!abbrvDic) {
+            NSString * plistPath = [[NSBundle mainBundle] pathForResource:@"ProvinceStateAbbrv" ofType:@"plist"];
+            abbrvDic = [NSDictionary dictionaryWithContentsOfFile:plistPath];
+        }
+         adminArea = [[abbrvDic objectForKey:[adminArea lowercaseString]] uppercaseString]; //search by lowercase for consistency, display as uppercase
+    }
+    NSString* area = [NSString stringWithFormat:@"%@, %@",placemark.locality ? placemark.locality : placemark.subAdministrativeArea,adminArea];
     
     CLLocation* location = placemark.location;
-    NSString* locality = placemark.locality;
+    NSString* locality = placemark.locality ? placemark.locality : placemark.subAdministrativeArea;
     
     NSLog(@"new radius %f",radius);
     self.currentSearchLocation = location;
     self.currentSearchRadius = radius;
     self.currentSearchAreaString = area;
     
-    self.locationLabel.text = locality;
+    self.locationLabel.text = area;
     
     [NSUserDefaults setLastSearchLocation:location];
     [NSUserDefaults setLastSearchRadius:radius];
