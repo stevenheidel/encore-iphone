@@ -10,6 +10,16 @@
 #import <CoreLocation/CoreLocation.h>
 
 @implementation NSUserDefaults (Encore)
++(BOOL)shouldShowWalkthrough
+{
+    if([[NSUserDefaults standardUserDefaults] boolForKey:@"walkthrough_showen"]){
+        return NO;
+    }else{
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"walkthrough_showen"];
+        return YES;
+    }
+}
+
 +(NSString*) userName {
    return [[NSUserDefaults standardUserDefaults] stringForKey:@"user_name"];
 }

@@ -28,6 +28,8 @@
 @property (nonatomic,assign) NSInteger itemNumber;
 @property (nonatomic,strong) IBOutlet UIView* containerView;
 @property (nonatomic,readonly) NSString * postID;
+@property (assign) BOOL showShareButton;
+
 @property (nonatomic,unsafe_unretained) id <ECPostViewControllerDelegate> delegate;
 - (IBAction)playButtonTapped:(id)sender;
 

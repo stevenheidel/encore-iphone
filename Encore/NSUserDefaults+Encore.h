@@ -12,6 +12,8 @@
 #import "ECSearchType.h"
 
 @interface NSUserDefaults (Encore)
++(BOOL)shouldShowWalkthrough;
+
 +(NSString*) userName;
 +(void) setUsername: (NSString*) username;
 

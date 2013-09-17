@@ -135,13 +135,15 @@ typedef enum {
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
     self.navigationItem.leftBarButtonItem = backButton;
     
-    UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    UIImage *rightButImage = [UIImage imageNamed:@"shareButton.png"];
-    [rightButton setBackgroundImage:rightButImage forState:UIControlStateNormal];
-    [rightButton addTarget:self action:@selector(shareTapped) forControlEvents:UIControlEventTouchUpInside];
-    rightButton.frame = CGRectMake(0, 0, rightButImage.size.width, rightButImage.size.height);
-    UIBarButtonItem *shareButton = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
-    self.navigationItem.rightBarButtonItem = shareButton;
+    if(self.showShareButton){
+        UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        UIImage *rightButImage = [UIImage imageNamed:@"shareButton.png"];
+        [rightButton setBackgroundImage:rightButImage forState:UIControlStateNormal];
+        [rightButton addTarget:self action:@selector(shareTapped) forControlEvents:UIControlEventTouchUpInside];
+        rightButton.frame = CGRectMake(0, 0, rightButImage.size.width, rightButImage.size.height);
+        UIBarButtonItem *shareButton = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
+        self.navigationItem.rightBarButtonItem = shareButton;
+    }
 }
 
 -(void) setupGestureRecgonizers {

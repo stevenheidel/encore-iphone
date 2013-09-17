@@ -27,6 +27,7 @@
 
 #import "Staging.h"
 #import "Reachability.h"
+#import "ECWelcomeViewController.h"
 
 @implementation ECAppDelegate
 
@@ -80,12 +81,16 @@
     [self.window makeKeyAndVisible];
     [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
     
+    if([NSUserDefaults shouldShowWalkthrough]){
+        [self showWalktrhoughView];
+    }else{
+        [self setUpLocationManager];
+        [Flurry setUserID:[NSUserDefaults userID]];
+    }
    
 //    if (![self isLoggedIn])
 //        [self showLoginView:NO];
 //    else {
-        [self setUpLocationManager];
-        [Flurry setUserID:[NSUserDefaults userID]];
 //    }
     
     return YES;
@@ -113,7 +118,7 @@
 //#endif 
     
 #if IN_BETA
-        [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
+     //   [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
         [TestFlight takeOff:@"019687e0-0d30-4959-bf90-f52ba008c834"];
 #endif
 
@@ -121,7 +126,6 @@
 
 
 #pragma mark - Login management
-
 
 - (void)fbDidNotLogin:(BOOL)cancelled {
     NSLog(@"Delegate fbDidNotLogin");
@@ -234,6 +238,17 @@
         [self.loginViewController.view addSubview:self.hud];
     }
     [self.hud show:YES];
+}
+
+#pragma mark - Walktrhough management
+
+-(void) showWalktrhoughView{
+    UIViewController *topViewController = [self.navigationController topViewController];    
+    UIStoryboard* walkthroughStoryboard = [UIStoryboard storyboardWithName:@"ECWalkthrough" bundle:nil];
+
+    ECWelcomeViewController* welcomeController = [walkthroughStoryboard instantiateInitialViewController];
+    welcomeController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    [topViewController presentViewController:welcomeController animated:YES completion:nil];
 }
 #pragma mark - Login management
 

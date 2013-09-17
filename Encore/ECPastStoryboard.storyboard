@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="nnw-kD-SbF">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="4510" systemVersion="13A569" targetRuntime="iOS.CocoaTouch" variant="6xAndEarlier" propertyAccessControl="none" useAutolayout="YES" initialViewController="nnw-kD-SbF">
     <dependencies>
+        <deployment defaultVersion="1536" identifier="iOS"/>
         <development version="4600" identifier="xcode"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
     </dependencies>
     <scenes>
         <!--Past View Controller-->
@@ -17,11 +18,13 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="wB8-j3-X2v">
+                                    <rect key="frame" x="95" y="20" width="130" height="130"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="130" id="cLH-bP-jS9"/>
                                     </constraints>
                                 </imageView>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I6s-Lx-ngi">
+                                    <rect key="frame" x="20" y="158" width="280" height="29"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="29" id="NNs-jY-hN3"/>
                                     </constraints>
@@ -30,6 +33,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Echo Beach, August 2, 2013" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pnb-Ok-tde">
+                                    <rect key="frame" x="20" y="182" width="280" height="21"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="21" id="1Yv-YH-6B5"/>
                                     </constraints>
@@ -60,6 +64,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EvG-HA-7IO">
+                                            <rect key="frame" x="20" y="15" width="202" height="44"/>
                                             <color key="backgroundColor" red="0.01176470588" green="0.69019607839999997" blue="0.89019607840000003" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="202" type="user" id="0c1-G2-h2q"/>
@@ -77,6 +82,7 @@
                                             </connections>
                                         </button>
                                         <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Ro-Qk-imJ">
+                                            <rect key="frame" x="236" y="15" width="61" height="44"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="61" type="user" id="aO1-KL-Rkb"/>
@@ -116,6 +122,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="lineup" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uno-JA-zla">
+                                            <rect key="frame" x="20" y="5" width="280" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="QTT-aR-5Td"/>
                                             </constraints>
@@ -124,6 +131,7 @@
                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </label>
                                         <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="UiD-xz-xtX">
+                                            <rect key="frame" x="0.0" y="25" width="320" height="116"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="116" id="T1p-9s-Gng"/>
@@ -136,19 +144,21 @@
                                             </collectionViewFlowLayout>
                                             <cells>
                                                 <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="LineupCell" id="M26-sS-Ba8" customClass="LineupCollectionCell">
-                                                    <rect key="frame" x="0.0" y="6" width="88" height="103"/>
+                                                    <rect key="frame" x="0.0" y="7" width="88" height="103"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                         <rect key="frame" x="0.0" y="0.0" width="88" height="103"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
                                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="dSd-8j-akf">
+                                                                <rect key="frame" x="10" y="6" width="68" height="68"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="68" id="91n-Tl-7bP"/>
                                                                     <constraint firstAttribute="height" constant="68" id="Xoc-b7-J3r"/>
                                                                 </constraints>
                                                             </imageView>
                                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="top" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="78" translatesAutoresizingMaskIntoConstraints="NO" id="q1l-BW-Xh9">
+                                                                <rect key="frame" x="5" y="73" width="78" height="30"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="30" id="Zb1-1Q-8sQ"/>
                                                                     <constraint firstAttribute="width" constant="78" id="xQ1-3W-lTV"/>
@@ -157,7 +167,9 @@
                                                                 <color key="textColor" red="0.1058823529" green="0.62352941179999999" blue="0.86274509799999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="yJu-D3-Mc8"/>
+                                                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="yJu-D3-Mc8">
+                                                                <rect key="frame" x="26" y="21" width="37" height="37"/>
+                                                            </activityIndicatorView>
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     </view>
@@ -207,6 +219,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fsu-P6-AeE" customClass="ECChangeConcertStateButton">
+                                            <rect key="frame" x="37" y="15" width="246" height="44"/>
                                             <color key="backgroundColor" red="0.20392156862745098" green="0.8784313725490196" blue="0.76078431372549016" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="246" type="user" id="6f0-f6-5bm"/>
@@ -252,12 +265,13 @@
         <!--Grid View Controller-->
         <scene sceneID="Oxy-ji-1TD">
             <objects>
-                <viewController id="C6R-Rp-fJY" customClass="ECGridViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ECGridViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="C6R-Rp-fJY" customClass="ECGridViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zRa-sd-kUO">
                         <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="4nW-7X-Iq4">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="HVB-r9-R2r">
                                     <size key="itemSize" width="103" height="103"/>
                                     <size key="headerReferenceSize" width="50" height="49"/>
@@ -272,14 +286,18 @@
                                             <rect key="frame" x="0.0" y="0.0" width="103" height="103"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U23-D8-mgg" userLabel="post"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U23-D8-mgg" userLabel="post">
+                                                    <rect key="frame" x="0.0" y="0.0" width="103" height="103"/>
+                                                </imageView>
                                                 <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="playbutton.png" translatesAutoresizingMaskIntoConstraints="NO" id="Kpq-rQ-wvy" userLabel="play button">
+                                                    <rect key="frame" x="26" y="26" width="52" height="52"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="52" id="8Z7-pe-C3G"/>
                                                         <constraint firstAttribute="height" constant="52" id="nzf-7k-Fer"/>
                                                     </constraints>
                                                 </imageView>
                                                 <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Ntl-dR-bdG">
+                                                    <rect key="frame" x="33" y="33" width="37" height="37"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </activityIndicatorView>
                                             </subviews>
@@ -308,11 +326,13 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jz0-90-84r">
+                                            <rect key="frame" x="20" y="8" width="280" height="20"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oRr-Rb-slR">
+                                            <rect key="frame" x="20" y="29" width="280" height="17"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
@@ -338,9 +358,13 @@
                                 </connections>
                             </collectionView>
                             <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bNr-nN-xjG" userLabel="Footer">
+                                <rect key="frame" x="0.0" y="514" width="320" height="34"/>
                                 <subviews>
-                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="efn-fD-Gao"/>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="efn-fD-Gao">
+                                        <rect key="frame" x="5" y="7" width="20" height="20"/>
+                                    </activityIndicatorView>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="49" contentMode="left" text="Getting photos and videos taken by the crowd" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cvf-kh-lB5" userLabel="Footer label">
+                                        <rect key="frame" x="30" y="7" width="299" height="20"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -358,6 +382,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" text="No photos or videos found." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="gSV-Ap-JhE">
+                                <rect key="frame" x="20" y="209" width="280" height="130"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="130" type="user" id="m6g-Sn-HOF"/>
                                 </constraints>
@@ -400,6 +425,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Av-HW-8j1" userLabel="Post">
+                                <rect key="frame" x="0.0" y="72" width="321" height="320"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
                                 <constraints>
@@ -407,9 +433,13 @@
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SOU-UE-yhE" userLabel="Container">
+                                <rect key="frame" x="0.0" y="456" width="320" height="92"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="scaleToFill" image="navbar.png" translatesAutoresizingMaskIntoConstraints="NO" id="fHB-QB-ed6" userLabel="Background"/>
+                                    <imageView userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="scaleToFill" image="navbar.png" translatesAutoresizingMaskIntoConstraints="NO" id="fHB-QB-ed6" userLabel="Background">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="92"/>
+                                    </imageView>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="218" translatesAutoresizingMaskIntoConstraints="NO" id="kqE-T6-mKV" userLabel="Caption">
+                                        <rect key="frame" x="82" y="31" width="218" height="48"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="218" id="CkB-5J-Q5a"/>
                                             <constraint firstAttribute="height" constant="48" id="uPX-q3-VYQ"/>
@@ -419,6 +449,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Myf-kx-Zg4" userLabel="Username">
+                                        <rect key="frame" x="82" y="14" width="196" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="196" id="wCo-rO-CV2"/>
                                         </constraints>
@@ -427,12 +458,14 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B4e-kS-ptb" userLabel="Profile Pic">
+                                        <rect key="frame" x="7" y="5" width="67" height="67"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="67" type="user" id="g6n-me-Wc2"/>
                                             <constraint firstAttribute="width" constant="67" type="user" id="hjI-4K-GCc"/>
                                         </constraints>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vqg-Ru-xgz" userLabel="Flag">
+                                        <rect key="frame" x="276" y="47" width="44" height="45"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="44" type="user" id="4ZG-I8-Gam"/>
                                             <constraint firstAttribute="height" constant="45" type="user" id="Rk9-rW-1TB"/>
@@ -467,6 +500,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rEp-jz-lUg" userLabel="Artist">
+                                <rect key="frame" x="20" y="15" width="281" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" type="user" id="hy0-f1-eJQ"/>
                                 </constraints>
@@ -475,6 +509,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="H9S-Bj-ZY0" userLabel="DateVenue">
+                                <rect key="frame" x="20" y="35" width="280" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="4TJ-Bf-vO2"/>
                                 </constraints>
@@ -483,6 +518,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="inF-pn-Tzm">
+                                <rect key="frame" x="131" y="202" width="59" height="59"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="59" type="user" id="cT9-Dg-KLu"/>
                                 </constraints>
@@ -548,100 +584,6 @@
         <image name="playbutton.png" width="59" height="59"/>
         <image name="shareiconbutton.png" width="50" height="45"/>
     </resources>
-    <classes>
-        <class className="DetailsCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/DetailsCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="changeStateButton" candidateClass="ECChangeConcertStateButton"/>
-            </relationships>
-        </class>
-        <class className="ECChangeConcertStateButton" superclassName="UIButton">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ECChangeConcertStateButton.h"/>
-        </class>
-        <class className="ECGridHeaderView" superclassName="UICollectionReusableView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ECGridHeaderView.h"/>
-            <relationships>
-                <relationship kind="outlet" name="eventLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="venueAndDateLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="ECGridViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ECGridViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="eventLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="footerView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="noPostsLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="postsCollectionView" candidateClass="UICollectionView"/>
-                <relationship kind="outlet" name="venueAndDateLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="ECPastViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ECPastViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="eventImage" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="eventName" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="eventVenueAndDate" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="ECPostCell" superclassName="UICollectionViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ECPostCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="activityIndicator" candidateClass="UIActivityIndicatorView"/>
-                <relationship kind="outlet" name="playButton" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="postImageView" candidateClass="UIImageView"/>
-            </relationships>
-        </class>
-        <class className="ECPostViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ECPostViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="flagPhoto"/>
-                <relationship kind="action" name="playButtonTapped:"/>
-                <relationship kind="outlet" name="artistLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="captionLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="containerView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="flagPostButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="playButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="postImage" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="profilePicture" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="userNameLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="venueAndDateLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="GetPhotosCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/GetPhotosCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="grabPhotosButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="shareButton" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="LineupCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/LineupCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="lineupCollectionView" candidateClass="UICollectionView"/>
-                <relationship kind="outlet" name="lineupLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="LineupCollectionCell" superclassName="UICollectionViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/LineupCollectionCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="activityIndicator" candidateClass="UIActivityIndicatorView"/>
-                <relationship kind="outlet" name="artistImage" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="artistLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="UICollectionReusableView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionReusableView.h"/>
-        </class>
-        <class className="UICollectionViewCell" superclassName="UICollectionReusableView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewCell.h"/>
-        </class>
-        <class className="UICollectionViewFlowLayout" superclassName="UICollectionViewLayout">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewFlowLayout.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

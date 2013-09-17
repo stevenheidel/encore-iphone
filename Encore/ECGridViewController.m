@@ -90,7 +90,10 @@
     UIBarButtonItem* shareButton = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
     self.navigationItem.rightBarButtonItem = shareButton;
 }
-
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+}
 -(void) viewWillDisappear:(BOOL)animated {
     [self.timer invalidate];
 }
@@ -113,7 +116,12 @@
         vc.venueAndDate = [self.concert venueAndDate];
         vc.itemNumber = row;
         vc.delegate = self;
+        if (!self.navigationItem.rightBarButtonItem) { // if come from walkthough screen
+            vc.showShareButton = NO;
+        }else{
+            vc.showShareButton = YES;
         }
+    }
 }
 #pragma mark Event Populating
 -(void) askServerToPopulateConcert{
