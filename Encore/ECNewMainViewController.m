@@ -37,6 +37,7 @@
 #import "ECPastViewController.h"
 
 #import "SPGooglePlacesAutocompleteViewController.h"
+#import "ECLoginViewController.h"
 
 #define SearchCellIdentifier @"ECSearchResultCell"
 #define ConcertCellIdentifier @"ECConcertCellView"
@@ -507,9 +508,14 @@ typedef enum {
     }
     
     else {
-        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login", nil) message:NSLocalizedString(@"To view your profile, you must first login", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Login", nil), nil];
-        alert.tag = ECNotLoggedInAlert;
-        [alert show];
+        //TODO: load in login view controller
+        ECLoginViewController* login = [[ECLoginViewController alloc] init];
+        ECCustomNavController* navCtrl = [[ECCustomNavController alloc] initWithRootViewController:login];
+        
+        [self.navigationController presentViewController:navCtrl animated:YES completion:nil];
+//        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login", nil) message:NSLocalizedString(@"To view your profile, you must first login", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Login", nil), nil];
+//        alert.tag = ECNotLoggedInAlert;
+//        [alert show];
     }
 }
 

@@ -69,20 +69,20 @@
     NSLog(@"%@: did load",NSStringFromClass(self.class));
     // Do any additional setup after loading the view from its nib.
     
-    NSString *myListPath = [[NSBundle mainBundle] pathForResource:@"LoginInfoPages" ofType:@"plist"];
-    arrPages = [[NSArray alloc]initWithContentsOfFile:myListPath];
+//    NSString *myListPath = [[NSBundle mainBundle] pathForResource:@"LoginInfoPages" ofType:@"plist"];
+//    arrPages = [[NSArray alloc]initWithContentsOfFile:myListPath];
     
-    self.descScrollView.contentSize = CGSizeMake(descScrollView.frame.size.width * arrPages.count, descScrollView.frame.size.height);
+//    self.descScrollView.contentSize = CGSizeMake(descScrollView.frame.size.width * arrPages.count, descScrollView.frame.size.height);
     
-    CGRect screenRect = [[UIScreen mainScreen] bounds];
-    
-    if (screenRect.size.height == 568)
-    {
-        self.backgroundImage.image = [UIImage imageNamed:@"loginbackground-568h"];
-    }
-    else {
-        self.backgroundImage.image = [UIImage imageNamed:@"loginbackground"];
-    }
+//    CGRect screenRect = [[UIScreen mainScreen] bounds];
+//
+//    if (screenRect.size.height == 568)
+//    {
+//        self.backgroundImage.image = [UIImage imageNamed:@"newloginscreenbackground-568h"];
+//    }
+//    else {
+//        self.backgroundImage.image = [UIImage imageNamed:@"loginbackground"];
+//    }
     
     
 }
