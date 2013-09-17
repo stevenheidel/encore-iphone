@@ -234,8 +234,8 @@
 }
 -(void) showLoginHUD {
     if(!self.hud) {
-        self.hud = [[MBProgressHUD alloc] initWithView:self.loginViewController.view];
-        [self.loginViewController.view addSubview:self.hud];
+        self.hud = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+        [self.navigationController.view addSubview:self.hud];
     }
     [self.hud show:YES];
 }
