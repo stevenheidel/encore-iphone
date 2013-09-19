@@ -192,11 +192,11 @@ typedef enum {
 -(UIView*) noConcertsFooterView {
     if(_noConcertsFooterView == nil) {
         _noConcertsFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 200)];
-        _noConcertsFooterView.backgroundColor = [UIColor blackColor];
+        _noConcertsFooterView.backgroundColor = [UIColor clearColor];
         UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(5,5,315,150)];
         label.textColor = [UIColor whiteColor];
         label.textAlignment = NSTextAlignmentCenter;
-        label.backgroundColor = [UIColor blackColor];
+        label.backgroundColor = [UIColor clearColor];
         label.numberOfLines = 0;
         label.tag = 213;
         
