@@ -15,6 +15,9 @@
 #import <AFNetworking/UIImageView+AFNetworking.h>
 
 @interface ECWelcomeViewController ()
+{
+    UIView* lastFMView;
+}
 @property (strong,nonatomic) NSArray* featuredEvents;
 @property (assign) BOOL tappedOnConcert;
 @end
@@ -25,9 +28,12 @@
 
 - (void)viewDidLoad
 {
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
     [super viewDidLoad];
+
     [self setApperance];
     [self readFeaturedEvents];
+    [self setupLastFMView];
     self.tappedOnConcert = NO;
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -38,6 +44,7 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+   // [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationSlide];
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     if (self.tappedOnConcert) {
         [self.btnNext setEnabled:YES];
@@ -61,6 +68,28 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+-(BOOL)shouldAutorotate{
+    return NO;
+}
+
+-(NSUInteger)supportedInterfaceOrientations{
+    return UIInterfaceOrientationMaskPortrait;
+}
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation{
+    return UIInterfaceOrientationPortrait;
+}
+-(void) setupLastFMView {
+    lastFMView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.featuredTableView.frame.size.width,113.0f)];
+    UIButton* lastFMBUtton = [[UIButton alloc] initWithFrame:CGRectMake(100.0f, 6.0f, 98.0f, 13.0f)];
+    [lastFMBUtton addTarget:self action:@selector(openLastFM:) forControlEvents:UIControlEventTouchUpInside];
+    [lastFMBUtton setBackgroundImage:[UIImage imageNamed:@"lastfmAttr"] forState:UIControlStateNormal];
+    [lastFMBUtton setContentMode:UIViewContentModeScaleAspectFit];
+    [lastFMView addSubview: lastFMBUtton];
+    self.featuredTableView.tableFooterView = lastFMView;
+}
+- (IBAction)openLastFM:(id)sender {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"http://www.last.fm"]];
 }
 
 #pragma mark - Table view data source
@@ -143,9 +172,9 @@
     UIStoryboard* sb = [UIStoryboard storyboardWithName:@"ECPastStoryboard" bundle:nil];
     ECGridViewController * vc = [sb instantiateViewControllerWithIdentifier:@"ECGridViewController"];
     vc.concert = concert;
+    vc.hideShareButton = YES;
     [self.navigationController pushViewController:vc animated:YES];
-    vc.navigationItem.rightBarButtonItem = nil;
-        
+    
 }
 
 - (IBAction)nextButtonTapped:(id)sender {

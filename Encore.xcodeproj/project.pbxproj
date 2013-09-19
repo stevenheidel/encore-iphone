@@ -221,6 +221,13 @@
 		D901EA0817E838D300317129 /* encorelogo.png in Resources */ = {isa = PBXBuildFile; fileRef = D901EA0217E838D300317129 /* encorelogo.png */; };
 		D901EA0917E838D300317129 /* encorelogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D901EA0317E838D300317129 /* encorelogo@2x.png */; };
 		D901EA0C17E83A0400317129 /* ECWelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D901EA0B17E83A0400317129 /* ECWelcomeViewController.m */; };
+		D921D34E17EA083A00DE0756 /* ECSearchConcertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D921D34D17EA083A00DE0756 /* ECSearchConcertViewController.m */; };
+		D921D35617EA0DAF00DE0756 /* gotit.png in Resources */ = {isa = PBXBuildFile; fileRef = D921D35017EA0DAF00DE0756 /* gotit.png */; };
+		D921D35717EA0DAF00DE0756 /* gotit@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D921D35117EA0DAF00DE0756 /* gotit@2x.png */; };
+		D921D35817EA0DAF00DE0756 /* nextgrey.png in Resources */ = {isa = PBXBuildFile; fileRef = D921D35217EA0DAF00DE0756 /* nextgrey.png */; };
+		D921D35917EA0DAF00DE0756 /* nextgrey@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D921D35317EA0DAF00DE0756 /* nextgrey@2x.png */; };
+		D921D35A17EA0DAF00DE0756 /* skip@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D921D35417EA0DAF00DE0756 /* skip@2x.png */; };
+		D921D35B17EA0DAF00DE0756 /* skipbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = D921D35517EA0DAF00DE0756 /* skipbutton.png */; };
 		D92E8D9E17E84D5700FCD412 /* nextbuttom.png in Resources */ = {isa = PBXBuildFile; fileRef = D92E8D9C17E84D5700FCD412 /* nextbuttom.png */; };
 		D92E8D9F17E84D5700FCD412 /* nextbuttom@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D92E8D9D17E84D5700FCD412 /* nextbuttom@2x.png */; };
 		D940C19B17B4F56D00E4DF42 /* ECChangeConcertStateButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D940C19A17B4F56D00E4DF42 /* ECChangeConcertStateButton.m */; };
@@ -229,6 +236,7 @@
 		D956550A17A177BD00B7DA59 /* ticketsbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = D956550817A177BD00B7DA59 /* ticketsbutton.png */; };
 		D956550B17A177BD00B7DA59 /* ticketsbutton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D956550917A177BD00B7DA59 /* ticketsbutton@2x.png */; };
 		D9963FD017B0D4E9003C3CC1 /* UIImage+Merge.m in Sources */ = {isa = PBXBuildFile; fileRef = D9963FCF17B0D4E9003C3CC1 /* UIImage+Merge.m */; };
+		D99D322017EB778200659AF1 /* ECNextConcertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D99D321F17EB778200659AF1 /* ECNextConcertViewController.m */; };
 		D9D95CF617E8420500061DAF /* featured.json in Resources */ = {isa = PBXBuildFile; fileRef = D9D95CF517E8420500061DAF /* featured.json */; };
 /* End PBXBuildFile section */
 
@@ -542,6 +550,14 @@
 		D901EA0317E838D300317129 /* encorelogo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "encorelogo@2x.png"; sourceTree = "<group>"; };
 		D901EA0A17E83A0400317129 /* ECWelcomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECWelcomeViewController.h; sourceTree = "<group>"; };
 		D901EA0B17E83A0400317129 /* ECWelcomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECWelcomeViewController.m; sourceTree = "<group>"; };
+		D921D34C17EA083A00DE0756 /* ECSearchConcertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECSearchConcertViewController.h; sourceTree = "<group>"; };
+		D921D34D17EA083A00DE0756 /* ECSearchConcertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECSearchConcertViewController.m; sourceTree = "<group>"; };
+		D921D35017EA0DAF00DE0756 /* gotit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gotit.png; sourceTree = "<group>"; };
+		D921D35117EA0DAF00DE0756 /* gotit@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gotit@2x.png"; sourceTree = "<group>"; };
+		D921D35217EA0DAF00DE0756 /* nextgrey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nextgrey.png; sourceTree = "<group>"; };
+		D921D35317EA0DAF00DE0756 /* nextgrey@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nextgrey@2x.png"; sourceTree = "<group>"; };
+		D921D35417EA0DAF00DE0756 /* skip@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "skip@2x.png"; sourceTree = "<group>"; };
+		D921D35517EA0DAF00DE0756 /* skipbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = skipbutton.png; sourceTree = "<group>"; };
 		D92E8D9C17E84D5700FCD412 /* nextbuttom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nextbuttom.png; sourceTree = "<group>"; };
 		D92E8D9D17E84D5700FCD412 /* nextbuttom@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nextbuttom@2x.png"; sourceTree = "<group>"; };
 		D940C19917B4F56D00E4DF42 /* ECChangeConcertStateButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECChangeConcertStateButton.h; sourceTree = "<group>"; };
@@ -553,6 +569,8 @@
 		D956550917A177BD00B7DA59 /* ticketsbutton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ticketsbutton@2x.png"; sourceTree = "<group>"; };
 		D9963FCE17B0D4E9003C3CC1 /* UIImage+Merge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Merge.h"; sourceTree = "<group>"; };
 		D9963FCF17B0D4E9003C3CC1 /* UIImage+Merge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Merge.m"; sourceTree = "<group>"; };
+		D99D321E17EB778200659AF1 /* ECNextConcertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECNextConcertViewController.h; sourceTree = "<group>"; };
+		D99D321F17EB778200659AF1 /* ECNextConcertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECNextConcertViewController.m; sourceTree = "<group>"; };
 		D9D95CF517E8420500061DAF /* featured.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = featured.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1205,6 +1223,10 @@
 				D901E9FB17E836C300317129 /* ECWalkthrough.storyboard */,
 				D901EA0A17E83A0400317129 /* ECWelcomeViewController.h */,
 				D901EA0B17E83A0400317129 /* ECWelcomeViewController.m */,
+				D921D34C17EA083A00DE0756 /* ECSearchConcertViewController.h */,
+				D921D34D17EA083A00DE0756 /* ECSearchConcertViewController.m */,
+				D99D321E17EB778200659AF1 /* ECNextConcertViewController.h */,
+				D99D321F17EB778200659AF1 /* ECNextConcertViewController.m */,
 			);
 			name = Walkthrough;
 			sourceTree = "<group>";
@@ -1212,6 +1234,12 @@
 		D901E9FD17E838A000317129 /* walkthrough */ = {
 			isa = PBXGroup;
 			children = (
+				D921D35017EA0DAF00DE0756 /* gotit.png */,
+				D921D35117EA0DAF00DE0756 /* gotit@2x.png */,
+				D921D35217EA0DAF00DE0756 /* nextgrey.png */,
+				D921D35317EA0DAF00DE0756 /* nextgrey@2x.png */,
+				D921D35417EA0DAF00DE0756 /* skip@2x.png */,
+				D921D35517EA0DAF00DE0756 /* skipbutton.png */,
 				D92E8D9C17E84D5700FCD412 /* nextbuttom.png */,
 				D92E8D9D17E84D5700FCD412 /* nextbuttom@2x.png */,
 				D901E9FE17E838D300317129 /* background.png */,
@@ -1342,6 +1370,7 @@
 				A0848C0B176D1F0D009BBB38 /* ECLoginPageView.xib in Resources */,
 				D4B0AC4717727FDA00DC4DD2 /* ECPostPlaceholder.xib in Resources */,
 				A022AAA2177605900009244C /* Hero Light.otf in Resources */,
+				D921D35817EA0DAF00DE0756 /* nextgrey.png in Resources */,
 				A022AAA3177605900009244C /* Hero.otf in Resources */,
 				A022AAA817779BDF0009244C /* ECConcertCellView.xib in Resources */,
 				A022AACD177A38C90009244C /* magnifyglass@2x.png in Resources */,
@@ -1349,6 +1378,7 @@
 				A0A2B0BC177B324F00518B6C /* profileButton.png in Resources */,
 				A0A2B0BE177B381F00518B6C /* profileButton@2x.png in Resources */,
 				D4AA9775177C9562008F4E31 /* 37x-Checkmark.png in Resources */,
+				D921D35B17EA0DAF00DE0756 /* skipbutton.png in Resources */,
 				D4AA9776177C9562008F4E31 /* 37x-Checkmark@2x.png in Resources */,
 				D4AA977B177CFE2C008F4E31 /* ECPostCollectionHeaderView.xib in Resources */,
 				A0A2B0D5177E1E7200518B6C /* shareButton.png in Resources */,
@@ -1389,7 +1419,9 @@
 				A02661EE178DDCEA00741C9A /* addEventButton@2x.png in Resources */,
 				A02661F5178DE62700741C9A /* removeEventButton.png in Resources */,
 				A02661F6178DE62700741C9A /* removeEventButton@2x.png in Resources */,
+				D921D35917EA0DAF00DE0756 /* nextgrey@2x.png in Resources */,
 				A02661F8178DF02000741C9A /* gradient.png in Resources */,
+				D921D35617EA0DAF00DE0756 /* gotit.png in Resources */,
 				D4A9B31D178E5410008B5504 /* loginButton.png in Resources */,
 				D4A9B31E178E5410008B5504 /* loginButton@2x.png in Resources */,
 				D4A9B320178E546F008B5504 /* Default-568h@2x.png in Resources */,
@@ -1409,6 +1441,7 @@
 				D4A7980D17921EE40029F469 /* ATAppRatingFlow.h in Resources */,
 				D4A798111792FA2A0029F469 /* topgradient.png in Resources */,
 				D4A798131792FB4E0029F469 /* fullgradient.png in Resources */,
+				D921D35717EA0DAF00DE0756 /* gotit@2x.png in Resources */,
 				D4A7981517930F4B0029F469 /* ECLocationSetterView.xib in Resources */,
 				D4AC901117934250008F5FF0 /* oval.png in Resources */,
 				D4AC901217934250008F5FF0 /* oval@2x.png in Resources */,
@@ -1467,6 +1500,7 @@
 				24A7311617DD39EB009CF164 /* location@2x.png in Resources */,
 				24A7311817DD39EB009CF164 /* SPGooglePlacesAutocompleteViewController.xib in Resources */,
 				24B0D8DF17E15C9100B30612 /* shareiconbutton.png in Resources */,
+				D921D35A17EA0DAF00DE0756 /* skip@2x.png in Resources */,
 				24B0D8E017E15C9100B30612 /* shareiconbutton@2x.png in Resources */,
 				24A4C8C817E240340022B56F /* locationmarkerbutton.png in Resources */,
 				24A4C8C917E240340022B56F /* locationmarkerbutton@2x.png in Resources */,
@@ -1584,9 +1618,11 @@
 				D9963FD017B0D4E9003C3CC1 /* UIImage+Merge.m in Sources */,
 				D4719BA717B322250077AB46 /* ECPastViewController.m in Sources */,
 				D4719BAC17B340D20077AB46 /* ECRowCells.m in Sources */,
+				D99D322017EB778200659AF1 /* ECNextConcertViewController.m in Sources */,
 				D411CBE517B358FF006AF0C2 /* ECGridViewController.m in Sources */,
 				D4AF581717B48413000FCA93 /* ECEventProfileStatusManager.m in Sources */,
 				D940C19B17B4F56D00E4DF42 /* ECChangeConcertStateButton.m in Sources */,
+				D921D34E17EA083A00DE0756 /* ECSearchConcertViewController.m in Sources */,
 				24A730FA17DD2E46009CF164 /* SPGooglePlacesAutocompletePlace.m in Sources */,
 				24A730FB17DD2E46009CF164 /* SPGooglePlacesAutocompleteQuery.m in Sources */,
 				24A730FC17DD2E46009CF164 /* SPGooglePlacesAutocompleteUtilities.m in Sources */,
@@ -1720,7 +1756,8 @@
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)\"",
+					"$(SRCROOT)",
+					"$(SYSTEM_APPS_DIR)/Reveal.app/Contents/SharedSupport/iOS-Libraries",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Encore/Encore-Prefix.pch";
@@ -1768,7 +1805,8 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)\"",
+					"$(SRCROOT)",
+					"$(SYSTEM_APPS_DIR)/Reveal.app/Contents/SharedSupport/iOS-Libraries",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Encore/Encore-Prefix.pch";

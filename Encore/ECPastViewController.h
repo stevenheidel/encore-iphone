@@ -26,4 +26,6 @@
 @property (nonatomic,strong) NSString* previousArtist;
 @property (nonatomic, assign) ECSearchType tense;
 @property (nonatomic,strong) NSDictionary * concert;
+@property (nonatomic,assign) BOOL hideShareButton;
+
 @end

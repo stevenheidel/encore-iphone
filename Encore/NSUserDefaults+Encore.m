@@ -15,9 +15,12 @@
     if([[NSUserDefaults standardUserDefaults] boolForKey:@"walkthrough_showen"]){
         return NO;
     }else{
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"walkthrough_showen"];
         return YES;
     }
+}
+-(void)setWalkthoughFinished
+{
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"walkthrough_showen"];
 }
 
 +(NSString*) userName {

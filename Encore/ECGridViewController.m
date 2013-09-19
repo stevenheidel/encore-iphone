@@ -82,13 +82,16 @@
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
     self.navigationItem.leftBarButtonItem = backButton;
     
-    UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    UIImage *rightButImage = [UIImage imageNamed:@"shareButton"]; //stretchableImageWithLeftCapWidth:10 topCapHeight:10];
-    [rightButton setBackgroundImage:rightButImage forState:UIControlStateNormal];
-    [rightButton addTarget:self action:@selector(shareTapped) forControlEvents:UIControlEventTouchUpInside];
-    rightButton.frame = CGRectMake(0, 0, rightButImage.size.width, rightButImage.size.height);
-    UIBarButtonItem* shareButton = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
-    self.navigationItem.rightBarButtonItem = shareButton;
+    if(!self.hideShareButton)
+    {
+        UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        UIImage *rightButImage = [UIImage imageNamed:@"shareButton"]; //stretchableImageWithLeftCapWidth:10 topCapHeight:10];
+        [rightButton setBackgroundImage:rightButImage forState:UIControlStateNormal];
+        [rightButton addTarget:self action:@selector(shareTapped) forControlEvents:UIControlEventTouchUpInside];
+        rightButton.frame = CGRectMake(0, 0, rightButImage.size.width, rightButImage.size.height);
+        UIBarButtonItem* shareButton = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
+        self.navigationItem.rightBarButtonItem = shareButton;
+    }
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -116,11 +119,8 @@
         vc.venueAndDate = [self.concert venueAndDate];
         vc.itemNumber = row;
         vc.delegate = self;
-        if (!self.navigationItem.rightBarButtonItem) { // if come from walkthough screen
-            vc.showShareButton = NO;
-        }else{
-            vc.showShareButton = YES;
-        }
+        vc.showShareButton = !self.hideShareButton;
+        
     }
 }
 #pragma mark Event Populating

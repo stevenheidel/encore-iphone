@@ -62,6 +62,7 @@ typedef enum {
     [self.statusManager checkProfileState];
 }
 -(void) setAppearance {
+   
     //Background
     [self.eventImage setImageWithURLRequest:[NSURLRequest requestWithURL:self.concert.imageURL]
                            placeholderImage:nil
@@ -205,9 +206,11 @@ typedef enum {
             cell.grabPhotosButton.titleLabel.font = [UIFont heroFontWithSize:16];
             cell.grabPhotosButton.layer.cornerRadius = 5.0;
             cell.grabPhotosButton.layer.masksToBounds = YES;
-            
-            [cell.shareButton addTarget:self action:@selector(shareTapped) forControlEvents:UIControlEventTouchUpInside];
-            
+             if(self.hideShareButton){
+                 [cell.shareButton removeFromSuperview];
+             }else{
+                 [cell.shareButton addTarget:self action:@selector(shareTapped) forControlEvents:UIControlEventTouchUpInside];
+             }
             cell.contentView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
             return cell;
         }
@@ -220,6 +223,7 @@ typedef enum {
     if ([[segue identifier] isEqualToString:@"PastViewControllerToGridViewController"]) {
         ECGridViewController* vc = [segue destinationViewController];
         vc.concert = self.concert;
+        vc.hideShareButton = self.hideShareButton;
         [Flurry logEvent:@"Tapped_See_Photos_Past" withParameters:[self flurryParam]];
     }
 }
