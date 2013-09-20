@@ -28,7 +28,7 @@
 #import "Staging.h"
 #import "Reachability.h"
 #import "ECWelcomeViewController.h"
-
+#define TESTING_WALKTHROUGH 0
 @implementation ECAppDelegate
 
 
@@ -37,7 +37,7 @@
     Reachability* reach = [Reachability reachabilityWithHostname:@"www.google.com"];
     
     // Tell the reachability that we DON'T want to be reachable on 3G/EDGE/CDMA
-    reach.reachableOnWWAN = NO;
+    reach.reachableOnWWAN = YES;
     
     // Here we set up a NSNotification observer. The Reachability that caused the notification
     // is passed in the object parameter
@@ -80,8 +80,8 @@
     self.window.backgroundColor = [UIColor blackColor];
     [self.window makeKeyAndVisible];
     [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
-    
-    if([NSUserDefaults shouldShowWalkthrough]){
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    if([NSUserDefaults shouldShowWalkthrough] || TESTING_WALKTHROUGH){
         [self showWalktrhoughView];
     }else{
         [self setUpLocationManager];
@@ -147,7 +147,7 @@
                     [self.navigationController dismissViewControllerAnimated:YES completion:^{
                         [self.hud hide:YES];
                         [self setUpLocationManager];
-
+                        [self.mainViewController profileTapped];
                 }];
                 [[NSNotificationCenter defaultCenter] postNotificationName:ECLoginCompletedNotification object:nil];
 
@@ -197,6 +197,7 @@
             [self fetchUserinfo];
         
     }];
+
 }
 - (void)logout
 {

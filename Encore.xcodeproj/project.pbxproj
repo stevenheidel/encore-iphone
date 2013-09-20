@@ -10,6 +10,7 @@
 		2403C2C417E28A3100C518BF /* ECArtistView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2403C2C317E28A3100C518BF /* ECArtistView.storyboard */; };
 		245F1E9917E2E79400C7621D /* gearbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 245F1E9717E2E79400C7621D /* gearbutton.png */; };
 		245F1E9A17E2E79400C7621D /* gearbutton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 245F1E9817E2E79400C7621D /* gearbutton@2x.png */; };
+		247C114617ECE6D500B7F401 /* GooglePlacesAutocompleteView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 247C114517ECE6D500B7F401 /* GooglePlacesAutocompleteView.storyboard */; };
 		24A4C8C817E240340022B56F /* locationmarkerbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 24A4C8C617E240340022B56F /* locationmarkerbutton.png */; };
 		24A4C8C917E240340022B56F /* locationmarkerbutton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24A4C8C717E240340022B56F /* locationmarkerbutton@2x.png */; };
 		24A730FA17DD2E46009CF164 /* SPGooglePlacesAutocompletePlace.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A730F317DD2E46009CF164 /* SPGooglePlacesAutocompletePlace.m */; };
@@ -21,7 +22,6 @@
 		24A7311517DD39EB009CF164 /* location.png in Resources */ = {isa = PBXBuildFile; fileRef = 24A7310E17DD39EA009CF164 /* location.png */; };
 		24A7311617DD39EB009CF164 /* location@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24A7310F17DD39EA009CF164 /* location@2x.png */; };
 		24A7311717DD39EB009CF164 /* SPGooglePlacesAutocompleteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A7311117DD39EB009CF164 /* SPGooglePlacesAutocompleteViewController.m */; };
-		24A7311817DD39EB009CF164 /* SPGooglePlacesAutocompleteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24A7311217DD39EB009CF164 /* SPGooglePlacesAutocompleteViewController.xib */; };
 		24A7C1AB17E8E77100A7302B /* loginfacebookbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 24A7C1A417E8E77100A7302B /* loginfacebookbutton.png */; };
 		24A7C1AC17E8E77100A7302B /* loginfacebookbutton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24A7C1A517E8E77100A7302B /* loginfacebookbutton@2x.png */; };
 		24A7C1AD17E8E77100A7302B /* logintofacebook.png in Resources */ = {isa = PBXBuildFile; fileRef = 24A7C1A617E8E77100A7302B /* logintofacebook.png */; };
@@ -52,8 +52,6 @@
 		A04C4333176F85F9003B4299 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A04C4332176F85F9003B4299 /* CoreLocation.framework */; };
 		A068AE711790621800FA1BF4 /* lastfmAttr.png in Resources */ = {isa = PBXBuildFile; fileRef = A068AE6F1790621800FA1BF4 /* lastfmAttr.png */; };
 		A068AE721790621800FA1BF4 /* lastfmAttr@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A068AE701790621800FA1BF4 /* lastfmAttr@2x.png */; };
-		A0848C0B176D1F0D009BBB38 /* ECLoginPageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0848C0A176D1F0D009BBB38 /* ECLoginPageView.xib */; };
-		A0848C11176D25D5009BBB38 /* ECLoginPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0848C10176D25D5009BBB38 /* ECLoginPageView.m */; };
 		A0A2B0BC177B324F00518B6C /* profileButton.png in Resources */ = {isa = PBXBuildFile; fileRef = A0A2B0BB177B324F00518B6C /* profileButton.png */; };
 		A0A2B0BE177B381F00518B6C /* profileButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A0A2B0BD177B381F00518B6C /* profileButton@2x.png */; };
 		A0A2B0D5177E1E7200518B6C /* shareButton.png in Resources */ = {isa = PBXBuildFile; fileRef = A0A2B0D3177E1E7100518B6C /* shareButton.png */; };
@@ -85,7 +83,6 @@
 		D46D8F95179479A300011C5C /* login1iphone4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D46D8F92179479A200011C5C /* login1iphone4@2x.png */; };
 		D46D8F96179479A300011C5C /* login2iphone4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D46D8F93179479A300011C5C /* login2iphone4@2x.png */; };
 		D46D8F97179479A300011C5C /* login3iphone4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D46D8F94179479A300011C5C /* login3iphone4@2x.png */; };
-		D46D8F991794A9FC00011C5C /* ECLoginPageViewiphone4.xib in Resources */ = {isa = PBXBuildFile; fileRef = D46D8F981794A9FC00011C5C /* ECLoginPageViewiphone4.xib */; };
 		D4719BA717B322250077AB46 /* ECPastViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4719BA617B322250077AB46 /* ECPastViewController.m */; };
 		D4719BAA17B322640077AB46 /* ECPastStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4719BA917B322640077AB46 /* ECPastStoryboard.storyboard */; };
 		D4719BAC17B340D20077AB46 /* ECRowCells.m in Sources */ = {isa = PBXBuildFile; fileRef = D4719BAB17B340D20077AB46 /* ECRowCells.m */; };
@@ -104,18 +101,13 @@
 		D4A7980D17921EE40029F469 /* ATAppRatingFlow.h in Resources */ = {isa = PBXBuildFile; fileRef = D4A7980C17921EE40029F469 /* ATAppRatingFlow.h */; };
 		D4A798111792FA2A0029F469 /* topgradient.png in Resources */ = {isa = PBXBuildFile; fileRef = D4A798101792FA2A0029F469 /* topgradient.png */; };
 		D4A798131792FB4E0029F469 /* fullgradient.png in Resources */ = {isa = PBXBuildFile; fileRef = D4A798121792FB4D0029F469 /* fullgradient.png */; };
-		D4A7981517930F4B0029F469 /* ECLocationSetterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4A7981417930F4B0029F469 /* ECLocationSetterView.xib */; };
-		D4A7981817930F9B0029F469 /* ECLocationSetterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A7981717930F9B0029F469 /* ECLocationSetterViewController.m */; };
 		D4A7BEA8177B2F3B00C22D91 /* UIImage+Orientation.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A7BEA7177B2F3B00C22D91 /* UIImage+Orientation.m */; };
 		D4A8DDB8176A133B005E9847 /* NSDictionary+Posts.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A8DDAC176A133B005E9847 /* NSDictionary+Posts.m */; };
-		D4A8DDB9176A133B005E9847 /* ECConcertDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A8DDAD176A133B005E9847 /* ECConcertDetailViewController.m */; };
 		D4A8DDBA176A133B005E9847 /* Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A8DDAF176A133B005E9847 /* Cell.m */; };
-		D4A8DDBB176A133B005E9847 /* ECConcertDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4A8DDB1176A133B005E9847 /* ECConcertDetailViewController.xib */; };
 		D4A8DDBC176A133B005E9847 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D4A8DDB3176A133B005E9847 /* InfoPlist.strings */; };
 		D4A8DDC4176A20D2005E9847 /* ECJSONPoster.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A8DDC3176A20D2005E9847 /* ECJSONPoster.m */; };
 		D4A8DDCA176A39BA005E9847 /* NSDate+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A8DDC9176A39B9005E9847 /* NSDate+JSON.m */; };
 		D4A8DDCE176A405D005E9847 /* ECPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A8DDCC176A405D005E9847 /* ECPostViewController.m */; };
-		D4A8DDCF176A405D005E9847 /* ECPostViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4A8DDCD176A405D005E9847 /* ECPostViewController.xib */; };
 		D4A8DDD3176A8885005E9847 /* placeholder.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D4A8DDD2176A8885005E9847 /* placeholder.jpg */; };
 		D4A8DDD5176AAA99005E9847 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4A8DDD4176AAA98005E9847 /* QuartzCore.framework */; };
 		D4A99EDA1784EEC400F4FB46 /* feedback.png in Resources */ = {isa = PBXBuildFile; fileRef = D4A99ED81784EEC400F4FB46 /* feedback.png */; };
@@ -282,6 +274,7 @@
 		2403C2C317E28A3100C518BF /* ECArtistView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ECArtistView.storyboard; sourceTree = "<group>"; };
 		245F1E9717E2E79400C7621D /* gearbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gearbutton.png; sourceTree = "<group>"; };
 		245F1E9817E2E79400C7621D /* gearbutton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gearbutton@2x.png"; sourceTree = "<group>"; };
+		247C114517ECE6D500B7F401 /* GooglePlacesAutocompleteView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GooglePlacesAutocompleteView.storyboard; sourceTree = "<group>"; };
 		24A4C8C617E240340022B56F /* locationmarkerbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = locationmarkerbutton.png; sourceTree = "<group>"; };
 		24A4C8C717E240340022B56F /* locationmarkerbutton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "locationmarkerbutton@2x.png"; sourceTree = "<group>"; };
 		24A730F117DD2E46009CF164 /* APIKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIKey.h; sourceTree = "<group>"; };
@@ -299,7 +292,6 @@
 		24A7310F17DD39EA009CF164 /* location@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "location@2x.png"; sourceTree = "<group>"; };
 		24A7311017DD39EB009CF164 /* SPGooglePlacesAutocompleteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPGooglePlacesAutocompleteViewController.h; sourceTree = "<group>"; };
 		24A7311117DD39EB009CF164 /* SPGooglePlacesAutocompleteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPGooglePlacesAutocompleteViewController.m; sourceTree = "<group>"; };
-		24A7311217DD39EB009CF164 /* SPGooglePlacesAutocompleteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SPGooglePlacesAutocompleteViewController.xib; sourceTree = "<group>"; };
 		24A7C1A417E8E77100A7302B /* loginfacebookbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loginfacebookbutton.png; sourceTree = "<group>"; };
 		24A7C1A517E8E77100A7302B /* loginfacebookbutton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loginfacebookbutton@2x.png"; sourceTree = "<group>"; };
 		24A7C1A617E8E77100A7302B /* logintofacebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logintofacebook.png; sourceTree = "<group>"; };
@@ -334,9 +326,6 @@
 		A04C4332176F85F9003B4299 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		A068AE6F1790621800FA1BF4 /* lastfmAttr.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lastfmAttr.png; sourceTree = "<group>"; };
 		A068AE701790621800FA1BF4 /* lastfmAttr@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lastfmAttr@2x.png"; sourceTree = "<group>"; };
-		A0848C0A176D1F0D009BBB38 /* ECLoginPageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECLoginPageView.xib; sourceTree = "<group>"; };
-		A0848C0F176D25D5009BBB38 /* ECLoginPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECLoginPageView.h; sourceTree = "<group>"; };
-		A0848C10176D25D5009BBB38 /* ECLoginPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECLoginPageView.m; sourceTree = "<group>"; };
 		A0A2B0BB177B324F00518B6C /* profileButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profileButton.png; sourceTree = "<group>"; };
 		A0A2B0BD177B381F00518B6C /* profileButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profileButton@2x.png"; sourceTree = "<group>"; };
 		A0A2B0D3177E1E7100518B6C /* shareButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shareButton.png; sourceTree = "<group>"; };
@@ -372,7 +361,6 @@
 		D46D8F92179479A200011C5C /* login1iphone4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login1iphone4@2x.png"; sourceTree = "<group>"; };
 		D46D8F93179479A300011C5C /* login2iphone4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login2iphone4@2x.png"; sourceTree = "<group>"; };
 		D46D8F94179479A300011C5C /* login3iphone4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login3iphone4@2x.png"; sourceTree = "<group>"; };
-		D46D8F981794A9FC00011C5C /* ECLoginPageViewiphone4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECLoginPageViewiphone4.xib; sourceTree = "<group>"; };
 		D4719BA517B322250077AB46 /* ECPastViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECPastViewController.h; sourceTree = "<group>"; };
 		D4719BA617B322250077AB46 /* ECPastViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECPastViewController.m; sourceTree = "<group>"; };
 		D4719BA917B322640077AB46 /* ECPastStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ECPastStoryboard.storyboard; sourceTree = "<group>"; };
@@ -394,9 +382,6 @@
 		D4A7980C17921EE40029F469 /* ATAppRatingFlow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ATAppRatingFlow.h; path = "../apptentive-ios/ApptentiveConnect/source/Rating Flow/ATAppRatingFlow.h"; sourceTree = "<group>"; };
 		D4A798101792FA2A0029F469 /* topgradient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topgradient.png; sourceTree = "<group>"; };
 		D4A798121792FB4D0029F469 /* fullgradient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fullgradient.png; sourceTree = "<group>"; };
-		D4A7981417930F4B0029F469 /* ECLocationSetterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECLocationSetterView.xib; sourceTree = "<group>"; };
-		D4A7981617930F9B0029F469 /* ECLocationSetterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECLocationSetterViewController.h; sourceTree = "<group>"; };
-		D4A7981717930F9B0029F469 /* ECLocationSetterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECLocationSetterViewController.m; sourceTree = "<group>"; };
 		D4A7BEA6177B2F3B00C22D91 /* UIImage+Orientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Orientation.h"; sourceTree = "<group>"; };
 		D4A7BEA7177B2F3B00C22D91 /* UIImage+Orientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Orientation.m"; sourceTree = "<group>"; };
 		D4A7BEA9177B713400C22D91 /* EncoreURL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EncoreURL.h; sourceTree = "<group>"; };
@@ -404,11 +389,8 @@
 		D4A7BEAB177BFF3700C22D91 /* ECSearchType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECSearchType.h; sourceTree = "<group>"; };
 		D4A8DDAB176A133B005E9847 /* NSDictionary+Posts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Posts.h"; sourceTree = "<group>"; };
 		D4A8DDAC176A133B005E9847 /* NSDictionary+Posts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Posts.m"; sourceTree = "<group>"; };
-		D4A8DDAD176A133B005E9847 /* ECConcertDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECConcertDetailViewController.m; sourceTree = "<group>"; };
-		D4A8DDAE176A133B005E9847 /* ECConcertDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECConcertDetailViewController.h; sourceTree = "<group>"; };
 		D4A8DDAF176A133B005E9847 /* Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cell.m; sourceTree = "<group>"; };
 		D4A8DDB0176A133B005E9847 /* Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cell.h; sourceTree = "<group>"; };
-		D4A8DDB1176A133B005E9847 /* ECConcertDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECConcertDetailViewController.xib; sourceTree = "<group>"; };
 		D4A8DDB4176A133B005E9847 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = InfoPlist.strings; sourceTree = "<group>"; };
 		D4A8DDC2176A20D2005E9847 /* ECJSONPoster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECJSONPoster.h; sourceTree = "<group>"; };
 		D4A8DDC3176A20D2005E9847 /* ECJSONPoster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECJSONPoster.m; sourceTree = "<group>"; };
@@ -416,7 +398,6 @@
 		D4A8DDC9176A39B9005E9847 /* NSDate+JSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+JSON.m"; sourceTree = "<group>"; };
 		D4A8DDCB176A405D005E9847 /* ECPostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECPostViewController.h; sourceTree = "<group>"; };
 		D4A8DDCC176A405D005E9847 /* ECPostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECPostViewController.m; sourceTree = "<group>"; };
-		D4A8DDCD176A405D005E9847 /* ECPostViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECPostViewController.xib; sourceTree = "<group>"; };
 		D4A8DDD2176A8885005E9847 /* placeholder.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = placeholder.jpg; sourceTree = "<group>"; };
 		D4A8DDD4176AAA98005E9847 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		D4A99ED81784EEC400F4FB46 /* feedback.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = feedback.png; sourceTree = "<group>"; };
@@ -603,7 +584,7 @@
 				24A7310F17DD39EA009CF164 /* location@2x.png */,
 				24A7311017DD39EB009CF164 /* SPGooglePlacesAutocompleteViewController.h */,
 				24A7311117DD39EB009CF164 /* SPGooglePlacesAutocompleteViewController.m */,
-				24A7311217DD39EB009CF164 /* SPGooglePlacesAutocompleteViewController.xib */,
+				247C114517ECE6D500B7F401 /* GooglePlacesAutocompleteView.storyboard */,
 				24A730F117DD2E46009CF164 /* APIKey.h */,
 				24A730F217DD2E46009CF164 /* SPGooglePlacesAutocompletePlace.h */,
 				24A730F317DD2E46009CF164 /* SPGooglePlacesAutocompletePlace.m */,
@@ -735,9 +716,6 @@
 				D4A9A71017B03D65007E8A80 /* ECUpcomingViewController.h */,
 				D4A9A71117B03D65007E8A80 /* ECUpcomingViewController.m */,
 				D4A9A71517B03DC5007E8A80 /* ECUpcomingStoryboard.storyboard */,
-				D4A8DDAE176A133B005E9847 /* ECConcertDetailViewController.h */,
-				D4A8DDAD176A133B005E9847 /* ECConcertDetailViewController.m */,
-				D4A8DDB1176A133B005E9847 /* ECConcertDetailViewController.xib */,
 				D4B0AC4617727FDA00DC4DD2 /* ECPostPlaceholder.xib */,
 				D4AA9777177CF82A008F4E31 /* ECPostCollectionHeaderView.h */,
 				D4AA9778177CF82A008F4E31 /* ECPostCollectionHeaderView.m */,
@@ -763,7 +741,6 @@
 			children = (
 				D4A8DDCB176A405D005E9847 /* ECPostViewController.h */,
 				D4A8DDCC176A405D005E9847 /* ECPostViewController.m */,
-				D4A8DDCD176A405D005E9847 /* ECPostViewController.xib */,
 			);
 			name = "Post detail";
 			sourceTree = "<group>";
@@ -1043,10 +1020,6 @@
 				D4AA4D2D1766BA8C009B0635 /* ECLoginViewController.h */,
 				D4AA4D2E1766BA8C009B0635 /* ECLoginViewController.m */,
 				D4AA4D2F1766BA8C009B0635 /* ECLoginViewController.xib */,
-				A0848C0F176D25D5009BBB38 /* ECLoginPageView.h */,
-				A0848C10176D25D5009BBB38 /* ECLoginPageView.m */,
-				A0848C0A176D1F0D009BBB38 /* ECLoginPageView.xib */,
-				D46D8F981794A9FC00011C5C /* ECLoginPageViewiphone4.xib */,
 			);
 			name = Login;
 			sourceTree = "<group>";
@@ -1058,9 +1031,6 @@
 				D491F80D178B595D002E00E5 /* ECNewMainViewController.h */,
 				D491F80E178B595D002E00E5 /* ECNewMainViewController.m */,
 				D4A9B32D178E6587008B5504 /* SearchResultsSectionHeader.xib */,
-				D4A7981417930F4B0029F469 /* ECLocationSetterView.xib */,
-				D4A7981617930F9B0029F469 /* ECLocationSetterViewController.h */,
-				D4A7981717930F9B0029F469 /* ECLocationSetterViewController.m */,
 				A022AAA417779BB50009244C /* ECConcertCellView.h */,
 				A022AAA517779BB50009244C /* ECConcertCellView.m */,
 				A022AAA717779BDF0009244C /* ECConcertCellView.xib */,
@@ -1334,12 +1304,9 @@
 				D4AA4CFD1766B374009B0635 /* InfoPlist.strings in Resources */,
 				D4AA4D311766BA8C009B0635 /* ECLoginViewController.xib in Resources */,
 				D4AA4D391766F3D0009B0635 /* Localizable.strings in Resources */,
-				D4A8DDBB176A133B005E9847 /* ECConcertDetailViewController.xib in Resources */,
 				D4A8DDBC176A133B005E9847 /* InfoPlist.strings in Resources */,
-				D4A8DDCF176A405D005E9847 /* ECPostViewController.xib in Resources */,
 				D4A8DDD3176A8885005E9847 /* placeholder.jpg in Resources */,
 				A0FF1C53176CC88000433768 /* LoginInfoPages.plist in Resources */,
-				A0848C0B176D1F0D009BBB38 /* ECLoginPageView.xib in Resources */,
 				D4B0AC4717727FDA00DC4DD2 /* ECPostPlaceholder.xib in Resources */,
 				A022AAA2177605900009244C /* Hero Light.otf in Resources */,
 				A022AAA3177605900009244C /* Hero.otf in Resources */,
@@ -1385,6 +1352,7 @@
 				D4A9B30E178DDABD008B5504 /* divideractiveright@2x.png in Resources */,
 				D4A9B30F178DDABD008B5504 /* dividerdefault.png in Resources */,
 				D4A9B310178DDABD008B5504 /* dividerdefault@2x.png in Resources */,
+				247C114617ECE6D500B7F401 /* GooglePlacesAutocompleteView.storyboard in Resources */,
 				A02661ED178DDCEA00741C9A /* addEventButton.png in Resources */,
 				A02661EE178DDCEA00741C9A /* addEventButton@2x.png in Resources */,
 				A02661F5178DE62700741C9A /* removeEventButton.png in Resources */,
@@ -1409,7 +1377,6 @@
 				D4A7980D17921EE40029F469 /* ATAppRatingFlow.h in Resources */,
 				D4A798111792FA2A0029F469 /* topgradient.png in Resources */,
 				D4A798131792FB4E0029F469 /* fullgradient.png in Resources */,
-				D4A7981517930F4B0029F469 /* ECLocationSetterView.xib in Resources */,
 				D4AC901117934250008F5FF0 /* oval.png in Resources */,
 				D4AC901217934250008F5FF0 /* oval@2x.png in Resources */,
 				D4AC901317934250008F5FF0 /* plane.png in Resources */,
@@ -1432,7 +1399,6 @@
 				D46D8F95179479A300011C5C /* login1iphone4@2x.png in Resources */,
 				D46D8F96179479A300011C5C /* login2iphone4@2x.png in Resources */,
 				D46D8F97179479A300011C5C /* login3iphone4@2x.png in Resources */,
-				D46D8F991794A9FC00011C5C /* ECLoginPageViewiphone4.xib in Resources */,
 				D4AE47401795A013006AF663 /* ECProfileSectionHeaderView.xib in Resources */,
 				D4AE47451795A179006AF663 /* profileSectionHeader.png in Resources */,
 				D4AE47461795A179006AF663 /* profileSectionHeader@2x.png in Resources */,
@@ -1465,7 +1431,6 @@
 				24A7311417DD39EB009CF164 /* locateButton@2x.png in Resources */,
 				24A7311517DD39EB009CF164 /* location.png in Resources */,
 				24A7311617DD39EB009CF164 /* location@2x.png in Resources */,
-				24A7311817DD39EB009CF164 /* SPGooglePlacesAutocompleteViewController.xib in Resources */,
 				24B0D8DF17E15C9100B30612 /* shareiconbutton.png in Resources */,
 				24B0D8E017E15C9100B30612 /* shareiconbutton@2x.png in Resources */,
 				24A4C8C817E240340022B56F /* locationmarkerbutton.png in Resources */,
@@ -1556,12 +1521,10 @@
 				D4AC35FC1768C8B20087B1E9 /* ECJSONFetcher.m in Sources */,
 				D4AA4D301766BA8C009B0635 /* ECLoginViewController.m in Sources */,
 				D4A8DDB8176A133B005E9847 /* NSDictionary+Posts.m in Sources */,
-				D4A8DDB9176A133B005E9847 /* ECConcertDetailViewController.m in Sources */,
 				D4A8DDBA176A133B005E9847 /* Cell.m in Sources */,
 				D4A8DDC4176A20D2005E9847 /* ECJSONPoster.m in Sources */,
 				D4A8DDCA176A39BA005E9847 /* NSDate+JSON.m in Sources */,
 				D4A8DDCE176A405D005E9847 /* ECPostViewController.m in Sources */,
-				A0848C11176D25D5009BBB38 /* ECLoginPageView.m in Sources */,
 				A022AAA617779BB50009244C /* ECConcertCellView.m in Sources */,
 				A022AABF1779E8380009244C /* UIImage+GaussBlur.m in Sources */,
 				D4A7BEA8177B2F3B00C22D91 /* UIImage+Orientation.m in Sources */,
@@ -1574,7 +1537,6 @@
 				D491F80F178B595D002E00E5 /* ECNewMainViewController.m in Sources */,
 				A02661E0178C937200741C9A /* ECSearchResultCell.m in Sources */,
 				D4AC2DFF178FA64E00F292CA /* ECProfileConcertCell.m in Sources */,
-				D4A7981817930F9B0029F469 /* ECLocationSetterViewController.m in Sources */,
 				D4B31DE91793D03300822228 /* NSUserDefaults+Encore.m in Sources */,
 				D4BB7E09179CCF4E0098BCF4 /* ECCustomNavController.m in Sources */,
 				D948FE72179F951B0035297A /* ECFacebookManger.m in Sources */,

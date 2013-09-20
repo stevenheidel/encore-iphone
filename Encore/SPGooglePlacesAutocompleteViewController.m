@@ -61,12 +61,37 @@
 }
 
 - (void)viewDidLoad {
+    [super viewDidLoad];
+    searchQuery = [[SPGooglePlacesAutocompleteQuery alloc] init];
+    searchQuery.radius = 100.0;
+    shouldBeginEditing = YES;
+    if(SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")){
+        self.edgesForExtendedLayout = UIRectEdgeNone;
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
+//    self.navigationController.navigationBarHidden = YES;
     self.searchDisplayController.searchBar.placeholder = @"Enter search city or area";
     [self hideSaveButton];
     
     //set to current search location?
+
+}
+-(void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+}
+-(void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+//    [[UIApplication sharedApplication] setStatusBarHidden:YES];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+    
 }
 
+-(void) viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+//    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+}
 - (void)viewDidUnload {
     [self setMapView:nil];
     [super viewDidUnload];
@@ -168,6 +193,7 @@
     
     [self.searchDisplayController.searchBar setShowsCancelButton:NO animated:YES];
     [self.searchDisplayController.searchBar resignFirstResponder];
+    [self.searchDisplayController setActive:NO];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -178,10 +204,11 @@
         } else if (placemark) {
             [self addPlacemarkAnnotationToMap:placemark addressString:addressString];
             [self recenterMapToPlacemark:placemark];
+            self.searchDisplayController.searchBar.text = place.name;
             [self dismissSearchControllerWhileStayingActive];
             [self.searchDisplayController.searchResultsTableView deselectRowAtIndexPath:indexPath animated:NO];
             self.savedPlacemark = placemark;
-            self.searchDisplayController.searchBar.text = place.name;
+            
             [self showSaveButton];
         }
     }];

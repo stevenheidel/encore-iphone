@@ -61,7 +61,7 @@
 
 //Profile
 "logout_alert_title" = "Log out";
-"logout_alert_message" = "Do you want to log out of Encore?";
+"logout_alert_message" = "Do you want to log out of your profile? Your saved concerts will not be lost, but you will have to login again to view them.";
 "logout" = "Log out";
 
 //Post flags

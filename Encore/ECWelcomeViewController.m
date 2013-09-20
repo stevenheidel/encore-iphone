@@ -13,7 +13,7 @@
 #import "ECGridViewController.h"
 #import "NSDictionary+ConcertList.h"
 #import <AFNetworking/UIImageView+AFNetworking.h>
-
+#import "UIColor+EncoreUI.h"
 @interface ECWelcomeViewController ()
 @property (strong,nonatomic) NSArray* featuredEvents;
 @property (assign) BOOL tappedOnConcert;
@@ -34,6 +34,9 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
+        self.navigationController.navigationBar.barTintColor = [UIColor blueArtistTextColor];
+    }
 }
 
 -(void)viewWillAppear:(BOOL)animated{

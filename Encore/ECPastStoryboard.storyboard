@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="4510" systemVersion="13A569" targetRuntime="iOS.CocoaTouch" variant="6xAndEarlier" propertyAccessControl="none" useAutolayout="YES" initialViewController="nnw-kD-SbF">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="4510" systemVersion="12F37" targetRuntime="iOS.CocoaTouch" variant="6xAndEarlier" propertyAccessControl="none" useAutolayout="YES" initialViewController="nnw-kD-SbF">
     <dependencies>
         <deployment defaultVersion="1536" identifier="iOS"/>
         <development version="4600" identifier="xcode"/>
@@ -237,6 +237,7 @@
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="fsu-P6-AeE" firstAttribute="centerX" secondItem="tmc-SK-ANe" secondAttribute="centerX" type="default" id="1B5-c0-bV2"/>
                                     <constraint firstItem="fsu-P6-AeE" firstAttribute="top" secondItem="tmc-SK-ANe" secondAttribute="top" constant="15" type="user" id="TJc-a6-ki0"/>
@@ -274,13 +275,13 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="HVB-r9-R2r">
                                     <size key="itemSize" width="103" height="103"/>
-                                    <size key="headerReferenceSize" width="50" height="49"/>
+                                    <size key="headerReferenceSize" width="50" height="52"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="post" id="dto-Vy-kjg" customClass="ECPostCell">
-                                        <rect key="frame" x="0.0" y="49" width="103" height="103"/>
+                                        <rect key="frame" x="0.0" y="52" width="103" height="103"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="103" height="103"/>
@@ -322,7 +323,7 @@
                                     </collectionViewCell>
                                 </cells>
                                 <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="headerview" id="eZd-O6-9bd" customClass="ECGridHeaderView">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="52"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jz0-90-84r">
@@ -332,7 +333,10 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oRr-Rb-slR">
-                                            <rect key="frame" x="20" y="29" width="280" height="17"/>
+                                            <rect key="frame" x="20" y="28" width="280" height="23"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="23" id="9WV-lW-32h"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
@@ -340,12 +344,12 @@
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
-                                        <constraint firstItem="oRr-Rb-slR" firstAttribute="top" secondItem="jz0-90-84r" secondAttribute="bottom" constant="1" type="user" id="0MV-p3-uEf"/>
-                                        <constraint firstAttribute="trailing" secondItem="oRr-Rb-slR" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="7Hm-98-ozo"/>
+                                        <constraint firstItem="jz0-90-84r" firstAttribute="top" secondItem="eZd-O6-9bd" secondAttribute="top" constant="8" id="1Hg-Jc-U5e"/>
                                         <constraint firstAttribute="trailing" secondItem="jz0-90-84r" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="7b4-r7-6rj"/>
-                                        <constraint firstItem="jz0-90-84r" firstAttribute="top" secondItem="eZd-O6-9bd" secondAttribute="top" constant="8" type="user" id="aDF-4E-ggh"/>
+                                        <constraint firstItem="jz0-90-84r" firstAttribute="trailing" secondItem="oRr-Rb-slR" secondAttribute="trailing" type="default" id="C25-le-ZAV"/>
+                                        <constraint firstAttribute="bottom" secondItem="oRr-Rb-slR" secondAttribute="bottom" constant="1" id="EcO-6T-aai"/>
+                                        <constraint firstItem="oRr-Rb-slR" firstAttribute="leading" secondItem="jz0-90-84r" secondAttribute="leading" type="default" id="dzV-nA-Qef"/>
                                         <constraint firstItem="jz0-90-84r" firstAttribute="leading" secondItem="eZd-O6-9bd" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="jwT-4e-MGl"/>
-                                        <constraint firstItem="oRr-Rb-slR" firstAttribute="leading" secondItem="eZd-O6-9bd" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="wIa-pW-Rjs"/>
                                     </constraints>
                                     <connections>
                                         <outlet property="eventLabel" destination="jz0-90-84r" id="YdT-Bg-1Ct"/>
@@ -517,7 +521,7 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="inF-pn-Tzm">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="inF-pn-Tzm">
                                 <rect key="frame" x="131" y="202" width="59" height="59"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="59" type="user" id="cT9-Dg-KLu"/>

@@ -88,6 +88,10 @@ typedef enum {
     
     self.tableView.sectionHeaderHeight = 0;
     self.tableView.sectionFooterHeight = 0;
+    
+    if(SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")){
+        self.edgesForExtendedLayout = UIRectEdgeNone;
+    }
 }
 
 -(void) setNavBarAppearance {
@@ -95,6 +99,10 @@ typedef enum {
     self.navigationItem.titleView = encoreLogo;
     UIImage* image = [UIImage imageNamed:@"noimage"];
     self.navigationController.navigationBar.shadowImage = image;
+    
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
+        self.navigationController.navigationBar.barTintColor = [UIColor blueArtistTextColor];
+    }
 }
 
 -(void) setupHUD {

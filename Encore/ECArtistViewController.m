@@ -62,10 +62,7 @@ typedef enum {
 	[self.tableView addSubview:hud];
     hud.color = [UIColor lightBlueHUDConfirmationColor];
 	[hud show:YES];
-    NSString* artist = self.artist;
-    NSInteger endIndex = artist.length - 1;
-    artist = [NSString stringWithFormat:@"%@%@",artist,[[artist lowercaseString] characterAtIndex:endIndex]=='s' ? @"'":@"'s"];
-    hud.labelText = [NSString stringWithFormat:@"Loading %@ events",artist];
+    hud.labelText = [NSString stringWithFormat:@"Loading recent events"];
     [ECJSONFetcher fetchInfoForArtist:self.artist completion:^(NSDictionary *artistInfo) {
         self.events = [artistInfo objectForKey:@"events"];
         [self.tableView reloadData];

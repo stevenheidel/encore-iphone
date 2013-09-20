@@ -21,7 +21,6 @@
 #import "NSDictionary+ConcertList.h"
 #import "UIImageView+AFNetworking.h"
 #import "MBProgressHUD.h"
-#import "ECConcertDetailViewController.h"
 #import "ECAppDelegate.h"
 #import "UIImage+GaussBlur.h"
 #import <QuartzCore/QuartzCore.h>
@@ -29,7 +28,6 @@
 #import "UIViewController+KNSemiModal.h"
 
 #import "ECAlertTags.h"
-#import "ECLocationSetterViewController.h"
 
 #import "NSUserDefaults+Encore.h"
 #import "ECCustomNavController.h"
@@ -117,7 +115,6 @@ typedef enum {
     }
     
     else {
-        //TODO: Check network connection status before fetching anything
         if (![ApplicationDelegate connected]) {
             UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"No connection!" message:@"You must be connected to the internet to use Encore. Sorry pal." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"Try again", nil];
             alert.tag = ECNoNetworkAlertTag;
@@ -126,9 +123,7 @@ typedef enum {
         else {
          [self fetchConcerts];
         }
-        NSString* city = [NSUserDefaults lastSearchArea];
 
-        self.locationLabel.text = city == nil ? @"Location not set" : city;
     }
   
 }
@@ -191,7 +186,10 @@ typedef enum {
 -(void) initializeSearchLocation {
     self.currentSearchLocation = [NSUserDefaults lastSearchLocation];
     self.currentSearchRadius = [NSUserDefaults lastSearchRadius];
-    self.locationLabel.text = [NSUserDefaults searchCity];
+    
+    NSString* city = [NSUserDefaults lastSearchArea];
+    NSString* city2 = [NSUserDefaults searchCity];
+    self.locationLabel.text = city == nil ? city2 : city;
 }
 
 -(void) setEventArray: (NSArray*) concerts forType: (ECSearchType) searchType {
@@ -409,17 +407,25 @@ typedef enum {
 }
 
 -(void) setNavBarAppearance {
-    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navbar"] forBarMetrics:UIBarMetricsDefault];
-    if( IS_IPHONE_5 )
-        [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navbarlandscape-568h"] forBarMetrics:UIBarMetricsLandscapePhone];
-    else
-        [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navbarlandscape"] forBarMetrics:UIBarMetricsLandscapePhone];
+    if (SYSTEM_VERSION_LESS_THAN(@"7.0")){
+        [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navbar"] forBarMetrics:UIBarMetricsDefault];
+        if( IS_IPHONE_5 )
+            [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navbarlandscape-568h"] forBarMetrics:UIBarMetricsLandscapePhone];
+        else
+            [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navbarlandscape"] forBarMetrics:UIBarMetricsLandscapePhone];
+            [[UINavigationBar appearance] setTintColor:[UIColor clearColor]];
+            [[UINavigationBar appearance] setBackgroundColor:[UIColor clearColor]];
+//                [self.navigationController.navigationBar setBackgroundColor:[UIColor blueArtistTextColor]];
+    }
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
+        self.edgesForExtendedLayout = UIRectEdgeNone;
+        [self.navigationController.navigationBar setBarTintColor:[UIColor blueArtistTextColor]];
+        [self.navigationController.navigationBar setTranslucent:YES];
+    }
     
     //Use default navbar in youtube player
     [[UINavigationBar appearanceWhenContainedIn:[MPMoviePlayerViewController class], nil] setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
     
-    [[UINavigationBar appearance] setTintColor:[UIColor clearColor]];
-    [[UINavigationBar appearance] setBackgroundColor:[UIColor clearColor]];
     UIImageView* encoreLogo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo.png"]];
     self.navigationItem.titleView = encoreLogo;
     UIImage* image = [UIImage imageNamed:@"noimage"];
@@ -526,20 +532,25 @@ typedef enum {
 
 
 -(IBAction) modifySearchLocation {
-    SPGooglePlacesAutocompleteViewController* viewController = [SPGooglePlacesAutocompleteViewController new];
+    UIStoryboard* sb = [UIStoryboard storyboardWithName:@"GooglePlacesAutocompleteView" bundle:nil];
+    SPGooglePlacesAutocompleteViewController * viewController = [sb instantiateInitialViewController];
+//    SPGooglePlacesAutocompleteViewController* viewController = [SPGooglePlacesAutocompleteViewController new];
     viewController.delegate = self;
+//    ECCustomNavController* navCtrl = [[ECCustomNavController alloc] initWithRootViewController:viewController];
     [self presentViewController:viewController animated:YES completion:nil];
 }
 
 -(void) updatedSearchLocationToPlacemark:(CLPlacemark *)placemark{
     float radius = 0.5f;
     NSString* adminArea = placemark.administrativeArea;
-    if([placemark.ISOcountryCode isEqualToString:@"CA"] || [placemark.ISOcountryCode isEqualToString:@"US"]){ //use standard abbreviations for US and Canada.
+    if(SYSTEM_VERSION_LESS_THAN(@"7.0")){
+        if([placemark.ISOcountryCode isEqualToString:@"CA"] || [placemark.ISOcountryCode isEqualToString:@"US"]){ //use standard abbreviations for US and Canada.
         if (!abbrvDic) {
             NSString * plistPath = [[NSBundle mainBundle] pathForResource:@"ProvinceStateAbbrv" ofType:@"plist"];
             abbrvDic = [NSDictionary dictionaryWithContentsOfFile:plistPath];
         }
          adminArea = [[abbrvDic objectForKey:[adminArea lowercaseString]] uppercaseString]; //search by lowercase for consistency, display as uppercase
+        }
     }
     NSString* area = [NSString stringWithFormat:@"%@, %@",placemark.locality ? placemark.locality : placemark.subAdministrativeArea,adminArea];
     
@@ -568,84 +579,6 @@ typedef enum {
     }
 
 }
-- (IBAction)openLocationSetter {
-    if (self.locationSetterView == nil) {
-        self.locationSetterView = [ECLocationSetterViewController new];
-        self.locationSetterView.delegate = self;
-    }
-    
-    [NSUserDefaults setLastSearchRadius:self.currentSearchRadius];
-    [NSUserDefaults synchronize];
-    
-    [self presentSemiViewController:self.locationSetterView withOptions:@{
-     KNSemiModalOptionKeys.pushParentBack : @(NO),
-     KNSemiModalOptionKeys.parentAlpha : @(0.8)
-	 }];
-    [self dismissKeyboard]; //dismiss the keyboard, otherwise it will obstruct the location setter view
-}
-
--(void) hideLocationSetter {
-    [self dismissSemiModalView];
-}
-
-#pragma mark ECLocationSetterDelegate Method
--(void) locationSetter:(ECLocationSetterViewController *)setter updateLocationAlsoCloseView:(BOOL)shouldClose {
-    float radius = setter.locationSlider.value;
-    NSString* area = setter.areaStringForPlacemark;
-    CLLocation* location = setter.location;
-    NSString* locality = setter.placemark.locality;
-    
-    NSLog(@"new radius %f",radius);
-    self.currentSearchLocation = location;
-    self.currentSearchRadius = radius;
-    self.currentSearchAreaString = area;
-    
-    self.locationLabel.text = locality;
-    
-    [NSUserDefaults setLastSearchLocation:location];
-    [NSUserDefaults setLastSearchRadius:radius];
-    [NSUserDefaults setLastSearchArea: area];
-    [NSUserDefaults setSearchCity:locality];
-    [NSUserDefaults synchronize];
-    if(shouldClose)
-        [self hideLocationSetter];
-    
-    [self fetchConcerts];
-    if (self.hasSearched) {
-        //redo search with new location
-        [ECJSONFetcher fetchArtistsForString:self.searchBar.text withSearchType:self.currentSearchType forLocation:self.currentSearchLocation radius:[NSNumber numberWithFloat:self.currentSearchRadius] completion:^(NSDictionary *artists) {
-            [self fetchedConcertsForSearch:artists];
-        }];
-    }
-
-}
-//
-//-(void) updateSearchLocation:(CLLocation *)location radius: (float) radius area: (NSString*) area shouldCloseView:(BOOL)closeView{
-//    NSLog(@"new radius %f",radius);
-//    self.currentSearchLocation = location;
-//    self.currentSearchRadius = radius;
-//    self.currentSearchAreaString = area;
-//    [NSUserDefaults setLastSearchLocation:location];
-//    [NSUserDefaults setLastSearchRadius:radius];
-//    [NSUserDefaults setLastSearchArea: area];
-//    [NSUserDefaults synchronize];
-//    if(closeView)
-//        [self hideLocationSetter];
-//    
-//    [self fetchConcerts];
-//    if (self.hasSearched) {
-//        //redo search with new location
-//        [ECJSONFetcher fetchArtistsForString:self.searchBar.text withSearchType:self.currentSearchType forLocation:self.currentSearchLocation radius:[NSNumber numberWithFloat:self.currentSearchRadius] completion:^(NSDictionary *artists) {
-//            [self fetchedConcertsForSearch:artists];
-//        }];
-//    }
-//
-//}
-
--(void) updateRadius:(float)radius {
-    NSLog(@"Radius updated");
-    self.currentSearchRadius = radius;
-}
 
 #pragma mark Alert View Delegate
 -(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
@@ -662,7 +595,7 @@ typedef enum {
         {
             //Manually
             //TODO : push the new location viewcontroller
-            [self openLocationSetter];
+            [self modifySearchLocation];
 
         }
     }else if (alertView.tag == ECInviteNotLoggedInAlert)

@@ -79,6 +79,9 @@ typedef enum {
     self.venueAndDateLabel.alpha = 0.0;
     self.flagPostButton.enabled = NO;
     self.youtubeShowing = NO;
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
+        self.edgesForExtendedLayout = UIRectEdgeNone;
+    }
     
 }
 

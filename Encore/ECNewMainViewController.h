@@ -9,17 +9,16 @@
 #import <UIKit/UIKit.h>
 #import "ECProfileViewController.h"
 #import "ECSearchType.h"
-#import "ECLocationSetterViewController.h"
 #import "SPGooglePlacesAutocompleteViewController.h"
 
 @class CLLocation;
 @class MBProgressHUD, ECLocationSetterViewController;
 
-@interface ECNewMainViewController : UIViewController <UIAlertViewDelegate, UITableViewDataSource,UITableViewDelegate, ECLocationSetterDelegate,SPGooglePlacesAutocompleteViewControllerDelegate>
+@interface ECNewMainViewController : UIViewController <UIAlertViewDelegate, UITableViewDataSource,UITableViewDelegate,SPGooglePlacesAutocompleteViewControllerDelegate>
 
 - (void)dismissKeyboard;
+-(void) profileTapped;
 - (IBAction)openLastFM:(id)sender;
-- (IBAction)openLocationSetter;
 
 - (IBAction)modifySearchLocation;
 
