@@ -639,17 +639,11 @@
     <resources>
         <image name="addEventButton.png" width="27" height="27"/>
         <image name="bottomgradient.png" width="320" height="88"/>
-        <image name="bottomgradient.png" width="320" height="88"/>
-        <image name="bottomgradient.png" width="320" height="88"/>
-        <image name="encorelogo.png" width="270" height="62"/>
-        <image name="encorelogo.png" width="270" height="62"/>
-        <image name="encorelogo.png" width="270" height="62"/>
         <image name="encorelogo.png" width="270" height="62"/>
         <image name="gotit.png" width="274" height="42"/>
         <image name="nextbuttom.png" width="275" height="42"/>
         <image name="nextgrey.png" width="274" height="42"/>
         <image name="profilepreview.png" width="198" height="285"/>
-        <image name="searchbar.png" width="239" height="32"/>
         <image name="searchbar.png" width="239" height="32"/>
         <image name="skip.png" width="274" height="41"/>
     </resources>

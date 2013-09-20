@@ -113,7 +113,17 @@
 @implementation GetPhotosCell
 @end
 
+@implementation SongPreviewCell
+- (IBAction)playpauseButtonTapped:(id)sender {
+}
+
+- (IBAction)itunesButtonTapped:(id)sender {
+}
+@end
+
 @implementation DetailsCell
 
 
 @end
+
+

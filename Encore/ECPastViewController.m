@@ -35,6 +35,7 @@
 typedef enum {
     Photos,
     Lineup,
+    SongPreview,
     Details,
     NumberOfRows
 } ECPastRow;
@@ -50,7 +51,18 @@ typedef enum {
     self.navigationItem.titleView = encoreLogo;
     self.tableView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
     [self setAppearance];
-    
+    [ECJSONFetcher fetchSongPreviewForArtist:[self.concert headliner] completion:^(NSDictionary *song) {
+        self.songInfo = [[NSDictionary alloc] initWithDictionary:song];
+        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:SongPreview inSection:0]]
+                              withRowAnimation:UITableViewRowAnimationAutomatic];
+    }];
+}
+-(void) viewWillDisappear:(BOOL)animated {
+    if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
+        [self.player pause];
+        [[NSNotificationCenter defaultCenter] removeObserver:self];
+    }
+    [super viewWillDisappear:animated];
 }
 
 -(void) viewWillAppear:(BOOL)animated {
@@ -139,6 +151,8 @@ typedef enum {
             return 146.0f;
         case Lineup:
             return 142.0f;
+        case SongPreview:
+            return 76;
         case Photos:
             return 74.0f;
         default:
@@ -161,6 +175,8 @@ typedef enum {
             return @"lineup";
         case Photos:
             return @"photos";
+        case SongPreview:
+            return @"songpreview";
         default:
             return nil;
     }
@@ -212,6 +228,35 @@ typedef enum {
                  [cell.shareButton addTarget:self action:@selector(shareTapped) forControlEvents:UIControlEventTouchUpInside];
              }
             cell.contentView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
+            return cell;
+        }
+        case SongPreview:{
+            SongPreviewCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+            if (cell == nil) {
+                cell = [[SongPreviewCell alloc] init];
+            }
+            cell.contentView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
+            cell.lblMusicTitle.font = [UIFont lightHeroFontWithSize:16];
+            
+            if(!self.songInfo){
+                [cell.btnPlay setEnabled:NO];
+                [cell.btnItunes setEnabled:NO];
+                
+            }else{
+                [cell.btnPlay setEnabled:YES];
+                [cell.btnItunes setEnabled:YES];
+                [cell.btnPlay addTarget:self
+                                 action:@selector(playpauseButtonTapped:)
+                       forControlEvents:UIControlEventTouchUpInside];
+                [cell.btnItunes addTarget:self
+                                   action:@selector(openItunesLink)
+                         forControlEvents:UIControlEventTouchUpInside];
+            }
+            [cell.lblSongName setText:self.songInfo[@"collectionCensoredName"]];
+
+            if(self.player.rate == 1.0){
+                [cell.btnPlay setSelected:YES];
+            }
             return cell;
         }
         default:
@@ -394,6 +439,35 @@ typedef enum {
 
         }
     }
+    
+}
+#pragma mark - Play/Pause Song preview
+
+- (void) playpauseButtonTapped:(UIButton*)button
+{
+    if(!self.player){
+        NSURL *url = [NSURL URLWithString:self.songInfo[@"previewUrl"]];
+        AVPlayerItem* playerItem = [AVPlayerItem playerItemWithURL:url];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(songDidFinishPlaying) name:AVPlayerItemDidPlayToEndTimeNotification object:playerItem];
+        self.player = [[AVPlayer alloc] initWithPlayerItem:playerItem];
+    }
+    [button setSelected:!button.selected];
+    if (self.player.rate == 1.0) {
+        [self.player pause];
+    } else {
+        [self.player play];
+    }
+    
+}
+-(void)songDidFinishPlaying
+{
+    SongPreviewCell * songCell =(SongPreviewCell*)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:SongPreview inSection:0]];
+    [songCell.btnPlay setSelected:NO];
+}
+
+-(void)openItunesLink
+{
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString: self.songInfo[@"collectionViewUrl"]]];
     
 }
 

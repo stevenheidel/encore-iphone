@@ -13,19 +13,40 @@
 @protocol ECJSONFetcherDelegate;
 
 @interface ECJSONFetcher : NSObject
-+(void) fetchConcertsForUserID: (NSString *) fbID  completion: (void (^)(NSDictionary* concerts)) completion;
++(void) fetchConcertsForUserID: (NSString *) fbID
+                    completion: (void (^)(NSDictionary* concerts)) completion;
 
-+(void)fetchArtistsForString:(NSString*)searchStr withSearchType:(ECSearchType)searchType forLocation:(CLLocation   *)location radius: (NSNumber*) radius completion:(void (^)(NSDictionary* artists)) completion;
++(void)fetchArtistsForString:(NSString*)searchStr
+              withSearchType:(ECSearchType)searchType
+                 forLocation:(CLLocation   *)location
+                      radius: (NSNumber*) radius
+                  completion:(void (^)(NSDictionary* artists)) completion;
 
-+(void)fetchPictureForArtist: (NSString*) artist completion: (void(^) (NSURL* imageURL)) completion;
++(void)fetchPictureForArtist: (NSString*) artist
+                  completion: (void(^) (NSURL* imageURL)) completion;
 
-+(void) fetchInfoForArtist:(NSString*) artist completion: (void(^) (NSDictionary* artistInfo)) completion;
++(void) fetchInfoForArtist:(NSString*) artist
+                completion: (void(^) (NSDictionary* artistInfo)) completion;
 
-+(void)fetchPopularConcertsWithSearchType:(ECSearchType)searchType location: (CLLocation*) location radius: (NSNumber*) radius completion: (void (^)(NSArray* concerts)) completion;
++(void)fetchPopularConcertsWithSearchType:(ECSearchType)searchType
+                                 location: (CLLocation*) location
+                                   radius: (NSNumber*) radius
+                               completion: (void (^)(NSArray* concerts)) completion;
 
-+(void) fetchPostsForConcertWithID: (NSString *) concertID completion: (void (^)(NSArray* fetchedPosts)) completion;
-+(void) checkIfConcert: (NSString*) concertID isOnProfile: (NSString *) userID completion: (void (^)(BOOL isOnProfile)) completion;
-+(void) checkIfEventIsPopulating: (NSString*) eventID completion: (void (^)(BOOL isPopulating)) completion;
++(void) fetchPostsForConcertWithID: (NSString *) concertID
+                        completion: (void (^)(NSArray* fetchedPosts)) completion;
+
++(void) checkIfConcert: (NSString*) concertID
+           isOnProfile: (NSString *) userID
+            completion: (void (^)(BOOL isOnProfile)) completion;
+
++(void) checkIfEventIsPopulating: (NSString*) eventID
+                      completion: (void (^)(BOOL isPopulating)) completion;
+
++(void) fetchSongPreviewForArtist:(NSString*) artist
+                       completion: (void(^) (NSDictionary* songInfo)) completion;
+
+
 
 //@property (nonatomic,unsafe_unretained) id <ECJSONFetcherDelegate> delegate;
 @end

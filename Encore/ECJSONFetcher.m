@@ -259,6 +259,37 @@ NSString* stringForSearchType(ECSearchType searchType) {
     }];
     [operation start];
 }
++ (NSString*)urlEscapeString:(id)unencodedString {
+    if ([unencodedString isKindOfClass:[NSString class]]) {
+        CFStringRef originalStringRef = (__bridge_retained CFStringRef)unencodedString;
+        NSString *s = (__bridge_transfer NSString *)CFURLCreateStringByAddingPercentEscapes(NULL,originalStringRef, NULL, NULL,kCFStringEncodingUTF8);
+        CFRelease(originalStringRef);
+        return s;
+    }
+    return unencodedString;
+}
++(void) fetchSongPreviewForArtist:(NSString*) artist
+                       completion: (void(^) (NSDictionary* songInfo)) completion
+{
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://itunes.apple.com/search?term=%@&media=music&limit=1",[ECJSONFetcher urlEscapeString:artist]]];
+    
+    NSURLRequest * request = [NSURLRequest requestWithURL:url];
+    AFJSONRequestOperation * operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
 
+        NSArray* songs = [JSON objectForKey:@"results"];
+        if(songs.count == 0)
+            completion(FALSE);
+        else
+            completion (songs[0]);
+        
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        if (completion) {
+            completion(FALSE); //default to false
+        }
+    }];
+    [operation start];
+
+}
+                  
 
 @end

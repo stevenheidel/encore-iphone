@@ -237,6 +237,12 @@
 		D956550B17A177BD00B7DA59 /* ticketsbutton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D956550917A177BD00B7DA59 /* ticketsbutton@2x.png */; };
 		D9963FD017B0D4E9003C3CC1 /* UIImage+Merge.m in Sources */ = {isa = PBXBuildFile; fileRef = D9963FCF17B0D4E9003C3CC1 /* UIImage+Merge.m */; };
 		D99D322017EB778200659AF1 /* ECNextConcertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D99D321F17EB778200659AF1 /* ECNextConcertViewController.m */; };
+		D99D323317EC47CB00659AF1 /* itunes.png in Resources */ = {isa = PBXBuildFile; fileRef = D99D322D17EC47CB00659AF1 /* itunes.png */; };
+		D99D323417EC47CB00659AF1 /* itunes@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D99D322E17EC47CB00659AF1 /* itunes@2x.png */; };
+		D99D323517EC47CB00659AF1 /* pausesongbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = D99D322F17EC47CB00659AF1 /* pausesongbutton.png */; };
+		D99D323617EC47CB00659AF1 /* pausesongbutton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D99D323017EC47CB00659AF1 /* pausesongbutton@2x.png */; };
+		D99D323717EC47CB00659AF1 /* playsongbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = D99D323117EC47CB00659AF1 /* playsongbutton.png */; };
+		D99D323817EC47CB00659AF1 /* playsongbutton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D99D323217EC47CB00659AF1 /* playsongbutton@2x.png */; };
 		D9D95CF617E8420500061DAF /* featured.json in Resources */ = {isa = PBXBuildFile; fileRef = D9D95CF517E8420500061DAF /* featured.json */; };
 /* End PBXBuildFile section */
 
@@ -571,6 +577,12 @@
 		D9963FCF17B0D4E9003C3CC1 /* UIImage+Merge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Merge.m"; sourceTree = "<group>"; };
 		D99D321E17EB778200659AF1 /* ECNextConcertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECNextConcertViewController.h; sourceTree = "<group>"; };
 		D99D321F17EB778200659AF1 /* ECNextConcertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECNextConcertViewController.m; sourceTree = "<group>"; };
+		D99D322D17EC47CB00659AF1 /* itunes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = itunes.png; sourceTree = "<group>"; };
+		D99D322E17EC47CB00659AF1 /* itunes@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "itunes@2x.png"; sourceTree = "<group>"; };
+		D99D322F17EC47CB00659AF1 /* pausesongbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pausesongbutton.png; sourceTree = "<group>"; };
+		D99D323017EC47CB00659AF1 /* pausesongbutton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pausesongbutton@2x.png"; sourceTree = "<group>"; };
+		D99D323117EC47CB00659AF1 /* playsongbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playsongbutton.png; sourceTree = "<group>"; };
+		D99D323217EC47CB00659AF1 /* playsongbutton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "playsongbutton@2x.png"; sourceTree = "<group>"; };
 		D9D95CF517E8420500061DAF /* featured.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = featured.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -789,6 +801,12 @@
 		D4A8DDD1176A44A0005E9847 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				D99D322D17EC47CB00659AF1 /* itunes.png */,
+				D99D322E17EC47CB00659AF1 /* itunes@2x.png */,
+				D99D322F17EC47CB00659AF1 /* pausesongbutton.png */,
+				D99D323017EC47CB00659AF1 /* pausesongbutton@2x.png */,
+				D99D323117EC47CB00659AF1 /* playsongbutton.png */,
+				D99D323217EC47CB00659AF1 /* playsongbutton@2x.png */,
 				24A7C1A217E8E73800A7302B /* newloginscreen */,
 				D901E9FD17E838A000317129 /* walkthrough */,
 				245F1E9717E2E79400C7621D /* gearbutton.png */,
@@ -1363,6 +1381,7 @@
 				D4AA4D311766BA8C009B0635 /* ECLoginViewController.xib in Resources */,
 				D4AA4D391766F3D0009B0635 /* Localizable.strings in Resources */,
 				D4A8DDBB176A133B005E9847 /* ECConcertDetailViewController.xib in Resources */,
+				D99D323717EC47CB00659AF1 /* playsongbutton.png in Resources */,
 				D4A8DDBC176A133B005E9847 /* InfoPlist.strings in Resources */,
 				D4A8DDCF176A405D005E9847 /* ECPostViewController.xib in Resources */,
 				D4A8DDD3176A8885005E9847 /* placeholder.jpg in Resources */,
@@ -1434,12 +1453,14 @@
 				D92E8D9E17E84D5700FCD412 /* nextbuttom.png in Resources */,
 				D4AC2E05178FD2E200F292CA /* Black.png in Resources */,
 				D4AC2E06178FD2E200F292CA /* Black@2x 22-49-48-390.png in Resources */,
+				D99D323817EC47CB00659AF1 /* playsongbutton@2x.png in Resources */,
 				D4AC2E07178FD2E200F292CA /* Black~568h@2x.png in Resources */,
 				A068AE711790621800FA1BF4 /* lastfmAttr.png in Resources */,
 				A068AE721790621800FA1BF4 /* lastfmAttr@2x.png in Resources */,
 				D4A798001792189B0029F469 /* ATConnect.h in Resources */,
 				D4A7980D17921EE40029F469 /* ATAppRatingFlow.h in Resources */,
 				D4A798111792FA2A0029F469 /* topgradient.png in Resources */,
+				D99D323417EC47CB00659AF1 /* itunes@2x.png in Resources */,
 				D4A798131792FB4E0029F469 /* fullgradient.png in Resources */,
 				D921D35717EA0DAF00DE0756 /* gotit@2x.png in Resources */,
 				D4A7981517930F4B0029F469 /* ECLocationSetterView.xib in Resources */,
@@ -1465,6 +1486,7 @@
 				D46D8F95179479A300011C5C /* login1iphone4@2x.png in Resources */,
 				D46D8F96179479A300011C5C /* login2iphone4@2x.png in Resources */,
 				D46D8F97179479A300011C5C /* login3iphone4@2x.png in Resources */,
+				D99D323617EC47CB00659AF1 /* pausesongbutton@2x.png in Resources */,
 				D46D8F991794A9FC00011C5C /* ECLoginPageViewiphone4.xib in Resources */,
 				D4AE47401795A013006AF663 /* ECProfileSectionHeaderView.xib in Resources */,
 				D4AE47451795A179006AF663 /* profileSectionHeader.png in Resources */,
@@ -1496,6 +1518,7 @@
 				D4719BAA17B322640077AB46 /* ECPastStoryboard.storyboard in Resources */,
 				24A7311317DD39EB009CF164 /* locateButton.png in Resources */,
 				24A7311417DD39EB009CF164 /* locateButton@2x.png in Resources */,
+				D99D323517EC47CB00659AF1 /* pausesongbutton.png in Resources */,
 				24A7311517DD39EB009CF164 /* location.png in Resources */,
 				24A7311617DD39EB009CF164 /* location@2x.png in Resources */,
 				24A7311817DD39EB009CF164 /* SPGooglePlacesAutocompleteViewController.xib in Resources */,
@@ -1504,6 +1527,7 @@
 				24B0D8E017E15C9100B30612 /* shareiconbutton@2x.png in Resources */,
 				24A4C8C817E240340022B56F /* locationmarkerbutton.png in Resources */,
 				24A4C8C917E240340022B56F /* locationmarkerbutton@2x.png in Resources */,
+				D99D323317EC47CB00659AF1 /* itunes.png in Resources */,
 				2403C2C417E28A3100C518BF /* ECArtistView.storyboard in Resources */,
 				245F1E9917E2E79400C7621D /* gearbutton.png in Resources */,
 				245F1E9A17E2E79400C7621D /* gearbutton@2x.png in Resources */,
@@ -1754,6 +1778,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B56B831D22E04C90BC664348 /* Pods.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -1793,6 +1818,7 @@
 					"-lTestFlight",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "765CC74A-4BB6-4CD5-A212-B6C3F8756004";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;

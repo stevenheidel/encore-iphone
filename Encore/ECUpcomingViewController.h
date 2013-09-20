@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AVFoundation/AVFoundation.h>
+
 #import "ECSearchType.h"
 #import "ECEventProfileStatusManager.h"
 #import "ECChangeConcertStateButton.h"
@@ -26,5 +28,8 @@
 @property (nonatomic,strong) NSString* previousArtist;
 @property (nonatomic, assign) ECSearchType tense;
 @property (nonatomic,strong) NSDictionary * concert;
+@property (nonatomic,strong) AVPlayer* player;
+@property (nonatomic,strong) NSDictionary * songInfo;
+
 @end
 
