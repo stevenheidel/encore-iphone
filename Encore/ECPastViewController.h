@@ -10,6 +10,7 @@
 #import "ECSearchType.h"
 #import "ECEventProfileStatusManager.h"
 #import "ECChangeConcertStateButton.h"
+#import <AVFoundation/AVFoundation.h>
 
 @protocol ECPastViewControllerDelegate <NSObject>
 - (void) profileUpdated;
@@ -26,4 +27,8 @@
 @property (nonatomic,strong) NSString* previousArtist;
 @property (nonatomic, assign) ECSearchType tense;
 @property (nonatomic,strong) NSDictionary * concert;
+@property (nonatomic,assign) BOOL hideShareButton;
+@property (nonatomic,strong) NSDictionary * songInfo;
+@property (nonatomic,strong) AVPlayer* player;
+
 @end

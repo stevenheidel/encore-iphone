@@ -35,6 +35,7 @@ typedef enum {
     Tickets,
     Lineup,
     Details,
+    SongPreview,
     Location,
     NumberOfRows
 } ECUpcomingRow;
@@ -43,7 +44,6 @@ typedef enum {
 @interface MapViewAnnotation : NSObject <MKAnnotation>
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, assign) CLLocationCoordinate2D coordinate;
-
 - (id)initWithTitle:(NSString *)ttl andCoordinate:(CLLocationCoordinate2D)c2d;
 @end
 
@@ -83,6 +83,19 @@ typedef enum {
     self.navigationItem.titleView = encoreLogo;
     self.tableView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
     [self setAppearance];
+    [ECJSONFetcher fetchSongPreviewForArtist:[self.concert headliner] completion:^(NSDictionary *song) {
+        self.songInfo = [[NSDictionary alloc] initWithDictionary:song];
+        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:SongPreview inSection:0]]
+                              withRowAnimation:UITableViewRowAnimationAutomatic];
+    
+    }];
+}
+-(void) viewWillDisappear:(BOOL)animated {
+    if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
+        [self.player pause];
+        [[NSNotificationCenter defaultCenter] removeObserver:self];
+    }
+    [super viewWillDisappear:animated];
 }
 -(void) viewWillAppear:(BOOL)animated {
     if(!self.statusManager) {
@@ -163,6 +176,8 @@ typedef enum {
             return 142.0f;
         case Details:
             return 60.0f;
+        case SongPreview:
+            return 76;
         case Tickets:
             return 60.0f;
         default:
@@ -174,7 +189,7 @@ typedef enum {
 }
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return NumberOfRows;
+        return NumberOfRows;
 }
 
 +(NSString*) identifierForRow: (NSUInteger) row {
@@ -185,6 +200,8 @@ typedef enum {
             return @"lineup";
         case Details:
             return @"details";
+        case SongPreview:
+            return @"songpreview";
         case Tickets:
             return @"tickets";
         default:
@@ -270,6 +287,37 @@ typedef enum {
             
             return cell;
         }
+        case SongPreview:{
+            SongPreviewCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+            if (cell == nil) {
+                cell = [[SongPreviewCell alloc] init];
+            }
+            cell.contentView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
+            cell.lblMusicTitle.font = [UIFont lightHeroFontWithSize:16];
+            
+            if(!self.songInfo){
+                [cell.btnPlay setEnabled:NO];
+                [cell.btnItunes setEnabled:NO];
+
+            }else{
+                [cell.btnPlay setEnabled:YES];
+                [cell.btnItunes setEnabled:YES];
+                [cell.btnPlay addTarget:self
+                                 action:@selector(playpauseButtonTapped:)
+                       forControlEvents:UIControlEventTouchUpInside];
+                [cell.btnItunes addTarget:self
+                                   action:@selector(openItunesLink)
+                         forControlEvents:UIControlEventTouchUpInside];
+            }
+            
+            
+            [cell.lblSongName setText:self.songInfo[@"collectionCensoredName"]];
+            if(self.player.rate == 1.0){
+                [cell.btnPlay setSelected:YES];
+            }
+            return cell;
+        }
+        
         case Tickets: {
             GrabTicketsCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier];
             if (cell == nil) {
@@ -456,7 +504,35 @@ typedef enum {
     }
     
 }
+#pragma mark - Play/Pause Song preview
 
+- (void) playpauseButtonTapped:(UIButton*)button
+{
+    if(!self.songInfo){
+        return;
+    }
+        if(!self.player){
+            NSURL *url = [NSURL URLWithString:self.songInfo[@"previewUrl"]];
+            self.player = [[AVPlayer alloc] initWithURL:url];
+        }
+        [button setSelected:!button.selected];
+        if (self.player.rate == 1.0) {
+            [self.player pause];
+        } else {
+            [self.player play];
+        }
+    
+ 
+}
+
+-(void)openItunesLink
+{
+    if(!self.songInfo){
+        return;
+    }
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString: self.songInfo[@"collectionViewUrl"]]];
+  
+}
 #pragma mark - Adding/Removing Concerts
 
 -(void) addToProfile{

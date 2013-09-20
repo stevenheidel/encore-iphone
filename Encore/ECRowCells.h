@@ -43,6 +43,13 @@
 @property (weak, nonatomic) IBOutlet ECChangeConcertStateButton *changeStateButton;
 @end
 
+@interface SongPreviewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *lblMusicTitle;
+@property (weak, nonatomic) IBOutlet UIButton *btnPlay;
+@property (weak, nonatomic) IBOutlet UIButton *btnItunes;
+@property (weak, nonatomic) IBOutlet UILabel *lblSongName;
+@end
+
 @interface LocationCell : UITableViewCell <MKMapViewDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *locationLabel;
 @property (weak, nonatomic) IBOutlet UILabel *startTimeLabel;

@@ -24,6 +24,8 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *postsCollectionView;
 @property (weak, nonatomic) IBOutlet UIView *footerView;
 @property (weak, nonatomic) IBOutlet UILabel *noPostsLabel;
+@property (nonatomic,assign) BOOL hideShareButton;
+
 
 @end
 

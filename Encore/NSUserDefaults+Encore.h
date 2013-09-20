@@ -13,6 +13,7 @@
 
 @interface NSUserDefaults (Encore)
 +(BOOL)shouldShowWalkthrough;
+-(void)setWalkthoughFinished;
 
 +(NSString*) userName;
 +(void) setUsername: (NSString*) username;

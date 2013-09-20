@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4510" systemVersion="12F37" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="kpA-lm-Rwt">
     <dependencies>
         <deployment defaultVersion="1536" identifier="iOS"/>
+
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
     </dependencies>
     <scenes>
@@ -241,8 +243,85 @@
                                     <outlet property="changeStateButton" destination="yK4-gO-VCC" id="e6Q-Kq-tFK"/>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="songpreview" rowHeight="71" id="uop-K5-1gw" customClass="SongPreviewCell">
+                                <rect key="frame" x="0.0" y="491" width="320" height="71"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I8m-70-Evq" customClass="ECChangeConcertStateButton">
+                                            <rect key="frame" x="15" y="26" width="35" height="40"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                            <state key="normal" image="playsongbutton.png">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <state key="selected" image="pausesongbutton.png"/>
+                                            <state key="highlighted">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="playpauseButtonTapped:" destination="uop-K5-1gw" eventType="touchUpInside" id="o0w-37-9E8"/>
+                                            </connections>
+                                        </button>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="music" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GN3-7T-yxD">
+                                            <rect key="frame" x="20" y="5" width="280" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="21" id="pZd-nE-XxZ"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Music" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IWu-eN-NZZ">
+                                            <rect key="frame" x="55" y="26" width="142" height="40"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="142" id="1GU-qC-01i"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2hi-d9-fm0">
+                                            <rect key="frame" x="202" y="26" width="110" height="40"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                            <state key="normal" image="itunes.png">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="itunesButtonTapped:" destination="uop-K5-1gw" eventType="touchUpInside" id="a0o-ZF-gUc"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="I8m-70-Evq" firstAttribute="leading" secondItem="uop-K5-1gw" secondAttribute="leading" constant="15" id="8eh-YK-6n7"/>
+                                    <constraint firstAttribute="trailing" secondItem="GN3-7T-yxD" secondAttribute="trailing" constant="20" type="default" id="FZv-6Z-9gH"/>
+                                    <constraint firstItem="2hi-d9-fm0" firstAttribute="top" secondItem="IWu-eN-NZZ" secondAttribute="top" type="default" id="Pj1-vQ-pa1"/>
+                                    <constraint firstItem="GN3-7T-yxD" firstAttribute="leading" secondItem="uop-K5-1gw" secondAttribute="leading" constant="20" type="default" id="TfE-QR-CwT"/>
+                                    <constraint firstItem="I8m-70-Evq" firstAttribute="bottom" secondItem="IWu-eN-NZZ" secondAttribute="bottom" type="default" id="U1y-Zv-fuZ"/>
+                                    <constraint firstItem="GN3-7T-yxD" firstAttribute="top" secondItem="uop-K5-1gw" secondAttribute="top" constant="5" id="URR-Vz-nVq"/>
+                                    <constraint firstItem="IWu-eN-NZZ" firstAttribute="leading" secondItem="uop-K5-1gw" secondAttribute="leading" constant="55" id="Ylc-KO-1fw"/>
+                                    <constraint firstItem="I8m-70-Evq" firstAttribute="top" secondItem="IWu-eN-NZZ" secondAttribute="top" type="default" id="dYH-6s-5Bu"/>
+                                    <constraint firstItem="I8m-70-Evq" firstAttribute="top" secondItem="uop-K5-1gw" secondAttribute="top" constant="26" id="hu5-gu-H04"/>
+                                    <constraint firstAttribute="trailing" secondItem="2hi-d9-fm0" secondAttribute="trailing" constant="8" id="xUL-hT-yaN"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="btnItunes" destination="2hi-d9-fm0" id="ONc-qx-dch"/>
+                                    <outlet property="btnPlay" destination="I8m-70-Evq" id="jy1-U4-kRn"/>
+                                    <outlet property="lblMusicTitle" destination="GN3-7T-yxD" id="1Ag-Ei-DJ4"/>
+                                    <outlet property="lblSongName" destination="IWu-eN-NZZ" id="9nc-nB-dOv"/>
+                                </connections>
+                            </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="location" rowHeight="215" id="4ou-sL-lFG" customClass="LocationCell">
-                                <rect key="frame" x="0.0" y="491" width="320" height="215"/>
+                                <rect key="frame" x="0.0" y="562" width="320" height="215"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4ou-sL-lFG" id="FlC-H7-kRN">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="214"/>
@@ -323,10 +402,14 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z5x-FA-Vot" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="136" y="-6"/>
+            <point key="canvasLocation" x="584" y="10"/>
         </scene>
+
     </scenes>
     <resources>
+        <image name="itunes.png" width="110" height="40"/>
+        <image name="pausesongbutton.png" width="35" height="40"/>
+        <image name="playsongbutton.png" width="35" height="40"/>
         <image name="shareiconbutton.png" width="50" height="45"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
