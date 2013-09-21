@@ -129,6 +129,7 @@
     [[NSUserDefaults standardUserDefaults] setInteger:searchType forKey:@"Last_Search_Type"];
 }
 
+#pragma mark -
 +(void) synchronize {
     if([[NSUserDefaults standardUserDefaults] synchronize]) {
         NSLog(@"User defaults synchronized successfully");

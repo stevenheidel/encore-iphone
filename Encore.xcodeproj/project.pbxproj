@@ -11,6 +11,18 @@
 		245F1E9917E2E79400C7621D /* gearbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 245F1E9717E2E79400C7621D /* gearbutton.png */; };
 		245F1E9A17E2E79400C7621D /* gearbutton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 245F1E9817E2E79400C7621D /* gearbutton@2x.png */; };
 		247C114617ECE6D500B7F401 /* GooglePlacesAutocompleteView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 247C114517ECE6D500B7F401 /* GooglePlacesAutocompleteView.storyboard */; };
+		247C115717ED35D900B7F401 /* gotit.png in Resources */ = {isa = PBXBuildFile; fileRef = 247C114B17ED35D900B7F401 /* gotit.png */; };
+		247C115817ED35D900B7F401 /* gotit@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 247C114C17ED35D900B7F401 /* gotit@2x.png */; };
+		247C115917ED35D900B7F401 /* itunes.png in Resources */ = {isa = PBXBuildFile; fileRef = 247C114D17ED35D900B7F401 /* itunes.png */; };
+		247C115A17ED35D900B7F401 /* itunes@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 247C114E17ED35D900B7F401 /* itunes@2x.png */; };
+		247C115B17ED35D900B7F401 /* nextgrey.png in Resources */ = {isa = PBXBuildFile; fileRef = 247C114F17ED35D900B7F401 /* nextgrey.png */; };
+		247C115C17ED35D900B7F401 /* nextgrey@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 247C115017ED35D900B7F401 /* nextgrey@2x.png */; };
+		247C115D17ED35D900B7F401 /* pausesongbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 247C115117ED35D900B7F401 /* pausesongbutton.png */; };
+		247C115E17ED35D900B7F401 /* pausesongbutton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 247C115217ED35D900B7F401 /* pausesongbutton@2x.png */; };
+		247C115F17ED35D900B7F401 /* playsongbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 247C115317ED35D900B7F401 /* playsongbutton.png */; };
+		247C116017ED35D900B7F401 /* playsongbutton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 247C115417ED35D900B7F401 /* playsongbutton@2x.png */; };
+		247C116117ED35D900B7F401 /* skip@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 247C115517ED35D900B7F401 /* skip@2x.png */; };
+		247C116217ED35D900B7F401 /* skipbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 247C115617ED35D900B7F401 /* skipbutton.png */; };
 		24A4C8C817E240340022B56F /* locationmarkerbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 24A4C8C617E240340022B56F /* locationmarkerbutton.png */; };
 		24A4C8C917E240340022B56F /* locationmarkerbutton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24A4C8C717E240340022B56F /* locationmarkerbutton@2x.png */; };
 		24A730FA17DD2E46009CF164 /* SPGooglePlacesAutocompletePlace.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A730F317DD2E46009CF164 /* SPGooglePlacesAutocompletePlace.m */; };
@@ -275,6 +287,18 @@
 		245F1E9717E2E79400C7621D /* gearbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gearbutton.png; sourceTree = "<group>"; };
 		245F1E9817E2E79400C7621D /* gearbutton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gearbutton@2x.png"; sourceTree = "<group>"; };
 		247C114517ECE6D500B7F401 /* GooglePlacesAutocompleteView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GooglePlacesAutocompleteView.storyboard; sourceTree = "<group>"; };
+		247C114B17ED35D900B7F401 /* gotit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gotit.png; sourceTree = "<group>"; };
+		247C114C17ED35D900B7F401 /* gotit@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gotit@2x.png"; sourceTree = "<group>"; };
+		247C114D17ED35D900B7F401 /* itunes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = itunes.png; sourceTree = "<group>"; };
+		247C114E17ED35D900B7F401 /* itunes@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "itunes@2x.png"; sourceTree = "<group>"; };
+		247C114F17ED35D900B7F401 /* nextgrey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nextgrey.png; sourceTree = "<group>"; };
+		247C115017ED35D900B7F401 /* nextgrey@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nextgrey@2x.png"; sourceTree = "<group>"; };
+		247C115117ED35D900B7F401 /* pausesongbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pausesongbutton.png; sourceTree = "<group>"; };
+		247C115217ED35D900B7F401 /* pausesongbutton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pausesongbutton@2x.png"; sourceTree = "<group>"; };
+		247C115317ED35D900B7F401 /* playsongbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playsongbutton.png; sourceTree = "<group>"; };
+		247C115417ED35D900B7F401 /* playsongbutton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "playsongbutton@2x.png"; sourceTree = "<group>"; };
+		247C115517ED35D900B7F401 /* skip@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "skip@2x.png"; sourceTree = "<group>"; };
+		247C115617ED35D900B7F401 /* skipbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = skipbutton.png; sourceTree = "<group>"; };
 		24A4C8C617E240340022B56F /* locationmarkerbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = locationmarkerbutton.png; sourceTree = "<group>"; };
 		24A4C8C717E240340022B56F /* locationmarkerbutton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "locationmarkerbutton@2x.png"; sourceTree = "<group>"; };
 		24A730F117DD2E46009CF164 /* APIKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIKey.h; sourceTree = "<group>"; };
@@ -748,6 +772,18 @@
 		D4A8DDD1176A44A0005E9847 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				247C114B17ED35D900B7F401 /* gotit.png */,
+				247C114C17ED35D900B7F401 /* gotit@2x.png */,
+				247C114D17ED35D900B7F401 /* itunes.png */,
+				247C114E17ED35D900B7F401 /* itunes@2x.png */,
+				247C114F17ED35D900B7F401 /* nextgrey.png */,
+				247C115017ED35D900B7F401 /* nextgrey@2x.png */,
+				247C115117ED35D900B7F401 /* pausesongbutton.png */,
+				247C115217ED35D900B7F401 /* pausesongbutton@2x.png */,
+				247C115317ED35D900B7F401 /* playsongbutton.png */,
+				247C115417ED35D900B7F401 /* playsongbutton@2x.png */,
+				247C115517ED35D900B7F401 /* skip@2x.png */,
+				247C115617ED35D900B7F401 /* skipbutton.png */,
 				24A7C1A217E8E73800A7302B /* newloginscreen */,
 				D901E9FD17E838A000317129 /* walkthrough */,
 				245F1E9717E2E79400C7621D /* gearbutton.png */,
@@ -1308,8 +1344,10 @@
 				D4A8DDD3176A8885005E9847 /* placeholder.jpg in Resources */,
 				A0FF1C53176CC88000433768 /* LoginInfoPages.plist in Resources */,
 				D4B0AC4717727FDA00DC4DD2 /* ECPostPlaceholder.xib in Resources */,
+				247C116017ED35D900B7F401 /* playsongbutton@2x.png in Resources */,
 				A022AAA2177605900009244C /* Hero Light.otf in Resources */,
 				A022AAA3177605900009244C /* Hero.otf in Resources */,
+				247C116117ED35D900B7F401 /* skip@2x.png in Resources */,
 				A022AAA817779BDF0009244C /* ECConcertCellView.xib in Resources */,
 				A022AACD177A38C90009244C /* magnifyglass@2x.png in Resources */,
 				A022AACF177A39B00009244C /* magnifyglass.png in Resources */,
@@ -1318,8 +1356,10 @@
 				D4AA9775177C9562008F4E31 /* 37x-Checkmark.png in Resources */,
 				D4AA9776177C9562008F4E31 /* 37x-Checkmark@2x.png in Resources */,
 				D4AA977B177CFE2C008F4E31 /* ECPostCollectionHeaderView.xib in Resources */,
+				247C115C17ED35D900B7F401 /* nextgrey@2x.png in Resources */,
 				A0A2B0D5177E1E7200518B6C /* shareButton.png in Resources */,
 				A0A2B0D6177E1E7200518B6C /* shareButton@2x.png in Resources */,
+				247C115A17ED35D900B7F401 /* itunes@2x.png in Resources */,
 				D4ABD2E6177E1E6E00DC691F /* Icon-Small.png in Resources */,
 				D4ABD2EC177E2C8900DC691F /* ECPictureViewController.xib in Resources */,
 				A0A2B0DB177E333900518B6C /* ECProfileViewController.xib in Resources */,
@@ -1357,6 +1397,7 @@
 				A02661EE178DDCEA00741C9A /* addEventButton@2x.png in Resources */,
 				A02661F5178DE62700741C9A /* removeEventButton.png in Resources */,
 				A02661F6178DE62700741C9A /* removeEventButton@2x.png in Resources */,
+				247C115E17ED35D900B7F401 /* pausesongbutton@2x.png in Resources */,
 				A02661F8178DF02000741C9A /* gradient.png in Resources */,
 				D4A9B31D178E5410008B5504 /* loginButton.png in Resources */,
 				D4A9B31E178E5410008B5504 /* loginButton@2x.png in Resources */,
@@ -1369,8 +1410,10 @@
 				D4AC2E01178FA6BC00F292CA /* ECProfileConcertCell.xib in Resources */,
 				D92E8D9E17E84D5700FCD412 /* nextbuttom.png in Resources */,
 				D4AC2E05178FD2E200F292CA /* Black.png in Resources */,
+				247C116217ED35D900B7F401 /* skipbutton.png in Resources */,
 				D4AC2E06178FD2E200F292CA /* Black@2x 22-49-48-390.png in Resources */,
 				D4AC2E07178FD2E200F292CA /* Black~568h@2x.png in Resources */,
+				247C115F17ED35D900B7F401 /* playsongbutton.png in Resources */,
 				A068AE711790621800FA1BF4 /* lastfmAttr.png in Resources */,
 				A068AE721790621800FA1BF4 /* lastfmAttr@2x.png in Resources */,
 				D4A798001792189B0029F469 /* ATConnect.h in Resources */,
@@ -1401,6 +1444,7 @@
 				D46D8F97179479A300011C5C /* login3iphone4@2x.png in Resources */,
 				D4AE47401795A013006AF663 /* ECProfileSectionHeaderView.xib in Resources */,
 				D4AE47451795A179006AF663 /* profileSectionHeader.png in Resources */,
+				247C115917ED35D900B7F401 /* itunes.png in Resources */,
 				D4AE47461795A179006AF663 /* profileSectionHeader@2x.png in Resources */,
 				D4E16CA817973BF100A9DC99 /* locationmakerwhite.png in Resources */,
 				D4E16CA917973BF100A9DC99 /* locationmakerwhite@2x.png in Resources */,
@@ -1419,6 +1463,7 @@
 				D41489FE179F1FDF00EE643F /* findstuffbutton.png in Resources */,
 				D41489FF179F1FDF00EE643F /* findstuffbutton@2x.png in Resources */,
 				D956550A17A177BD00B7DA59 /* ticketsbutton.png in Resources */,
+				247C115717ED35D900B7F401 /* gotit.png in Resources */,
 				D92E8D9F17E84D5700FCD412 /* nextbuttom@2x.png in Resources */,
 				D956550B17A177BD00B7DA59 /* ticketsbutton@2x.png in Resources */,
 				D401054917A20E6C006078D0 /* playbutton.png in Resources */,
@@ -1429,8 +1474,10 @@
 				D4719BAA17B322640077AB46 /* ECPastStoryboard.storyboard in Resources */,
 				24A7311317DD39EB009CF164 /* locateButton.png in Resources */,
 				24A7311417DD39EB009CF164 /* locateButton@2x.png in Resources */,
+				247C115817ED35D900B7F401 /* gotit@2x.png in Resources */,
 				24A7311517DD39EB009CF164 /* location.png in Resources */,
 				24A7311617DD39EB009CF164 /* location@2x.png in Resources */,
+				247C115B17ED35D900B7F401 /* nextgrey.png in Resources */,
 				24B0D8DF17E15C9100B30612 /* shareiconbutton.png in Resources */,
 				24B0D8E017E15C9100B30612 /* shareiconbutton@2x.png in Resources */,
 				24A4C8C817E240340022B56F /* locationmarkerbutton.png in Resources */,
@@ -1445,6 +1492,7 @@
 				D901EA0717E838D300317129 /* bottomgradient@2x.png in Resources */,
 				D901EA0817E838D300317129 /* encorelogo.png in Resources */,
 				D901EA0917E838D300317129 /* encorelogo@2x.png in Resources */,
+				247C115D17ED35D900B7F401 /* pausesongbutton.png in Resources */,
 				D9D95CF617E8420500061DAF /* featured.json in Resources */,
 				24A7C1AB17E8E77100A7302B /* loginfacebookbutton.png in Resources */,
 				24A7C1AC17E8E77100A7302B /* loginfacebookbutton@2x.png in Resources */,
