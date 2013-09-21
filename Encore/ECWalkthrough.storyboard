@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="4510" systemVersion="12F37" targetRuntime="iOS.CocoaTouch" variant="6xAndEarlier" propertyAccessControl="none" useAutolayout="YES" initialViewController="2i5-ax-uTf">
-
     <dependencies>
         <deployment defaultVersion="1536" identifier="iOS"/>
         <development version="4600" identifier="xcode"/>
@@ -238,12 +237,11 @@
                                     <constraint firstItem="vww-P0-oIt" firstAttribute="leading" secondItem="AzY-Sr-af6" secondAttribute="leading" constant="25" type="user" id="ztz-xg-dWu"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profilepreview.png" translatesAutoresizingMaskIntoConstraints="NO" id="yij-Qg-ecw">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profilepreview.png" translatesAutoresizingMaskIntoConstraints="NO" id="yij-Qg-ecw">
                                 <rect key="frame" x="20" y="155" width="280" height="360"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="360" type="user" id="et1-Kd-bWE"/>
-                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="360" type="user" id="qCY-Oh-h7g"/>
                                 </constraints>
                             </imageView>
                             <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bottomgradient.png" translatesAutoresizingMaskIntoConstraints="NO" id="XHd-O2-iRj">
@@ -640,11 +638,17 @@
     <resources>
         <image name="addEventButton.png" width="27" height="27"/>
         <image name="bottomgradient.png" width="320" height="88"/>
+        <image name="bottomgradient.png" width="320" height="88"/>
+        <image name="bottomgradient.png" width="320" height="88"/>
+        <image name="encorelogo.png" width="270" height="62"/>
+        <image name="encorelogo.png" width="270" height="62"/>
+        <image name="encorelogo.png" width="270" height="62"/>
         <image name="encorelogo.png" width="270" height="62"/>
         <image name="gotit.png" width="274" height="42"/>
         <image name="nextbuttom.png" width="275" height="42"/>
         <image name="nextgrey.png" width="274" height="42"/>
         <image name="profilepreview.png" width="198" height="285"/>
+        <image name="searchbar.png" width="239" height="32"/>
         <image name="searchbar.png" width="239" height="32"/>
         <image name="skip.png" width="274" height="41"/>
     </resources>

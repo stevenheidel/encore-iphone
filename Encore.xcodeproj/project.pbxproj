@@ -23,6 +23,8 @@
 		247C116017ED35D900B7F401 /* playsongbutton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 247C115417ED35D900B7F401 /* playsongbutton@2x.png */; };
 		247C116117ED35D900B7F401 /* skip@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 247C115517ED35D900B7F401 /* skip@2x.png */; };
 		247C116217ED35D900B7F401 /* skipbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 247C115617ED35D900B7F401 /* skipbutton.png */; };
+		247C116617ED398000B7F401 /* ECSearchConcertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 247C116517ED398000B7F401 /* ECSearchConcertViewController.m */; };
+		247C116917ED398900B7F401 /* ECNextConcertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 247C116817ED398900B7F401 /* ECNextConcertViewController.m */; };
 		24A4C8C817E240340022B56F /* locationmarkerbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 24A4C8C617E240340022B56F /* locationmarkerbutton.png */; };
 		24A4C8C917E240340022B56F /* locationmarkerbutton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24A4C8C717E240340022B56F /* locationmarkerbutton@2x.png */; };
 		24A730FA17DD2E46009CF164 /* SPGooglePlacesAutocompletePlace.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A730F317DD2E46009CF164 /* SPGooglePlacesAutocompletePlace.m */; };
@@ -299,6 +301,10 @@
 		247C115417ED35D900B7F401 /* playsongbutton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "playsongbutton@2x.png"; sourceTree = "<group>"; };
 		247C115517ED35D900B7F401 /* skip@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "skip@2x.png"; sourceTree = "<group>"; };
 		247C115617ED35D900B7F401 /* skipbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = skipbutton.png; sourceTree = "<group>"; };
+		247C116417ED398000B7F401 /* ECSearchConcertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECSearchConcertViewController.h; sourceTree = "<group>"; };
+		247C116517ED398000B7F401 /* ECSearchConcertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECSearchConcertViewController.m; sourceTree = "<group>"; };
+		247C116717ED398900B7F401 /* ECNextConcertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECNextConcertViewController.h; sourceTree = "<group>"; };
+		247C116817ED398900B7F401 /* ECNextConcertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECNextConcertViewController.m; sourceTree = "<group>"; };
 		24A4C8C617E240340022B56F /* locationmarkerbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = locationmarkerbutton.png; sourceTree = "<group>"; };
 		24A4C8C717E240340022B56F /* locationmarkerbutton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "locationmarkerbutton@2x.png"; sourceTree = "<group>"; };
 		24A730F117DD2E46009CF164 /* APIKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIKey.h; sourceTree = "<group>"; };
@@ -1208,6 +1214,10 @@
 		D901E9F917E8369B00317129 /* Walkthrough */ = {
 			isa = PBXGroup;
 			children = (
+				247C116717ED398900B7F401 /* ECNextConcertViewController.h */,
+				247C116817ED398900B7F401 /* ECNextConcertViewController.m */,
+				247C116417ED398000B7F401 /* ECSearchConcertViewController.h */,
+				247C116517ED398000B7F401 /* ECSearchConcertViewController.m */,
 				D901E9FB17E836C300317129 /* ECWalkthrough.storyboard */,
 				D901EA0A17E83A0400317129 /* ECWelcomeViewController.h */,
 				D901EA0B17E83A0400317129 /* ECWelcomeViewController.m */,
@@ -1578,6 +1588,7 @@
 				D4A7BEA8177B2F3B00C22D91 /* UIImage+Orientation.m in Sources */,
 				D4AA9779177CF82A008F4E31 /* ECPostCollectionHeaderView.m in Sources */,
 				D4ABD2EB177E2C8900DC691F /* ECPictureViewController.m in Sources */,
+				247C116617ED398000B7F401 /* ECSearchConcertViewController.m in Sources */,
 				A0A2B0DA177E333900518B6C /* ECProfileViewController.m in Sources */,
 				A00402BD177F4F7300B998CF /* ECProfileHeader.m in Sources */,
 				D428A45B1781085500101F12 /* UIColor+EncoreUI.m in Sources */,
@@ -1590,6 +1601,7 @@
 				D948FE72179F951B0035297A /* ECFacebookManger.m in Sources */,
 				D4B2DDBC17B0101800836F53 /* ECArtistViewController.m in Sources */,
 				D4B2DDC217B01B0900836F53 /* ECLineupViewController.m in Sources */,
+				247C116917ED398900B7F401 /* ECNextConcertViewController.m in Sources */,
 				D4A9A71317B03D65007E8A80 /* ECUpcomingViewController.m in Sources */,
 				D9963FD017B0D4E9003C3CC1 /* UIImage+Merge.m in Sources */,
 				D4719BA717B322250077AB46 /* ECPastViewController.m in Sources */,

@@ -54,6 +54,13 @@ typedef enum {
 
 @implementation ECSearchConcertViewController
 
+-(NSArray*) searchResultsEvents {
+    if (self.comboSearchResultsDic != nil) {
+        return [self.comboSearchResultsDic objectForKey:@"events"];
+    }
+    return nil;
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -254,7 +261,7 @@ typedef enum {
     if (comboDic) {
         self.hasSearched = TRUE;
         self.comboSearchResultsDic = comboDic;
-        if (!self.searchResultsEvents.count > 0) {
+        if (![self.searchResultsEvents count] > 0) {
             self.hasSearched = FALSE;
             self.comboSearchResultsDic = nil;
             MBProgressHUD* alert = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
