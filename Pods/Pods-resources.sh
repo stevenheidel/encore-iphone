@@ -39,12 +39,6 @@ install_resource()
       ;;
   esac
 }
-install_resource "KNMultiItemSelector/KNMultiItemSelector/Images/KNDefaultImage.png"
-install_resource "KNMultiItemSelector/KNMultiItemSelector/Images/KNDefaultImage@2x.png"
-install_resource "KNMultiItemSelector/KNMultiItemSelector/Images/KNSelectorTip.png"
-install_resource "KNMultiItemSelector/KNMultiItemSelector/Images/KNSelectorTip@2x.png"
-install_resource "KNMultiItemSelector/KNMultiItemSelector/Images/KNZoomIcon.png"
-install_resource "KNMultiItemSelector/KNMultiItemSelector/Images/KNZoomIcon@2x.png"
 
 rsync -avr --no-relative --exclude '*/.svn/*' --files-from="$RESOURCES_TO_COPY" / "${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"
 rm -f "$RESOURCES_TO_COPY"

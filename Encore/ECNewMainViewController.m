@@ -25,8 +25,6 @@
 #import "UIImage+GaussBlur.h"
 #import <QuartzCore/QuartzCore.h>
 
-#import "UIViewController+KNSemiModal.h"
-
 #import "ECAlertTags.h"
 
 #import "NSUserDefaults+Encore.h"
