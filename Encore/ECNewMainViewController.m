@@ -451,7 +451,7 @@ typedef enum {
 //                [self.navigationController.navigationBar setBackgroundColor:[UIColor blueArtistTextColor]];
     }
     if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
-        self.edgesForExtendedLayout = UIRectEdgeNone;
+//        self.edgesForExtendedLayout = UIRectEdgeNone;
         [self.navigationController.navigationBar setBarTintColor:[UIColor blueArtistTextColor]];
         [self.navigationController.navigationBar setTranslucent:YES];
     }

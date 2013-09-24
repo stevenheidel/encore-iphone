@@ -27,7 +27,7 @@
                                 </constraints>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="HlE-VT-IbH">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="E96-RF-aMq" userLabel="Header">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="74"/>
@@ -123,7 +123,6 @@
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="ewv-3k-71O" firstAttribute="leading" secondItem="r8f-Xx-36C" secondAttribute="leading" id="0Gn-9Q-sHG"/>
-                            <constraint firstItem="HlE-VT-IbH" firstAttribute="top" secondItem="r8f-Xx-36C" secondAttribute="top" id="BuE-Pa-zv4"/>
                             <constraint firstItem="HlE-VT-IbH" firstAttribute="trailing" secondItem="r8f-Xx-36C" secondAttribute="trailing" id="Ktu-F3-X28"/>
                             <constraint firstItem="HlE-VT-IbH" firstAttribute="leading" secondItem="r8f-Xx-36C" secondAttribute="leading" id="Vhd-4o-OhP"/>
                             <constraint firstItem="HlE-VT-IbH" firstAttribute="bottom" secondItem="r8f-Xx-36C" secondAttribute="bottom" id="adz-Ev-knC"/>
@@ -131,6 +130,7 @@
                             <constraint firstItem="SOM-DW-RgO" firstAttribute="bottom" secondItem="r8f-Xx-36C" secondAttribute="bottom" id="jUP-ZD-N4B"/>
                             <constraint firstItem="ewv-3k-71O" firstAttribute="bottom" secondItem="r8f-Xx-36C" secondAttribute="bottom" id="kHf-dr-W65"/>
                             <constraint firstItem="SOM-DW-RgO" firstAttribute="trailing" secondItem="r8f-Xx-36C" secondAttribute="trailing" id="oCG-nV-OFP"/>
+                            <constraint firstItem="HlE-VT-IbH" firstAttribute="top" secondItem="b1E-CF-7Uh" secondAttribute="bottom" id="qSr-uk-sly"/>
                             <constraint firstItem="SOM-DW-RgO" firstAttribute="top" secondItem="r8f-Xx-36C" secondAttribute="top" id="rJk-Qb-6n6"/>
                             <constraint firstItem="ewv-3k-71O" firstAttribute="trailing" secondItem="r8f-Xx-36C" secondAttribute="trailing" id="veB-s4-VFG"/>
                         </constraints>

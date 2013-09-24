@@ -36,8 +36,13 @@
                                 </connections>
                             </searchBar>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="St2-kZ-5g4">
-                                <rect key="frame" x="266" y="518" width="34" height="30"/>
+                                <rect key="frame" x="249" y="494" width="51" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="9a0-bN-Kcg"/>
+                                    <constraint firstAttribute="width" constant="51" id="udG-Fm-NgO"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Save">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -46,8 +51,13 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Px9-vt-wjo">
-                                <rect key="frame" x="20" y="518" width="48" height="30"/>
+                                <rect key="frame" x="20" y="494" width="49" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="AQc-PG-EvA"/>
+                                    <constraint firstAttribute="width" constant="49" id="OVj-5r-Ucg"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Cancel">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -77,9 +87,9 @@
                             <constraint firstItem="p2x-U0-OaN" firstAttribute="top" secondItem="gkh-5w-PDA" secondAttribute="bottom" id="DBj-Jn-Djp"/>
                             <constraint firstAttribute="trailing" secondItem="SbB-Gv-gWn" secondAttribute="trailing" id="LNZ-jC-yz1"/>
                             <constraint firstItem="Age-SV-RNT" firstAttribute="top" secondItem="SbB-Gv-gWn" secondAttribute="bottom" id="NdV-sp-xB7"/>
-                            <constraint firstItem="Age-SV-RNT" firstAttribute="top" secondItem="Px9-vt-wjo" secondAttribute="bottom" constant="20" id="OwS-a0-e0F"/>
+                            <constraint firstItem="Age-SV-RNT" firstAttribute="top" secondItem="Px9-vt-wjo" secondAttribute="bottom" constant="30" id="OwS-a0-e0F"/>
                             <constraint firstItem="Px9-vt-wjo" firstAttribute="leading" secondItem="sJX-9t-1uS" secondAttribute="leading" constant="20" id="Rdd-jr-QZg"/>
-                            <constraint firstItem="Age-SV-RNT" firstAttribute="top" secondItem="St2-kZ-5g4" secondAttribute="bottom" constant="20" id="VaU-Lf-uYa"/>
+                            <constraint firstItem="Age-SV-RNT" firstAttribute="top" secondItem="St2-kZ-5g4" secondAttribute="bottom" constant="30" id="VaU-Lf-uYa"/>
                             <constraint firstItem="SbB-Gv-gWn" firstAttribute="top" secondItem="sJX-9t-1uS" secondAttribute="top" id="lbb-Ev-FdS"/>
                         </constraints>
                     </view>
@@ -87,6 +97,7 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="mapView" destination="SbB-Gv-gWn" id="bsv-gA-SbX"/>
+                        <outlet property="saveButton" destination="St2-kZ-5g4" id="uZY-9c-h2F"/>
                         <outlet property="searchDisplayController" destination="nwG-gH-V7Y" id="f12-Bd-aL8"/>
                     </connections>
                 </viewController>

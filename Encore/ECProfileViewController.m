@@ -382,7 +382,9 @@ typedef enum {
 
 #pragma mark - Logout / Settings
 -(void) settingsTapped {
-    UIActionSheet* actionSheet = [[UIActionSheet alloc] initWithTitle:@"Settings" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Logout" otherButtonTitles:@"Give Feedback", nil];
+    
+    UIActionSheet* actionSheet = [[UIActionSheet alloc] initWithTitle: [NSString stringWithFormat:@"Encore Version %@", [NSString stringWithFormat:@"%@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]]]
+ delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Logout" otherButtonTitles:@"Give Feedback", @"Repeat Walkthrough", nil];
     actionSheet.tag = SettingsActionSheet;
     actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
     [actionSheet showInView:self.view];
@@ -395,6 +397,11 @@ typedef enum {
         }
         else if (buttonIndex == actionSheet.firstOtherButtonIndex) {
             [self openFeedback];
+        }
+        else if (buttonIndex == actionSheet.firstOtherButtonIndex + 1){
+            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"No" message:@"Not implemented" delegate:nil cancelButtonTitle:@"HAHA" otherButtonTitles:nil];
+            [alert show];
+            //TODO: repeat walkthrough
         }
     }
     
