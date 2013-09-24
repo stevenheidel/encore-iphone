@@ -147,6 +147,7 @@
                     [self.navigationController dismissViewControllerAnimated:YES completion:^{
                         [self.hud hide:YES];
                         [self setUpLocationManager];
+                        
                         [self.mainViewController profileTapped];
                 }];
                 [[NSNotificationCenter defaultCenter] postNotificationName:ECLoginCompletedNotification object:nil];
