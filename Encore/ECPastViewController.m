@@ -148,7 +148,7 @@ typedef enum {
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.row) {
         case Details:
-            return 146.0f;
+            return 75.0f;
         case Lineup:
             return 142.0f;
         case SongPreview:

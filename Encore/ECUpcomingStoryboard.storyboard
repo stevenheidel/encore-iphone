@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4510" systemVersion="12F37" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="kpA-lm-Rwt">
     <dependencies>
         <deployment defaultVersion="1536" identifier="iOS"/>
-
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
     </dependencies>
     <scenes>
@@ -246,7 +244,7 @@
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="songpreview" rowHeight="71" id="uop-K5-1gw" customClass="SongPreviewCell">
                                 <rect key="frame" x="0.0" y="491" width="320" height="71"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uop-K5-1gw" id="g11-za-eJb">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
@@ -298,20 +296,19 @@
                                             </connections>
                                         </button>
                                     </subviews>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </view>
+                                </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="I8m-70-Evq" firstAttribute="leading" secondItem="uop-K5-1gw" secondAttribute="leading" constant="15" id="8eh-YK-6n7"/>
-                                    <constraint firstAttribute="trailing" secondItem="GN3-7T-yxD" secondAttribute="trailing" constant="20" type="default" id="FZv-6Z-9gH"/>
-                                    <constraint firstItem="2hi-d9-fm0" firstAttribute="top" secondItem="IWu-eN-NZZ" secondAttribute="top" type="default" id="Pj1-vQ-pa1"/>
-                                    <constraint firstItem="GN3-7T-yxD" firstAttribute="leading" secondItem="uop-K5-1gw" secondAttribute="leading" constant="20" type="default" id="TfE-QR-CwT"/>
-                                    <constraint firstItem="I8m-70-Evq" firstAttribute="bottom" secondItem="IWu-eN-NZZ" secondAttribute="bottom" type="default" id="U1y-Zv-fuZ"/>
-                                    <constraint firstItem="GN3-7T-yxD" firstAttribute="top" secondItem="uop-K5-1gw" secondAttribute="top" constant="5" id="URR-Vz-nVq"/>
-                                    <constraint firstItem="IWu-eN-NZZ" firstAttribute="leading" secondItem="uop-K5-1gw" secondAttribute="leading" constant="55" id="Ylc-KO-1fw"/>
-                                    <constraint firstItem="I8m-70-Evq" firstAttribute="top" secondItem="IWu-eN-NZZ" secondAttribute="top" type="default" id="dYH-6s-5Bu"/>
-                                    <constraint firstItem="I8m-70-Evq" firstAttribute="top" secondItem="uop-K5-1gw" secondAttribute="top" constant="26" id="hu5-gu-H04"/>
-                                    <constraint firstAttribute="trailing" secondItem="2hi-d9-fm0" secondAttribute="trailing" constant="8" id="xUL-hT-yaN"/>
+                                    <constraint firstAttribute="trailing" secondItem="GN3-7T-yxD" secondAttribute="trailing" constant="20" id="04Z-j2-aXN"/>
+                                    <constraint firstItem="GN3-7T-yxD" firstAttribute="top" secondItem="uop-K5-1gw" secondAttribute="top" constant="5" id="9ut-TO-qQo"/>
+                                    <constraint firstItem="I8m-70-Evq" firstAttribute="top" secondItem="uop-K5-1gw" secondAttribute="top" constant="26" id="Ibx-Us-2pP"/>
+                                    <constraint firstItem="I8m-70-Evq" firstAttribute="bottom" secondItem="IWu-eN-NZZ" secondAttribute="bottom" id="MlF-bY-wF0"/>
+                                    <constraint firstAttribute="trailing" secondItem="2hi-d9-fm0" secondAttribute="trailing" constant="8" id="TIO-u3-ZLv"/>
+                                    <constraint firstItem="2hi-d9-fm0" firstAttribute="top" secondItem="IWu-eN-NZZ" secondAttribute="top" id="Tbe-kA-ODU"/>
+                                    <constraint firstItem="I8m-70-Evq" firstAttribute="top" secondItem="IWu-eN-NZZ" secondAttribute="top" id="pN5-0E-vo2"/>
+                                    <constraint firstItem="IWu-eN-NZZ" firstAttribute="leading" secondItem="uop-K5-1gw" secondAttribute="leading" constant="55" id="qd1-CW-pB9"/>
+                                    <constraint firstItem="I8m-70-Evq" firstAttribute="leading" secondItem="uop-K5-1gw" secondAttribute="leading" constant="15" id="ut4-AX-jIB"/>
+                                    <constraint firstItem="GN3-7T-yxD" firstAttribute="leading" secondItem="uop-K5-1gw" secondAttribute="leading" constant="20" id="yEl-SN-yl6"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="btnItunes" destination="2hi-d9-fm0" id="ONc-qx-dch"/>
@@ -404,7 +401,6 @@
             </objects>
             <point key="canvasLocation" x="584" y="10"/>
         </scene>
-
     </scenes>
     <resources>
         <image name="itunes.png" width="110" height="40"/>

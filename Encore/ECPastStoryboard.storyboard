@@ -290,11 +290,11 @@
                                     <outlet property="lblSongName" destination="Be0-qS-ujT" id="bVc-F0-nwr"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="details" rowHeight="146" id="tmc-SK-ANe" customClass="DetailsCell">
-                                <rect key="frame" x="0.0" y="516" width="320" height="146"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="details" rowHeight="75" id="tmc-SK-ANe" customClass="DetailsCell">
+                                <rect key="frame" x="0.0" y="516" width="320" height="75"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="145"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="74"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fsu-P6-AeE" customClass="ECChangeConcertStateButton">
@@ -446,9 +446,12 @@
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="efn-fD-Gao">
                                         <rect key="frame" x="5" y="7" width="20" height="20"/>
                                     </activityIndicatorView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="49" contentMode="left" text="Getting photos and videos taken by the crowd" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cvf-kh-lB5" userLabel="Footer label">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="49" contentMode="left" text="Getting photos &amp; videos taken by the crowd" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cvf-kh-lB5" userLabel="Footer label">
                                         <rect key="frame" x="30" y="7" width="299" height="20"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="299" id="gmZ-OQ-DJz"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -518,9 +521,6 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SOU-UE-yhE" userLabel="Container">
                                 <rect key="frame" x="0.0" y="456" width="320" height="92"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="scaleToFill" image="navbar.png" translatesAutoresizingMaskIntoConstraints="NO" id="fHB-QB-ed6" userLabel="Background">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="92"/>
-                                    </imageView>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="218" translatesAutoresizingMaskIntoConstraints="NO" id="kqE-T6-mKV" userLabel="Caption">
                                         <rect key="frame" x="82" y="31" width="218" height="48"/>
                                         <constraints>
@@ -548,7 +548,7 @@
                                         </constraints>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vqg-Ru-xgz" userLabel="Flag">
-                                        <rect key="frame" x="276" y="47" width="44" height="45"/>
+                                        <rect key="frame" x="276" y="0.0" width="44" height="45"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="44" type="user" id="4ZG-I8-Gam"/>
                                             <constraint firstAttribute="height" constant="45" type="user" id="Rk9-rW-1TB"/>
@@ -565,19 +565,15 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.59999999999999998" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="kqE-T6-mKV" firstAttribute="top" secondItem="SOU-UE-yhE" secondAttribute="top" constant="31" id="6xk-On-M0f"/>
                                     <constraint firstAttribute="height" constant="92" type="user" id="B0V-jV-JvE"/>
-                                    <constraint firstItem="fHB-QB-ed6" firstAttribute="trailing" secondItem="SOU-UE-yhE" secondAttribute="trailing" type="user" id="D8h-jl-LQ6"/>
-                                    <constraint firstItem="fHB-QB-ed6" firstAttribute="top" secondItem="SOU-UE-yhE" secondAttribute="top" type="default" id="E2L-n8-1zn"/>
                                     <constraint firstAttribute="trailing" secondItem="kqE-T6-mKV" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="G6q-GC-zRt"/>
-                                    <constraint firstItem="Vqg-Ru-xgz" firstAttribute="bottom" secondItem="SOU-UE-yhE" secondAttribute="bottom" type="default" id="MRg-vs-YUd"/>
+                                    <constraint firstItem="Vqg-Ru-xgz" firstAttribute="top" secondItem="SOU-UE-yhE" secondAttribute="top" type="default" id="PFo-6B-dh2"/>
                                     <constraint firstItem="Vqg-Ru-xgz" firstAttribute="trailing" secondItem="SOU-UE-yhE" secondAttribute="trailing" type="default" id="Pby-GF-KMM"/>
                                     <constraint firstAttribute="bottom" secondItem="B4e-kS-ptb" secondAttribute="bottom" constant="20" symbolic="YES" type="user" id="XnD-Sv-ioh"/>
-                                    <constraint firstAttribute="bottom" secondItem="fHB-QB-ed6" secondAttribute="bottom" type="user" id="dyE-IW-vfb"/>
-                                    <constraint firstItem="fHB-QB-ed6" firstAttribute="leading" secondItem="SOU-UE-yhE" secondAttribute="leading" type="user" id="f77-ib-mz3"/>
-                                    <constraint firstItem="Myf-kx-Zg4" firstAttribute="top" secondItem="SOU-UE-yhE" secondAttribute="top" constant="14" id="qlN-Oj-zgj"/>
+                                    <constraint firstItem="Myf-kx-Zg4" firstAttribute="top" secondItem="SOU-UE-yhE" secondAttribute="top" constant="14" id="nEd-x3-qyd"/>
                                     <constraint firstItem="Myf-kx-Zg4" firstAttribute="leading" secondItem="B4e-kS-ptb" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="ty5-9W-5SG"/>
                                     <constraint firstItem="kqE-T6-mKV" firstAttribute="leading" secondItem="B4e-kS-ptb" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="wjI-Tb-m9J"/>
                                 </constraints>
@@ -664,7 +660,6 @@
     <resources>
         <image name="flag.png" width="22" height="25"/>
         <image name="itunes.png" width="110" height="40"/>
-        <image name="navbar.png" width="320" height="44"/>
         <image name="pausesongbutton.png" width="35" height="40"/>
         <image name="playbutton.png" width="59" height="59"/>
         <image name="playsongbutton.png" width="35" height="40"/>

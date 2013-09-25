@@ -14,10 +14,14 @@
 @implementation ECEventProfileStatusManager
 
 -(void) checkProfileState {
-    [ECJSONFetcher checkIfConcert:self.eventID isOnProfile:[NSUserDefaults userID] completion:^(BOOL isOnProfile) {
-        [self.delegate profileState:isOnProfile];
-        self.isOnProfile = isOnProfile;
-    }];
+    NSString* userID = [NSUserDefaults userID]; //only check if the userID is not null (null if not logged in)
+    //alternatively could check if logged in, but this is essentially the same result; can't check if on profile without an id
+    if(userID){
+        [ECJSONFetcher checkIfConcert:self.eventID isOnProfile:userID completion:^(BOOL isOnProfile) {
+            [self.delegate profileState:isOnProfile];
+            self.isOnProfile = isOnProfile;
+        }];
+    }
 }
 
 -(void) toggleProfileState {
