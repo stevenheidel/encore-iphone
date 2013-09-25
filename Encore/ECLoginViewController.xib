@@ -13,19 +13,19 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleAspectFill" id="1">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" image="newloginscreenbackground.png" translatesAutoresizingMaskIntoConstraints="NO" id="520">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </imageView>
-                <button opaque="NO" contentMode="scaleAspectFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="249">
-                    <rect key="frame" x="20" y="453" width="280" height="53"/>
+                <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="249">
+                    <rect key="frame" x="20" y="345" width="280" height="53"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="53" id="560"/>
+                        <constraint firstAttribute="height" constant="53" id="08V-hR-Lw7"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                     <state key="normal" image="loginfacebookbutton.png">
@@ -39,32 +39,45 @@
                         <action selector="performLogin:" destination="-1" eventType="touchUpInside" id="253"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="414">
-                    <rect key="frame" x="94" y="516" width="133" height="32"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="414">
+                    <rect key="frame" x="94" y="436" width="133" height="33"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="133" id="426"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <state key="normal" title="Cancel">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    </state>
-                    <state key="highlighted">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                     </state>
                     <connections>
                         <action selector="loginLater" destination="-1" eventType="touchUpInside" id="442"/>
                     </connections>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="profilepreview.png" translatesAutoresizingMaskIntoConstraints="NO" id="754">
-                    <rect key="frame" x="40" y="20" width="240" height="352"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" verticalCompressionResistancePriority="749" image="profilepreview.png" translatesAutoresizingMaskIntoConstraints="NO" id="754">
+                    <rect key="frame" x="48" y="84" width="225" height="253"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login to add concerts to your profile" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="c44-Rp-Oil" userLabel="Title label">
+                    <rect key="frame" x="20" y="20" width="280" height="56"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="240" id="758"/>
-                        <constraint firstAttribute="height" constant="352" id="765"/>
+                        <constraint firstAttribute="height" constant="56" id="cfD-tC-RrB"/>
                     </constraints>
-                </imageView>
+                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We won't post anything without asking you. Promise." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="200" translatesAutoresizingMaskIntoConstraints="NO" id="D8b-iL-aka">
+                    <rect key="frame" x="60" y="400" width="200" height="35"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="35" id="7Q0-MP-3BH"/>
+                        <constraint firstAttribute="width" constant="200" id="jc6-JM-A25"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
@@ -72,16 +85,24 @@
                 <constraint firstItem="520" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="530"/>
                 <constraint firstItem="520" firstAttribute="top" secondItem="1" secondAttribute="top" id="733"/>
                 <constraint firstItem="520" firstAttribute="bottom" secondItem="1" secondAttribute="bottom" id="734"/>
-                <constraint firstAttribute="bottom" secondItem="414" secondAttribute="bottom" constant="20" symbolic="YES" id="742"/>
                 <constraint firstItem="520" firstAttribute="trailing" secondItem="1" secondAttribute="trailing" id="743"/>
-                <constraint firstAttribute="trailing" secondItem="249" secondAttribute="trailing" constant="20" symbolic="YES" id="749"/>
-                <constraint firstItem="249" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="20" symbolic="YES" id="751"/>
-                <constraint firstItem="754" firstAttribute="centerX" secondItem="249" secondAttribute="centerX" id="756"/>
-                <constraint firstItem="414" firstAttribute="top" secondItem="249" secondAttribute="bottom" constant="10" id="763"/>
-                <constraint firstItem="754" firstAttribute="top" secondItem="1" secondAttribute="top" constant="20" symbolic="YES" id="764"/>
+                <constraint firstItem="249" firstAttribute="leading" secondItem="c44-Rp-Oil" secondAttribute="leading" id="9bF-Hg-amM"/>
+                <constraint firstAttribute="trailing" secondItem="c44-Rp-Oil" secondAttribute="trailing" constant="20" id="BEq-kn-tZh"/>
+                <constraint firstItem="249" firstAttribute="trailing" secondItem="c44-Rp-Oil" secondAttribute="trailing" id="BQY-Fw-Qlz"/>
+                <constraint firstItem="754" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="48" id="EvV-Bg-aD9"/>
+                <constraint firstAttribute="bottom" relation="lessThanOrEqual" secondItem="754" secondAttribute="bottom" constant="149" id="Oso-tv-GTa"/>
+                <constraint firstItem="D8b-iL-aka" firstAttribute="top" secondItem="249" secondAttribute="bottom" constant="2" id="Sst-Xm-zhY"/>
+                <constraint firstItem="754" firstAttribute="top" secondItem="c44-Rp-Oil" secondAttribute="bottom" constant="8" id="ZMV-ib-9rz"/>
+                <constraint firstItem="249" firstAttribute="top" secondItem="754" secondAttribute="bottom" constant="8" symbolic="YES" id="crN-Wc-Qeh"/>
+                <constraint firstItem="754" firstAttribute="centerX" secondItem="c44-Rp-Oil" secondAttribute="centerX" constant="0.5" id="g6f-dv-OoH"/>
+                <constraint firstAttribute="bottom" secondItem="414" secondAttribute="bottom" constant="11" id="g77-Nw-bzo"/>
+                <constraint firstItem="c44-Rp-Oil" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="20" id="paL-Br-Mv5"/>
+                <constraint firstItem="414" firstAttribute="top" relation="greaterThanOrEqual" secondItem="D8b-iL-aka" secondAttribute="bottom" constant="1" id="rgh-mH-YVT"/>
+                <constraint firstItem="c44-Rp-Oil" firstAttribute="top" secondItem="1" secondAttribute="top" constant="20" symbolic="YES" id="ugy-yD-a0z"/>
+                <constraint firstItem="249" firstAttribute="centerX" secondItem="D8b-iL-aka" secondAttribute="centerX" id="ydq-4a-mQH"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
-            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
         </view>
     </objects>
     <resources>
