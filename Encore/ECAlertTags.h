@@ -18,7 +18,6 @@ typedef enum {
     LocationSetterRightAlert,
     FailedGeocodeAlert,
     NoLocationAlert,
-    ECInviteNotLoggedInAlert,
     ECShareNotLoggedInAlert,
     ECChangeStateNotLoggedInAlert,
     ECNoNetworkAlertTag

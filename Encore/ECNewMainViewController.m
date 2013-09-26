@@ -396,43 +396,6 @@ typedef enum {
     self.navigationItem.rightBarButtonItem = locationButton;
 }
 
--(void) inviteTapped {
-    
-    if (self.isLoggedIn){
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:ECLoginCompletedNotification object:nil];
-
-     [Flurry logEvent:@"Tapped_Invite" withParameters:[NSDictionary dictionaryWithObject:@"MainView" forKey:@"source"]];
-    //        //https://developers.facebook.com/docs/concepts/requests/#invites
-    //        //TODO: filter out people that have not installed it
-    //Provide a filter in your request interface that only lists people that have not installed the game. If you use the Requests dialog, you can enable this with the app_non_users filter.
-    NSDictionary* params = nil;
-    [FBWebDialogs presentRequestsDialogModallyWithSession:[FBSession activeSession]
-                                                  message:@"Check out Encore on iOS"
-                                                    title:@"Invite Friends to Encore"
-                                               parameters:params
-                                                  handler:^(FBWebDialogResult result, NSURL *resultURL, NSError *error) {
-                                                      if (error) {
-                                                          // Case A: Error launching the dialog or sending request.
-                                                          NSLog(@"Error sending request.");
-                                                      } else {
-                                                          if (result == FBWebDialogResultDialogNotCompleted) {
-                                                              // Case B: User clicked the "x" icon
-                                                              NSLog(@"User canceled request.");
-                                                              [Flurry logEvent:@"Canceled_Inviting_Friends_On_Dialog"];
-                                                              
-                                                          } else {
-                                                              NSLog(@"Request Sent.");
-                                                              [Flurry logEvent:@"Successfully_Invited_Friends"]; //TODO figure out how many friends were invited
-                                                          }
-                                                      }}];
-    }else
-    {
-        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login", nil) message:NSLocalizedString(@"To invite your friends, you must first login", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Login", nil), nil];
-        alert.tag = ECInviteNotLoggedInAlert;
-        [alert show];        
-    }
-
-}
 -(void) feedbackTapped {
         [Flurry logEvent:@"Opened_Feedback" withParameters:[NSDictionary dictionaryWithObject:@"MainView" forKey:@"source"]];
     ATConnect *connection = [ATConnect sharedConnection];
@@ -626,18 +589,8 @@ typedef enum {
     {
         if(buttonIndex == alertView.firstOtherButtonIndex)
         {
-            //Manually
-
-            //TODO : push the new location viewcontroller
-
             [self modifySearchLocation];
 
-        }
-    }else if (alertView.tag == ECInviteNotLoggedInAlert)
-    {
-        if (buttonIndex == alertView.firstOtherButtonIndex) {
-            [ApplicationDelegate beginFacebookAuthorization];
-            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(inviteTapped) name:ECLoginCompletedNotification object:nil];
         }
     }
     else if (alertView.tag == ECNoNetworkAlertTag) {
