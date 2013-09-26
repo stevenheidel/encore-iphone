@@ -287,33 +287,22 @@ typedef enum {
     UIActivityViewController* shareDrawer = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
     shareDrawer.excludedActivityTypes = @[UIActivityTypePostToWeibo,UIActivityTypeAssignToContact,UIActivityTypeSaveToCameraRoll,UIActivityTypePrint];
     
-    //TODO: do something with this completion handler, ie. analytics.
     shareDrawer.completionHandler = ^(NSString *activityType, BOOL completed){
         if (completed) {
             NSLog(@"Selected activity was performed.");
+            [Flurry logEvent:@"EVENT_MULTISHARE" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"Past",@"tense",[self.concert eventName], @"event_name",activityType,@"selected_sharing_option", nil]];
         } else {
             if (activityType == NULL) {
                 NSLog(@"User dismissed the view controller without making a selection.");
+                [Flurry logEvent:@"EVENT_MULTISHARE" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"Past",@"tense", [self.concert eventName], @"event_name",@"dismissed_wo_selection", @"selection_sharing_option",nil]];
             } else {
                 NSLog(@"Activity was not performed.");
             }
         }
     };
     [self presentViewController:shareDrawer animated:YES completion:nil];
-//    if([ApplicationDelegate isLoggedIn]) {
-//        [[NSNotificationCenter defaultCenter] removeObserver:self name:ECLoginCompletedNotification object:nil];
-//        [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
-//        [Flurry logEvent:@"Share_Tapped_Concert" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"pastvc",@"source",self.concert.eventID,@"eventID", self.concert.eventName, @"eventName", nil]];
-//        [self share];
-//    }
-//    else {
-//        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login", nil) message:NSLocalizedString(@"To share this concert, you must first login", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Login", nil), nil];
-//        alert.tag = ECShareNotLoggedInAlert;
-//        [alert show];
-//    }
 }
 
-//currently not in use, replaced with multishare
 -(void) share {
     [self shareWithTaggedFriends:nil];
 }
@@ -336,9 +325,9 @@ typedef enum {
                 NSLog(@"Success sharing concert!");
                 [Flurry logEvent:@"Concert_Share_To_FB_Success" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:url.absoluteString, @"url", nil]];
             }
-            
         }];
     }
+    
     else {
         NSMutableDictionary *params2 =
         [NSMutableDictionary dictionaryWithObjectsAndKeys:
@@ -479,12 +468,49 @@ typedef enum {
         
         [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
         [self.statusManager toggleProfileState];
+        
     }else
     {
         UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login", nil) message:NSLocalizedString(@"To add this concert to your profile, you must first login", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Login", nil), nil];
         alert.tag = ECChangeStateNotLoggedInAlert;
         [alert show];
     }
+}
+
+-(void) openFacebookPicker {
+    if (self.friendPickerController == nil) {
+        // Create friend picker, and get data loaded into it.
+        self.friendPickerController = [[FBFriendPickerViewController alloc] init];
+        self.friendPickerController.title = @"Who else went?";
+        self.friendPickerController.delegate = self;
+    }
+    [self.friendPickerController loadData];
+    [self.friendPickerController clearSelection];
+    
+    
+    [self presentViewController:self.friendPickerController animated:YES completion:^{
+        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+    }];
+    
+}
+
+- (void) handlePickerDone
+{
+    [self dismissViewControllerAnimated:YES completion:^{
+        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    }];
+}
+
+- (void)facebookViewControllerDoneWasPressed:(id)sender
+{
+    for (id<FBGraphUser> user in self.friendPickerController.selection) {
+        NSLog(@"Friend selected: %@", user.name);
+    }
+    [self handlePickerDone];
+}
+
+-(void) facebookViewControllerCancelWasPressed:(id)sender {
+    [self handlePickerDone];
 }
 
 -(void)successChangingState:(BOOL)isOnProfile
@@ -497,7 +523,9 @@ typedef enum {
     
     [Flurry logEvent:@"Completed_Adding_Concert" withParameters:[self flurryParam]];
     
-
+    if (isOnProfile) {
+        [self openFacebookPicker];
+    }
 }
 -(void) failedToChangeState: (BOOL) isOnProfile;
 {

@@ -12,13 +12,15 @@
 #import "ECSearchType.h"
 #import "ECEventProfileStatusManager.h"
 #import "ECChangeConcertStateButton.h"
+#import <FacebookSDK/FacebookSDK.h>
+
 @protocol ECUpcomingViewControllerDelegate <NSObject>
 - (void) profileUpdated;
 @end
 
-@interface ECUpcomingViewController : UITableViewController
+@interface ECUpcomingViewController : UITableViewController <ECEventProfileStatusManagerDelegate,FBFriendPickerDelegate>
 
-
+@property (nonatomic,strong) FBFriendPickerViewController* friendPickerController;
 @property (weak, nonatomic) IBOutlet UIImageView *eventImage;
 @property (weak, nonatomic) IBOutlet UILabel *eventName;
 @property (weak, nonatomic) IBOutlet UILabel *eventVenueAndDate;

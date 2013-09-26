@@ -11,13 +11,12 @@
 #import "ECEventProfileStatusManager.h"
 #import "ECChangeConcertStateButton.h"
 #import <AVFoundation/AVFoundation.h>
-
+#import <FacebookSDK/FacebookSDK.h>
 @protocol ECPastViewControllerDelegate <NSObject>
 - (void) profileUpdated;
 @end
 
-@interface ECPastViewController : UITableViewController <UIAlertViewDelegate,ECEventProfileStatusManagerDelegate>
-@property (nonatomic,assign) BOOL isOnProfile;
+@interface ECPastViewController : UITableViewController <UIAlertViewDelegate,ECEventProfileStatusManagerDelegate,FBFriendPickerDelegate>
 @property (nonatomic,weak) ECChangeConcertStateButton* iwasthereButton;
 @property (weak, nonatomic) IBOutlet UIImageView *eventImage;
 @property (weak, nonatomic) IBOutlet UILabel *eventName;
@@ -30,5 +29,7 @@
 @property (nonatomic,assign) BOOL hideShareButton;
 @property (nonatomic,strong) NSDictionary * songInfo;
 @property (nonatomic,strong) AVPlayer* player;
+
+@property (nonatomic,strong) FBFriendPickerViewController* friendPickerController;
 
 @end

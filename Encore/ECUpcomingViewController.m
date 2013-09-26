@@ -553,6 +553,42 @@ typedef enum {
     [self.iamgoingButton setButtonIsOnProfile:isOnProfile];
 }
 
+-(void) openFacebookPicker {
+    if (self.friendPickerController == nil) {
+        // Create friend picker, and get data loaded into it.
+        self.friendPickerController = [[FBFriendPickerViewController alloc] init];
+        self.friendPickerController.title = @"Invite friends";
+        self.friendPickerController.delegate = self;
+    }
+    [self.friendPickerController loadData];
+    [self.friendPickerController clearSelection];
+    
+    
+    [self presentViewController:self.friendPickerController animated:YES completion:^{
+        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+    }];
+    
+}
+
+- (void) handlePickerDone
+{
+    [self dismissViewControllerAnimated:YES completion:^{
+        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    }];
+}
+
+- (void)facebookViewControllerDoneWasPressed:(id)sender
+{
+    for (id<FBGraphUser> user in self.friendPickerController.selection) {
+        NSLog(@"Friend selected: %@", user.name);
+    }
+    [self handlePickerDone];
+}
+
+-(void) facebookViewControllerCancelWasPressed:(id)sender {
+    [self handlePickerDone];
+}
+
 -(void)successChangingState:(BOOL)isOnProfile
 {
     [self.iamgoingButton setButtonIsOnProfile:isOnProfile];
@@ -563,7 +599,9 @@ typedef enum {
     
     [Flurry logEvent:@"Completed_Adding_Concert" withParameters:[self flurryParam]];
     
-    
+    if (isOnProfile) {
+        [self openFacebookPicker];
+    }
 }
 -(void) failedToChangeState: (BOOL) isOnProfile;
 {
