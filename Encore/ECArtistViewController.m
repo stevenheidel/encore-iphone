@@ -195,7 +195,7 @@ typedef enum {
     UITableViewCell* cell = [self.tableView dequeueReusableCellWithIdentifier:@"eventcell"];
     NSDictionary* event = [self eventForIndexPath: indexPath];
     NSDateFormatter* formatter = [NSDateFormatter new];
-    formatter.dateFormat = @"yyyy-mm-dd";
+    formatter.dateFormat = @"yyyy-MM-dd";
     NSDate* date = [formatter dateFromString:[event objectForKey: @"date"]];
     
     formatter.dateStyle = NSDateFormatterMediumStyle;
