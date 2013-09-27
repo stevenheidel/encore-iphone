@@ -195,4 +195,27 @@
     }];
 
 }
+
+
++(void) addFriends: (NSArray*) friends ofUser: (NSString*) userID toEvent: (NSString*) eventID completion: (void(^)(BOOL success)) completion {
+    NSString* urlString = [NSString stringWithFormat:SaveFriendsURL,userID,eventID];
+    AFHTTPClient * client = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:BaseURL]];
+    
+    [client registerHTTPOperationClass:[AFJSONRequestOperation class]];
+    [client setDefaultHeader:@"Accept" value:@"application/json"];
+    NSDictionary* parameters = [NSDictionary dictionaryWithObjectsAndKeys:friends,@"facebook_friend_ids", nil];
+    
+    [client postPath:urlString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"%@:Success posting friends of user %@ to event %@.",NSStringFromClass([self class]),userID,eventID);
+        if (completion) {
+            completion(TRUE);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"%@:Failed to post friends of user %@ to event %@: %@...",NSStringFromClass([self class]),userID,eventID,[[error description] substringToIndex:MAX_ERROR_LEN]);
+        if (completion) {
+            completion(FALSE);
+        }
+    }];
+    
+}
 @end

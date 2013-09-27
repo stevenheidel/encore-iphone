@@ -126,4 +126,65 @@
 
 @end
 
+@implementation FriendsCell
+
+-(void) setFriends:(NSArray *)friends {
+    _friends = friends;
+    self.friendImages = [[NSMutableArray alloc] initWithCapacity:self.friends.count];
+    
+    for (int i = 0; i < self.friends.count; i++) {
+        [self.friendImages addObject:[NSNull null]];
+    }
+    [self.friendsCollectionView reloadData];
+}
+-(UICollectionViewCell*) collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    NSInteger itemNumber = indexPath.row;
+    NSDictionary* friend = [self.friends objectAtIndex:itemNumber];
+    NSString* name = [friend objectForKey:@"name"];
+    
+    __weak FriendCollectionCell *cell = (FriendCollectionCell*)[collectionView dequeueReusableCellWithReuseIdentifier:@"FriendCell" forIndexPath:indexPath];
+    [cell.friendImage setImage:nil];
+    
+    if([self.friendImages objectAtIndex:indexPath.row] == [NSNull null]) {
+        [cell.activityIndicator startAnimating];
+        NSURL* imageURL = [NSURL URLWithString:[friend objectForKey:@"facebook_image_url"]];
+            UIImage* image = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL]];
+            if (image) {
+                [self.friendImages replaceObjectAtIndex:indexPath.row withObject:image];
+                [cell.friendImage setImage: image];
+            }
+            [cell.activityIndicator stopAnimating];
+    }
+    else {
+        [cell.friendImage setImage:[self.friendImages objectAtIndex:indexPath.row]];
+    }
+    
+    cell.friendNameLabel.text = name;
+    
+        cell.friendNameLabel.font = [UIFont heroFontWithSize:10];
+        cell.friendImage.layer.cornerRadius = 5.0;
+        cell.friendImage.layer.masksToBounds = YES;
+        cell.friendImage.layer.borderColor = [UIColor grayColor].CGColor;
+        cell.friendImage.layer.borderWidth = 0.1;
+    
+    return cell;
+}
+-(NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    
+    return self.friends.count;
+}
+-(NSInteger) numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    return 1;
+}
+
+-(void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    return;
+}
+@end
+
+@implementation FriendCollectionCell
+
+@end
+
 

@@ -17,18 +17,25 @@
 @end
 
 @interface ECPastViewController : UITableViewController <UIAlertViewDelegate,ECEventProfileStatusManagerDelegate,FBFriendPickerDelegate>
+
+
 @property (nonatomic,weak) ECChangeConcertStateButton* iwasthereButton;
+
 @property (weak, nonatomic) IBOutlet UIImageView *eventImage;
 @property (weak, nonatomic) IBOutlet UILabel *eventName;
 @property (weak, nonatomic) IBOutlet UILabel *eventVenueAndDate;
+
 @property (nonatomic,strong) ECEventProfileStatusManager* statusManager;
 @property (nonatomic,strong) id <ECPastViewControllerDelegate> eventStateDelegate; //for profile
-@property (nonatomic,strong) NSString* previousArtist;
+@property (nonatomic,strong) NSString* previousArtist; //if the view was reached from an artist page, remembers in case user clicks on same artist again
+
 @property (nonatomic, assign) ECSearchType tense;
 @property (nonatomic,strong) NSDictionary * concert;
 @property (nonatomic,assign) BOOL hideShareButton;
-@property (nonatomic,strong) NSDictionary * songInfo;
+
 @property (nonatomic,strong) AVPlayer* player;
+@property (nonatomic,readonly) NSDictionary* songInfo;
+@property (nonatomic,strong) NSArray * songs;
 
 @property (nonatomic,strong) FBFriendPickerViewController* friendPickerController;
 

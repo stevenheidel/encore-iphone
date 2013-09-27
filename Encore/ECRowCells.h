@@ -28,8 +28,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *lineupLabel;
 @property (weak,nonatomic) IBOutlet UICollectionView* lineupCollectionView;
 @property (nonatomic,strong) NSArray* lineup;
-@property (nonatomic,weak) UINavigationController* navController;
-@property (nonatomic, strong) NSString* previousArtist; // if you got to the current page from a previous page, will jus pop
+@property (nonatomic,weak) UINavigationController* navController; //needs reference to nav controller to push view controller on click
+@property (nonatomic, strong) NSString* previousArtist; // if you got to the current page from a previous page, will just pop
 @end
 
 @interface LineupCollectionCell : UICollectionViewCell
@@ -59,4 +59,18 @@
 @property (weak,nonatomic) IBOutlet UILabel* phoneLabel;
 @property (weak,nonatomic) IBOutlet MKMapView* mapView;
 -(IBAction)openBigMap;
+@end
+
+@interface FriendsCell: UITableViewCell  <UICollectionViewDataSource,UICollectionViewDelegate>
+@property (nonatomic, strong) NSMutableArray* friendImages;
+@property (weak,nonatomic) IBOutlet UILabel *friendsLabel;
+@property (weak,nonatomic) IBOutlet UICollectionView* friendsCollectionView;
+@property (nonatomic,strong) IBOutlet UIButton* addFriendsButton;
+@property (nonatomic,strong) NSArray* friends;
+@end
+
+@interface FriendCollectionCell : UICollectionViewCell
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (weak,nonatomic) IBOutlet UIImageView* friendImage;
+@property (weak,nonatomic) IBOutlet UILabel* friendNameLabel;
 @end

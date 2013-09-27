@@ -268,8 +268,8 @@ NSString* stringForSearchType(ECSearchType searchType) {
     }
     return unencodedString;
 }
-+(void) fetchSongPreviewForArtist:(NSString*) artist
-                       completion: (void(^) (NSDictionary* songInfo)) completion
++(void) fetchSongPreviewsForArtist:(NSString*) artist
+                       completion: (void(^) (NSArray* songs)) completion
 {
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://itunes.apple.com/search?term=%@&media=music&limit=1",[ECJSONFetcher urlEscapeString:artist]]];
     
@@ -277,18 +277,38 @@ NSString* stringForSearchType(ECSearchType searchType) {
     AFJSONRequestOperation * operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
 
         NSArray* songs = [JSON objectForKey:@"results"];
-        if(songs.count == 0)
-            completion(FALSE);
-        else
-            completion (songs[0]);
+        NSLog(@"%@: Successfully got %d songs for artist %@",NSStringFromClass([self class]),songs.count,artist);
+        if (completion) {
+            completion (songs);
+        }
         
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        NSLog(@"%@: Failed to get song preview for artist %@: %@",NSStringFromClass([self class]),artist,[[error description] substringToIndex:MAX_ERROR_LEN]);
         if (completion) {
-            completion(FALSE); //default to false
+            completion(nil);
         }
     }];
     [operation start];
 
+}
+
++(void) fetchFriendsForUser: (NSString*) userID atEvent: (NSString*) eventID completion: (void (^) (NSArray* friends)) completion {
+    NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:GetFriendsURL,userID,eventID]];
+    NSURLRequest * request = [NSURLRequest requestWithURL:url];
+    
+    AFJSONRequestOperation * operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        NSArray* friends = (NSArray*) JSON;
+        NSLog(@"%@: Successfully got %d friends for user %@ at event %@",NSStringFromClass([self class]),friends.count,userID,eventID);
+        if (completion) {
+            completion(friends);
+        }
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        NSLog(@"%@: Failed to get friends for user %@ at event %@: %@...",NSStringFromClass([self class]),userID,eventID,[[error description] substringToIndex:MAX_ERROR_LEN]);
+        if (completion) {
+            completion(nil);
+        }
+    }];
+    [operation start];
 }
                   
 

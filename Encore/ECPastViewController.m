@@ -37,6 +37,7 @@ typedef enum {
     Lineup,
     SongPreview,
     Details,
+    Friends,
     NumberOfRows
 } ECPastRow;
 
@@ -51,8 +52,8 @@ typedef enum {
     self.navigationItem.titleView = encoreLogo;
     self.tableView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
     [self setAppearance];
-    [ECJSONFetcher fetchSongPreviewForArtist:[self.concert headliner] completion:^(NSDictionary *song) {
-        self.songInfo = [[NSDictionary alloc] initWithDictionary:song];
+    [ECJSONFetcher fetchSongPreviewsForArtist:[self.concert headliner] completion:^(NSArray *songs) {
+        self.songs = [NSArray arrayWithArray:songs];
         [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:SongPreview inSection:0]]
                               withRowAnimation:UITableViewRowAnimationAutomatic];
     }];
@@ -147,6 +148,8 @@ typedef enum {
 
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.row) {
+        case Friends:
+            return 100.0f;
         case Details:
             return 75.0f;
         case Lineup:
@@ -169,6 +172,8 @@ typedef enum {
 
 +(NSString*) identifierForRow: (NSUInteger) row {
     switch (row) {
+        case Friends:
+            return @"friends";
         case Details:
             return @"details";
         case Lineup:
@@ -182,10 +187,23 @@ typedef enum {
     }
 }
 
+-(void) addFriends {
+    [self openFacebookPicker];
+}
+
 -(UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString* identifier = [ECPastViewController identifierForRow:indexPath.row];
     
     switch (indexPath.row) {
+        case Friends: {
+            FriendsCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+            cell.contentView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
+            [ECJSONFetcher fetchFriendsForUser:[NSUserDefaults userID] atEvent:[self.concert eventID] completion:^(NSArray *friends) {
+                cell.friends = friends;
+            }];
+            [cell.addFriendsButton addTarget:self action:@selector(addFriends) forControlEvents:UIControlEventTouchUpInside];
+            return cell;
+        }
         case Details: {
             DetailsCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier];
             if (cell == nil) {
@@ -431,6 +449,11 @@ typedef enum {
     
 }
 #pragma mark - Play/Pause Song preview
+
+-(NSDictionary*) songInfo {
+    NSInteger currentSongIndex = 0; //TODO: modify so changes
+    return [self.songs objectAtIndex:currentSongIndex];
+}
 
 - (void) playpauseButtonTapped:(UIButton*)button
 {

@@ -43,11 +43,10 @@
 +(void) checkIfEventIsPopulating: (NSString*) eventID
                       completion: (void (^)(BOOL isPopulating)) completion;
 
-+(void) fetchSongPreviewForArtist:(NSString*) artist
-                       completion: (void(^) (NSDictionary* songInfo)) completion;
++(void) fetchSongPreviewsForArtist:(NSString*) artist
+                       completion: (void(^) (NSArray* songs)) completion;  //array of dictionaries of song info
 
 
-
-//@property (nonatomic,unsafe_unretained) id <ECJSONFetcherDelegate> delegate;
++(void) fetchFriendsForUser: (NSString*) userID atEvent: (NSString*) eventID completion: (void (^) (NSArray* friends)) completion;
 @end
 

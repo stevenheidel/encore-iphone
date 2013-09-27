@@ -61,4 +61,9 @@ static NSString* const PostImageURL = @"events/%@/posts"; //,concertid
 static NSString* const CheckEventPopulatingURL = @BASE_URL_DEF "events/%@/populating.json"; //,eventID
 static NSString* const PopulateEventURL = @BASE_URL_DEF "events/%@/populate.json"; //, eventID
 
+#pragma mark - Friends
+static NSString* const SaveFriendsURL = @BASE_URL_DEF "users/%@/events/%@/add_facebook_friends"; //,userID,eventID
+static NSString* const GetFriendsURL = @BASE_URL_DEF "users/%@/events/%@/facebook_friends"; //
+
+
 #endif

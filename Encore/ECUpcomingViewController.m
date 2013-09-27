@@ -83,8 +83,8 @@ typedef enum {
     self.navigationItem.titleView = encoreLogo;
     self.tableView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
     [self setAppearance];
-    [ECJSONFetcher fetchSongPreviewForArtist:[self.concert headliner] completion:^(NSDictionary *song) {
-        self.songInfo = [[NSDictionary alloc] initWithDictionary:song];
+    [ECJSONFetcher fetchSongPreviewsForArtist:[self.concert headliner] completion:^(NSArray *songs) {
+        self.songs = [NSArray arrayWithArray:songs];
         [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:SongPreview inSection:0]]
                               withRowAnimation:UITableViewRowAnimationAutomatic];
     
@@ -505,6 +505,11 @@ typedef enum {
     
 }
 #pragma mark - Play/Pause Song preview
+
+-(NSDictionary*) songInfo {
+    NSInteger currentSongIndex = 0; //TODO: modify so changes
+    return [self.songs objectAtIndex:currentSongIndex];
+}
 
 - (void) playpauseButtonTapped:(UIButton*)button
 {
