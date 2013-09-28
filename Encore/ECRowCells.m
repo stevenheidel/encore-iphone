@@ -162,6 +162,7 @@
 -(void) awakeFromNib {
     self.friendsTitleLabel.font = [UIFont lightHeroFontWithSize:ROW_TITLE_SIZE];
     self.contentView.backgroundColor = [UIColor eventRowBackgroundColor];
+    self.noFriendsLabel.hidden = NO;
 }
 -(void) setFriends:(NSArray *)friends {
     _friends = friends;
@@ -172,6 +173,7 @@
             [self.friendImages addObject:[NSNull null]];
         }
         [self.friendsCollectionView reloadData];
+        self.noFriendsLabel.hidden = YES;
     }
     else {
         self.noFriendsLabel.hidden = NO;

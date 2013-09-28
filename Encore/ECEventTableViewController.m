@@ -236,7 +236,9 @@
 -(void) checkInvites {
     NSMutableArray* uninvitedFriends = [NSMutableArray arrayWithCapacity:self.friends.count];
     for (NSDictionary* friend in self.friends) {
-        if ([friend objectForKey:@"invite_sent"] == FALSE) {
+        BOOL inviteSent = [[friend valueForKey:@"invite_sent"] boolValue]==1;
+        
+        if (!inviteSent) {
             [uninvitedFriends addObject:friend];
         }
     }
@@ -250,7 +252,7 @@
     NSMutableDictionary* params =   [NSMutableDictionary dictionaryWithObjectsAndKeys:stringOfFriends,@"to", nil];
     [FBWebDialogs presentRequestsDialogModallyWithSession:[FBSession activeSession]
                                                   message:[NSString stringWithFormat:@"Check out Encore!"]
-                                                    title:nil
+                                                    title:@"Invite"
                                                parameters:params
                                                   handler:^(FBWebDialogResult result, NSURL *resultURL, NSError *error) {
                                                       if (error) {
