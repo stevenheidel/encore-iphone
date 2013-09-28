@@ -265,7 +265,7 @@ typedef enum {
             message = @"No shows are happening in %@ today\n\nRoadtrip? Try changing your location to a city nearby";
             break;
         case ECSearchTypeFuture:
-            message = @"Doesn't seem like %@ is into concerts.\n\nTry changing your location to a more happening city nearby or check back later.";
+            message = @"We couldn't find any upcoming shows in %@.\n\nTry changing your location or check back later.";
             break;
         default:
             break;
