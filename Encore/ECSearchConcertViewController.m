@@ -79,7 +79,7 @@ typedef enum {
     [self initializeSearchLocation];
     self.tap = [[UITapGestureRecognizer alloc]
                 initWithTarget:self
-                action:@selector(dismissKeyboard)];
+                action:@selector(dismissKeyboard:)];
 
     //if user already set location using select location controller don't listen to location changes
     if([NSUserDefaults lastSearchLocation].coordinate.latitude == 0 && [NSUserDefaults lastSearchLocation].coordinate.longitude == 0)
