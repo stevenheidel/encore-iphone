@@ -203,7 +203,7 @@
     
     [client registerHTTPOperationClass:[AFJSONRequestOperation class]];
     [client setDefaultHeader:@"Accept" value:@"application/json"];
-    NSDictionary* parameters = [NSDictionary dictionaryWithObjectsAndKeys:friends,@"facebook_friend_ids", nil];
+    NSDictionary* parameters = [NSDictionary dictionaryWithObjectsAndKeys:friends,@"friends", nil];
     
     [client postPath:urlString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"%@:Success posting friends of user %@ to event %@.",NSStringFromClass([self class]),userID,eventID);
