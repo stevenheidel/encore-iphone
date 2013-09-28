@@ -25,6 +25,7 @@
 		247C116217ED35D900B7F401 /* skipbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 247C115617ED35D900B7F401 /* skipbutton.png */; };
 		247C116617ED398000B7F401 /* ECSearchConcertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 247C116517ED398000B7F401 /* ECSearchConcertViewController.m */; };
 		247C116917ED398900B7F401 /* ECNextConcertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 247C116817ED398900B7F401 /* ECNextConcertViewController.m */; };
+		249E82B717F63C6F004D969D /* ECEventTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 249E82B617F63C6F004D969D /* ECEventTableViewController.m */; };
 		24A4C8C817E240340022B56F /* locationmarkerbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 24A4C8C617E240340022B56F /* locationmarkerbutton.png */; };
 		24A4C8C917E240340022B56F /* locationmarkerbutton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24A4C8C717E240340022B56F /* locationmarkerbutton@2x.png */; };
 		24A730FA17DD2E46009CF164 /* SPGooglePlacesAutocompletePlace.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A730F317DD2E46009CF164 /* SPGooglePlacesAutocompletePlace.m */; };
@@ -305,6 +306,8 @@
 		247C116517ED398000B7F401 /* ECSearchConcertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECSearchConcertViewController.m; sourceTree = "<group>"; };
 		247C116717ED398900B7F401 /* ECNextConcertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECNextConcertViewController.h; sourceTree = "<group>"; };
 		247C116817ED398900B7F401 /* ECNextConcertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECNextConcertViewController.m; sourceTree = "<group>"; };
+		249E82B517F63C6F004D969D /* ECEventTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECEventTableViewController.h; sourceTree = "<group>"; };
+		249E82B617F63C6F004D969D /* ECEventTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECEventTableViewController.m; sourceTree = "<group>"; };
 		24A4C8C617E240340022B56F /* locationmarkerbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = locationmarkerbutton.png; sourceTree = "<group>"; };
 		24A4C8C717E240340022B56F /* locationmarkerbutton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "locationmarkerbutton@2x.png"; sourceTree = "<group>"; };
 		24A730F117DD2E46009CF164 /* APIKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIKey.h; sourceTree = "<group>"; };
@@ -734,18 +737,20 @@
 		D4A8DDBF176A134B005E9847 /* Concert */ = {
 			isa = PBXGroup;
 			children = (
-				D4AF581517B48413000FCA93 /* ECEventProfileStatusManager.h */,
-				D4AF581617B48413000FCA93 /* ECEventProfileStatusManager.m */,
+				249E82B517F63C6F004D969D /* ECEventTableViewController.h */,
+				249E82B617F63C6F004D969D /* ECEventTableViewController.m */,
 				D4719BA517B322250077AB46 /* ECPastViewController.h */,
 				D4719BA617B322250077AB46 /* ECPastViewController.m */,
 				D4719BA917B322640077AB46 /* ECPastStoryboard.storyboard */,
+				D4A9A71017B03D65007E8A80 /* ECUpcomingViewController.h */,
+				D4A9A71117B03D65007E8A80 /* ECUpcomingViewController.m */,
+				D4A9A71517B03DC5007E8A80 /* ECUpcomingStoryboard.storyboard */,
+				D4AF581517B48413000FCA93 /* ECEventProfileStatusManager.h */,
+				D4AF581617B48413000FCA93 /* ECEventProfileStatusManager.m */,
 				D411CBE317B358FF006AF0C2 /* ECGridViewController.h */,
 				D411CBE417B358FF006AF0C2 /* ECGridViewController.m */,
 				D4719BAD17B341020077AB46 /* ECRowCells.h */,
 				D4719BAB17B340D20077AB46 /* ECRowCells.m */,
-				D4A9A71017B03D65007E8A80 /* ECUpcomingViewController.h */,
-				D4A9A71117B03D65007E8A80 /* ECUpcomingViewController.m */,
-				D4A9A71517B03DC5007E8A80 /* ECUpcomingStoryboard.storyboard */,
 				D4B0AC4617727FDA00DC4DD2 /* ECPostPlaceholder.xib */,
 				D4AA9777177CF82A008F4E31 /* ECPostCollectionHeaderView.h */,
 				D4AA9778177CF82A008F4E31 /* ECPostCollectionHeaderView.m */,
@@ -1612,6 +1617,7 @@
 				24A730FA17DD2E46009CF164 /* SPGooglePlacesAutocompletePlace.m in Sources */,
 				24A730FB17DD2E46009CF164 /* SPGooglePlacesAutocompleteQuery.m in Sources */,
 				24A730FC17DD2E46009CF164 /* SPGooglePlacesAutocompleteUtilities.m in Sources */,
+				249E82B717F63C6F004D969D /* ECEventTableViewController.m in Sources */,
 				24A730FD17DD2E46009CF164 /* SPGooglePlacesPlaceDetailQuery.m in Sources */,
 				24A7311717DD39EB009CF164 /* SPGooglePlacesAutocompleteViewController.m in Sources */,
 				D901EA0C17E83A0400317129 /* ECWelcomeViewController.m in Sources */,

@@ -10,8 +10,9 @@
 #import "ECProfileHeader.h"
 #import "ECProfileConcertCell.h"
 //#import "ECConcertDetailViewController.h"
-#import "ECPastViewController.h"
-#import "ECUpcomingViewController.h"
+#import "ECEventTableViewController.h"
+//#import "ECPastViewController.h"
+//#import "ECUpcomingViewController.h"
 
 #import "NSDictionary+ConcertList.h"
 #import <QuartzCore/QuartzCore.h>
@@ -47,7 +48,7 @@ typedef enum {
     SettingsActionSheet
 }ProfileActionSheetTags;
 
-@interface ECProfileViewController ()<ECPastViewControllerDelegate,ECUpcomingViewControllerDelegate>
+@interface ECProfileViewController ()<ECEventViewControllerDelegate>
 
 @property (strong,atomic) MBProgressHUD* hud;
 @end
@@ -346,22 +347,21 @@ typedef enum {
     NSUInteger section = indexPath.section;
     NSDictionary* concert = [[self arrayForSection:section] objectAtIndex:indexPath.row];
     
-    if(indexPath.section == PastSection) {
-        UIStoryboard* sb = [UIStoryboard storyboardWithName:@"ECPastStoryboard" bundle:nil];
-        ECPastViewController * vc = [sb instantiateInitialViewController];
-        vc.tense = ECSearchTypePast;
-        vc.concert = concert;
-        vc.eventStateDelegate = self;
-        [self.navigationController pushViewController:vc animated:YES];
+    ECSearchType tense = ECSearchTypePast;
+    NSString* storyboardName = @"ECPastStoryboard";
+    
+    if(indexPath.section == FutureSection) {
+        tense  = ECSearchTypeFuture;
+        storyboardName = @"ECUpcomingStoryboard";
     }
-    else {
-        UIStoryboard* sb = [UIStoryboard storyboardWithName:@"ECUpcomingStoryboard" bundle:nil];
-        ECUpcomingViewController * vc = [sb instantiateInitialViewController];
-        vc.tense = ECSearchTypeFuture;
-        vc.concert = concert;
-        vc.eventStateDelegate = self;
-        [self.navigationController pushViewController:vc animated:YES];
-    }
+    
+    UIStoryboard* sb = [UIStoryboard storyboardWithName:storyboardName bundle:nil];
+    ECEventTableViewController * vc = [sb instantiateInitialViewController];
+    vc.tense = tense;
+    vc.concert = concert;
+    vc.eventStateDelegate = self;
+    [self.navigationController pushViewController:vc animated:YES];
+    
     [Flurry logEvent:@"Selected_Event_On_Profile" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:concert.eventID, @"eventID",concert.eventName,@"eventName",[NSNumber numberWithInt:indexPath.row],@"row",[ECProfileViewController tenseStringForSection:section],@"Tense", nil]];
 
 }
