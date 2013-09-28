@@ -379,7 +379,7 @@
                                 </constraints>
                                 <connections>
                                     <outlet property="addressLabel" destination="zba-7k-wSx" id="dUq-AD-avR"/>
-                                    <outlet property="locationLabel" destination="Yyn-be-IwG" id="jOX-XS-eCe"/>
+                                    <outlet property="locationTitleLabel" destination="Yyn-be-IwG" id="cfC-IN-SSt"/>
                                     <outlet property="mapView" destination="Heh-BN-YO4" id="UY3-al-Yzb"/>
                                     <outlet property="startTimeLabel" destination="lpk-WE-HYa" id="s5h-lv-Hgp"/>
                                 </connections>

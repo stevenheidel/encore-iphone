@@ -84,4 +84,9 @@ UIColor* colorWithHSB(float hue, float saturation, float brightness, float alpha
 +(UIColor*) separatorColor {
     return colorWithRGB(255.0f, 255.0f, 255.0f, 0.2f);
 }
+
+#pragma mark - Events
++(UIColor*) eventRowBackgroundColor {
+    return colorWithRGB(0.0f, 0.0f, 0.0f, 0.6f);
+}
 @end

@@ -66,6 +66,8 @@
 {
     [super viewDidLoad];
     
+    self.checkedInvites = FALSE; //OR load from nsuserdefaults?
+    
     self.eventName.text = [[self.concert eventName] uppercaseString];
     self.eventVenueAndDate.text = [self.concert venueAndDate];
     UIImageView* encoreLogo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
@@ -74,11 +76,19 @@
     [self setAppearance];
     [ECJSONFetcher fetchSongPreviewsForArtist:[self.concert headliner] completion:^(NSArray *songs) {
         self.songs = [NSArray arrayWithArray:songs];
-        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:SongPreview inSection:0]]
+        
+        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:[self rowIndexForRowType:SongPreview] inSection:0]]
                               withRowAnimation:UITableViewRowAnimationAutomatic];
     }];
+    self.friends = nil;
 }
-
+-(NSInteger) rowIndexForRowType:(ECEventRow) rowID {
+    NSInteger i = 0;
+    for (i=0; i<self.rowOrder.count; i++) {
+        if ([self.rowOrder[i] integerValue] == rowID) return i;
+    }
+    return -1; //ERROR, not found
+}
 -(void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     if(!self.statusManager) {
@@ -223,6 +233,39 @@
     }
 }
 
+-(void) checkInvites {
+    NSMutableArray* uninvitedFriends = [NSMutableArray arrayWithCapacity:self.friends.count];
+    for (NSDictionary* friend in self.friends) {
+        if ([friend objectForKey:@"invite_sent"] == FALSE) {
+            [uninvitedFriends addObject:friend];
+        }
+    }
+    if ([uninvitedFriends count] > 0) {
+        [self inviteFriends: uninvitedFriends];
+    }
+}
+
+-(void) inviteFriends: (NSArray*) friends {
+    NSString* stringOfFriends = [[friends valueForKey:@"facebook_id"] componentsJoinedByString:@", "];
+    NSMutableDictionary* params =   [NSMutableDictionary dictionaryWithObjectsAndKeys:stringOfFriends,@"to", nil];
+    [FBWebDialogs presentRequestsDialogModallyWithSession:[FBSession activeSession]
+                                                  message:[NSString stringWithFormat:@"Check out Encore!"]
+                                                    title:nil
+                                               parameters:params
+                                                  handler:^(FBWebDialogResult result, NSURL *resultURL, NSError *error) {
+                                                      if (error) {
+                                                          // Case A: Error launching the dialog or sending request.
+                                                          NSLog(@"Error sending request.");
+                                                      } else {
+                                                          if (result == FBWebDialogResultDialogNotCompleted) {
+                                                              // Case B: User clicked the "x" icon
+                                                              NSLog(@"User canceled request.");
+                                                          } else {
+                                                              NSLog(@"Request Sent.");
+                                                          }
+                                                      }}];
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSInteger row = indexPath.row;
@@ -231,64 +274,47 @@
     switch (rowID) {
         case Friends: {
             FriendsCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-            cell.contentView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
-            [ECJSONFetcher fetchFriendsForUser:[NSUserDefaults userID] atEvent:[self.concert eventID] completion:^(NSArray *friends) {
-                cell.friends = friends;
-            }];
+            NSString* userID = [NSUserDefaults userID];
+            if (!self.friends && userID != nil) {
+                [ECJSONFetcher fetchFriendsForUser:userID atEvent:[self.concert eventID] completion:^(NSArray *friends) {
+                    if (friends.count > 0) {
+                        self.friends = [NSArray arrayWithArray:friends];
+                        cell.friends = friends;
+                        if (!self.checkedInvites) {
+                            [self checkInvites];
+                        }
+                    }
+                }];
+            }
+            else cell.friends = self.friends;
             [cell.addFriendsButton addTarget:self action:@selector(addFriends) forControlEvents:UIControlEventTouchUpInside];
             return cell;
         }
         case Details: {
             DetailsCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-            if (cell == nil) {
-                cell = [[DetailsCell alloc] init];
-            }
-            cell.contentView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
-            cell.changeStateButton.titleLabel.font = [UIFont heroFontWithSize:20];
-            cell.changeStateButton.layer.cornerRadius = 5.0;
-            cell.changeStateButton.layer.masksToBounds = YES;
             [cell.changeStateButton addTarget:self action:@selector(addToProfile) forControlEvents:UIControlEventTouchUpInside];
             self.changeConcertStateButton = cell.changeStateButton;
             [self.changeConcertStateButton setButtonIsOnProfile:self.statusManager.isOnProfile];
-            
             return cell;
         }
         case Lineup: {
             LineupCell* cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-            if (cell == nil) {
-                cell = [[LineupCell alloc] init];
-            }
-            cell.lineupLabel.font = [UIFont lightHeroFontWithSize:16];
-            cell.lineup = self.concert.lineup;
-            cell.contentView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
             cell.navController = self.navigationController;
             cell.previousArtist = self.previousArtist;
+            cell.lineup = self.concert.lineup;
             return cell;
         }
         case Photos: {
             GetPhotosCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-            if (cell == nil) {
-                cell = [[GetPhotosCell alloc] init];
-            }
-            
-            cell.grabPhotosButton.titleLabel.font = [UIFont heroFontWithSize:16];
-            cell.grabPhotosButton.layer.cornerRadius = 5.0;
-            cell.grabPhotosButton.layer.masksToBounds = YES;
             if(self.hideShareButton){
                 [cell.shareButton removeFromSuperview];
             }else{
                 [cell.shareButton addTarget:self action:@selector(shareTapped) forControlEvents:UIControlEventTouchUpInside];
             }
-            cell.contentView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
             return cell;
         }
         case SongPreview:{
             SongPreviewCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-            if (cell == nil) {
-                cell = [[SongPreviewCell alloc] init];
-            }
-            cell.contentView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
-            cell.lblMusicTitle.font = [UIFont lightHeroFontWithSize:16];
             
             if(!self.songInfo){
                 [cell.btnPlay setEnabled:NO];
@@ -313,25 +339,14 @@
         }
         case Location: {
             LocationCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-            if (cell == nil) {
-                cell = [[LocationCell alloc] init];
-            }
-            UITapGestureRecognizer* tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:cell action:@selector(openBigMap)];
-            tapRecognizer.numberOfTapsRequired = 1;
-            tapRecognizer.numberOfTouchesRequired = 1;
-            [cell.mapView addGestureRecognizer:tapRecognizer];
+           
             cell.addressLabel.text = [NSString stringWithFormat:@"%@",[self.concert address]];
             cell.startTimeLabel.text = [self.concert startTime];
-            
-            cell.locationLabel.font = [UIFont lightHeroFontWithSize:16];
-            //            cell.addressLabel.font = [UIFont lightHeroFontWithSize:16];
             
             CLLocation* location = [self.concert coordinates];
             CLLocationCoordinate2D coord2D = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude);
             cell.location2D = coord2D;
             cell.venueName = self.concert.venueName;
-            
-            //  cell.startTimeLabel.text = self.concert.startTime;
             
             MapViewAnnotation* annotation = [[MapViewAnnotation alloc] initWithTitle:[self.concert venueName] andCoordinate:coord2D];
             [cell.mapView setCenterCoordinate:coord2D];
@@ -339,11 +354,6 @@
             MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(coord2D, 1000, 1000);
             [cell.mapView setRegion:region animated:YES];
             [cell.mapView regionThatFits:region];
-            
-            cell.mapView.layer.borderColor = [UIColor blackColor].CGColor;
-            cell.mapView.layer.borderWidth = 1;
-            cell.contentView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
-            //            [cell.mapView selectAnnotation:annotation animated:YES];
             
             return cell;
         }
@@ -435,10 +445,12 @@
     if (self.friendPickerController == nil) {
         // Create friend picker, and get data loaded into it.
         self.friendPickerController = [[FBFriendPickerViewController alloc] init];
-        self.friendPickerController.title = @"Who else went?";
+        self.friendPickerController.title = NSLocalizedString(@"Who else went?", @"Title for facebook friend picker"); //TODO: change for upcoming
         self.friendPickerController.delegate = self;
     }
+
     [self.friendPickerController loadData];
+    
     [self.friendPickerController clearSelection];
     
     self.friendPickerController.userID = [NSUserDefaults userID];
@@ -458,19 +470,24 @@
 
 - (void)facebookViewControllerDoneWasPressed:(id)sender
 {
-    NSArray* selection = [self.friendPickerController.selection valueForKey:@"id"];
+    NSArray* selection = self.friendPickerController.selection;
     if (selection.count>0) {
         NSMutableArray* subSelection = [NSMutableArray arrayWithCapacity:selection.count];
         for (NSDictionary* dic in selection) {
             [subSelection addObject:[NSDictionary dictionaryWithObjectsAndKeys:[dic objectForKey:@"id"],@"facebook_id", [dic objectForKey:@"name"], @"name",nil]];
         }
+        self.friends = nil;
         [ECJSONPoster addFriends: subSelection ofUser:[NSUserDefaults userID] toEvent:[self.concert eventID] completion:^(BOOL success) {
             NSLog(@"Success %d",success);
+            
+            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:[self rowIndexForRowType:Friends] inSection:0]]
+                                  withRowAnimation:UITableViewRowAnimationAutomatic];
         }];
 
     }
     
     [self handlePickerDone];
+    
 }
 
 -(void) facebookViewControllerCancelWasPressed:(id)sender {

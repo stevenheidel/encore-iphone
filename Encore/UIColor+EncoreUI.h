@@ -40,4 +40,7 @@
 //navbar
 +(UIColor*) lightBlueNavBarColor;
 +(UIColor*) lightBlueNavBarEndColor;
+
+//events
++(UIColor*) eventRowBackgroundColor;
 @end

@@ -51,7 +51,7 @@
 @end
 
 @interface LocationCell : UITableViewCell <MKMapViewDelegate>
-@property (weak, nonatomic) IBOutlet UILabel *locationLabel;
+@property (weak, nonatomic) IBOutlet UILabel *locationTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *startTimeLabel;
 @property (assign,nonatomic) CLLocationCoordinate2D location2D;
 @property (copy,nonatomic) NSString* venueName;
@@ -63,7 +63,8 @@
 
 @interface FriendsCell: UITableViewCell  <UICollectionViewDataSource,UICollectionViewDelegate>
 @property (nonatomic, strong) NSMutableArray* friendImages;
-@property (weak,nonatomic) IBOutlet UILabel *friendsLabel;
+@property (weak,nonatomic) IBOutlet UILabel *friendsTitleLabel;
+@property (weak,nonatomic) IBOutlet UILabel *noFriendsLabel;
 @property (weak,nonatomic) IBOutlet UICollectionView* friendsCollectionView;
 @property (nonatomic,strong) IBOutlet UIButton* addFriendsButton;
 @property (nonatomic,strong) NSArray* friends;

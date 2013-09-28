@@ -39,6 +39,8 @@ static const int upcomingRows[] = {Tickets, Lineup,Details, SongPreview, Locatio
 -(NSString*) shareTextPrefix;
 -(void) setRows;
 
+@property (nonatomic, assign) BOOL checkedInvites;
+@property (nonatomic, strong) NSArray* friends;
 @property (nonatomic,strong) NSArray* rowOrder;
 @property (weak, nonatomic) IBOutlet UIImageView *eventImage;
 @property (weak, nonatomic) IBOutlet UILabel *eventName;
