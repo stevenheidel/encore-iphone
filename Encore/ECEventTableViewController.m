@@ -215,7 +215,12 @@
 
 
 -(void) addFriends {
-    [self openFacebookPicker];
+    if ([ApplicationDelegate isLoggedIn]) {
+        [self openFacebookPicker];
+    }
+    else {
+        //TODO: Login Alert
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -400,9 +405,9 @@
     
     [Flurry logEvent:@"Completed_Adding_Concert" withParameters:[self flurryParam]];
     
-    if (isOnProfile) {
-        [self openFacebookPicker];
-    }
+//    if (isOnProfile) {
+//        [self openFacebookPicker];
+//    }
 }
 
 -(void) concertStateChangedHUD{
@@ -454,9 +459,16 @@
 - (void)facebookViewControllerDoneWasPressed:(id)sender
 {
     NSArray* selection = [self.friendPickerController.selection valueForKey:@"id"];
-    [ECJSONPoster addFriends: selection ofUser:[NSUserDefaults userID] toEvent:[self.concert eventID] completion:^(BOOL success) {
-        NSLog(@"Succes %d",success);
-    }];
+    if (selection.count>0) {
+        NSMutableArray* subSelection = [NSMutableArray arrayWithCapacity:selection.count];
+        for (NSDictionary* dic in selection) {
+            [subSelection addObject:[NSDictionary dictionaryWithObjectsAndKeys:[dic objectForKey:@"id"],@"facebook_id", [dic objectForKey:@"name"], @"name",nil]];
+        }
+        [ECJSONPoster addFriends: subSelection ofUser:[NSUserDefaults userID] toEvent:[self.concert eventID] completion:^(BOOL success) {
+            NSLog(@"Success %d",success);
+        }];
+
+    }
     
     [self handlePickerDone];
 }
