@@ -51,11 +51,11 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Px9-vt-wjo">
-                                <rect key="frame" x="20" y="494" width="49" height="44"/>
+                                <rect key="frame" x="20" y="494" width="56" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="AQc-PG-EvA"/>
-                                    <constraint firstAttribute="width" constant="49" id="OVj-5r-Ucg"/>
+                                    <constraint firstAttribute="width" constant="56" id="OVj-5r-Ucg"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Cancel">
