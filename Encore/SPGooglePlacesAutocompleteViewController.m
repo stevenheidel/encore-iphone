@@ -10,7 +10,7 @@
 #import "SPGooglePlacesAutocompleteQuery.h"
 #import "SPGooglePlacesAutocompletePlace.h"
 #import <CoreLocation/CoreLocation.h>
-
+#import "UIColor+EncoreUI.h"
 @interface SPGooglePlacesAutocompleteViewController ()
 -(IBAction)cancel;
 -(IBAction)save;
@@ -66,10 +66,9 @@
     searchQuery.radius = 100.0;
     shouldBeginEditing = YES;
     if(SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")){
-        self.edgesForExtendedLayout = UIRectEdgeNone;
-        self.automaticallyAdjustsScrollViewInsets = NO;
+//        self.edgesForExtendedLayout = UIRectEdgeNone;
+//        self.automaticallyAdjustsScrollViewInsets = NO;
     }
-//    self.navigationController.navigationBarHidden = YES;
     self.searchDisplayController.searchBar.placeholder = @"Enter search city or area";
     [self hideSaveButton];
     
@@ -82,7 +81,6 @@
 }
 -(void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-//    [[UIApplication sharedApplication] setStatusBarHidden:YES];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     
 }
@@ -90,7 +88,6 @@
 -(void) viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-//    [[UIApplication sharedApplication] setStatusBarHidden:NO];
 }
 - (void)viewDidUnload {
     [self setMapView:nil];

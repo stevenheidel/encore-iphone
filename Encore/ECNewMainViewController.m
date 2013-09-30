@@ -150,8 +150,23 @@ typedef enum {
                     [self fetchConcerts];
                 }
                 NSString* city = [NSUserDefaults lastSearchArea];
-                
-                self.locationLabel.text = city == nil ? @"Location not set" : city;
+                if  (city == nil) {
+                    CLLocation* location = [NSUserDefaults userCoordinate];
+                    CLGeocoder* geocoder = [CLGeocoder new];
+                    [geocoder reverseGeocodeLocation:[[CLLocation alloc] initWithLatitude:location.coordinate.latitude longitude:location.coordinate.longitude] completionHandler:^(NSArray *placemarks, NSError *error) {
+                        if (error) {
+                            NSLog(@"Error reverse geocoding: %@", error.description);
+                            self.locationLabel.text = @"";
+                        }
+                        
+                        else {
+                            CLPlacemark* placemark = [placemarks objectAtIndex:0];
+                            self.locationLabel.text = placemark.locality != nil ? placemark.locality : placemark.subAdministrativeArea;
+                        }
+                    }];
+
+                }
+                else self.locationLabel.text = city;
             }
         }else{
             self.viewLoaded= NO;
@@ -208,6 +223,7 @@ typedef enum {
 -(void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [[ATAppRatingFlow sharedRatingFlow] showRatingFlowFromViewControllerIfConditionsAreMet:self];
+
 }
 
 -(void) viewWillDisappear:(BOOL)animated {
@@ -414,9 +430,8 @@ typedef enum {
 //                [self.navigationController.navigationBar setBackgroundColor:[UIColor blueArtistTextColor]];
     }
     if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
-//        self.edgesForExtendedLayout = UIRectEdgeNone;
         [self.navigationController.navigationBar setBarTintColor:[UIColor blueArtistTextColor]];
-        [self.navigationController.navigationBar setTranslucent:YES];
+        [self.navigationController.navigationBar setTranslucent:IS_IPHONE_5];
     }
     
     //Use default navbar in youtube player
@@ -510,14 +525,11 @@ typedef enum {
     }
     
     else {
-        //TODO: load in login view controller
         ECLoginViewController* login = [[ECLoginViewController alloc] init];
-        ECCustomNavController* navCtrl = [[ECCustomNavController alloc] initWithRootViewController:login];
+//        ECCustomNavController* navCtrl = [[ECCustomNavController alloc] initWithRootViewController:login];
+//        navCtrl.navigationBarHidden = YES;
+        [self.navigationController presentViewController:login animated:YES completion:nil];
         
-        [self.navigationController presentViewController:navCtrl animated:YES completion:nil];
-//        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login", nil) message:NSLocalizedString(@"To view your profile, you must first login", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Login", nil), nil];
-//        alert.tag = ECNotLoggedInAlert;
-//        [alert show];
     }
 }
 
@@ -530,9 +542,7 @@ typedef enum {
 -(IBAction) modifySearchLocation {
     UIStoryboard* sb = [UIStoryboard storyboardWithName:@"GooglePlacesAutocompleteView" bundle:nil];
     SPGooglePlacesAutocompleteViewController * viewController = [sb instantiateInitialViewController];
-//    SPGooglePlacesAutocompleteViewController* viewController = [SPGooglePlacesAutocompleteViewController new];
     viewController.delegate = self;
-//    ECCustomNavController* navCtrl = [[ECCustomNavController alloc] initWithRootViewController:viewController];
     [self presentViewController:viewController animated:YES completion:nil];
 }
 
