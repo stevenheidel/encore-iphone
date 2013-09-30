@@ -74,13 +74,17 @@
     self.navigationItem.titleView = encoreLogo;
     self.tableView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
     [self setAppearance];
+    self.friends = [[NSArray alloc] init];
+
+    //Fetch song previews
     [ECJSONFetcher fetchSongPreviewsForArtist:[self.concert headliner] completion:^(NSArray *songs) {
         self.songs = [NSArray arrayWithArray:songs];
         self.currentSongIndex = 0;
-        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:[self rowIndexForRowType:SongPreview] inSection:0]]
-                              withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self.tableView reloadData];
     }];
-    self.friends = nil;
+    
+   
+    //self.friends = nil;
 }
 -(NSInteger) rowIndexForRowType:(ECEventRow) rowID {
     NSInteger i = 0;
@@ -198,7 +202,11 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.rowOrder count];
+    if (self.statusManager.isOnProfile)
+        return [self.rowOrder count];
+    else
+        return [self.rowOrder count] -1;
+    
 }
 
 -(NSString*) identifierForRow: (NSUInteger) row {
@@ -233,7 +241,7 @@
     }
 }
 
--(void) checkInvites {
+-(void) checkInvites:(NSArray*) friends {
     NSMutableArray* uninvitedFriends = [NSMutableArray arrayWithCapacity:self.friends.count];
     for (NSDictionary* friend in self.friends) {
         BOOL inviteSent = [[friend valueForKey:@"invite_sent"] boolValue]==1;
@@ -255,6 +263,7 @@
                                                     title:@"Invite"
                                                parameters:params
                                                   handler:^(FBWebDialogResult result, NSURL *resultURL, NSError *error) {
+                                                      NSLog(@"%@",resultURL);
                                                       if (error) {
                                                           // Case A: Error launching the dialog or sending request.
                                                           NSLog(@"Error sending request.");
@@ -276,19 +285,7 @@
     switch (rowID) {
         case Friends: {
             FriendsCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-            NSString* userID = [NSUserDefaults userID];
-            if (!self.friends && userID != nil) {
-                [ECJSONFetcher fetchFriendsForUser:userID atEvent:[self.concert eventID] completion:^(NSArray *friends) {
-                    if (friends.count > 0) {
-                        self.friends = [NSArray arrayWithArray:friends];
-                        cell.friends = friends;
-                        if (!self.checkedInvites) {
-                            [self checkInvites];
-                        }
-                    }
-                }];
-            }
-            else cell.friends = self.friends;
+            cell.friends = self.friends;
             [cell.addFriendsButton addTarget:self action:@selector(addFriends) forControlEvents:UIControlEventTouchUpInside];
             return cell;
         }
@@ -390,6 +387,20 @@
 
 -(void) profileState:(BOOL)isOnProfile {
     [self.changeConcertStateButton setButtonIsOnProfile:isOnProfile];
+    //if user has this concert in his account
+    if(isOnProfile)
+    {
+        //Fetch friends invites
+        NSString* userID = [NSUserDefaults userID];
+        [ECJSONFetcher fetchFriendsForUser:userID atEvent:[self.concert eventID] completion:^(NSArray *friends){
+            self.friends = friends;
+            [self.tableView reloadData];
+        }];
+        
+    }else{
+        //reload tableview to remove friends cell
+        [self.tableView reloadData];
+    }
 }
 
 -(void) addToProfile{
@@ -409,7 +420,7 @@
 
 -(void)successChangingState:(BOOL)isOnProfile
 {
-    [self.changeConcertStateButton setButtonIsOnProfile:isOnProfile];
+    [self profileState:isOnProfile];
     [self concertStateChangedHUD];
     
     if([self.eventStateDelegate respondsToSelector:@selector(profileUpdated)])
@@ -417,9 +428,9 @@
     
     [Flurry logEvent:@"Completed_Adding_Concert" withParameters:[self flurryParam]];
     
-//    if (isOnProfile) {
-//        [self openFacebookPicker];
-//    }
+    if (isOnProfile) {
+        [self openFacebookPicker];
+    }
 }
 
 -(void) concertStateChangedHUD{
@@ -479,11 +490,14 @@
             [subSelection addObject:[NSDictionary dictionaryWithObjectsAndKeys:[dic objectForKey:@"id"],@"facebook_id", [dic objectForKey:@"name"], @"name",nil]];
         }
         self.friends = nil;
-        [ECJSONPoster addFriends: subSelection ofUser:[NSUserDefaults userID] toEvent:[self.concert eventID] completion:^(BOOL success) {
-            NSLog(@"Success %d",success);
-            
-            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:[self rowIndexForRowType:Friends] inSection:0]]
-                                  withRowAnimation:UITableViewRowAnimationAutomatic];
+        //When user finish select friends, Check for un-invited friends and show Facebook invite dialoge
+        [ECJSONPoster addFriends: subSelection
+                          ofUser:[NSUserDefaults userID]
+                         toEvent:[self.concert eventID]
+                      completion:^(NSArray* uninvitedFriends) {
+                          self.friends = uninvitedFriends;
+                          [self checkInvites:self.friends];
+                          [self.tableView reloadData];
         }];
 
     }

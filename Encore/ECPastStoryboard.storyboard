@@ -757,6 +757,7 @@
         <image name="itunes.png" width="110" height="40"/>
         <image name="pausesongbutton.png" width="35" height="40"/>
         <image name="playbutton.png" width="59" height="59"/>
+        <image name="playbutton.png" width="59" height="59"/>
         <image name="playsongbutton.png" width="35" height="40"/>
         <image name="shareiconbutton.png" width="50" height="45"/>
     </resources>

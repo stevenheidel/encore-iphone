@@ -201,7 +201,8 @@
     else {
         [cell.friendImage setImage:[self.friendImages objectAtIndex:indexPath.row]];
     }
-    
+    [cell.friendImage.layer setCornerRadius:37.5];
+    [cell.friendImage setClipsToBounds:YES];
     cell.friendNameLabel.text = name;
     
     return cell;

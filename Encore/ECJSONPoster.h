@@ -21,6 +21,9 @@
 +(void) populateConcert: (NSString*) eventID completion: (void(^)(BOOL success)) completion;
 
 
-+(void) addFriends: (NSArray*) friends ofUser: (NSString*) userID toEvent: (NSString*) eventID completion: (void(^)(BOOL success)) completion;
++(void) addFriends: (NSArray*) friends
+            ofUser: (NSString*) userID
+           toEvent: (NSString*) eventID
+        completion: (void(^)(NSArray* friends)) completion;
 
 @end

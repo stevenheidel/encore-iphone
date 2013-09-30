@@ -90,7 +90,7 @@
         NSLog(@"%@: ERROR removing concert %@ from profile %@: %@...",NSStringFromClass([self class]), concertID, userID,[[error description] substringToIndex:MAX_ERROR_LEN]);
         if (completion) {
             completion(FALSE);
-        }
+        }   
     }];
 }
 
@@ -197,7 +197,7 @@
 }
 
 
-+(void) addFriends: (NSArray*) friends ofUser: (NSString*) userID toEvent: (NSString*) eventID completion: (void(^)(BOOL success)) completion {
++(void) addFriends: (NSArray*) friends ofUser: (NSString*) userID toEvent: (NSString*) eventID completion: (void(^)(NSArray* friends)) completion {
     NSString* urlString = [NSString stringWithFormat:SaveFriendsURL,userID,eventID];
     AFHTTPClient * client = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:BaseURL]];
     
@@ -208,12 +208,12 @@
     [client postPath:urlString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"%@:Success posting friends of user %@ to event %@.",NSStringFromClass([self class]),userID,eventID);
         if (completion) {
-            completion(TRUE);
+            completion(responseObject);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@:Failed to post friends of user %@ to event %@: %@...",NSStringFromClass([self class]),userID,eventID,[[error description] substringToIndex:MAX_ERROR_LEN]);
         if (completion) {
-            completion(FALSE);
+            completion(nil);
         }
     }];
     
