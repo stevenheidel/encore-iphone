@@ -37,6 +37,7 @@
 
 #import "ECAppDelegate.h"
 #import "MBProgressHUD.h"
+#import "ECWelcomeViewController.h"
 
 typedef enum {
     FutureSection,
@@ -399,9 +400,10 @@ typedef enum {
             [self openFeedback];
         }
         else if (buttonIndex == actionSheet.firstOtherButtonIndex + 1){
-            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"No" message:@"Not implemented" delegate:nil cancelButtonTitle:@"HAHA" otherButtonTitles:nil];
-            [alert show];
-            //TODO: repeat walkthrough
+            [self dismissViewControllerAnimated:YES completion:^{
+                [ApplicationDelegate showWalktrhoughView];
+            }];
+
         }
     }
     

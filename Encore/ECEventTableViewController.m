@@ -29,7 +29,7 @@
 
 #import "NSUserDefaults+Encore.h"
 #import "ECRowCells.h"
-
+#define kAffiliateCode @"10lbaN"
 @interface MapViewAnnotation : NSObject <MKAnnotation>
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, assign) CLLocationCoordinate2D coordinate;
@@ -76,7 +76,7 @@
     [self setAppearance];
     [ECJSONFetcher fetchSongPreviewsForArtist:[self.concert headliner] completion:^(NSArray *songs) {
         self.songs = [NSArray arrayWithArray:songs];
-        
+        self.currentSongIndex = 0;
         [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:[self rowIndexForRowType:SongPreview] inSection:0]]
                               withRowAnimation:UITableViewRowAnimationAutomatic];
     }];
@@ -332,7 +332,7 @@
                                    action:@selector(openItunesLink)
                          forControlEvents:UIControlEventTouchUpInside];
             }
-            [cell.lblSongName setText:self.songInfo[@"collectionCensoredName"]];
+            [cell.lblSongName setText:self.songInfo[@"trackCensoredName"]];
             
             if(self.player.rate == 1.0){
                 [cell.btnPlay setSelected:YES];
@@ -678,18 +678,22 @@
 #pragma mark - Play/Pause Song preview
 
 -(NSDictionary*) songInfo {
-    NSInteger currentSongIndex = 0; //TODO: modify so changes
-    return [self.songs objectAtIndex:currentSongIndex];
+    NSLog(@"Song %@",[self.songs objectAtIndex:self.currentSongIndex]);
+    return [self.songs objectAtIndex:self.currentSongIndex];
 }
 
+-(void)prepareCurrentSong
+{
+    NSURL *url = [NSURL URLWithString:self.songInfo[@"previewUrl"]];
+    AVPlayerItem* playerItem = [AVPlayerItem playerItemWithURL:url];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(songDidFinishPlaying) name:AVPlayerItemDidPlayToEndTimeNotification object:playerItem];
+    self.player = [[AVPlayer alloc] initWithPlayerItem:playerItem];
+}
 - (void) playpauseButtonTapped:(UIButton*)button
 {
-    if(!self.player){
-        NSURL *url = [NSURL URLWithString:self.songInfo[@"previewUrl"]];
-        AVPlayerItem* playerItem = [AVPlayerItem playerItemWithURL:url];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(songDidFinishPlaying) name:AVPlayerItemDidPlayToEndTimeNotification object:playerItem];
-        self.player = [[AVPlayer alloc] initWithPlayerItem:playerItem];
-    }
+    if(!self.player)
+        [self prepareCurrentSong];
+
     [button setSelected:!button.selected];
     if (self.player.rate == 1.0) {
         [self.player pause];
@@ -700,13 +704,34 @@
 }
 -(void)songDidFinishPlaying
 {
-    SongPreviewCell * songCell =(SongPreviewCell*)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:SongPreview inSection:0]];
-    [songCell.btnPlay setSelected:NO];
+    [[NSNotificationCenter defaultCenter]removeObserver:self
+                                                   name:AVPlayerItemDidPlayToEndTimeNotification
+                                                 object:self.player.currentItem];
+    if(self.currentSongIndex < self.songs.count-1){
+        self.currentSongIndex++;
+        [self prepareCurrentSong];
+        [self.player play];
+
+        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:SongPreview inSection:0]]
+                              withRowAnimation:UITableViewRowAnimationAutomatic];
+    }else{
+        //Reset everything back
+        self.currentSongIndex = 0;
+        self.player= nil;
+        //Reload the view
+        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:SongPreview inSection:0]]
+                              withRowAnimation:UITableViewRowAnimationAutomatic];
+        //Deselect the button
+        SongPreviewCell * songCell =(SongPreviewCell*)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:SongPreview inSection:0]];
+        [songCell.btnPlay setSelected:NO];
+    }
+    
 }
 
 -(void)openItunesLink
 {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString: self.songInfo[@"collectionViewUrl"]]];
+    NSString* affliateURL = [self.songInfo[@"trackViewUrl"] stringByAppendingFormat:@"&at=%@",kAffiliateCode];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:affliateURL]];
     
 }
 

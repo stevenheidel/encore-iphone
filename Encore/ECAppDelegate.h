@@ -45,4 +45,5 @@
 @property (strong, nonatomic) CLLocationManager *locationManager;
 
 @property BOOL isNavigating;
+-(void) showWalktrhoughView;
 @end
