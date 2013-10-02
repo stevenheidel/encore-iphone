@@ -29,7 +29,7 @@
 
 #import "NSUserDefaults+Encore.h"
 #import "ECRowCells.h"
-
+#define kAffiliateCode @"10lbaN"
 @interface MapViewAnnotation : NSObject <MKAnnotation>
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, assign) CLLocationCoordinate2D coordinate;
@@ -74,13 +74,17 @@
     self.navigationItem.titleView = encoreLogo;
     self.tableView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
     [self setAppearance];
+    self.friends = [[NSArray alloc] init];
+
+    //Fetch song previews
     [ECJSONFetcher fetchSongPreviewsForArtist:[self.concert headliner] completion:^(NSArray *songs) {
         self.songs = [NSArray arrayWithArray:songs];
-        
-        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:[self rowIndexForRowType:SongPreview] inSection:0]]
-                              withRowAnimation:UITableViewRowAnimationAutomatic];
+        self.currentSongIndex = 0;
+        [self.tableView reloadData];
     }];
-    self.friends = nil;
+    
+   
+    //self.friends = nil;
 }
 -(NSInteger) rowIndexForRowType:(ECEventRow) rowID {
     NSInteger i = 0;
@@ -198,7 +202,11 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.rowOrder count];
+    if (self.statusManager.isOnProfile)
+        return [self.rowOrder count];
+    else
+        return [self.rowOrder count] -1;
+    
 }
 
 -(NSString*) identifierForRow: (NSUInteger) row {
@@ -233,7 +241,7 @@
     }
 }
 
--(void) checkInvites {
+-(void) checkInvites:(NSArray*) friends {
     NSMutableArray* uninvitedFriends = [NSMutableArray arrayWithCapacity:self.friends.count];
     for (NSDictionary* friend in self.friends) {
         BOOL inviteSent = [[friend valueForKey:@"invite_sent"] boolValue]==1;
@@ -255,6 +263,7 @@
                                                     title:@"Invite"
                                                parameters:params
                                                   handler:^(FBWebDialogResult result, NSURL *resultURL, NSError *error) {
+                                                      NSLog(@"%@",resultURL);
                                                       if (error) {
                                                           // Case A: Error launching the dialog or sending request.
                                                           NSLog(@"Error sending request.");
@@ -276,19 +285,7 @@
     switch (rowID) {
         case Friends: {
             FriendsCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-            NSString* userID = [NSUserDefaults userID];
-            if (!self.friends && userID != nil) {
-                [ECJSONFetcher fetchFriendsForUser:userID atEvent:[self.concert eventID] completion:^(NSArray *friends) {
-                    if (friends.count > 0) {
-                        self.friends = [NSArray arrayWithArray:friends];
-                        cell.friends = friends;
-                        if (!self.checkedInvites) {
-                            [self checkInvites];
-                        }
-                    }
-                }];
-            }
-            else cell.friends = self.friends;
+            cell.friends = self.friends;
             [cell.addFriendsButton addTarget:self action:@selector(addFriends) forControlEvents:UIControlEventTouchUpInside];
             return cell;
         }
@@ -332,7 +329,7 @@
                                    action:@selector(openItunesLink)
                          forControlEvents:UIControlEventTouchUpInside];
             }
-            [cell.lblSongName setText:self.songInfo[@"collectionCensoredName"]];
+            [cell.lblSongName setText:self.songInfo[@"trackCensoredName"]];
             
             if(self.player.rate == 1.0){
                 [cell.btnPlay setSelected:YES];
@@ -390,6 +387,20 @@
 
 -(void) profileState:(BOOL)isOnProfile {
     [self.changeConcertStateButton setButtonIsOnProfile:isOnProfile];
+    //if user has this concert in his account
+    if(isOnProfile)
+    {
+        //Fetch friends invites
+        NSString* userID = [NSUserDefaults userID];
+        [ECJSONFetcher fetchFriendsForUser:userID atEvent:[self.concert eventID] completion:^(NSArray *friends){
+            self.friends = friends;
+            [self.tableView reloadData];
+        }];
+        
+    }else{
+        //reload tableview to remove friends cell
+        [self.tableView reloadData];
+    }
 }
 
 -(void) addToProfile{
@@ -409,7 +420,7 @@
 
 -(void)successChangingState:(BOOL)isOnProfile
 {
-    [self.changeConcertStateButton setButtonIsOnProfile:isOnProfile];
+    [self profileState:isOnProfile];
     [self concertStateChangedHUD];
     
     if([self.eventStateDelegate respondsToSelector:@selector(profileUpdated)])
@@ -417,9 +428,9 @@
     
     [Flurry logEvent:@"Completed_Adding_Concert" withParameters:[self flurryParam]];
     
-//    if (isOnProfile) {
-//        [self openFacebookPicker];
-//    }
+    if (isOnProfile) {
+        [self openFacebookPicker];
+    }
 }
 
 -(void) concertStateChangedHUD{
@@ -479,11 +490,14 @@
             [subSelection addObject:[NSDictionary dictionaryWithObjectsAndKeys:[dic objectForKey:@"id"],@"facebook_id", [dic objectForKey:@"name"], @"name",nil]];
         }
         self.friends = nil;
-        [ECJSONPoster addFriends: subSelection ofUser:[NSUserDefaults userID] toEvent:[self.concert eventID] completion:^(BOOL success) {
-            NSLog(@"Success %d",success);
-            
-            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:[self rowIndexForRowType:Friends] inSection:0]]
-                                  withRowAnimation:UITableViewRowAnimationAutomatic];
+        //When user finish select friends, Check for un-invited friends and show Facebook invite dialoge
+        [ECJSONPoster addFriends: subSelection
+                          ofUser:[NSUserDefaults userID]
+                         toEvent:[self.concert eventID]
+                      completion:^(NSArray* uninvitedFriends) {
+                          self.friends = uninvitedFriends;
+                          [self checkInvites:self.friends];
+                          [self.tableView reloadData];
         }];
 
     }
@@ -678,18 +692,22 @@
 #pragma mark - Play/Pause Song preview
 
 -(NSDictionary*) songInfo {
-    NSInteger currentSongIndex = 0; //TODO: modify so changes
-    return [self.songs objectAtIndex:currentSongIndex];
+    NSLog(@"Song %@",[self.songs objectAtIndex:self.currentSongIndex]);
+    return [self.songs objectAtIndex:self.currentSongIndex];
 }
 
+-(void)prepareCurrentSong
+{
+    NSURL *url = [NSURL URLWithString:self.songInfo[@"previewUrl"]];
+    AVPlayerItem* playerItem = [AVPlayerItem playerItemWithURL:url];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(songDidFinishPlaying) name:AVPlayerItemDidPlayToEndTimeNotification object:playerItem];
+    self.player = [[AVPlayer alloc] initWithPlayerItem:playerItem];
+}
 - (void) playpauseButtonTapped:(UIButton*)button
 {
-    if(!self.player){
-        NSURL *url = [NSURL URLWithString:self.songInfo[@"previewUrl"]];
-        AVPlayerItem* playerItem = [AVPlayerItem playerItemWithURL:url];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(songDidFinishPlaying) name:AVPlayerItemDidPlayToEndTimeNotification object:playerItem];
-        self.player = [[AVPlayer alloc] initWithPlayerItem:playerItem];
-    }
+    if(!self.player)
+        [self prepareCurrentSong];
+
     [button setSelected:!button.selected];
     if (self.player.rate == 1.0) {
         [self.player pause];
@@ -700,13 +718,34 @@
 }
 -(void)songDidFinishPlaying
 {
-    SongPreviewCell * songCell =(SongPreviewCell*)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:SongPreview inSection:0]];
-    [songCell.btnPlay setSelected:NO];
+    [[NSNotificationCenter defaultCenter]removeObserver:self
+                                                   name:AVPlayerItemDidPlayToEndTimeNotification
+                                                 object:self.player.currentItem];
+    if(self.currentSongIndex < self.songs.count-1){
+        self.currentSongIndex++;
+        [self prepareCurrentSong];
+        [self.player play];
+
+        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:SongPreview inSection:0]]
+                              withRowAnimation:UITableViewRowAnimationAutomatic];
+    }else{
+        //Reset everything back
+        self.currentSongIndex = 0;
+        self.player= nil;
+        //Reload the view
+        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:SongPreview inSection:0]]
+                              withRowAnimation:UITableViewRowAnimationAutomatic];
+        //Deselect the button
+        SongPreviewCell * songCell =(SongPreviewCell*)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:SongPreview inSection:0]];
+        [songCell.btnPlay setSelected:NO];
+    }
+    
 }
 
 -(void)openItunesLink
 {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString: self.songInfo[@"collectionViewUrl"]]];
+    NSString* affliateURL = [self.songInfo[@"trackViewUrl"] stringByAppendingFormat:@"&at=%@",kAffiliateCode];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:affliateURL]];
     
 }
 

@@ -11,7 +11,7 @@
 #define Encore_EncoreURL_h
 
 #if STAGING
-#define BASE_URL_PUBLIC_DEF "http://encore-backend-staging.herokuapp.com/"
+#define BASE_URL_PUBLIC_DEF "http://on.encore.fm/"
 #else
 #if PRODUCTION
 #define BASE_URL_PUBLIC_DEF "http://on.encore.fm/"

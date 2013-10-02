@@ -379,7 +379,7 @@ typedef enum {
     if (self.hasSearched) {
         return SEARCH_CELL_HEIGHT;
     } else {
-        return 115;
+        return 85;
     }
     
 }

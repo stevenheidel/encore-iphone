@@ -53,6 +53,7 @@ static const int upcomingRows[] = {Tickets, Lineup,Details, SongPreview, Locatio
 @property (nonatomic,strong) AVPlayer* player;
 @property (nonatomic,readonly) NSDictionary* songInfo;
 @property (nonatomic,strong) NSArray * songs;
+@property (assign) NSInteger currentSongIndex;
 
 @property (nonatomic, assign) ECSearchType tense;
 @property (nonatomic,strong) NSDictionary * concert;

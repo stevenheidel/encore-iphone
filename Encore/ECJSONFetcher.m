@@ -271,7 +271,7 @@ NSString* stringForSearchType(ECSearchType searchType) {
 +(void) fetchSongPreviewsForArtist:(NSString*) artist
                        completion: (void(^) (NSArray* songs)) completion
 {
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://itunes.apple.com/search?term=%@&media=music&limit=1",[ECJSONFetcher urlEscapeString:artist]]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://itunes.apple.com/search?term=%@&media=music&limit=10",[ECJSONFetcher urlEscapeString:artist]]];
     
     NSURLRequest * request = [NSURLRequest requestWithURL:url];
     AFJSONRequestOperation * operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
