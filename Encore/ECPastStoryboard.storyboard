@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4510" systemVersion="13A584" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="nnw-kD-SbF">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4510" systemVersion="12F37" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="nnw-kD-SbF">
     <dependencies>
         <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
@@ -329,7 +329,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="74" height="74"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
-                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hDf-8k-ZnJ">
+                                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hDf-8k-ZnJ">
                                                                 <rect key="frame" x="0.0" y="0.0" width="74" height="74"/>
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             </imageView>
@@ -756,7 +756,6 @@
         <image name="flag.png" width="22" height="25"/>
         <image name="itunes.png" width="110" height="40"/>
         <image name="pausesongbutton.png" width="35" height="40"/>
-        <image name="playbutton.png" width="59" height="59"/>
         <image name="playbutton.png" width="59" height="59"/>
         <image name="playsongbutton.png" width="35" height="40"/>
         <image name="shareiconbutton.png" width="50" height="45"/>
