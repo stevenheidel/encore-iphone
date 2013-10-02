@@ -79,7 +79,7 @@
     self.unreachableIndicatorView = [[UIView alloc] initWithFrame:CGRectMake(0, self.window.frame.size.height-30, self.window.frame.size.width, 30)];
     [self.unreachableIndicatorView setBackgroundColor:[UIColor redColor]];
     UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(5, 7.5, self.window.frame.size.width, 15)];
-    label.text = @"No Internet connection detected";
+    label.text = @"No Internet connection detected  ";
     label.textColor = [UIColor whiteColor];
     label.textAlignment = NSTextAlignmentCenter;
     [self.unreachableIndicatorView addSubview:label];

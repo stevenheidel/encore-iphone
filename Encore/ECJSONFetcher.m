@@ -162,12 +162,18 @@ NSString* stringForSearchType(ECSearchType searchType) {
 }
 
 +(void) fetchInfoForArtist:(NSString*) artist completion: (void(^) (NSDictionary* artistInfo)) completion {
-    NSString* infoURL = [NSString stringWithFormat:ArtistInfoURL,[artist stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    NSInteger limitEvents = 10;
+    NSString* infoURL = [NSString stringWithFormat:ArtistInfoURL,[artist stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],limitEvents];
     NSURL* url = [NSURL URLWithString:infoURL];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     __block NSDictionary* info;
     AFJSONRequestOperation* operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         info = (NSDictionary*) JSON;
+        NSDictionary* events = [info objectForKey:@"events"];
+        NSInteger pastCount = [[events objectForKey:@"past"] count];
+        NSInteger upcomingCount = [[events objectForKey:@"upcoming"] count];
+        NSLog(@"%@: Successfully retrieved info for artist %@. %d upcoming and %d past",NSStringFromClass([ECJSONFetcher class]),artist,upcomingCount,pastCount);
+
         if (completion) {
             completion(info);
         }

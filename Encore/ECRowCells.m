@@ -42,13 +42,18 @@
 -(void) awakeFromNib {
     self.lineupLabel.font = [UIFont lightHeroFontWithSize:ROW_TITLE_SIZE];
     self.contentView.backgroundColor = [UIColor eventRowBackgroundColor];
+    self.lineupImages = nil;
 }
 -(void) setLineup:(NSArray *)lineup {
+
     _lineup = lineup;
-    self.lineupImages = [[NSMutableArray alloc] initWithCapacity:self.lineup.count];
     
-    for (int i = 0; i < self.lineup.count; i++) {
-        [self.lineupImages addObject:[NSNull null]];
+    if(!self.lineupImages) {
+        self.lineupImages = [[NSMutableArray alloc] initWithCapacity:self.lineup.count];
+        
+        for (int i = 0; i < self.lineup.count; i++) {
+            [self.lineupImages addObject:[NSNull null]];
+        }
     }
 }
 -(UICollectionViewCell*) collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {

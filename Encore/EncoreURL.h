@@ -42,8 +42,8 @@ static NSString *const TodayPopularConcertsURL = @"events/today.json";
 //Artists and Concerts combo
 //purposely left out base url, get is initialized with base url
 static NSString *const ArtistCombinedSearchURL = @"artists/combined_search.json";
-static NSString *const ArtistPictureURL = @BASE_URL_DEF "artists/%@/picture.json"; //,artist
-static NSString *const ArtistInfoURL = @BASE_URL_DEF "artists/%@/info.json?limit_events=10";//,arist (last fm id presumably)
+static NSString *const ArtistPictureURL = @BASE_URL_DEF "artists/picture.json?artist_id=%@"; //,artistid
+static NSString *const ArtistInfoURL = @BASE_URL_DEF "artists/info.json?artist_id=%@&limit_events=%d";//,arist,limit events
 //Posts
 static NSString *const ConcertPostsURL = @BASE_URL_DEF "events/%@/posts" ; //,concertID
 static NSString *const FlagPostURL = @"posts/%@/flag.json"; //,postID

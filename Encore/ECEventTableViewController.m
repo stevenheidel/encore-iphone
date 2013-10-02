@@ -66,7 +66,7 @@
 {
     [super viewDidLoad];
     
-    self.checkedInvites = FALSE; //OR load from nsuserdefaults?
+    self.checkedInvites = FALSE; //OR load from nsuserdefaults? (global setting)
     
     self.eventName.text = [[self.concert eventName] uppercaseString];
     self.eventVenueAndDate.text = [self.concert venueAndDate];
@@ -695,7 +695,10 @@
 
 -(NSDictionary*) songInfo {
 //    NSLog(@"Song %@",[self.songs objectAtIndex:self.currentSongIndex]);
-    return [self.songs objectAtIndex:self.currentSongIndex];
+    if (self.songs.count >0) {
+        return [self.songs objectAtIndex:self.currentSongIndex];
+    }
+    return nil;
 }
 
 -(void)prepareCurrentSong
