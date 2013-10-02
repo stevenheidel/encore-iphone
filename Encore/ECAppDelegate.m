@@ -36,8 +36,11 @@
     // Allocate a reachability object
     Reachability* reach = [Reachability reachabilityWithHostname:@"www.google.com"];
     
-    // Tell the reachability that we DON'T want to be reachable on 3G/EDGE/CDMA
+//    // Tell the reachability that we DON'T want to be reachable on 3G/EDGE/CDMA  old, don't know why you wouldn't want to be reachable on that
+    //suppose you don't want to use data
+    
     reach.reachableOnWWAN = YES;
+    
     
     // Here we set up a NSNotification observer. The Reachability that caused the notification
     // is passed in the object parameter
@@ -55,20 +58,38 @@
     return !(networkStatus == NotReachable);
 }
 
-//-(void) reachabilityChanged: (NSNotification*) notification {
-//    NSLog(@"Reachability changed!");
-//    Reachability* reach = (Reachability*)notification.object;
-//    if (reach.isReachable) {
-//        NSLog(@"REACHABLE!");
-//    }
-//    else {
-//        NSLog(@"UNREACHABLE!");
-//    }
-//}
+-(void) reachabilityChanged: (NSNotification*) notification {
+    Reachability* reach = (Reachability*)notification.object;
+    if (reach.isReachable) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSLog(@"REACHABLE!");
+            [self.unreachableIndicatorView removeFromSuperview];
+        });
+        
+    }
+    else {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSLog(@"UNREACHABLE!");
+            [[UIApplication sharedApplication].keyWindow addSubview:self.unreachableIndicatorView];
+            [[UIApplication sharedApplication].keyWindow bringSubviewToFront:self.unreachableIndicatorView];
+        });
+    }
+}
+-(void) setupUnreachableIndicatorView {
+    self.unreachableIndicatorView = [[UIView alloc] initWithFrame:CGRectMake(0, self.window.frame.size.height-30, self.window.frame.size.width, 30)];
+    [self.unreachableIndicatorView setBackgroundColor:[UIColor redColor]];
+    UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(5, 7.5, self.window.frame.size.width, 15)];
+    label.text = @"No Internet connection detected";
+    label.textColor = [UIColor whiteColor];
+    label.textAlignment = NSTextAlignmentCenter;
+    [self.unreachableIndicatorView addSubview:label];
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    
-//    [self checkReachability];
+    [self setupUnreachableIndicatorView];
+    [self checkReachability];
+
     [self startAnalytics];
     
     self.navigationController = (UINavigationController*)self.window.rootViewController;

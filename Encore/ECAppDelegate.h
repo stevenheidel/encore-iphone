@@ -32,6 +32,7 @@
 -(BOOL) isLoggedIn;
 -(BOOL) connected;
 -(void) setUpLocationManager;
+@property (strong,nonatomic) UIView* unreachableIndicatorView;
 @property (strong,nonatomic) MBProgressHUD* hud;
 @property (nonatomic,assign) BOOL fullScreenVideoPlaying;
 @property (strong, nonatomic) UIWindow *window;
