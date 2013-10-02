@@ -692,7 +692,7 @@
 #pragma mark - Play/Pause Song preview
 
 -(NSDictionary*) songInfo {
-    NSLog(@"Song %@",[self.songs objectAtIndex:self.currentSongIndex]);
+//    NSLog(@"Song %@",[self.songs objectAtIndex:self.currentSongIndex]);
     return [self.songs objectAtIndex:self.currentSongIndex];
 }
 
