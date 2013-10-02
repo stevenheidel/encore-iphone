@@ -259,7 +259,7 @@
     NSString* stringOfFriends = [[friends valueForKey:@"facebook_id"] componentsJoinedByString:@", "];
     NSMutableDictionary* params =   [NSMutableDictionary dictionaryWithObjectsAndKeys:stringOfFriends,@"to", nil];
     [FBWebDialogs presentRequestsDialogModallyWithSession:[FBSession activeSession]
-                                                  message:[NSString stringWithFormat:@"Check out Encore!"]
+                                                  message:@"Check out Encore on iOS!"
                                                     title:@"Invite"
                                                parameters:params
                                                   handler:^(FBWebDialogResult result, NSURL *resultURL, NSError *error) {
@@ -271,8 +271,10 @@
                                                           if (result == FBWebDialogResultDialogNotCompleted) {
                                                               // Case B: User clicked the "x" icon
                                                               NSLog(@"User canceled request.");
+                                                              [Flurry logEvent:@"Canceled_Inviting_Friends_On_Dialog"];
                                                           } else {
                                                               NSLog(@"Request Sent.");
+                                                              [Flurry logEvent:@"Successfully_Invited_Friends" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger:friends.count],@"num_invited", nil]];
                                                           }
                                                       }}];
 }
