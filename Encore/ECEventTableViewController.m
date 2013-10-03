@@ -460,7 +460,12 @@
     if (self.friendPickerController == nil) {
         // Create friend picker, and get data loaded into it.
         self.friendPickerController = [[FBFriendPickerViewController alloc] init];
-        self.friendPickerController.title = NSLocalizedString(@"Who else went?", @"Title for facebook friend picker"); //TODO: change for upcoming
+        
+        NSString* titleForPicker = @"Who's coming?"; //TODO: move to subclasses?
+        if (self.tense == ECSearchTypePast) {
+            titleForPicker = @"Who else went";
+        }
+        self.friendPickerController.title = titleForPicker;
         self.friendPickerController.delegate = self;
     }
 
