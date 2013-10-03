@@ -179,7 +179,7 @@
         case Friends:
             return 100.0f;
         case Details:
-            return 75.0f;
+            return 60.0f;
         case Lineup:
             return 142.0f;
         case SongPreview:

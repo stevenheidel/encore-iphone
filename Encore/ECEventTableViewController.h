@@ -25,8 +25,8 @@ typedef enum {
 
 #define HUD_DELAY 1.0
 
-static const int pastRows[] = {Photos, Lineup, SongPreview, Details, Friends};
-static const int upcomingRows[] = {Tickets, Lineup,Details, SongPreview, Location}; //TODO: add Friends
+static const int pastRows[] = {Photos, Lineup, SongPreview, Details, Friends}; //TODO: Currently, since friends is hidden depending on whether or not the person went/is going to a show, friends has to be last row, need to change implementation if want it differently
+static const int upcomingRows[] = {Tickets, Lineup,SongPreview, Location, Details, Friends};
 
 @protocol ECEventViewControllerDelegate <NSObject>
 - (void) profileUpdated;
