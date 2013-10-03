@@ -731,7 +731,7 @@
         [self prepareCurrentSong];
         [self.player play];
 
-        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:SongPreview inSection:0]]
+        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:[self rowIndexForRowType:SongPreview] inSection:0]]
                               withRowAnimation:UITableViewRowAnimationAutomatic];
     }else{
         //Reset everything back
@@ -741,7 +741,7 @@
         [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:SongPreview inSection:0]]
                               withRowAnimation:UITableViewRowAnimationAutomatic];
         //Deselect the button
-        SongPreviewCell * songCell =(SongPreviewCell*)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:SongPreview inSection:0]];
+        SongPreviewCell * songCell =(SongPreviewCell*)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:[self rowIndexForRowType:SongPreview] inSection:0]];
         [songCell.btnPlay setSelected:NO];
     }
     
