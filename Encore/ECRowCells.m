@@ -13,6 +13,7 @@
 #import "UIFont+Encore.h"
 #import "ECArtistViewController.h"
 #import "UIColor+EncoreUI.h"
+#import <AFNetworking/UIImageView+AFNetworking.h>
 
 #define ROW_TITLE_SIZE 16.0f
 @implementation LocationCell
@@ -65,23 +66,21 @@
     __weak LineupCollectionCell *cell = (LineupCollectionCell*)[collectionView dequeueReusableCellWithReuseIdentifier:@"LineupCell" forIndexPath:indexPath];
     [cell.artistImage setImage:nil];
     
-    if([self.lineupImages objectAtIndex:indexPath.row] == [NSNull null]) {
         [cell.activityIndicator startAnimating];
         [ECJSONFetcher fetchPictureForArtist:name completion:^(NSURL *imageURL) {
-            UIImage* image = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL]];
-            if (!image) {
-                image = [UIImage imageNamed:@"placeholder.jpg"]; //TODO: replace with a better placeholder
-            }
-            if (image) {
-                [self.lineupImages replaceObjectAtIndex:indexPath.row withObject:image];
-                [cell.artistImage setImage: image];
-            }
-            [cell.activityIndicator stopAnimating];
+            
+            [cell.artistImage setImageWithURLRequest:[NSURLRequest requestWithURL:imageURL]
+                                    placeholderImage:nil
+                                             success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                                                 [cell.artistImage setImage:image];
+                                                 [cell.activityIndicator stopAnimating];
+                                             } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+                                                 [cell.artistImage setImage:[UIImage imageNamed:@"placeholder.jpg"]];
+                                                 [cell.activityIndicator stopAnimating];
+
+                                             }];
+
         }];
-    }
-    else {
-        [cell.artistImage setImage:[self.lineupImages objectAtIndex:indexPath.row]];
-    }
     
     cell.artistLabel.text = [[artist objectForKey:@"artist"] uppercaseString];
     
@@ -190,24 +189,19 @@
     NSDictionary* friend = [self.friends objectAtIndex:itemNumber];
     NSString* name = [friend objectForKey:@"name"];
     
-    __weak FriendCollectionCell *cell = (FriendCollectionCell*)[collectionView dequeueReusableCellWithReuseIdentifier:@"FriendCell" forIndexPath:indexPath];
-    [cell.friendImage setImage:nil];
-    
-    if([self.friendImages objectAtIndex:indexPath.row] == [NSNull null]) {
-        [cell.activityIndicator startAnimating];
-        NSURL* imageURL = [NSURL URLWithString:[friend objectForKey:@"facebook_image_url"]];
-            UIImage* image = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL]];
-            if (image) {
-                [self.friendImages replaceObjectAtIndex:indexPath.row withObject:image];
-                [cell.friendImage setImage: image];
-            }
-            [cell.activityIndicator stopAnimating];
-    }
-    else {
-        [cell.friendImage setImage:[self.friendImages objectAtIndex:indexPath.row]];
-    }
-    [cell.friendImage.layer setCornerRadius:37.5];
-    [cell.friendImage setClipsToBounds:YES];
+__weak FriendCollectionCell *cell = (FriendCollectionCell*)[collectionView dequeueReusableCellWithReuseIdentifier:@"FriendCell" forIndexPath:indexPath];
+    [cell.activityIndicator startAnimating];
+    NSURL* imageURL = [NSURL URLWithString:[friend objectForKey:@"facebook_image_url"]];
+    [cell.friendImage setImageWithURLRequest:[NSURLRequest requestWithURL:imageURL]
+                            placeholderImage:[[UIImage alloc] init]
+                                     success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                                         [cell.friendImage setImage:image];
+                                         [cell.activityIndicator stopAnimating];
+                                     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+                                         [cell.friendImage setImage:[UIImage imageNamed:@"placeholder.jpg"]];
+                                         [cell.activityIndicator stopAnimating];
+
+                                     }];
     cell.friendNameLabel.text = name;
     
     return cell;
@@ -228,10 +222,11 @@
 @implementation FriendCollectionCell
 -(void) awakeFromNib {
     self.friendNameLabel.font = [UIFont heroFontWithSize:10];
-    self.friendImage.layer.cornerRadius = 5.0;
+    self.friendImage.layer.cornerRadius = CGRectGetWidth(self.friendImage.frame)/2;
     self.friendImage.layer.masksToBounds = YES;
     self.friendImage.layer.borderColor = [UIColor grayColor].CGColor;
     self.friendImage.layer.borderWidth = 0.1;
+
 }
 @end
 
