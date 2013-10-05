@@ -177,7 +177,7 @@
     NSInteger rowID = [(NSNumber*)[self.rowOrder objectAtIndex:indexPath.row] integerValue];
     switch (rowID) {
         case Friends:
-            return 100.0f;
+            return 120.0f;
         case Details:
             return 60.0f;
         case Lineup:
