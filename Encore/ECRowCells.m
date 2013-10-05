@@ -65,15 +65,19 @@
     
     __weak LineupCollectionCell *cell = (LineupCollectionCell*)[collectionView dequeueReusableCellWithReuseIdentifier:@"LineupCell" forIndexPath:indexPath];
     [cell.artistImage setImage:nil];
-    
+    UIImage* savedImage = [self.lineupImages objectAtIndex:itemNumber];
+    if (savedImage != (id) [NSNull null]) {
+        [cell.artistImage setImage:savedImage];
+    }
+    else {
         [cell.activityIndicator startAnimating];
         [ECJSONFetcher fetchPictureForArtist:name completion:^(NSURL *imageURL) {
             
             [cell.artistImage setImageWithURLRequest:[NSURLRequest requestWithURL:imageURL]
                                     placeholderImage:nil
                                              success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-                                                 [self.lineupImages replaceObjectAtIndex:indexPath.row withObject:image];
                                                  [cell.artistImage setImage:image];
+                                                 [self.lineupImages replaceObjectAtIndex:indexPath.row withObject:image];
                                                  [cell.activityIndicator stopAnimating];
                                              } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
                                                  [cell.artistImage setImage:[UIImage imageNamed:@"placeholder.jpg"]];
@@ -82,7 +86,7 @@
                                              }];
 
         }];
-    
+    }
     cell.artistLabel.text = [[artist objectForKey:@"artist"] uppercaseString];
     
     return cell;
