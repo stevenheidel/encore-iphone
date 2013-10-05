@@ -146,11 +146,13 @@ typedef enum {
                         else {
                             CLPlacemark* placemark = [placemarks objectAtIndex:0];
                             self.locationLabel.text = placemark.locality != nil ? placemark.locality : placemark.subAdministrativeArea;
+                            [NSUserDefaults setLastSearchArea:self.locationLabel.text];
                         }
                     }];
 
                 }
                 else self.locationLabel.text = city;
+                
             }
         }else{
             self.viewLoaded= NO;
@@ -271,7 +273,7 @@ typedef enum {
             break;
     }
     
-    label.text = [NSString stringWithFormat:message,[NSUserDefaults searchCity]];
+    label.text = [NSString stringWithFormat:message,[NSUserDefaults lastSearchArea]];
     
     return _noConcertsFooterView;
 }
