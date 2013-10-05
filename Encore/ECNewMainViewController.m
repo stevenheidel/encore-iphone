@@ -105,22 +105,6 @@ typedef enum {
     [self.tableView setIndicatorStyle:UIScrollViewIndicatorStyleWhite];
     self.view.clipsToBounds = YES;
     
-    //if user already set location using select location controller don't listen to location changes
-    if([NSUserDefaults lastSearchLocation].coordinate.latitude == 0 && [NSUserDefaults lastSearchLocation].coordinate.longitude == 0)
-    {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(LocationAcquired) name:ECLocationAcquiredNotification object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(LocationFailed) name:ECLocationFailedNotification object:nil];
-    }
-    else {
-        if (![ApplicationDelegate connected]) {
-            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"No connection!" message:@"You must be connected to the internet to use Encore. Sorry pal." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"Try again", nil];
-            alert.tag = ECNoNetworkAlertTag;
-            [alert show];
-        }
-        else {
-         [self fetchConcerts];
-        }
-    }
 }
 
 - (void)viewDidAppear:(BOOL)animated{
