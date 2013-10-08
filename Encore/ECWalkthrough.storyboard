@@ -215,7 +215,7 @@
                                             <constraint firstAttribute="height" constant="62" type="user" id="lrt-pI-VfR"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Find your next show, grab tickets and get your crew together" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="270" translatesAutoresizingMaskIntoConstraints="NO" id="vww-P0-oIt">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Grab tickets to your next show and invite friends" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="270" translatesAutoresizingMaskIntoConstraints="NO" id="vww-P0-oIt">
                                         <rect key="frame" x="25" y="91" width="270" height="53"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="53" type="user" id="4Eh-RT-Ndp"/>
@@ -375,8 +375,12 @@
                                             <constraint firstAttribute="width" constant="270" type="user" id="y2e-fd-DMG"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Search for a concert you attended" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4O2-Kh-Sv1">
-                                        <rect key="frame" x="32" y="107" width="257" height="20"/>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Find a concert you attended in your city" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="300" translatesAutoresizingMaskIntoConstraints="NO" id="4O2-Kh-Sv1">
+                                        <rect key="frame" x="12" y="107" width="300" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" type="user" id="auL-tA-aOr"/>
+                                            <constraint firstAttribute="width" constant="300" id="sZf-b5-lXb"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -409,22 +413,22 @@
                                             <constraint firstAttribute="height" constant="65" type="user" id="PwI-p3-Bl1"/>
                                             <constraint firstItem="5Bt-UL-bpE" firstAttribute="centerX" secondItem="HHd-tA-pgb" secondAttribute="centerX" type="default" id="lbX-7w-0cW"/>
                                             <constraint firstAttribute="bottom" secondItem="5Bt-UL-bpE" secondAttribute="bottom" constant="9" id="mHo-R9-eHp"/>
-                                            <constraint firstItem="5Bt-UL-bpE" firstAttribute="top" secondItem="woo-Xy-NzZ" secondAttribute="top" constant="1" id="maY-VL-yKm"/>
+                                            <constraint firstItem="5Bt-UL-bpE" firstAttribute="top" secondItem="woo-Xy-NzZ" secondAttribute="top" constant="1" type="user" id="maY-VL-yKm"/>
                                             <constraint firstAttribute="bottom" secondItem="HHd-tA-pgb" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="uZX-mi-mGP"/>
                                         </constraints>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="4O2-Kh-Sv1" firstAttribute="centerX" secondItem="wba-K3-EDD" secondAttribute="centerX" type="default" id="7IQ-g2-WMy"/>
+                                    <constraint firstItem="4O2-Kh-Sv1" firstAttribute="leading" secondItem="woo-Xy-NzZ" secondAttribute="leading" type="default" id="9hm-B4-f27"/>
+                                    <constraint firstItem="5Bt-UL-bpE" firstAttribute="top" secondItem="4O2-Kh-Sv1" secondAttribute="bottom" constant="16" type="user" id="FF6-Kq-Bab"/>
+                                    <constraint firstItem="woo-Xy-NzZ" firstAttribute="trailing" secondItem="4O2-Kh-Sv1" secondAttribute="trailing" type="default" id="H2k-U3-7rJ"/>
                                     <constraint firstItem="wba-K3-EDD" firstAttribute="top" secondItem="PiV-Qx-7TW" secondAttribute="top" constant="30" type="user" id="JzI-ZL-RdG"/>
                                     <constraint firstAttribute="height" constant="210" type="user" id="K4B-ep-GK5"/>
-                                    <constraint firstItem="woo-Xy-NzZ" firstAttribute="top" secondItem="PiV-Qx-7TW" secondAttribute="top" constant="142" id="MGk-Fh-pf1"/>
-                                    <constraint firstAttribute="bottom" secondItem="4O2-Kh-Sv1" secondAttribute="bottom" constant="83" id="R6y-wK-mkk"/>
-                                    <constraint firstAttribute="trailing" secondItem="woo-Xy-NzZ" secondAttribute="trailing" constant="8" id="jNZ-lN-IM0"/>
-                                    <constraint firstItem="woo-Xy-NzZ" firstAttribute="leading" secondItem="PiV-Qx-7TW" secondAttribute="leading" constant="12" id="ucL-ng-qQf"/>
+                                    <constraint firstItem="woo-Xy-NzZ" firstAttribute="top" secondItem="PiV-Qx-7TW" secondAttribute="top" constant="142" type="user" id="MGk-Fh-pf1"/>
+                                    <constraint firstItem="wba-K3-EDD" firstAttribute="centerX" secondItem="PiV-Qx-7TW" secondAttribute="centerX" type="default" id="TYo-7H-prx"/>
+                                    <constraint firstItem="4O2-Kh-Sv1" firstAttribute="leading" secondItem="PiV-Qx-7TW" secondAttribute="leading" constant="12" id="aIv-Yq-BNA"/>
                                     <constraint firstAttribute="width" constant="320" type="user" id="yEY-Hh-9kC"/>
-                                    <constraint firstItem="4O2-Kh-Sv1" firstAttribute="centerX" secondItem="PiV-Qx-7TW" secondAttribute="centerX" type="default" id="yMr-Aa-7RT"/>
                                 </constraints>
                             </view>
                             <tableView opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="115" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="o6V-ZI-Yt9">

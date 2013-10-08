@@ -192,6 +192,7 @@
         }
         [self.friendsCollectionView reloadData];
         self.noFriendsLabel.hidden = YES;
+        [self.addFriendsButton removeFromSuperview];
     }
     else {
         self.noFriendsLabel.hidden = NO;

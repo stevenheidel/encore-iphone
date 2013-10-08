@@ -110,7 +110,8 @@
     ECConcertCellView *cell = [tableView dequeueReusableCellWithIdentifier:ConcertCellIdentifier forIndexPath:indexPath];
     NSDictionary * concertDic = [self.featuredEvents objectAtIndex:indexPath.row];
     [cell setUpCellForConcert:concertDic];
-    
+    cell.lblLocation.text = [[concertDic address] uppercaseString];
+
     [cell.imageArtist setImageWithURL:[concertDic imageURL] placeholderImage:nil]; //TODO add placeholder
     cell.lblName.textColor = [UIColor whiteColor];
 
@@ -183,4 +184,5 @@
 - (IBAction)nextButtonTapped:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
 @end

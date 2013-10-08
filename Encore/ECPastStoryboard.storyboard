@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4510" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="nnw-kD-SbF">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4510" systemVersion="13A584" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="nnw-kD-SbF">
     <dependencies>
         <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
@@ -55,13 +55,118 @@
                             </constraints>
                         </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="kis-Ce-pGp">
-                            <rect key="frame" x="0.0" y="760" width="320" height="1"/>
+                            <rect key="frame" x="0.0" y="765" width="320" height="1"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
                         <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="friends" rowHeight="125" id="5vu-qg-iob" customClass="FriendsCell">
+                                <rect key="frame" x="0.0" y="293" width="320" height="125"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5vu-qg-iob" id="TQT-bH-jrU">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="124"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="friends" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zI4-89-h1N" userLabel="friends title">
+                                            <rect key="frame" x="120" y="5" width="80" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="80" id="62G-Jv-5RX"/>
+                                                <constraint firstAttribute="height" constant="21" id="yxK-sn-cOR"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tag some friends that went" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ft5-Xi-hKN" userLabel="no friends label">
+                                            <rect key="frame" x="48" y="51" width="252" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="wCz-gH-6Sn">
+                                            <rect key="frame" x="68" y="26" width="252" height="93"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="252" id="aWc-E8-iod"/>
+                                                <constraint firstAttribute="height" constant="93" id="pJv-qI-lxT"/>
+                                            </constraints>
+                                            <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ARv-4N-qsa">
+                                                <size key="itemSize" width="68" height="93"/>
+                                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                <inset key="sectionInset" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                            </collectionViewFlowLayout>
+                                            <cells>
+                                                <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FriendCell" id="vci-s1-fVx" customClass="FriendCollectionCell">
+                                                    <rect key="frame" x="5" y="0.0" width="68" height="93"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                                        <rect key="frame" x="0.0" y="0.0" width="68" height="93"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <subviews>
+                                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hDf-8k-ZnJ">
+                                                                <rect key="frame" x="0.0" y="0.0" width="68" height="68"/>
+                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                            </imageView>
+                                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="68" translatesAutoresizingMaskIntoConstraints="NO" id="tid-6e-HcT">
+                                                                <rect key="frame" x="0.0" y="69" width="68" height="30"/>
+                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    </view>
+                                                    <connections>
+                                                        <outlet property="friendImage" destination="hDf-8k-ZnJ" id="cqU-P5-7BR"/>
+                                                        <outlet property="friendNameLabel" destination="tid-6e-HcT" id="kJI-2w-QxM"/>
+                                                    </connections>
+                                                </collectionViewCell>
+                                            </cells>
+                                            <connections>
+                                                <outlet property="dataSource" destination="5vu-qg-iob" id="NNL-dK-RYZ"/>
+                                                <outlet property="delegate" destination="5vu-qg-iob" id="eXp-ce-h0i"/>
+                                            </connections>
+                                        </collectionView>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FAZ-Hf-uNH">
+                                            <rect key="frame" x="20" y="51" width="22" height="22"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="22" id="Xye-g1-i38"/>
+                                                <constraint firstAttribute="height" constant="22" id="nzO-P6-zYl"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <state key="normal">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="zI4-89-h1N" firstAttribute="top" secondItem="TQT-bH-jrU" secondAttribute="top" constant="5" id="FC9-J0-tse"/>
+                                        <constraint firstItem="wCz-gH-6Sn" firstAttribute="leading" secondItem="FAZ-Hf-uNH" secondAttribute="trailing" constant="26" id="LpB-tT-L9r"/>
+                                        <constraint firstItem="FAZ-Hf-uNH" firstAttribute="leading" secondItem="TQT-bH-jrU" secondAttribute="leading" constant="20" id="OSO-d9-dMe"/>
+                                        <constraint firstItem="FAZ-Hf-uNH" firstAttribute="top" secondItem="TQT-bH-jrU" secondAttribute="top" constant="51" id="SSP-gr-erg"/>
+                                        <constraint firstItem="zI4-89-h1N" firstAttribute="top" relation="greaterThanOrEqual" secondItem="TQT-bH-jrU" secondAttribute="top" constant="5" id="bww-RU-zG8"/>
+                                        <constraint firstAttribute="centerX" secondItem="zI4-89-h1N" secondAttribute="centerX" id="d61-dW-eNd"/>
+                                        <constraint firstAttribute="trailing" secondItem="wCz-gH-6Sn" secondAttribute="trailing" id="dcp-lq-FIj"/>
+                                        <constraint firstItem="wCz-gH-6Sn" firstAttribute="leading" secondItem="TQT-bH-jrU" secondAttribute="leading" priority="900" id="iaM-s7-HHZ"/>
+                                        <constraint firstItem="wCz-gH-6Sn" firstAttribute="top" secondItem="zI4-89-h1N" secondAttribute="bottom" id="qjA-0d-eYm"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="addFriendsButton" destination="FAZ-Hf-uNH" id="O8f-z4-5aC"/>
+                                    <outlet property="friendsCollectionView" destination="wCz-gH-6Sn" id="Ls1-bt-iNc"/>
+                                    <outlet property="friendsTitleLabel" destination="zI4-89-h1N" id="R4r-ie-MIs"/>
+                                    <outlet property="noFriendsLabel" destination="ft5-Xi-hKN" id="fUO-4L-hm3"/>
+                                </connections>
+                            </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="photos" rowHeight="74" id="pju-yT-rbv" customClass="GetPhotosCell">
-                                <rect key="frame" x="0.0" y="293" width="320" height="74"/>
+                                <rect key="frame" x="0.0" y="418" width="320" height="74"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pju-yT-rbv" id="3SJ-yB-MJS">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="73"/>
@@ -120,7 +225,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="lineup" rowHeight="142" id="WQC-18-eYh" customClass="LineupCell">
-                                <rect key="frame" x="0.0" y="367" width="320" height="142"/>
+                                <rect key="frame" x="0.0" y="492" width="320" height="142"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WQC-18-eYh" id="hgn-oZ-Q2h">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="141"/>
@@ -216,7 +321,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="songpreview" rowHeight="71" id="MiR-S5-eUd" customClass="SongPreviewCell">
-                                <rect key="frame" x="0.0" y="509" width="320" height="71"/>
+                                <rect key="frame" x="0.0" y="634" width="320" height="71"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MiR-S5-eUd" id="vo9-3O-VoX">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
@@ -291,98 +396,8 @@
                                     <outlet property="lblSongName" destination="Be0-qS-ujT" id="bVc-F0-nwr"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="friends" rowHeight="120" id="5vu-qg-iob" customClass="FriendsCell">
-                                <rect key="frame" x="0.0" y="580" width="320" height="120"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5vu-qg-iob" id="TQT-bH-jrU">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="119"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="friends" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zI4-89-h1N" userLabel="friends title">
-                                            <rect key="frame" x="120" y="5" width="80" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="80" id="62G-Jv-5RX"/>
-                                                <constraint firstAttribute="height" constant="21" id="yxK-sn-cOR"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tag some friends that went" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ft5-Xi-hKN" userLabel="no friends label">
-                                            <rect key="frame" x="48" y="51" width="252" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="wCz-gH-6Sn">
-                                            <rect key="frame" x="68" y="26" width="252" height="88"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                            <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ARv-4N-qsa">
-                                                <size key="itemSize" width="68" height="88"/>
-                                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                            </collectionViewFlowLayout>
-                                            <cells>
-                                                <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FriendCell" id="vci-s1-fVx" customClass="FriendCollectionCell">
-                                                    <rect key="frame" x="0.0" y="0.0" width="68" height="88"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                                        <rect key="frame" x="0.0" y="0.0" width="68" height="88"/>
-                                                        <autoresizingMask key="autoresizingMask"/>
-                                                        <subviews>
-                                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hDf-8k-ZnJ">
-                                                                <rect key="frame" x="0.0" y="0.0" width="68" height="68"/>
-                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                            </imageView>
-                                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tid-6e-HcT">
-                                                                <rect key="frame" x="0.0" y="69" width="68" height="21"/>
-                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                        </subviews>
-                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                    </view>
-                                                    <connections>
-                                                        <outlet property="friendImage" destination="hDf-8k-ZnJ" id="cqU-P5-7BR"/>
-                                                        <outlet property="friendNameLabel" destination="tid-6e-HcT" id="kJI-2w-QxM"/>
-                                                    </connections>
-                                                </collectionViewCell>
-                                            </cells>
-                                            <connections>
-                                                <outlet property="dataSource" destination="5vu-qg-iob" id="NNL-dK-RYZ"/>
-                                                <outlet property="delegate" destination="5vu-qg-iob" id="eXp-ce-h0i"/>
-                                            </connections>
-                                        </collectionView>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FAZ-Hf-uNH">
-                                            <rect key="frame" x="20" y="51" width="22" height="22"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                            <state key="normal">
-                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
-                                        </button>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="zI4-89-h1N" firstAttribute="top" secondItem="TQT-bH-jrU" secondAttribute="top" constant="5" id="FC9-J0-tse"/>
-                                        <constraint firstAttribute="centerX" secondItem="zI4-89-h1N" secondAttribute="centerX" id="d61-dW-eNd"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <outlet property="addFriendsButton" destination="FAZ-Hf-uNH" id="O8f-z4-5aC"/>
-                                    <outlet property="friendsCollectionView" destination="wCz-gH-6Sn" id="Ls1-bt-iNc"/>
-                                    <outlet property="friendsTitleLabel" destination="zI4-89-h1N" id="R4r-ie-MIs"/>
-                                    <outlet property="noFriendsLabel" destination="ft5-Xi-hKN" id="fUO-4L-hm3"/>
-                                </connections>
-                            </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="details" rowHeight="60" id="tmc-SK-ANe" customClass="DetailsCell">
-                                <rect key="frame" x="0.0" y="700" width="320" height="60"/>
+                                <rect key="frame" x="0.0" y="705" width="320" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tmc-SK-ANe" id="qYG-mt-3BG">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="59"/>

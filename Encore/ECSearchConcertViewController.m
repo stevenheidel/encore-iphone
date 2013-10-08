@@ -125,7 +125,7 @@ typedef enum {
     [self.searchbar setTextColor:[UIColor blackColor]];
     
     UIColor *color = [UIColor darkGrayColor];
-    self.searchbar.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"" attributes:@{NSForegroundColorAttributeName: color}];
+    self.searchbar.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Artist search..." attributes:@{NSForegroundColorAttributeName: color}];
 
 }
 -(void) setupLastFMView {
@@ -159,6 +159,9 @@ typedef enum {
 -(void) initializeSearchLocation {
     self.currentSearchLocation = [NSUserDefaults lastSearchLocation];
     self.currentSearchRadius = [NSUserDefaults lastSearchRadius];
+    NSString* city = [NSUserDefaults lastSearchArea];
+    NSString* city2 = [NSUserDefaults searchCity];
+    self.lblSearchConcert.text = [NSString stringWithFormat:@"Find a concert you attended in %@",city == nil ? city2 : city];
 }
 
 -(void)LocationAcquired
@@ -359,7 +362,6 @@ typedef enum {
         
         
         [cell setUpCellForConcert:concertDic];
-        cell.lblName.textColor = [UIColor whiteColor];
 
         //Using UIImageView+AFNetworking, automatically set the cell's image view based on the URL
         [cell.imageArtist setImageWithURL:[concertDic imageURL] placeholderImage:nil]; //TODO add placeholder
@@ -424,4 +426,5 @@ typedef enum {
 -(CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return 0;
 }
+
 @end

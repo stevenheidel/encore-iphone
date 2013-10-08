@@ -47,4 +47,15 @@
     [[NSUserDefaults standardUserDefaults] setWalkthoughFinished];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+-(BOOL)shouldAutorotate{
+    return NO;
+}
+
+-(NSUInteger)supportedInterfaceOrientations{
+    return UIInterfaceOrientationMaskPortrait;
+}
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation{
+    return UIInterfaceOrientationPortrait;
+}
 @end

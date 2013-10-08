@@ -80,8 +80,11 @@
     //Fetch song previews
     [ECJSONFetcher fetchSongPreviewsForArtist:[self.concert headliner] completion:^(NSArray *songs) {
         self.songs = [NSArray arrayWithArray:songs];
-        self.currentSongIndex = 0;
-        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:[self rowIndexForRowType:SongPreview] inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+        if(self.songs.count > 0){
+            self.currentSongIndex = 0;
+            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:[self rowIndexForRowType:SongPreview] inSection:0]]
+                                  withRowAnimation:UITableViewRowAnimationAutomatic];
+        }
     }];
 }
 
@@ -176,7 +179,7 @@
     NSInteger rowID = [(NSNumber*)[self.rowOrder objectAtIndex:indexPath.row] integerValue];
     switch (rowID) {
         case Friends:
-            return 120.0f;
+            return 125.0f;
         case Details:
             return 60.0f;
         case Lineup:
@@ -241,16 +244,21 @@
 }
 
 -(void) checkInvites:(NSArray*) friends {
-    NSMutableArray* uninvitedFriends = [NSMutableArray arrayWithCapacity:self.friends.count];
+    [self.uninvitedFriends removeAllObjects];
+    self.uninvitedFriends = [NSMutableArray arrayWithCapacity:self.friends.count];
+    
     for (NSDictionary* friend in self.friends) {
         BOOL inviteSent = [[friend valueForKey:@"invite_sent"] boolValue]==1;
         
         if (!inviteSent) {
-            [uninvitedFriends addObject:friend];
+            [self.uninvitedFriends addObject:friend];
         }
     }
-    if ([uninvitedFriends count] > 0) {
-        [self inviteFriends: uninvitedFriends];
+    if ([self.uninvitedFriends count] > 0) {
+        NSString* alertMessage = [NSString stringWithFormat:@"%d of your friends haven't joined Encore. Invite them to share this concert with them.",self.uninvitedFriends.count];
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil message:alertMessage delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Invite", nil];
+        alert.tag = ECInviteFriendsTag;
+        [alert show];        
     }
 }
 
@@ -482,9 +490,11 @@
 
 - (void) handlePickerDone
 {
-    [self dismissViewControllerAnimated:YES completion:^{
-        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-    }];
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
+        [self dismissViewControllerAnimated:YES completion:^{
+            [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+        }];
+    }
 }
 
 - (void)facebookViewControllerDoneWasPressed:(id)sender
@@ -674,6 +684,12 @@
             [[NSNotificationCenter defaultCenter] addObserver:self.statusManager selector:@selector(checkProfileState) name:ECLoginCompletedNotification object:nil];
             
         }
+    }else if (alertView.tag == ECInviteFriendsTag)
+    {
+        if (buttonIndex == alertView.firstOtherButtonIndex) {
+            [self inviteFriends: self.uninvitedFriends];
+        }
+
     }
     
 }

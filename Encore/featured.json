@@ -9,7 +9,7 @@
             "lastfm_url": "http://www.last.fm/event/3506541+The+Lumineers+at+Sound+Academy+on+2+May+2013",
             "venue_name": "Sound Academy",
             "venue": {
-                "street": "11 Polson Street",
+                "street": "",
                 "city": "Toronto",
                 "postalcode": "M5A 1A4",
                 "country": "Canada",
@@ -59,7 +59,7 @@
             "venue_name": "Suvilahti",
             "venue": {
                 "street": "",
-                "city": "Helsinki, Uusimma",
+                "city": "Helsinki",
                 "postalcode": "",
                 "country": "Finland",
                 "latitude": 43.629188,
@@ -84,7 +84,7 @@
                 "street": "",
                 "city": "Houston, TX",
                 "postalcode": "",
-                "country": "USA",
+                "country": "",
                 "latitude": 43.629188,
                 "longitude": -79.415054
             },
@@ -107,7 +107,7 @@
                 "street": "",
                 "city": "Chicago, IL",
                 "postalcode": "",
-                "country": "USA",
+                "country": "",
                 "latitude": 43.629188,
                 "longitude": -79.415054
             },
@@ -130,7 +130,7 @@
                 "street": "",
                 "city": "Las Vegas, NV",
                 "postalcode": "",
-                "country": " USA",
+                "country": " ",
                 "latitude": 43.629188,
                 "longitude": -79.415054
             },
@@ -153,7 +153,7 @@
                 "street": "",
                 "city": "Philidalphia, PA",
                 "postalcode": "",
-                "country": " USA",
+                "country": " ",
                 "latitude": 43.629188,
                 "longitude": -79.415054
             },
@@ -176,7 +176,7 @@
                 "street": "",
                 "city": "New York, NY",
                 "postalcode": "",
-                "country": " USA",
+                "country": " ",
                 "latitude": 43.629188,
                 "longitude": -79.415054
             },
@@ -245,7 +245,7 @@
                 "street": "",
                 "city": "San Fransisco, CA",
                 "postalcode": "",
-                "country": "USA",
+                "country": "",
                 "latitude": 43.629188,
                 "longitude": -79.415054
             },
@@ -268,7 +268,7 @@
                 "street": "",
                 "city": "Atlantic City, NJ",
                 "postalcode": "",
-                "country": "USA",
+                "country": "",
                 "latitude": 43.629188,
                 "longitude": -79.415054
             },
@@ -314,7 +314,7 @@
                 "street": "",
                 "city": "Pittsbugh, PA",
                 "postalcode": "",
-                "country": "USA",
+                "country": "",
                 "latitude": 43.629188,
                 "longitude": -79.415054
             },
@@ -337,7 +337,7 @@
                 "street": "",
                 "city": "Boston, MA",
                 "postalcode": "",
-                "country": "USA",
+                "country": "",
                 "latitude": 43.629188,
                 "longitude": -79.415054
             },
@@ -360,7 +360,7 @@
                 "street": "",
                 "city": "Orlando, FL",
                 "postalcode": "",
-                "country": "USA",
+                "country": "",
                 "latitude": 43.629188,
                 "longitude": -79.415054
             },
@@ -383,7 +383,7 @@
                 "street": "",
                 "city": "Irvine, CA",
                 "postalcode": "",
-                "country": "USA",
+                "country": "",
                 "latitude": 43.629188,
                 "longitude": -79.415054
             },
