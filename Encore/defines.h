@@ -11,7 +11,7 @@
 
 #define kApptentiveAPIKey @"4912976421a2aa607475f5aabefeccdf568146d906e26959e5ce950723fbe255"
 #define kApptentiveAppID @"668917758"
-
+#define kAffiliateCode @"10lbaN"
 
 
 #endif

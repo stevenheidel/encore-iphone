@@ -15,7 +15,7 @@
 #import "UIColor+EncoreUI.h"
 #import <AFNetworking/UIImageView+AFNetworking.h>
 
-#define ROW_TITLE_SIZE 16.0f
+
 @implementation LocationCell
 -(void) awakeFromNib {
     self.locationTitleLabel.font = [UIFont lightHeroFontWithSize:ROW_TITLE_SIZE];
@@ -130,8 +130,17 @@
 @implementation GrabTicketsCell
 
 -(IBAction) grabTickets {
-    [[UIApplication sharedApplication] openURL:self.lastfmURL];
-    [Flurry logEvent:@"Tapped_Grab_Tickets" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:self.lastfmURL, @"URL", nil]];
+    NSString* flag = @"success";
+    if (self.ticketsURL) {
+        [[UIApplication sharedApplication] openURL:self.ticketsURL];
+    }
+    else {
+        flag = @"failed";
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Sorry, no tickets link was found." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    }
+    
+    [Flurry logEvent:@"Tapped_Grab_Tickets" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:self.ticketsURL, @"URL", flag, @"success_flag", nil]];
 }
 
 @end

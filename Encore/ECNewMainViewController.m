@@ -124,7 +124,6 @@ typedef enum {
             }
             
             else {
-                //TODO: Check network connection status before fetching anything
                 if (![ApplicationDelegate connected]) {
                     UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"No connection!" message:@"You must be connected to the internet to use Encore. Sorry pal." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"Try again", nil];
                     alert.tag = ECNoNetworkAlertTag;
@@ -436,12 +435,18 @@ typedef enum {
     UIImage* dividerRightActive = [UIImage imageNamed:@"divideractiveright"];
     UIImage* bothInactive = [UIImage imageNamed:@"dividerdefault"];
     
-    [self.segmentedControl setBackgroundImage:unselected forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-    [self.segmentedControl setBackgroundImage:selected forState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
+    [[UISegmentedControl appearance] setBackgroundImage:unselected forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    [[UISegmentedControl appearance] setBackgroundImage:selected forState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
+
+    [[UISegmentedControl appearance] setDividerImage:dividerLeftActive forLeftSegmentState:UIControlStateSelected rightSegmentState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    [[UISegmentedControl appearance] setDividerImage:dividerLeftActive forLeftSegmentState:UIControlStateSelected rightSegmentState:UIControlStateDisabled barMetrics:UIBarMetricsDefault];
     
-    [self.segmentedControl setDividerImage:dividerLeftActive forLeftSegmentState:UIControlStateSelected rightSegmentState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-    [self.segmentedControl setDividerImage:dividerRightActive forLeftSegmentState:UIControlStateNormal rightSegmentState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
-    [self.segmentedControl setDividerImage:bothInactive forLeftSegmentState:UIControlStateNormal rightSegmentState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    [[UISegmentedControl appearance] setDividerImage:dividerRightActive forLeftSegmentState:UIControlStateNormal rightSegmentState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
+    [[UISegmentedControl appearance] setDividerImage:dividerRightActive forLeftSegmentState:UIControlStateDisabled rightSegmentState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
+    
+    [[UISegmentedControl appearance] setDividerImage:bothInactive forLeftSegmentState:UIControlStateNormal rightSegmentState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    [[UISegmentedControl appearance] setDividerImage:bothInactive forLeftSegmentState:UIControlStateDisabled rightSegmentState:UIControlStateDisabled barMetrics:UIBarMetricsDefault];
+    
     NSDictionary* selectedTextAttr = [NSDictionary dictionaryWithObjectsAndKeys:
                                       [UIColor whiteColor], UITextAttributeTextColor,
                                       [UIColor clearColor], UITextAttributeTextShadowColor,
@@ -455,13 +460,13 @@ typedef enum {
                                         [UIFont heroFontWithSize:17.0f], UITextAttributeFont,
                                         nil];
 
-    [self.segmentedControl setTitleTextAttributes:selectedTextAttr forState:UIControlStateSelected];
-    [self.segmentedControl setTitleTextAttributes:unselectedTextAttr forState:UIControlStateNormal];
+    [[UISegmentedControl appearance] setTitleTextAttributes:selectedTextAttr forState:UIControlStateSelected];
+    [[UISegmentedControl appearance] setTitleTextAttributes:unselectedTextAttr forState:UIControlStateNormal];
 
     //Guess and check to get right offset. May not be perfect, seems to be good though
-    [self.segmentedControl setContentPositionAdjustment:UIOffsetMake(4, 0) forSegmentType:UISegmentedControlSegmentLeft barMetrics:UIBarMetricsDefault];
-    [self.segmentedControl setContentPositionAdjustment:UIOffsetMake(0, 0) forSegmentType:UISegmentedControlSegmentCenter barMetrics:UIBarMetricsDefault];
-    [self.segmentedControl setContentPositionAdjustment:UIOffsetMake(-4, 0) forSegmentType:UISegmentedControlSegmentRight barMetrics:UIBarMetricsDefault];
+    [[UISegmentedControl appearance] setContentPositionAdjustment:UIOffsetMake(4, 0) forSegmentType:UISegmentedControlSegmentLeft barMetrics:UIBarMetricsDefault];
+    [[UISegmentedControl appearance] setContentPositionAdjustment:UIOffsetMake(0, 0) forSegmentType:UISegmentedControlSegmentCenter barMetrics:UIBarMetricsDefault];
+    [[UISegmentedControl appearance] setContentPositionAdjustment:UIOffsetMake(-4, 0) forSegmentType:UISegmentedControlSegmentRight barMetrics:UIBarMetricsDefault];
 }
 
 -(void)setDateLabel {
@@ -533,7 +538,7 @@ typedef enum {
 }
 
 -(void) updatedSearchLocationToPlacemark:(CLPlacemark *)placemark{
-    float radius = 0.5f;
+    float radius = 1.0f;
     NSString* adminArea = placemark.administrativeArea;
     if(SYSTEM_VERSION_LESS_THAN(@"7.0")){
         if([placemark.ISOcountryCode isEqualToString:@"CA"] || [placemark.ISOcountryCode isEqualToString:@"US"]){ //use standard abbreviations for US and Canada.
@@ -557,7 +562,7 @@ typedef enum {
     self.locationLabel.text = area;
     
     [NSUserDefaults setLastSearchLocation:location];
-    [NSUserDefaults setLastSearchRadius:radius];
+//    [NSUserDefaults setLastSearchRadius:radius];
     [NSUserDefaults setLastSearchArea: area];
     [NSUserDefaults setSearchCity:locality];
     [NSUserDefaults synchronize];

@@ -14,27 +14,32 @@
 #import "MBProgressHUD.h"
 #import "ECUpcomingViewController.h"
 #import "ECPastViewController.h"
+#import "UIImage+GaussBlur.h"
+#import "UIImage+Merge.h"
+#import "ECSearchResultCell.h"
+#import "ECRowCells.h"
+#import "defines.h"
+
+#define SearchCellIdentifier @"ECSearchResultCell"
 
 typedef enum {
-    ArtistInfoPastSection,
-    ArtistInfoUpcomingSection,
+    ArtistInfoMusicSection,
+    ArtistInfoEventSection,
     ArtistInfoNumSections
 }ArtistInfoSections;
+
+typedef enum {
+    PastSegment,
+    UpcomingSegment
+} SegmentedControlIndices;
+
 @interface ECArtistViewController ()
 
 @end
 
 @implementation ECArtistViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
+#pragma mark - autorotation
 -(BOOL)shouldAutorotate{
     return NO;
 }
@@ -46,9 +51,16 @@ typedef enum {
     return UIInterfaceOrientationPortrait;
 }
 
+#pragma mark - view loading
 - (void)viewDidLoad
 {
+    [self.tableView registerNib:[UINib nibWithNibName:@"ECSearchResultCell" bundle:nil]
+         forCellReuseIdentifier:SearchCellIdentifier];
     [super viewDidLoad];
+    
+    self.tableView.separatorColor = [UIColor separatorColor];
+    
+    
     UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
     UIImage *leftButImage = [UIImage imageNamed:@"backButton"];
     [leftButton setBackgroundImage:leftButImage forState:UIControlStateNormal];
@@ -59,14 +71,31 @@ typedef enum {
 
 
     MBProgressHUD* hud = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
-	[self.tableView addSubview:hud];
+	[self.navigationController.view addSubview:hud];
     hud.color = [UIColor lightBlueHUDConfirmationColor];
 	[hud show:YES];
     hud.labelText = [NSString stringWithFormat:@"Loading recent events"];
     [ECJSONFetcher fetchInfoForArtist:self.artist completion:^(NSDictionary *artistInfo) {
         self.events = [artistInfo objectForKey:@"events"];
-        [self.tableView reloadData];
+        NSIndexSet* set = [NSIndexSet indexSetWithIndex:ArtistInfoEventSection];
+        UISegmentedControl* control = self.sectionHeaderView.segmentedControl;
+        NSInteger pastCount = self.pastEvents.count;
+        NSInteger upcomingCount = self.upcomingEvents.count;
+        if (!pastCount>0) {
+            self.currentSelection = ECSearchTypeFuture;
+        }
+        else self.currentSelection = ECSearchTypePast;
+        
+        [control setEnabled:pastCount != 0 forSegmentAtIndex:PastSegment];
+        [control setEnabled:upcomingCount != 0 forSegmentAtIndex:UpcomingSegment];
+        [self.tableView reloadSections:set withRowAnimation:UITableViewRowAnimationAutomatic];
         [hud hide:YES];
+    }];
+    //Fetch song previews
+    [ECJSONFetcher fetchSongPreviewsForArtist:self.artist completion:^(NSArray *songs) {
+        self.songs = [NSArray arrayWithArray:songs];
+        self.currentSongIndex = 0;
+        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:ArtistInfoMusicSection]] withRowAnimation:UITableViewRowAnimationAutomatic];
     }];
     if (self.artistImage != (id)[NSNull null]) {
         self.artistImageView.image = self.artistImage;
@@ -81,7 +110,19 @@ typedef enum {
     UIImageView* encoreLogo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
     self.navigationItem.titleView = encoreLogo;
     self.tableView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
+    
+    [self setBackgroundImage];
+}
 
+-(void) setBackgroundImage {
+    UIImage* image =  self.artistImage;
+    UIImage* backgroundImage = [UIImage mergeImage:[image imageWithGaussianBlur]
+                                         withImage:[UIImage imageNamed:@"fullgradient"]];
+    
+    UIImageView *tempImageView = [[UIImageView alloc] initWithImage:backgroundImage];
+    [tempImageView setFrame:self.tableView.frame];
+    tempImageView.contentMode = UIViewContentModeScaleAspectFill;
+    self.tableView.backgroundView = tempImageView;
 }
 
 -(void) backButtonWasPressed {
@@ -94,18 +135,21 @@ typedef enum {
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Table view
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     NSInteger section = indexPath.section;
-    if (section == ArtistInfoPastSection) {
-        UIStoryboard* pastBoard = [UIStoryboard storyboardWithName:@"ECPastStoryboard" bundle:nil];
-        ECPastViewController* pastVC =  (ECPastViewController*)[pastBoard instantiateInitialViewController];
-        pastVC.concert = [self.pastEvents objectAtIndex:indexPath.row];
-        pastVC.tense = ECSearchTypePast;
-        pastVC.previousArtist = self.artist;
-        [self.navigationController pushViewController:pastVC animated:YES];
+    if (section == ArtistInfoEventSection) {
+        if (self.currentSelection == ECSearchTypePast) {
+            UIStoryboard* pastBoard = [UIStoryboard storyboardWithName:@"ECPastStoryboard" bundle:nil];
+            ECPastViewController* pastVC =  (ECPastViewController*)[pastBoard instantiateInitialViewController];
+            pastVC.concert = [self.pastEvents objectAtIndex:indexPath.row];
+            pastVC.tense = ECSearchTypePast;
+            pastVC.previousArtist = self.artist;
+            [self.navigationController pushViewController:pastVC animated:YES];
+        }
     }
-    else if (section == ArtistInfoUpcomingSection){
+    else {
         UIStoryboard* upcomingBoard = [UIStoryboard storyboardWithName:@"ECUpcomingStoryboard" bundle:nil];
         ECUpcomingViewController* upcomingVC = (ECUpcomingViewController*) [upcomingBoard instantiateInitialViewController];
         upcomingVC.concert = [self.upcomingEvents objectAtIndex:indexPath.row];
@@ -120,11 +164,11 @@ typedef enum {
 }
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == ArtistInfoPastSection) {
-        return [self.pastEvents count];
+    if (section == ArtistInfoMusicSection) {
+        return 1;
     }
-    else if (section == ArtistInfoUpcomingSection) {
-        return [self.upcomingEvents count];
+    else if (section == ArtistInfoEventSection) {
+        return [[self currentEventArray] count];
     }
     return 0;
 }
@@ -136,33 +180,36 @@ typedef enum {
     return [self.events objectForKey:@"upcoming"];
 }
 
--(NSArray*) arrayForSection:(NSInteger) section {
-    switch (section) {
-        case ArtistInfoUpcomingSection:
+-(NSArray*) currentEventArray {
+    switch (self.currentSelection) {
+        case ECSearchTypeFuture :
             return self.upcomingEvents;
-        case ArtistInfoPastSection:
+        case ECSearchTypePast:
             return self.pastEvents;
         default:
             return nil;
     }
 }
 
--(NSString*) titleForSection: (NSInteger) section {
-    switch (section) {
-        case ArtistInfoPastSection:
-            return @"PAST";
-        case ArtistInfoUpcomingSection:
-            return @"UPCOMING";
-    }
-    return nil;
-}
+//-(NSString*) titleForSection: (NSInteger) section {
+//    switch (section) {
+//        case ArtistInfoPastSection:
+//            return @"PAST";
+//        case ArtistInfoUpcomingSection:
+//            return @"UPCOMING";
+//    }
+//    return nil;
+//}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    if ([self tableView: tableView numberOfRowsInSection:section]==0){
-        return 0;
+    if (section == ArtistInfoMusicSection) {
+        return 0.0f;
     }
-    return 16.0;
+    else if (section == ArtistInfoEventSection) {
+        return 75.0f;
+    }
+    return 0;
 }
 
 -(CGFloat) tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
@@ -170,41 +217,169 @@ typedef enum {
 }
 
 -(UIView*) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    if([[self arrayForSection:section] count]==0){
-        return nil;//[UIView new];
+    if (ArtistInfoMusicSection) {
+        return nil;
     }
-    NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"ECProfileSectionHeaderView" owner:nil options:nil];
-    UIView* headerView = [subviewArray objectAtIndex:0];
-    UILabel* label = (UILabel*)[headerView viewWithTag:87];
-    [label setFont:[UIFont heroFontWithSize:14.0f]];
-    [label setText:[self titleForSection:section]];
-    
-    return headerView;
+    if (self.sectionHeaderView == nil) {
+        NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"ECArtistSectionHeaderView" owner:nil options:nil];
+        ECPastUpcomingSectionHeader* view = [subviewArray objectAtIndex:0];
+        view = [subviewArray objectAtIndex:0];
+        view.segmentedControl.tintColor = [UIColor blueArtistTextColor];
+        view.titleLabel.font = [UIFont heroFontWithSize:ROW_TITLE_SIZE];
+        view.artistVC = self;
+        view.segmentedControl.selectedSegmentIndex = self.currentSelection == ECSearchTypePast ? PastSegment : UpcomingSegment;
+        self.sectionHeaderView = view;
+        }
+    return self.sectionHeaderView;
 }
+
 -(NSDictionary*) eventForIndexPath: (NSIndexPath*) indexPath {
     NSUInteger section = indexPath.section;
-    if (section == ArtistInfoPastSection) {
-        return [[self.events objectForKey:@"past"] objectAtIndex:indexPath.row];
-    }
-    else if (section == ArtistInfoUpcomingSection) {
-        return [[self.events objectForKey:@"upcoming"] objectAtIndex:indexPath.row];
+    if (section == ArtistInfoEventSection) {
+        if (self.currentSelection == ECSearchTypePast) {
+            return [[self.events objectForKey:@"past"] objectAtIndex:indexPath.row];
+        }
+        else return [[self.events objectForKey:@"upcoming"] objectAtIndex:indexPath.row];
     }
     return nil;
 }
--(UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell* cell = [self.tableView dequeueReusableCellWithIdentifier:@"eventcell"];
-    NSDictionary* event = [self eventForIndexPath: indexPath];
-    NSDateFormatter* formatter = [NSDateFormatter new];
-    formatter.dateFormat = @"yyyy-MM-dd";
-    NSDate* date = [formatter dateFromString:[event objectForKey: @"date"]];
+
+-(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    formatter.dateStyle = NSDateFormatterMediumStyle;
-    formatter.dateFormat = nil;
-    cell.detailTextLabel.text = [formatter stringFromDate:date];
-    NSString* city = [[event objectForKey:@"venue"] objectForKey:@"city"];
-    cell.textLabel.text = [NSString stringWithFormat:@"%@, %@",[event objectForKey:@"venue_name"], city];
-    cell.textLabel.textColor = [UIColor whiteColor];
-    cell.textLabel.font = [UIFont systemFontOfSize:14.0];
-    return cell;
+    if (indexPath.section == ArtistInfoMusicSection) {
+        return 76.0f;
+    }
+    else return 70.0f;
+}
+
+-(NSString*) identifierForIndexPath: (NSIndexPath*)indexPath {
+    NSInteger section = indexPath.section;
+    if (section == ArtistInfoMusicSection) {
+        return @"songpreview";
+    }
+    else return SearchCellIdentifier;
+    
+    return nil;
+}
+
+-(UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSString* identifier = [self identifierForIndexPath:indexPath];
+    if (indexPath.section == ArtistInfoMusicSection) {
+        SongPreviewCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        
+        if(!self.songInfo){
+            [cell.btnPlay setEnabled:NO];
+            [cell.btnItunes setEnabled:NO];
+            
+        }else{
+            [cell.btnPlay setEnabled:YES];
+            [cell.btnItunes setEnabled:YES];
+            [cell.btnPlay addTarget:self
+                             action:@selector(playpauseButtonTapped:)
+                   forControlEvents:UIControlEventTouchUpInside];
+            [cell.btnItunes addTarget:self
+                               action:@selector(openItunesLink)
+                     forControlEvents:UIControlEventTouchUpInside];
+        }
+        [cell.lblSongName setText:self.songInfo[@"trackCensoredName"]];
+        
+        if(self.player.rate == 1.0){
+            [cell.btnPlay setSelected:YES];
+        }
+        return cell;
+    }
+    else {
+        NSArray* selectedArray = [self currentEventArray];
+        
+        ECSearchResultCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
+        NSDictionary * eventDic = [selectedArray objectAtIndex:indexPath.row];
+        [cell setupCellForEvent:eventDic];
+        cell.backgroundColor = [UIColor eventRowBackgroundColor];
+        return cell;
+    }
+    
+    return nil;
+}
+
+
+#pragma mark - Play/Pause Song preview
+
+-(NSDictionary*) songInfo {
+    //    NSLog(@"Song %@",[self.songs objectAtIndex:self.currentSongIndex]);
+    if (self.songs.count >0) {
+        return [self.songs objectAtIndex:self.currentSongIndex];
+    }
+    return nil;
+}
+
+-(void)prepareCurrentSong
+{
+    NSURL *url = [NSURL URLWithString:self.songInfo[@"previewUrl"]];
+    AVPlayerItem* playerItem = [AVPlayerItem playerItemWithURL:url];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(songDidFinishPlaying) name:AVPlayerItemDidPlayToEndTimeNotification object:playerItem];
+    self.player = [[AVPlayer alloc] initWithPlayerItem:playerItem];
+}
+- (void) playpauseButtonTapped:(UIButton*)button
+{
+    if(!self.player)
+        [self prepareCurrentSong];
+    
+    [button setSelected:!button.selected];
+    if (self.player.rate == 1.0) {
+        [self.player pause];
+    } else {
+        [self.player play];
+    }
+    
+}
+-(void)songDidFinishPlaying
+{
+    [[NSNotificationCenter defaultCenter]removeObserver:self
+                                                   name:AVPlayerItemDidPlayToEndTimeNotification
+                                                 object:self.player.currentItem];
+    if(self.currentSongIndex < self.songs.count-1){
+        self.currentSongIndex++;
+        [self prepareCurrentSong];
+        [self.player play];
+        
+        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:ArtistInfoMusicSection]]
+                              withRowAnimation:UITableViewRowAnimationAutomatic];
+    }else{
+        //Reset everything back
+        self.currentSongIndex = 0;
+        self.player= nil;
+        //Reload the view
+        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:SongPreview inSection:0]]
+                              withRowAnimation:UITableViewRowAnimationAutomatic];
+        //Deselect the button
+        SongPreviewCell * songCell =(SongPreviewCell*)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:ArtistInfoMusicSection]];
+        [songCell.btnPlay setSelected:NO];
+    }
+    
+}
+
+-(void)openItunesLink
+{
+    NSString* affliateURL = [self.songInfo[@"trackViewUrl"] stringByAppendingFormat:@"&at=%@",kAffiliateCode];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:affliateURL]];
+    
+}
+
+-(void) setCurrentSelection:(ECSearchType)currentSelection {
+    _currentSelection = currentSelection;
+    NSIndexSet *sections = [NSIndexSet indexSetWithIndex:ArtistInfoEventSection];
+    [self.tableView reloadSections:sections withRowAnimation:UITableViewRowAnimationAutomatic];
+}
+
+@end
+
+@implementation ECPastUpcomingSectionHeader
+-(void) awakeFromNib {
+    [self.titleLabel setFont:[UIFont lightHeroFontWithSize:ROW_TITLE_SIZE]];
+}
+
+- (IBAction)switchedSelection:(id)sender {
+    NSInteger selectedIndex = [(UISegmentedControl*) sender selectedSegmentIndex];
+    self.artistVC.currentSelection = selectedIndex == PastSegment ? ECSearchTypePast : ECSearchTypeFuture;
 }
 @end

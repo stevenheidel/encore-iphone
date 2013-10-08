@@ -29,7 +29,8 @@
 
 #import "NSUserDefaults+Encore.h"
 #import "ECRowCells.h"
-#define kAffiliateCode @"10lbaN"
+
+#import "defines.h"
 @interface MapViewAnnotation : NSObject <MKAnnotation>
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, assign) CLLocationCoordinate2D coordinate;

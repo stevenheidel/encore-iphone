@@ -8,6 +8,7 @@
 
 #import <MapKit/MapKit.h>
 #import "ECChangeConcertStateButton.h"
+#define ROW_TITLE_SIZE 16.0f
 
 @interface GetPhotosCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIButton* grabPhotosButton;
@@ -15,7 +16,7 @@
 @end
 
 @interface GrabTicketsCell : UITableViewCell
-@property (strong,nonatomic) NSURL* lastfmURL;
+@property (strong,nonatomic) NSURL* ticketsURL;
 @property (weak, nonatomic) IBOutlet UIButton* grabTicketsButton;
 @property (weak,nonatomic) IBOutlet UIButton* shareButton;
 -(IBAction) grabTickets;
