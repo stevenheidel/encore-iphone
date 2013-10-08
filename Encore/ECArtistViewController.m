@@ -28,11 +28,6 @@ typedef enum {
     ArtistInfoNumSections
 }ArtistInfoSections;
 
-typedef enum {
-    PastSegment,
-    UpcomingSegment
-} SegmentedControlIndices;
-
 @interface ECArtistViewController ()
 
 @end
@@ -77,18 +72,20 @@ typedef enum {
     hud.labelText = [NSString stringWithFormat:@"Loading recent events"];
     [ECJSONFetcher fetchInfoForArtist:self.artist completion:^(NSDictionary *artistInfo) {
         self.events = [artistInfo objectForKey:@"events"];
-        NSIndexSet* set = [NSIndexSet indexSetWithIndex:ArtistInfoEventSection];
         UISegmentedControl* control = self.sectionHeaderView.segmentedControl;
         NSInteger pastCount = self.pastEvents.count;
         NSInteger upcomingCount = self.upcomingEvents.count;
         if (!pastCount>0) {
-            self.currentSelection = ECSearchTypeFuture;
+            self.currentSelection = UpcomingSegment;
         }
-        else self.currentSelection = ECSearchTypePast;
+        else {
+            self.currentSelection = PastSegment;
+        }
+        control.selectedSegmentIndex = self.currentSelection;
         
         [control setEnabled:pastCount != 0 forSegmentAtIndex:PastSegment];
         [control setEnabled:upcomingCount != 0 forSegmentAtIndex:UpcomingSegment];
-        [self.tableView reloadSections:set withRowAnimation:UITableViewRowAnimationAutomatic];
+//        [self.tableView reloadSections:set withRowAnimation:UITableViewRowAnimationAutomatic];
         [hud hide:YES];
     }];
     //Fetch song previews
@@ -140,7 +137,7 @@ typedef enum {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     NSInteger section = indexPath.section;
     if (section == ArtistInfoEventSection) {
-        if (self.currentSelection == ECSearchTypePast) {
+        if (self.currentSelection == PastSegment) {
             UIStoryboard* pastBoard = [UIStoryboard storyboardWithName:@"ECPastStoryboard" bundle:nil];
             ECPastViewController* pastVC =  (ECPastViewController*)[pastBoard instantiateInitialViewController];
             pastVC.concert = [self.pastEvents objectAtIndex:indexPath.row];
@@ -148,14 +145,15 @@ typedef enum {
             pastVC.previousArtist = self.artist;
             [self.navigationController pushViewController:pastVC animated:YES];
         }
-    }
-    else {
-        UIStoryboard* upcomingBoard = [UIStoryboard storyboardWithName:@"ECUpcomingStoryboard" bundle:nil];
-        ECUpcomingViewController* upcomingVC = (ECUpcomingViewController*) [upcomingBoard instantiateInitialViewController];
-        upcomingVC.concert = [self.upcomingEvents objectAtIndex:indexPath.row];
-        upcomingVC.tense = ECSearchTypeFuture;
-        upcomingVC.previousArtist = self.artist;
-        [self.navigationController pushViewController:upcomingVC animated:YES];
+        else {
+            UIStoryboard* upcomingBoard = [UIStoryboard storyboardWithName:@"ECUpcomingStoryboard" bundle:nil];
+            ECUpcomingViewController* upcomingVC = (ECUpcomingViewController*) [upcomingBoard instantiateInitialViewController];
+            upcomingVC.concert = [self.upcomingEvents objectAtIndex:indexPath.row];
+            upcomingVC.tense = ECSearchTypeFuture;
+            upcomingVC.previousArtist = self.artist;
+            [self.navigationController pushViewController:upcomingVC animated:YES];
+        }
+
     }
 }
 
@@ -182,9 +180,9 @@ typedef enum {
 
 -(NSArray*) currentEventArray {
     switch (self.currentSelection) {
-        case ECSearchTypeFuture :
+        case UpcomingSegment :
             return self.upcomingEvents;
-        case ECSearchTypePast:
+        case PastSegment:
             return self.pastEvents;
         default:
             return nil;
@@ -227,16 +225,16 @@ typedef enum {
         view.segmentedControl.tintColor = [UIColor blueArtistTextColor];
         view.titleLabel.font = [UIFont heroFontWithSize:ROW_TITLE_SIZE];
         view.artistVC = self;
-        view.segmentedControl.selectedSegmentIndex = self.currentSelection == ECSearchTypePast ? PastSegment : UpcomingSegment;
+        view.segmentedControl.selectedSegmentIndex = self.currentSelection;
         self.sectionHeaderView = view;
-        }
+    }
     return self.sectionHeaderView;
 }
 
 -(NSDictionary*) eventForIndexPath: (NSIndexPath*) indexPath {
     NSUInteger section = indexPath.section;
     if (section == ArtistInfoEventSection) {
-        if (self.currentSelection == ECSearchTypePast) {
+        if (self.currentSelection == PastSegment) {
             return [[self.events objectForKey:@"past"] objectAtIndex:indexPath.row];
         }
         else return [[self.events objectForKey:@"upcoming"] objectAtIndex:indexPath.row];
@@ -365,7 +363,7 @@ typedef enum {
     
 }
 
--(void) setCurrentSelection:(ECSearchType)currentSelection {
+-(void) setCurrentSelection:(SegmentedControlIndices)currentSelection {
     _currentSelection = currentSelection;
     NSIndexSet *sections = [NSIndexSet indexSetWithIndex:ArtistInfoEventSection];
     [self.tableView reloadSections:sections withRowAnimation:UITableViewRowAnimationAutomatic];
@@ -380,6 +378,6 @@ typedef enum {
 
 - (IBAction)switchedSelection:(id)sender {
     NSInteger selectedIndex = [(UISegmentedControl*) sender selectedSegmentIndex];
-    self.artistVC.currentSelection = selectedIndex == PastSegment ? ECSearchTypePast : ECSearchTypeFuture;
+    self.artistVC.currentSelection = selectedIndex;
 }
 @end

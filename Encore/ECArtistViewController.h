@@ -10,6 +10,11 @@
 #import "ECSearchType.h"
 #import <AVFoundation/AVFoundation.h>
 
+typedef enum {
+    PastSegment,
+    UpcomingSegment
+} SegmentedControlIndices;
+
 @class ECPastUpcomingSectionHeader;
 @interface ECArtistViewController : UITableViewController
 
@@ -25,7 +30,7 @@
 @property (weak,nonatomic) IBOutlet UIImageView* artistImageView;
 @property (weak,nonatomic) UIImage* artistImage;
 @property (weak,nonatomic) IBOutlet UILabel* artistNameLabel;
-@property (nonatomic,assign) ECSearchType currentSelection;
+@property (nonatomic,assign) SegmentedControlIndices currentSelection;
 @property (nonatomic, strong) ECPastUpcomingSectionHeader* sectionHeaderView;
 @end
 

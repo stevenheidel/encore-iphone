@@ -24,6 +24,9 @@
                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="grT-Xn-TTO">
                     <rect key="frame" x="73" y="30" width="175" height="37"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="36" id="aIw-bK-YWB"/>
+                    </constraints>
                     <segments>
                         <segment title="PAST"/>
                         <segment title="UPCOMING"/>
@@ -37,8 +40,8 @@
             <constraints>
                 <constraint firstItem="grT-Xn-TTO" firstAttribute="top" secondItem="a2R-KM-Qwe" secondAttribute="bottom" constant="4" id="FZN-32-1Vk"/>
                 <constraint firstItem="grT-Xn-TTO" firstAttribute="centerX" secondItem="1" secondAttribute="centerX" id="Kt6-Qe-wgg"/>
-                <constraint firstItem="a2R-KM-Qwe" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="20" symbolic="YES" id="SBo-TX-zoA"/>
-                <constraint firstItem="grT-Xn-TTO" firstAttribute="centerX" secondItem="a2R-KM-Qwe" secondAttribute="centerX" id="TVM-gV-IdN"/>
+                <constraint firstItem="a2R-KM-Qwe" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="20" id="Md9-zE-e6T"/>
+                <constraint firstAttribute="trailing" secondItem="a2R-KM-Qwe" secondAttribute="trailing" constant="20" id="eKi-4C-vdE"/>
                 <constraint firstItem="a2R-KM-Qwe" firstAttribute="top" secondItem="1" secondAttribute="top" constant="5" id="tou-ti-heG"/>
                 <constraint firstAttribute="bottom" secondItem="grT-Xn-TTO" secondAttribute="bottom" constant="9" id="vSh-HK-s1D"/>
             </constraints>
