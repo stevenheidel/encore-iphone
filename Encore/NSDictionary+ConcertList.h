@@ -11,6 +11,8 @@
 @interface NSDictionary (ConcertList)
 
 -(NSString *) niceDate;
+-(NSString*) niceDateNotUppercase;
+
 -(NSString *) eventName;
 -(NSString *) venueName;
 -(NSString*) venueAndDate; //string with both, separated by comma
@@ -22,6 +24,7 @@
 -(NSURL *) backgroundURL;
 -(NSURL *) imageURL;
 -(NSURL *) lastfmURL;
+-(NSURL *) ticketsURL;
 
 -(NSString *) month;
 -(NSString *) day;

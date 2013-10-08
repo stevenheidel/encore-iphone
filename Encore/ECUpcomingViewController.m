@@ -54,7 +54,7 @@
 }
 
 -(NSString*) shareText {
-    return [NSString stringWithFormat: @"Encore: Who wants to come to %@%@ show at %@, %@?",[self shareTextPrefix],[self.concert eventName],[self.concert venueName],[self.concert niceDate]];
+    return [NSString stringWithFormat: @"Want to come to %@%@ show at %@, %@?",[self shareTextPrefix],[self.concert eventName],[self.concert venueName],[self.concert niceDateNotUppercase]];
 }
 
 //-(void) shareWithTaggedFriends: (NSArray*) taggedFriends {

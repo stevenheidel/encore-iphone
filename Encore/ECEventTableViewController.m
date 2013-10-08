@@ -67,7 +67,7 @@
 {
     [super viewDidLoad];
     
-    self.checkedInvites = FALSE; //OR load from nsuserdefaults? (global setting)
+    self.checkedInvites = FALSE; //OR load from nsuserdefaults? (ie global setting)
     
     self.eventName.text = [[self.concert eventName] uppercaseString];
     self.eventVenueAndDate.text = [self.concert venueAndDate];
@@ -81,12 +81,10 @@
     [ECJSONFetcher fetchSongPreviewsForArtist:[self.concert headliner] completion:^(NSArray *songs) {
         self.songs = [NSArray arrayWithArray:songs];
         self.currentSongIndex = 0;
-        [self.tableView reloadData];
+        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:[self rowIndexForRowType:SongPreview] inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
     }];
-    
-   
-    //self.friends = nil;
 }
+
 -(NSInteger) rowIndexForRowType:(ECEventRow) rowID {
     NSInteger i = 0;
     for (i=0; i<self.rowOrder.count; i++) {
@@ -365,7 +363,7 @@
                 cell = [[GrabTicketsCell alloc] init];
                 
             }
-            cell.lastfmURL = [self.concert lastfmURL];
+            cell.ticketsURL = [self.concert ticketsURL];
             cell.grabTicketsButton.titleLabel.font = [UIFont heroFontWithSize:20];
             cell.grabTicketsButton.layer.cornerRadius = 5.0;
             cell.grabTicketsButton.layer.masksToBounds = YES;
@@ -586,7 +584,7 @@
 }
 
 -(NSString*) shareText {
-       return [NSString stringWithFormat: @"Encore: Who wants to come to %@%@ show at %@, %@?",[self shareTextPrefix],[self.concert eventName],[self.concert venueName],[self.concert niceDate]];
+       return [NSString stringWithFormat: @"Want to come to %@%@ show at %@, %@?",[self shareTextPrefix],[self.concert eventName],[self.concert venueName],[self.concert niceDateNotUppercase]];
     //meant to be overrided
 }
 

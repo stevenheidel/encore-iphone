@@ -12,13 +12,17 @@ static NSString * const kDateFormat = @"yyyy-MM-dd";
 
 @implementation NSDictionary (ConcertList)
 -(NSString *) niceDate {
+    return [[self niceDateNotUppercase]uppercaseString];
+}
+
+-(NSString*) niceDateNotUppercase {
     NSString * dateStr = [self objectForKey:@"date"];
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:kDateFormat];
     NSDate *date = [dateFormat dateFromString:dateStr];
     
     [dateFormat setDateFormat:@"MMMM d, yyyy"];
-    return [[dateFormat stringFromDate:date] uppercaseString];
+    return [dateFormat stringFromDate:date];
 }
 
 -(NSString *) eventName {
@@ -95,7 +99,20 @@ static NSString * const kDateFormat = @"yyyy-MM-dd";
 }
 
 -(NSURL *) lastfmURL {
-    return [NSURL URLWithString:[self objectForKey:@"lastfm_url"]];
+    NSString* lastfmURL = [self objectForKey:@"lastfm_url"];
+    
+    if (lastfmURL != (id)[NSNull null]) {
+        return [NSURL URLWithString:lastfmURL];
+    }
+    return nil;
+}
+
+-(NSURL *) ticketsURL {
+    NSString* ticketsURLString = [self objectForKey:@"tickets_url"];
+    if (ticketsURLString != (id)[NSNull null]) {
+        return [NSURL URLWithString: ticketsURLString];
+    }
+    return [self lastfmURL];
 }
 
 -(NSString *) month {

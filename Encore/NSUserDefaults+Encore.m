@@ -78,11 +78,12 @@
 }
 
 +(float) lastSearchRadius {
-    float retVal = [[NSUserDefaults standardUserDefaults] floatForKey:@"last_search_radius"];
-    if (retVal == 0.0f) { //defaults to 0 if nothing saved
-        return 0.5f;
-    }
-    return retVal;
+//    float retVal = [[NSUserDefaults standardUserDefaults] floatForKey:@"last_search_radius"];
+//    if (retVal == 0.0f) { //defaults to 0 if nothing saved
+//        return 1.0f;
+//    }
+//    return retVal;
+    return 1.0f;
 }
 
 +(void) setLastSearchRadius: (float) searchRadius {
