@@ -47,6 +47,11 @@ typedef enum {
 }
 
 #pragma mark - view loading
+-(void) viewWillDisappear:(BOOL)animated {
+    [self.hud removeFromSuperview];
+    self.hud = nil;
+    [super viewWillDisappear:animated];
+}
 - (void)viewDidLoad
 {
     [self.tableView registerNib:[UINib nibWithNibName:@"ECSearchResultCell" bundle:nil]
@@ -68,8 +73,10 @@ typedef enum {
     MBProgressHUD* hud = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
 	[self.navigationController.view addSubview:hud];
     hud.color = [UIColor lightBlueHUDConfirmationColor];
+    hud.userInteractionEnabled = NO;
 	[hud show:YES];
     hud.labelText = [NSString stringWithFormat:@"Loading recent events"];
+    self.hud = hud;
     [ECJSONFetcher fetchInfoForArtist:self.artist completion:^(NSDictionary *artistInfo) {
         self.events = [artistInfo objectForKey:@"events"];
         UISegmentedControl* control = self.sectionHeaderView.segmentedControl;
@@ -113,13 +120,15 @@ typedef enum {
 
 -(void) setBackgroundImage {
     UIImage* image =  self.artistImage;
-    UIImage* backgroundImage = [UIImage mergeImage:[image imageWithGaussianBlur]
+    if(image != (id) [NSNull null] && image != nil) {
+        UIImage* backgroundImage = [UIImage mergeImage:[image imageWithGaussianBlur]
                                          withImage:[UIImage imageNamed:@"fullgradient"]];
     
-    UIImageView *tempImageView = [[UIImageView alloc] initWithImage:backgroundImage];
-    [tempImageView setFrame:self.tableView.frame];
-    tempImageView.contentMode = UIViewContentModeScaleAspectFill;
-    self.tableView.backgroundView = tempImageView;
+        UIImageView *tempImageView = [[UIImageView alloc] initWithImage:backgroundImage];
+        [tempImageView setFrame:self.tableView.frame];
+        tempImageView.contentMode = UIViewContentModeScaleAspectFill;
+        self.tableView.backgroundView = tempImageView;
+    }
 }
 
 -(void) backButtonWasPressed {
