@@ -433,18 +433,21 @@ typedef enum {
     UIImage* dividerLeftActive = [UIImage imageNamed:@"divideractiveleft"];
     UIImage* dividerRightActive = [UIImage imageNamed:@"divideractiveright"];
     UIImage* bothInactive = [UIImage imageNamed:@"dividerdefault"];
+    UIImage* dividerLeftActiveRightDisabled = [UIImage imageNamed:@"disabledright"];
+    UIImage* dividerRightActiveLeftDisabled = [UIImage imageNamed:@"disabledleft"];
+    UIImage* dividerBothDisabled = [UIImage imageNamed:@"disabledboth"];
     
     [[UISegmentedControl appearance] setBackgroundImage:unselected forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
     [[UISegmentedControl appearance] setBackgroundImage:selected forState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
 
     [[UISegmentedControl appearance] setDividerImage:dividerLeftActive forLeftSegmentState:UIControlStateSelected rightSegmentState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-    [[UISegmentedControl appearance] setDividerImage:dividerLeftActive forLeftSegmentState:UIControlStateSelected rightSegmentState:UIControlStateDisabled barMetrics:UIBarMetricsDefault];
+    [[UISegmentedControl appearance] setDividerImage:dividerLeftActiveRightDisabled forLeftSegmentState:UIControlStateSelected rightSegmentState:UIControlStateDisabled barMetrics:UIBarMetricsDefault];
     
     [[UISegmentedControl appearance] setDividerImage:dividerRightActive forLeftSegmentState:UIControlStateNormal rightSegmentState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
-    [[UISegmentedControl appearance] setDividerImage:dividerRightActive forLeftSegmentState:UIControlStateDisabled rightSegmentState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
+    [[UISegmentedControl appearance] setDividerImage:dividerRightActiveLeftDisabled forLeftSegmentState:UIControlStateDisabled rightSegmentState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
     
     [[UISegmentedControl appearance] setDividerImage:bothInactive forLeftSegmentState:UIControlStateNormal rightSegmentState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-    [[UISegmentedControl appearance] setDividerImage:bothInactive forLeftSegmentState:UIControlStateDisabled rightSegmentState:UIControlStateDisabled barMetrics:UIBarMetricsDefault];
+    [[UISegmentedControl appearance] setDividerImage:dividerBothDisabled forLeftSegmentState:UIControlStateDisabled rightSegmentState:UIControlStateDisabled barMetrics:UIBarMetricsDefault];
     
     NSDictionary* selectedTextAttr = [NSDictionary dictionaryWithObjectsAndKeys:
                                       [UIColor whiteColor], UITextAttributeTextColor,

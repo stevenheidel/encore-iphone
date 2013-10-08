@@ -45,6 +45,12 @@
 		24A7C1B017E8E77100A7302B /* profilepreview.png in Resources */ = {isa = PBXBuildFile; fileRef = 24A7C1A917E8E77100A7302B /* profilepreview.png */; };
 		24A7C1B117E8E77100A7302B /* profilepreview@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24A7C1AA17E8E77100A7302B /* profilepreview@2x.png */; };
 		24AB802B1803AD7C002A9913 /* ECArtistSectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24AB802A1803AD7C002A9913 /* ECArtistSectionHeaderView.xib */; };
+		24AB803318048E48002A9913 /* disabledboth.png in Resources */ = {isa = PBXBuildFile; fileRef = 24AB802D18048E48002A9913 /* disabledboth.png */; };
+		24AB803418048E48002A9913 /* disabledboth@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24AB802E18048E48002A9913 /* disabledboth@2x.png */; };
+		24AB803518048E48002A9913 /* disabledleft.png in Resources */ = {isa = PBXBuildFile; fileRef = 24AB802F18048E48002A9913 /* disabledleft.png */; };
+		24AB803618048E48002A9913 /* disabledleft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24AB803018048E48002A9913 /* disabledleft@2x.png */; };
+		24AB803718048E48002A9913 /* disabledright.png in Resources */ = {isa = PBXBuildFile; fileRef = 24AB803118048E48002A9913 /* disabledright.png */; };
+		24AB803818048E48002A9913 /* disabledright@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24AB803218048E48002A9913 /* disabledright@2x.png */; };
 		24B0D8DF17E15C9100B30612 /* shareiconbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 24B0D8DD17E15C9100B30612 /* shareiconbutton.png */; };
 		24B0D8E017E15C9100B30612 /* shareiconbutton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24B0D8DE17E15C9100B30612 /* shareiconbutton@2x.png */; };
 		255A9AF4A1C64F71B97704C8 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 918A85E0EEDE48F3BEFD223A /* libPods.a */; };
@@ -334,6 +340,12 @@
 		24A7C1A917E8E77100A7302B /* profilepreview.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profilepreview.png; sourceTree = "<group>"; };
 		24A7C1AA17E8E77100A7302B /* profilepreview@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profilepreview@2x.png"; sourceTree = "<group>"; };
 		24AB802A1803AD7C002A9913 /* ECArtistSectionHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECArtistSectionHeaderView.xib; sourceTree = "<group>"; };
+		24AB802D18048E48002A9913 /* disabledboth.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = disabledboth.png; sourceTree = "<group>"; };
+		24AB802E18048E48002A9913 /* disabledboth@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "disabledboth@2x.png"; sourceTree = "<group>"; };
+		24AB802F18048E48002A9913 /* disabledleft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = disabledleft.png; sourceTree = "<group>"; };
+		24AB803018048E48002A9913 /* disabledleft@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "disabledleft@2x.png"; sourceTree = "<group>"; };
+		24AB803118048E48002A9913 /* disabledright.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = disabledright.png; sourceTree = "<group>"; };
+		24AB803218048E48002A9913 /* disabledright@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "disabledright@2x.png"; sourceTree = "<group>"; };
 		24B0D8DD17E15C9100B30612 /* shareiconbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shareiconbutton.png; sourceTree = "<group>"; };
 		24B0D8DE17E15C9100B30612 /* shareiconbutton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shareiconbutton@2x.png"; sourceTree = "<group>"; };
 		918A85E0EEDE48F3BEFD223A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -853,6 +865,12 @@
 		D4A9B2FC178DDABD008B5504 /* Segmented Control */ = {
 			isa = PBXGroup;
 			children = (
+				24AB802D18048E48002A9913 /* disabledboth.png */,
+				24AB802E18048E48002A9913 /* disabledboth@2x.png */,
+				24AB802F18048E48002A9913 /* disabledleft.png */,
+				24AB803018048E48002A9913 /* disabledleft@2x.png */,
+				24AB803118048E48002A9913 /* disabledright.png */,
+				24AB803218048E48002A9913 /* disabledright@2x.png */,
 				D4A9B2FD178DDABD008B5504 /* activefull.png */,
 				D4A9B2FE178DDABD008B5504 /* activefull@2x.png */,
 				D4A9B2FF178DDABD008B5504 /* defaultfull.png */,
@@ -1373,6 +1391,7 @@
 				A0A2B0BE177B381F00518B6C /* profileButton@2x.png in Resources */,
 				D4AA9775177C9562008F4E31 /* 37x-Checkmark.png in Resources */,
 				D4AA9776177C9562008F4E31 /* 37x-Checkmark@2x.png in Resources */,
+				24AB803818048E48002A9913 /* disabledright@2x.png in Resources */,
 				D4AA977B177CFE2C008F4E31 /* ECPostCollectionHeaderView.xib in Resources */,
 				247C115C17ED35D900B7F401 /* nextgrey@2x.png in Resources */,
 				A0A2B0D5177E1E7200518B6C /* shareButton.png in Resources */,
@@ -1406,6 +1425,7 @@
 				D4A9B30A178DDABD008B5504 /* defaultfull@2x.png in Resources */,
 				24AB802B1803AD7C002A9913 /* ECArtistSectionHeaderView.xib in Resources */,
 				D4A9B30B178DDABD008B5504 /* divideractiveleft.png in Resources */,
+				24AB803318048E48002A9913 /* disabledboth.png in Resources */,
 				D4A9B30C178DDABD008B5504 /* divideractiveleft@2x.png in Resources */,
 				D4A9B30D178DDABD008B5504 /* divideractiveright.png in Resources */,
 				D4A9B30E178DDABD008B5504 /* divideractiveright@2x.png in Resources */,
@@ -1420,6 +1440,7 @@
 				A02661F8178DF02000741C9A /* gradient.png in Resources */,
 				D4A9B31D178E5410008B5504 /* loginButton.png in Resources */,
 				D4A9B31E178E5410008B5504 /* loginButton@2x.png in Resources */,
+				24AB803618048E48002A9913 /* disabledleft@2x.png in Resources */,
 				D4A9B320178E546F008B5504 /* Default-568h@2x.png in Resources */,
 				D4A9B323178E5486008B5504 /* Default.png in Resources */,
 				D4A9B324178E5486008B5504 /* Default@2x.png in Resources */,
@@ -1464,6 +1485,7 @@
 				D4AE47401795A013006AF663 /* ECProfileSectionHeaderView.xib in Resources */,
 				D4AE47451795A179006AF663 /* profileSectionHeader.png in Resources */,
 				247C115917ED35D900B7F401 /* itunes.png in Resources */,
+				24AB803718048E48002A9913 /* disabledright.png in Resources */,
 				D4AE47461795A179006AF663 /* profileSectionHeader@2x.png in Resources */,
 				D4E16CA817973BF100A9DC99 /* locationmakerwhite.png in Resources */,
 				D4E16CA917973BF100A9DC99 /* locationmakerwhite@2x.png in Resources */,
@@ -1496,12 +1518,14 @@
 				247C115817ED35D900B7F401 /* gotit@2x.png in Resources */,
 				24A7311517DD39EB009CF164 /* location.png in Resources */,
 				24A7311617DD39EB009CF164 /* location@2x.png in Resources */,
+				24AB803518048E48002A9913 /* disabledleft.png in Resources */,
 				247C115B17ED35D900B7F401 /* nextgrey.png in Resources */,
 				24B0D8DF17E15C9100B30612 /* shareiconbutton.png in Resources */,
 				24B0D8E017E15C9100B30612 /* shareiconbutton@2x.png in Resources */,
 				24A4C8C817E240340022B56F /* locationmarkerbutton.png in Resources */,
 				24A4C8C917E240340022B56F /* locationmarkerbutton@2x.png in Resources */,
 				2403C2C417E28A3100C518BF /* ECArtistView.storyboard in Resources */,
+				24AB803418048E48002A9913 /* disabledboth@2x.png in Resources */,
 				245F1E9917E2E79400C7621D /* gearbutton.png in Resources */,
 				245F1E9A17E2E79400C7621D /* gearbutton@2x.png in Resources */,
 				D901E9FC17E836C300317129 /* ECWalkthrough.storyboard in Resources */,

@@ -28,7 +28,7 @@
 #import "Staging.h"
 #import "Reachability.h"
 #import "ECWelcomeViewController.h"
-#define TESTING_WALKTHROUGH 1
+
 @implementation ECAppDelegate
 
 
