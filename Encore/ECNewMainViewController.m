@@ -5,7 +5,6 @@
 //  Created by Shimmy on 2013-07-08.
 //  Copyright (c) 2013 Encore. All rights reserved.
 //
-#define IS_IPHONE_5 ( fabs( ( double )[ [ UIScreen mainScreen ] bounds ].size.height - ( double )568 ) < DBL_EPSILON )
 #import <MediaPlayer/MediaPlayer.h>
 #import "UIColor+EncoreUI.h"
 #import "UIFont+Encore.h"

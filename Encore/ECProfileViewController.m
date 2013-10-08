@@ -93,6 +93,7 @@ typedef enum {
     
     if(SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")){
         self.edgesForExtendedLayout = UIRectEdgeNone;
+        [self.navigationController.navigationBar setTranslucent:IS_IPHONE_5];
     }
 }
 
