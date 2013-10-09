@@ -227,7 +227,7 @@
     cell.postImageView.image = nil;
     NSDictionary* post = [self.posts objectAtIndex:indexPath.row];
     [cell.activityIndicator startAnimating];
-    [cell.postImageView setImageWithURLRequest:[NSURLRequest requestWithURL:[post imageURL]] placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+    [cell.postImageView setImageWithURLRequest:[NSURLRequest requestWithURL:[post imageURL]] placeholderImage:[[UIImage alloc] init] success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
         cell.postImageView.image = image;
         [cell.activityIndicator stopAnimating];
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
