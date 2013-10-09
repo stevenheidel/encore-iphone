@@ -630,6 +630,7 @@
                     <navigationItem key="navigationItem" id="exj-X4-odA"/>
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
+                        <outlet property="btnSkip" destination="eVn-Xv-2ue" id="LXT-h5-0kB"/>
                         <outlet property="lblSearchConcert" destination="4O2-Kh-Sv1" id="MwA-o1-JXr"/>
                         <outlet property="searchbar" destination="HHd-tA-pgb" id="wsa-K1-Uaa"/>
                         <outlet property="tableview" destination="o6V-ZI-Yt9" id="RQd-NR-ZfG"/>

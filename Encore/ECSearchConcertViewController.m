@@ -48,6 +48,7 @@ typedef enum {
 @property (strong, nonatomic) UIView* searchHeaderView;
 @property (nonatomic, strong) UIView* noConcertsFooterView;
 @property (strong, nonatomic) UITapGestureRecognizer *tap;
+@property (assign) BOOL tappedOnConcert;
 
 
 @end
@@ -80,7 +81,7 @@ typedef enum {
     self.tap = [[UITapGestureRecognizer alloc]
                 initWithTarget:self
                 action:@selector(dismissKeyboard:)];
-
+    self.tappedOnConcert = NO;
     //if user already set location using select location controller don't listen to location changes
     if([NSUserDefaults lastSearchLocation].coordinate.latitude == 0 && [NSUserDefaults lastSearchLocation].coordinate.longitude == 0)
     {
@@ -104,6 +105,10 @@ typedef enum {
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     // [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationSlide];
+    if(self.tappedOnConcert){
+        [self.btnSkip setImage:[UIImage imageNamed:@"nextbuttom.png"] forState:UIControlStateNormal];
+        [self.btnSkip setImage:[UIImage imageNamed:@"nextbuttom.png"] forState:UIControlStateHighlighted];
+    }
     [self.navigationController setNavigationBarHidden:YES animated:YES];
 
 }
@@ -418,6 +423,7 @@ typedef enum {
             [self.navigationController setNavigationBarHidden:NO animated:YES];
 
            }
+    self.tappedOnConcert = YES;
 }
 -(UIView*) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     return nil;

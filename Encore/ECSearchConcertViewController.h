@@ -13,5 +13,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblSearchConcert;
 - (IBAction)dismissKeyboard:(id)sender;
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
+@property (weak, nonatomic) IBOutlet UIButton *btnSkip;
 
 @end
