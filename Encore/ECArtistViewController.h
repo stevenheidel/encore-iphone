@@ -15,7 +15,7 @@ typedef enum {
     UpcomingSegment
 } SegmentedControlIndices;
 
-@class ECPastUpcomingSectionHeader;
+@class ECPastUpcomingSectionHeader,AFJSONRequestOperation;
 @interface ECArtistViewController : UITableViewController
 
 @property (nonatomic,strong) AVPlayer* player;
@@ -32,6 +32,9 @@ typedef enum {
 @property (weak,nonatomic) IBOutlet UILabel* artistNameLabel;
 @property (nonatomic,assign) SegmentedControlIndices currentSelection;
 @property (nonatomic, strong) ECPastUpcomingSectionHeader* sectionHeaderView;
+
+@property (nonatomic,weak) AFJSONRequestOperation* infoOperation;
+
 @end
 
 @interface ECPastUpcomingSectionHeader : UIView

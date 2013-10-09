@@ -94,7 +94,7 @@ NSString* stringForSearchType(ECSearchType searchType) {
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"ERROR fetching popular concerts: %@...",[[error description] substringToIndex:MAX_ERROR_LEN]);
-        if (searchType == ECSearchTypePast) {
+        if (searchType == ECSearchTypePast) { // so you don't get 3 error messages
             UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Sorry, something went wrong. Please try again later." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alert show];
         }
@@ -161,7 +161,7 @@ NSString* stringForSearchType(ECSearchType searchType) {
     [operation start];
 }
 
-+(void) fetchInfoForArtist:(NSString*) artist completion: (void(^) (NSDictionary* artistInfo)) completion {
++(AFJSONRequestOperation*) fetchInfoForArtist:(NSString*) artist completion: (void(^) (NSDictionary* artistInfo)) completion {
     NSInteger limitEvents = 10;
     NSString* infoURL = [NSString stringWithFormat:ArtistInfoURL,[artist stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],limitEvents];
     NSURL* url = [NSURL URLWithString:infoURL];
@@ -179,13 +179,12 @@ NSString* stringForSearchType(ECSearchType searchType) {
         }
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         NSLog(@"ERROR: failed to retrieve info for artist %@, %@",artist,[error.description substringToIndex:MAX_ERROR_LEN]);
-        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Sorry, something went wrong" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alert show];
         if (completion) {
             completion(nil);
         }
     }];
     [operation start];
+    return operation;
 }
 
 +(void) fetchPostsForConcertWithID: (NSString *) concertID completion: (void (^)(NSArray* fetchedPosts)) completion{

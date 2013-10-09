@@ -19,6 +19,9 @@
 #import "ECSearchResultCell.h"
 #import "ECRowCells.h"
 #import "defines.h"
+#import "UIImageView+AFNetworking.h"
+
+#import "AFNetworking.h"
 
 #define SearchCellIdentifier @"ECSearchResultCell"
 
@@ -28,8 +31,9 @@ typedef enum {
     ArtistInfoNumSections
 }ArtistInfoSections;
 
-@interface ECArtistViewController ()
-
+@interface ECArtistViewController (){
+    UIAlertView* alert;
+}
 @end
 
 @implementation ECArtistViewController
@@ -50,6 +54,8 @@ typedef enum {
 -(void) viewWillDisappear:(BOOL)animated {
     [self.hud removeFromSuperview];
     self.hud = nil;
+    alert = nil;
+    [self.infoOperation cancel];
     [super viewWillDisappear:animated];
 }
 - (void)viewDidLoad
@@ -77,7 +83,8 @@ typedef enum {
 	[hud show:YES];
     hud.labelText = [NSString stringWithFormat:@"Loading recent events"];
     self.hud = hud;
-    [ECJSONFetcher fetchInfoForArtist:self.artist completion:^(NSDictionary *artistInfo) {
+    alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Sorry, something went wrong. No events were found." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    self.infoOperation = [ECJSONFetcher fetchInfoForArtist:self.artist completion:^(NSDictionary *artistInfo) {
         self.events = [artistInfo objectForKey:@"events"];
         UISegmentedControl* control = self.sectionHeaderView.segmentedControl;
         NSInteger pastCount = self.pastEvents.count;
@@ -94,6 +101,10 @@ typedef enum {
         [control setEnabled:upcomingCount != 0 forSegmentAtIndex:UpcomingSegment];
 //        [self.tableView reloadSections:set withRowAnimation:UITableViewRowAnimationAutomatic];
         [hud hide:YES];
+        if ((pastCount == 0 && upcomingCount == 0) || artistInfo == nil) {
+            if (alert)
+                [alert show];
+        }
     }];
     //Fetch song previews
     [ECJSONFetcher fetchSongPreviewsForArtist:self.artist completion:^(NSArray *songs) {
@@ -101,16 +112,29 @@ typedef enum {
         self.currentSongIndex = 0;
         [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:ArtistInfoMusicSection]] withRowAnimation:UITableViewRowAnimationAutomatic];
     }];
-    if (self.artistImage != (id)[NSNull null]) {
-        self.artistImageView.image = self.artistImage;
-        self.artistImageView.layer.cornerRadius = 5.0;
-        self.artistImageView.layer.masksToBounds = YES;
-        self.artistImageView.layer.borderColor = [UIColor grayColor].CGColor;
-        self.artistImageView.layer.borderWidth = 0.1;
+    if (self.artistImage == (id)[NSNull null] || !self.artistImage) {
+        [ECJSONFetcher fetchPictureForArtist:self.artist completion:^(NSURL *imageURL) {
+            [self.artistImageView setImageWithURLRequest:[NSURLRequest requestWithURL:imageURL] placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                self.artistImage = image;
+                self.artistImageView.image = self.artistImage;
+            } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+                self.artistImage = [UIImage imageNamed:@"placeholder.jpg"];
+                self.artistImageView.image = self.artistImage;
+            }];
+        }];
     }
-        self.artistNameLabel.text = [self.artist uppercaseString];
+    else {
+        self.artistImageView.image = self.artistImage;
+    }
+    self.artistImageView.layer.cornerRadius = 5.0;
+    self.artistImageView.layer.masksToBounds = YES;
+    self.artistImageView.layer.borderColor = [UIColor grayColor].CGColor;
+    self.artistImageView.layer.borderWidth = 0.1;
+    
+    self.artistNameLabel.text = [self.artist uppercaseString];
     self.artistNameLabel.font = [UIFont heroFontWithSize:16.f];
     self.artistNameLabel.textColor = [UIColor blueArtistTextColor];
+    
     UIImageView* encoreLogo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
     self.navigationItem.titleView = encoreLogo;
     self.tableView.indicatorStyle = UIScrollViewIndicatorStyleWhite;

@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "ECSearchType.h"
 
-@class CLLocation;
+@class CLLocation,AFJSONRequestOperation;
 @protocol ECJSONFetcherDelegate;
 
 @interface ECJSONFetcher : NSObject
@@ -25,7 +25,7 @@
 +(void)fetchPictureForArtist: (NSString*) artist
                   completion: (void(^) (NSURL* imageURL)) completion;
 
-+(void) fetchInfoForArtist:(NSString*) artist
++(AFJSONRequestOperation*) fetchInfoForArtist:(NSString*) artist
                 completion: (void(^) (NSDictionary* artistInfo)) completion;
 
 +(void)fetchPopularConcertsWithSearchType:(ECSearchType)searchType
