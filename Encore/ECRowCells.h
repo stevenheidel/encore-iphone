@@ -19,7 +19,6 @@
 @property (strong,nonatomic) NSURL* ticketsURL;
 @property (weak, nonatomic) IBOutlet UIButton* grabTicketsButton;
 @property (weak,nonatomic) IBOutlet UIButton* shareButton;
--(IBAction) grabTickets;
 
 @end
 

@@ -182,9 +182,6 @@
                                             <state key="highlighted">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
-                                            <connections>
-                                                <action selector="grabTickets" destination="55C-tk-7vZ" eventType="touchUpInside" id="tTL-XR-Ydt"/>
-                                            </connections>
                                         </button>
                                         <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lkT-Qk-Pgj">
                                             <rect key="frame" x="236" y="8" width="61" height="44"/>

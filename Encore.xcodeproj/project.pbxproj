@@ -243,6 +243,14 @@
 		D948FE72179F951B0035297A /* ECFacebookManger.m in Sources */ = {isa = PBXBuildFile; fileRef = D948FE71179F951B0035297A /* ECFacebookManger.m */; };
 		D956550A17A177BD00B7DA59 /* ticketsbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = D956550817A177BD00B7DA59 /* ticketsbutton.png */; };
 		D956550B17A177BD00B7DA59 /* ticketsbutton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D956550917A177BD00B7DA59 /* ticketsbutton@2x.png */; };
+		D97836161805A0080061C203 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D97836151805A0080061C203 /* MessageUI.framework */; };
+		D97836191805A7670061C203 /* artistpage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D97836171805A7670061C203 /* artistpage@2x.png */; };
+		D978361A1805A7670061C203 /* artistpage.png in Resources */ = {isa = PBXBuildFile; fileRef = D97836181805A7670061C203 /* artistpage.png */; };
+		D97836281805AA0E0061C203 /* default-controls.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D978361C1805AA0E0061C203 /* default-controls.bundle */; };
+		D97836291805AA0E0061C203 /* DZWebBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = D978361E1805AA0E0061C203 /* DZWebBrowser.m */; };
+		D978362A1805AA0E0061C203 /* NJKWebViewProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = D97836221805AA0E0061C203 /* NJKWebViewProgress.m */; };
+		D978362B1805AA0E0061C203 /* SDCachedURLResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = D97836251805AA0E0061C203 /* SDCachedURLResponse.m */; };
+		D978362C1805AA0E0061C203 /* SDURLCache.m in Sources */ = {isa = PBXBuildFile; fileRef = D97836271805AA0E0061C203 /* SDURLCache.m */; };
 		D9963FD017B0D4E9003C3CC1 /* UIImage+Merge.m in Sources */ = {isa = PBXBuildFile; fileRef = D9963FCF17B0D4E9003C3CC1 /* UIImage+Merge.m */; };
 		D9D95CF617E8420500061DAF /* featured.json in Resources */ = {isa = PBXBuildFile; fileRef = D9D95CF517E8420500061DAF /* featured.json */; };
 /* End PBXBuildFile section */
@@ -581,6 +589,18 @@
 		D948FE71179F951B0035297A /* ECFacebookManger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECFacebookManger.m; sourceTree = "<group>"; };
 		D956550817A177BD00B7DA59 /* ticketsbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ticketsbutton.png; sourceTree = "<group>"; };
 		D956550917A177BD00B7DA59 /* ticketsbutton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ticketsbutton@2x.png"; sourceTree = "<group>"; };
+		D97836151805A0080061C203 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		D97836171805A7670061C203 /* artistpage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "artistpage@2x.png"; sourceTree = "<group>"; };
+		D97836181805A7670061C203 /* artistpage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = artistpage.png; sourceTree = "<group>"; };
+		D978361C1805AA0E0061C203 /* default-controls.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "default-controls.bundle"; sourceTree = "<group>"; };
+		D978361D1805AA0E0061C203 /* DZWebBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DZWebBrowser.h; sourceTree = "<group>"; };
+		D978361E1805AA0E0061C203 /* DZWebBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DZWebBrowser.m; sourceTree = "<group>"; };
+		D97836211805AA0E0061C203 /* NJKWebViewProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NJKWebViewProgress.h; sourceTree = "<group>"; };
+		D97836221805AA0E0061C203 /* NJKWebViewProgress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NJKWebViewProgress.m; sourceTree = "<group>"; };
+		D97836241805AA0E0061C203 /* SDCachedURLResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCachedURLResponse.h; sourceTree = "<group>"; };
+		D97836251805AA0E0061C203 /* SDCachedURLResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCachedURLResponse.m; sourceTree = "<group>"; };
+		D97836261805AA0E0061C203 /* SDURLCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDURLCache.h; sourceTree = "<group>"; };
+		D97836271805AA0E0061C203 /* SDURLCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDURLCache.m; sourceTree = "<group>"; };
 		D9963FCE17B0D4E9003C3CC1 /* UIImage+Merge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Merge.h"; sourceTree = "<group>"; };
 		D9963FCF17B0D4E9003C3CC1 /* UIImage+Merge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Merge.m"; sourceTree = "<group>"; };
 		D9D95CF517E8420500061DAF /* featured.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = featured.json; sourceTree = "<group>"; };
@@ -591,6 +611,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D97836161805A0080061C203 /* MessageUI.framework in Frameworks */,
 				D4A7980B17921BD20029F469 /* SystemConfiguration.framework in Frameworks */,
 				D4AA34FD17A0699F0015D79A /* AVFoundation.framework in Frameworks */,
 				D4AA34FA17A069980015D79A /* MediaPlayer.framework in Frameworks */,
@@ -981,6 +1002,7 @@
 		D4AA4CF11766B374009B0635 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D97836151805A0080061C203 /* MessageUI.framework */,
 				D4AA34FC17A0699F0015D79A /* AVFoundation.framework */,
 				D4AA34F917A069980015D79A /* MediaPlayer.framework */,
 				D948FE6D179F93EE0035297A /* FacebookSDK.framework */,
@@ -1005,6 +1027,7 @@
 		D4AA4CF81766B374009B0635 /* Encore */ = {
 			isa = PBXGroup;
 			children = (
+				D978361B1805AA0E0061C203 /* DZWebBrowser */,
 				D901E9F917E8369B00317129 /* Walkthrough */,
 				24A730F017DD2C13009CF164 /* SPGooglePlacesAutocomplete */,
 				D4AA4D011766B374009B0635 /* ECAppDelegate.h */,
@@ -1257,6 +1280,8 @@
 		D901E9FD17E838A000317129 /* walkthrough */ = {
 			isa = PBXGroup;
 			children = (
+				D97836171805A7670061C203 /* artistpage@2x.png */,
+				D97836181805A7670061C203 /* artistpage.png */,
 				D92E8D9C17E84D5700FCD412 /* nextbuttom.png */,
 				D92E8D9D17E84D5700FCD412 /* nextbuttom@2x.png */,
 				D901E9FE17E838D300317129 /* background.png */,
@@ -1267,6 +1292,46 @@
 				D901EA0317E838D300317129 /* encorelogo@2x.png */,
 			);
 			name = walkthrough;
+			sourceTree = "<group>";
+		};
+		D978361B1805AA0E0061C203 /* DZWebBrowser */ = {
+			isa = PBXGroup;
+			children = (
+				D978361C1805AA0E0061C203 /* default-controls.bundle */,
+				D978361D1805AA0E0061C203 /* DZWebBrowser.h */,
+				D978361E1805AA0E0061C203 /* DZWebBrowser.m */,
+				D978361F1805AA0E0061C203 /* External */,
+			);
+			path = DZWebBrowser;
+			sourceTree = "<group>";
+		};
+		D978361F1805AA0E0061C203 /* External */ = {
+			isa = PBXGroup;
+			children = (
+				D97836201805AA0E0061C203 /* NJKWebViewProgress */,
+				D97836231805AA0E0061C203 /* SDURLCache */,
+			);
+			path = External;
+			sourceTree = "<group>";
+		};
+		D97836201805AA0E0061C203 /* NJKWebViewProgress */ = {
+			isa = PBXGroup;
+			children = (
+				D97836211805AA0E0061C203 /* NJKWebViewProgress.h */,
+				D97836221805AA0E0061C203 /* NJKWebViewProgress.m */,
+			);
+			path = NJKWebViewProgress;
+			sourceTree = "<group>";
+		};
+		D97836231805AA0E0061C203 /* SDURLCache */ = {
+			isa = PBXGroup;
+			children = (
+				D97836241805AA0E0061C203 /* SDCachedURLResponse.h */,
+				D97836251805AA0E0061C203 /* SDCachedURLResponse.m */,
+				D97836261805AA0E0061C203 /* SDURLCache.h */,
+				D97836271805AA0E0061C203 /* SDURLCache.m */,
+			);
+			path = SDURLCache;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1396,6 +1461,7 @@
 				D4AA9776177C9562008F4E31 /* 37x-Checkmark@2x.png in Resources */,
 				24AB803818048E48002A9913 /* disabledright@2x.png in Resources */,
 				D4AA977B177CFE2C008F4E31 /* ECPostCollectionHeaderView.xib in Resources */,
+				D978361A1805A7670061C203 /* artistpage.png in Resources */,
 				247C115C17ED35D900B7F401 /* nextgrey@2x.png in Resources */,
 				A0A2B0D5177E1E7200518B6C /* shareButton.png in Resources */,
 				A0A2B0D6177E1E7200518B6C /* shareButton@2x.png in Resources */,
@@ -1418,6 +1484,7 @@
 				D491F807178B54C9002E00E5 /* logo.png in Resources */,
 				D491F808178B54C9002E00E5 /* logo@2x.png in Resources */,
 				D491F80C178B57C1002E00E5 /* Main.storyboard in Resources */,
+				D97836191805A7670061C203 /* artistpage@2x.png in Resources */,
 				A02661E4178C9F6200741C9A /* ECSearchResultCell.xib in Resources */,
 				D4A9B2D4178DBE83008B5504 /* navbar.png in Resources */,
 				D4A9B2D5178DBE83008B5504 /* navbar@2x.png in Resources */,
@@ -1522,6 +1589,7 @@
 				247C115817ED35D900B7F401 /* gotit@2x.png in Resources */,
 				24A7311517DD39EB009CF164 /* location.png in Resources */,
 				24A7311617DD39EB009CF164 /* location@2x.png in Resources */,
+				D97836281805AA0E0061C203 /* default-controls.bundle in Resources */,
 				24AB803518048E48002A9913 /* disabledleft.png in Resources */,
 				247C115B17ED35D900B7F401 /* nextgrey.png in Resources */,
 				24B0D8DF17E15C9100B30612 /* shareiconbutton.png in Resources */,
@@ -1617,6 +1685,7 @@
 				D4AA4D301766BA8C009B0635 /* ECLoginViewController.m in Sources */,
 				D4A8DDB8176A133B005E9847 /* NSDictionary+Posts.m in Sources */,
 				D4A8DDBA176A133B005E9847 /* Cell.m in Sources */,
+				D978362C1805AA0E0061C203 /* SDURLCache.m in Sources */,
 				D4A8DDC4176A20D2005E9847 /* ECJSONPoster.m in Sources */,
 				D4A8DDCA176A39BA005E9847 /* NSDate+JSON.m in Sources */,
 				D4A8DDCE176A405D005E9847 /* ECPostViewController.m in Sources */,
@@ -1635,6 +1704,7 @@
 				D4AC2DFF178FA64E00F292CA /* ECProfileConcertCell.m in Sources */,
 				D4B31DE91793D03300822228 /* NSUserDefaults+Encore.m in Sources */,
 				D4BB7E09179CCF4E0098BCF4 /* ECCustomNavController.m in Sources */,
+				D978362A1805AA0E0061C203 /* NJKWebViewProgress.m in Sources */,
 				D948FE72179F951B0035297A /* ECFacebookManger.m in Sources */,
 				D4B2DDBC17B0101800836F53 /* ECArtistViewController.m in Sources */,
 				D4B2DDC217B01B0900836F53 /* ECLineupViewController.m in Sources */,
@@ -1644,9 +1714,11 @@
 				D4719BA717B322250077AB46 /* ECPastViewController.m in Sources */,
 				D4719BAC17B340D20077AB46 /* ECRowCells.m in Sources */,
 				D411CBE517B358FF006AF0C2 /* ECGridViewController.m in Sources */,
+				D978362B1805AA0E0061C203 /* SDCachedURLResponse.m in Sources */,
 				D4AF581717B48413000FCA93 /* ECEventProfileStatusManager.m in Sources */,
 				D940C19B17B4F56D00E4DF42 /* ECChangeConcertStateButton.m in Sources */,
 				24A730FA17DD2E46009CF164 /* SPGooglePlacesAutocompletePlace.m in Sources */,
+				D97836291805AA0E0061C203 /* DZWebBrowser.m in Sources */,
 				24A730FB17DD2E46009CF164 /* SPGooglePlacesAutocompleteQuery.m in Sources */,
 				24A730FC17DD2E46009CF164 /* SPGooglePlacesAutocompleteUtilities.m in Sources */,
 				249E82B717F63C6F004D969D /* ECEventTableViewController.m in Sources */,

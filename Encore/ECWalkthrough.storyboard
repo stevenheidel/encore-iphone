@@ -201,7 +201,7 @@
             <objects>
                 <viewController id="4Sg-81-ue3" customClass="ECNextConcertViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="05q-TN-FWd">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AzY-Sr-af6">
@@ -240,22 +240,22 @@
                                     <constraint firstItem="vww-P0-oIt" firstAttribute="leading" secondItem="AzY-Sr-af6" secondAttribute="leading" constant="25" type="user" id="ztz-xg-dWu"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profilepreview.png" translatesAutoresizingMaskIntoConstraints="NO" id="yij-Qg-ecw">
-                                <rect key="frame" x="20" y="155" width="280" height="360"/>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="artistpage.png" translatesAutoresizingMaskIntoConstraints="NO" id="yij-Qg-ecw">
+                                <rect key="frame" x="63" y="149" width="195" height="285"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="360" type="user" id="et1-Kd-bWE"/>
+                                    <constraint firstAttribute="width" constant="195" id="eox-Mm-RDz"/>
                                 </constraints>
                             </imageView>
                             <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bottomgradient.png" translatesAutoresizingMaskIntoConstraints="NO" id="XHd-O2-iRj">
-                                <rect key="frame" x="0.0" y="480" width="320" height="88"/>
+                                <rect key="frame" x="0.0" y="392" width="320" height="88"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="88" type="user" id="2EW-jg-n2V"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pBH-fj-EXK">
-                                <rect key="frame" x="25" y="487" width="270" height="62"/>
+                                <rect key="frame" x="25" y="399" width="270" height="62"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="270" id="UAA-e5-WRd"/>
@@ -273,18 +273,19 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="XHd-O2-iRj" secondAttribute="bottom" type="default" id="7eo-Ry-ROM"/>
+                            <constraint firstAttribute="bottom" secondItem="XHd-O2-iRj" secondAttribute="bottom" type="user" id="7eo-Ry-ROM"/>
                             <constraint firstItem="pBH-fj-EXK" firstAttribute="top" secondItem="XHd-O2-iRj" secondAttribute="bottom" constant="-81" type="user" id="Hq0-EG-oSX"/>
+                            <constraint firstItem="yij-Qg-ecw" firstAttribute="centerX" secondItem="pBH-fj-EXK" secondAttribute="centerX" type="default" id="HzL-uT-79e"/>
                             <constraint firstItem="XHd-O2-iRj" firstAttribute="leading" secondItem="AzY-Sr-af6" secondAttribute="leading" type="default" id="K9M-fu-MQM"/>
                             <constraint firstItem="pBH-fj-EXK" firstAttribute="centerX" secondItem="XHd-O2-iRj" secondAttribute="centerX" type="default" id="NLK-bx-E1A"/>
-                            <constraint firstItem="yij-Qg-ecw" firstAttribute="top" secondItem="05q-TN-FWd" secondAttribute="top" constant="155" id="NnS-Ta-gq2"/>
-                            <constraint firstItem="yij-Qg-ecw" firstAttribute="leading" secondItem="05q-TN-FWd" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="dJz-V4-pa6"/>
+                            <constraint firstItem="yij-Qg-ecw" firstAttribute="top" secondItem="05q-TN-FWd" secondAttribute="top" constant="149" id="Vil-0D-cIu"/>
+                            <constraint firstItem="XHd-O2-iRj" firstAttribute="top" relation="lessThanOrEqual" secondItem="yij-Qg-ecw" secondAttribute="bottom" constant="46" type="user" id="bka-Si-Wo6"/>
                             <constraint firstItem="AzY-Sr-af6" firstAttribute="top" secondItem="05q-TN-FWd" secondAttribute="top" type="user" id="k5o-0T-F43"/>
-                            <constraint firstItem="yij-Qg-ecw" firstAttribute="centerX" secondItem="pBH-fj-EXK" secondAttribute="centerX" type="default" id="rA9-q7-GGo"/>
                             <constraint firstItem="XHd-O2-iRj" firstAttribute="leading" secondItem="05q-TN-FWd" secondAttribute="leading" type="default" id="zF0-Fq-tJx"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="qjQ-az-OQY"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="lblNextConcert" destination="vww-P0-oIt" id="znX-V3-7T2"/>
                     </connections>
@@ -643,12 +644,12 @@
     </scenes>
     <resources>
         <image name="addEventButton.png" width="27" height="27"/>
+        <image name="artistpage.png" width="198" height="285"/>
         <image name="bottomgradient.png" width="320" height="88"/>
         <image name="encorelogo.png" width="270" height="62"/>
         <image name="gotit.png" width="274" height="42"/>
         <image name="nextbuttom.png" width="275" height="42"/>
         <image name="nextgrey.png" width="274" height="42"/>
-        <image name="profilepreview.png" width="198" height="285"/>
         <image name="searchbar.png" width="239" height="32"/>
         <image name="skip.png" width="274" height="41"/>
     </resources>

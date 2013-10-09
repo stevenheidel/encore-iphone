@@ -14,6 +14,8 @@
 #import <QuartzCore/QuartzCore.h>
 
 #import "MBProgressHUD.h"
+#import "DZWebBrowser.h"
+
 
 #import "ECAppDelegate.h"
 #import "EncoreURL.h"
@@ -376,6 +378,7 @@
             cell.grabTicketsButton.layer.cornerRadius = 5.0;
             cell.grabTicketsButton.layer.masksToBounds = YES;
             cell.contentView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
+            [cell.grabTicketsButton addTarget:self action:@selector(grabTicketTapped) forControlEvents:UIControlEventTouchUpInside ];
             [cell.shareButton addTarget:self action:@selector(shareTapped) forControlEvents:UIControlEventTouchUpInside];
             return cell;
         }
@@ -624,7 +627,24 @@
     [self presentViewController:shareDrawer animated:YES completion:nil];
 }
 
+-(void)grabTicketTapped
+{
+    NSString* flag = @"success";
+    if (self.concert.ticketsURL) {
+        DZWebBrowser* browser = [[DZWebBrowser alloc] initWebBrowserWithURL:self.concert.ticketsURL];
+        browser.pushed = YES;
+        browser.showProgress = YES;
+        [self.navigationController pushViewController:browser animated:YES];
+    }
+    else {
+        flag = @"failed";
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Sorry, no tickets link was found." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    }
+    
+    [Flurry logEvent:@"Tapped_Grab_Tickets" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:self.concert.ticketsURL, @"URL", flag, @"success_flag", nil]];
 
+}
 #pragma mark - misc
 -(NSString*) tenseString {
     ECSearchType tense = self.tense;
