@@ -232,6 +232,7 @@
         [cell.activityIndicator stopAnimating];
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
         [cell.activityIndicator stopAnimating];
+        cell.postImageView.image = [UIImage imageNamed:@"nopostimage"];
     }];
     
     cell.postType = [post postType];
