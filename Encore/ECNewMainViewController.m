@@ -439,15 +439,41 @@ typedef enum {
     
     [[UISegmentedControl appearance] setBackgroundImage:unselected forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
     [[UISegmentedControl appearance] setBackgroundImage:selected forState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
+        [[UISegmentedControl appearance] setTintColor:[UIColor whiteColor]];
+    }else{
+    [[UISegmentedControl appearance] setDividerImage:dividerLeftActive
+                                 forLeftSegmentState:UIControlStateSelected
+                                   rightSegmentState:UIControlStateNormal
+                                          barMetrics:UIBarMetricsDefault];
+    
+    [[UISegmentedControl appearance] setDividerImage:dividerLeftActiveRightDisabled
+                                 forLeftSegmentState:UIControlStateSelected
+                                   rightSegmentState:UIControlStateDisabled
+                                          barMetrics:UIBarMetricsDefault];
+    
+    [[UISegmentedControl appearance] setDividerImage:dividerRightActive
+                                 forLeftSegmentState:UIControlStateNormal
+                                   rightSegmentState:UIControlStateSelected
+                                          barMetrics:UIBarMetricsDefault];
+    
+    [[UISegmentedControl appearance] setDividerImage:dividerRightActiveLeftDisabled
+                                 forLeftSegmentState:UIControlStateDisabled
+                                   rightSegmentState:UIControlStateSelected
+                                          barMetrics:UIBarMetricsDefault];
+    
+    [[UISegmentedControl appearance] setDividerImage:bothInactive
+                                 forLeftSegmentState:UIControlStateNormal
+                                   rightSegmentState:UIControlStateNormal
+                                          barMetrics:UIBarMetricsDefault];
+    
+    [[UISegmentedControl appearance] setDividerImage:dividerBothDisabled
+                                 forLeftSegmentState:UIControlStateDisabled
+                                   rightSegmentState:UIControlStateDisabled
+                                          barMetrics:UIBarMetricsDefault];
+    }
 
-    [[UISegmentedControl appearance] setDividerImage:dividerLeftActive forLeftSegmentState:UIControlStateSelected rightSegmentState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-    [[UISegmentedControl appearance] setDividerImage:dividerLeftActiveRightDisabled forLeftSegmentState:UIControlStateSelected rightSegmentState:UIControlStateDisabled barMetrics:UIBarMetricsDefault];
     
-    [[UISegmentedControl appearance] setDividerImage:dividerRightActive forLeftSegmentState:UIControlStateNormal rightSegmentState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
-    [[UISegmentedControl appearance] setDividerImage:dividerRightActiveLeftDisabled forLeftSegmentState:UIControlStateDisabled rightSegmentState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
-    
-    [[UISegmentedControl appearance] setDividerImage:bothInactive forLeftSegmentState:UIControlStateNormal rightSegmentState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-    [[UISegmentedControl appearance] setDividerImage:dividerBothDisabled forLeftSegmentState:UIControlStateDisabled rightSegmentState:UIControlStateDisabled barMetrics:UIBarMetricsDefault];
     
     NSDictionary* selectedTextAttr = [NSDictionary dictionaryWithObjectsAndKeys:
                                       [UIColor whiteColor], UITextAttributeTextColor,

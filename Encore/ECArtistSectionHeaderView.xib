@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4510" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4510" systemVersion="13A584" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
@@ -11,40 +11,27 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="75"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="shows" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a2R-KM-Qwe">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="shows" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="a2R-KM-Qwe">
                     <rect key="frame" x="20" y="5" width="280" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="21" id="qcW-ad-8nG"/>
-                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="grT-Xn-TTO">
-                    <rect key="frame" x="73" y="30" width="175" height="37"/>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="grT-Xn-TTO">
+                    <rect key="frame" x="56" y="30" width="207" height="37"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="36" id="aIw-bK-YWB"/>
-                    </constraints>
                     <segments>
                         <segment title="PAST"/>
                         <segment title="UPCOMING"/>
                     </segments>
+                    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
                         <action selector="switchedSelection:" destination="1" eventType="valueChanged" id="aSj-tf-gtt"/>
                     </connections>
                 </segmentedControl>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="calibratedWhite"/>
-            <constraints>
-                <constraint firstItem="grT-Xn-TTO" firstAttribute="top" secondItem="a2R-KM-Qwe" secondAttribute="bottom" constant="4" id="FZN-32-1Vk"/>
-                <constraint firstItem="grT-Xn-TTO" firstAttribute="centerX" secondItem="1" secondAttribute="centerX" id="Kt6-Qe-wgg"/>
-                <constraint firstItem="a2R-KM-Qwe" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="20" id="Md9-zE-e6T"/>
-                <constraint firstAttribute="trailing" secondItem="a2R-KM-Qwe" secondAttribute="trailing" constant="20" id="eKi-4C-vdE"/>
-                <constraint firstItem="a2R-KM-Qwe" firstAttribute="top" secondItem="1" secondAttribute="top" constant="5" id="tou-ti-heG"/>
-                <constraint firstAttribute="bottom" secondItem="grT-Xn-TTO" secondAttribute="bottom" constant="9" id="vSh-HK-s1D"/>
-            </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="segmentedControl" destination="grT-Xn-TTO" id="WYP-OJ-CR9"/>

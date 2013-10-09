@@ -231,10 +231,10 @@ typedef enum {
         NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"ECArtistSectionHeaderView" owner:nil options:nil];
         ECPastUpcomingSectionHeader* view = [subviewArray objectAtIndex:0];
         view = [subviewArray objectAtIndex:0];
-        view.segmentedControl.tintColor = [UIColor blueArtistTextColor];
         view.titleLabel.font = [UIFont heroFontWithSize:ROW_TITLE_SIZE];
         view.artistVC = self;
         view.segmentedControl.selectedSegmentIndex = self.currentSelection;
+        [self.sectionHeaderView setTranslatesAutoresizingMaskIntoConstraints:NO];
         self.sectionHeaderView = view;
     }
     return self.sectionHeaderView;
@@ -273,7 +273,7 @@ typedef enum {
     NSString* identifier = [self identifierForIndexPath:indexPath];
     if (indexPath.section == ArtistInfoMusicSection) {
         SongPreviewCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-        
+
         if(!self.songInfo){
             [cell.btnPlay setEnabled:NO];
             [cell.btnItunes setEnabled:NO];
@@ -299,9 +299,16 @@ typedef enum {
         NSArray* selectedArray = [self currentEventArray];
         
         ECSearchResultCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
+        [cell setBackgroundColor:[UIColor eventRowBackgroundColor]];
         NSDictionary * eventDic = [selectedArray objectAtIndex:indexPath.row];
         [cell setupCellForEvent:eventDic];
-        cell.backgroundColor = [UIColor eventRowBackgroundColor];
+        // remove scroll view background color and keep the cell background color
+        for(UIView *subview in cell.subviews){
+            if([subview isKindOfClass:[UIScrollView class]]){
+                UIScrollView *theScrollView = (UIScrollView *)subview;
+                [theScrollView setBackgroundColor:[UIColor clearColor]];
+            }
+        }
         return cell;
     }
     
