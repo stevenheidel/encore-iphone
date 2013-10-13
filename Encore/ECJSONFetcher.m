@@ -71,12 +71,16 @@ NSString* stringForSearchType(ECSearchType searchType) {
     }
     return nil;
 }
-+(void)fetchPopularConcertsWithSearchType:(ECSearchType)searchType location: (CLLocation*) location radius: (NSNumber*) radius completion: (void (^)(NSArray* concerts)) completion {
++(void)fetchPopularConcertsWithSearchType:(ECSearchType)searchType location: (CLLocation*) location radius: (NSNumber*) radius page:(NSInteger) page completion: (void (^)(NSArray* concerts)) completion {
     __block NSArray * concertList;
     NSNumber* latitude = [NSNumber numberWithDouble:location.coordinate.latitude];
     NSNumber* longitude = [NSNumber numberWithDouble:location.coordinate.longitude];
-    
-    NSDictionary * parameters = [NSDictionary dictionaryWithObjectsAndKeys:latitude,@"latitude", longitude, @"longitude", radius, @"radius",nil];
+    NSDictionary * parameters ;
+//    if(searchType == ECSearchTypeFuture)
+//        parameters = [NSDictionary dictionaryWithObjectsAndKeys:latitude,@"latitude", longitude, @"longitude", radius, @"radius",[NSString stringWithFormat:@"%d",page],@"page",@"50",@"limit",nil];
+//    else
+        parameters = [NSDictionary dictionaryWithObjectsAndKeys:latitude,@"latitude", longitude, @"longitude", radius, @"radius",nil];
+
     
     NSURL * url = [NSURL URLWithString:BaseURL];
     AFHTTPClient * client = [[AFHTTPClient alloc] initWithBaseURL:url];
@@ -88,6 +92,9 @@ NSString* stringForSearchType(ECSearchType searchType) {
     [client getPath:artistConcertsPath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
 
         concertList = (NSArray*) [(NSDictionary*)responseObject objectForKey:@"events"];
+#warning for testing only
+        if(page > 4)
+            concertList = nil;
         NSLog(@"%@: Successfully fetched %d popular concerts for search type: %@ Location: %f %f", NSStringFromClass([ECJSONFetcher class]),concertList.count,stringForSearchType(searchType),location.coordinate.latitude,location.coordinate.longitude);
         if (completion) {
             completion(concertList);

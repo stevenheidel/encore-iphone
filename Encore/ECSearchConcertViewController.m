@@ -76,8 +76,11 @@ typedef enum {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     [self setApperance];
+    [self setupHUD];
     [self setupLastFMView];
-    [self initializeSearchLocation];
+    [self addArtistImageToHeader];
+    self.searchHeaderView = nil;
+
     self.tap = [[UITapGestureRecognizer alloc]
                 initWithTarget:self
                 action:@selector(dismissKeyboard:)];
@@ -98,6 +101,7 @@ typedef enum {
             [alert show];
         }
         else {
+            [self initializeSearchLocation];
             [self fetchPopularConcertsWithSearchType:ECSearchTypePast];
         }
     }
@@ -165,8 +169,26 @@ typedef enum {
     self.currentSearchLocation = [NSUserDefaults lastSearchLocation];
     self.currentSearchRadius = [NSUserDefaults lastSearchRadius];
     NSString* city = [NSUserDefaults lastSearchArea];
-    NSString* city2 = [NSUserDefaults searchCity];
-    self.lblSearchConcert.text = [NSString stringWithFormat:@"Find a concert you attended in %@",city == nil ? city2 : city];
+    if  (city == nil) {
+        CLLocation* location = [NSUserDefaults userCoordinate];
+        CLGeocoder* geocoder = [CLGeocoder new];
+        [geocoder reverseGeocodeLocation:[[CLLocation alloc] initWithLatitude:location.coordinate.latitude longitude:location.coordinate.longitude] completionHandler:^(NSArray *placemarks, NSError *error) {
+            if (error) {
+                NSLog(@"Error reverse geocoding: %@", error.description);
+                self.lblSearchConcert.text = [NSString stringWithFormat:@"Find a concert you attended in %@",city];
+            }
+            
+            else {
+                CLPlacemark* placemark = [placemarks objectAtIndex:0];
+                [NSUserDefaults setLastSearchArea:placemark.locality != nil ? placemark.locality : placemark.subAdministrativeArea];
+                self.lblSearchConcert.text = [NSString stringWithFormat:@"Find a concert you attended in %@",[NSUserDefaults lastSearchArea]];
+
+            }
+        }];
+    }else{
+        self.lblSearchConcert.text = [NSString stringWithFormat:@"Find a concert you attended in %@",city];
+
+    }
 }
 
 -(void)LocationAcquired
@@ -186,7 +208,7 @@ typedef enum {
 #pragma mark - Concerts Methods
 
 -(void) fetchPopularConcertsWithSearchType: (ECSearchType) type {
-    [ECJSONFetcher fetchPopularConcertsWithSearchType:type location:self.currentSearchLocation radius:[NSNumber numberWithFloat:self.currentSearchRadius] completion:^(NSArray *concerts) {
+    [ECJSONFetcher fetchPopularConcertsWithSearchType:type location:self.currentSearchLocation radius:[NSNumber numberWithFloat:self.currentSearchRadius] page:0  completion:^(NSArray *concerts) {
         [self fetchedPopularConcerts:concerts forType:type];
     }];
 }
@@ -201,7 +223,7 @@ typedef enum {
     [self.hud hide:YES];
 
     [self.tableview reloadData];
-    
+    NSLog(@"self.tableView = %@, self.tableView.tableHeaderView = %@", self.tableview, self.tableview.tableHeaderView);
 }
 
 -(UIView*) noConcertsFooterView {
@@ -223,6 +245,55 @@ typedef enum {
     
     return _noConcertsFooterView;
 }
+-(void) addArtistImageToHeader {
+    if (self.searchResultsEvents.count > 0) {
+        if(!self.searchHeaderView) {
+            NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"SearchResultsSectionHeader" owner:nil options:nil];
+            self.searchHeaderView = [subviewArray objectAtIndex:0];
+        }
+        UIImageView* artistImage = (UIImageView*)[self.searchHeaderView viewWithTag:10];
+        if ([self.searchedArtistDic imageURL]) {
+            [artistImage setImageWithURL:[self.searchedArtistDic imageURL] placeholderImage:[UIImage imageNamed: @"placeholder.jpg"]];
+        }
+        else {
+            [artistImage setImageWithURL:[[self.searchResultsEvents objectAtIndex:0] imageURL] placeholderImage:[UIImage imageNamed: @"placeholder.jpg"]];
+        }
+        
+        artistImage.layer.cornerRadius = 5.0;
+        artistImage.layer.masksToBounds = YES;
+        
+        self.searchHeaderView.clipsToBounds =YES;
+        CGRect headerFrame = self.tableview.tableHeaderView.frame;
+        
+        self.searchHeaderView.frame = CGRectMake(0,headerFrame.size.height,320,SEARCH_HEADER_HEIGHT);
+        headerFrame.size.height = headerFrame.size.height + SEARCH_HEADER_HEIGHT;
+        UIView* header = self.tableview.tableHeaderView;
+        header.frame = headerFrame;
+        [header addSubview:self.searchHeaderView];
+        self.tableview.tableHeaderView = header;
+    }
+}
+
+-(void) resetTableHeaderView {
+    if ([self.searchHeaderView isDescendantOfView:self.tableview.tableHeaderView]) {
+        UIView* header = self.tableview.tableHeaderView;
+        CGRect frame = header.frame;
+        frame.size.height = frame.size.height - SEARCH_HEADER_HEIGHT;
+        header.frame = frame;
+        [self.searchHeaderView removeFromSuperview];
+        self.tableview.tableHeaderView = header;
+    }
+}
+-(void) setupHUD {
+    //add hud progress indicator
+    self.hud = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.view addSubview:self.hud];
+    self.hud.labelText = NSLocalizedString(@"loading", nil);
+    self.hud.color = [UIColor lightBlueHUDConfirmationColor];
+    //    self.hud.labelFont = [UIFont heroFontWithSize:self.hud.labelFont.pointSize];
+    //    self.hud.detailsLabelFont = [UIFont heroFontWithSize:self.hud.detailsLabelFont.pointSize];
+}
+
 #pragma mark - Searchbar Methods
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
     [self.view addGestureRecognizer:self.tap]; //for dismissing the keyboard if tap outside
@@ -252,16 +323,7 @@ typedef enum {
     [textField resignFirstResponder];
     return YES;
 }
--(void) resetTableHeaderView {
-    if ([self.searchHeaderView isDescendantOfView:self.tableview.tableHeaderView]) {
-        UIView* header =self.tableview.tableHeaderView;
-        CGRect frame = header.frame;
-        frame.size.height = frame.size.height - SEARCH_HEADER_HEIGHT;
-        header.frame = frame;
-        [self.searchHeaderView removeFromSuperview];
-        self.tableview.tableHeaderView = header;
-    }
-}
+
 - (void)fetchedConcertsForSearch:(NSDictionary *)comboDic {
     [self.hud hide:YES];
     [self resetTableHeaderView];
@@ -298,36 +360,14 @@ typedef enum {
     [self.tableview reloadData];
     [self addArtistImageToHeader];
 }
--(void) addArtistImageToHeader {
-    if (self.searchResultsEvents.count > 0) {
-        if(!self.searchHeaderView) {
-            NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"SearchResultsSectionHeader" owner:nil options:nil];
-            self.searchHeaderView = [subviewArray objectAtIndex:0];
-        }
-        UIImageView* artistImage = (UIImageView*)[self.searchHeaderView viewWithTag:10];
-        if ([self.searchedArtistDic imageURL]) {
-            [artistImage setImageWithURL:[self.searchedArtistDic imageURL] placeholderImage:[UIImage imageNamed: @"placeholder.jpg"]];
-        }
-        else {
-            [artistImage setImageWithURL:[[self.searchResultsEvents objectAtIndex:0] imageURL] placeholderImage:[UIImage imageNamed: @"placeholder.jpg"]];
-        }
-        
-        artistImage.layer.cornerRadius = 5.0;
-        artistImage.layer.masksToBounds = YES;
-        
-        self.searchHeaderView.clipsToBounds =YES;
-        CGRect headerFrame = self.tableview.tableHeaderView.frame;
-        
-        self.searchHeaderView.frame = CGRectMake(0,headerFrame.size.height,320,SEARCH_HEADER_HEIGHT);
-        headerFrame.size.height = headerFrame.size.height + SEARCH_HEADER_HEIGHT;
-        UIView* header = self.tableview.tableHeaderView;
-        header.frame = headerFrame;
-        [header addSubview:self.searchHeaderView];
-        self.tableview.tableHeaderView = header;
-    }
+
+- (BOOL)textFieldShouldClear:(UITextField *)textField {
+    self.hasSearched = FALSE;
+    
+    [self.tableview reloadData];
+    [self resetTableHeaderView];
+    return YES;
 }
-
-
 #pragma mark - Tabelview Methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -358,6 +398,8 @@ typedef enum {
             ECSearchResultCell *cell = [tableView dequeueReusableCellWithIdentifier:SearchCellIdentifier forIndexPath:indexPath];
             NSDictionary * eventDic = [self.searchResultsEvents objectAtIndex:indexPath.row];
             [cell setupCellForEvent:eventDic];
+            cell.lblEventTitle.textColor = [UIColor darkGrayColor];
+
             return cell;
         }
     }
@@ -367,6 +409,7 @@ typedef enum {
         
         
         [cell setUpCellForConcert:concertDic];
+        cell.lblName.textColor = [UIColor darkGrayColor];
 
         //Using UIImageView+AFNetworking, automatically set the cell's image view based on the URL
         [cell.imageArtist setImageWithURL:[concertDic imageURL] placeholderImage:nil]; //TODO add placeholder
@@ -375,6 +418,13 @@ typedef enum {
     }
     
     return nil;
+}
+-(UIView*) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    return nil;
+}
+
+-(CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 0;
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
@@ -425,12 +475,6 @@ typedef enum {
            }
     self.tappedOnConcert = YES;
 }
--(UIView*) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    return nil;
-}
 
--(CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 0;
-}
 
 @end

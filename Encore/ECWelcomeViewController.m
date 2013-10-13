@@ -111,9 +111,8 @@
     NSDictionary * concertDic = [self.featuredEvents objectAtIndex:indexPath.row];
     [cell setUpCellForConcert:concertDic];
     cell.lblLocation.text = [[concertDic address] uppercaseString];
-
     [cell.imageArtist setImageWithURL:[concertDic imageURL] placeholderImage:nil]; //TODO add placeholder
-    cell.lblName.textColor = [UIColor whiteColor];
+    cell.lblName.textColor = [UIColor darkGrayColor];
 
     return cell;
 }

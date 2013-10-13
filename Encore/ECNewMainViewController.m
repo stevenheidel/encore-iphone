@@ -50,9 +50,12 @@ typedef enum {
     BOOL showingSearchBar;
     UIView* lastFMView;
     NSDictionary* abbrvDic;
-
+    
 }
+@property (assign) NSInteger page;
 @property (assign) BOOL viewLoaded;
+@property (assign) BOOL showLoadMore;
+
 @end
 
 @implementation ECNewMainViewController
@@ -90,7 +93,8 @@ typedef enum {
                                    action:@selector(dismissKeyboard)];
     
     [self initializeSearchLocation];
-    
+    self.page = 1;
+    self.showLoadMore = NO;
     self.currentSearchType = [NSUserDefaults lastSearchType];
     if (self.currentSearchType == 0) { //default if nothing saved is 0, which is invalid.
         self.currentSearchType = ECSearchTypeToday;
@@ -103,6 +107,7 @@ typedef enum {
     
     [self.tableView setIndicatorStyle:UIScrollViewIndicatorStyleWhite];
     self.view.clipsToBounds = YES;
+    self.futureConcerts = [[NSMutableArray alloc] init];
     
 }
 
@@ -231,7 +236,9 @@ typedef enum {
             self.todaysConcerts = concerts;
             break;
         case ECSearchTypeFuture:
-            self.futureConcerts = concerts;
+           // self.showLoadMore = concerts.count == 0 ? NO:YES;
+            self.showLoadMore = NO;
+            [self.futureConcerts addObjectsFromArray:concerts];
             break;
         case ECSearchTypePast:
             self.pastConcerts = concerts;
@@ -293,7 +300,9 @@ typedef enum {
     if(self.currentSearchType == type) {
         [self showLoadingHUD];
     }
-    [ECJSONFetcher fetchPopularConcertsWithSearchType:type location:self.currentSearchLocation radius:[NSNumber numberWithFloat:self.currentSearchRadius] completion:^(NSArray *concerts) {
+    [ECJSONFetcher fetchPopularConcertsWithSearchType:type location:self.currentSearchLocation radius:[NSNumber numberWithFloat:self.currentSearchRadius] page:self.page completion:^(NSArray *concerts) {
+        if(self.currentSearchType == ECSearchTypeFuture && concerts.count > 0)
+            self.page++;
         [self fetchedPopularConcerts:concerts forType:type];
     }];
 }
@@ -335,21 +344,21 @@ typedef enum {
 }
 -(void) reloadData {
     [Flurry logEvent:@"Used_Refresh_Control_Main_View" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[self currentSearchTypeString], @"search_type", nil]];
-    [ECJSONFetcher fetchPopularConcertsWithSearchType:self.currentSearchType location: self.currentSearchLocation radius: [NSNumber numberWithFloat:self.currentSearchRadius] completion:^(NSArray *concerts) {
-        switch (self.currentSearchType) {
-            case ECSearchTypeFuture:
-                self.futureConcerts = concerts;
-                break;
-            case ECSearchTypePast:
-                self.pastConcerts = concerts;
-                break;
-            case ECSearchTypeToday:
-                self.todaysConcerts = concerts;
-                break;
-            default:
-                break;
+    self.page = 1;
+    [ECJSONFetcher fetchPopularConcertsWithSearchType:self.currentSearchType location: self.currentSearchLocation radius: [NSNumber numberWithFloat:self.currentSearchRadius] page:self.page completion:^(NSArray *concerts) {
+        if(self.currentSearchType == ECSearchTypeFuture){
+            [self.futureConcerts removeAllObjects];
         }
+        [self setEventArray:concerts forType:self.currentSearchType];
         [self.tableView reloadData];
+        
+        if ([self currentEventArray].count == 0) {
+            self.tableView.tableFooterView = self.noConcertsFooterView;
+        }
+        else {
+            self.tableView.tableFooterView = lastFMView;
+        }
+        [self.hud hide:YES];
         [self setBackgroundImage];
         [self.refreshControl endRefreshing];
     }];
@@ -771,7 +780,10 @@ typedef enum {
             return [self.searchResultsEvents count];
     }
     else {
-        return [[self currentEventArray] count];
+        if(self.currentSearchType == ECSearchTypeFuture && self.showLoadMore)
+            return [[self currentEventArray] count]+1;// 1 for loading more cell
+        else
+            return [[self currentEventArray] count];
     }
     return 0;
 }
@@ -789,8 +801,15 @@ typedef enum {
         }
     }
     else { //popular concert cell
-        ECConcertCellView *cell = [tableView dequeueReusableCellWithIdentifier:ConcertCellIdentifier forIndexPath:indexPath];
         NSArray* concerts = [self currentEventArray];
+        if(concerts.count == indexPath.row && self.showLoadMore){
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LoadMore"];
+            UIActivityIndicatorView* load = (UIActivityIndicatorView*)[cell viewWithTag:55];
+            [load startAnimating];
+            return cell;
+        }
+        
+        ECConcertCellView *cell = [tableView dequeueReusableCellWithIdentifier:ConcertCellIdentifier forIndexPath:indexPath];
         NSDictionary * concertDic = [concerts objectAtIndex:indexPath.row];
         
 
@@ -810,6 +829,14 @@ typedef enum {
     [self dismissKeyboard];
 }
 
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    CGFloat endScrolling = scrollView.contentOffset.y + scrollView.frame.size.height;
+    if (endScrolling >= scrollView.contentSize.height && self.currentSearchType == ECSearchTypeFuture && self.showLoadMore)
+    {
+        [self fetchPopularConcertsWithSearchType:ECSearchTypeFuture];
+    }
+}
 -(NSArray*) currentEventArray {
     if(self.hasSearched /*&& self.currentSearchType != ECSearchTypeToday8*/) {
         return self.searchResultsEvents;

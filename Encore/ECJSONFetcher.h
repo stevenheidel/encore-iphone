@@ -31,6 +31,7 @@
 +(void)fetchPopularConcertsWithSearchType:(ECSearchType)searchType
                                  location: (CLLocation*) location
                                    radius: (NSNumber*) radius
+                                     page:(NSInteger) page
                                completion: (void (^)(NSArray* concerts)) completion;
 
 +(void) fetchPostsForConcertWithID: (NSString *) concertID

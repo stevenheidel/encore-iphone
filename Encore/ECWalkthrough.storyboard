@@ -440,14 +440,19 @@
                                     <constraint firstAttribute="height" constant="357" type="user" id="d8m-xV-G3C"/>
                                 </constraints>
                                 <color key="sectionIndexTrackingBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <view key="tableHeaderView" contentMode="scaleToFill" id="zyO-Eh-sXV">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="sSG-Na-BCx">
-                                    <rect key="frame" x="0.0" y="177" width="320" height="88"/>
+                                    <rect key="frame" x="0.0" y="178" width="320" height="88"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ECConcertCellView" rowHeight="85" id="Cbk-Nb-RGt" customClass="ECConcertCellView">
-                                        <rect key="frame" x="0.0" y="22" width="320" height="85"/>
+                                        <rect key="frame" x="0.0" y="23" width="320" height="85"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="300" height="85"/>
@@ -508,7 +513,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ECSearchResultCell" rowHeight="70" id="hbR-cT-6AL" customClass="ECSearchResultCell">
-                                        <rect key="frame" x="0.0" y="107" width="320" height="70"/>
+                                        <rect key="frame" x="0.0" y="108" width="320" height="70"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="300" height="70"/>
@@ -566,6 +571,7 @@
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="bzV-82-zdU" firstAttribute="leading" secondItem="hbR-cT-6AL" secondAttribute="leading" constant="11" id="8uJ-Sn-w3A"/>
                                             <constraint firstItem="qh8-9W-KM1" firstAttribute="top" secondItem="hbR-cT-6AL" secondAttribute="top" constant="20" scoringType="29" id="SOi-fA-OSS"/>

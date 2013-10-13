@@ -8,6 +8,9 @@
 
 #import "ECEventTableViewController.h"
 
+#import "ECPastViewController.h"
+#import "ECUpcomingViewController.h"
+
 #import "UIimageView+AFNetworking.h"
 #import "ATAppRatingFlow.h"
 #import <MapKit/MapKit.h>
@@ -84,8 +87,7 @@
         self.songs = [NSArray arrayWithArray:songs];
         if(self.songs.count > 0){
             self.currentSongIndex = 0;
-            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:[self rowIndexForRowType:SongPreview] inSection:0]]
-                                  withRowAnimation:UITableViewRowAnimationAutomatic];
+            [self.tableView reloadData];
         }
     }];
 }
@@ -265,10 +267,20 @@
 }
 
 -(void) inviteFriends: (NSArray*) friends {
+    NSString* message;
+    if([self isKindOfClass:[ECPastViewController class]]){
+        message = [NSString stringWithFormat:@"Check out the photos and videos of the %@ concert we went on Encore.",self.concert.headliner];
+
+    }else{
+        message = [NSString stringWithFormat:@"Check out the photos and videos of the %@ concert are going to on Encore.",self.concert.headliner];
+
+    }
+    
+    
     NSString* stringOfFriends = [[friends valueForKey:@"facebook_id"] componentsJoinedByString:@", "];
     NSMutableDictionary* params =   [NSMutableDictionary dictionaryWithObjectsAndKeys:stringOfFriends,@"to", nil];
     [FBWebDialogs presentRequestsDialogModallyWithSession:[FBSession activeSession]
-                                                  message:@"Check out Encore on iOS!"
+                                                  message:message
                                                     title:@"Invite"
                                                parameters:params
                                                   handler:^(FBWebDialogResult result, NSURL *resultURL, NSError *error) {

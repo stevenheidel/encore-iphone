@@ -249,8 +249,8 @@
 		D97836281805AA0E0061C203 /* default-controls.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D978361C1805AA0E0061C203 /* default-controls.bundle */; };
 		D97836291805AA0E0061C203 /* DZWebBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = D978361E1805AA0E0061C203 /* DZWebBrowser.m */; };
 		D978362A1805AA0E0061C203 /* NJKWebViewProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = D97836221805AA0E0061C203 /* NJKWebViewProgress.m */; };
-		D978362B1805AA0E0061C203 /* SDCachedURLResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = D97836251805AA0E0061C203 /* SDCachedURLResponse.m */; };
-		D978362C1805AA0E0061C203 /* SDURLCache.m in Sources */ = {isa = PBXBuildFile; fileRef = D97836271805AA0E0061C203 /* SDURLCache.m */; };
+		D978362B1805AA0E0061C203 /* SDCachedURLResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = D97836251805AA0E0061C203 /* SDCachedURLResponse.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		D978362C1805AA0E0061C203 /* SDURLCache.m in Sources */ = {isa = PBXBuildFile; fileRef = D97836271805AA0E0061C203 /* SDURLCache.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D9963FD017B0D4E9003C3CC1 /* UIImage+Merge.m in Sources */ = {isa = PBXBuildFile; fileRef = D9963FCF17B0D4E9003C3CC1 /* UIImage+Merge.m */; };
 		D9D95CF617E8420500061DAF /* featured.json in Resources */ = {isa = PBXBuildFile; fileRef = D9D95CF517E8420500061DAF /* featured.json */; };
 /* End PBXBuildFile section */
@@ -1852,7 +1852,7 @@
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)\"",
+					"$(SRCROOT)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Encore/Encore-Prefix.pch";
@@ -1901,7 +1901,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Simon E Bromberg (7289C5AAFZ)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)\"",
+					"$(SRCROOT)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Encore/Encore-Prefix.pch";

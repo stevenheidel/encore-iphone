@@ -50,7 +50,7 @@
 
 @property(nonatomic, strong) NSArray* todaysConcerts;
 @property(nonatomic, strong) NSArray* pastConcerts;
-@property(nonatomic, strong) NSArray* futureConcerts;
+@property(nonatomic, strong) NSMutableArray* futureConcerts;
 
 @property(nonatomic, readonly) NSArray *searchResultsEvents;
 @property(nonatomic, readonly) NSDictionary *searchedArtistDic;

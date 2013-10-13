@@ -36,8 +36,8 @@
             "venue_name": "Twickenham Stadium",
             "venue": {
                 "street": "",
-                "city": "Richmond, ",
-                "postalcode": " ",
+                "city": "Richmond",
+               "country": "",
                 "country": "United Kingdom",
                 "latitude": 43.629188,
                 "longitude": -79.415054
@@ -107,7 +107,7 @@
                 "street": "",
                 "city": "Chicago, IL",
                 "postalcode": "",
-                "country": "",
+               "country": "",
                 "latitude": 43.629188,
                 "longitude": -79.415054
             },
@@ -130,7 +130,7 @@
                 "street": "",
                 "city": "Las Vegas, NV",
                 "postalcode": "",
-                "country": " ",
+               "country": "",
                 "latitude": 43.629188,
                 "longitude": -79.415054
             },
@@ -153,7 +153,7 @@
                 "street": "",
                 "city": "Philidalphia, PA",
                 "postalcode": "",
-                "country": " ",
+               "country": "",
                 "latitude": 43.629188,
                 "longitude": -79.415054
             },
@@ -176,7 +176,7 @@
                 "street": "",
                 "city": "New York, NY",
                 "postalcode": "",
-                "country": " ",
+               "country": "",
                 "latitude": 43.629188,
                 "longitude": -79.415054
             },
