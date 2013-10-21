@@ -76,9 +76,9 @@ NSString* stringForSearchType(ECSearchType searchType) {
     NSNumber* latitude = [NSNumber numberWithDouble:location.coordinate.latitude];
     NSNumber* longitude = [NSNumber numberWithDouble:location.coordinate.longitude];
     NSDictionary * parameters ;
-//    if(searchType == ECSearchTypeFuture)
-//        parameters = [NSDictionary dictionaryWithObjectsAndKeys:latitude,@"latitude", longitude, @"longitude", radius, @"radius",[NSString stringWithFormat:@"%d",page],@"page",@"50",@"limit",nil];
-//    else
+    if(searchType == ECSearchTypeFuture)
+        parameters = [NSDictionary dictionaryWithObjectsAndKeys:latitude,@"latitude", longitude, @"longitude", radius, @"radius",[NSString stringWithFormat:@"%d",page],@"page",@"50",@"limit",nil];
+    else
         parameters = [NSDictionary dictionaryWithObjectsAndKeys:latitude,@"latitude", longitude, @"longitude", radius, @"radius",nil];
 
     

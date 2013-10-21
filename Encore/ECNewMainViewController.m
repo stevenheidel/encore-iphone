@@ -236,8 +236,8 @@ typedef enum {
             self.todaysConcerts = concerts;
             break;
         case ECSearchTypeFuture:
-           // self.showLoadMore = concerts.count == 0 ? NO:YES;
-            self.showLoadMore = NO;
+            self.showLoadMore = concerts.count == 0 ? NO:YES;
+          //  self.showLoadMore = NO;
             [self.futureConcerts addObjectsFromArray:concerts];
             break;
         case ECSearchTypePast:
@@ -298,10 +298,11 @@ typedef enum {
 
 -(void) fetchPopularConcertsWithSearchType: (ECSearchType) type {
     if(self.currentSearchType == type) {
-        [self showLoadingHUD];
+        if( !(self.currentSearchType == ECSearchTypeFuture && self.showLoadMore))
+            [self showLoadingHUD];
     }
     [ECJSONFetcher fetchPopularConcertsWithSearchType:type location:self.currentSearchLocation radius:[NSNumber numberWithFloat:self.currentSearchRadius] page:self.page completion:^(NSArray *concerts) {
-        if(self.currentSearchType == ECSearchTypeFuture && concerts.count > 0)
+        if(type == ECSearchTypeFuture && concerts.count > 0)
             self.page++;
         [self fetchedPopularConcerts:concerts forType:type];
     }];
