@@ -44,7 +44,7 @@
 -(NSString*) city;
 -(NSDictionary*) venueDetails;
 -(NSString *) address;
-
+-(NSString *) addressWithoutCountry;
 
 -(NSString *) headliner;
 -(NSArray *) artists;

@@ -20,7 +20,9 @@
 -(void) awakeFromNib {
     self.locationTitleLabel.font = [UIFont lightHeroFontWithSize:ROW_TITLE_SIZE];
     self.contentView.backgroundColor = [UIColor eventRowBackgroundColor];
-    
+    self.addressLabel.font = [UIFont lightHeroFontWithSize:15];
+    self.startTimeLabel.font = [UIFont lightHeroFontWithSize:14];
+
     UITapGestureRecognizer* tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openBigMap)];
     tapRecognizer.numberOfTapsRequired = 1;
     tapRecognizer.numberOfTouchesRequired = 1;
@@ -146,6 +148,8 @@
 -(void) awakeFromNib {
     self.contentView.backgroundColor = [UIColor eventRowBackgroundColor];
     self.lblMusicTitle.font = [UIFont lightHeroFontWithSize:ROW_TITLE_SIZE];
+    self.lblSongName.font = [UIFont lightHeroFontWithSize:15];
+
 }
 - (IBAction)playpauseButtonTapped:(id)sender {
 }

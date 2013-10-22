@@ -60,6 +60,14 @@ static NSString * const kDateFormat = @"yyyy-MM-dd";
     [address removeObject:@""];
     return [address componentsJoinedByString:@", "];
 }
+-(NSString *) addressWithoutCountry
+{
+    NSMutableArray* address = [[NSMutableArray alloc] init];
+    [address addObject:[self street]];
+    [address addObject:[self city]];
+    [address removeObject:@""];
+    return [address componentsJoinedByString:@", "];
+}
 
 -(NSString*) startTime {
     NSString* time = [self objectForKey:@"start_time"];
@@ -67,7 +75,6 @@ static NSString * const kDateFormat = @"yyyy-MM-dd";
     [formatter setDateFormat:@"EE, d MMM yyyy HH:mm:ss"];
     NSDate* date = [formatter dateFromString:time];
     NSDateFormatter* formatter2 = [NSDateFormatter new];
-    formatter2.dateStyle  = NSDateFormatterMediumStyle;
     formatter2.timeStyle = NSDateFormatterShortStyle;
     time = [formatter2 stringFromDate:date];
     return time;

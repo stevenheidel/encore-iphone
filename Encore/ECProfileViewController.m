@@ -217,7 +217,7 @@ typedef enum {
 }
 
 - (void) updateHeader {
-    self.lblConcerts.text = [self.pastEvents count] == 1 ? [NSString stringWithFormat:@"%d Past Concert", [self.pastEvents count]] : [NSString stringWithFormat:@"%d Past Concerts", [self.pastEvents count]];
+    self.lblConcerts.text = ([self.pastEvents count]+[self.futureEvents count]) == 1 ? [NSString stringWithFormat:@"%d Concert", [self.pastEvents count]+[self.futureEvents count]] : [NSString stringWithFormat:@"%d Concerts", [self.pastEvents count]+[self.futureEvents count]];
 }
 
 -(void) viewDidAppear:(BOOL)animated {

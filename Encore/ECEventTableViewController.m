@@ -362,8 +362,8 @@
         case Location: {
             LocationCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier];
            
-            cell.addressLabel.text = [NSString stringWithFormat:@"%@",[self.concert address]];
-            cell.startTimeLabel.text = [self.concert startTime];
+            cell.addressLabel.text = [NSString stringWithFormat:@"%@",[self.concert addressWithoutCountry]];
+            cell.startTimeLabel.text = [NSString stringWithFormat:@"Doors open at: %@",[self.concert startTime]];
             
             CLLocation* location = [self.concert coordinates];
             CLLocationCoordinate2D coord2D = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude);
