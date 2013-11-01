@@ -301,7 +301,8 @@ typedef enum {
     if ([self tableView: tableView numberOfRowsInSection:section]==0){
         return 0;
     }
-    return 16.0;
+   // return 16.0;
+    return 0;
 }
 
 -(CGFloat) tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {

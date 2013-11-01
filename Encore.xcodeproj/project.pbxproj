@@ -83,6 +83,10 @@
 		A0A2B0DB177E333900518B6C /* ECProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0A2B0D9177E333900518B6C /* ECProfileViewController.xib */; };
 		A0A2B0DD177E3B5A00518B6C /* ECProfileHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0A2B0DC177E3B5A00518B6C /* ECProfileHeader.xib */; };
 		A0FF1C53176CC88000433768 /* LoginInfoPages.plist in Resources */ = {isa = PBXBuildFile; fileRef = A0FF1C52176CC88000433768 /* LoginInfoPages.plist */; };
+		CDAB543518238EB40069FF9F /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = CDAB543318238EB40069FF9F /* placeholder.png */; };
+		CDAB543618238EB40069FF9F /* placeholder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDAB543418238EB40069FF9F /* placeholder@2x.png */; };
+		CDAB54391823962D0069FF9F /* concertplaceholder.png in Resources */ = {isa = PBXBuildFile; fileRef = CDAB54371823962D0069FF9F /* concertplaceholder.png */; };
+		CDAB543A1823962D0069FF9F /* concertplaceholder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDAB54381823962D0069FF9F /* concertplaceholder@2x.png */; };
 		D401054917A20E6C006078D0 /* playbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = D401054717A20E6C006078D0 /* playbutton.png */; };
 		D401054A17A20E6C006078D0 /* playbutton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D401054817A20E6C006078D0 /* playbutton@2x.png */; };
 		D411CBE517B358FF006AF0C2 /* ECGridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D411CBE417B358FF006AF0C2 /* ECGridViewController.m */; };
@@ -131,7 +135,6 @@
 		D4A8DDC4176A20D2005E9847 /* ECJSONPoster.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A8DDC3176A20D2005E9847 /* ECJSONPoster.m */; };
 		D4A8DDCA176A39BA005E9847 /* NSDate+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A8DDC9176A39B9005E9847 /* NSDate+JSON.m */; };
 		D4A8DDCE176A405D005E9847 /* ECPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A8DDCC176A405D005E9847 /* ECPostViewController.m */; };
-		D4A8DDD3176A8885005E9847 /* placeholder.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D4A8DDD2176A8885005E9847 /* placeholder.jpg */; };
 		D4A8DDD5176AAA99005E9847 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4A8DDD4176AAA98005E9847 /* QuartzCore.framework */; };
 		D4A99EDA1784EEC400F4FB46 /* feedback.png in Resources */ = {isa = PBXBuildFile; fileRef = D4A99ED81784EEC400F4FB46 /* feedback.png */; };
 		D4A99EDB1784EEC400F4FB46 /* feedback@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4A99ED91784EEC400F4FB46 /* feedback@2x.png */; };
@@ -393,6 +396,10 @@
 		A0A2B0DC177E3B5A00518B6C /* ECProfileHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECProfileHeader.xib; sourceTree = "<group>"; };
 		A0FF1C52176CC88000433768 /* LoginInfoPages.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = LoginInfoPages.plist; sourceTree = "<group>"; };
 		B56B831D22E04C90BC664348 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
+		CDAB543318238EB40069FF9F /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
+		CDAB543418238EB40069FF9F /* placeholder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "placeholder@2x.png"; sourceTree = "<group>"; };
+		CDAB54371823962D0069FF9F /* concertplaceholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = concertplaceholder.png; sourceTree = "<group>"; };
+		CDAB54381823962D0069FF9F /* concertplaceholder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "concertplaceholder@2x.png"; sourceTree = "<group>"; };
 		D401054717A20E6C006078D0 /* playbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playbutton.png; sourceTree = "<group>"; };
 		D401054817A20E6C006078D0 /* playbutton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "playbutton@2x.png"; sourceTree = "<group>"; };
 		D411CBE317B358FF006AF0C2 /* ECGridViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECGridViewController.h; sourceTree = "<group>"; };
@@ -455,7 +462,6 @@
 		D4A8DDC9176A39B9005E9847 /* NSDate+JSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+JSON.m"; sourceTree = "<group>"; };
 		D4A8DDCB176A405D005E9847 /* ECPostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECPostViewController.h; sourceTree = "<group>"; };
 		D4A8DDCC176A405D005E9847 /* ECPostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECPostViewController.m; sourceTree = "<group>"; };
-		D4A8DDD2176A8885005E9847 /* placeholder.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = placeholder.jpg; sourceTree = "<group>"; };
 		D4A8DDD4176AAA98005E9847 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		D4A99ED81784EEC400F4FB46 /* feedback.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = feedback.png; sourceTree = "<group>"; };
 		D4A99ED91784EEC400F4FB46 /* feedback@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "feedback@2x.png"; sourceTree = "<group>"; };
@@ -820,6 +826,10 @@
 		D4A8DDD1176A44A0005E9847 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				CDAB54371823962D0069FF9F /* concertplaceholder.png */,
+				CDAB54381823962D0069FF9F /* concertplaceholder@2x.png */,
+				CDAB543318238EB40069FF9F /* placeholder.png */,
+				CDAB543418238EB40069FF9F /* placeholder@2x.png */,
 				247C114B17ED35D900B7F401 /* gotit.png */,
 				247C114C17ED35D900B7F401 /* gotit@2x.png */,
 				247C114D17ED35D900B7F401 /* itunes.png */,
@@ -867,7 +877,6 @@
 				D45DBD651783EE2A000ED3C1 /* Icons */,
 				D45DBD621783EDF4000ED3C1 /* App Icons */,
 				D45DBD661783EE3F000ED3C1 /* Launch */,
-				D4A8DDD2176A8885005E9847 /* placeholder.jpg */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -1442,10 +1451,10 @@
 			files = (
 				D4A797FE179218610029F469 /* ApptentiveResources.bundle in Resources */,
 				D4AA4CFD1766B374009B0635 /* InfoPlist.strings in Resources */,
+				CDAB54391823962D0069FF9F /* concertplaceholder.png in Resources */,
 				D4AA4D311766BA8C009B0635 /* ECLoginViewController.xib in Resources */,
 				D4AA4D391766F3D0009B0635 /* Localizable.strings in Resources */,
 				D4A8DDBC176A133B005E9847 /* InfoPlist.strings in Resources */,
-				D4A8DDD3176A8885005E9847 /* placeholder.jpg in Resources */,
 				A0FF1C53176CC88000433768 /* LoginInfoPages.plist in Resources */,
 				D4B0AC4717727FDA00DC4DD2 /* ECPostPlaceholder.xib in Resources */,
 				247C116017ED35D900B7F401 /* playsongbutton@2x.png in Resources */,
@@ -1494,6 +1503,7 @@
 				D4A9B309178DDABD008B5504 /* defaultfull.png in Resources */,
 				D4A9B30A178DDABD008B5504 /* defaultfull@2x.png in Resources */,
 				24AB802B1803AD7C002A9913 /* ECArtistSectionHeaderView.xib in Resources */,
+				CDAB543518238EB40069FF9F /* placeholder.png in Resources */,
 				D4A9B30B178DDABD008B5504 /* divideractiveleft.png in Resources */,
 				24AB803318048E48002A9913 /* disabledboth.png in Resources */,
 				D4A9B30C178DDABD008B5504 /* divideractiveleft@2x.png in Resources */,
@@ -1547,6 +1557,7 @@
 				D46D8F8A179460FA00011C5C /* login3.png in Resources */,
 				D46D8F8B179460FA00011C5C /* login3@2x.png in Resources */,
 				D46D8F8E1794610200011C5C /* login1.png in Resources */,
+				CDAB543618238EB40069FF9F /* placeholder@2x.png in Resources */,
 				D46D8F8F1794610200011C5C /* login1@2x.png in Resources */,
 				2424B2BE180501F700402D96 /* nopostimage.png in Resources */,
 				D46D8F91179465A500011C5C /* loginbackground@2x.png in Resources */,
@@ -1557,6 +1568,7 @@
 				D4AE47451795A179006AF663 /* profileSectionHeader.png in Resources */,
 				247C115917ED35D900B7F401 /* itunes.png in Resources */,
 				24AB803718048E48002A9913 /* disabledright.png in Resources */,
+				CDAB543A1823962D0069FF9F /* concertplaceholder@2x.png in Resources */,
 				D4AE47461795A179006AF663 /* profileSectionHeader@2x.png in Resources */,
 				D4E16CA817973BF100A9DC99 /* locationmakerwhite.png in Resources */,
 				D4E16CA917973BF100A9DC99 /* locationmakerwhite@2x.png in Resources */,

@@ -69,7 +69,8 @@ NSString * const kNewAttachmentKey = @"kNewAttachmentKey";
 	UIBarButtonItem *_previousButton;
 	UIBarButtonItem *_nextButton;
     UIBarButtonItem *_shareButton;
-    
+    UIBarButtonItem *_reloadButton;
+
     UILabel *_titleLabel;
     UILabel *_urlLabel;
     
@@ -139,6 +140,9 @@ NSString * const kNewAttachmentKey = @"kNewAttachmentKey";
     leftButton.frame = CGRectMake(0, 0, leftButImage.size.width, leftButImage.size.height);
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
     self.navigationItem.leftBarButtonItem = backButton;
+    
+    
+    
 
     UIBarButtonItem *indicatorButton = [[UIBarButtonItem alloc] initWithCustomView:self.activityIndicator];
     [self.navigationItem setRightBarButtonItem:indicatorButton animated:NO];
@@ -313,8 +317,9 @@ NSString * const kNewAttachmentKey = @"kNewAttachmentKey";
     _stopButton = [[UIBarButtonItem alloc] initWithImage:stopImg style:UIBarButtonItemStylePlain target:self action:@selector(stopWebView)];
     _previousButton = [[UIBarButtonItem alloc] initWithImage:previousdImg style:UIBarButtonItemStylePlain target:self action:@selector(backWebView)];
     _nextButton = [[UIBarButtonItem alloc] initWithImage:nextImg style:UIBarButtonItemStylePlain target:self action:@selector(forwardWebView)];
-    
-    NSMutableArray *items = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? [NSMutableArray arrayWithObjects:margin, _stopButton, flexibleMargin, _previousButton, flexibleMargin, _nextButton, nil] : [NSMutableArray arrayWithObjects:margin, _stopButton, flexibleMargin, _previousButton, flexibleMargin, _nextButton, nil];
+    _reloadButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(reloadWebView)];
+
+    NSMutableArray *items = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? [NSMutableArray arrayWithObjects:margin, _stopButton, flexibleMargin, _previousButton, flexibleMargin, _nextButton,flexibleMargin,_reloadButton, nil] : [NSMutableArray arrayWithObjects:margin, _stopButton, flexibleMargin, _previousButton, flexibleMargin, _nextButton,flexibleMargin,_reloadButton, nil];
     
     if (_allowSharing) {
         [items addObject:flexibleMargin];
@@ -323,8 +328,6 @@ NSString * const kNewAttachmentKey = @"kNewAttachmentKey";
         [items addObject:margin];
     }
     else {
-        [items addObject:flexibleMargin];
-        [items addObject:flexibleMargin];
     }
     
     return items;

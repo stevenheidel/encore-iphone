@@ -212,8 +212,8 @@ typedef enum {
                             [self setViewForCurrentType];
                             self.userNameLabel.text = [self.post userName];
                             self.captionLabel.text = [self.post caption];
-                            [self.postImage setImageWithURL:[self.post imageURL]];
-                            [self.profilePicture setImageWithURL:[self.post profilePictureURL] placeholderImage:[UIImage imageNamed:@"placeholder.jpg"]];
+                            [self.postImage setImageWithURL:[self.post imageURL] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+                            [self.profilePicture setImageWithURL:[self.post profilePictureURL] placeholderImage:[UIImage imageNamed:@"placeholder"]];
                             [UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
                                 self.postImage.alpha = 1.0;
                                 self.playButton.alpha = 1.0;

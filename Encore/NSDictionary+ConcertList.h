@@ -12,6 +12,7 @@
 
 -(NSString *) niceDate;
 -(NSString*) niceDateNotUppercase;
+-(NSString*) smallDate;
 
 -(NSString *) eventName;
 -(NSString *) venueName;

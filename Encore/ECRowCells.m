@@ -18,7 +18,7 @@
 
 @implementation LocationCell
 -(void) awakeFromNib {
-    self.locationTitleLabel.font = [UIFont lightHeroFontWithSize:ROW_TITLE_SIZE];
+    self.locationTitleLabel.font = [UIFont heroFontWithSize:ROW_TITLE_SIZE];
     self.contentView.backgroundColor = [UIColor eventRowBackgroundColor];
     self.addressLabel.font = [UIFont lightHeroFontWithSize:15];
     self.startTimeLabel.font = [UIFont lightHeroFontWithSize:14];
@@ -43,7 +43,7 @@
 
 @implementation LineupCell
 -(void) awakeFromNib {
-    self.lineupLabel.font = [UIFont lightHeroFontWithSize:ROW_TITLE_SIZE];
+    self.lineupLabel.font = [UIFont heroFontWithSize:ROW_TITLE_SIZE];
     self.contentView.backgroundColor = [UIColor eventRowBackgroundColor];
     self.lineupImages = nil;
 }
@@ -82,7 +82,7 @@
                                                  [self.lineupImages replaceObjectAtIndex:indexPath.row withObject:image];
                                                  [cell.activityIndicator stopAnimating];
                                              } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-                                                 [cell.artistImage setImage:[UIImage imageNamed:@"placeholder.jpg"]];
+                                                 [cell.artistImage setImage:[UIImage imageNamed:@"placeholder"]];
                                                  [cell.activityIndicator stopAnimating];
 
                                              }];
@@ -147,7 +147,7 @@
 @implementation SongPreviewCell
 -(void) awakeFromNib {
     self.contentView.backgroundColor = [UIColor eventRowBackgroundColor];
-    self.lblMusicTitle.font = [UIFont lightHeroFontWithSize:ROW_TITLE_SIZE];
+    self.lblMusicTitle.font = [UIFont heroFontWithSize:ROW_TITLE_SIZE];
     self.lblSongName.font = [UIFont lightHeroFontWithSize:15];
 
 }
@@ -170,9 +170,11 @@
 
 @implementation FriendsCell
 -(void) awakeFromNib {
-    self.friendsTitleLabel.font = [UIFont lightHeroFontWithSize:ROW_TITLE_SIZE];
+    self.friendsTitleLabel.font = [UIFont heroFontWithSize:ROW_TITLE_SIZE];
     self.contentView.backgroundColor = [UIColor eventRowBackgroundColor];
     self.noFriendsLabel.hidden = NO;
+    self.noFriendsLabel.font = [UIFont lightHeroFontWithSize:15];
+
 }
 -(void) setFriends:(NSArray *)friends {
     _friends = friends;
@@ -205,7 +207,7 @@ __weak FriendCollectionCell *cell = (FriendCollectionCell*)[collectionView deque
                                          [cell.friendImage setImage:image];
                                          [cell.activityIndicator stopAnimating];
                                      } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-                                         [cell.friendImage setImage:[UIImage imageNamed:@"placeholder.jpg"]];
+                                         [cell.friendImage setImage:[UIImage imageNamed:@"placeholder"]];
                                          [cell.activityIndicator stopAnimating];
 
                                      }];

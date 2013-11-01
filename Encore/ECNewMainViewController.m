@@ -948,10 +948,10 @@ typedef enum {
         }
         UIImageView* artistImage = (UIImageView*)[self.searchHeaderView viewWithTag:10];
         if ([self.searchedArtistDic imageURL]) {
-            [artistImage setImageWithURL:[self.searchedArtistDic imageURL] placeholderImage:[UIImage imageNamed: @"placeholder.jpg"]];
+            [artistImage setImageWithURL:[self.searchedArtistDic imageURL] placeholderImage:[UIImage imageNamed: @"placeholder"]];
         }
         else {
-            [artistImage setImageWithURL:[[self.searchResultsEvents objectAtIndex:0] imageURL] placeholderImage:[UIImage imageNamed: @"placeholder.jpg"]];
+            [artistImage setImageWithURL:[[self.searchResultsEvents objectAtIndex:0] imageURL] placeholderImage:[UIImage imageNamed: @"placeholder"]];
         }
         
         artistImage.layer.cornerRadius = 5.0;

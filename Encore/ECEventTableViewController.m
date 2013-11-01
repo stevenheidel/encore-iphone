@@ -141,7 +141,7 @@
                                         
                                     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
                                         
-                                        self.eventImage.image = [UIImage imageNamed:@"placeholder.jpg"];
+                                        self.eventImage.image = [UIImage imageNamed:@"placeholder"];
                                         UIImageView *tempImageView = [[UIImageView alloc] initWithImage:[[UIImage imageNamed:@"Black"] imageWithGaussianBlur] ];
                                         [tempImageView setFrame:self.tableView.frame];
                                         self.tableView.backgroundView = tempImageView;
@@ -268,11 +268,13 @@
 
 -(void) inviteFriends: (NSArray*) friends {
     NSString* message;
+    
+    NSString* date = [self.concert smallDate];
     if([self isKindOfClass:[ECPastViewController class]]){
-        message = [NSString stringWithFormat:@"Check out the photos and videos of the %@ concert we went on Encore.",self.concert.headliner];
+        message = [NSString stringWithFormat:@"Check out the photos and videos of the %@ %@ concert we went to on Encore.",date,self.concert.headliner];
 
     }else{
-        message = [NSString stringWithFormat:@"Check out the photos and videos of the %@ concert are going to on Encore.",self.concert.headliner];
+        message = [NSString stringWithFormat:@"Check out the photos and videos of the %@ %@ concert we are going to on Encore.",date,self.concert.headliner];
 
     }
     
@@ -363,8 +365,9 @@
             LocationCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier];
            
             cell.addressLabel.text = [NSString stringWithFormat:@"%@",[self.concert addressWithoutCountry]];
-            cell.startTimeLabel.text = [NSString stringWithFormat:@"Doors open at: %@",[self.concert startTime]];
-            
+            if([self.concert startTime]){
+                cell.startTimeLabel.text = [NSString stringWithFormat:@"Doors open at: %@",[self.concert startTime]];
+            }
             CLLocation* location = [self.concert coordinates];
             CLLocationCoordinate2D coord2D = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude);
             cell.location2D = coord2D;
@@ -485,7 +488,7 @@
         
         NSString* titleForPicker = @"Who's coming?"; //TODO: move to subclasses?
         if (self.tense == ECSearchTypePast) {
-            titleForPicker = @"Who else went";
+            titleForPicker = @"Who else went?";
         }
         self.friendPickerController.title = titleForPicker;
         self.friendPickerController.delegate = self;

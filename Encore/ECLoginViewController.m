@@ -9,6 +9,8 @@
 #import "ECLoginViewController.h"
 #import "ECAppDelegate.h"
 #import "ECJSONPoster.h"
+#import "UIFont+Encore.h"
+
 @interface ECLoginViewController ()
 
 @end
@@ -37,6 +39,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self.lblWarning setFont:[UIFont heroFontWithSize:12]];
     NSLog(@"%@: did load",NSStringFromClass(self.class));
 }
 

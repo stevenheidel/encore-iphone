@@ -29,7 +29,7 @@
     self.lblLocation.textColor = [UIColor whiteColor];
     
     //TODO: Move this code to setUpCellImageForConcert: once we have a way to recognized if the server sent a blank image or not
-    self.imageArtist.image = [UIImage imageNamed:@"placeholder.jpg"];
+    self.imageArtist.image = [UIImage imageNamed:@"placeholder"];
     self.imageArtist.layer.cornerRadius = 5.0;
     self.imageArtist.layer.masksToBounds = YES;
 //    self.imageArtist.layer.borderWidth = 1.0;

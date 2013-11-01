@@ -118,7 +118,7 @@ typedef enum {
                 self.artistImage = image;
                 self.artistImageView.image = self.artistImage;
             } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-                self.artistImage = [UIImage imageNamed:@"placeholder.jpg"];
+                self.artistImage = [UIImage imageNamed:@"placeholder"];
                 self.artistImageView.image = self.artistImage;
             }];
         }];

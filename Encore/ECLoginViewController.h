@@ -13,6 +13,7 @@
     NSArray *arrPages;
 }
 - (void)loginFailed;
+@property (weak, nonatomic) IBOutlet UILabel *lblWarning;
 
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundImage;
 
