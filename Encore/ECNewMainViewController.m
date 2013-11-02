@@ -55,6 +55,7 @@ typedef enum {
 @property (assign) NSInteger page;
 @property (assign) BOOL viewLoaded;
 @property (assign) BOOL showLoadMore;
+@property (assign) BOOL shouldReload;
 
 @end
 
@@ -85,7 +86,7 @@ typedef enum {
     [self setupSearchBar];
     [self setupRefreshControl];
     [self setupLastFMView];
-    
+    self.shouldReload= NO;
     self.locationLabel.font = [UIFont heroFontWithSize:16.0f];
     
     self.tap = [[UITapGestureRecognizer alloc]
@@ -238,6 +239,10 @@ typedef enum {
         case ECSearchTypeFuture:
             self.showLoadMore = concerts.count == 0 ? NO:YES;
           //  self.showLoadMore = NO;
+            if(self.shouldReload){
+                self.shouldReload = NO;
+                [self.futureConcerts removeAllObjects];
+            }
             [self.futureConcerts addObjectsFromArray:concerts];
             break;
         case ECSearchTypePast:
@@ -596,7 +601,8 @@ typedef enum {
     self.currentSearchLocation = location;
     self.currentSearchRadius = radius;
     self.currentSearchAreaString = area;
-    
+    self.shouldReload = YES;
+    self.page = 1;
     self.locationLabel.text = area;
     
     [NSUserDefaults setLastSearchLocation:location];
@@ -604,7 +610,6 @@ typedef enum {
     [NSUserDefaults setLastSearchArea: area];
     [NSUserDefaults setSearchCity:locality];
     [NSUserDefaults synchronize];
-    
     [self fetchConcerts];
     if (self.hasSearched) {
         //redo search with new location

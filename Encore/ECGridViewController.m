@@ -45,8 +45,13 @@
 
 #pragma mark Autorotation
 -(BOOL)shouldAutorotate{
-    return NO;
+    if(self.interfaceOrientation ==  UIInterfaceOrientationMaskPortrait || self.interfaceOrientation ==  UIInterfaceOrientationMaskPortraitUpsideDown )
+    return YES;
+    else
+        return NO;
 }
+
+
 
 -(NSUInteger)supportedInterfaceOrientations{
     return UIInterfaceOrientationMaskPortrait;
