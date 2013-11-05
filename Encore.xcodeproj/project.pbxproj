@@ -1395,6 +1395,11 @@
 				CLASSPREFIX = EC;
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = Encore;
+				TargetAttributes = {
+					D4AA4CEE1766B374009B0635 = {
+						DevelopmentTeam = 7289C5AAFZ;
+					};
+				};
 			};
 			buildConfigurationList = D4AA4CEA1766B373009B0635 /* Build configuration list for PBXProject "Encore" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1862,6 +1867,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B56B831D22E04C90BC664348 /* Pods.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -1900,7 +1907,7 @@
 					"-lTestFlight",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "E06267B4-E7D0-4840-A7DE-189061CB2820";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1909,8 +1916,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B56B831D22E04C90BC664348 /* Pods.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Simon E Bromberg (7289C5AAFZ)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Simon E Bromberg (7289C5AAFZ)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -1949,7 +1956,7 @@
 					"-lTestFlight",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "CCA62C69-0A99-45BE-98BF-155F7AAC8CED";
+				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "CCA62C69-0A99-45BE-98BF-155F7AAC8CED";
 				WRAPPER_EXTENSION = app;
 			};
