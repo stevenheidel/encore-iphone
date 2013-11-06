@@ -37,8 +37,7 @@
             "venue": {
                 "street": "",
                 "city": "London",
-               "country": "",
-                "country": "United Kingdom",
+                "country": "UK",
                 "latitude": 43.629188,
                 "longitude": -79.415054
             },
