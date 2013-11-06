@@ -9,11 +9,7 @@
 #import "ECProfileViewController.h"
 #import "ECProfileHeader.h"
 #import "ECProfileConcertCell.h"
-//#import "ECConcertDetailViewController.h"
 #import "ECEventTableViewController.h"
-//#import "ECPastViewController.h"
-//#import "ECUpcomingViewController.h"
-
 #import "NSDictionary+ConcertList.h"
 #import <QuartzCore/QuartzCore.h>
 #import <FacebookSDK/FacebookSDK.h>
@@ -32,6 +28,7 @@
 
 #define HEADER_HEIGHT 166.0  //height in nib is actually 170, but for some reason that leaves extra space at bottom
 #define FLAG_HUD_DELAY 2.0
+#define SECTION_LINE_SEPARATOR_HEIGHT 2.0
 
 #import "ECAlertTags.h"
 
@@ -217,7 +214,22 @@ typedef enum {
 }
 
 - (void) updateHeader {
-    self.lblConcerts.text = ([self.pastEvents count]+[self.futureEvents count]) == 1 ? [NSString stringWithFormat:@"%d Concert", [self.pastEvents count]+[self.futureEvents count]] : [NSString stringWithFormat:@"%d Concerts", [self.pastEvents count]+[self.futureEvents count]];
+    NSInteger nFut = self.futureEvents.count;
+    NSInteger nPas = self.pastEvents.count;
+    NSInteger total = nFut + nPas;
+    NSString* suffix = total == 1 ? @"" : @"s";
+    NSString* text = nil;
+    if (total == 1) {
+        NSString* temp = @"Past";
+        if (nFut == 1) {
+            temp = @"Upcoming";
+        }
+        text = [NSString stringWithFormat:@"%d %@ Concert",total,temp];
+    }
+    else {
+        text = [NSString stringWithFormat:@"%d Concert%@ (%d Upcoming)",total,suffix,nFut];
+    }
+    self.lblConcerts.text = text;
 }
 
 -(void) viewDidAppear:(BOOL)animated {
@@ -301,8 +313,11 @@ typedef enum {
     if ([self tableView: tableView numberOfRowsInSection:section]==0){
         return 0;
     }
-   // return 16.0;
-    return 0;
+    else if (section == 0) {
+        return 0;
+    }
+    return SECTION_LINE_SEPARATOR_HEIGHT;//16.0;
+//    return 0;
 }
 
 -(CGFloat) tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
@@ -337,13 +352,22 @@ typedef enum {
     if([[self arrayForSection:section] count]==0){
         return nil;//[UIView new];
     }
-    NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"ECProfileSectionHeaderView" owner:nil options:nil];
-    UIView* headerView = [subviewArray objectAtIndex:0];
-    UILabel* label = (UILabel*)[headerView viewWithTag:87];
-    [label setFont:[UIFont heroFontWithSize:14.0f]];
-    [label setText:[[ECProfileViewController titleForSection: section] uppercaseString]];
+    else if (section == 0) {
+        return nil;
+    }
+
+    UIView* line = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, SECTION_LINE_SEPARATOR_HEIGHT)];
+    line.backgroundColor = [UIColor profileSectionSeparatorColour];
+    return line;
+    //original full blue separators
     
-    return headerView;
+//    NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"ECProfileSectionHeaderView" owner:nil options:nil];
+//    UIView* headerView = [subviewArray objectAtIndex:0];
+//    UILabel* label = (UILabel*)[headerView viewWithTag:87];
+//    [label setFont:[UIFont heroFontWithSize:14.0f]];
+//    [label setText:[[ECProfileViewController titleForSection: section] uppercaseString]];
+//    
+//    return headerView;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];

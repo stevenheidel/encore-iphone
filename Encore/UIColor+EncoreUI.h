@@ -26,6 +26,7 @@
 +(UIColor*) imageBorderColor;
 
 +(UIColor*) profileImageBorderColor;
++(UIColor*) profileSectionSeparatorColour;
 +(UIColor*) unselectedSegmentedControlColor;
 
 //HUDs

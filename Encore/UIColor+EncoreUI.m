@@ -44,6 +44,10 @@ UIColor* colorWithHSB(float hue, float saturation, float brightness, float alpha
     return colorWithRGB(160.0f,165.0f,170.0f,1.0);
 }
 
++(UIColor*) profileSectionSeparatorColour {
+    return colorWithRGB(185, 211, 238, 0.6);
+}
+
 #pragma mark - HUD
 +(UIColor*) lightBlueHUDConfirmationColor {
     return colorWithRGB(0.0f,176.0f,227.0f,0.90);
@@ -89,4 +93,6 @@ UIColor* colorWithHSB(float hue, float saturation, float brightness, float alpha
 +(UIColor*) eventRowBackgroundColor {
     return colorWithRGB(0.0f, 0.0f, 0.0f, 0.6f);
 }
+
+
 @end
