@@ -206,16 +206,22 @@ typedef enum {
     [UIView animateWithDuration:0.2
                           delay:0.0
                         options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                            self.postImage.alpha = 0.0;
+                            self.postImageView.alpha = 0.0;
                             self.playButton.alpha = 0.0;
                         } completion:^(BOOL finished) {
                             [self setViewForCurrentType];
                             self.userNameLabel.text = [self.post userName];
                             self.captionLabel.text = [self.post caption];
-                            [self.postImage setImageWithURL:[self.post imageURL] placeholderImage:[[UIImage alloc]init]];
+//                            [self.postImageView setImageWithURL:[self.post imageURL] placeholderImage:[[UIImage alloc]init]];
+                            [self.postImageView setImageWithURLRequest:[NSURLRequest requestWithURL:[self.post imageURL]] placeholderImage:[[UIImage alloc] init] success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                                self.postImageView.image = image;
+                            } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+                                self.postImageView.image = [UIImage imageNamed:@"placeholderimg2"];
+                            }];
+
                             [self.profilePicture setImageWithURL:[self.post profilePictureURL] placeholderImage:[UIImage imageNamed:@"placeholder"]];
                             [UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                                self.postImage.alpha = 1.0;
+                                self.postImageView.alpha = 1.0;
                                 self.playButton.alpha = 1.0;
                             }completion: ^(BOOL finished){
 
@@ -237,7 +243,7 @@ typedef enum {
         [animation setDuration:0.50];
         [animation setTimingFunction:
          [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
-        [self.postImage.layer addAnimation:animation forKey:kCATransition];
+        [self.postImageView.layer addAnimation:animation forKey:kCATransition];
 
     }
     else {
@@ -249,7 +255,7 @@ typedef enum {
         [animation setDuration:0.50];
         [animation setTimingFunction:
          [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
-        [self.postImage.layer addAnimation:animation forKey:kCATransition];
+        [self.postImageView.layer addAnimation:animation forKey:kCATransition];
 
     }
 

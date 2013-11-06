@@ -232,12 +232,14 @@
     cell.postImageView.image = nil;
     NSDictionary* post = [self.posts objectAtIndex:indexPath.row];
     [cell.activityIndicator startAnimating];
+    
+    //why is it necessary to set placeholder to empty image?
     [cell.postImageView setImageWithURLRequest:[NSURLRequest requestWithURL:[post imageURL]] placeholderImage:[[UIImage alloc] init] success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
         cell.postImageView.image = image;
         [cell.activityIndicator stopAnimating];
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
         [cell.activityIndicator stopAnimating];
-        cell.postImageView.image = [UIImage imageNamed:@"concertplaceholder"];
+        cell.postImageView.image = [UIImage imageNamed:@"placeholderimg2"];
     }];
     
     cell.postType = [post postType];

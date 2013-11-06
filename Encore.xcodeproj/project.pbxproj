@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		2403C2C417E28A3100C518BF /* ECArtistView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2403C2C317E28A3100C518BF /* ECArtistView.storyboard */; };
-		2424B2BE180501F700402D96 /* nopostimage.png in Resources */ = {isa = PBXBuildFile; fileRef = 2424B2BD180501F700402D96 /* nopostimage.png */; };
 		245F1E9917E2E79400C7621D /* gearbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 245F1E9717E2E79400C7621D /* gearbutton.png */; };
 		245F1E9A17E2E79400C7621D /* gearbutton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 245F1E9817E2E79400C7621D /* gearbutton@2x.png */; };
 		247C114617ECE6D500B7F401 /* GooglePlacesAutocompleteView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 247C114517ECE6D500B7F401 /* GooglePlacesAutocompleteView.storyboard */; };
@@ -27,6 +26,10 @@
 		247C116617ED398000B7F401 /* ECSearchConcertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 247C116517ED398000B7F401 /* ECSearchConcertViewController.m */; };
 		247C116917ED398900B7F401 /* ECNextConcertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 247C116817ED398900B7F401 /* ECNextConcertViewController.m */; };
 		249E82B717F63C6F004D969D /* ECEventTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 249E82B617F63C6F004D969D /* ECEventTableViewController.m */; };
+		24A4BBD8182A231B00667209 /* placeholderimg2.png in Resources */ = {isa = PBXBuildFile; fileRef = 24A4BBD4182A231B00667209 /* placeholderimg2.png */; };
+		24A4BBD9182A231B00667209 /* placeholderimg2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24A4BBD5182A231B00667209 /* placeholderimg2@2x.png */; };
+		24A4BBDA182A231B00667209 /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 24A4BBD6182A231B00667209 /* placeholder.png */; };
+		24A4BBDB182A231B00667209 /* placeholder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24A4BBD7182A231B00667209 /* placeholder@2x.png */; };
 		24A4C8C817E240340022B56F /* locationmarkerbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 24A4C8C617E240340022B56F /* locationmarkerbutton.png */; };
 		24A4C8C917E240340022B56F /* locationmarkerbutton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24A4C8C717E240340022B56F /* locationmarkerbutton@2x.png */; };
 		24A730FA17DD2E46009CF164 /* SPGooglePlacesAutocompletePlace.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A730F317DD2E46009CF164 /* SPGooglePlacesAutocompletePlace.m */; };
@@ -83,10 +86,6 @@
 		A0A2B0DB177E333900518B6C /* ECProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0A2B0D9177E333900518B6C /* ECProfileViewController.xib */; };
 		A0A2B0DD177E3B5A00518B6C /* ECProfileHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0A2B0DC177E3B5A00518B6C /* ECProfileHeader.xib */; };
 		A0FF1C53176CC88000433768 /* LoginInfoPages.plist in Resources */ = {isa = PBXBuildFile; fileRef = A0FF1C52176CC88000433768 /* LoginInfoPages.plist */; };
-		CDAB543518238EB40069FF9F /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = CDAB543318238EB40069FF9F /* placeholder.png */; };
-		CDAB543618238EB40069FF9F /* placeholder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDAB543418238EB40069FF9F /* placeholder@2x.png */; };
-		CDAB54391823962D0069FF9F /* concertplaceholder.png in Resources */ = {isa = PBXBuildFile; fileRef = CDAB54371823962D0069FF9F /* concertplaceholder.png */; };
-		CDAB543A1823962D0069FF9F /* concertplaceholder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDAB54381823962D0069FF9F /* concertplaceholder@2x.png */; };
 		D401054917A20E6C006078D0 /* playbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = D401054717A20E6C006078D0 /* playbutton.png */; };
 		D401054A17A20E6C006078D0 /* playbutton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D401054817A20E6C006078D0 /* playbutton@2x.png */; };
 		D411CBE517B358FF006AF0C2 /* ECGridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D411CBE417B358FF006AF0C2 /* ECGridViewController.m */; };
@@ -306,7 +305,6 @@
 /* Begin PBXFileReference section */
 		2401A80C179BC8F300B881B7 /* ECPostType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECPostType.h; sourceTree = "<group>"; };
 		2403C2C317E28A3100C518BF /* ECArtistView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ECArtistView.storyboard; sourceTree = "<group>"; };
-		2424B2BD180501F700402D96 /* nopostimage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nopostimage.png; sourceTree = "<group>"; };
 		245F1E9717E2E79400C7621D /* gearbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gearbutton.png; sourceTree = "<group>"; };
 		245F1E9817E2E79400C7621D /* gearbutton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gearbutton@2x.png"; sourceTree = "<group>"; };
 		247C114517ECE6D500B7F401 /* GooglePlacesAutocompleteView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GooglePlacesAutocompleteView.storyboard; sourceTree = "<group>"; };
@@ -328,6 +326,10 @@
 		247C116817ED398900B7F401 /* ECNextConcertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECNextConcertViewController.m; sourceTree = "<group>"; };
 		249E82B517F63C6F004D969D /* ECEventTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECEventTableViewController.h; sourceTree = "<group>"; };
 		249E82B617F63C6F004D969D /* ECEventTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECEventTableViewController.m; sourceTree = "<group>"; };
+		24A4BBD4182A231B00667209 /* placeholderimg2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholderimg2.png; sourceTree = "<group>"; };
+		24A4BBD5182A231B00667209 /* placeholderimg2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "placeholderimg2@2x.png"; sourceTree = "<group>"; };
+		24A4BBD6182A231B00667209 /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
+		24A4BBD7182A231B00667209 /* placeholder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "placeholder@2x.png"; sourceTree = "<group>"; };
 		24A4C8C617E240340022B56F /* locationmarkerbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = locationmarkerbutton.png; sourceTree = "<group>"; };
 		24A4C8C717E240340022B56F /* locationmarkerbutton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "locationmarkerbutton@2x.png"; sourceTree = "<group>"; };
 		24A730F117DD2E46009CF164 /* APIKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIKey.h; sourceTree = "<group>"; };
@@ -396,10 +398,6 @@
 		A0A2B0DC177E3B5A00518B6C /* ECProfileHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECProfileHeader.xib; sourceTree = "<group>"; };
 		A0FF1C52176CC88000433768 /* LoginInfoPages.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = LoginInfoPages.plist; sourceTree = "<group>"; };
 		B56B831D22E04C90BC664348 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
-		CDAB543318238EB40069FF9F /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
-		CDAB543418238EB40069FF9F /* placeholder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "placeholder@2x.png"; sourceTree = "<group>"; };
-		CDAB54371823962D0069FF9F /* concertplaceholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = concertplaceholder.png; sourceTree = "<group>"; };
-		CDAB54381823962D0069FF9F /* concertplaceholder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "concertplaceholder@2x.png"; sourceTree = "<group>"; };
 		D401054717A20E6C006078D0 /* playbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playbutton.png; sourceTree = "<group>"; };
 		D401054817A20E6C006078D0 /* playbutton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "playbutton@2x.png"; sourceTree = "<group>"; };
 		D411CBE317B358FF006AF0C2 /* ECGridViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECGridViewController.h; sourceTree = "<group>"; };
@@ -651,6 +649,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		24A4BBDD182A232B00667209 /* Placeholders */ = {
+			isa = PBXGroup;
+			children = (
+				24A4BBD4182A231B00667209 /* placeholderimg2.png */,
+				24A4BBD5182A231B00667209 /* placeholderimg2@2x.png */,
+				24A4BBD6182A231B00667209 /* placeholder.png */,
+				24A4BBD7182A231B00667209 /* placeholder@2x.png */,
+			);
+			name = Placeholders;
+			sourceTree = "<group>";
+		};
 		24A730F017DD2C13009CF164 /* SPGooglePlacesAutocomplete */ = {
 			isa = PBXGroup;
 			children = (
@@ -826,10 +835,7 @@
 		D4A8DDD1176A44A0005E9847 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				CDAB54371823962D0069FF9F /* concertplaceholder.png */,
-				CDAB54381823962D0069FF9F /* concertplaceholder@2x.png */,
-				CDAB543318238EB40069FF9F /* placeholder.png */,
-				CDAB543418238EB40069FF9F /* placeholder@2x.png */,
+				24A4BBDD182A232B00667209 /* Placeholders */,
 				247C114B17ED35D900B7F401 /* gotit.png */,
 				247C114C17ED35D900B7F401 /* gotit@2x.png */,
 				247C114D17ED35D900B7F401 /* itunes.png */,
@@ -837,7 +843,6 @@
 				247C114F17ED35D900B7F401 /* nextgrey.png */,
 				247C115017ED35D900B7F401 /* nextgrey@2x.png */,
 				247C115117ED35D900B7F401 /* pausesongbutton.png */,
-				2424B2BD180501F700402D96 /* nopostimage.png */,
 				247C115217ED35D900B7F401 /* pausesongbutton@2x.png */,
 				247C115317ED35D900B7F401 /* playsongbutton.png */,
 				247C115417ED35D900B7F401 /* playsongbutton@2x.png */,
@@ -1456,7 +1461,6 @@
 			files = (
 				D4A797FE179218610029F469 /* ApptentiveResources.bundle in Resources */,
 				D4AA4CFD1766B374009B0635 /* InfoPlist.strings in Resources */,
-				CDAB54391823962D0069FF9F /* concertplaceholder.png in Resources */,
 				D4AA4D311766BA8C009B0635 /* ECLoginViewController.xib in Resources */,
 				D4AA4D391766F3D0009B0635 /* Localizable.strings in Resources */,
 				D4A8DDBC176A133B005E9847 /* InfoPlist.strings in Resources */,
@@ -1508,7 +1512,6 @@
 				D4A9B309178DDABD008B5504 /* defaultfull.png in Resources */,
 				D4A9B30A178DDABD008B5504 /* defaultfull@2x.png in Resources */,
 				24AB802B1803AD7C002A9913 /* ECArtistSectionHeaderView.xib in Resources */,
-				CDAB543518238EB40069FF9F /* placeholder.png in Resources */,
 				D4A9B30B178DDABD008B5504 /* divideractiveleft.png in Resources */,
 				24AB803318048E48002A9913 /* disabledboth.png in Resources */,
 				D4A9B30C178DDABD008B5504 /* divideractiveleft@2x.png in Resources */,
@@ -1517,6 +1520,7 @@
 				D4A9B30F178DDABD008B5504 /* dividerdefault.png in Resources */,
 				D4A9B310178DDABD008B5504 /* dividerdefault@2x.png in Resources */,
 				247C114617ECE6D500B7F401 /* GooglePlacesAutocompleteView.storyboard in Resources */,
+				24A4BBDA182A231B00667209 /* placeholder.png in Resources */,
 				A02661ED178DDCEA00741C9A /* addEventButton.png in Resources */,
 				A02661EE178DDCEA00741C9A /* addEventButton@2x.png in Resources */,
 				A02661F5178DE62700741C9A /* removeEventButton.png in Resources */,
@@ -1537,6 +1541,7 @@
 				D4AC2E05178FD2E200F292CA /* Black.png in Resources */,
 				247C116217ED35D900B7F401 /* skipbutton.png in Resources */,
 				D4AC2E06178FD2E200F292CA /* Black@2x 22-49-48-390.png in Resources */,
+				24A4BBDB182A231B00667209 /* placeholder@2x.png in Resources */,
 				D4AC2E07178FD2E200F292CA /* Black~568h@2x.png in Resources */,
 				247C115F17ED35D900B7F401 /* playsongbutton.png in Resources */,
 				A068AE711790621800FA1BF4 /* lastfmAttr.png in Resources */,
@@ -1554,6 +1559,7 @@
 				D4AC901E17934519008F5FF0 /* slider_maximum.png in Resources */,
 				D4AC901F17934519008F5FF0 /* slider_maximum@2x.png in Resources */,
 				D4AC902017934519008F5FF0 /* slider_minimum.png in Resources */,
+				24A4BBD8182A231B00667209 /* placeholderimg2.png in Resources */,
 				D4AC902117934519008F5FF0 /* slider_minimum@2x.png in Resources */,
 				D46D8F8217945F7000011C5C /* loginbackground.png in Resources */,
 				D46D8F8317945F7000011C5C /* loginbackground-568h@2x.png in Resources */,
@@ -1562,9 +1568,7 @@
 				D46D8F8A179460FA00011C5C /* login3.png in Resources */,
 				D46D8F8B179460FA00011C5C /* login3@2x.png in Resources */,
 				D46D8F8E1794610200011C5C /* login1.png in Resources */,
-				CDAB543618238EB40069FF9F /* placeholder@2x.png in Resources */,
 				D46D8F8F1794610200011C5C /* login1@2x.png in Resources */,
-				2424B2BE180501F700402D96 /* nopostimage.png in Resources */,
 				D46D8F91179465A500011C5C /* loginbackground@2x.png in Resources */,
 				D46D8F95179479A300011C5C /* login1iphone4@2x.png in Resources */,
 				D46D8F96179479A300011C5C /* login2iphone4@2x.png in Resources */,
@@ -1573,7 +1577,6 @@
 				D4AE47451795A179006AF663 /* profileSectionHeader.png in Resources */,
 				247C115917ED35D900B7F401 /* itunes.png in Resources */,
 				24AB803718048E48002A9913 /* disabledright.png in Resources */,
-				CDAB543A1823962D0069FF9F /* concertplaceholder@2x.png in Resources */,
 				D4AE47461795A179006AF663 /* profileSectionHeader@2x.png in Resources */,
 				D4E16CA817973BF100A9DC99 /* locationmakerwhite.png in Resources */,
 				D4E16CA917973BF100A9DC99 /* locationmakerwhite@2x.png in Resources */,
@@ -1627,6 +1630,7 @@
 				247C115D17ED35D900B7F401 /* pausesongbutton.png in Resources */,
 				D9D95CF617E8420500061DAF /* featured.json in Resources */,
 				24A7C1AB17E8E77100A7302B /* loginfacebookbutton.png in Resources */,
+				24A4BBD9182A231B00667209 /* placeholderimg2@2x.png in Resources */,
 				24A7C1AC17E8E77100A7302B /* loginfacebookbutton@2x.png in Resources */,
 				24A7C1AD17E8E77100A7302B /* logintofacebook.png in Resources */,
 				24A7C1AE17E8E77100A7302B /* newloginscreenbackground.png in Resources */,

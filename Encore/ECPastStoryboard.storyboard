@@ -110,6 +110,7 @@
                                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hDf-8k-ZnJ">
                                                                 <rect key="frame" x="0.0" y="0.0" width="68" height="68"/>
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             </imageView>
                                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="68" translatesAutoresizingMaskIntoConstraints="NO" id="tid-6e-HcT">
                                                                 <rect key="frame" x="0.0" y="69" width="68" height="30"/>
@@ -262,6 +263,7 @@
                                                         <subviews>
                                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="dSd-8j-akf">
                                                                 <rect key="frame" x="10" y="6" width="68" height="68"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="68" id="91n-Tl-7bP"/>
                                                                     <constraint firstAttribute="height" constant="68" id="Xoc-b7-J3r"/>
@@ -471,7 +473,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="post" id="dto-Vy-kjg" customClass="ECPostCell">
-                                        <rect key="frame" x="0.0" y="116" width="103" height="103"/>
+                                        <rect key="frame" x="0.0" y="52" width="103" height="103"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="103" height="103"/>
@@ -513,7 +515,7 @@
                                     </collectionViewCell>
                                 </cells>
                                 <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="headerview" id="eZd-O6-9bd" customClass="ECGridHeaderView">
-                                    <rect key="frame" x="0.0" y="64" width="320" height="52"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="52"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jz0-90-84r">
@@ -762,7 +764,7 @@
                         <outlet property="containerView" destination="SOU-UE-yhE" id="aYc-hs-YNq"/>
                         <outlet property="flagPostButton" destination="Vqg-Ru-xgz" id="xeg-Ox-pwE"/>
                         <outlet property="playButton" destination="inF-pn-Tzm" id="IwN-JL-vBc"/>
-                        <outlet property="postImage" destination="9Av-HW-8j1" id="B0Q-Oc-rCI"/>
+                        <outlet property="postImageView" destination="9Av-HW-8j1" id="QNL-al-cye"/>
                         <outlet property="profilePicture" destination="B4e-kS-ptb" id="43X-qq-984"/>
                         <outlet property="userNameLabel" destination="Myf-kx-Zg4" id="Aw7-pm-ev4"/>
                         <outlet property="venueAndDateLabel" destination="H9S-Bj-ZY0" id="Im5-Td-jXT"/>

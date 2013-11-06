@@ -20,7 +20,7 @@
 @property (copy, nonatomic) NSString* venueAndDate;
 @property (weak, nonatomic) IBOutlet UIButton *playButton;
 
-@property (nonatomic,weak) IBOutlet UIImageView * postImage;
+@property (nonatomic,weak) IBOutlet UIImageView * postImageView;
 @property (nonatomic,weak) IBOutlet UIImageView * profilePicture;
 @property (nonatomic,weak) IBOutlet UILabel * captionLabel;
 @property (nonatomic,weak) IBOutlet UILabel * userNameLabel;
