@@ -219,16 +219,17 @@ typedef enum {
     NSInteger total = nFut + nPas;
     NSString* suffix = total == 1 ? @"" : @"s";
     NSString* text = nil;
-    if (total == 1) {
-        NSString* temp = @"Past";
-        if (nFut == 1) {
-            temp = @"Upcoming";
-        }
-        text = [NSString stringWithFormat:@"%d %@ Concert",total,temp];
-    }
-    else {
-        text = [NSString stringWithFormat:@"%d Concert%@ (%d Upcoming)",total,suffix,nFut];
-    }
+//    if (total == 1) {
+//        NSString* temp = @"Past";
+//        if (nFut == 1) {
+//            temp = @"Upcoming";
+//        }
+//        text = [NSString stringWithFormat:@"%d %@ Concert",total,temp];
+//    }
+//    else {
+//        text = [NSString stringWithFormat:@"%d Concert%@ (%d Upcoming)",total,suffix,nFut];
+//    }
+    text = [NSString stringWithFormat:@"%d Concert%@",total,suffix];
     self.lblConcerts.text = text;
 }
 
