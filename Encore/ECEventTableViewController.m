@@ -621,7 +621,7 @@
     
     NSString* shareText = [self shareText];
     
-    NSURL* url = [self.concert lastfmURL];
+    NSURL* url = [self.concert ticketsURL];
     NSArray *activityItems = [NSArray arrayWithObjects:shareText,url, self.eventImage.image, nil];
     
     UIActivityViewController* shareDrawer = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
