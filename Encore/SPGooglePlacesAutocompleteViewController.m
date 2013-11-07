@@ -4,7 +4,7 @@
 //
 //  Created by Stephen Poletto on 7/17/12.
 //  Copyright (c) 2012 Stephen Poletto. All rights reserved.
-//
+//  Modified for Encore by Simon Bromberg
 
 #import "SPGooglePlacesAutocompleteViewController.h"
 #import "SPGooglePlacesAutocompleteQuery.h"
@@ -69,15 +69,15 @@
 //        self.edgesForExtendedLayout = UIRectEdgeNone;
 //        self.automaticallyAdjustsScrollViewInsets = NO;
     }
-    self.searchDisplayController.searchBar.placeholder = @"Enter search city or area";
+    self.searchDisplayController.searchBar.placeholder = NSLocalizedString(@"Change city", @"placeholder text for search bar on top of map");
     [self hideSaveButton];
-    
+//    
     //set to current search location?
 
 }
 -(void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
+    [self centerMapToLocation:self.initialLocation];
 }
 -(void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -103,6 +103,19 @@
     self.saveButton.hidden = NO;
     self.saveButton.enabled = YES;
 }
+- (void) centerMapToLocation: (CLLocation*) location {
+    MKCoordinateRegion region;
+    MKCoordinateSpan span;
+    
+    span.latitudeDelta = 0.02;
+    span.longitudeDelta = 0.02;
+    
+    region.span = span;
+
+    CLLocationCoordinate2D location2D = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude);
+    region.center = location2D;
+    [self.mapView setRegion:region];
+}
 - (IBAction)recenterMapToUserLocation:(id)sender {
     MKCoordinateRegion region;
     MKCoordinateSpan span;
@@ -112,6 +125,7 @@
     
     region.span = span;
     CLLocationCoordinate2D location = self.mapView.userLocation.coordinate;
+    
     region.center = location;
     
     [self.mapView setRegion:region animated:YES];

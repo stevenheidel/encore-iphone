@@ -26,6 +26,8 @@
 
 @property (strong, nonatomic) IBOutlet MKMapView *mapView;
 @property (nonatomic,unsafe_unretained) id <SPGooglePlacesAutocompleteViewControllerDelegate> delegate;
+@property (nonatomic,strong) CLLocation* initialLocation;
+
 
 @end
 

@@ -580,6 +580,7 @@ typedef enum {
     UIStoryboard* sb = [UIStoryboard storyboardWithName:@"GooglePlacesAutocompleteView" bundle:nil];
     SPGooglePlacesAutocompleteViewController * viewController = [sb instantiateInitialViewController];
     viewController.delegate = self;
+    viewController.initialLocation = self.currentSearchLocation;
     [self presentViewController:viewController animated:YES completion:nil];
 }
 
