@@ -46,6 +46,7 @@
 - (IBAction)skipButtonTapped:(id)sender {
     [[NSUserDefaults standardUserDefaults] setWalkthoughFinished];
     [self dismissViewControllerAnimated:YES completion:nil];
+    [Flurry logEvent:@"Walkthrough_Finished" withParameters:nil];
 }
 -(BOOL)shouldAutorotate{
     return NO;

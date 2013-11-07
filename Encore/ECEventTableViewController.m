@@ -290,6 +290,7 @@
                                                       if (error) {
                                                           // Case A: Error launching the dialog or sending request.
                                                           NSLog(@"Error sending request.");
+                                                          [Flurry logEvent:@"Error_Inviting_Friends_On_Dialog"];
                                                       } else {
                                                           if (result == FBWebDialogResultDialogNotCompleted) {
                                                               // Case B: User clicked the "x" icon
@@ -533,11 +534,10 @@
                           [self checkInvites:self.friends];
                           [self.tableView reloadData];
         }];
-
     }
     
     [self handlePickerDone];
-    
+    [Flurry logEvent:@"Done_Friend_Tagging" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:selection.count],@"taggedFriendsCount",self.concert.eventID,@"eventID",self.concert.headliner,@"headliner", nil]];
 }
 
 -(void) facebookViewControllerCancelWasPressed:(id)sender {
@@ -638,6 +638,11 @@
                 NSLog(@"Activity was not performed.");
             }
         }
+        NSString* result = completed ? @"success" : @"fail";
+        if (activityType == NULL) {
+            result = @"dismissed";
+        }
+        [Flurry logEvent:@"Share_Tapped" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:activityType,@"ActivityType", result, @"result", self.concert.eventID,@"eventID",self.concert.headliner,@"headliner",[self tenseString],@"PageType",nil]];
     };
     [self presentViewController:shareDrawer animated:YES completion:nil];
 }
@@ -724,7 +729,7 @@
         if (buttonIndex == alertView.firstOtherButtonIndex) {
             [self inviteFriends: self.uninvitedFriends];
         }
-
+        [Flurry logEvent:@"Invite_Friends_Alert_Result" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[alertView buttonTitleAtIndex:buttonIndex],@"tappedButton", self.concert.eventID,@"eventID",self.concert.headliner,@"headliner", nil]];
     }
     
 }
@@ -774,7 +779,7 @@
     } else {
         [self.player play];
     }
-    
+    [Flurry logEvent:@"Tapped_Play_Button" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[self tenseString],@"PageType",self.concert.headliner, @"artist", nil]];
 }
 -(void)songDidFinishPlaying
 {
@@ -806,7 +811,7 @@
 {
     NSString* affliateURL = [self.songInfo[@"trackViewUrl"] stringByAppendingFormat:@"&at=%@",kAffiliateCode];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:affliateURL]];
-    
+    [Flurry logEvent:@"Tapped_iTunes_Link" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[self tenseString], @"PageType", self.concert.headliner,@"artist", nil]];
 }
 
 @end

@@ -429,6 +429,7 @@ typedef enum {
         else if (buttonIndex == actionSheet.firstOtherButtonIndex + 1){
             [self dismissViewControllerAnimated:YES completion:^{
                 [ApplicationDelegate showWalktrhoughView];
+                [Flurry logEvent:@"Tapped_Repeat_Walkthrough" withParameters:nil];
             }];
 
         }

@@ -141,6 +141,7 @@
     vc.hideShareButton = YES;
     [self.navigationController pushViewController:vc animated:YES];
     
+    [Flurry logEvent:@"Walkthrough_Concert_Tap" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:concert.headliner,@"Headliner",nil]];
 }
 
 - (IBAction)nextButtonTapped:(id)sender {

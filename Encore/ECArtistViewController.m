@@ -186,7 +186,7 @@ typedef enum {
             upcomingVC.previousArtist = self.artist;
             [self.navigationController pushViewController:upcomingVC animated:YES];
         }
-
+        [Flurry logEvent:@"Main_Selected_Row" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"Artist_%@",self.currentSelection==PastSegment ? @"Past" : @"Upcoming"], @"Search_Type", [NSNumber numberWithInt:indexPath.row], @"row", @"n/a", @"is_post_search", nil]];
     }
 }
 
@@ -368,7 +368,7 @@ typedef enum {
     } else {
         [self.player play];
     }
-    
+    [Flurry logEvent:@"Tapped_Play_Button" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"Artist",@"PageType",self.artist, @"artist", nil]];
 }
 -(void)songDidFinishPlaying
 {
@@ -401,6 +401,7 @@ typedef enum {
     NSString* affliateURL = [self.songInfo[@"trackViewUrl"] stringByAppendingFormat:@"&at=%@",kAffiliateCode];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:affliateURL]];
     
+    [Flurry logEvent:@"Tapped_iTunes_Link" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"Artist", @"PageType", self.artist,@"artist", nil]];
 }
 
 -(void) setCurrentSelection:(SegmentedControlIndices)currentSelection {
