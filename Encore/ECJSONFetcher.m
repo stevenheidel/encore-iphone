@@ -92,7 +92,6 @@ NSString* stringForSearchType(ECSearchType searchType) {
     [client getPath:artistConcertsPath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
 
         concertList = (NSArray*) [(NSDictionary*)responseObject objectForKey:@"events"];
-#warning for testing only
         if(page > 4)
             concertList = nil;
         NSLog(@"%@: Successfully fetched %d popular concerts for search type: %@ Location: %f %f", NSStringFromClass([ECJSONFetcher class]),concertList.count,stringForSearchType(searchType),location.coordinate.latitude,location.coordinate.longitude);
