@@ -412,7 +412,7 @@ typedef enum {
 -(void) settingsTapped {
     
     UIActionSheet* actionSheet = [[UIActionSheet alloc] initWithTitle: [NSString stringWithFormat:@"Encore Version %@", [NSString stringWithFormat:@"%@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]]]
- delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Logout" otherButtonTitles:@"Give Feedback", @"Repeat Walkthrough", nil];
+ delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Logout" otherButtonTitles:@"Give Feedback", @"Repeat Walkthrough",@"Invite Friends",nil];
     actionSheet.tag = SettingsActionSheet;
     actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
     [actionSheet showInView:self.view];
@@ -431,6 +431,29 @@ typedef enum {
                 [ApplicationDelegate showWalktrhoughView];
                 [Flurry logEvent:@"Tapped_Repeat_Walkthrough" withParameters:nil];
             }];
+
+        }else  if (buttonIndex == actionSheet.firstOtherButtonIndex + 2){
+            NSDictionary* params = nil;
+            [FBWebDialogs presentRequestsDialogModallyWithSession:[FBSession activeSession]
+                                                          message:@"Check out this concert app for iPhone. It lets you find local concerts and rediscover past shows you've attended"
+                                                            title:@"Invite Friends to Encore"
+                                                       parameters:params
+                                                          handler:^(FBWebDialogResult result, NSURL *resultURL, NSError *error) {
+                                                              if (error) {
+                                                                  // Case A: Error launching the dialog or sending request.
+                                                                  NSLog(@"Error sending request.");
+                                                              } else {
+                                                                  if (result == FBWebDialogResultDialogNotCompleted) {
+                                                                      // Case B: User clicked the "x" icon
+                                                                      NSLog(@"User canceled request.");
+                                                                      [Flurry logEvent:@"Canceled_Inviting_Friends_On_Dialog"];
+                                                                      
+                                                                  } else {
+                                                                      NSLog(@"Request Sent.");
+                                                                      [Flurry logEvent:@"Successfully_Invited_Friends"]; //TODO figure out how many friends were invited
+                                                                  }
+                                                              }}];
+            
 
         }
     }
