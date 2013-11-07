@@ -22,7 +22,6 @@
 -(NSString *) serverID;
 -(NSString*) eventID;
 
--(NSURL *) backgroundURL;
 -(NSURL *) imageURL;
 -(NSURL *) lastfmURL;
 -(NSURL *) ticketsURL;

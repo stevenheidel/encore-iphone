@@ -530,7 +530,8 @@ typedef enum {
 }
 
 - (void) setBackgroundImage {
-    if ([[self currentEventArray] count] > 0) {
+    NSArray* currentEventArray = [self currentEventArray];
+    if ([currentEventArray count] > 0) {
         if(self.hasSearched) {
             NSURL* imageURL = [self.searchedArtistDic imageURL];
             if(!imageURL)
@@ -539,7 +540,13 @@ typedef enum {
             [self.imgBackground setImage: background];
             return;
         }
-        UIImage *background = [[UIImage imageWithData:[NSData dataWithContentsOfURL:[[[self currentEventArray] objectAtIndex:0] imageURL]]] imageWithGaussianBlur];
+
+        int i = 0;
+        NSURL* url = nil;
+        while (url == nil) {
+            url = [[currentEventArray objectAtIndex:i++] imageURL];
+        }
+        UIImage *background = [[UIImage imageWithData:[NSData dataWithContentsOfURL:url]] imageWithGaussianBlur];
         [self.imgBackground setImage:background];
     }
     else [self.imgBackground setImage:nil];

@@ -108,12 +108,13 @@ static NSString * const kDateFormat = @"yyyy-MM-dd";
     return [self objectForKey:@"lastfm_id"];
 }
 
--(NSURL *) backgroundURL {
-    return [NSURL URLWithString:[self objectForKey:@"background_url"]];
-}
-
 -(NSURL *) imageURL {
-    return [NSURL URLWithString:[self objectForKey:@"image_url"] ];
+    NSString *url = [self objectForKey:@"image_url"];
+    if (![url isKindOfClass:[NSNull class]] && url.length > 0) {
+        return [NSURL URLWithString:url];
+    } else {
+        return nil;
+    }
 }
 
 -(NSURL *) lastfmURL {

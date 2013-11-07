@@ -11,7 +11,7 @@
 @implementation NSDictionary (Posts)
 -(NSURL *) imageURL {
     NSString *url = [self objectForKey:@"image_url"];
-    if (![url isKindOfClass:[NSNull class]]) {
+    if (![url isKindOfClass:[NSNull class]] && url.length > 0) {
         return [NSURL URLWithString:url];
     } else {
         return nil;
