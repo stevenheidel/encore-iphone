@@ -311,14 +311,10 @@ typedef enum {
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    if ([self tableView: tableView numberOfRowsInSection:section]==0){
+    if ([self sectionShouldNotHaveSeparator:section]){
         return 0;
     }
-    else if (section == 0) {
-        return 0;
-    }
-    return SECTION_LINE_SEPARATOR_HEIGHT;//16.0;
-//    return 0;
+    return SECTION_LINE_SEPARATOR_HEIGHT;
 }
 
 -(CGFloat) tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
@@ -349,17 +345,24 @@ typedef enum {
     return NumberOfSections;
 }
 
+-(BOOL) sectionShouldNotHaveSeparator: (NSInteger) section {
+    NSArray* arrayForSection = [self arrayForSection:section];
+    NSInteger count = [arrayForSection count];
+    return (count == 0 || section == 0 || (section == 1 && [[self arrayForSection:0] count] == 0));
+}
 -(UIView*) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    if([[self arrayForSection:section] count]==0){
+    
+       //no line if there isn't anything in the section, or if it's the first section (b/c it's intended as a separator only), or it's the second section and there isn't anything in the section before it
+    if ([self sectionShouldNotHaveSeparator: section]) {
         return nil;//[UIView new];
     }
-    else if (section == 0) {
-        return nil;
-    }
-
+    
     UIView* line = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, SECTION_LINE_SEPARATOR_HEIGHT)];
     line.backgroundColor = [UIColor profileSectionSeparatorColour];
     return line;
+  
+    
+    
     //original full blue separators
     
 //    NSArray *subviewArray = [[NSBundle mainBundle] loadNibNamed:@"ECProfileSectionHeaderView" owner:nil options:nil];
