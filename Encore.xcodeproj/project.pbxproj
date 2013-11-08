@@ -1892,7 +1892,7 @@
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"-ObjC",
-					"-lFlurry_4.2.2",
+					"-lFlurry_4.3.0",
 					"-lsqlite3.0",
 					"-lz",
 					"-framework",
@@ -1941,7 +1941,7 @@
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"-ObjC",
-					"-lFlurry_4.2.2",
+					"-lFlurry_4.3.0",
 					"-lsqlite3.0",
 					"-lz",
 					"-framework",
