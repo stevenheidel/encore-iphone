@@ -10,7 +10,7 @@
 #define COCOAPODS_POD_AVAILABLE_AFNetworking
 #define COCOAPODS_VERSION_MAJOR_AFNetworking 1
 #define COCOAPODS_VERSION_MINOR_AFNetworking 3
-#define COCOAPODS_VERSION_PATCH_AFNetworking 2
+#define COCOAPODS_VERSION_PATCH_AFNetworking 3
 
 // FlurrySDK
 #define COCOAPODS_POD_AVAILABLE_FlurrySDK
@@ -46,5 +46,5 @@
 #define COCOAPODS_POD_AVAILABLE_XCDYouTubeVideoPlayerViewController
 #define COCOAPODS_VERSION_MAJOR_XCDYouTubeVideoPlayerViewController 1
 #define COCOAPODS_VERSION_MINOR_XCDYouTubeVideoPlayerViewController 1
-#define COCOAPODS_VERSION_PATCH_XCDYouTubeVideoPlayerViewController 0
+#define COCOAPODS_VERSION_PATCH_XCDYouTubeVideoPlayerViewController 1
 
