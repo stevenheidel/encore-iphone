@@ -46,6 +46,13 @@ typedef enum {
     SettingsActionSheet
 }ProfileActionSheetTags;
 
+typedef enum {
+    LogoutIndex,
+    FeedbackIndex,
+    WalkthroughIndex,
+    InviteIndex
+} SettingsActionSheetButtonIndices;
+
 @interface ECProfileViewController ()<ECEventViewControllerDelegate>
 
 @property (strong,atomic) MBProgressHUD* hud;
@@ -416,6 +423,9 @@ typedef enum {
     
     UIActionSheet* actionSheet = [[UIActionSheet alloc] initWithTitle: [NSString stringWithFormat:@"Encore Version %@", [NSString stringWithFormat:@"%@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]]]
  delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Logout" otherButtonTitles:@"Give Feedback", @"Repeat Walkthrough",@"Invite Friends",nil];
+    
+    // Make sure the order of the button titles matches the order of the indices defined in the typedef at the top of the page.
+    
     actionSheet.tag = SettingsActionSheet;
     actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
     [actionSheet showInView:self.view];
@@ -426,16 +436,17 @@ typedef enum {
         if (buttonIndex == actionSheet.destructiveButtonIndex) {
             [self logoutTapped];
         }
-        else if (buttonIndex == actionSheet.firstOtherButtonIndex) {
+        else if (buttonIndex == FeedbackIndex) {
             [self openFeedback];
         }
-        else if (buttonIndex == actionSheet.firstOtherButtonIndex + 1){
+        else if (buttonIndex == WalkthroughIndex){
             [self dismissViewControllerAnimated:YES completion:^{
                 [ApplicationDelegate showWalktrhoughView];
                 [Flurry logEvent:@"Tapped_Repeat_Walkthrough" withParameters:nil];
             }];
 
-        }else  if (buttonIndex == actionSheet.firstOtherButtonIndex + 2){
+        }
+        else if (buttonIndex == InviteIndex){
             NSDictionary* params = nil;
             [FBWebDialogs presentRequestsDialogModallyWithSession:[FBSession activeSession]
                                                           message:@"Check out this concert app for iPhone. It lets you find local concerts and rediscover past shows you've attended"
@@ -453,7 +464,8 @@ typedef enum {
                                                                       
                                                                   } else {
                                                                       NSLog(@"Request Sent.");
-                                                                      [Flurry logEvent:@"Successfully_Invited_Friends"]; //TODO figure out how many friends were invited
+                                                                      [Flurry logEvent:@"Successfully_Invited_Friends_From_Profile" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:resultURL, @"resultURL",nil]]; //TODO figure out how many friends were invited
+                                                                      NSLog(@"result url %@",resultURL);
                                                                   }
                                                               }}];
             
