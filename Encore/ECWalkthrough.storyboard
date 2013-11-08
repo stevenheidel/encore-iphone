@@ -90,7 +90,7 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="BNe-7P-rxJ">
                                                     <rect key="frame" x="30" y="13" width="90" height="90"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="90" id="qhn-V8-1V2"/>
                                                         <constraint firstAttribute="width" constant="90" id="w4O-gt-kNt"/>
@@ -554,7 +554,7 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="5rc-hM-hVt">
                                                     <rect key="frame" x="12" y="10" width="65" height="65"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="65" id="Ylf-L4-W4d"/>
                                                         <constraint firstAttribute="height" constant="65" id="onu-0j-n0J"/>
