@@ -269,11 +269,12 @@
 -(void) inviteFriends: (NSArray*) friends {
     NSString* message;
     
+    NSString* date = [self.concert smallDate];
     if([self isKindOfClass:[ECPastViewController class]]){
-        message = [NSString stringWithFormat:@"Check out the photos and videos of the %@ concert we went to on Encore.",self.concert.headliner];
+        message = [NSString stringWithFormat:@"Check out the photos and videos of the %@ %@ concert we went to on Encore.",date,self.concert.headliner];
 
     }else{
-        message = [NSString stringWithFormat:@"Check out the photos and videos of the %@ concert we are going to on Encore. They'll be up after the show.",self.concert.headliner];
+        message = [NSString stringWithFormat:@"Check out the photos and videos of the %@ concert we're going to on Encore. They'll be up after the show.",self.concert.headliner];
 
     }
     

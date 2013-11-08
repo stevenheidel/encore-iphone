@@ -31,7 +31,7 @@ static NSString * const kDateFormat = @"yyyy-MM-dd";
     [dateFormat setDateFormat:kDateFormat];
     NSDate *date = [dateFormat dateFromString:dateStr];
     
-    [dateFormat setDateFormat:@"MMM dd/yy"];
+    [dateFormat setDateFormat:@"MMM yy"];
     return [dateFormat stringFromDate:date];
 
 }
