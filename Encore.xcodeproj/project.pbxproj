@@ -257,6 +257,8 @@
 		D978362C1805AA0E0061C203 /* SDURLCache.m in Sources */ = {isa = PBXBuildFile; fileRef = D97836271805AA0E0061C203 /* SDURLCache.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D9963FD017B0D4E9003C3CC1 /* UIImage+Merge.m in Sources */ = {isa = PBXBuildFile; fileRef = D9963FCF17B0D4E9003C3CC1 /* UIImage+Merge.m */; };
 		D9D95CF617E8420500061DAF /* featured.json in Resources */ = {isa = PBXBuildFile; fileRef = D9D95CF517E8420500061DAF /* featured.json */; };
+		FC4990EB182E51B000B1FFF2 /* artist_placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = FC4990E9182E51B000B1FFF2 /* artist_placeholder.png */; };
+		FC4990EC182E51B000B1FFF2 /* artist_placeholder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC4990EA182E51B000B1FFF2 /* artist_placeholder@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -612,6 +614,8 @@
 		D9963FCE17B0D4E9003C3CC1 /* UIImage+Merge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Merge.h"; sourceTree = "<group>"; };
 		D9963FCF17B0D4E9003C3CC1 /* UIImage+Merge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Merge.m"; sourceTree = "<group>"; };
 		D9D95CF517E8420500061DAF /* featured.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = featured.json; sourceTree = "<group>"; };
+		FC4990E9182E51B000B1FFF2 /* artist_placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = artist_placeholder.png; sourceTree = "<group>"; };
+		FC4990EA182E51B000B1FFF2 /* artist_placeholder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "artist_placeholder@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -656,6 +660,8 @@
 		24A4BBDD182A232B00667209 /* Placeholders */ = {
 			isa = PBXGroup;
 			children = (
+				FC4990E9182E51B000B1FFF2 /* artist_placeholder.png */,
+				FC4990EA182E51B000B1FFF2 /* artist_placeholder@2x.png */,
 				24A4BBD4182A231B00667209 /* placeholderimg2.png */,
 				24A4BBD5182A231B00667209 /* placeholderimg2@2x.png */,
 				24A4BBD6182A231B00667209 /* placeholder.png */,
@@ -1516,6 +1522,7 @@
 				D4A9B307178DDABD008B5504 /* activefull.png in Resources */,
 				D4A9B308178DDABD008B5504 /* activefull@2x.png in Resources */,
 				D4A9B309178DDABD008B5504 /* defaultfull.png in Resources */,
+				FC4990EB182E51B000B1FFF2 /* artist_placeholder.png in Resources */,
 				D4A9B30A178DDABD008B5504 /* defaultfull@2x.png in Resources */,
 				24AB802B1803AD7C002A9913 /* ECArtistSectionHeaderView.xib in Resources */,
 				D4A9B30B178DDABD008B5504 /* divideractiveleft.png in Resources */,
@@ -1565,6 +1572,7 @@
 				D4AC901617934250008F5FF0 /* walkingman@2x.png in Resources */,
 				D4AC901E17934519008F5FF0 /* slider_maximum.png in Resources */,
 				D4AC901F17934519008F5FF0 /* slider_maximum@2x.png in Resources */,
+				FC4990EC182E51B000B1FFF2 /* artist_placeholder@2x.png in Resources */,
 				D4AC902017934519008F5FF0 /* slider_minimum.png in Resources */,
 				24A4BBD8182A231B00667209 /* placeholderimg2.png in Resources */,
 				D4AC902117934519008F5FF0 /* slider_minimum@2x.png in Resources */,

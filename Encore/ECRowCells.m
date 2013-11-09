@@ -81,12 +81,12 @@
                                                  if(image)
                                                      [cell.artistImage setImage:image];
                                                  else
-                                                     [cell.artistImage setImage:[UIImage imageNamed:@"placeholder"]];
+                                                     [cell.artistImage setImage:[UIImage imageNamed:@"artist_placeholder"]];
                                                  
                                                  [self.lineupImages replaceObjectAtIndex:indexPath.row withObject:image];
                                                  [cell.activityIndicator stopAnimating];
                                              } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-                                                 [cell.artistImage setImage:[UIImage imageNamed:@"placeholder"]];
+                                                 [cell.artistImage setImage:[UIImage imageNamed:@"artist_placeholder"]];
                                                  [cell.activityIndicator stopAnimating];
 
                                              }];
