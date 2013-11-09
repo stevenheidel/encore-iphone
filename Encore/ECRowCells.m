@@ -78,7 +78,11 @@
             [cell.artistImage setImageWithURLRequest:[NSURLRequest requestWithURL:imageURL]
                                     placeholderImage:nil
                                              success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-                                                 [cell.artistImage setImage:image];
+                                                 if(image)
+                                                     [cell.artistImage setImage:image];
+                                                 else
+                                                     [cell.artistImage setImage:[UIImage imageNamed:@"placeholder"]];
+                                                 
                                                  [self.lineupImages replaceObjectAtIndex:indexPath.row withObject:image];
                                                  [cell.activityIndicator stopAnimating];
                                              } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {

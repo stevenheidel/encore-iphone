@@ -366,9 +366,17 @@
             LocationCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier];
            
             cell.addressLabel.text = [NSString stringWithFormat:@"%@",[self.concert addressWithoutCountry]];
-            if([self.concert startTime]){
+            
+            NSString* time = [self.concert startTime];
+            NSUInteger start = time.length - 5;
+            NSString* lastTwoDigits =[time substringWithRange:NSMakeRange(start,2)];
+            
+            if([self.concert startTime] && ([lastTwoDigits isEqualToString:@"00"] || [lastTwoDigits isEqualToString:@"30"])){
                 cell.startTimeLabel.text = [NSString stringWithFormat:@"Doors open at: %@",[self.concert startTime]];
+            }else{
+                cell.startTimeLabel.text = @"";
             }
+            
             CLLocation* location = [self.concert coordinates];
             CLLocationCoordinate2D coord2D = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude);
             cell.location2D = coord2D;
