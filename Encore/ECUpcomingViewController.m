@@ -51,6 +51,10 @@
     [super didReceiveMemoryWarning];
 }
 
+#pragma mark - sharing
+-(NSURL*) shareURL {
+    return [self.concert ticketsURL];
+}
 -(NSString*) shareText {
     return [NSString stringWithFormat: @"Want to come to %@%@ show at %@, %@?",[self shareTextPrefix],[self.concert eventName],[self.concert venueName],[self.concert smallDateNoYear]];
 }

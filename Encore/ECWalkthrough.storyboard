@@ -29,11 +29,11 @@
                         <viewControllerLayoutGuide type="bottom" id="akx-nX-yme"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="uIu-fN-1w9">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="115" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="C1Y-nq-LmD">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -150,14 +150,14 @@
                                 </connections>
                             </tableView>
                             <imageView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bottomgradient.png" translatesAutoresizingMaskIntoConstraints="NO" id="ESy-x7-wWt">
-                                <rect key="frame" x="0.0" y="480" width="320" height="88"/>
+                                <rect key="frame" x="0.0" y="392" width="320" height="88"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="88" id="Fbw-K8-mT8"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4VL-Hi-DG6">
-                                <rect key="frame" x="25" y="493" width="270" height="62"/>
+                                <rect key="frame" x="25" y="405" width="270" height="62"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="62" id="Sgh-Oh-bMy"/>
@@ -209,7 +209,7 @@
                         <viewControllerLayoutGuide type="bottom" id="UtC-0L-u6Q"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="05q-TN-FWd">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AzY-Sr-af6">
@@ -256,14 +256,14 @@
                                 </constraints>
                             </imageView>
                             <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bottomgradient.png" translatesAutoresizingMaskIntoConstraints="NO" id="XHd-O2-iRj">
-                                <rect key="frame" x="0.0" y="480" width="320" height="88"/>
+                                <rect key="frame" x="0.0" y="392" width="320" height="88"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="88" id="2EW-jg-n2V"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pBH-fj-EXK">
-                                <rect key="frame" x="25" y="487" width="270" height="62"/>
+                                <rect key="frame" x="25" y="399" width="270" height="62"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="270" id="UAA-e5-WRd"/>
@@ -373,18 +373,25 @@
                         <viewControllerLayoutGuide type="bottom" id="h9r-jh-bcF"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="UGJ-FK-rrR">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profilepreview.png" translatesAutoresizingMaskIntoConstraints="NO" id="ROh-qI-Ywp">
+                                <rect key="frame" x="63" y="149" width="195" height="285"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="195" id="qDC-Le-5yF"/>
+                                </constraints>
+                            </imageView>
                             <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bottomgradient.png" translatesAutoresizingMaskIntoConstraints="NO" id="Tsf-tr-SEu">
-                                <rect key="frame" x="0.0" y="480" width="320" height="88"/>
+                                <rect key="frame" x="0.0" y="392" width="320" height="88"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="88" id="cAH-Dw-bfh"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vwP-1k-0A2">
-                                <rect key="frame" x="25" y="487" width="270" height="62"/>
+                                <rect key="frame" x="25" y="399" width="270" height="62"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="62" id="5XT-R9-Sc9"/>
@@ -398,13 +405,6 @@
                                     <action selector="skipButtonTapped:" destination="Yai-ie-ff4" eventType="touchUpInside" id="3EY-Zz-M0q"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profilepreview.png" translatesAutoresizingMaskIntoConstraints="NO" id="ROh-qI-Ywp">
-                                <rect key="frame" x="63" y="141" width="195" height="285"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="195" id="qDC-Le-5yF"/>
-                                </constraints>
-                            </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="encorelogo.png" translatesAutoresizingMaskIntoConstraints="NO" id="Fig-kD-LH0">
                                 <rect key="frame" x="25" y="20" width="270" height="62"/>
                                 <constraints>
@@ -431,8 +431,9 @@
                             <constraint firstItem="Fig-kD-LH0" firstAttribute="top" secondItem="UGJ-FK-rrR" secondAttribute="top" constant="20" symbolic="YES" id="P6x-No-HGm"/>
                             <constraint firstItem="vwP-1k-0A2" firstAttribute="centerX" secondItem="Tsf-tr-SEu" secondAttribute="centerX" id="WdX-Bx-3LL"/>
                             <constraint firstItem="LSZ-b9-Fbe" firstAttribute="leading" secondItem="Fig-kD-LH0" secondAttribute="leading" id="jF4-Kt-e6Y"/>
+                            <constraint firstItem="ROh-qI-Ywp" firstAttribute="top" secondItem="ETO-bb-wXy" secondAttribute="bottom" constant="149" id="n7M-O4-mti"/>
                             <constraint firstItem="Fig-kD-LH0" firstAttribute="leading" secondItem="vwP-1k-0A2" secondAttribute="leading" id="nnV-f0-QL9"/>
-                            <constraint firstItem="Tsf-tr-SEu" firstAttribute="top" secondItem="ROh-qI-Ywp" secondAttribute="bottom" constant="54" id="tM3-fb-Zk9"/>
+                            <constraint firstItem="Tsf-tr-SEu" firstAttribute="top" relation="lessThanOrEqual" secondItem="ROh-qI-Ywp" secondAttribute="bottom" constant="54" id="tM3-fb-Zk9"/>
                             <constraint firstItem="Tsf-tr-SEu" firstAttribute="leading" secondItem="UGJ-FK-rrR" secondAttribute="leading" id="vtW-tf-yge"/>
                             <constraint firstItem="vwP-1k-0A2" firstAttribute="top" secondItem="Tsf-tr-SEu" secondAttribute="bottom" constant="-81" id="wIg-5h-JMG"/>
                         </constraints>
@@ -455,7 +456,7 @@
                         <viewControllerLayoutGuide type="bottom" id="sWE-uh-NqB"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Vdf-Vu-76d">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PiV-Qx-7TW">
@@ -688,14 +689,14 @@
                                 </connections>
                             </tableView>
                             <imageView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bottomgradient.png" translatesAutoresizingMaskIntoConstraints="NO" id="baV-ts-x3n">
-                                <rect key="frame" x="0.0" y="480" width="320" height="88"/>
+                                <rect key="frame" x="0.0" y="392" width="320" height="88"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="88" id="Zez-B1-nvV"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eVn-Xv-2ue">
-                                <rect key="frame" x="25" y="493" width="270" height="62"/>
+                                <rect key="frame" x="25" y="405" width="270" height="62"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="270" id="4Zi-S1-r18"/>
@@ -755,6 +756,6 @@
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
+        <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
 </document>

@@ -5,7 +5,7 @@
 //  Created by Shimmy on 2013-08-07.
 //  Copyright (c) 2013 Encore. All rights reserved.
 //
-
+static NSString * const kDateFormat = @"yyyy-MM-dd";
 #import "ECPastViewController.h"
 #import "ECGridViewController.h"
 #import "NSDictionary+ConcertList.h"
@@ -52,8 +52,19 @@
 }
 #pragma mark FB Sharing
 
+-(NSURL*) shareURL {
+    return [NSURL URLWithString:[NSString stringWithFormat:ShareConcertURL,self.concert.eventID]];
+}
+
 -(NSString*) shareText {
-    return [NSString stringWithFormat: @"Check out these photos and videos on Encore from %@%@ show at %@, %@.",[self shareTextPrefix],[self.concert eventName],[self.concert venueName],[self.concert niceDate]];
+    NSString * dateStr = [self.concert objectForKey:@"date"];
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:kDateFormat];
+    NSDate *date = [dateFormat dateFromString:dateStr];
+    
+    [dateFormat setDateFormat:@"dd/MM/yy"];
+    
+    return [NSString stringWithFormat: @"Check out these photos and videos from the %@ %@ show",[dateFormat stringFromDate:date],[self.concert eventName]];
 }
 
 @end

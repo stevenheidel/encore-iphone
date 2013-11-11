@@ -629,13 +629,17 @@
        return [NSString stringWithFormat: @"Want to come to %@%@ show at %@, %@?",[self shareTextPrefix],[self.concert eventName],[self.concert venueName],[self.concert niceDateNotUppercase]];
     //meant to be overrided
 }
+-(NSURL*) shareURL {
+    NSLog(@"Warning: %@ subclass has not overidden shareURL. Returning nil share URL",NSStringFromClass(self.class));
+    return nil;
+}
 
 #pragma mark FB Sharing
 -(void) shareTapped {
     
     NSString* shareText = [self shareText];
     
-    NSURL* url = [self.concert ticketsURL];
+    NSURL* url = [self shareURL];
     NSArray *activityItems = [NSArray arrayWithObjects:shareText,url, self.eventImage.image, nil];
     
     UIActivityViewController* shareDrawer = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
