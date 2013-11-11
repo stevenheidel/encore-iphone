@@ -833,8 +833,7 @@ typedef enum {
         [cell setUpCellForConcert:concertDic];
         
         //Using UIImageView+AFNetworking, automatically set the cell's image view based on the URL
-        [cell.imageArtist setImageWithURL:[concertDic imageURL] placeholderImage:nil]; //TODO add placeholder
-        
+        [cell.imageArtist setImageWithURL:[concertDic imageURL] placeholderImage:nil];
         return cell;
     }
     
