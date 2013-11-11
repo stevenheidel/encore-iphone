@@ -141,10 +141,16 @@
                                         
                                     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
                                         
-                                        self.eventImage.image = [UIImage imageNamed:@"placeholder"];
-                                        UIImageView *tempImageView = [[UIImageView alloc] initWithImage:[[UIImage imageNamed:@"Black"] imageWithGaussianBlur] ];
+                                        UIImage* image = [UIImage imageNamed:@"placeholder"];
+                                        self.eventImage.image = image;
+                                       UIImage* backgroundImage = [UIImage mergeImage:[image imageWithGaussianBlur]
+                                                                            withImage:[UIImage imageNamed:@"fullgradient"]];
+                                        
+                                        UIImageView *tempImageView = [[UIImageView alloc] initWithImage:backgroundImage];
                                         [tempImageView setFrame:self.tableView.frame];
+                                        tempImageView.contentMode = UIViewContentModeScaleAspectFill;
                                         self.tableView.backgroundView = tempImageView;
+
                                         
                                     }];
     
