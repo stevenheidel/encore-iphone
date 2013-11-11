@@ -24,6 +24,17 @@ static NSString * const kDateFormat = @"yyyy-MM-dd";
     [dateFormat setDateFormat:@"MMMM d, yyyy"];
     return [dateFormat stringFromDate:date];
 }
+
+-(NSString*) smallDateNoYear {
+    NSString * dateStr = [self objectForKey:@"date"];
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:kDateFormat];
+    NSDate *date = [dateFormat dateFromString:dateStr];
+    
+    [dateFormat setDateFormat:@"MMMM d"];
+    return [dateFormat stringFromDate:date];
+}
+
 -(NSString*) smallDate
 {
     NSString * dateStr = [self objectForKey:@"date"];

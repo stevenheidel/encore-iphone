@@ -2,7 +2,7 @@
 //  ECUpcomingViewController.m
 //  Encore
 //
-//  Created by Shimmy on 2013-08-05.
+//  Created by Simon Bromberg on 2013-08-05.
 //  Copyright (c) 2013 Encore. All rights reserved.
 //
 
@@ -52,7 +52,7 @@
 }
 
 -(NSString*) shareText {
-    return [NSString stringWithFormat: @"Want to come to %@%@ show at %@, %@?",[self shareTextPrefix],[self.concert eventName],[self.concert venueName],[self.concert niceDateNotUppercase]];
+    return [NSString stringWithFormat: @"Want to come to %@%@ show at %@, %@?",[self shareTextPrefix],[self.concert eventName],[self.concert venueName],[self.concert smallDateNoYear]];
 }
 
 
