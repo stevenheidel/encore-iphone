@@ -291,8 +291,7 @@ typedef enum {
     ECProfileConcertCell *cell = [tableView dequeueReusableCellWithIdentifier:myIdentifier forIndexPath:indexPath];
     NSDictionary * concertDic = [[self arrayForSection:indexPath.section] objectAtIndex:indexPath.row];
     [cell setUpCellForConcert:concertDic];
-    [cell.imageArtist setImageWithURL:[concertDic imageURL] placeholderImage:nil];
-
+    
     cell.contentView.backgroundColor = [UIColor clearColor];
     return cell;
 }

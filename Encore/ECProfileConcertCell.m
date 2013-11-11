@@ -13,6 +13,7 @@
 
 #import "UIColor+EncoreUI.h"
 #import "UIFont+Encore.h"
+#import "UIImageView+AFNetworking.h"
 
 @implementation ECProfileConcertCell
 
@@ -28,8 +29,23 @@
     self.lblLocation.font = [UIFont heroFontWithSize: 10.0];
     self.lblLocation.textColor = [UIColor whiteColor];
     
-    //TODO: Move this code to setUpCellImageForConcert: once we have a way to recognized if the server sent a blank image or not
-    self.imageArtist.image = [UIImage imageNamed:@"placeholder"];
+    if (![concertDic imageURL]) {
+        self.imageArtist.image = [UIImage imageNamed:@"placeholder"];
+    }
+    else {
+        __weak typeof(self) weakSelf = self;
+        [self.imageArtist setImageWithURLRequest:[NSURLRequest requestWithURL:[concertDic imageURL]] placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+            if (!image) {
+                weakSelf.imageArtist.image = [UIImage imageNamed:@"placeholder"];
+            }
+            else weakSelf.imageArtist.image = image;
+        } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+            weakSelf.imageArtist.image = [UIImage imageNamed:@"placeholder"];
+        }];
+    }
+
+    
+    
     self.imageArtist.layer.cornerRadius = 5.0;
     self.imageArtist.layer.masksToBounds = YES;
     
