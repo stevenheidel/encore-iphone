@@ -259,11 +259,11 @@ typedef enum {
 -(UIView*) noConcertsFooterView {
     if(_noConcertsFooterView == nil) {
         _noConcertsFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 200)];
-        _noConcertsFooterView.backgroundColor = [UIColor blackColor];
-        UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(5,5,315,150)];
+        _noConcertsFooterView.backgroundColor = [UIColor clearColor];
+        UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(20,30,280,150)];
         label.textColor = [UIColor whiteColor];
         label.textAlignment = NSTextAlignmentCenter;
-        label.backgroundColor = [UIColor blackColor];
+        label.backgroundColor = [UIColor clearColor];
         label.numberOfLines = 0;
         label.tag = 213;
         
@@ -277,7 +277,7 @@ typedef enum {
             message = @"No one has added a show in your area recently.\n\nSearch for a show above or try changing your location";
             break;
         case ECSearchTypeToday:
-            message = @"No shows are happening in %@ today\n\nRoadtrip? Try changing your location to a city nearby";
+            message = @"We couldn't find any shows in %@ today\n\nRoadtrip? Try changing your location to a city nearby";
             break;
         case ECSearchTypeFuture:
             message = @"We couldn't find any upcoming shows in %@.\n\nTry changing your location or check back later.";
@@ -833,7 +833,13 @@ typedef enum {
         [cell setUpCellForConcert:concertDic];
         
         //Using UIImageView+AFNetworking, automatically set the cell's image view based on the URL
-        [cell.imageArtist setImageWithURL:[concertDic imageURL] placeholderImage:nil];
+        __block ECConcertCellView* cellBlock = cell;
+        [cell.imageArtist setImageWithURLRequest:[NSURLRequest requestWithURL:[concertDic imageURL]] placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+            cellBlock.imageArtist.image = image;
+        } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+            cellBlock.imageArtist.image = [UIImage imageNamed:@"placeholder"];
+        }];
+//        [cell.imageArtist setImageWithURL:[concertDic imageURL] placeholderImage:nil];
         return cell;
     }
     

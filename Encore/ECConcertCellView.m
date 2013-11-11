@@ -28,6 +28,7 @@
     self.lblLocation.font = [UIFont heroFontWithSize: 12.0];
     self.lblLocation.textColor = [UIColor whiteColor];
     
+    self.imageArtist.image = [[UIImage alloc] init];
     self.imageArtist.layer.cornerRadius = 5.0;
     self.imageArtist.layer.masksToBounds = YES;
 //    self.imageArtist.layer.borderWidth = 1.0;
