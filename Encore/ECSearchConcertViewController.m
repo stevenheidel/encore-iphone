@@ -208,7 +208,7 @@ typedef enum {
 #pragma mark - Concerts Methods
 
 -(void) fetchPopularConcertsWithSearchType: (ECSearchType) type {
-    [ECJSONFetcher fetchPopularConcertsWithSearchType:type location:self.currentSearchLocation radius:[NSNumber numberWithFloat:self.currentSearchRadius] page:0  completion:^(NSArray *concerts) {
+    [ECJSONFetcher fetchPopularConcertsWithSearchType:type location:self.currentSearchLocation radius:[NSNumber numberWithFloat:self.currentSearchRadius] page:0  completion:^(NSArray *concerts,NSInteger total) {
         [self fetchedPopularConcerts:concerts forType:type];
     }];
 }
