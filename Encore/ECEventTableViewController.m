@@ -833,3 +833,24 @@
 }
 
 @end
+
+#pragma mark - Activity Provider
+//This is unfinished code for providing different share texts to different activity types. Mainly twitter is the issue because it has a limit
+@implementation APActivityProvider
+- (id) activityViewController:(UIActivityViewController *)activityViewController
+          itemForActivityType:(NSString *)activityType
+{
+    if ( [activityType isEqualToString:UIActivityTypePostToTwitter] )
+        return @"This is a #twitter post!";
+    if ( [activityType isEqualToString:UIActivityTypePostToFacebook] )
+        return @"This is a facebook post!";
+    if ( [activityType isEqualToString:UIActivityTypeMessage] )
+        return @"SMS message text";
+    if ( [activityType isEqualToString:UIActivityTypeMail] )
+        return @"Email text here!";
+    if ( [activityType isEqualToString:@"it.albertopasca.myApp"] )
+        return @"OpenMyapp custom text";
+    return nil;
+}
+- (id) activityViewControllerPlaceholderItem:(UIActivityViewController *)activityViewController { return @""; }
+@end
