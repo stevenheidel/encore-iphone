@@ -885,7 +885,7 @@ typedef enum {
 -(void) loadMoreTapped {
     [self.loadMoreButton setEnabled:NO];
     [self.loadMoreButton setTitle:@"Loading..." forState:UIControlStateNormal];
-    NSLog(@"%@: Load More tapped. Currently showing %d concerts. Total remaining: %d",NSStringFromClass(self.class),self.futureConcerts.count,self.totalUpcoming);
+    NSLog(@"%@: Load More tapped. Currently showing %d concerts. Total remaining: %d Page: %d",NSStringFromClass(self.class),self.futureConcerts.count,self.totalUpcoming,self.page-1);
     if (self.totalUpcoming > self.futureConcerts.count) {
         [self.loadMoreActivityIndicator startAnimating];
         [self fetchPopularConcertsWithSearchType:ECSearchTypeFuture];
