@@ -58,6 +58,7 @@ typedef enum {
 @property (assign) BOOL showLoadMore;
 @property (assign) BOOL shouldReload;
 @property (nonatomic,weak) UIActivityIndicatorView* loadMoreActivityIndicator;
+@property (nonatomic,weak) UIButton* loadMoreButton;
 @end
 
 @implementation ECNewMainViewController
@@ -330,6 +331,7 @@ typedef enum {
             self.tableView.tableFooterView = lastFMView;
         }
         [self.hud hide:YES];
+        [self updateLoadMoreCell];
     }
     if (self.segmentedControl.selectedSegmentIndex == [ECNewMainViewController segmentIndexForSearchType:searchType]) {
         [self.tableView reloadData];
@@ -337,6 +339,23 @@ typedef enum {
     }
 }
 
+-(void) updateLoadMoreCell {
+    if (self.currentSearchType == ECSearchTypeFuture) {
+        [self.loadMoreActivityIndicator stopAnimating];
+        [self.loadMoreButton setEnabled:self.totalUpcoming > self.futureConcerts.count];
+        [self.loadMoreButton setHidden:self.totalUpcoming <= self.futureConcerts.count];
+        
+        if (self.futureConcerts.count == 0 || self.futureConcerts.count == self.totalUpcoming) { //no more pages to load
+            self.showLoadMore = NO;
+            [self.loadMoreActivityIndicator stopAnimating];
+            [self.loadMoreButton setEnabled:NO];
+            [self.loadMoreButton setHidden:YES];
+        }
+        else if (self.totalUpcoming > self.futureConcerts.count) {
+            [self.loadMoreButton setTitle:@"Load More" forState:UIControlStateNormal];
+        }
+    }
+}
 -(void) setupHUD {
     //add hud progress indicator
     self.hud = [[MBProgressHUD alloc] initWithView:self.view];
@@ -363,7 +382,11 @@ typedef enum {
             self.totalUpcoming = total;
         }
         [self setEventArray:concerts forType:self.currentSearchType];
+        
         [self.tableView reloadData];
+        
+        [self updateLoadMoreCell];
+
         
         if ([self currentEventArray].count == 0) {
             self.tableView.tableFooterView = self.noConcertsFooterView;
@@ -627,6 +650,7 @@ typedef enum {
     [NSUserDefaults setSearchCity:locality];
     [NSUserDefaults synchronize];
     [self fetchConcerts];
+    [self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
     if (self.hasSearched) {
         //redo search with new location
         [ECJSONFetcher fetchArtistsForString:self.searchBar.text withSearchType:self.currentSearchType forLocation:self.currentSearchLocation radius:[NSNumber numberWithFloat:self.currentSearchRadius] completion:^(NSDictionary *artists) {
@@ -827,11 +851,10 @@ typedef enum {
         if(concerts.count == indexPath.row){
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LoadMore"];
             UIActivityIndicatorView* load = (UIActivityIndicatorView*)[cell viewWithTag:55];
-            if (self.showLoadMore) {
-                [load startAnimating];
-            }
-            else [load stopAnimating];
+            UIButton* loadMoreButton = (UIButton*) [cell viewWithTag:56];
+            [loadMoreButton addTarget:self action:@selector(loadMoreTapped) forControlEvents:UIControlEventTouchUpInside];
             self.loadMoreActivityIndicator = load;
+            self.loadMoreButton = loadMoreButton;
             return cell;
         }
         
@@ -859,20 +882,29 @@ typedef enum {
     [self dismissKeyboard];
 }
 
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
-{
-    CGFloat endScrolling = scrollView.contentOffset.y + scrollView.frame.size.height;
-
-        if (self.currentSearchType == ECSearchTypeFuture && endScrolling >= scrollView.contentSize.height && self.showLoadMore) {//at bottom
-            if (self.totalUpcoming > self.futureConcerts.count) {
-                [self fetchPopularConcertsWithSearchType:ECSearchTypeFuture];
-            }
-            else {
-                self.showLoadMore = NO;
-                [self.loadMoreActivityIndicator stopAnimating];
-            }
-        }
+-(void) loadMoreTapped {
+    [self.loadMoreButton setEnabled:NO];
+    [self.loadMoreButton setTitle:@"Loading..." forState:UIControlStateNormal];
+    NSLog(@"%@: Load More tapped. Currently showing %d concerts. Total remaining: %d",NSStringFromClass(self.class),self.futureConcerts.count,self.totalUpcoming);
+    if (self.totalUpcoming > self.futureConcerts.count) {
+        [self.loadMoreActivityIndicator startAnimating];
+        [self fetchPopularConcertsWithSearchType:ECSearchTypeFuture];
+    }
 }
+//- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+//{
+//    CGFloat endScrolling = scrollView.contentOffset.y + scrollView.frame.size.height;
+//    NSLog(@"total upcoming: %d future concerts: %d page: %d", self.totalUpcoming,self.futureConcerts.count,self.page);
+//        if (self.currentSearchType == ECSearchTypeFuture && endScrolling >= scrollView.contentSize.height && self.showLoadMore) {//at bottom
+//            if (self.totalUpcoming >= self.futureConcerts.count) {
+//                [self fetchPopularConcertsWithSearchType:ECSearchTypeFuture];
+//            }
+//            else {
+//                self.showLoadMore = NO;
+//                [self.loadMoreActivityIndicator stopAnimating];
+//            }
+//        }
+//}
 -(NSArray*) currentEventArray {
     if(self.hasSearched /*&& self.currentSearchType != ECSearchTypeToday8*/) {
         return self.searchResultsEvents;
@@ -929,6 +961,7 @@ typedef enum {
     }
     else {
         NSArray* events = [self currentEventArray];
+        if (events.count <= indexPath.row) return; // selected the load more cell
         NSDictionary* concert = [events objectAtIndex:indexPath.row];
         if (self.currentSearchType == ECSearchTypePast) {
             UIStoryboard* sb = [UIStoryboard storyboardWithName:@"ECPastStoryboard" bundle:nil];

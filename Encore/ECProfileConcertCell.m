@@ -34,7 +34,7 @@
     }
     else {
         __weak typeof(self) weakSelf = self;
-        [self.imageArtist setImageWithURLRequest:[NSURLRequest requestWithURL:[concertDic imageURL]] placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+        [self.imageArtist setImageWithURLRequest:[NSURLRequest requestWithURL:[concertDic imageURL]] placeholderImage:[UIImage new] success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
             if (!image) {
                 weakSelf.imageArtist.image = [UIImage imageNamed:@"placeholder"];
             }
