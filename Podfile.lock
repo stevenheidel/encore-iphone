@@ -4,7 +4,7 @@ PODS:
   - MBProgressHUD (0.8)
   - Reachability (3.1.1)
   - SAMRateLimit (0.2.0)
-  - TestFlightSDK (1.2.6)
+  - TestFlightSDK (2.1.1-beta)
   - XCDYouTubeVideoPlayerViewController (1.1.1)
 
 DEPENDENCIES:
@@ -13,7 +13,7 @@ DEPENDENCIES:
   - MBProgressHUD
   - Reachability
   - SAMRateLimit
-  - TestFlightSDK (= 1.2.6)
+  - TestFlightSDK
   - XCDYouTubeVideoPlayerViewController
 
 SPEC CHECKSUMS:
@@ -22,7 +22,7 @@ SPEC CHECKSUMS:
   MBProgressHUD: 2bbc6f470111daf7f3eaa4eb12b8cbf01c4c0622
   Reachability: 2be6bc2fd2bd31d97f5db33e75e4b29c79e95883
   SAMRateLimit: 22b0ba0fafa8a9c438b7f76e4182914ef704c701
-  TestFlightSDK: 7d9abce62f5a17191c4df84fd88e05797e6776e0
+  TestFlightSDK: dea28c16f0bf65c49c4ed8939b2ae0b0ed9bf8b0
   XCDYouTubeVideoPlayerViewController: e629d764ec0ae302f543e3947dfac08aef4cf209
 
-COCOAPODS: 0.25.0
+COCOAPODS: 0.27.1
