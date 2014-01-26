@@ -344,7 +344,7 @@ typedef enum {
         [self.loadMoreActivityIndicator stopAnimating];
         [self.loadMoreButton setEnabled:self.totalUpcoming > self.futureConcerts.count];
         [self.loadMoreButton setHidden:self.totalUpcoming <= self.futureConcerts.count];
-        
+        self.showLoadMore = self.totalUpcoming > self.futureConcerts.count;
         if (self.futureConcerts.count == 0 || self.futureConcerts.count == self.totalUpcoming) { //no more pages to load
             self.showLoadMore = NO;
             [self.loadMoreActivityIndicator stopAnimating];
