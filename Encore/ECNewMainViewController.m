@@ -317,6 +317,9 @@ typedef enum {
             self.totalUpcoming = total;
         }
         [self fetchedPopularConcerts:concerts forType:type];
+        if (type == self.currentSearchType) {
+            [self.hud hide:YES];
+        }
     }];
 }
 
@@ -620,6 +623,7 @@ typedef enum {
 }
 
 -(void) updatedSearchLocationToPlacemark:(CLPlacemark *)placemark{
+    [self.hud show:YES];
     float radius = 1.0f;
     NSString* adminArea = placemark.administrativeArea;
     if(SYSTEM_VERSION_LESS_THAN(@"7.0")){
@@ -655,6 +659,7 @@ typedef enum {
         //redo search with new location
         [ECJSONFetcher fetchArtistsForString:self.searchBar.text withSearchType:self.currentSearchType forLocation:self.currentSearchLocation radius:[NSNumber numberWithFloat:self.currentSearchRadius] completion:^(NSDictionary *artists) {
             [self fetchedConcertsForSearch:artists];
+            [self.hud hide:YES];
         }];
     }
 
