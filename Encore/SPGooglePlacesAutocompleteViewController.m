@@ -292,10 +292,6 @@
     annotationView.animatesDrop = YES;
     annotationView.canShowCallout = YES;
     
-    UIButton *detailButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-    [detailButton addTarget:self action:@selector(annotationDetailButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    annotationView.rightCalloutAccessoryView = detailButton;
-    
     return annotationView;
 }
 
@@ -304,8 +300,6 @@
     [self.mapView selectAnnotation:selectedPlaceAnnotation animated:YES];
 }
 
-- (void)annotationDetailButtonPressed:(id)sender {
-    // Detail view controller application logic here.
-}
+
 
 @end
