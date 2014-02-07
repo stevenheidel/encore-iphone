@@ -63,7 +63,7 @@
         [url appendFormat:@"&types=%@", SPPlaceTypeStringForPlaceType(types)];
     }
     
-    NSLog(@"googleURLString : %@",url);
+//    NSLog(@"googleURLString : %@",url);
     
     return url;
 }
