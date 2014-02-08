@@ -11,7 +11,6 @@
 #import "NSUserDefaults+Encore.h"
 
 @interface ECNextConcertViewController ()
-
 @end
 
 @implementation ECNextConcertViewController

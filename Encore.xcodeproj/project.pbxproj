@@ -1254,13 +1254,13 @@
 		D901E9F917E8369B00317129 /* Walkthrough */ = {
 			isa = PBXGroup;
 			children = (
+				D901EA0A17E83A0400317129 /* ECWelcomeViewController.h */,
+				D901EA0B17E83A0400317129 /* ECWelcomeViewController.m */,
 				247C116717ED398900B7F401 /* ECNextConcertViewController.h */,
 				247C116817ED398900B7F401 /* ECNextConcertViewController.m */,
 				247C116417ED398000B7F401 /* ECSearchConcertViewController.h */,
 				247C116517ED398000B7F401 /* ECSearchConcertViewController.m */,
 				D901E9FB17E836C300317129 /* ECWalkthrough.storyboard */,
-				D901EA0A17E83A0400317129 /* ECWelcomeViewController.h */,
-				D901EA0B17E83A0400317129 /* ECWelcomeViewController.m */,
 			);
 			name = Walkthrough;
 			sourceTree = "<group>";

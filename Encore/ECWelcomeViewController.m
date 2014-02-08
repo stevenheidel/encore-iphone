@@ -18,42 +18,53 @@
 {
     UIView* lastFMView;
 }
+
+@property (weak, nonatomic) IBOutlet UILabel *lblPickConcert;
+@property (weak, nonatomic) IBOutlet UILabel *lblWelcomeTo;
+@property (weak, nonatomic) IBOutlet UITableView *featuredTableView;
+
+@property (weak, nonatomic) IBOutlet UIButton *btnNext;
+
+- (IBAction)nextButtonTapped:(id)sender;
+
 @property (strong,nonatomic) NSArray* featuredEvents;
 @property (assign) BOOL tappedOnConcert;
+@property (nonatomic,weak) IBOutlet UIImageView* bottomGreyBar;
+
 @end
 
 @implementation ECWelcomeViewController
 
-
-
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
 
     [self setApperance];
     [self readFeaturedEvents];
     [self setupLastFMView];
     self.tappedOnConcert = NO;
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+   
+    [self shouldShowBottomButton: NO];
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
         self.navigationController.navigationBar.barTintColor = [UIColor blueArtistTextColor];
     }
 }
 
--(void)viewWillAppear:(BOOL)animated{
+-(void) shouldShowBottomButton: (BOOL) shouldShow {
+    self.btnNext.hidden = !shouldShow;
+    self.btnNext.enabled = shouldShow;
+    
+    self.bottomGreyBar.hidden = !shouldShow;
+}
+
+-(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationSlide];
     [self.navigationController setNavigationBarHidden:YES animated:YES];
-    if (self.tappedOnConcert) {
-        [self.btnNext setEnabled:YES];
-    }
+
+    [self shouldShowBottomButton:self.tappedOnConcert];
 }
-- (void)setApperance
-{
+- (void)setApperance {
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]]];
     NSInteger size = 15;
     UIFont* font = [UIFont heroFontWithSize:size];
@@ -61,8 +72,7 @@
     [self.lblWelcomeTo setFont:font];
 }
 
--(void)readFeaturedEvents
-{
+-(void)readFeaturedEvents {
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"featured" ofType:@"json"];
     NSDictionary *featuredEventsDictionary = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:filePath] options:0 error:Nil];
     self.featuredEvents = [[NSArray alloc] initWithArray:featuredEventsDictionary[@"events"]];
@@ -114,7 +124,7 @@
     [cell setUpCellForConcert:concertDic];
     cell.lblLocation.text = [[concertDic address] uppercaseString];
     [cell.imageArtist setImageWithURL:[concertDic imageURL] placeholderImage:nil]; //TODO add placeholder
-    cell.lblName.textColor = [UIColor darkGrayColor];
+    cell.lblName.textColor = [UIColor whiteColor];
 
     return cell;
 }
