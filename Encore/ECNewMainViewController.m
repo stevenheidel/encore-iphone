@@ -586,6 +586,7 @@ typedef enum {
 
 #pragma mark - Buttons
 -(void)profileTapped {
+    [self showLoadingHUD];
     [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
     [Flurry logEvent:@"Profile_Button_Pressed" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:self.isLoggedIn ? @"Logged_In" : @"Not_Logged_In",@"Logged_In_State",[self currentSearchTypeString],@"Search_Type", nil]];
     if (self.isLoggedIn){
@@ -597,14 +598,18 @@ typedef enum {
             [[self.profileViewController.viewControllers objectAtIndex:0] performSelector:@selector(profileUpdated)]; // Update profile
         }
         self.profileViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-        [self presentViewController:self.profileViewController animated:YES completion:nil];
+        [self presentViewController:self.profileViewController animated:YES completion:^{
+            [self.hud hide:YES];
+        }];
     }
     
     else {
         ECLoginViewController* login = [[ECLoginViewController alloc] init];
 //        ECCustomNavController* navCtrl = [[ECCustomNavController alloc] initWithRootViewController:login];
 //        navCtrl.navigationBarHidden = YES;
-        [self.navigationController presentViewController:login animated:YES completion:nil];
+        [self.navigationController presentViewController:login animated:YES completion:^{
+            [self.hud hide:YES];
+        }];
         
     }
 }
@@ -624,7 +629,7 @@ typedef enum {
 }
 
 -(void) updatedSearchLocationToPlacemark:(CLPlacemark *)placemark{
-    [self.hud show:YES];
+    [self showLoadingHUD];
     float radius = 1.0f;
     NSString* adminArea = placemark.administrativeArea;
     if(SYSTEM_VERSION_LESS_THAN(@"7.0")){
