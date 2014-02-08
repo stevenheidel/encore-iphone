@@ -1,0 +1,1 @@
+PODS_LRGLOWINGBUTTON_OTHER_LDFLAGS = -framework QuartzCore

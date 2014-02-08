@@ -67,5 +67,6 @@ static const int upcomingRows[] = {Tickets, Lineup,SongPreview, Location, Detail
 
 @property (nonatomic,weak) ECChangeConcertStateButton* changeConcertStateButton;
 
+@property (nonatomic,assign) BOOL backButtonShouldGlow;
 
 @end

@@ -46,6 +46,7 @@ static NSString * const kDateFormat = @"yyyy-MM-dd";
     if ([[segue identifier] isEqualToString:@"PastViewControllerToGridViewController"]) {
         ECGridViewController* vc = [segue destinationViewController];
         vc.concert = self.concert;
+        vc.backButtonShouldGlow = NO;
         vc.hideShareButton = self.hideShareButton;
         [Flurry logEvent:@"Tapped_See_Photos_Past" withParameters:[self flurryParam]];
     }

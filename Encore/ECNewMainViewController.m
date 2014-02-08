@@ -941,6 +941,7 @@ typedef enum {
                 UIStoryboard* sb = [UIStoryboard storyboardWithName:@"ECPastStoryboard" bundle:nil];
                 ECPastViewController * vc = [sb instantiateInitialViewController];
                 vc.tense = self.currentSearchType;
+                vc.backButtonShouldGlow =  NO;
                 vc.concert = [self.searchResultsEvents objectAtIndex:indexPath.row];
                 [self.navigationController pushViewController:vc animated:YES];
             }
@@ -948,6 +949,7 @@ typedef enum {
                 UIStoryboard* sb = [UIStoryboard storyboardWithName:@"ECUpcomingStoryboard" bundle:nil];
                 ECUpcomingViewController * vc = [sb instantiateInitialViewController];
                 vc.tense = self.currentSearchType;
+                vc.backButtonShouldGlow = NO;
                 vc.concert = [self.searchResultsEvents objectAtIndex:indexPath.row];
                 [self.navigationController pushViewController:vc animated:YES];
             }
@@ -961,6 +963,7 @@ typedef enum {
         if (self.currentSearchType == ECSearchTypePast) {
             UIStoryboard* sb = [UIStoryboard storyboardWithName:@"ECPastStoryboard" bundle:nil];
             ECPastViewController * vc = [sb instantiateInitialViewController];
+            vc.backButtonShouldGlow = NO;
             vc.tense = self.currentSearchType;
             vc.concert = concert;
             [self.navigationController pushViewController:vc animated:YES];
@@ -969,6 +972,7 @@ typedef enum {
             UIStoryboard* sb = [UIStoryboard storyboardWithName:@"ECUpcomingStoryboard" bundle:nil];
             ECUpcomingViewController * vc = [sb instantiateInitialViewController];
             vc.tense = self.currentSearchType;
+            vc.backButtonShouldGlow = NO;
             vc.concert = concert;
             [self.navigationController pushViewController:vc animated:YES];
         }

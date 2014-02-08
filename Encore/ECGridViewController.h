@@ -26,6 +26,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *noPostsLabel;
 @property (nonatomic,assign) BOOL hideShareButton;
 
+@property (nonatomic,assign) BOOL backButtonShouldGlow;
 
 @end
 

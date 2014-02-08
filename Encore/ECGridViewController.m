@@ -20,6 +20,7 @@
 #import "ATAppRatingFlow.h"
 #import "EncoreURL.h"
 
+#import "LRGlowingButton.h"
 @implementation ECPostCell
 
 -(void) setPostType:(ECPostType)postType {
@@ -79,16 +80,27 @@
     UIImageView* encoreLogo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
     self.navigationItem.titleView = encoreLogo;
     self.postsCollectionView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
-    UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    UIImage *leftButImage = [UIImage imageNamed:@"backButton"]; //stretchableImageWithLeftCapWidth:10 topCapHeight:10];
-    [leftButton setBackgroundImage:leftButImage forState:UIControlStateNormal];
+    
+    //Navigation bar
+    UIImage *leftButImage = [UIImage imageNamed:@"backButton"];
+    UIButton* leftButton = nil;
+    if (self.backButtonShouldGlow) {
+        LRGlowingButton* leftButtonGlow = [LRGlowingButton buttonWithType:UIButtonTypeCustom];
+        leftButtonGlow.glowsWhenHighlighted = YES;
+        leftButtonGlow.highlightedGlowColor = [UIColor greenColor];
+        leftButton = leftButtonGlow;
+        [leftButtonGlow performSelector:@selector(startPulse) withObject:nil afterDelay:10.0];
+    }
+    else {
+        leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    }
     [leftButton addTarget:self action:@selector(backButtonWasPressed) forControlEvents:UIControlEventTouchUpInside];
     leftButton.frame = CGRectMake(0, 0, leftButImage.size.width, leftButImage.size.height);
+    [leftButton setBackgroundImage:leftButImage forState:UIControlStateNormal];
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
     self.navigationItem.leftBarButtonItem = backButton;
-    
-    if(!self.hideShareButton)
-    {
+
+    if(!self.hideShareButton) {
         UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
         UIImage *rightButImage = [UIImage imageNamed:@"shareButton"]; //stretchableImageWithLeftCapWidth:10 topCapHeight:10];
         [rightButton setBackgroundImage:rightButImage forState:UIControlStateNormal];

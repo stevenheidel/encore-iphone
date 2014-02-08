@@ -80,7 +80,7 @@ typedef enum {
     [self setupLastFMView];
     [self addArtistImageToHeader];
     self.searchHeaderView = nil;
-
+    
     self.tap = [[UITapGestureRecognizer alloc]
                 initWithTarget:self
                 action:@selector(dismissKeyboard:)];
@@ -114,7 +114,7 @@ typedef enum {
         [self.btnSkip setImage:[UIImage imageNamed:@"nextbuttom.png"] forState:UIControlStateHighlighted];
     }
     [self.navigationController setNavigationBarHidden:YES animated:YES];
-
+    
 }
 - (void) setApperance
 {
@@ -135,7 +135,7 @@ typedef enum {
     
     UIColor *color = [UIColor darkGrayColor];
     self.searchbar.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Artist search..." attributes:@{NSForegroundColorAttributeName: color}];
-
+    
 }
 -(void) setupLastFMView {
     lastFMView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.tableview.frame.size.width,133.0f)];
@@ -182,12 +182,12 @@ typedef enum {
                 CLPlacemark* placemark = [placemarks objectAtIndex:0];
                 [NSUserDefaults setLastSearchArea:placemark.locality != nil ? placemark.locality : placemark.subAdministrativeArea];
                 self.lblSearchConcert.text = [NSString stringWithFormat:@"Find a concert you attended in %@",[NSUserDefaults lastSearchArea]];
-
+                
             }
         }];
     }else{
         self.lblSearchConcert.text = [NSString stringWithFormat:@"Find a concert you attended in %@",city];
-
+        
     }
 }
 
@@ -199,10 +199,10 @@ typedef enum {
 }
 -(void)LocationFailed
 {
-
+    
     NSLog(@"Location failed");
     [self performSegueWithIdentifier:@"ECSkipButtonTapped" sender:Nil];
-
+    
 }
 
 #pragma mark - Concerts Methods
@@ -214,14 +214,14 @@ typedef enum {
 }
 
 -(void) fetchedPopularConcerts: (NSArray*) concerts forType: (ECSearchType) searchType {
-
+    
     self.concerts = [[NSArray alloc] initWithArray:concerts];
     
     if ([self concerts].count == 0) {
         self.tableview.tableFooterView = self.noConcertsFooterView;
     }
     [self.hud hide:YES];
-
+    
     [self.tableview reloadData];
     NSLog(@"self.tableView = %@, self.tableView.tableHeaderView = %@", self.tableview, self.tableview.tableHeaderView);
 }
@@ -301,18 +301,18 @@ typedef enum {
 - (IBAction)dismissKeyboard:(id)sender {
     [self.searchbar resignFirstResponder];
     [self.view removeGestureRecognizer:self.tap];
-
+    
 }
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [self.searchbar resignFirstResponder];
-
+    
     if ([textField.text length] > 0) { //don't search empty searches
         [ECJSONFetcher fetchArtistsForString:textField.text withSearchType:ECSearchTypePast
                                  forLocation:self.currentSearchLocation
                                       radius: [NSNumber numberWithFloat:self.currentSearchRadius]
                                   completion:^(NSDictionary * comboDic) {
-            [self fetchedConcertsForSearch:comboDic];
-        }];
+                                      [self fetchedConcertsForSearch:comboDic];
+                                  }];
         
         self.hud.labelText = NSLocalizedString(@"Searching", nil);
         self.hud.detailsLabelText = [NSString stringWithFormat:NSLocalizedString(@"hudSearchArtist", nil), [textField text]];
@@ -398,8 +398,8 @@ typedef enum {
             ECSearchResultCell *cell = [tableView dequeueReusableCellWithIdentifier:SearchCellIdentifier forIndexPath:indexPath];
             NSDictionary * eventDic = [self.searchResultsEvents objectAtIndex:indexPath.row];
             [cell setupCellForEvent:eventDic];
-            cell.lblEventTitle.textColor = [UIColor darkGrayColor];
-
+            cell.lblEventTitle.textColor = [UIColor whiteColor];
+            
             return cell;
         }
     }
@@ -409,8 +409,8 @@ typedef enum {
         
         
         [cell setUpCellForConcert:concertDic];
-        cell.lblName.textColor = [UIColor darkGrayColor];
-
+        cell.lblName.textColor = [UIColor whiteColor];
+        
         //Using UIImageView+AFNetworking, automatically set the cell's image view based on the URL
         [cell.imageArtist setImageWithURL:[concertDic imageURL] placeholderImage:nil]; //TODO add placeholder
         
@@ -449,30 +449,30 @@ typedef enum {
             [self.tableview reloadData];
         }
         else {
-                [self.navigationController setNavigationBarHidden:NO animated:YES];
-                UIStoryboard* sb = [UIStoryboard storyboardWithName:@"ECPastStoryboard" bundle:nil];
-                ECPastViewController * vc = [sb instantiateInitialViewController];
-                vc.tense = ECSearchTypePast;
-                vc.hideShareButton = YES;
-                vc.concert = [self.searchResultsEvents objectAtIndex:indexPath.row];
-                [self.navigationController pushViewController:vc animated:YES];
-                [self.navigationController setNavigationBarHidden:NO animated:YES];
-
-            
-        }
-    }
-    else {
-
-        NSDictionary* concert = [self.concerts objectAtIndex:indexPath.row];
+            [self.navigationController setNavigationBarHidden:NO animated:YES];
             UIStoryboard* sb = [UIStoryboard storyboardWithName:@"ECPastStoryboard" bundle:nil];
             ECPastViewController * vc = [sb instantiateInitialViewController];
             vc.tense = ECSearchTypePast;
-            vc.concert = concert;
             vc.hideShareButton = YES;
+            vc.concert = [self.searchResultsEvents objectAtIndex:indexPath.row];
+            vc.backButtonShouldGlow = YES;
             [self.navigationController pushViewController:vc animated:YES];
             [self.navigationController setNavigationBarHidden:NO animated:YES];
-
-           }
+        }
+    }
+    else {
+        
+        NSDictionary* concert = [self.concerts objectAtIndex:indexPath.row];
+        UIStoryboard* sb = [UIStoryboard storyboardWithName:@"ECPastStoryboard" bundle:nil];
+        ECPastViewController * vc = [sb instantiateInitialViewController];
+        vc.tense = ECSearchTypePast;
+        vc.concert = concert;
+        vc.backButtonShouldGlow = YES;
+        vc.hideShareButton = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+        [self.navigationController setNavigationBarHidden:NO animated:YES];
+        
+    }
     self.tappedOnConcert = YES;
 }
 

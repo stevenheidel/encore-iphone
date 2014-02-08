@@ -1,11 +1,10 @@
 platform :ios, '6.0'
 xcodeproj 'Encore.xcodeproj'
 pod 'AFNetworking',	'~> 1.3'
-#pod 'Facebook-iOS-SDK', :inhibit_warnings => true
 pod 'MBProgressHUD'
 pod 'TestFlightSDK'
 pod 'FlurrySDK'
 pod 'XCDYouTubeVideoPlayerViewController'
 pod 'SAMRateLimit'
-#pod 'TRAutocompleteView', '~> 1.1'
 pod 'Reachability'
+pod 'LRGlowingButton'

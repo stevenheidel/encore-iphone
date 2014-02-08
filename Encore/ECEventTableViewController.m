@@ -6,6 +6,7 @@
 //  Copyright (c) 2013 Encore. All rights reserved.
 //
 
+#import "LRGlowingButton.h"
 #import "ECEventTableViewController.h"
 
 #import "ECPastViewController.h"
@@ -166,11 +167,21 @@
     [self.eventVenueAndDate setFont:[UIFont heroFontWithSize:12]];
     
     //Navigation bar
-    UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    UIImage *leftButImage = [UIImage imageNamed:@"backButton.png"];
-    [leftButton setBackgroundImage:leftButImage forState:UIControlStateNormal];
+    UIImage *leftButImage = [UIImage imageNamed:@"backButton"];
+    UIButton* leftButton = nil;
+    if (self.backButtonShouldGlow) {
+        LRGlowingButton* leftButtonGlow = [LRGlowingButton buttonWithType:UIButtonTypeCustom];
+        leftButtonGlow.glowsWhenHighlighted = YES;
+        leftButtonGlow.highlightedGlowColor = [UIColor greenColor];
+        leftButton = leftButtonGlow;
+        [leftButtonGlow performSelector:@selector(startPulse) withObject:nil afterDelay:10.0];
+    }
+    else {
+        leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    }
     [leftButton addTarget:self action:@selector(backButtonWasPressed) forControlEvents:UIControlEventTouchUpInside];
     leftButton.frame = CGRectMake(0, 0, leftButImage.size.width, leftButImage.size.height);
+    [leftButton setBackgroundImage:leftButImage forState:UIControlStateNormal];
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
     self.navigationItem.leftBarButtonItem = backButton;
     

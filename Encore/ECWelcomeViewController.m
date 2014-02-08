@@ -147,8 +147,10 @@
     NSDictionary* concert = [self.featuredEvents objectAtIndex:indexPath.row];
     UIStoryboard* sb = [UIStoryboard storyboardWithName:@"ECPastStoryboard" bundle:nil];
     ECGridViewController * vc = [sb instantiateViewControllerWithIdentifier:@"ECGridViewController"];
+    vc.backButtonShouldGlow = YES;
     vc.concert = concert;
     vc.hideShareButton = YES;
+    
     [self.navigationController pushViewController:vc animated:YES];
     
     [Flurry logEvent:@"Walkthrough_Concert_Tap" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:concert.headliner,@"Headliner",nil]];
