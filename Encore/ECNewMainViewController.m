@@ -445,7 +445,7 @@ typedef enum {
 }
 
 -(void) feedbackTapped {
-        [Flurry logEvent:@"Opened_Feedback" withParameters:[NSDictionary dictionaryWithObject:@"MainView" forKey:@"source"]];
+    [Flurry logEvent:@"Opened_Feedback" withParameters:[NSDictionary dictionaryWithObject:@"MainView" forKey:@"source"]];
     ATConnect *connection = [ATConnect sharedConnection];
     [connection presentMessageCenterFromViewController: self];
 }

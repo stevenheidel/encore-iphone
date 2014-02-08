@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		2403C2C417E28A3100C518BF /* ECArtistView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2403C2C317E28A3100C518BF /* ECArtistView.storyboard */; };
+		245BBDBF18A5F94600B80781 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 245BBDBE18A5F94600B80781 /* Accelerate.framework */; };
+		245BBDC418A5F9A100B80781 /* libApptentiveConnect.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 245BBDB918A5F91A00B80781 /* libApptentiveConnect.a */; };
+		245BBDC518A5FA3500B80781 /* ApptentiveResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 245BBDBD18A5F91A00B80781 /* ApptentiveResources.bundle */; };
 		245F1E9917E2E79400C7621D /* gearbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 245F1E9717E2E79400C7621D /* gearbutton.png */; };
 		245F1E9A17E2E79400C7621D /* gearbutton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 245F1E9817E2E79400C7621D /* gearbutton@2x.png */; };
 		2468603F1832BF7100FD1666 /* Icon7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2468603E1832BF7100FD1666 /* Icon7@2x.png */; };
@@ -110,15 +113,11 @@
 		D491F808178B54C9002E00E5 /* logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D491F806178B54C9002E00E5 /* logo@2x.png */; };
 		D491F80C178B57C1002E00E5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D491F80B178B57C1002E00E5 /* Main.storyboard */; };
 		D491F80F178B595D002E00E5 /* ECNewMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D491F80E178B595D002E00E5 /* ECNewMainViewController.m */; };
-		D4A797FD179217F30029F469 /* libApptentiveConnect.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D4A797F4179217DC0029F469 /* libApptentiveConnect.a */; };
-		D4A797FE179218610029F469 /* ApptentiveResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D4A797F8179217DC0029F469 /* ApptentiveResources.bundle */; };
-		D4A798001792189B0029F469 /* ATConnect.h in Resources */ = {isa = PBXBuildFile; fileRef = D4A797FF1792189B0029F469 /* ATConnect.h */; };
 		D4A7980317921BB60029F469 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4A7980217921BB60029F469 /* CoreData.framework */; };
 		D4A7980517921BBC0029F469 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4A7980417921BBC0029F469 /* CoreText.framework */; };
 		D4A7980717921BC50029F469 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4A7980617921BC50029F469 /* CoreTelephony.framework */; };
 		D4A7980917921BCD0029F469 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4A7980817921BCD0029F469 /* StoreKit.framework */; };
 		D4A7980B17921BD20029F469 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4A7980A17921BD20029F469 /* SystemConfiguration.framework */; };
-		D4A7980D17921EE40029F469 /* ATAppRatingFlow.h in Resources */ = {isa = PBXBuildFile; fileRef = D4A7980C17921EE40029F469 /* ATAppRatingFlow.h */; };
 		D4A798111792FA2A0029F469 /* topgradient.png in Resources */ = {isa = PBXBuildFile; fileRef = D4A798101792FA2A0029F469 /* topgradient.png */; };
 		D4A798131792FB4E0029F469 /* fullgradient.png in Resources */ = {isa = PBXBuildFile; fileRef = D4A798121792FB4D0029F469 /* fullgradient.png */; };
 		D4A7BEA8177B2F3B00C22D91 /* UIImage+Orientation.m in Sources */ = {isa = PBXBuildFile; fileRef = D4A7BEA7177B2F3B00C22D91 /* UIImage+Orientation.m */; };
@@ -254,37 +253,37 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		D4A797F3179217DC0029F469 /* PBXContainerItemProxy */ = {
+		245BBDB818A5F91A00B80781 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = D4A797ED179217DB0029F469 /* ApptentiveConnect.xcodeproj */;
+			containerPortal = 245BBDB218A5F91900B80781 /* ApptentiveConnect.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 496DC37F1333D35600743F65;
 			remoteInfo = ApptentiveConnect;
 		};
-		D4A797F5179217DC0029F469 /* PBXContainerItemProxy */ = {
+		245BBDBA18A5F91A00B80781 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = D4A797ED179217DB0029F469 /* ApptentiveConnect.xcodeproj */;
+			containerPortal = 245BBDB218A5F91900B80781 /* ApptentiveConnect.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 496DC38C1333D35600743F65;
 			remoteInfo = ApptentiveConnectTests;
 		};
-		D4A797F7179217DC0029F469 /* PBXContainerItemProxy */ = {
+		245BBDBC18A5F91A00B80781 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = D4A797ED179217DB0029F469 /* ApptentiveConnect.xcodeproj */;
+			containerPortal = 245BBDB218A5F91900B80781 /* ApptentiveConnect.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 49D1118C13341A7C00603373;
 			remoteInfo = ApptentiveResources;
 		};
-		D4A797F9179217EF0029F469 /* PBXContainerItemProxy */ = {
+		245BBDC018A5F99300B80781 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = D4A797ED179217DB0029F469 /* ApptentiveConnect.xcodeproj */;
+			containerPortal = 245BBDB218A5F91900B80781 /* ApptentiveConnect.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = 496DC37E1333D35600743F65;
 			remoteInfo = ApptentiveConnect;
 		};
-		D4A797FB179217EF0029F469 /* PBXContainerItemProxy */ = {
+		245BBDC218A5F99600B80781 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = D4A797ED179217DB0029F469 /* ApptentiveConnect.xcodeproj */;
+			containerPortal = 245BBDB218A5F91900B80781 /* ApptentiveConnect.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = 49D1118B13341A7C00603373;
 			remoteInfo = ApptentiveResources;
@@ -301,6 +300,10 @@
 /* Begin PBXFileReference section */
 		2401A80C179BC8F300B881B7 /* ECPostType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECPostType.h; sourceTree = "<group>"; };
 		2403C2C317E28A3100C518BF /* ECArtistView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ECArtistView.storyboard; sourceTree = "<group>"; };
+		245BBDB218A5F91900B80781 /* ApptentiveConnect.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ApptentiveConnect.xcodeproj; path = "apptentive-ios/ApptentiveConnect/ApptentiveConnect.xcodeproj"; sourceTree = "<group>"; };
+		245BBDBE18A5F94600B80781 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		245BBDC618A5FA6E00B80781 /* ATConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATConnect.h; sourceTree = "<group>"; };
+		245BBDC718A5FA9400B80781 /* ATAppRatingFlow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATAppRatingFlow.h; sourceTree = "<group>"; };
 		245F1E9717E2E79400C7621D /* gearbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gearbutton.png; sourceTree = "<group>"; };
 		245F1E9817E2E79400C7621D /* gearbutton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gearbutton@2x.png"; sourceTree = "<group>"; };
 		2468603E1832BF7100FD1666 /* Icon7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon7@2x.png"; sourceTree = "<group>"; };
@@ -423,15 +426,12 @@
 		D491F80B178B57C1002E00E5 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		D491F80D178B595D002E00E5 /* ECNewMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECNewMainViewController.h; sourceTree = "<group>"; };
 		D491F80E178B595D002E00E5 /* ECNewMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECNewMainViewController.m; sourceTree = "<group>"; };
-		D4A797ED179217DB0029F469 /* ApptentiveConnect.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ApptentiveConnect.xcodeproj; path = "apptentive-ios/ApptentiveConnect/ApptentiveConnect.xcodeproj"; sourceTree = "<group>"; };
-		D4A797FF1792189B0029F469 /* ATConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ATConnect.h; path = "../apptentive-ios/ApptentiveConnect/source/ATConnect.h"; sourceTree = "<group>"; };
 		D4A798011792192F0029F469 /* defines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = defines.h; sourceTree = "<group>"; };
 		D4A7980217921BB60029F469 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		D4A7980417921BBC0029F469 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		D4A7980617921BC50029F469 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		D4A7980817921BCD0029F469 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		D4A7980A17921BD20029F469 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		D4A7980C17921EE40029F469 /* ATAppRatingFlow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ATAppRatingFlow.h; path = "../apptentive-ios/ApptentiveConnect/source/Rating Flow/ATAppRatingFlow.h"; sourceTree = "<group>"; };
 		D4A798101792FA2A0029F469 /* topgradient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topgradient.png; sourceTree = "<group>"; };
 		D4A798121792FB4D0029F469 /* fullgradient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fullgradient.png; sourceTree = "<group>"; };
 		D4A7BEA6177B2F3B00C22D91 /* UIImage+Orientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Orientation.h"; sourceTree = "<group>"; };
@@ -607,6 +607,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				245BBDC418A5F9A100B80781 /* libApptentiveConnect.a in Frameworks */,
+				245BBDBF18A5F94600B80781 /* Accelerate.framework in Frameworks */,
 				D97836161805A0080061C203 /* MessageUI.framework in Frameworks */,
 				D4A7980B17921BD20029F469 /* SystemConfiguration.framework in Frameworks */,
 				D4AA34FD17A0699F0015D79A /* AVFoundation.framework in Frameworks */,
@@ -617,7 +619,6 @@
 				D4A7980717921BC50029F469 /* CoreTelephony.framework in Frameworks */,
 				D4A7980517921BBC0029F469 /* CoreText.framework in Frameworks */,
 				D4A7980317921BB60029F469 /* CoreData.framework in Frameworks */,
-				D4A797FD179217F30029F469 /* libApptentiveConnect.a in Frameworks */,
 				A04C4333176F85F9003B4299 /* CoreLocation.framework in Frameworks */,
 				D4A8DDD5176AAA99005E9847 /* QuartzCore.framework in Frameworks */,
 				D4AA4CF31766B374009B0635 /* UIKit.framework in Frameworks */,
@@ -641,6 +642,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		245BBDB318A5F91900B80781 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				245BBDB918A5F91A00B80781 /* libApptentiveConnect.a */,
+				245BBDBB18A5F91A00B80781 /* ApptentiveConnectTests.xctest */,
+				245BBDBD18A5F91A00B80781 /* ApptentiveResources.bundle */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		24A4BBDD182A232B00667209 /* Placeholders */ = {
 			isa = PBXGroup;
 			children = (
@@ -742,16 +753,6 @@
 				D4A9B31F178E546F008B5504 /* Default-568h@2x.png */,
 			);
 			name = Launch;
-			sourceTree = "<group>";
-		};
-		D4A797EE179217DB0029F469 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				D4A797F4179217DC0029F469 /* libApptentiveConnect.a */,
-				D4A797F6179217DC0029F469 /* ApptentiveConnectTests.octest */,
-				D4A797F8179217DC0029F469 /* ApptentiveResources.bundle */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		D4A8DDB2176A133B005E9847 /* en.lproj */ = {
@@ -974,7 +975,7 @@
 		D4AA4CE61766B373009B0635 = {
 			isa = PBXGroup;
 			children = (
-				D4A797ED179217DB0029F469 /* ApptentiveConnect.xcodeproj */,
+				245BBDB218A5F91900B80781 /* ApptentiveConnect.xcodeproj */,
 				D4AA4CF81766B374009B0635 /* Encore */,
 				D4A8DDB2176A133B005E9847 /* en.lproj */,
 				D4AA4D161766B374009B0635 /* EncoreTests */,
@@ -996,6 +997,7 @@
 		D4AA4CF11766B374009B0635 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				245BBDBE18A5F94600B80781 /* Accelerate.framework */,
 				D97836151805A0080061C203 /* MessageUI.framework */,
 				D4AA34FC17A0699F0015D79A /* AVFoundation.framework */,
 				D4AA34F917A069980015D79A /* MediaPlayer.framework */,
@@ -1054,13 +1056,13 @@
 				D4AA4CFE1766B374009B0635 /* main.m */,
 				D4A798011792192F0029F469 /* defines.h */,
 				2401A80C179BC8F300B881B7 /* ECPostType.h */,
-				D4A797FF1792189B0029F469 /* ATConnect.h */,
-				D4A7980C17921EE40029F469 /* ATAppRatingFlow.h */,
 				D4AA4D001766B374009B0635 /* Encore-Prefix.pch */,
 				D4A9B330178E7DAC008B5504 /* ECAlertTags.h */,
 				D4A7BEAA177B731F00C22D91 /* Staging.h */,
 				D4A7BEA9177B713400C22D91 /* EncoreURL.h */,
 				D4A7BEAB177BFF3700C22D91 /* ECSearchType.h */,
+				245BBDC618A5FA6E00B80781 /* ATConnect.h */,
+				245BBDC718A5FA9400B80781 /* ATAppRatingFlow.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1344,8 +1346,8 @@
 			buildRules = (
 			);
 			dependencies = (
-				D4A797FA179217EF0029F469 /* PBXTargetDependency */,
-				D4A797FC179217EF0029F469 /* PBXTargetDependency */,
+				245BBDC318A5F99600B80781 /* PBXTargetDependency */,
+				245BBDC118A5F99300B80781 /* PBXTargetDependency */,
 			);
 			name = Encore;
 			productName = Encore;
@@ -1398,8 +1400,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = D4A797EE179217DB0029F469 /* Products */;
-					ProjectRef = D4A797ED179217DB0029F469 /* ApptentiveConnect.xcodeproj */;
+					ProductGroup = 245BBDB318A5F91900B80781 /* Products */;
+					ProjectRef = 245BBDB218A5F91900B80781 /* ApptentiveConnect.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -1411,25 +1413,25 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		D4A797F4179217DC0029F469 /* libApptentiveConnect.a */ = {
+		245BBDB918A5F91A00B80781 /* libApptentiveConnect.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libApptentiveConnect.a;
-			remoteRef = D4A797F3179217DC0029F469 /* PBXContainerItemProxy */;
+			remoteRef = 245BBDB818A5F91A00B80781 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		D4A797F6179217DC0029F469 /* ApptentiveConnectTests.octest */ = {
+		245BBDBB18A5F91A00B80781 /* ApptentiveConnectTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			path = ApptentiveConnectTests.octest;
-			remoteRef = D4A797F5179217DC0029F469 /* PBXContainerItemProxy */;
+			path = ApptentiveConnectTests.xctest;
+			remoteRef = 245BBDBA18A5F91A00B80781 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		D4A797F8179217DC0029F469 /* ApptentiveResources.bundle */ = {
+		245BBDBD18A5F91A00B80781 /* ApptentiveResources.bundle */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = ApptentiveResources.bundle;
-			remoteRef = D4A797F7179217DC0029F469 /* PBXContainerItemProxy */;
+			remoteRef = 245BBDBC18A5F91A00B80781 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -1439,7 +1441,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D4A797FE179218610029F469 /* ApptentiveResources.bundle in Resources */,
+				245BBDC518A5FA3500B80781 /* ApptentiveResources.bundle in Resources */,
 				D4AA4CFD1766B374009B0635 /* InfoPlist.strings in Resources */,
 				D4AA4D311766BA8C009B0635 /* ECLoginViewController.xib in Resources */,
 				D4AA4D391766F3D0009B0635 /* Localizable.strings in Resources */,
@@ -1531,8 +1533,6 @@
 				24B3840218A5E24C00E5C714 /* removeConcert@2x.png in Resources */,
 				A068AE711790621800FA1BF4 /* lastfmAttr.png in Resources */,
 				A068AE721790621800FA1BF4 /* lastfmAttr@2x.png in Resources */,
-				D4A798001792189B0029F469 /* ATConnect.h in Resources */,
-				D4A7980D17921EE40029F469 /* ATAppRatingFlow.h in Resources */,
 				D4A798111792FA2A0029F469 /* topgradient.png in Resources */,
 				D4A798131792FB4E0029F469 /* fullgradient.png in Resources */,
 				D4AC901117934250008F5FF0 /* oval.png in Resources */,
@@ -1736,15 +1736,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		D4A797FA179217EF0029F469 /* PBXTargetDependency */ = {
+		245BBDC118A5F99300B80781 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = ApptentiveConnect;
-			targetProxy = D4A797F9179217EF0029F469 /* PBXContainerItemProxy */;
+			targetProxy = 245BBDC018A5F99300B80781 /* PBXContainerItemProxy */;
 		};
-		D4A797FC179217EF0029F469 /* PBXTargetDependency */ = {
+		245BBDC318A5F99600B80781 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = ApptentiveResources;
-			targetProxy = D4A797FB179217EF0029F469 /* PBXContainerItemProxy */;
+			targetProxy = 245BBDC218A5F99600B80781 /* PBXContainerItemProxy */;
 		};
 		D4AA4D151766B374009B0635 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1883,8 +1883,8 @@
 					Security,
 					"-weak_framework",
 					Social,
-					"-all_load",
 					"-lTestFlight",
+					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -1932,8 +1932,8 @@
 					Security,
 					"-weak_framework",
 					Social,
-					"-all_load",
 					"-lTestFlight",
+					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
