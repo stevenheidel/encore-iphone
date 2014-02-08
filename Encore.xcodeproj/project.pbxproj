@@ -61,6 +61,8 @@
 		24AB803818048E48002A9913 /* disabledright@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24AB803218048E48002A9913 /* disabledright@2x.png */; };
 		24B0D8DF17E15C9100B30612 /* shareiconbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 24B0D8DD17E15C9100B30612 /* shareiconbutton.png */; };
 		24B0D8E017E15C9100B30612 /* shareiconbutton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24B0D8DE17E15C9100B30612 /* shareiconbutton@2x.png */; };
+		24B3840218A5E24C00E5C714 /* removeConcert@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24B3840118A5E24C00E5C714 /* removeConcert@2x.png */; };
+		24B3840518A5E4E300E5C714 /* addConcert@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24B3840418A5E4E200E5C714 /* addConcert@2x.png */; };
 		255A9AF4A1C64F71B97704C8 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 918A85E0EEDE48F3BEFD223A /* libPods.a */; };
 		A00402BD177F4F7300B998CF /* ECProfileHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = A00402BC177F4F7300B998CF /* ECProfileHeader.m */; };
 		A00402C4177F6B0900B998CF /* backButton.png in Resources */ = {isa = PBXBuildFile; fileRef = A00402C2177F6B0900B998CF /* backButton.png */; };
@@ -361,6 +363,8 @@
 		24AB803218048E48002A9913 /* disabledright@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "disabledright@2x.png"; sourceTree = "<group>"; };
 		24B0D8DD17E15C9100B30612 /* shareiconbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shareiconbutton.png; sourceTree = "<group>"; };
 		24B0D8DE17E15C9100B30612 /* shareiconbutton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shareiconbutton@2x.png"; sourceTree = "<group>"; };
+		24B3840118A5E24C00E5C714 /* removeConcert@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "removeConcert@2x.png"; sourceTree = "<group>"; };
+		24B3840418A5E4E200E5C714 /* addConcert@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "addConcert@2x.png"; sourceTree = "<group>"; };
 		918A85E0EEDE48F3BEFD223A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A00402BB177F4F7300B998CF /* ECProfileHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECProfileHeader.h; sourceTree = "<group>"; };
 		A00402BC177F4F7300B998CF /* ECProfileHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECProfileHeader.m; sourceTree = "<group>"; };
@@ -808,6 +812,8 @@
 		D4A8DDD1176A44A0005E9847 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				24B3840118A5E24C00E5C714 /* removeConcert@2x.png */,
+				24B3840418A5E4E200E5C714 /* addConcert@2x.png */,
 				24A4BBDD182A232B00667209 /* Placeholders */,
 				247C114B17ED35D900B7F401 /* gotit.png */,
 				247C114C17ED35D900B7F401 /* gotit@2x.png */,
@@ -1476,6 +1482,7 @@
 				D4A99EDB1784EEC400F4FB46 /* feedback@2x.png in Resources */,
 				D491F807178B54C9002E00E5 /* logo.png in Resources */,
 				D491F808178B54C9002E00E5 /* logo@2x.png in Resources */,
+				24B3840518A5E4E300E5C714 /* addConcert@2x.png in Resources */,
 				D491F80C178B57C1002E00E5 /* Main.storyboard in Resources */,
 				D97836191805A7670061C203 /* artistpage@2x.png in Resources */,
 				A02661E4178C9F6200741C9A /* ECSearchResultCell.xib in Resources */,
@@ -1521,6 +1528,7 @@
 				24A4BBDB182A231B00667209 /* placeholder@2x.png in Resources */,
 				D4AC2E07178FD2E200F292CA /* Black~568h@2x.png in Resources */,
 				247C115F17ED35D900B7F401 /* playsongbutton.png in Resources */,
+				24B3840218A5E24C00E5C714 /* removeConcert@2x.png in Resources */,
 				A068AE711790621800FA1BF4 /* lastfmAttr.png in Resources */,
 				A068AE721790621800FA1BF4 /* lastfmAttr@2x.png in Resources */,
 				D4A798001792189B0029F469 /* ATConnect.h in Resources */,
@@ -1852,7 +1860,7 @@
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"-ObjC",
-					"-lFlurry_4.3.0",
+					"-lFlurry_4.3.1",
 					"-lsqlite3.0",
 					"-lz",
 					"-framework",
@@ -1901,7 +1909,7 @@
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"-ObjC",
-					"-lFlurry_4.3.0",
+					"-lFlurry_4.3.1",
 					"-lsqlite3.0",
 					"-lz",
 					"-framework",

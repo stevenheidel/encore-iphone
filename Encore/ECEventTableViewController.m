@@ -54,7 +54,7 @@
 @end
 
 @interface ECEventTableViewController ()
-
+@property (nonatomic,strong) UIBarButtonItem* navAddbutton;
 @end
 
 @implementation ECEventTableViewController
@@ -68,8 +68,7 @@
     return self;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     
     self.checkedInvites = FALSE; //OR load from nsuserdefaults? (ie global setting)
@@ -81,7 +80,7 @@
     self.tableView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
     [self setAppearance];
     self.friends = [[NSArray alloc] init];
-
+    
     //Fetch song previews
     [ECJSONFetcher fetchSongPreviewsForArtist:[self.concert headliner] completion:^(NSArray *songs) {
         self.songs = [NSArray arrayWithArray:songs];
@@ -90,6 +89,8 @@
             [self.tableView reloadData];
         }
     }];
+    
+    [self initNavBarAddAndRemoveButton];
 }
 
 -(NSInteger) rowIndexForRowType:(ECEventRow) rowID {
@@ -177,12 +178,6 @@
     
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 #pragma mark - Table view data source
 
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -207,13 +202,11 @@
     }
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (self.statusManager.isOnProfile)
         return [self.rowOrder count];
     else
@@ -419,16 +412,27 @@
 }
 
 #pragma mark - Adding/Removing Concert
--(void) failedToChangeState: (BOOL) isOnProfile;
-{
+-(void) failedToChangeState: (BOOL) isOnProfile {
     [self alertError];
     [self.changeConcertStateButton setButtonIsOnProfile:isOnProfile];
     [Flurry logEvent:@"Failed_Adding_Concert" withParameters:[self flurryParam]];
     
 }
 
+-(void) initNavBarAddAndRemoveButton {
+    self.navAddbutton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"removeConcert"] style:UIBarButtonItemStylePlain target:self action:@selector(addToProfile)];
+
+    self.navAddbutton.tintColor = [UIColor whiteColor];
+    self.navigationItem.rightBarButtonItem = self.navAddbutton;
+}
+
+//status checker delegate response
 -(void) profileState:(BOOL)isOnProfile {
     [self.changeConcertStateButton setButtonIsOnProfile:isOnProfile];
+    NSString* name = isOnProfile ? @"removeConcert" : @"addConcert";
+    UIImage* image = [UIImage imageNamed:name];
+    self.navAddbutton.image = image;
+    
     //if user has this concert in his account
     if(isOnProfile)
     {
@@ -445,23 +449,22 @@
     }
 }
 
--(void) addToProfile{
+-(void) addToProfile {
     if (ApplicationDelegate.isLoggedIn) {
         [[NSNotificationCenter defaultCenter] removeObserver:self.statusManager name:ECLoginCompletedNotification object:nil];
         
         [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
         [self.statusManager toggleProfileState];
         
-    }else
-    {
+    }
+    else {
         UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login", nil) message:NSLocalizedString(@"To add this concert to your profile, you must first login", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Login", nil), nil];
         alert.tag = ECChangeStateNotLoggedInAlert;
         [alert show];
     }
 }
 
--(void)successChangingState:(BOOL)isOnProfile
-{
+-(void)successChangingState:(BOOL)isOnProfile {
     [self profileState:isOnProfile];
     [self concertStateChangedHUD];
     
@@ -475,7 +478,7 @@
     }
 }
 
--(void) concertStateChangedHUD{
+-(void) concertStateChangedHUD {
     MBProgressHUD* HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
     [self.navigationController.view addSubview:HUD];
     
@@ -521,8 +524,7 @@
     
 }
 
-- (void) handlePickerDone
-{
+- (void) handlePickerDone {
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
         [self dismissViewControllerAnimated:YES completion:^{
             [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
@@ -530,8 +532,7 @@
     }
 }
 
-- (void)facebookViewControllerDoneWasPressed:(id)sender
-{
+- (void)facebookViewControllerDoneWasPressed:(id)sender {
     NSArray* selection = self.friendPickerController.selection;
     if (selection.count>0) {
         NSMutableArray* subSelection = [NSMutableArray arrayWithCapacity:selection.count];
@@ -771,22 +772,20 @@
 #pragma mark - Play/Pause Song preview
 
 -(NSDictionary*) songInfo {
-//    NSLog(@"Song %@",[self.songs objectAtIndex:self.currentSongIndex]);
     if (self.songs.count >0) {
         return [self.songs objectAtIndex:self.currentSongIndex];
     }
     return nil;
 }
 
--(void)prepareCurrentSong
-{
+-(void)prepareCurrentSong {
     NSURL *url = [NSURL URLWithString:self.songInfo[@"previewUrl"]];
     AVPlayerItem* playerItem = [AVPlayerItem playerItemWithURL:url];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(songDidFinishPlaying) name:AVPlayerItemDidPlayToEndTimeNotification object:playerItem];
     self.player = [[AVPlayer alloc] initWithPlayerItem:playerItem];
 }
-- (void) playpauseButtonTapped:(UIButton*)button
-{
+
+- (void) playpauseButtonTapped:(UIButton*)button {
     if(!self.player)
         [self prepareCurrentSong];
 
@@ -798,8 +797,8 @@
     }
     [Flurry logEvent:@"Tapped_Play_Button" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[self tenseString],@"PageType",self.concert.headliner, @"artist", nil]];
 }
--(void)songDidFinishPlaying
-{
+
+-(void)songDidFinishPlaying {
     [[NSNotificationCenter defaultCenter]removeObserver:self
                                                    name:AVPlayerItemDidPlayToEndTimeNotification
                                                  object:self.player.currentItem];
@@ -824,11 +823,11 @@
     
 }
 
--(void)openItunesLink
-{
+-(void)openItunesLink {
     NSString* affliateURL = [self.songInfo[@"trackViewUrl"] stringByAppendingFormat:@"&at=%@",kAffiliateCode];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:affliateURL]];
     [Flurry logEvent:@"Tapped_iTunes_Link" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[self tenseString], @"PageType", self.concert.headliner,@"artist", nil]];
 }
 
 @end
+
