@@ -11,6 +11,19 @@
 		245BBDBF18A5F94600B80781 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 245BBDBE18A5F94600B80781 /* Accelerate.framework */; };
 		245BBDC418A5F9A100B80781 /* libApptentiveConnect.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 245BBDB918A5F91A00B80781 /* libApptentiveConnect.a */; };
 		245BBDC518A5FA3500B80781 /* ApptentiveResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 245BBDBD18A5F91A00B80781 /* ApptentiveResources.bundle */; };
+		245BBDCD18A5FD5700B80781 /* TapjoyResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 245BBDCB18A5FD5700B80781 /* TapjoyResources.bundle */; };
+		245BBDCE18A5FD5700B80781 /* Tapjoy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 245BBDCC18A5FD5700B80781 /* Tapjoy.framework */; };
+		245BBDD018A5FD7300B80781 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 245BBDCF18A5FD7300B80781 /* AdSupport.framework */; };
+		245BBDD218A5FD7B00B80781 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 245BBDD118A5FD7B00B80781 /* CFNetwork.framework */; };
+		245BBDD418A5FD8700B80781 /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 245BBDD318A5FD8600B80781 /* EventKitUI.framework */; };
+		245BBDD618A5FD8F00B80781 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 245BBDD518A5FD8F00B80781 /* EventKit.framework */; };
+		245BBDD818A5FD9B00B80781 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 245BBDD718A5FD9B00B80781 /* libsqlite3.0.dylib */; };
+		245BBDDA18A5FDA400B80781 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 245BBDD918A5FDA400B80781 /* libxml2.dylib */; };
+		245BBDDC18A5FDAD00B80781 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 245BBDDB18A5FDAD00B80781 /* libz.dylib */; };
+		245BBDDE18A5FDC600B80781 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 245BBDDD18A5FDC600B80781 /* MobileCoreServices.framework */; };
+		245BBDE018A5FDD300B80781 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 245BBDDF18A5FDD300B80781 /* Social.framework */; };
+		245BBDE218A5FDE600B80781 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 245BBDE118A5FDE600B80781 /* Twitter.framework */; };
+		245BBDE418A5FE0D00B80781 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 245BBDE318A5FE0D00B80781 /* CoreMotion.framework */; };
 		245F1E9917E2E79400C7621D /* gearbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 245F1E9717E2E79400C7621D /* gearbutton.png */; };
 		245F1E9A17E2E79400C7621D /* gearbutton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 245F1E9817E2E79400C7621D /* gearbutton@2x.png */; };
 		2468603F1832BF7100FD1666 /* Icon7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2468603E1832BF7100FD1666 /* Icon7@2x.png */; };
@@ -304,6 +317,19 @@
 		245BBDBE18A5F94600B80781 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		245BBDC618A5FA6E00B80781 /* ATConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATConnect.h; sourceTree = "<group>"; };
 		245BBDC718A5FA9400B80781 /* ATAppRatingFlow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATAppRatingFlow.h; sourceTree = "<group>"; };
+		245BBDCB18A5FD5700B80781 /* TapjoyResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TapjoyResources.bundle; sourceTree = "<group>"; };
+		245BBDCC18A5FD5700B80781 /* Tapjoy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Tapjoy.framework; sourceTree = "<group>"; };
+		245BBDCF18A5FD7300B80781 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		245BBDD118A5FD7B00B80781 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		245BBDD318A5FD8600B80781 /* EventKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKitUI.framework; path = System/Library/Frameworks/EventKitUI.framework; sourceTree = SDKROOT; };
+		245BBDD518A5FD8F00B80781 /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
+		245BBDD718A5FD9B00B80781 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		245BBDD918A5FDA400B80781 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		245BBDDB18A5FDAD00B80781 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		245BBDDD18A5FDC600B80781 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		245BBDDF18A5FDD300B80781 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		245BBDE118A5FDE600B80781 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
+		245BBDE318A5FE0D00B80781 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		245F1E9717E2E79400C7621D /* gearbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gearbutton.png; sourceTree = "<group>"; };
 		245F1E9817E2E79400C7621D /* gearbutton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gearbutton@2x.png"; sourceTree = "<group>"; };
 		2468603E1832BF7100FD1666 /* Icon7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon7@2x.png"; sourceTree = "<group>"; };
@@ -607,10 +633,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				245BBDE418A5FE0D00B80781 /* CoreMotion.framework in Frameworks */,
+				245BBDE218A5FDE600B80781 /* Twitter.framework in Frameworks */,
+				D4A7980B17921BD20029F469 /* SystemConfiguration.framework in Frameworks */,
+				245BBDE018A5FDD300B80781 /* Social.framework in Frameworks */,
+				245BBDDE18A5FDC600B80781 /* MobileCoreServices.framework in Frameworks */,
+				245BBDDC18A5FDAD00B80781 /* libz.dylib in Frameworks */,
+				245BBDDA18A5FDA400B80781 /* libxml2.dylib in Frameworks */,
+				245BBDD818A5FD9B00B80781 /* libsqlite3.0.dylib in Frameworks */,
+				245BBDD618A5FD8F00B80781 /* EventKit.framework in Frameworks */,
+				245BBDD418A5FD8700B80781 /* EventKitUI.framework in Frameworks */,
+				245BBDD218A5FD7B00B80781 /* CFNetwork.framework in Frameworks */,
+				245BBDD018A5FD7300B80781 /* AdSupport.framework in Frameworks */,
 				245BBDC418A5F9A100B80781 /* libApptentiveConnect.a in Frameworks */,
 				245BBDBF18A5F94600B80781 /* Accelerate.framework in Frameworks */,
 				D97836161805A0080061C203 /* MessageUI.framework in Frameworks */,
-				D4A7980B17921BD20029F469 /* SystemConfiguration.framework in Frameworks */,
 				D4AA34FD17A0699F0015D79A /* AVFoundation.framework in Frameworks */,
 				D4AA34FA17A069980015D79A /* MediaPlayer.framework in Frameworks */,
 				D4BB7E11179DC26C0098BCF4 /* ImageIO.framework in Frameworks */,
@@ -622,6 +659,7 @@
 				A04C4333176F85F9003B4299 /* CoreLocation.framework in Frameworks */,
 				D4A8DDD5176AAA99005E9847 /* QuartzCore.framework in Frameworks */,
 				D4AA4CF31766B374009B0635 /* UIKit.framework in Frameworks */,
+				245BBDCE18A5FD5700B80781 /* Tapjoy.framework in Frameworks */,
 				D4AA4CF51766B374009B0635 /* Foundation.framework in Frameworks */,
 				D4AA4CF71766B374009B0635 /* CoreGraphics.framework in Frameworks */,
 				255A9AF4A1C64F71B97704C8 /* libPods.a in Frameworks */,
@@ -650,6 +688,31 @@
 				245BBDBD18A5F91A00B80781 /* ApptentiveResources.bundle */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		245BBDC818A5FD5600B80781 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				245BBDC918A5FD5700B80781 /* Tapjoy.embeddedframework */,
+			);
+			path = Libraries;
+			sourceTree = "<group>";
+		};
+		245BBDC918A5FD5700B80781 /* Tapjoy.embeddedframework */ = {
+			isa = PBXGroup;
+			children = (
+				245BBDCA18A5FD5700B80781 /* Resources */,
+				245BBDCC18A5FD5700B80781 /* Tapjoy.framework */,
+			);
+			path = Tapjoy.embeddedframework;
+			sourceTree = "<group>";
+		};
+		245BBDCA18A5FD5700B80781 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				245BBDCB18A5FD5700B80781 /* TapjoyResources.bundle */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		24A4BBDD182A232B00667209 /* Placeholders */ = {
@@ -975,6 +1038,7 @@
 		D4AA4CE61766B373009B0635 = {
 			isa = PBXGroup;
 			children = (
+				245BBDC818A5FD5600B80781 /* Libraries */,
 				245BBDB218A5F91900B80781 /* ApptentiveConnect.xcodeproj */,
 				D4AA4CF81766B374009B0635 /* Encore */,
 				D4A8DDB2176A133B005E9847 /* en.lproj */,
@@ -997,6 +1061,17 @@
 		D4AA4CF11766B374009B0635 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				245BBDE318A5FE0D00B80781 /* CoreMotion.framework */,
+				245BBDE118A5FDE600B80781 /* Twitter.framework */,
+				245BBDDF18A5FDD300B80781 /* Social.framework */,
+				245BBDDD18A5FDC600B80781 /* MobileCoreServices.framework */,
+				245BBDDB18A5FDAD00B80781 /* libz.dylib */,
+				245BBDD918A5FDA400B80781 /* libxml2.dylib */,
+				245BBDD718A5FD9B00B80781 /* libsqlite3.0.dylib */,
+				245BBDD518A5FD8F00B80781 /* EventKit.framework */,
+				245BBDD318A5FD8600B80781 /* EventKitUI.framework */,
+				245BBDD118A5FD7B00B80781 /* CFNetwork.framework */,
+				245BBDCF18A5FD7300B80781 /* AdSupport.framework */,
 				245BBDBE18A5F94600B80781 /* Accelerate.framework */,
 				D97836151805A0080061C203 /* MessageUI.framework */,
 				D4AA34FC17A0699F0015D79A /* AVFoundation.framework */,
@@ -1502,6 +1577,7 @@
 				D4A9B30C178DDABD008B5504 /* divideractiveleft@2x.png in Resources */,
 				D4A9B30D178DDABD008B5504 /* divideractiveright.png in Resources */,
 				D4A9B30E178DDABD008B5504 /* divideractiveright@2x.png in Resources */,
+				245BBDCD18A5FD5700B80781 /* TapjoyResources.bundle in Resources */,
 				D4A9B30F178DDABD008B5504 /* dividerdefault.png in Resources */,
 				D4A9B310178DDABD008B5504 /* dividerdefault@2x.png in Resources */,
 				247C114617ECE6D500B7F401 /* GooglePlacesAutocompleteView.storyboard in Resources */,
@@ -1852,6 +1928,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
+					/Users/shimmy/Code/Encore/iphone/Libraries/Tapjoy.embeddedframework,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Encore/Encore-Prefix.pch";
@@ -1901,6 +1978,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
+					/Users/shimmy/Code/Encore/iphone/Libraries/Tapjoy.embeddedframework,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Encore/Encore-Prefix.pch";

@@ -646,13 +646,14 @@ typedef enum {
     CLLocation* location = placemark.location;
     NSString* locality = placemark.locality ? placemark.locality : placemark.subAdministrativeArea;
     
-    NSLog(@"new radius %f",radius);
     self.currentSearchLocation = location;
     self.currentSearchRadius = radius;
     self.currentSearchAreaString = area;
     self.shouldReload = YES;
     self.page = 1;
     self.locationLabel.text = area;
+    
+    [Flurry logEvent:@"ChangedLocation" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:area,@"area", [NSString stringWithFormat:@"%f,%f",location.coordinate.latitude,location.coordinate.longitude],@"latlong", nil]];
     
     [NSUserDefaults setLastSearchLocation:location];
 //    [NSUserDefaults setLastSearchRadius:radius];
@@ -891,6 +892,7 @@ typedef enum {
 }
 
 -(void) loadMoreTapped {
+    
     [self.loadMoreButton setEnabled:NO];
     [self.loadMoreButton setTitle:@"Loading..." forState:UIControlStateNormal];
     NSLog(@"%@: Load More tapped. Currently showing %d concerts. Total remaining: %d Page: %d",NSStringFromClass(self.class),self.futureConcerts.count,self.totalUpcoming,self.page-1);
@@ -898,6 +900,7 @@ typedef enum {
         [self.loadMoreActivityIndicator startAnimating];
         [self fetchPopularConcertsWithSearchType:ECSearchTypeFuture];
     }
+    [Flurry logEvent:@"LoadMoreTapped" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[self currentSearchTypeString],@"CurrentSearchType", [NSNumber numberWithInteger:self.page],@"Page",self.currentSearchAreaString,@"SearchArea", nil]];
 }
 
 -(NSArray*) currentEventArray {
