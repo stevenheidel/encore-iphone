@@ -540,10 +540,11 @@ typedef enum {
     [[UISegmentedControl appearance] setTitleTextAttributes:selectedTextAttr forState:UIControlStateSelected];
     [[UISegmentedControl appearance] setTitleTextAttributes:unselectedTextAttr forState:UIControlStateNormal];
 
+    //The following code screwed up the sharing from UIActivityViewController
     //Guess and check to get right offset. May not be perfect, seems to be good though
-    [[UISegmentedControl appearance] setContentPositionAdjustment:UIOffsetMake(4, 0) forSegmentType:UISegmentedControlSegmentLeft barMetrics:UIBarMetricsDefault];
-    [[UISegmentedControl appearance] setContentPositionAdjustment:UIOffsetMake(0, 0) forSegmentType:UISegmentedControlSegmentCenter barMetrics:UIBarMetricsDefault];
-    [[UISegmentedControl appearance] setContentPositionAdjustment:UIOffsetMake(-4, 0) forSegmentType:UISegmentedControlSegmentRight barMetrics:UIBarMetricsDefault];
+//    [[UISegmentedControl appearance] setContentPositionAdjustment:UIOffsetMake(4, 0) forSegmentType:UISegmentedControlSegmentLeft barMetrics:UIBarMetricsDefault];
+//    [[UISegmentedControl appearance] setContentPositionAdjustment:UIOffsetMake(0, 0) forSegmentType:UISegmentedControlSegmentCenter barMetrics:UIBarMetricsDefault];
+//    [[UISegmentedControl appearance] setContentPositionAdjustment:UIOffsetMake(-4, 0) forSegmentType:UISegmentedControlSegmentRight barMetrics:UIBarMetricsDefault];
 }
 
 -(void)setDateLabel {
