@@ -644,8 +644,7 @@
     
     UIActivityViewController* shareDrawer = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
     shareDrawer.excludedActivityTypes = @[UIActivityTypePostToWeibo,UIActivityTypeAssignToContact,UIActivityTypeSaveToCameraRoll,UIActivityTypePrint];
-    
-    //TODO: do something with this completion handler, ie. analytics.
+
     shareDrawer.completionHandler = ^(NSString *activityType, BOOL completed){
         if (completed) {
             NSLog(@"Selected activity was performed.");
@@ -832,25 +831,4 @@
     [Flurry logEvent:@"Tapped_iTunes_Link" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[self tenseString], @"PageType", self.concert.headliner,@"artist", nil]];
 }
 
-@end
-
-#pragma mark - Activity Provider
-//This is unfinished code for providing different share texts to different activity types. Mainly twitter is the issue because it has a limit
-@implementation APActivityProvider
-- (id) activityViewController:(UIActivityViewController *)activityViewController
-          itemForActivityType:(NSString *)activityType
-{
-    if ( [activityType isEqualToString:UIActivityTypePostToTwitter] )
-        return @"This is a #twitter post!";
-    if ( [activityType isEqualToString:UIActivityTypePostToFacebook] )
-        return @"This is a facebook post!";
-    if ( [activityType isEqualToString:UIActivityTypeMessage] )
-        return @"SMS message text";
-    if ( [activityType isEqualToString:UIActivityTypeMail] )
-        return @"Email text here!";
-    if ( [activityType isEqualToString:@"it.albertopasca.myApp"] )
-        return @"OpenMyapp custom text";
-    return nil;
-}
-- (id) activityViewControllerPlaceholderItem:(UIActivityViewController *)activityViewController { return @""; }
 @end

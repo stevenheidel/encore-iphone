@@ -66,14 +66,14 @@ typedef enum {
 #pragma mark - View loading
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     //Initializations;
     abbrvDic = nil;
     self.searchHeaderView = nil;
     self.hasSearched = FALSE;
     self.comboSearchResultsDic = nil;
     showingSearchBar = NO; //by default hidden (see storyboard)
-    
+
     [self.tableView registerNib:[UINib nibWithNibName:@"ECSearchResultCell" bundle:nil]
          forCellReuseIdentifier:SearchCellIdentifier];
     [self.tableView registerNib:[UINib nibWithNibName:@"ECConcertCellView" bundle:nil]
@@ -90,7 +90,7 @@ typedef enum {
     [self setupLastFMView];
     self.shouldReload= NO;
     self.locationLabel.font = [UIFont heroFontWithSize:16.0f];
-    
+
     self.tap = [[UITapGestureRecognizer alloc]
                                    initWithTarget:self
                                    action:@selector(dismissKeyboard)];
@@ -111,7 +111,6 @@ typedef enum {
     [self.tableView setIndicatorStyle:UIScrollViewIndicatorStyleWhite];
     self.view.clipsToBounds = YES;
     self.futureConcerts = [[NSMutableArray alloc] init];
-    
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -470,7 +469,7 @@ typedef enum {
     //Use default navbar in youtube player
     [[UINavigationBar appearanceWhenContainedIn:[MPMoviePlayerViewController class], nil] setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
     
-    UIImageView* encoreLogo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo.png"]];
+    UIImageView* encoreLogo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
     self.navigationItem.titleView = encoreLogo;
     UIImage* image = [UIImage imageNamed:@"noimage"];
     self.navigationController.navigationBar.shadowImage = image;
@@ -523,18 +522,19 @@ typedef enum {
     }
 
     
+    NSShadow* shadow = [[NSShadow alloc] init];
+    shadow.shadowColor = nil;
+    shadow.shadowOffset = CGSizeMake(0, 0);
     
     NSDictionary* selectedTextAttr = [NSDictionary dictionaryWithObjectsAndKeys:
-                                      [UIColor whiteColor], UITextAttributeTextColor,
-                                      [UIColor clearColor], UITextAttributeTextShadowColor,
-                                      [NSValue valueWithUIOffset:UIOffsetMake(0, 0)], UITextAttributeTextShadowOffset,
-                                      [UIFont heroFontWithSize:17.0f], UITextAttributeFont,
+                                      [UIColor whiteColor], NSForegroundColorAttributeName,
+                                      shadow, NSShadowAttributeName,
+                                      [UIFont heroFontWithSize:17.0f], NSFontAttributeName,
                                        nil];
     NSDictionary* unselectedTextAttr = [NSDictionary dictionaryWithObjectsAndKeys:
-                                        [UIColor unselectedSegmentedControlColor], UITextAttributeTextColor,
-                                        [UIColor clearColor], UITextAttributeTextShadowColor,
-                                        [NSValue valueWithUIOffset:UIOffsetMake(0, 0)], UITextAttributeTextShadowOffset,
-                                        [UIFont heroFontWithSize:17.0f], UITextAttributeFont,
+                                        [UIColor unselectedSegmentedControlColor], NSForegroundColorAttributeName,
+                                        shadow, NSShadowAttributeName,
+                                        [UIFont heroFontWithSize:17.0f], NSFontAttributeName,
                                         nil];
 
     [[UISegmentedControl appearance] setTitleTextAttributes:selectedTextAttr forState:UIControlStateSelected];
@@ -840,9 +840,6 @@ typedef enum {
     return 0;
 }
 
--(void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-
-}
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (self.hasSearched) {
         if (indexPath.section == ECSearchResultSection) {
@@ -897,20 +894,7 @@ typedef enum {
         [self fetchPopularConcertsWithSearchType:ECSearchTypeFuture];
     }
 }
-//- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
-//{
-//    CGFloat endScrolling = scrollView.contentOffset.y + scrollView.frame.size.height;
-//    NSLog(@"total upcoming: %d future concerts: %d page: %d", self.totalUpcoming,self.futureConcerts.count,self.page);
-//        if (self.currentSearchType == ECSearchTypeFuture && endScrolling >= scrollView.contentSize.height && self.showLoadMore) {//at bottom
-//            if (self.totalUpcoming >= self.futureConcerts.count) {
-//                [self fetchPopularConcertsWithSearchType:ECSearchTypeFuture];
-//            }
-//            else {
-//                self.showLoadMore = NO;
-//                [self.loadMoreActivityIndicator stopAnimating];
-//            }
-//        }
-//}
+
 -(NSArray*) currentEventArray {
     if(self.hasSearched /*&& self.currentSearchType != ECSearchTypeToday8*/) {
         return self.searchResultsEvents;

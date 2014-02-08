@@ -69,11 +69,3 @@ static const int upcomingRows[] = {Tickets, Lineup,SongPreview, Location, Detail
 
 
 @end
-
-@interface APActivityProvider : UIActivityItemProvider <UIActivityItemSource>
-
-@property (nonatomic,strong) NSDictionary* concertDictionary;
-@end
-
-@interface APActivityIcon : UIActivity
-@end
