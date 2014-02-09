@@ -22,6 +22,9 @@
             self.isOnProfile = isOnProfile;
         }];
     }
+    else {
+        [self.delegate profileState:NO];
+    }
 }
 
 -(void) toggleProfileState {

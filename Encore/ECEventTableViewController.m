@@ -90,8 +90,6 @@
             [self.tableView reloadData];
         }
     }];
-    
-    [self initNavBarAddAndRemoveButton];
 }
 
 -(NSInteger) rowIndexForRowType:(ECEventRow) rowID {
@@ -430,19 +428,19 @@
     
 }
 
--(void) initNavBarAddAndRemoveButton {
-    self.navAddbutton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"removeConcert"] style:UIBarButtonItemStylePlain target:self action:@selector(addToProfile)];
-
-    self.navAddbutton.tintColor = [UIColor whiteColor];
-    self.navigationItem.rightBarButtonItem = self.navAddbutton;
-}
-
 //status checker delegate response
 -(void) profileState:(BOOL)isOnProfile {
     [self.changeConcertStateButton setButtonIsOnProfile:isOnProfile];
-    NSString* name = isOnProfile ? @"removeConcert" : @"addConcert";
+    NSString* name = isOnProfile ? @"removeConcertBorder" : @"addConcertBorder";
     UIImage* image = [UIImage imageNamed:name];
-    self.navAddbutton.image = image;
+    if (!self.navAddbutton) {
+        self.navAddbutton = [[UIBarButtonItem alloc] initWithImage:image style:UIBarButtonItemStylePlain target:self action:@selector(addToProfile)];
+        self.navAddbutton.tintColor = [UIColor whiteColor];
+        self.navigationItem.rightBarButtonItem = self.navAddbutton;
+    }
+    else {
+        self.navAddbutton.image = image;
+    }
     
     //if user has this concert in his account
     if(isOnProfile)
