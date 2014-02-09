@@ -109,10 +109,10 @@
     [self.statusManager checkProfileState];
 }
 -(void) viewWillDisappear:(BOOL)animated {
-    if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
-        [self.player pause];
-        [[NSNotificationCenter defaultCenter] removeObserver:self];
-    }
+//    if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
+//    }
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [self stopPlaying];
     [super viewWillDisappear:animated];
 }
 
@@ -794,6 +794,13 @@
     self.player = [[AVPlayer alloc] initWithPlayerItem:playerItem];
 }
 
+- (void) stopPlaying {
+    if (self.player && self.player.rate == 1.0) {
+        [self.player pause];
+        SongPreviewCell* cell = (SongPreviewCell*)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:SongPreview inSection:0]];
+        [cell.btnPlay setSelected:NO];
+    }
+}
 - (void) playpauseButtonTapped:(UIButton*)button {
     if(!self.player)
         [self prepareCurrentSong];
