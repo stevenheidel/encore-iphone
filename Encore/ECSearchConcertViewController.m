@@ -175,17 +175,19 @@ typedef enum {
         [geocoder reverseGeocodeLocation:[[CLLocation alloc] initWithLatitude:location.coordinate.latitude longitude:location.coordinate.longitude] completionHandler:^(NSArray *placemarks, NSError *error) {
             if (error) {
                 NSLog(@"Error reverse geocoding: %@", error.description);
-                self.lblSearchConcert.text = [NSString stringWithFormat:@"Find a concert you attended in %@",city];
             }
             
             else {
                 CLPlacemark* placemark = [placemarks objectAtIndex:0];
-                [NSUserDefaults setLastSearchArea:placemark.locality != nil ? placemark.locality : placemark.subAdministrativeArea];
-                self.lblSearchConcert.text = [NSString stringWithFormat:@"Find a concert you attended in %@",[NSUserDefaults lastSearchArea]];
+                NSString* searchArea = placemark.locality != nil ? placemark.locality : placemark.subAdministrativeArea;
+                [NSUserDefaults setLastSearchArea: searchArea];
+                [NSUserDefaults synchronize];
+                self.lblSearchConcert.text = [NSString stringWithFormat:@"Find a concert you attended in %@",searchArea];
                 
             }
         }];
-    }else{
+    }
+    else {
         self.lblSearchConcert.text = [NSString stringWithFormat:@"Find a concert you attended in %@",city];
         
     }
@@ -208,8 +210,10 @@ typedef enum {
 #pragma mark - Concerts Methods
 
 -(void) fetchPopularConcertsWithSearchType: (ECSearchType) type {
+    [self.hud show:YES];
     [ECJSONFetcher fetchPopularConcertsWithSearchType:type location:self.currentSearchLocation radius:[NSNumber numberWithFloat:self.currentSearchRadius] page:0  completion:^(NSArray *concerts,NSInteger total) {
         [self fetchedPopularConcerts:concerts forType:type];
+
     }];
 }
 

@@ -115,15 +115,12 @@ typedef enum {
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    if(!self.viewLoaded)
-    {
+    if(!self.viewLoaded) {
         self.viewLoaded= YES;
         //If walkthough finished animating
-        if(![NSUserDefaults shouldShowWalkthrough])
-        {
+        if(![NSUserDefaults shouldShowWalkthrough]) {
             //if user already set location using select location controller don't listen to location changes
-            if([NSUserDefaults lastSearchLocation].coordinate.latitude == 0 && [NSUserDefaults lastSearchLocation].coordinate.longitude == 0)
-            {
+            if([NSUserDefaults lastSearchLocation].coordinate.latitude == 0 && [NSUserDefaults lastSearchLocation].coordinate.longitude == 0) {
                 [(ECAppDelegate*)[[UIApplication sharedApplication] delegate] setUpLocationManager];
                 [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(LocationAcquired) name:ECLocationAcquiredNotification object:nil];
                 [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(LocationFailed) name:ECLocationFailedNotification object:nil];
@@ -136,6 +133,7 @@ typedef enum {
                     [alert show];
                 }
                 else {
+                    self.currentSearchLocation = [NSUserDefaults lastSearchLocation];
                     [self fetchConcerts];
                 }
                 NSString* city = [NSUserDefaults lastSearchArea];
@@ -152,6 +150,7 @@ typedef enum {
                             CLPlacemark* placemark = [placemarks objectAtIndex:0];
                             self.locationLabel.text = placemark.locality != nil ? placemark.locality : placemark.subAdministrativeArea;
                             [NSUserDefaults setLastSearchArea:self.locationLabel.text];
+                            [NSUserDefaults synchronize];
                         }
                     }];
 
@@ -316,9 +315,6 @@ typedef enum {
             self.totalUpcoming = total;
         }
         [self fetchedPopularConcerts:concerts forType:type];
-        if (type == self.currentSearchType) {
-            [self.hud hide:YES];
-        }
     }];
 }
 
