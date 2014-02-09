@@ -6,7 +6,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#define PULSE_DELAY 3.0
 @interface LRGlowingButton : UIButton
 
 @property (nonatomic,assign) BOOL glowsWhenHighlighted;

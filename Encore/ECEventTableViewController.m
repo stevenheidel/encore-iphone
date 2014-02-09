@@ -172,7 +172,7 @@
         leftButtonGlow.glowsWhenHighlighted = YES;
         leftButtonGlow.highlightedGlowColor = [UIColor greenColor];
         leftButton = leftButtonGlow;
-        [leftButtonGlow performSelector:@selector(startPulse) withObject:nil afterDelay:10.0];
+        [leftButtonGlow performSelector:@selector(startPulse) withObject:nil afterDelay:PULSE_DELAY];
     }
     else {
         leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
