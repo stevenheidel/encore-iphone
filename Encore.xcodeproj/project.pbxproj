@@ -1936,7 +1936,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
-					/Users/shimmy/Code/Encore/iphone/Libraries/Tapjoy.embeddedframework,
+					"$(SRCROOT)/Libraries/Tapjoy.embeddedframework",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Encore/Encore-Prefix.pch";
@@ -1986,7 +1986,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
-					/Users/shimmy/Code/Encore/iphone/Libraries/Tapjoy.embeddedframework,
+					"$(SRCROOT)/Libraries/Tapjoy.embeddedframework",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Encore/Encore-Prefix.pch";
