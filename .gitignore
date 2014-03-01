@@ -15,5 +15,5 @@ profile
 DerivedData
 .idea/
 *.hmap
-
+*.ipa
 Encore/Staging.h
