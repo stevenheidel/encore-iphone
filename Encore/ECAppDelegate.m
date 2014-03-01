@@ -408,4 +408,16 @@
     [NSUserDefaults synchronize];
 }
 
+-(BOOL) application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    NSString* urlString = [url absoluteString];
+    NSString* searchString = @"events/";
+    NSRange range = [urlString rangeOfString:searchString];
+    if (range.location != NSNotFound) {
+        NSString* eventID = [urlString substringFromIndex:range.location+searchString.length];
+        [self.mainViewController loadConcertWithID: eventID];
+        [Flurry logEvent:@"LoadedConcertSharedOnFacebook" withParameters:[NSDictionary dictionaryWithObject:eventID forKey:@"eventID"]];
+    }
+    return YES;
+}
+
 @end

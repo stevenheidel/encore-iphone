@@ -13,6 +13,24 @@
 
 //TODO could change to use blocks instead of delegates to return success
 @implementation ECJSONFetcher
+
++(void) fetchConcertWithEventID: (NSString *) eventID completion: (void (^)(NSDictionary* concert)) completion {
+    NSString* concertURL = [NSString stringWithFormat:SingleConcertURL,eventID];
+    NSURL* url = [NSURL URLWithString:concertURL];
+    NSURLRequest * request = [NSURLRequest requestWithURL:url];
+    AFJSONRequestOperation * operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        if (completion) {
+            completion((NSDictionary*) JSON);
+        }
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        NSLog(@"%@: Failed to get single concert %@, Error; %@", NSStringFromClass([ECJSONFetcher class]), eventID,[[error description] substringToIndex:MAX_ERROR_LEN]);
+        if (completion) {
+            completion(nil);
+        }
+    }];
+    [operation start];
+}
+
 +(void) fetchConcertsForUserID: (NSString *) fbID  completion: (void (^)(NSDictionary* concerts)) completion {
     __block NSDictionary * concertList;
     NSString *  fullConcertsUrl = [NSString stringWithFormat:UserConcertsURL,fbID];

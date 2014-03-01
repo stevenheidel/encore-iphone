@@ -21,7 +21,7 @@
 - (IBAction)openLastFM:(id)sender;
 
 - (IBAction)modifySearchLocation;
-
+-(void) loadConcertWithID: (NSString*) eventID;
 @property (weak, nonatomic) IBOutlet UILabel* locationLabel;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *locationBarButton;
 @property (nonatomic, strong) UIView* noConcertsFooterView;

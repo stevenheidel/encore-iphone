@@ -13,6 +13,7 @@
 @protocol ECJSONFetcherDelegate;
 
 @interface ECJSONFetcher : NSObject
++(void) fetchConcertWithEventID: (NSString *) eventID completion: (void (^)(NSDictionary* concert)) completion;
 +(void) fetchConcertsForUserID: (NSString *) fbID
                     completion: (void (^)(NSDictionary* concerts)) completion;
 

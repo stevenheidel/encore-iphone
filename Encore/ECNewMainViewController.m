@@ -924,6 +924,47 @@ typedef enum {
     
 }
 
+BOOL dateIsPast (NSDate* date) {
+    NSDate* today = [NSDate date];
+    NSComparisonResult result =[date compare:today];
+    if (result == NSOrderedAscending) {
+        return YES;
+    }
+        return NO;
+}
+
+-(void) loadConcertWithID: (NSString*) eventID {
+    [ECJSONFetcher fetchConcertWithEventID:eventID completion:^(NSDictionary *concert) {
+        if (concert) {
+            NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+            NSDate* eventDate = [dateFormatter dateFromString:concert[@"date"]];
+            if (eventDate) {
+                if (!self.view.window) {
+                    [self dismissViewControllerAnimated:NO completion:nil];
+                    [self.navigationController popToRootViewControllerAnimated:NO];
+                }
+                if (dateIsPast(eventDate)) {
+                    UIStoryboard* sb = [UIStoryboard storyboardWithName:@"ECPastStoryboard" bundle:nil];
+                    ECPastViewController * vc = [sb instantiateInitialViewController];
+                    vc.tense = ECSearchTypePast;
+                    vc.backButtonShouldGlow =  NO;
+                    vc.concert = concert;
+                    [self.navigationController pushViewController:vc animated:NO];
+                }
+                else {
+                    UIStoryboard* sb = [UIStoryboard storyboardWithName:@"ECUpcomingStoryboard" bundle:nil];
+                    ECUpcomingViewController * vc = [sb instantiateInitialViewController];
+                    vc.tense = ECSearchTypeFuture;
+                    vc.backButtonShouldGlow = NO;
+                    vc.concert = concert;
+                    [self.navigationController pushViewController:vc animated:NO];
+                }
+            }
+        }
+    }];
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent]; 

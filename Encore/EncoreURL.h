@@ -41,6 +41,7 @@ static NSString *const PastPopularConcertsURL = @"events/past.json";
 static NSString *const FuturePopularConcertsURL = @"events/future.json";
 static NSString *const TodayPopularConcertsURL = @"events/today.json";
 
+static NSString *const SingleConcertURL = @BASE_URL_DEF "events/%@";
 //Artists and Concerts combo
 //purposely left out base url, get is initialized with base url
 static NSString *const ArtistCombinedSearchURL = @"artists/combined_search.json";
