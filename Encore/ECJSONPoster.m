@@ -25,7 +25,7 @@
     unsigned int unitFlags =  NSYearCalendarUnit;
     NSDateComponents* breakdownInfo = [[NSCalendar currentCalendar] components: unitFlags fromDate:date toDate:today options:0];
 //    NSLog(@"%d", [breakdownInfo year]);
-    return [breakdownInfo year];
+    return (int)[breakdownInfo year];
 }
 
 +(void) postUser:(NSDictionary/*<FBGraphUser>*/ *)user completion: (void (^)(NSDictionary* response)) completion {

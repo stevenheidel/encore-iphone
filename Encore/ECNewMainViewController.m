@@ -891,7 +891,7 @@ typedef enum {
     
     [self.loadMoreButton setEnabled:NO];
     [self.loadMoreButton setTitle:@"Loading..." forState:UIControlStateNormal];
-    NSLog(@"%@: Load More tapped. Currently showing %d concerts. Total remaining: %d Page: %d",NSStringFromClass(self.class),self.futureConcerts.count,self.totalUpcoming,self.page-1);
+    NSLog(@"%@: Load More tapped. Currently showing %i concerts. Total remaining: %i Page: %i",NSStringFromClass(self.class),(int)self.futureConcerts.count,(int)self.totalUpcoming,(int)(self.page-1));
     if (self.totalUpcoming > self.futureConcerts.count) {
         [self.loadMoreActivityIndicator startAnimating];
         [self fetchPopularConcertsWithSearchType:ECSearchTypeFuture];
@@ -968,7 +968,7 @@ BOOL dateIsPast (NSDate* date) {
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent]; 
-    [Flurry logEvent:@"Main_Selected_Row" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[self currentSearchTypeString], @"Search_Type", [NSNumber numberWithInt:indexPath.row], @"row", self.hasSearched ? @"post_search" : @"not_post_search", @"is_post_search", nil]];
+    [Flurry logEvent:@"Main_Selected_Row" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[self currentSearchTypeString], @"Search_Type", [NSNumber numberWithInteger:indexPath.row], @"row", self.hasSearched ? @"post_search" : @"not_post_search", @"is_post_search", nil]];
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (self.hasSearched) {

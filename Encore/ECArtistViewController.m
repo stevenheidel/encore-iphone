@@ -186,7 +186,7 @@ typedef enum {
             upcomingVC.previousArtist = self.artist;
             [self.navigationController pushViewController:upcomingVC animated:YES];
         }
-        [Flurry logEvent:@"Main_Selected_Row" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"Artist_%@",self.currentSelection==PastSegment ? @"Past" : @"Upcoming"], @"Search_Type", [NSNumber numberWithInt:indexPath.row], @"row", @"n/a", @"is_post_search", nil]];
+        [Flurry logEvent:@"Main_Selected_Row" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"Artist_%@",self.currentSelection==PastSegment ? @"Past" : @"Upcoming"], @"Search_Type", [NSNumber numberWithInteger:indexPath.row], @"row", @"n/a", @"is_post_search", nil]];
     }
 }
 
@@ -419,6 +419,6 @@ typedef enum {
 
 - (IBAction)switchedSelection:(id)sender {
     NSInteger selectedIndex = [(UISegmentedControl*) sender selectedSegmentIndex];
-    self.artistVC.currentSelection = selectedIndex;
+    self.artistVC.currentSelection = (SegmentedControlIndices)selectedIndex;
 }
 @end

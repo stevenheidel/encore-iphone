@@ -46,7 +46,7 @@ static NSString *const SingleConcertURL = @BASE_URL_DEF "events/%@";
 //purposely left out base url, get is initialized with base url
 static NSString *const ArtistCombinedSearchURL = @"artists/combined_search.json";
 static NSString *const ArtistPictureURL = @BASE_URL_DEF "artists/picture.json?artist_id=%@"; //,artistid
-static NSString *const ArtistInfoURL = @BASE_URL_DEF "artists/info.json?artist_id=%@&limit_events=%d";//,arist,limit events
+static NSString *const ArtistInfoURL = @BASE_URL_DEF "artists/info.json?artist_id=%@&limit_events=%i";//,arist,limit events
 //Posts
 static NSString *const ConcertPostsURL = @BASE_URL_DEF "events/%@/posts" ; //,concertID
 static NSString *const FlagPostURL = @"posts/%@/flag.json"; //,postID

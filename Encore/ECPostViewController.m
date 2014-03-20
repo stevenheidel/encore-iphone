@@ -302,7 +302,7 @@ typedef enum {
         if(buttonIndex != actionSheet.cancelButtonIndex){
             NSString* flag = [actionSheet buttonTitleAtIndex:buttonIndex];
             
-            NSMutableDictionary* params = [NSMutableDictionary dictionaryWithObjectsAndKeys:flag,@"flag",[NSNumber numberWithInt:buttonIndex], @"button_index",nil];
+            NSMutableDictionary* params = [NSMutableDictionary dictionaryWithObjectsAndKeys:flag,@"flag",[NSNumber numberWithInteger:buttonIndex], @"button_index",nil];
             [params addEntriesFromDictionary:self.post];
             
             [ECJSONPoster flagPost:self.postID withFlag:flag fromUser: [self userID] completion:^(BOOL success) {

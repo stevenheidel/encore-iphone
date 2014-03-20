@@ -467,7 +467,7 @@ NSString * const kNewAttachmentKey = @"kNewAttachmentKey";
         CGPoint point = [gesture locationInView:_webView];
         
         //// Get the URL link at the touch location
-        NSString *function = [NSString stringWithFormat:@"script.getElement(%i,%i);", (NSInteger)point.x, (NSInteger)point.y];
+        NSString *function = [NSString stringWithFormat:@"script.getElement(%li,%li);", (long)point.x, (long)point.y];
         NSString *result = [_webView stringByEvaluatingJavaScriptFromString:function];
         
         NSData *JSONData = [result dataUsingEncoding:NSStringEncodingConversionAllowLossy];

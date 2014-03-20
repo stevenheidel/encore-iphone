@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="nnw-kD-SbF">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="nnw-kD-SbF">
     <dependencies>
         <deployment defaultVersion="1536" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
         <!--Past View Controller-->
@@ -441,6 +441,7 @@
                     </tableView>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="568"/>
                     <connections>
                         <outlet property="eventImage" destination="wB8-j3-X2v" id="RSh-Qd-a6A"/>
                         <outlet property="eventName" destination="I6s-Lx-ngi" id="CiO-OT-JQM"/>
@@ -471,6 +472,15 @@
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
+                                <label key="backgroundView" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" text="No photos or videos found." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="320" id="gSV-Ap-JhE">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="130" id="m6g-Sn-HOF"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="16"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="post" id="dto-Vy-kjg" customClass="ECPostCell">
                                         <rect key="frame" x="0.0" y="116" width="103" height="103"/>
@@ -524,8 +534,8 @@
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oRr-Rb-slR">
-                                            <rect key="frame" x="20" y="28" width="280" height="23"/>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oRr-Rb-slR">
+                                            <rect key="frame" x="20" y="29" width="280" height="23"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="23" id="9WV-lW-32h"/>
                                             </constraints>
@@ -580,32 +590,21 @@
                                     <constraint firstItem="Cvf-kh-lB5" firstAttribute="leading" secondItem="bNr-nN-xjG" secondAttribute="leading" constant="30" id="aE7-Gh-CaR"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" text="No photos or videos found." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="gSV-Ap-JhE">
-                                <rect key="frame" x="20" y="219" width="280" height="130"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="130" id="m6g-Sn-HOF"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="16"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="bNr-nN-xjG" secondAttribute="bottom" id="I7x-h2-e2T"/>
-                            <constraint firstItem="gSV-Ap-JhE" firstAttribute="leading" secondItem="zRa-sd-kUO" secondAttribute="leading" constant="20" symbolic="YES" id="Lic-xh-hE7"/>
                             <constraint firstItem="bNr-nN-xjG" firstAttribute="trailing" secondItem="zRa-sd-kUO" secondAttribute="trailing" id="OWF-2e-GYO"/>
                             <constraint firstItem="4nW-7X-Iq4" firstAttribute="top" secondItem="zRa-sd-kUO" secondAttribute="top" id="OvS-Bb-X8M"/>
                             <constraint firstItem="4nW-7X-Iq4" firstAttribute="bottom" secondItem="zRa-sd-kUO" secondAttribute="bottom" id="Uha-6A-oKD"/>
                             <constraint firstItem="bNr-nN-xjG" firstAttribute="leading" secondItem="zRa-sd-kUO" secondAttribute="leading" id="dDK-ge-eAz"/>
                             <constraint firstItem="4nW-7X-Iq4" firstAttribute="trailing" secondItem="zRa-sd-kUO" secondAttribute="trailing" id="hPK-DX-wmh"/>
                             <constraint firstItem="4nW-7X-Iq4" firstAttribute="leading" secondItem="zRa-sd-kUO" secondAttribute="leading" id="hPd-dk-PAp"/>
-                            <constraint firstAttribute="trailing" secondItem="gSV-Ap-JhE" secondAttribute="trailing" constant="20" symbolic="YES" id="oDI-oK-kMi"/>
-                            <constraint firstItem="gSV-Ap-JhE" firstAttribute="centerY" secondItem="4nW-7X-Iq4" secondAttribute="centerY" id="z1Y-1G-IRp"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Gpm-0C-BxU"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="568"/>
                     <connections>
                         <outlet property="footerView" destination="bNr-nN-xjG" id="Gdt-4M-dLP"/>
                         <outlet property="noPostsLabel" destination="gSV-Ap-JhE" id="4xJ-wo-L87"/>

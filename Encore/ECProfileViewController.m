@@ -236,7 +236,7 @@ typedef enum {
 //    else {
 //        text = [NSString stringWithFormat:@"%d Concert%@ (%d Upcoming)",total,suffix,nFut];
 //    }
-    text = [NSString stringWithFormat:@"%d Concert%@",total,suffix];
+    text = [NSString stringWithFormat:@"%i Concert%@",(int)total,suffix];
     self.lblConcerts.text = text;
 }
 
@@ -399,7 +399,7 @@ typedef enum {
     vc.eventStateDelegate = self;
     [self.navigationController pushViewController:vc animated:YES];
     
-    [Flurry logEvent:@"Selected_Event_On_Profile" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:concert.eventID, @"eventID",concert.eventName,@"eventName",[NSNumber numberWithInt:indexPath.row],@"row",[ECProfileViewController tenseStringForSection:section],@"Tense", nil]];
+    [Flurry logEvent:@"Selected_Event_On_Profile" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:concert.eventID, @"eventID",concert.eventName,@"eventName",[NSNumber numberWithInteger:indexPath.row],@"row",[ECProfileViewController tenseStringForSection:section],@"Tense", nil]];
 
 }
 

@@ -161,7 +161,7 @@ static NSString * const kDateFormat = @"yyyy-MM-dd";
     NSDate* date = [formatter dateFromString:dateStr];
     unsigned int unitFlags =  NSDayCalendarUnit;
     NSDateComponents* breakdownInfo = [[NSCalendar currentCalendar] components: unitFlags fromDate:date];
-    return [NSString stringWithFormat:@"%d",[breakdownInfo day]];
+    return [NSString stringWithFormat:@"%d",(int)[breakdownInfo day]];
 }
 
 -(NSString *) weekday {

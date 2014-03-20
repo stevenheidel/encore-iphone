@@ -288,7 +288,7 @@
         newIndex = 0;  //loop to the beginning
     }
     
-    return [NSDictionary dictionaryWithObjectsAndKeys:[self.posts objectAtIndex:newIndex], @"dic", [NSNumber numberWithInt:newIndex], @"index",nil];
+    return [NSDictionary dictionaryWithObjectsAndKeys:[self.posts objectAtIndex:newIndex], @"dic", [NSNumber numberWithInteger:newIndex], @"index",nil];
 }
 
 #pragma mark FB Sharing

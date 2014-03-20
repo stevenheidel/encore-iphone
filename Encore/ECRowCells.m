@@ -108,7 +108,7 @@
 -(void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     NSUInteger row = indexPath.row;
     NSString* artist = [[self.lineup objectAtIndex:indexPath.row] objectForKey:@"artist"];
-    [Flurry logEvent:@"Tapped_Lineup_Artist" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:artist,@"artist", [NSNumber numberWithInt:row], @"lineup_index",nil]];
+    [Flurry logEvent:@"Tapped_Lineup_Artist" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:artist,@"artist", [NSNumber numberWithInteger:row], @"lineup_index",nil]];
     
     if ([artist isEqualToString:self.previousArtist]) {
         [self.navController popViewControllerAnimated:YES];

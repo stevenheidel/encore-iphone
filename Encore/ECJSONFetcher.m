@@ -39,14 +39,14 @@
     AFJSONRequestOperation * operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         
         concertList = (NSDictionary*) [(NSDictionary*)JSON objectForKey:@"events"];
-        NSLog(@"%@: Successfully fetched %d past and %d future concerts for profile %@", NSStringFromClass([ECJSONFetcher class]),[[concertList objectForKey:@"past"] count], [[concertList objectForKey:@"future"] count], fbID);
+        NSLog(@"%@: Successfully fetched %d past and %d future concerts for profile %@", NSStringFromClass([ECJSONFetcher class]),(int)[[concertList objectForKey:@"past"] count], (int)[[concertList objectForKey:@"future"] count], fbID);
         if (completion) {
             completion(concertList);
         }
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         NSLog(@"ERROR fetching concerts for userID %@: %@...",fbID,[[error description] substringToIndex:MAX_ERROR_LEN]);
         if (RETURN_TEST_DATA) {
-            NSDictionary * past1 = [NSDictionary dictionaryWithObjectsAndKeys:@"2013-06-12", @"date", @"Test Venue 1", @"venue_name", @"My Artist", @"name", @"11", @"server_id", nil];
+            NSDictionary * past1 = [NSDictionary dictionaryWithObjectsAndKeys:@"2013-06-12", @"date", @"%ldst Venue 1", @"venue_name", @"My Artist", @"name", @"11", @"server_id", nil];
             NSDictionary * past2 = [NSDictionary dictionaryWithObjectsAndKeys:@"2012-05-11", @"date", @"Test Venue 2", @"venue_name", @"Go Artist", @"name", @"22", @"server_id", nil];
             NSDictionary * future1 = [NSDictionary dictionaryWithObjectsAndKeys:@"2013-09-11", @"date", @"Test Venue 3", @"venue_name", @"Artist2013", @"name", @"33", @"server_id", nil];
             NSDictionary * future2 = [NSDictionary dictionaryWithObjectsAndKeys:@"2013-12-22", @"date", @"Test Venue 4", @"venue_name", @"Cool Artist", @"name", @"44", @"server_id", nil];
@@ -95,7 +95,7 @@ NSString* stringForSearchType(ECSearchType searchType) {
     NSNumber* longitude = [NSNumber numberWithDouble:location.coordinate.longitude];
     NSDictionary * parameters ;
     if(searchType == ECSearchTypeFuture)
-        parameters = [NSDictionary dictionaryWithObjectsAndKeys:latitude,@"latitude", longitude, @"longitude", radius, @"radius",[NSString stringWithFormat:@"%d",page],@"page",@"50",@"limit",nil];
+        parameters = [NSDictionary dictionaryWithObjectsAndKeys:latitude,@"latitude", longitude, @"longitude", radius, @"radius",[NSString stringWithFormat:@"%d",(int)page],@"page",@"50",@"limit",nil];
     else
         parameters = [NSDictionary dictionaryWithObjectsAndKeys:latitude,@"latitude", longitude, @"longitude", radius, @"radius",nil];
 
@@ -114,7 +114,7 @@ NSString* stringForSearchType(ECSearchType searchType) {
             concertList = nil;
         NSInteger total = [[(NSDictionary*) responseObject objectForKey:@"total"] integerValue];
         
-        NSLog(@"%@: Successfully fetched %d popular concerts for search type: %@ Location: %f %f", NSStringFromClass([ECJSONFetcher class]),concertList.count,stringForSearchType(searchType),location.coordinate.latitude,location.coordinate.longitude);
+        NSLog(@"%@: Successfully fetched %d popular concerts for search type: %@ Location: %f %f", NSStringFromClass([ECJSONFetcher class]),(int)concertList.count,stringForSearchType(searchType),location.coordinate.latitude,location.coordinate.longitude);
         if (completion) {
             completion(concertList,total);
         }
@@ -154,7 +154,7 @@ NSString* stringForSearchType(ECSearchType searchType) {
 
             artistConcertComboList = (NSDictionary*)responseObject;
 //        NSLog(@"%@",artistConcertComboList.description);
-        NSLog(@"Successfully fetched %d %@ Artists and Concerts for string. %@", [[artistConcertComboList objectForKey:@"events"] count],tenseString, searchStr);
+        NSLog(@"Successfully fetched %d %@ Artists and Concerts for string. %@", (int)[[artistConcertComboList objectForKey:@"events"] count],tenseString, searchStr);
         
             if (completion) {
                 completion(artistConcertComboList);
@@ -188,7 +188,7 @@ NSString* stringForSearchType(ECSearchType searchType) {
 }
 
 +(AFJSONRequestOperation*) fetchInfoForArtist:(NSString*) artist completion: (void(^) (NSDictionary* artistInfo)) completion {
-    NSInteger limitEvents = 10;
+    int limitEvents = 10;
     NSString* infoURL = [NSString stringWithFormat:ArtistInfoURL,[artist stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],limitEvents];
     NSURL* url = [NSURL URLWithString:infoURL];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
@@ -198,7 +198,7 @@ NSString* stringForSearchType(ECSearchType searchType) {
         NSDictionary* events = [info objectForKey:@"events"];
         NSInteger pastCount = [[events objectForKey:@"past"] count];
         NSInteger upcomingCount = [[events objectForKey:@"upcoming"] count];
-        NSLog(@"%@: Successfully retrieved info for artist %@. %d upcoming and %d past",NSStringFromClass([ECJSONFetcher class]),artist,upcomingCount,pastCount);
+        NSLog(@"%@: Successfully retrieved info for artist %@. %d upcoming and %d past",NSStringFromClass([ECJSONFetcher class]),artist,(int)upcomingCount,(int)pastCount);
 
         if (completion) {
             completion(info);
@@ -293,7 +293,7 @@ NSString* stringForSearchType(ECSearchType searchType) {
     AFJSONRequestOperation * operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
 
         NSArray* songs = [JSON objectForKey:@"results"];
-        NSLog(@"%@: Successfully got %d songs for artist %@",NSStringFromClass([self class]),songs.count,artist);
+        NSLog(@"%@: Successfully got %d songs for artist %@",NSStringFromClass([self class]),(int)songs.count,artist);
         if (completion) {
             completion (songs);
         }

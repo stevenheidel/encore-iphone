@@ -123,7 +123,7 @@
 }
 
 +(ECSearchType) lastSearchType {
-    return [[NSUserDefaults standardUserDefaults] integerForKey:@"Last_Search_Type"];
+    return (ECSearchType)[[NSUserDefaults standardUserDefaults] integerForKey:@"Last_Search_Type"];
 }
 
 +(void) setLastSearchType:(ECSearchType)searchType {
