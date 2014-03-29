@@ -111,6 +111,9 @@
 -(void) viewWillDisappear:(BOOL)animated {
 //    if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
 //    }
+    if (self.isMovingToParentViewController) {
+        self.statusManager = nil;
+    }
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self stopPlaying];
     [super viewWillDisappear:animated];

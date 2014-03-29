@@ -21,6 +21,9 @@
 #import "EncoreURL.h"
 
 #import "LRGlowingButton.h"
+typedef enum {
+    NoPostsAlertTag
+}GridVcAlertTags;
 @implementation ECPostCell
 
 -(void) setPostType:(ECPostType)postType {
@@ -35,7 +38,7 @@
 @end
 
 
-@interface ECGridViewController () {
+@interface ECGridViewController () <UIAlertViewDelegate> {
     BOOL _isPopulating;
 }
 
@@ -155,7 +158,7 @@
         if(isPopulating){
             //Show the footer
             [self showFooter];
-            [self hideNoPostsLabel];
+//            [self hideNoPostsLabel];
         
         }else
         {
@@ -179,7 +182,7 @@
         if(fetchedPosts.count > 0){
             self.posts = fetchedPosts;
             [self.postsCollectionView reloadData];
-            [self hideNoPostsLabel];
+//            [self hideNoPostsLabel];
         }else{
             //Add No posts found Label
             if (!_isPopulating && !shouldAsk) {
@@ -219,15 +222,21 @@
 
 }
 -(void)showNoPostsLabel{
-    [UIView animateWithDuration:0.3 animations:^{
-        [self.noPostsLabel setAlpha:1];
-    }];
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"No posts found" message:@"Unfortunately we could not find any posts for this show." delegate:self cancelButtonTitle:@"Back" otherButtonTitles: nil];
+    alert.tag = NoPostsAlertTag;
+    [alert show];
 }
 
 -(void)hideNoPostsLabel{
     [UIView animateWithDuration:0.3 animations:^{
         [self.noPostsLabel setAlpha:0];
     }];
+}
+
+-(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (alertView.tag == NoPostsAlertTag && buttonIndex == alertView.cancelButtonIndex) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 #pragma mark - collection view

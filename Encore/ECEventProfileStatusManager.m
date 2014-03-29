@@ -18,7 +18,9 @@
     //alternatively could check if logged in, but this is essentially the same result; can't check if on profile without an id
     if(userID){
         [ECJSONFetcher checkIfConcert:self.eventID isOnProfile:userID completion:^(BOOL isOnProfile) {
-            [self.delegate profileState:isOnProfile];
+            if (self.delegate) {
+                [self.delegate profileState:isOnProfile];
+            }
             self.isOnProfile = isOnProfile;
         }];
     }
@@ -43,10 +45,14 @@
         [ECJSONPoster addConcert:self.eventID toUser:[NSUserDefaults userID] completion:^(BOOL success) {
             if (success) {
                 self.isOnProfile = !self.isOnProfile;
-                [self.delegate successChangingState:self.isOnProfile];
+                if(self.delegate) {
+                    [self.delegate successChangingState:self.isOnProfile];
+                }
             }
             else {
-                [self.delegate failedToChangeState:self.isOnProfile];
+                if (self.delegate) {
+                    [self.delegate failedToChangeState:self.isOnProfile];
+                }
             }
         }];
     }
