@@ -112,6 +112,7 @@
 //    if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
 //    }
     if (self.isMovingToParentViewController) {
+        self.statusManager.delegate = nil;
         self.statusManager = nil;
     }
     [[NSNotificationCenter defaultCenter] removeObserver:self];
