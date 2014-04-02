@@ -572,9 +572,15 @@ typedef enum {
         int i = 0;
         NSURL* url = nil;
         while (url == nil) {
+            if (i == [currentEventArray count]) {
+                break;
+            }
             url = [[currentEventArray objectAtIndex:i++] imageURL];
         }
-        UIImage *background = [[UIImage imageWithData:[NSData dataWithContentsOfURL:url]] imageWithGaussianBlur];
+        UIImage* background = nil;
+        if (url) {
+            background = [[UIImage imageWithData:[NSData dataWithContentsOfURL:url]] imageWithGaussianBlur];
+        }
         [self.imgBackground setImage:background];
     }
     else [self.imgBackground setImage:nil];
