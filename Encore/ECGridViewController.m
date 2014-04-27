@@ -19,8 +19,8 @@
 #import "ECAlertTags.h"
 #import "ATAppRatingFlow.h"
 #import "EncoreURL.h"
-
-#import "LRGlowingButton.h"
+//
+//#import "LRGlowingButton.h"
 typedef enum {
     NoPostsAlertTag
 }GridVcAlertTags;
@@ -88,15 +88,16 @@ typedef enum {
     UIImage *leftButImage = [UIImage imageNamed:@"backButton"];
     UIButton* leftButton = nil;
     if (self.backButtonShouldGlow) {
-        LRGlowingButton* leftButtonGlow = [LRGlowingButton buttonWithType:UIButtonTypeCustom];
-        leftButtonGlow.glowsWhenHighlighted = YES;
-        leftButtonGlow.highlightedGlowColor = [UIColor greenColor];
-        leftButton = leftButtonGlow;
-        [leftButtonGlow performSelector:@selector(startPulse) withObject:nil afterDelay:PULSE_DELAY];
+//        LRGlowingButton* leftButtonGlow = [LRGlowingButton buttonWithType:UIButtonTypeCustom];
+//        leftButtonGlow.glowsWhenHighlighted = YES;
+//        leftButtonGlow.highlightedGlowColor = [UIColor greenColor];
+//        leftButton = leftButtonGlow;
+//        [leftButtonGlow performSelector:@selector(startPulse) withObject:nil afterDelay:PULSE_DELAY];
+        leftButImage = [UIImage imageNamed:@"orangeBackButton"];
     }
-    else {
+//    else {
         leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    }
+//    }
     [leftButton addTarget:self action:@selector(backButtonWasPressed) forControlEvents:UIControlEventTouchUpInside];
     leftButton.frame = CGRectMake(0, 0, leftButImage.size.width, leftButImage.size.height);
     [leftButton setBackgroundImage:leftButImage forState:UIControlStateNormal];
@@ -184,9 +185,8 @@ typedef enum {
             [self.postsCollectionView reloadData];
 //            [self hideNoPostsLabel];
         }else{
-            //Add No posts found Label
             if (!_isPopulating && !shouldAsk) {
-                [self showNoPostsLabel];
+                [self alertNoPosts];
             }
             if(shouldAsk) {
              [self askServerToPopulateConcert];
@@ -221,10 +221,13 @@ typedef enum {
     }];
 
 }
--(void)showNoPostsLabel{
-    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"No posts found" message:@"Unfortunately we could not find any posts for this show." delegate:self cancelButtonTitle:@"Back" otherButtonTitles: nil];
-    alert.tag = NoPostsAlertTag;
-    [alert show];
+-(void)alertNoPosts{
+    if ([self.navigationController.visibleViewController isEqual:self]) {
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"No posts found" message:@"Unfortunately we could not find any posts for this show." delegate:self cancelButtonTitle:@"Back" otherButtonTitles: nil];
+        alert.tag = NoPostsAlertTag;
+    
+        [alert show];
+    }
 }
 
 -(void)hideNoPostsLabel{

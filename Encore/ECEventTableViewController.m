@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Encore. All rights reserved.
 //
 
-#import "LRGlowingButton.h"
+//#import "LRGlowingButton.h"
 #import "ECEventTableViewController.h"
 
 #import "ECPastViewController.h"
@@ -106,12 +106,14 @@
     }
     self.statusManager.eventID = self.concert.eventID;
     [self.statusManager setDelegate:self];
-    [self.statusManager checkProfileState];
+    if ([self isMovingToParentViewController]) {
+        [self.statusManager checkProfileState];
+    }
 }
 -(void) viewWillDisappear:(BOOL)animated {
 //    if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
 //    }
-    if (self.isMovingToParentViewController) {
+    if ([self isMovingFromParentViewController]) {
         self.statusManager.delegate = nil;
         self.statusManager = nil;
     }
@@ -172,15 +174,16 @@
     UIImage *leftButImage = [UIImage imageNamed:@"backButton"];
     UIButton* leftButton = nil;
     if (self.backButtonShouldGlow) {
-        LRGlowingButton* leftButtonGlow = [LRGlowingButton buttonWithType:UIButtonTypeCustom];
-        leftButtonGlow.glowsWhenHighlighted = YES;
-        leftButtonGlow.highlightedGlowColor = [UIColor greenColor];
-        leftButton = leftButtonGlow;
-        [leftButtonGlow performSelector:@selector(startPulse) withObject:nil afterDelay:PULSE_DELAY];
+//        LRGlowingButton* leftButtonGlow = [LRGlowingButton buttonWithType:UIButtonTypeCustom];
+//        leftButtonGlow.glowsWhenHighlighted = YES;
+//        leftButtonGlow.highlightedGlowColor = [UIColor greenColor];
+//        leftButton = leftButtonGlow;
+//        [leftButtonGlow performSelector:@selector(startPulse) withObject:nil afterDelay:PULSE_DELAY];
+        leftButImage = [UIImage imageNamed:@"orangeBackButton"];
     }
-    else {
+//    else {
         leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    }
+//    }
     [leftButton addTarget:self action:@selector(backButtonWasPressed) forControlEvents:UIControlEventTouchUpInside];
     leftButton.frame = CGRectMake(0, 0, leftButImage.size.width, leftButImage.size.height);
     [leftButton setBackgroundImage:leftButImage forState:UIControlStateNormal];
@@ -312,7 +315,15 @@
                                                               NSLog(@"Request Sent.");
                                                               [Flurry logEvent:@"Successfully_Invited_Friends" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger:friends.count],@"num_invited", nil]];
                                                           }
-                                                      }}];
+                                                      }
+                                                      [self openGraphShareTrigger];
+                                                  }];
+}
+
+-(void) openGraphShareTrigger {
+//    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Share on Facebook?" message:@"Share this concert on Facebook?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Share", nil];
+//    alert.tag =  ECShareOpenGraphTag;
+//    [alert show];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -760,7 +771,71 @@
         if (buttonIndex == alertView.firstOtherButtonIndex) {
             [self inviteFriends: self.uninvitedFriends];
         }
+        else {
+            [self openGraphShareTrigger];
+        }
         [Flurry logEvent:@"Invite_Friends_Alert_Result" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[alertView buttonTitleAtIndex:buttonIndex],@"tappedButton", self.concert.eventID,@"eventID",self.concert.headliner,@"headliner", nil]];
+    } else if (alertView.tag == ECShareOpenGraphTag) {
+        NSMutableDictionary<FBGraphObject> *action = [FBGraphObject graphObject];
+        action.provisionedForPost = YES;
+        NSMutableDictionary<FBGraphObject> *object = [FBGraphObject openGraphObjectForPost];
+        object.provisionedForPost = YES;
+        
+        object[@"og"] = @{@"title":self.concert.eventName,@"image":self.concert.imageURL.absoluteString,@"url":[NSString stringWithFormat:ShareConcertURL,self.concert.eventID],@"type":@"encorefm:concert"};
+        object[@"artist"] = self.concert.headliner;
+        object[@"venue"] = self.concert.venueName;
+        object[@"date"] = self.concert[@"date"];
+        object[@"city"] = self.concert.city;
+        id<FBGraphObject> location = [FBGraphObject graphObject];
+        location[@"latitude"] = [NSNumber numberWithFloat:self.concert.coordinates.coordinate.latitude];
+        location[@"longitude"] = [NSNumber numberWithFloat:self.concert.coordinates.coordinate.longitude];
+        object[@"coordinates"] = location;
+        action[@"concert"] = object;
+//        // Check if the Facebook app is installed and we can present the share dialog
+//        
+//        // Create an action
+//        id<FBOpenGraphAction> action2 = (id<FBOpenGraphAction>)[FBGraphObject graphObject];
+//        
+//        // Link the object to the action
+//        [action setObject:object forKey:@"concert"];
+//        FBOpenGraphActionShareDialogParams *params = [[FBOpenGraphActionShareDialogParams alloc] init];
+//        params.action = action2;
+//        params.actionType = @"encorefm:went_to";
+//        
+//        // If the Facebook app is installed and we can present the share dialog
+//        if([FBDialogs canPresentShareDialogWithOpenGraphActionParams:params]) {
+//            // Show the share dialog
+//            [FBDialogs presentShareDialogWithOpenGraphAction:action2
+//                                                  actionType:@"encorefm:went_to"
+//                                         previewPropertyName:@"dish"
+//                                                     handler:^(FBAppCall *call, NSDictionary *results, NSError *error) {
+//                                                         if(error) {
+//                                                             // There was an error
+//                                                             NSLog(@"Error publishing story: %@", error.description);
+//                                                         } else {
+//                                                             // Success
+//                                                             NSLog(@"result %@", results);
+//                                                         }
+//                                                     }];
+//            
+//            // If the Facebook app is NOT installed and we can't present the share dialog
+//        } else {
+//            // FALLBACK GOES HERE
+//        }
+        
+        
+        [FBRequestConnection startForPostWithGraphPath:@"me/encorefm:went_to"
+                                           graphObject:action
+                                     completionHandler:^(FBRequestConnection *connection,
+                                                         id result,
+                                                         NSError *error) {
+                                         if (error) {
+                                             NSLog(@"%@: error posting FB open graph story, %@",NSStringFromClass(self.class),error.description);
+                                         }
+                                         else {
+                                             NSLog(@"%@: Success posting FB open graph story",NSStringFromClass(self.class));
+                                         }
+                                     }];
     }
     
 }

@@ -10,6 +10,7 @@
 #import "ECJSONFetcher.h"
 #import "ECJSONPoster.h"
 #import "NSUserDefaults+Encore.h"
+#import <Crashlytics/Crashlytics.h>
 
 @implementation ECEventProfileStatusManager
 
@@ -17,6 +18,13 @@
     NSString* userID = [NSUserDefaults userID]; //only check if the userID is not null (null if not logged in)
     //alternatively could check if logged in, but this is essentially the same result; can't check if on profile without an id
     if(userID){
+        if (self.delegate == nil) {
+            CLS_LOG(@"Delegate is nil");
+        }
+        if (self.eventID.length == 0) {
+            CLS_LOG(@"Event ID is nil");
+        }
+        
         [ECJSONFetcher checkIfConcert:self.eventID isOnProfile:userID completion:^(BOOL isOnProfile) {
             if ([self.delegate respondsToSelector: @selector(profileState:)]) {
                 [self.delegate profileState:isOnProfile];
@@ -24,7 +32,7 @@
             self.isOnProfile = isOnProfile;
         }];
     }
-    else {
+    else if ([self.delegate respondsToSelector:@selector(profileState:)]){
         [self.delegate profileState:NO];
     }
 }

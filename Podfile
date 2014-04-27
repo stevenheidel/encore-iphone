@@ -7,7 +7,7 @@ pod 'FlurrySDK'
 pod 'XCDYouTubeVideoPlayerViewController'
 pod 'SAMRateLimit'
 pod 'Reachability'
-pod 'LRGlowingButton'
+#pod 'LRGlowingButton'
 #pod 'apptentive-ios'
 
 # Remove 64-bit build architecture from Pods targets

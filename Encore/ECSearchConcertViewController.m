@@ -291,6 +291,7 @@ typedef enum {
 -(void) setupHUD {
     //add hud progress indicator
     self.hud = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.hud setUserInteractionEnabled:NO];
     [self.view addSubview:self.hud];
     self.hud.labelText = NSLocalizedString(@"loading", nil);
     self.hud.color = [UIColor lightBlueHUDConfirmationColor];

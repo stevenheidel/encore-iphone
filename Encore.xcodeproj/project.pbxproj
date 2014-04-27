@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		2403C2C417E28A3100C518BF /* ECArtistView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2403C2C317E28A3100C518BF /* ECArtistView.storyboard */; };
+		241C7F62190871340026A8EA /* orangeBackButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 241C7F61190871340026A8EA /* orangeBackButton@2x.png */; };
+		241C7F66190876EC0026A8EA /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 241C7F65190876EC0026A8EA /* Crashlytics.framework */; };
+		241C7F68190896CB0026A8EA /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 241C7F67190896CB0026A8EA /* FacebookSDK.framework */; };
 		2459110518A76D310016B07F /* addConcertBorder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2459110318A76D310016B07F /* addConcertBorder@2x.png */; };
 		2459110618A76D310016B07F /* removeConcertBorder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2459110418A76D310016B07F /* removeConcertBorder@2x.png */; };
 		245BBDBF18A5F94600B80781 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 245BBDBE18A5F94600B80781 /* Accelerate.framework */; };
@@ -249,7 +252,6 @@
 		D92E8D9E17E84D5700FCD412 /* nextbuttom.png in Resources */ = {isa = PBXBuildFile; fileRef = D92E8D9C17E84D5700FCD412 /* nextbuttom.png */; };
 		D92E8D9F17E84D5700FCD412 /* nextbuttom@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D92E8D9D17E84D5700FCD412 /* nextbuttom@2x.png */; };
 		D940C19B17B4F56D00E4DF42 /* ECChangeConcertStateButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D940C19A17B4F56D00E4DF42 /* ECChangeConcertStateButton.m */; };
-		D948FE6E179F93EE0035297A /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D948FE6D179F93EE0035297A /* FacebookSDK.framework */; };
 		D948FE72179F951B0035297A /* ECFacebookManger.m in Sources */ = {isa = PBXBuildFile; fileRef = D948FE71179F951B0035297A /* ECFacebookManger.m */; };
 		D956550A17A177BD00B7DA59 /* ticketsbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = D956550817A177BD00B7DA59 /* ticketsbutton.png */; };
 		D956550B17A177BD00B7DA59 /* ticketsbutton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D956550917A177BD00B7DA59 /* ticketsbutton@2x.png */; };
@@ -315,6 +317,9 @@
 /* Begin PBXFileReference section */
 		2401A80C179BC8F300B881B7 /* ECPostType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECPostType.h; sourceTree = "<group>"; };
 		2403C2C317E28A3100C518BF /* ECArtistView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ECArtistView.storyboard; sourceTree = "<group>"; };
+		241C7F61190871340026A8EA /* orangeBackButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "orangeBackButton@2x.png"; sourceTree = "<group>"; };
+		241C7F65190876EC0026A8EA /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		241C7F67190896CB0026A8EA /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		2459110318A76D310016B07F /* addConcertBorder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "addConcertBorder@2x.png"; sourceTree = "<group>"; };
 		2459110418A76D310016B07F /* removeConcertBorder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "removeConcertBorder@2x.png"; sourceTree = "<group>"; };
 		245BBDB218A5F91900B80781 /* ApptentiveConnect.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ApptentiveConnect.xcodeproj; path = "apptentive-ios/ApptentiveConnect/ApptentiveConnect.xcodeproj"; sourceTree = "<group>"; };
@@ -608,7 +613,6 @@
 		D92E8D9D17E84D5700FCD412 /* nextbuttom@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nextbuttom@2x.png"; sourceTree = "<group>"; };
 		D940C19917B4F56D00E4DF42 /* ECChangeConcertStateButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECChangeConcertStateButton.h; sourceTree = "<group>"; };
 		D940C19A17B4F56D00E4DF42 /* ECChangeConcertStateButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECChangeConcertStateButton.m; sourceTree = "<group>"; };
-		D948FE6D179F93EE0035297A /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		D948FE70179F951B0035297A /* ECFacebookManger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECFacebookManger.h; sourceTree = "<group>"; };
 		D948FE71179F951B0035297A /* ECFacebookManger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECFacebookManger.m; sourceTree = "<group>"; };
 		D956550817A177BD00B7DA59 /* ticketsbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ticketsbutton.png; sourceTree = "<group>"; };
@@ -650,6 +654,7 @@
 				245BBDD218A5FD7B00B80781 /* CFNetwork.framework in Frameworks */,
 				245BBDD018A5FD7300B80781 /* AdSupport.framework in Frameworks */,
 				245BBDC418A5F9A100B80781 /* libApptentiveConnect.a in Frameworks */,
+				241C7F68190896CB0026A8EA /* FacebookSDK.framework in Frameworks */,
 				245BBDBF18A5F94600B80781 /* Accelerate.framework in Frameworks */,
 				D97836161805A0080061C203 /* MessageUI.framework in Frameworks */,
 				D4AA34FD17A0699F0015D79A /* AVFoundation.framework in Frameworks */,
@@ -663,11 +668,11 @@
 				A04C4333176F85F9003B4299 /* CoreLocation.framework in Frameworks */,
 				D4A8DDD5176AAA99005E9847 /* QuartzCore.framework in Frameworks */,
 				D4AA4CF31766B374009B0635 /* UIKit.framework in Frameworks */,
+				241C7F66190876EC0026A8EA /* Crashlytics.framework in Frameworks */,
 				245BBDCE18A5FD5700B80781 /* Tapjoy.framework in Frameworks */,
 				D4AA4CF51766B374009B0635 /* Foundation.framework in Frameworks */,
 				D4AA4CF71766B374009B0635 /* CoreGraphics.framework in Frameworks */,
 				255A9AF4A1C64F71B97704C8 /* libPods.a in Frameworks */,
-				D948FE6E179F93EE0035297A /* FacebookSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -880,6 +885,7 @@
 		D4A8DDD1176A44A0005E9847 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				241C7F61190871340026A8EA /* orangeBackButton@2x.png */,
 				24B3840118A5E24C00E5C714 /* removeConcert@2x.png */,
 				24B3840418A5E4E200E5C714 /* addConcert@2x.png */,
 				2459110318A76D310016B07F /* addConcertBorder@2x.png */,
@@ -1067,6 +1073,8 @@
 		D4AA4CF11766B374009B0635 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				241C7F67190896CB0026A8EA /* FacebookSDK.framework */,
+				241C7F65190876EC0026A8EA /* Crashlytics.framework */,
 				245BBDE318A5FE0D00B80781 /* CoreMotion.framework */,
 				245BBDE118A5FDE600B80781 /* Twitter.framework */,
 				245BBDDF18A5FDD300B80781 /* Social.framework */,
@@ -1082,7 +1090,6 @@
 				D97836151805A0080061C203 /* MessageUI.framework */,
 				D4AA34FC17A0699F0015D79A /* AVFoundation.framework */,
 				D4AA34F917A069980015D79A /* MediaPlayer.framework */,
-				D948FE6D179F93EE0035297A /* FacebookSDK.framework */,
 				D4BB7E10179DC26C0098BCF4 /* ImageIO.framework */,
 				D4B708371797A53C00CF3A9D /* MapKit.framework */,
 				D4A7980A17921BD20029F469 /* SystemConfiguration.framework */,
@@ -1423,6 +1430,7 @@
 				D4AA4CEC1766B374009B0635 /* Frameworks */,
 				D4AA4CED1766B374009B0635 /* Resources */,
 				6ED2426A9A5940A7960A5FC6 /* Copy Pods Resources */,
+				241C7F64190876780026A8EA /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1568,6 +1576,7 @@
 				D491F807178B54C9002E00E5 /* logo.png in Resources */,
 				D491F808178B54C9002E00E5 /* logo@2x.png in Resources */,
 				24B3840518A5E4E300E5C714 /* addConcert@2x.png in Resources */,
+				241C7F62190871340026A8EA /* orangeBackButton@2x.png in Resources */,
 				D491F80C178B57C1002E00E5 /* Main.storyboard in Resources */,
 				D97836191805A7670061C203 /* artistpage@2x.png in Resources */,
 				A02661E4178C9F6200741C9A /* ECSearchResultCell.xib in Resources */,
@@ -1712,6 +1721,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		241C7F64190876780026A8EA /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Crashlytics.framework/run c12b678409321970d5cec21099c268564caa15c1 89d1337b41d35c89269b8c1f8954b5fb27bedd453438223839ca7f512e1cc581";
+		};
 		6ED2426A9A5940A7960A5FC6 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1943,6 +1965,7 @@
 					"$(inherited)",
 					"$(SRCROOT)",
 					"$(SRCROOT)/Libraries/Tapjoy.embeddedframework",
+					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Encore/Encore-Prefix.pch";
@@ -1952,7 +1975,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-ObjC",
-					"-lFlurry_4.3.2",
+					"-lFlurry_4.4.0",
 					"-lsqlite3.0",
 					"-lz",
 					"-framework",
@@ -1999,6 +2022,7 @@
 					"$(inherited)",
 					"$(SRCROOT)",
 					"$(SRCROOT)/Libraries/Tapjoy.embeddedframework",
+					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Encore/Encore-Prefix.pch";
@@ -2008,7 +2032,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-ObjC",
-					"-lFlurry_4.3.2",
+					"-lFlurry_4.4.0",
 					"-lsqlite3.0",
 					"-lz",
 					"-framework",

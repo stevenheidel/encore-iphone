@@ -1,9 +1,8 @@
 PODS:
-  - AFNetworking (1.3.3)
-  - FlurrySDK (4.3.2):
+  - AFNetworking (1.3.4)
+  - FlurrySDK (4.4.0):
     - FlurrySDK/FlurrySDK
-  - FlurrySDK/FlurrySDK (4.3.2)
-  - LRGlowingButton (0.2)
+  - FlurrySDK/FlurrySDK (4.4.0)
   - MBProgressHUD (0.8)
   - Reachability (3.1.1)
   - SAMRateLimit (0.2.0)
@@ -13,7 +12,6 @@ PODS:
 DEPENDENCIES:
   - AFNetworking (~> 1.3)
   - FlurrySDK
-  - LRGlowingButton
   - MBProgressHUD
   - Reachability
   - SAMRateLimit
@@ -21,13 +19,12 @@ DEPENDENCIES:
   - XCDYouTubeVideoPlayerViewController
 
 SPEC CHECKSUMS:
-  AFNetworking: 61fdd49e2ffe6380378df37b3b6e70630bb9dd66
-  FlurrySDK: 0ba42379fd272d69246ae06386a2c5688516ffd8
-  LRGlowingButton: 48b984e9b31cc5ec15668cfc4b84fd513e1b3bf7
+  AFNetworking: e403d4333a4e1956cb3fe42364c3c879f820c9a0
+  FlurrySDK: 2cd8f2ce2383ca152c5d96fa34cb9ef29706feda
   MBProgressHUD: 2bbc6f470111daf7f3eaa4eb12b8cbf01c4c0622
   Reachability: be4883bb93f31e38266ae3365e5600a317aae735
   SAMRateLimit: 22b0ba0fafa8a9c438b7f76e4182914ef704c701
-  TestFlightSDK: 71e3e78d3a46144dbad975a4bf80a14dae6a818a
+  TestFlightSDK: fe0567a897456b6f65b180541892ef0154986e01
   XCDYouTubeVideoPlayerViewController: 7b8c4787c246a36b9858a8a348f4c163d152cff7
 
-COCOAPODS: 0.29.0
+COCOAPODS: 0.32.1

@@ -19,7 +19,18 @@
     });
     return sharedInstance;
 }
-
++ (BOOL) checkFacebookPermissions:(FBSession *)session
+{
+    NSArray *permissions = [session permissions];
+    NSArray *requiredPermissions = @[@"publish_actions"];
+    
+    for (NSString *perm in requiredPermissions) {
+        if (![permissions containsObject:perm]) {
+            return NO; // required permission not found
+        }
+    }
+    return YES;
+}
 - (BOOL)loginUserWithCompletionHandler:(void (^)(NSError* error))handler
 {
     BOOL isReturningUser = [FBSession openActiveSessionWithReadPermissions:[NSArray arrayWithObjects:@"basic_info",@"user_birthday",@"email",nil]
@@ -28,7 +39,15 @@
      {
          switch (state)
          {
-             case FBSessionStateOpen:
+             case FBSessionStateOpen: {
+//                 if (![ECFacebookManger checkFacebookPermissions:session]) {
+//                     [session requestNewPublishPermissions:@[@"publish_actions"] defaultAudience:FBSessionDefaultAudienceFriends completionHandler:^(FBSession *session2, NSError *error) {
+//                         if (session2.state == FBSessionStateOpenTokenExtended) {
+//                             NSLog(@"success extending permissions");
+//                         }
+//                     }];
+//                 }
+             }
                  break;
              case FBSessionStateClosed:
                  [Flurry logEvent:@"FBSessionClosed"];
@@ -45,6 +64,7 @@
     
     return isReturningUser;
 }
+
 - (void)logout
 {
     [[FBSession activeSession] closeAndClearTokenInformation];
