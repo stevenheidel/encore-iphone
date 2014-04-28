@@ -134,7 +134,12 @@
 @end
 
 @implementation GrabTicketsCell
-
+-(void) awakeFromNib {
+    self.grabTicketsButton.titleLabel.font = [UIFont heroFontWithSize:20];
+    self.grabTicketsButton.layer.cornerRadius = 5.0;
+    self.grabTicketsButton.layer.masksToBounds = YES;
+    self.contentView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
+}
 
 
 @end

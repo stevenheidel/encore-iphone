@@ -39,7 +39,7 @@
     AFJSONRequestOperation * operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         
         concertList = (NSDictionary*) [(NSDictionary*)JSON objectForKey:@"events"];
-        NSLog(@"%@: Successfully fetched %d past and %d future concerts for profile %@", NSStringFromClass([ECJSONFetcher class]),(int)[[concertList objectForKey:@"past"] count], (int)[[concertList objectForKey:@"future"] count], fbID);
+        NSLog(@"%@: Fetched %d past and %d future concerts for profile %@", NSStringFromClass([ECJSONFetcher class]),(int)[[concertList objectForKey:@"past"] count], (int)[[concertList objectForKey:@"future"] count], fbID);
         if (completion) {
             completion(concertList);
         }
@@ -114,7 +114,7 @@ NSString* stringForSearchType(ECSearchType searchType) {
             concertList = nil;
         NSInteger total = [[(NSDictionary*) responseObject objectForKey:@"total"] integerValue];
         
-        NSLog(@"%@: Successfully fetched %d popular concerts for search type: %@ Location: %f %f", NSStringFromClass([ECJSONFetcher class]),(int)concertList.count,stringForSearchType(searchType),location.coordinate.latitude,location.coordinate.longitude);
+        NSLog(@"%@: Fetched %d popular concerts for search type: %@ Location: %f %f", NSStringFromClass([ECJSONFetcher class]),(int)concertList.count,stringForSearchType(searchType),location.coordinate.latitude,location.coordinate.longitude);
         if (completion) {
             completion(concertList,total);
         }
@@ -154,7 +154,7 @@ NSString* stringForSearchType(ECSearchType searchType) {
 
             artistConcertComboList = (NSDictionary*)responseObject;
 //        NSLog(@"%@",artistConcertComboList.description);
-        NSLog(@"Successfully fetched %d %@ Artists and Concerts for string. %@", (int)[[artistConcertComboList objectForKey:@"events"] count],tenseString, searchStr);
+        NSLog(@"Fetched %d %@ Artists and Concerts for string. %@", (int)[[artistConcertComboList objectForKey:@"events"] count],tenseString, searchStr);
         
             if (completion) {
                 completion(artistConcertComboList);
@@ -175,7 +175,7 @@ NSString* stringForSearchType(ECSearchType searchType) {
     AFJSONRequestOperation * operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         NSURL* imageURL = [NSURL URLWithString:[(NSDictionary*) JSON objectForKey:@"image_url"]];
         if (completion) {
-            NSLog(@"%@: Successfully fetched picture for artist %@",NSStringFromClass([ECJSONFetcher class]),artist);
+            NSLog(@"%@:Fetched picture for artist %@",NSStringFromClass([ECJSONFetcher class]),artist);
             completion(imageURL);
         }
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
@@ -198,7 +198,7 @@ NSString* stringForSearchType(ECSearchType searchType) {
         NSDictionary* events = [info objectForKey:@"events"];
         NSInteger pastCount = [[events objectForKey:@"past"] count];
         NSInteger upcomingCount = [[events objectForKey:@"upcoming"] count];
-        NSLog(@"%@: Successfully retrieved info for artist %@. %d upcoming and %d past",NSStringFromClass([ECJSONFetcher class]),artist,(int)upcomingCount,(int)pastCount);
+        NSLog(@"%@:Retrieved info for artist %@. %d upcoming and %d past",NSStringFromClass([ECJSONFetcher class]),artist,(int)upcomingCount,(int)pastCount);
 
         if (completion) {
             completion(info);
@@ -246,7 +246,7 @@ NSString* stringForSearchType(ECSearchType searchType) {
     [client getPath:CheckConcertForUserUrl parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         BOOL result = FALSE;
         result = [(NSNumber*)[(NSDictionary*) responseObject objectForKey:@"response"] boolValue];
-        NSLog(@"Successfully polled server for if concert %@ is on profile %@. Response: %@", concertID, userID,result ? @"YES" :@"NO");
+        NSLog(@"Checked if concert %@ is on profile %@. Response: %@", concertID, userID,result ? @"YES" :@"NO");
         if(completion)
             completion(result);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -261,7 +261,7 @@ NSString* stringForSearchType(ECSearchType searchType) {
     AFJSONRequestOperation * operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         BOOL result = FALSE;
         result = [(NSNumber*)[(NSDictionary*) JSON objectForKey:@"response"] boolValue];
-        NSLog(@"%@: Successfully polled server for if event %@ is populating: %@",NSStringFromClass([ ECJSONFetcher class]),eventID,result ? @"YES":@"NO");
+        NSLog(@"%@: Polled server for if event %@ is populating: %@",NSStringFromClass([ ECJSONFetcher class]),eventID,result ? @"YES":@"NO");
         if (completion) {
             completion(result);
         }
@@ -293,7 +293,7 @@ NSString* stringForSearchType(ECSearchType searchType) {
     AFJSONRequestOperation * operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
 
         NSArray* songs = [JSON objectForKey:@"results"];
-        NSLog(@"%@: Successfully got %d songs for artist %@",NSStringFromClass([self class]),(int)songs.count,artist);
+        NSLog(@"%@: Got %d songs for artist %@",NSStringFromClass([self class]),(int)songs.count,artist);
         if (completion) {
             completion (songs);
         }
@@ -314,7 +314,7 @@ NSString* stringForSearchType(ECSearchType searchType) {
     
     AFJSONRequestOperation * operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         NSArray* friends = (NSArray*) JSON;
-        NSLog(@"%@: Successfully got %d friends for user %@ at event %@",NSStringFromClass([self class]),friends.count,userID,eventID);
+        NSLog(@"%@: Got %d friends for user %@ at event %@",NSStringFromClass([self class]),friends.count,userID,eventID);
         if (completion) {
             completion(friends);
         }
@@ -326,6 +326,30 @@ NSString* stringForSearchType(ECSearchType searchType) {
     }];
     [operation start];
 }
-                  
+
++(void) fetchSeatgeekURLForEvent: (NSString*) eventID completion: (void(^) (NSString* seatgeek_url)) completion {
+    NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:SeatgeekURL,eventID]];
+    NSURLRequest* request = [NSURLRequest requestWithURL:url];
+    
+    AFJSONRequestOperation* operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        NSString* seatgeek_url = (NSString*) JSON[@"seatgeek_url"];
+        if (completion) {
+            if (![seatgeek_url isKindOfClass:[NSString class]]) {
+                seatgeek_url = nil;
+                NSLog(@"%@: No seatgeek URL for event %@",NSStringFromClass([self class]),eventID);
+            }
+            else NSLog(@"%@: Got seatgeek URL for event %@",NSStringFromClass([self class]),eventID);
+            completion(seatgeek_url);
+        }
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        NSLog(@"%@: Failed to get seatgeek url for event %@: %@...",NSStringFromClass([self class]),eventID,[[error description] substringToIndex:MAX_ERROR_LEN]);
+        if (completion) {
+            completion(nil);
+        }
+    }];
+    
+    [operation start];
+    
+}
 
 @end

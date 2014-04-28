@@ -53,6 +53,8 @@ static NSString *const FlagPostURL = @"posts/%@/flag.json"; //,postID
 //Concert Check
 static NSString *const CheckConcertOnProfileURL = @"users/%@/events.json"; //,userID
 
+static NSString *const SeatgeekURL = @BASE_URL_DEF "events/%@/seatgeek_url.json"; //,eventID
+
 #pragma mark - Posting
 //static NSString *const ;
 //Add concert to User

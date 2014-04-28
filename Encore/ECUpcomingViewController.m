@@ -8,6 +8,7 @@
 
 #import "ECUpcomingViewController.h"
 #import "NSDictionary+ConcertList.h"
+#import "ECJSONFetcher.h"
 
 @interface ECUpcomingViewController ()<ECEventProfileStatusManagerDelegate>
 
@@ -26,7 +27,17 @@
 - (void)viewDidLoad
 {
     [self setRows];
+    [self getTicketsURL];
     [super viewDidLoad];
+}
+
+-(void) getTicketsURL {
+    self.ticketsURL = self.concert.ticketsURL;
+    [ECJSONFetcher fetchSeatgeekURLForEvent:[self.concert eventID] completion:^(NSString *seatgeek_url) {
+        if (seatgeek_url.length > 0) {
+            self.ticketsURL = [NSURL URLWithString:seatgeek_url];
+        }
+    }];
 }
 
 -(void) setRows {
@@ -53,7 +64,7 @@
 
 #pragma mark - sharing
 -(NSURL*) shareURL {
-    return [self.concert ticketsURL];
+    return self.ticketsURL;
 }
 -(NSString*) shareText {
     return [NSString stringWithFormat: @"Want to come to %@%@ show at %@, %@?",[self shareTextPrefix],[self.concert eventName],[self.concert venueName],[self.concert smallDateNoYear]];

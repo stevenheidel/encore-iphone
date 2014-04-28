@@ -69,4 +69,6 @@ static const int upcomingRows[] = {Tickets, Lineup,SongPreview, Location, Detail
 
 @property (nonatomic,assign) BOOL backButtonShouldGlow;
 
+@property (nonatomic,copy) NSURL* ticketsURL;
+
 @end

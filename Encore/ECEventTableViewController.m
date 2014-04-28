@@ -56,6 +56,7 @@
 
 @interface ECEventTableViewController ()
 @property (nonatomic,strong) UIBarButtonItem* navAddbutton;
+
 @end
 
 @implementation ECEventTableViewController
@@ -90,6 +91,8 @@
             [self.tableView reloadData];
         }
     }];
+    
+    
 }
 
 -(NSInteger) rowIndexForRowType:(ECEventRow) rowID {
@@ -416,15 +419,6 @@
         }
         case Tickets: {
             GrabTicketsCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-            if (cell == nil) {
-                cell = [[GrabTicketsCell alloc] init];
-                
-            }
-            cell.ticketsURL = [self.concert ticketsURL];
-            cell.grabTicketsButton.titleLabel.font = [UIFont heroFontWithSize:20];
-            cell.grabTicketsButton.layer.cornerRadius = 5.0;
-            cell.grabTicketsButton.layer.masksToBounds = YES;
-            cell.contentView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
             [cell.grabTicketsButton addTarget:self action:@selector(grabTicketTapped) forControlEvents:UIControlEventTouchUpInside ];
             [cell.shareButton addTarget:self action:@selector(shareTapped) forControlEvents:UIControlEventTouchUpInside];
             return cell;
@@ -693,9 +687,10 @@
 {
     NSString* flag = @"success";
     if (self.concert.ticketsURL) {
-        DZWebBrowser* browser = [[DZWebBrowser alloc] initWebBrowserWithURL:self.concert.ticketsURL];
+        DZWebBrowser* browser = [[DZWebBrowser alloc] initWebBrowserWithURL:self.ticketsURL];
         browser.pushed = YES;
         browser.showProgress = YES;
+        browser.allowSharing = YES;
         [self.navigationController pushViewController:browser animated:YES];
     }
     else {
