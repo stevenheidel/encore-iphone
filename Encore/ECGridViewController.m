@@ -21,8 +21,6 @@
 #import "EncoreURL.h"
 #import "MBProgressHUD.h"
 
-//
-//#import "LRGlowingButton.h"
 typedef enum {
     NoPostsAlertTag
 }GridVcAlertTags;
