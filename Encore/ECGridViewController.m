@@ -196,8 +196,8 @@ typedef enum {
             [self showFooter];
 //            [self hideNoPostsLabel];
         
-        }else
-        {
+        }
+        else {
             //Call get images method
             [self loadConcertImages: NO];
             //Stop timer
