@@ -72,7 +72,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        [self.tableView setSeparatorInset:UIEdgeInsetsZero];
+    }
     self.checkedInvites = FALSE; //OR load from nsuserdefaults? (ie global setting)
     
     self.eventName.text = [[self.concert eventName] uppercaseString];
