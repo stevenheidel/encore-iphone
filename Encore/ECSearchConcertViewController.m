@@ -227,7 +227,7 @@ typedef enum {
     [self.hud hide:YES];
     
     [self.tableview reloadData];
-    NSLog(@"self.tableView = %@, self.tableView.tableHeaderView = %@", self.tableview, self.tableview.tableHeaderView);
+//    NSLog(@"self.tableView = %@, self.tableView.tableHeaderView = %@", self.tableview, self.tableview.tableHeaderView);
 }
 
 -(UIView*) noConcertsFooterView {
