@@ -19,6 +19,8 @@
 #import "ECAlertTags.h"
 #import "ATAppRatingFlow.h"
 #import "EncoreURL.h"
+#import "MBProgressHUD.h"
+
 //
 //#import "LRGlowingButton.h"
 typedef enum {
@@ -40,9 +42,9 @@ typedef enum {
 
 @interface ECGridViewController () <UIAlertViewDelegate> {
     BOOL _isPopulating;
+    BOOL responseReceived;
     ECGridViewController* threeColVersion;
 }
-
 @property(strong) NSTimer* timer;
 @end
 
@@ -79,6 +81,7 @@ typedef enum {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     _isPopulating = NO;
+    responseReceived = NO;
     if (self.posts.count == 0) {
         [self loadConcertImages: YES];
     }
@@ -146,9 +149,14 @@ typedef enum {
 -(void) viewWillDisappear:(BOOL)animated {
     [self.timer invalidate];
 }
+
 -(void) backButtonWasPressed {
-    [self.navigationController popToViewController:self.concertDetailPage animated:YES];
+    if (self.concertDetailPage) {
+        [self.navigationController popToViewController:self.concertDetailPage animated:YES];
+    }
+    else [self.navigationController popViewControllerAnimated:YES];
 }
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -169,6 +177,7 @@ typedef enum {
         
     }
 }
+
 #pragma mark Event Populating
 -(void) askServerToPopulateConcert{
     [ECJSONPoster populateConcert:self.concert.eventID completion:^(BOOL success) {
@@ -178,6 +187,7 @@ typedef enum {
         [self startTimer];
     }];
 }
+
 -(void) checkConcertIfPopulating {
     [ECJSONFetcher checkIfEventIsPopulating:[self.concert eventID] completion:^(BOOL isPopulating) {
         _isPopulating = isPopulating;
@@ -196,15 +206,21 @@ typedef enum {
             [self hideFooter];
 
         }
-
-        
-       
     }];
 
 }
 
+-(void) checkStatus {
+    if (!responseReceived) {
+        MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.userInteractionEnabled = NO;
+        hud.color = [UIColor blueArtistTextColor];
+    }
+}
 -(void)loadConcertImages: (BOOL) shouldAsk {
+    [self performSelector:@selector(checkStatus) withObject:nil afterDelay:0.8];
     [ECJSONFetcher fetchPostsForConcertWithID:self.concert.eventID completion:^(NSArray *fetchedPosts) {
+        responseReceived = YES;
         if(fetchedPosts.count > 0){
             self.posts = [NSMutableArray arrayWithArray:fetchedPosts];
             [self.postsCollectionView reloadData];
@@ -217,6 +233,7 @@ typedef enum {
              [self askServerToPopulateConcert];
             }
         }
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
 }
 
