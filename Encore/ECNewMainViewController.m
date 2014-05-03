@@ -309,12 +309,12 @@ typedef enum {
         if( !(self.currentSearchType == ECSearchTypeFuture && self.showLoadMore))
             [self showLoadingHUD];
     }
-    [ECJSONFetcher fetchPopularConcertsWithSearchType:type location:self.currentSearchLocation radius:[NSNumber numberWithFloat:self.currentSearchRadius] page:self.page completion:^(NSArray *concerts, NSInteger total) {
-        if(type == ECSearchTypeFuture && concerts.count > 0) {
+    [ECJSONFetcher fetchPopularConcertsWithSearchType:type location:self.currentSearchLocation radius:[NSNumber numberWithFloat:self.currentSearchRadius] page:self.page completion:^(NSArray *concerts, NSInteger total,ECSearchType searchType) {
+        if(searchType == ECSearchTypeFuture && concerts.count > 0) {
             self.page++;
             self.totalUpcoming = total;
         }
-        [self fetchedPopularConcerts:concerts forType:type];
+        [self fetchedPopularConcerts:concerts forType:searchType];
     }];
 }
 
@@ -374,19 +374,21 @@ typedef enum {
 -(void) reloadData {
     [Flurry logEvent:@"Used_Refresh_Control_Main_View" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[self currentSearchTypeString], @"search_type", nil]];
     self.page = 1;
-    [ECJSONFetcher fetchPopularConcertsWithSearchType:self.currentSearchType location: self.currentSearchLocation radius: [NSNumber numberWithFloat:self.currentSearchRadius] page:self.page completion:^(NSArray *concerts,NSInteger total) {
-        if(self.currentSearchType == ECSearchTypeFuture){
+    
+    [ECJSONFetcher fetchPopularConcertsWithSearchType:self.currentSearchType location: self.currentSearchLocation radius: [NSNumber numberWithFloat:self.currentSearchRadius] page:self.page completion:^(NSArray *concerts,NSInteger total,ECSearchType searchType) {
+        if(searchType == ECSearchTypeFuture){
             [self.futureConcerts removeAllObjects];
             self.totalUpcoming = total;
         }
-        [self setEventArray:concerts forType:self.currentSearchType];
+        [self setEventArray:concerts forType:searchType];
         
-        [self.tableView reloadData];
+        if (self.currentSearchType == searchType) {
+            [self.tableView reloadData];
+        }
         
         [self updateLoadMoreCell];
-
         
-        if ([self currentEventArray].count == 0) {
+        if ([self eventArrayForSearchType:searchType].count == 0) {
             self.tableView.tableFooterView = self.noConcertsFooterView;
         }
         else {
@@ -718,6 +720,7 @@ typedef enum {
 #pragma mark Segmented Control
 
 -(IBAction) switchedSelection: (id) sender {
+    [self.refreshControl endRefreshing];
     [self.switchingHUD show:YES];
     [self performSelector:@selector(reloadTableViewForSwitchedSelection) withObject:nil afterDelay:0.1];
 }
@@ -905,11 +908,8 @@ typedef enum {
     [Flurry logEvent:@"LoadMoreTapped" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[self currentSearchTypeString],@"CurrentSearchType", [NSNumber numberWithInteger:self.page],@"Page",self.currentSearchAreaString,@"SearchArea", nil]];
 }
 
--(NSArray*) currentEventArray {
-    if(self.hasSearched /*&& self.currentSearchType != ECSearchTypeToday8*/) {
-        return self.searchResultsEvents;
-    }
-    switch (self.currentSearchType) {
+-(NSArray*) eventArrayForSearchType: (ECSearchType) searchType {
+    switch (searchType) {
         case ECSearchTypePast:
             return self.pastConcerts;
         case ECSearchTypeToday:
@@ -919,6 +919,13 @@ typedef enum {
         default:
             return nil;
     }
+}
+
+-(NSArray*) currentEventArray {
+    if(self.hasSearched /*&& self.currentSearchType != ECSearchTypeToday8*/) {
+        return self.searchResultsEvents;
+    }
+    return [self eventArrayForSearchType:self.currentSearchType];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

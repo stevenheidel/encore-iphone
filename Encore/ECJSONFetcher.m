@@ -89,7 +89,7 @@ NSString* stringForSearchType(ECSearchType searchType) {
     }
     return nil;
 }
-+(void)fetchPopularConcertsWithSearchType:(ECSearchType)searchType location: (CLLocation*) location radius: (NSNumber*) radius page:(NSInteger) page completion: (void (^)(NSArray* concerts,NSInteger total)) completion {
++(void)fetchPopularConcertsWithSearchType:(ECSearchType)searchType location: (CLLocation*) location radius: (NSNumber*) radius page:(NSInteger) page completion: (void (^)(NSArray* concerts,NSInteger total,ECSearchType searchType)) completion {
     __block NSArray * concertList;
     NSNumber* latitude = [NSNumber numberWithDouble:location.coordinate.latitude];
     NSNumber* longitude = [NSNumber numberWithDouble:location.coordinate.longitude];
@@ -116,7 +116,7 @@ NSString* stringForSearchType(ECSearchType searchType) {
         
         NSLog(@"%@: Fetched %d popular concerts for search type: %@ Location: %f %f", NSStringFromClass([ECJSONFetcher class]),(int)concertList.count,stringForSearchType(searchType),location.coordinate.latitude,location.coordinate.longitude);
         if (completion) {
-            completion(concertList,total);
+            completion(concertList,total,searchType);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"ERROR fetching popular concerts: %@...",[[error description] substringToIndex:MAX_ERROR_LEN]);
@@ -125,7 +125,7 @@ NSString* stringForSearchType(ECSearchType searchType) {
             [alert show];
         }
         if(completion)
-            completion(nil,0);
+            completion(nil,0,searchType);
     }];
 }
 

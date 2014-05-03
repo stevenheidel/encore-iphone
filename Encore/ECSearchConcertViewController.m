@@ -211,8 +211,8 @@ typedef enum {
 
 -(void) fetchPopularConcertsWithSearchType: (ECSearchType) type {
     [self.hud show:YES];
-    [ECJSONFetcher fetchPopularConcertsWithSearchType:type location:self.currentSearchLocation radius:[NSNumber numberWithFloat:self.currentSearchRadius] page:0  completion:^(NSArray *concerts,NSInteger total) {
-        [self fetchedPopularConcerts:concerts forType:type];
+    [ECJSONFetcher fetchPopularConcertsWithSearchType:type location:self.currentSearchLocation radius:[NSNumber numberWithFloat:self.currentSearchRadius] page:0  completion:^(NSArray *concerts,NSInteger total,ECSearchType searchType) {
+        [self fetchedPopularConcerts:concerts forType:searchType];
 
     }];
 }

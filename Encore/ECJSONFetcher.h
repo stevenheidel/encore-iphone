@@ -33,7 +33,7 @@
                                  location: (CLLocation*) location
                                    radius: (NSNumber*) radius
                                      page:(NSInteger) page
-                               completion: (void (^)(NSArray* concerts,NSInteger total)) completion;
+                               completion: (void (^)(NSArray* concerts,NSInteger total,ECSearchType searchType)) completion;
 
 +(void) fetchPostsForConcertWithID: (NSString *) concertID
                         completion: (void (^)(NSArray* fetchedPosts)) completion;
