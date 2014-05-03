@@ -9,7 +9,6 @@ pod 'SAMRateLimit'
 pod 'Reachability'
 #pod 'LRGlowingButton'
 #pod 'apptentive-ios'
-
 # Remove 64-bit build architecture from Pods targets
 post_install do |installer|
   installer.project.targets.each do |target|
