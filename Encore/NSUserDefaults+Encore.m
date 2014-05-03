@@ -144,4 +144,11 @@
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"FBAccessTokenKey"];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"FBExpirationDateKey"];
 }
+
+//+(BOOL) postsLayout {
+//    return [[NSUserDefaults standardUserDefaults] boolForKey:@"GridisSingleColumn"];
+//}
+//+(void) setPostsLayout: (BOOL) isSingleColumn {
+//    [[NSUserDefaults standardUserDefaults] setBool:isSingleColumn forKey:@"GridisSingleColumn"];
+//}
 @end

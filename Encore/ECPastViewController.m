@@ -10,6 +10,7 @@ static NSString * const kDateFormat = @"yyyy-MM-dd";
 #import "ECGridViewController.h"
 #import "NSDictionary+ConcertList.h"
 #import "EncoreURL.h"
+#import "NSUserDefaults+Encore.h"
 
 @implementation ECPastViewController
 
@@ -46,7 +47,9 @@ static NSString * const kDateFormat = @"yyyy-MM-dd";
     if ([[segue identifier] isEqualToString:@"PastViewControllerToGridViewController"]) {
         ECGridViewController* vc = [segue destinationViewController];
         vc.concert = self.concert;
+        vc.concertDetailPage = self;
         vc.backButtonShouldGlow = NO;
+        vc.isSingleColumn = YES;
         vc.hideShareButton = self.hideShareButton;
         [Flurry logEvent:@"Tapped_See_Photos_Past" withParameters:[self flurryParam]];
     }

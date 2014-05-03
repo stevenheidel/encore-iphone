@@ -72,7 +72,6 @@ typedef enum {
 #pragma mark - view setup
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSLog(@"%@: did load",NSStringFromClass(self.class));
     [self setUpBackButton];
 //    [self setupLogoutButton];
     [self setupSettingsButton];

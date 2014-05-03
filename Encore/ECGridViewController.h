@@ -18,7 +18,7 @@
 
 @interface ECGridViewController : UIViewController <ECPostViewControllerDelegate>
 @property (nonatomic,strong) NSDictionary * concert;
-@property (nonatomic,strong) NSArray * posts;
+@property (nonatomic,strong) NSMutableArray * posts;
 @property (nonatomic,strong) IBOutlet UILabel * eventLabel;
 @property (nonatomic,strong) IBOutlet UILabel * venueAndDateLabel;
 @property (weak, nonatomic) IBOutlet UICollectionView *postsCollectionView;
@@ -27,7 +27,8 @@
 @property (nonatomic,assign) BOOL hideShareButton;
 
 @property (nonatomic,assign) BOOL backButtonShouldGlow;
-
+@property (nonatomic,weak) UIViewController* concertDetailPage;
+@property (nonatomic,assign) BOOL isSingleColumn;
 @end
 
 @interface ECPostCell : UICollectionViewCell

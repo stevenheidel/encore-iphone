@@ -40,7 +40,6 @@
 {
     [super viewDidLoad];
     [self.lblWarning setFont:[UIFont heroFontWithSize:12]];
-    NSLog(@"%@: did load",NSStringFromClass(self.class));
 }
 
 - (void)viewDidUnload {

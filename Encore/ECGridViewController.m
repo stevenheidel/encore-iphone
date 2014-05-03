@@ -40,6 +40,7 @@ typedef enum {
 
 @interface ECGridViewController () <UIAlertViewDelegate> {
     BOOL _isPopulating;
+    ECGridViewController* threeColVersion;
 }
 
 @property(strong) NSTimer* timer;
@@ -78,9 +79,15 @@ typedef enum {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     _isPopulating = NO;
-    [self loadConcertImages: YES];
+    if (self.posts.count == 0) {
+        [self loadConcertImages: YES];
+    }
     
     UIImageView* encoreLogo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
+    encoreLogo.userInteractionEnabled = YES;
+    UITapGestureRecognizer* tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(navTap)];
+    tapRecognizer.numberOfTapsRequired = 2;
+    [encoreLogo addGestureRecognizer:tapRecognizer];
     self.navigationItem.titleView = encoreLogo;
     self.postsCollectionView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
     
@@ -114,6 +121,24 @@ typedef enum {
         self.navigationItem.rightBarButtonItem = shareButton;
     }
 }
+-(void) navTap {
+    if (self.isSingleColumn) {
+        if (!threeColVersion) {
+            threeColVersion = [[UIStoryboard storyboardWithName:@"ECPastStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"ECGridViewController2"];
+            threeColVersion.concert = self.concert;
+            threeColVersion.isSingleColumn = NO;
+            threeColVersion.posts = self.posts;
+            threeColVersion.concertDetailPage = self.concertDetailPage;
+        }
+        [self.navigationController pushViewController:threeColVersion animated:NO];
+
+    }
+    else {
+        [self.navigationController popViewControllerAnimated:NO];
+    }
+//    [Flurry logEvent:@"GridViewControllerNavTap" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:self.isSingleColumn], @"selfIsSingleCol",nil]];
+}
+
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
@@ -122,7 +147,7 @@ typedef enum {
     [self.timer invalidate];
 }
 -(void) backButtonWasPressed {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popToViewController:self.concertDetailPage animated:YES];
 }
 - (void)didReceiveMemoryWarning
 {
@@ -181,7 +206,7 @@ typedef enum {
 -(void)loadConcertImages: (BOOL) shouldAsk {
     [ECJSONFetcher fetchPostsForConcertWithID:self.concert.eventID completion:^(NSArray *fetchedPosts) {
         if(fetchedPosts.count > 0){
-            self.posts = fetchedPosts;
+            self.posts = [NSMutableArray arrayWithArray:fetchedPosts];
             [self.postsCollectionView reloadData];
 //            [self hideNoPostsLabel];
         }else{
@@ -263,11 +288,17 @@ typedef enum {
         [cell.activityIndicator stopAnimating];
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
         [cell.activityIndicator stopAnimating];
+        [self deletePostAtIndexPath: indexPath];
+        NSArray* indexPaths = [NSArray arrayWithObject:indexPath];
+        [collectionView deleteItemsAtIndexPaths:indexPaths];
         cell.postImageView.image = [UIImage imageNamed:@"placeholderimg2"];
     }];
     
     cell.postType = [post postType];
     return cell;
+}
+-(void) deletePostAtIndexPath: (NSIndexPath*) indexPath {
+    [self.posts removeObjectAtIndex:indexPath.row];
 }
 
 -(UICollectionReusableView*) collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {

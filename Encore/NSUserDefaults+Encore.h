@@ -45,4 +45,7 @@
 +(void) synchronize;
 
 +(void) clearLoginDetails;
+
+//+(BOOL) postsLayout;
+//+(void) setPostsLayout: (BOOL) isSingleColumn;
 @end
