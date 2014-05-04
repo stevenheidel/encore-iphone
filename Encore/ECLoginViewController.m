@@ -12,7 +12,7 @@
 #import "UIFont+Encore.h"
 
 @interface ECLoginViewController ()
-
+@property (nonatomic,weak) IBOutlet UIButton* cancelButton;
 @end
 
 @implementation ECLoginViewController
@@ -40,6 +40,7 @@
 {
     [super viewDidLoad];
     [self.lblWarning setFont:[UIFont heroFontWithSize:12]];
+    self.cancelButton.titleLabel.font = [UIFont heroFontWithSize:17.0];
 }
 
 - (void)viewDidUnload {

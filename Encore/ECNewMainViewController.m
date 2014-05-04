@@ -866,6 +866,7 @@ typedef enum {
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LoadMore"];
             UIActivityIndicatorView* load = (UIActivityIndicatorView*)[cell viewWithTag:55];
             UIButton* loadMoreButton = (UIButton*) [cell viewWithTag:56];
+            [loadMoreButton.titleLabel setFont:[UIFont heroFontWithSize:15.0]];
             [loadMoreButton addTarget:self action:@selector(loadMoreTapped) forControlEvents:UIControlEventTouchUpInside];
             self.loadMoreActivityIndicator = load;
             self.loadMoreButton = loadMoreButton;
@@ -899,7 +900,7 @@ typedef enum {
 -(void) loadMoreTapped {
     
     [self.loadMoreButton setEnabled:NO];
-    [self.loadMoreButton setTitle:@"Loading..." forState:UIControlStateNormal];
+    [self.loadMoreButton setTitle:@"LOADING..." forState:UIControlStateNormal];
     NSLog(@"%@: Load More tapped. Currently showing %i concerts. Total remaining: %i Page: %i",NSStringFromClass(self.class),(int)self.futureConcerts.count,(int)self.totalUpcoming,(int)(self.page-1));
     if (self.totalUpcoming > self.futureConcerts.count) {
         [self.loadMoreActivityIndicator startAnimating];

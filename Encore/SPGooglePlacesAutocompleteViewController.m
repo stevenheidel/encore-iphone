@@ -11,11 +11,13 @@
 #import "SPGooglePlacesAutocompletePlace.h"
 #import <CoreLocation/CoreLocation.h>
 #import "UIColor+EncoreUI.h"
+#import "UIFont+Encore.h"
+
 @interface SPGooglePlacesAutocompleteViewController ()
 -(IBAction)cancel;
 -(IBAction)save;
 @property (nonatomic,weak) IBOutlet UIButton* saveButton;
-
+@property (nonatomic,weak) IBOutlet UIButton* cancelButton;
 @property (nonatomic,strong) CLPlacemark* savedPlacemark;
 @end
 
@@ -71,9 +73,19 @@
     }
     self.searchDisplayController.searchBar.placeholder = NSLocalizedString(@"Change city", @"placeholder text for search bar on top of map");
     [self hideSaveButton];
-//    
+    
+    [self.cancelButton.titleLabel setFont:[UIFont heroFontWithSize:17.0]];
+    [self.saveButton.titleLabel setFont:[UIFont heroFontWithSize:17.0]];
+//
     //set to current search location?
-
+    id barButtonAppearanceInSearchBar = [UIBarButtonItem appearanceWhenContainedIn:[UISearchBar class], nil];
+    
+    [barButtonAppearanceInSearchBar setTitleTextAttributes:@{
+                                                             UITextAttributeFont : [UIFont heroFontWithSize:18],
+                                                             UITextAttributeTextColor : [UIColor whiteColor]
+                                                             } forState:UIControlStateNormal];
+    [barButtonAppearanceInSearchBar setTitle:@"CANCEL"];
+    self.searchDisplayController.searchBar.backgroundImage = [UIImage imageNamed:@"navbar"];
 }
 -(void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];

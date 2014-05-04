@@ -20,6 +20,7 @@
 #import "ATAppRatingFlow.h"
 #import "EncoreURL.h"
 #import "MBProgressHUD.h"
+#import "CMPopTipView.h"
 
 typedef enum {
     NoPostsAlertTag
@@ -38,7 +39,7 @@ typedef enum {
 @end
 
 
-@interface ECGridViewController () <UIAlertViewDelegate> {
+@interface ECGridViewController () <UIAlertViewDelegate,CMPopTipViewDelegate> {
     BOOL _isPopulating;
     BOOL responseReceived;
     ECGridViewController* threeColVersion;
@@ -84,12 +85,8 @@ typedef enum {
         [self loadConcertImages: YES];
     }
     
-    UIImageView* encoreLogo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
-    encoreLogo.userInteractionEnabled = YES;
-    UITapGestureRecognizer* tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(navTap)];
-    tapRecognizer.numberOfTapsRequired = 2;
-    [encoreLogo addGestureRecognizer:tapRecognizer];
-    self.navigationItem.titleView = encoreLogo;
+    [self setupLogo];
+    
     self.postsCollectionView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
     
     //Navigation bar
@@ -122,6 +119,20 @@ typedef enum {
         self.navigationItem.rightBarButtonItem = shareButton;
     }
 }
+
+-(void) setupLogo {
+    UIImageView* encoreLogo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
+    encoreLogo.userInteractionEnabled = YES;
+    UITapGestureRecognizer* tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(navTap)];
+    tapRecognizer.numberOfTapsRequired = 2;
+    [encoreLogo addGestureRecognizer:tapRecognizer];
+    self.navigationItem.titleView = encoreLogo;
+}
+
+-(void) hideToolTip: (CMPopTipView*) tooltip {
+    [tooltip dismissAnimated:YES];
+}
+
 -(void) navTap {
     if (self.isSingleColumn) {
         if (!threeColVersion) {
@@ -130,6 +141,7 @@ typedef enum {
             threeColVersion.isSingleColumn = NO;
             threeColVersion.posts = self.posts;
             threeColVersion.concertDetailPage = self.concertDetailPage;
+            threeColVersion.backButtonShouldGlow = self.backButtonShouldGlow;
         }
         [self.navigationController pushViewController:threeColVersion animated:NO];
 
@@ -137,7 +149,7 @@ typedef enum {
     else {
         [self.navigationController popViewControllerAnimated:NO];
     }
-//    [Flurry logEvent:@"GridViewControllerNavTap" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:self.isSingleColumn], @"selfIsSingleCol",nil]];
+    [Flurry logEvent:@"GridViewControllerNavTap" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:self.isSingleColumn], @"selfIsSingleCol",nil]];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -222,6 +234,7 @@ typedef enum {
         if(fetchedPosts.count > 0){
             self.posts = [NSMutableArray arrayWithArray:fetchedPosts];
             [self.postsCollectionView reloadData];
+            [self doTooltip];
 //            [self hideNoPostsLabel];
         }else{
             if (!_isPopulating && !shouldAsk) {
@@ -242,6 +255,30 @@ typedef enum {
                                                 selector:@selector(checkConcertIfPopulating)
                                                 userInfo:nil
                                                  repeats:YES];
+}
+
+-(void) doTooltip {
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"GridViewControllerShownBefore"]) {
+        CMPopTipView *tooltip = [[CMPopTipView alloc] initWithMessage:@"Double tap the logo to see more photos at once"];
+        tooltip.delegate = self;
+        tooltip.backgroundColor = [UIColor blueArtistTextColor];
+        tooltip.textColor = [UIColor whiteColor];
+        tooltip.hasGradientBackground = NO;
+        tooltip.hasShadow = NO;
+        tooltip.has3DStyle = NO;
+        tooltip.borderColor = [UIColor blueArtistTextColor];
+        tooltip.textFont = [UIFont systemFontOfSize:17.0];
+//        tooltip.textFont = [UIFont heroFontWithSize:17.0]; //Screws it up for some reason
+        tooltip.dismissTapAnywhere = YES;
+        //HACK ALERT (wouldn't let me easily point to the titleView)
+        UIView* view = [[UIView alloc] initWithFrame:CGRectMake(self.view.frame.size.width/2, self.topLayoutGuide.length, 0, 0)];
+        [self.view addSubview:view];
+        [self.view bringSubviewToFront:view];
+        [tooltip presentPointingAtView:view inView:self.view animated:YES];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"GridViewControllerShownBefore"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        [self performSelector:@selector(hideToolTip:) withObject:tooltip afterDelay:5.0];
+    }
 }
 
 -(void) stopTimer {
@@ -450,6 +487,8 @@ typedef enum {
     return params;
 }
 
-
+-(void) popTipViewWasDismissedByUser:(CMPopTipView *)popTipView {
+    
+}
 
 @end
