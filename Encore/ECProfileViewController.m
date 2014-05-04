@@ -438,11 +438,13 @@ typedef enum {
             [self openFeedback];
         }
         else if (buttonIndex == WalkthroughIndex){
+            //For testing purposes, restarting the walkthrough resets this which is used to determine if the tooltip should appear
+            [[NSUserDefaults standardUserDefaults] setBool: NO forKey:@"GridViewControllerShownBefore"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
             [self dismissViewControllerAnimated:YES completion:^{
                 [ApplicationDelegate showWalktrhoughView];
                 [Flurry logEvent:@"Tapped_Repeat_Walkthrough" withParameters:nil];
             }];
-
         }
         else if (buttonIndex == InviteIndex){
             NSDictionary* params = nil;

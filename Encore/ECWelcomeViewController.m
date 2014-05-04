@@ -148,7 +148,9 @@
     UIStoryboard* sb = [UIStoryboard storyboardWithName:@"ECPastStoryboard" bundle:nil];
     ECGridViewController * vc = [sb instantiateViewControllerWithIdentifier:@"ECGridViewController"];
     vc.backButtonShouldGlow = YES;
+    vc.isSingleColumn = YES;
     vc.concert = concert;
+    vc.concertDetailPage = self;
     vc.hideShareButton = YES;
     
     [self.navigationController pushViewController:vc animated:YES];
