@@ -18,8 +18,6 @@
 #import <QuartzCore/QuartzCore.h>
 
 #import "MBProgressHUD.h"
-#import "DZWebBrowser.h"
-
 
 #import "ECAppDelegate.h"
 #import "EncoreURL.h"
@@ -421,7 +419,7 @@
         }
         case Tickets: {
             GrabTicketsCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-            [cell.grabTicketsButton addTarget:self action:@selector(grabTicketTapped) forControlEvents:UIControlEventTouchUpInside ];
+            [cell.grabTicketsButton addTarget:self action:@selector(grabTicketTapped:) forControlEvents:UIControlEventTouchUpInside ];
             [cell.shareButton addTarget:self action:@selector(shareTapped) forControlEvents:UIControlEventTouchUpInside];
             return cell;
         }
@@ -685,24 +683,9 @@
     [self presentViewController:shareDrawer animated:YES completion:nil];
 }
 
--(void)grabTicketTapped
+-(void)grabTicketTapped: (id) sender
 {
-    NSString* flag = @"success";
-    if (self.concert.ticketsURL) {
-        DZWebBrowser* browser = [[DZWebBrowser alloc] initWebBrowserWithURL:self.ticketsURL];
-        browser.pushed = YES;
-        browser.showProgress = YES;
-        browser.allowSharing = YES;
-        [self.navigationController pushViewController:browser animated:YES];
-    }
-    else {
-        flag = @"failed";
-        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Sorry, no tickets link was found." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alert show];
-    }
-    
-    [Flurry logEvent:@"Tapped_Grab_Tickets" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:self.concert.ticketsURL, @"URL", flag, @"success_flag", nil]];
-
+    NSLog(@"%@: grabTicketTapped must be overwritten",NSStringFromClass(self.class));
 }
 #pragma mark - misc
 -(NSString*) tenseString {
