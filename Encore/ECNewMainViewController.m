@@ -33,6 +33,7 @@
 
 #import "SPGooglePlacesAutocompleteViewController.h"
 #import "ECLoginViewController.h"
+#import "MLPAutoCompleteTextField.h"
 
 #define SearchCellIdentifier @"ECSearchResultCell"
 #define ConcertCellIdentifier @"ECConcertCellView"
@@ -46,7 +47,7 @@ typedef enum {
 }ECSearchSection;
 
 
-@interface ECNewMainViewController () {
+@interface ECNewMainViewController () <MLPAutoCompleteTextFieldDataSource, MLPAutoCompleteTextFieldDelegate> {
     BOOL showingSearchBar;
     UIView* lastFMView;
     NSDictionary* abbrvDic;
@@ -59,6 +60,9 @@ typedef enum {
 @property (assign) BOOL shouldReload;
 @property (nonatomic,weak) UIActivityIndicatorView* loadMoreActivityIndicator;
 @property (nonatomic,weak) UIButton* loadMoreButton;
+@property (nonatomic,strong) NSMutableArray* suggestions;
+
+@property (weak, nonatomic) IBOutlet MLPAutoCompleteTextField *searchBar;
 @end
 
 @implementation ECNewMainViewController
@@ -111,6 +115,12 @@ typedef enum {
     [self.tableView setIndicatorStyle:UIScrollViewIndicatorStyleWhite];
     self.view.clipsToBounds = YES;
     self.futureConcerts = [[NSMutableArray alloc] init];
+    
+    self.suggestions = [NSMutableArray arrayWithArray:@[@"BEYONCE",@"THE KILLERS",@"U2"]];
+    [self.searchBar setAutoCompleteRegularFontName:@"Hero"];
+    [self.searchBar setAutoCompleteFontSize:12.0];
+    [self.searchBar setAutoCompleteTableAppearsAsKeyboardAccessory:YES];
+    [self.searchBar setAutoCompleteTableBackgroundColor:[UIColor whiteColor]];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -1187,4 +1197,33 @@ BOOL dateIsPast (NSDate* date) {
     }
     return nil;
 }
+
+
+#pragma mark - MLPAutoCompleteTextField
+- (void)autoCompleteTextField:(MLPAutoCompleteTextField *)textField
+ possibleCompletionsForString:(NSString *)string
+            completionHandler:(void (^)(NSArray *))handler
+{
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0);
+    dispatch_async(queue, ^{
+        
+        NSArray *completions;
+        completions = self.suggestions;
+        
+        handler(completions);
+    });
+}
+
+- (void)autoCompleteTextField:(MLPAutoCompleteTextField *)textField
+  didSelectAutoCompleteString:(NSString *)selectedString
+       withAutoCompleteObject:(id<MLPAutoCompletionObject>)selectedObject
+            forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(selectedObject){
+        NSLog(@"selected object from autocomplete menu %@ with string %@", selectedObject, [selectedObject autocompleteString]);
+    } else {
+        NSLog(@"selected string '%@' from autocomplete menu", selectedString);
+    }
+}
+
 @end

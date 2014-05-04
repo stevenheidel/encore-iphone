@@ -65,7 +65,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="300" height="55"/>
                                                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                 </view>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Artist search..." minimumFontSize="17" background="searchbar.png" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="UU0-XP-3u7" userLabel="Search">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Artist search..." minimumFontSize="17" background="searchbar.png" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="UU0-XP-3u7" userLabel="Search" customClass="MLPAutoCompleteTextField">
                                                     <rect key="frame" x="8" y="10" width="284" height="35"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
@@ -74,6 +74,8 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <textInputTraits key="textInputTraits" returnKeyType="search"/>
                                                     <connections>
+                                                        <outlet property="autoCompleteDataSource" destination="8hQ-DB-bIb" id="2V5-fv-TXa"/>
+                                                        <outlet property="autoCompleteDelegate" destination="8hQ-DB-bIb" id="fzn-ZW-SpP"/>
                                                         <outlet property="delegate" destination="8hQ-DB-bIb" id="ez6-fH-gFb"/>
                                                     </connections>
                                                 </textField>
