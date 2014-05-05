@@ -108,8 +108,8 @@ NSString * const kNewAttachmentKey = @"kNewAttachmentKey";
         [_netReach startNotifier];
         
         //Initializes the NSURLRequest Cache
-        SDURLCache *cache = [[SDURLCache alloc] initWithMemoryCapacity:1024*1024 diskCapacity:1024*1024*5 diskPath:[SDURLCache defaultCachePath]];
-        [NSURLCache setSharedURLCache:cache];
+        //SDURLCache *cache = [[SDURLCache alloc] initWithMemoryCapacity:1024*1024 diskCapacity:1024*1024*5 diskPath:[SDURLCache defaultCachePath]];
+        //[NSURLCache setSharedURLCache:cache];
     }
     return self;
 }
