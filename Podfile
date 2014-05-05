@@ -10,7 +10,7 @@ pod 'Reachability'
 pod 'CMPopTipView', '~> 2.2.0'
 #pod 'LRGlowingButton'
 #pod 'apptentive-ios'
-
+pod 'MLPAutoCompleteTextField', '~> 1.5'
 # Remove 64-bit build architecture from Pods targets
 post_install do |installer|
   installer.project.targets.each do |target|
