@@ -116,7 +116,7 @@ typedef enum {
     self.view.clipsToBounds = YES;
     self.futureConcerts = [[NSMutableArray alloc] init];
     
-    self.suggestions = [NSMutableArray arrayWithArray:@[@"BEYONCE",@"THE KILLERS",@"U2"]];
+    self.suggestions = [NSArray arrayWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"ArtistAutocomplete" ofType:@"plist"]];
     [self.searchBar setAutoCompleteRegularFontName:@"Hero"];
     [self.searchBar setAutoCompleteFontSize:12.0];
     [self.searchBar setAutoCompleteTableAppearsAsKeyboardAccessory:YES];
@@ -1111,21 +1111,25 @@ BOOL dateIsPast (NSDate* date) {
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
-    if ([textField.text length] > 0) { //don't search empty searches
-        [ECJSONFetcher fetchArtistsForString:textField.text withSearchType:self.currentSearchType forLocation:self.currentSearchLocation radius: [NSNumber numberWithFloat:self.currentSearchRadius] completion:^(NSDictionary * comboDic) {
-            [self fetchedConcertsForSearch:comboDic];
-        }];
-
-        self.hud.labelText = NSLocalizedString(@"Searching", nil);
-        self.hud.detailsLabelText = [NSString stringWithFormat:NSLocalizedString(@"hudSearchArtist", nil), [textField text]];
-        [self.hud show:YES];
-        
-        [Flurry logEvent:@"Searched_Artist" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:textField.text, @"search_text", [self currentSearchTypeString], @"Search_Type", [NSNumber numberWithDouble:self.currentSearchLocation.coordinate.latitude], @"latitude", [NSNumber numberWithDouble:self.currentSearchLocation.coordinate.longitude],@"longitude", [NSNumber numberWithFloat:self.currentSearchRadius], @"radius", self.currentSearchAreaString, @"area_string", nil]];
-    }
+    [self doSearchOnText:textField.text];
     [self.view removeGestureRecognizer:self.tap];
     [textField resignFirstResponder];
     return YES;
+}
+
+-(void) doSearchOnText: (NSString*) text {
+    [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
+    if ([text length] > 0) { //don't search empty searches
+        [ECJSONFetcher fetchArtistsForString:text withSearchType:self.currentSearchType forLocation:self.currentSearchLocation radius: [NSNumber numberWithFloat:self.currentSearchRadius] completion:^(NSDictionary * comboDic) {
+            [self fetchedConcertsForSearch:comboDic];
+        }];
+        
+        self.hud.labelText = NSLocalizedString(@"Searching", nil);
+        self.hud.detailsLabelText = [NSString stringWithFormat:NSLocalizedString(@"hudSearchArtist", nil), text];
+        [self.hud show:YES];
+        
+        [Flurry logEvent:@"Searched_Artist" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:text, @"search_text", [self currentSearchTypeString], @"Search_Type", [NSNumber numberWithDouble:self.currentSearchLocation.coordinate.latitude], @"latitude", [NSNumber numberWithDouble:self.currentSearchLocation.coordinate.longitude],@"longitude", [NSNumber numberWithFloat:self.currentSearchRadius], @"radius", self.currentSearchAreaString, @"area_string", nil]];
+    }
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
@@ -1207,8 +1211,12 @@ BOOL dateIsPast (NSDate* date) {
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0);
     dispatch_async(queue, ^{
         
-        NSArray *completions;
-        completions = self.suggestions;
+        NSMutableArray *completions = [NSMutableArray new];
+        for (NSString* artist in self.suggestions) {
+            if ([[artist lowercaseString] hasPrefix:[self.searchBar.text lowercaseString]]) {
+                [completions addObject:artist];
+            }
+        }
         
         handler(completions);
     });
@@ -1219,11 +1227,9 @@ BOOL dateIsPast (NSDate* date) {
        withAutoCompleteObject:(id<MLPAutoCompletionObject>)selectedObject
             forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(selectedObject){
-        NSLog(@"selected object from autocomplete menu %@ with string %@", selectedObject, [selectedObject autocompleteString]);
-    } else {
-        NSLog(@"selected string '%@' from autocomplete menu", selectedString);
-    }
+    self.searchBar.text = [selectedString uppercaseString];
+    [self doSearchOnText:selectedString];
+    
 }
 
 @end

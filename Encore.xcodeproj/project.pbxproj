@@ -31,6 +31,7 @@
 		245BBDE418A5FE0D00B80781 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 245BBDE318A5FE0D00B80781 /* CoreMotion.framework */; };
 		245F1E9917E2E79400C7621D /* gearbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 245F1E9717E2E79400C7621D /* gearbutton.png */; };
 		245F1E9A17E2E79400C7621D /* gearbutton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 245F1E9817E2E79400C7621D /* gearbutton@2x.png */; };
+		24675F5D191770D800B86AF9 /* ArtistAutocomplete.plist in Resources */ = {isa = PBXBuildFile; fileRef = 24675F5C191770D700B86AF9 /* ArtistAutocomplete.plist */; };
 		2468603F1832BF7100FD1666 /* Icon7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2468603E1832BF7100FD1666 /* Icon7@2x.png */; };
 		246860411832C00100FD1666 /* Spotlight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 246860401832C00100FD1666 /* Spotlight@2x.png */; };
 		247C114617ECE6D500B7F401 /* GooglePlacesAutocompleteView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 247C114517ECE6D500B7F401 /* GooglePlacesAutocompleteView.storyboard */; };
@@ -341,6 +342,7 @@
 		245BBDE318A5FE0D00B80781 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		245F1E9717E2E79400C7621D /* gearbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gearbutton.png; sourceTree = "<group>"; };
 		245F1E9817E2E79400C7621D /* gearbutton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gearbutton@2x.png"; sourceTree = "<group>"; };
+		24675F5C191770D700B86AF9 /* ArtistAutocomplete.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ArtistAutocomplete.plist; sourceTree = "<group>"; };
 		2468603E1832BF7100FD1666 /* Icon7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon7@2x.png"; sourceTree = "<group>"; };
 		246860401832C00100FD1666 /* Spotlight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Spotlight@2x.png"; sourceTree = "<group>"; };
 		247C114517ECE6D500B7F401 /* GooglePlacesAutocompleteView.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GooglePlacesAutocompleteView.storyboard; sourceTree = "<group>"; };
@@ -1133,6 +1135,7 @@
 		D4AA4CF91766B374009B0635 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				24675F5C191770D700B86AF9 /* ArtistAutocomplete.plist */,
 				D9D95CF517E8420500061DAF /* featured.json */,
 				D4C9C08C177A51CC00F864FC /* Post+Fetch */,
 				D4C9C08A177A51BB00F864FC /* Font */,
@@ -1608,6 +1611,7 @@
 				A02661F8178DF02000741C9A /* gradient.png in Resources */,
 				D4A9B31D178E5410008B5504 /* loginButton.png in Resources */,
 				D4A9B31E178E5410008B5504 /* loginButton@2x.png in Resources */,
+				24675F5D191770D800B86AF9 /* ArtistAutocomplete.plist in Resources */,
 				24AB803618048E48002A9913 /* disabledleft@2x.png in Resources */,
 				D4A9B320178E546F008B5504 /* Default-568h@2x.png in Resources */,
 				D4A9B323178E5486008B5504 /* Default.png in Resources */,
