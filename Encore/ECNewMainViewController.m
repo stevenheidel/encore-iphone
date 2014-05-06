@@ -1249,7 +1249,7 @@ BOOL dateIsPast (NSDate* date) {
             self.hasSearched = FALSE;
             self.comboSearchResultsDic = nil;
             if (autocomplete) {
-                UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"No events found for your location" message:@"Want to check out recent and upcoming shows in other cities?" delegate:self cancelButtonTitle:@"No way!" otherButtonTitles:@"Party on!", nil];
+                UIAlertView* alert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"No events found in %@",self.locationLabel.text] message:@"Want to see their recent and upcoming shows in other cities?" delegate:self cancelButtonTitle:@"No way!" otherButtonTitles:@"Party on!", nil];
                 alert.tag = ECMainShouldGoToArtistPageAlert;
                 [alert show];
                 return;
@@ -1267,7 +1267,7 @@ BOOL dateIsPast (NSDate* date) {
     }
     else { //failed to find anything
         if (autocomplete) {
-            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"No events found for your location" message:@"Want to check out recent and upcoming shows in other cities?" delegate:self cancelButtonTitle:@"No way!" otherButtonTitles:@"Party on!", nil];
+            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"No events found in %@",self.locationLabel.text] message:@"Want to see their recent and upcoming shows in other cities?" delegate:self cancelButtonTitle:@"No way!" otherButtonTitles:@"Party on!", nil];
             alert.tag = ECMainShouldGoToArtistPageAlert;
             [alert show];
             return;

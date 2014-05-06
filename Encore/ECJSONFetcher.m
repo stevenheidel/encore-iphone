@@ -183,6 +183,7 @@ NSString* stringForSearchType(ECSearchType searchType) {
         if (completion) {
             completion(nil);
         }
+        [Flurry logEvent:@"FailedToLoadArtistPhoto" withParameters:@{@"artist":artist}];
     }];
     [operation start];
 }

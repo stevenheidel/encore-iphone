@@ -132,9 +132,7 @@
 
 #pragma mark -
 +(void) synchronize {
-    if([[NSUserDefaults standardUserDefaults] synchronize]) {
-        NSLog(@"User defaults synchronized successfully");
-    }
+    if([[NSUserDefaults standardUserDefaults] synchronize]);
     else NSLog(@"User defaults failed to synchronize");
 }
 
