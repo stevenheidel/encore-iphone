@@ -119,11 +119,25 @@
 //        [self showLoginView:NO];
 //    else {
 //    }
-    
-
-    
+    [self setupAutocompletionsFile];
     return YES;
 }
+
+-(void) setupAutocompletionsFile {
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"FirstLaunchEver_autocompletion"]) {
+        NSArray* suggestions = [NSArray arrayWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"ArtistAutocomplete" ofType:@"plist"]];
+        NSString *path = [[self applicationDocumentsDirectory].path stringByAppendingPathComponent:@"SavedAutocompletions.plist"];
+        [suggestions writeToFile:path atomically:YES];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"FirstLaunchEver_autocompletion"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+}
+
+-(NSURL *) applicationDocumentsDirectory {
+    return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory
+                                                   inDomains:NSUserDomainMask] lastObject];
+}
+
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
 {
     return  [[ECFacebookManger sharedFacebookManger] handleOpenURL:url];

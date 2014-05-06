@@ -18,7 +18,6 @@
 #import <Foundation/Foundation.h>
 
 #import "FBGraphObject.h"
-#import "FBSDKMacros.h"
 
 // up-front decl's
 @class FBRequest;
@@ -80,7 +79,7 @@ typedef enum {
  a `NSDictionary` using FBNonJSONResponseProperty as the key and the literal
  response as the value.
  */
-FBSDK_EXTERN NSString *const FBNonJSONResponseProperty;
+extern NSString *const FBNonJSONResponseProperty;
 
 /*!
  @typedef FBRequestHandler

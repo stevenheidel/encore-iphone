@@ -85,7 +85,7 @@
 		24B3840218A5E24C00E5C714 /* removeConcert@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24B3840118A5E24C00E5C714 /* removeConcert@2x.png */; };
 		24B3840518A5E4E300E5C714 /* addConcert@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24B3840418A5E4E200E5C714 /* addConcert@2x.png */; };
 		24C7E23F1918B4E90068EAC8 /* ECLoadStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 24C7E23E1918B4E90068EAC8 /* ECLoadStatus.m */; };
-		24C7E24219193F660068EAC8 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24C7E24119193F660068EAC8 /* FacebookSDK.framework */; };
+		24C7E24419195C8D0068EAC8 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24C7E24319195C8D0068EAC8 /* FacebookSDK.framework */; };
 		A00402BD177F4F7300B998CF /* ECProfileHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = A00402BC177F4F7300B998CF /* ECProfileHeader.m */; };
 		A00402C4177F6B0900B998CF /* backButton.png in Resources */ = {isa = PBXBuildFile; fileRef = A00402C2177F6B0900B998CF /* backButton.png */; };
 		A00402C5177F6B0900B998CF /* backButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A00402C3177F6B0900B998CF /* backButton@2x.png */; };
@@ -407,7 +407,7 @@
 		24B3840418A5E4E200E5C714 /* addConcert@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "addConcert@2x.png"; sourceTree = "<group>"; };
 		24C7E23D1918B4E90068EAC8 /* ECLoadStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECLoadStatus.h; sourceTree = "<group>"; };
 		24C7E23E1918B4E90068EAC8 /* ECLoadStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECLoadStatus.m; sourceTree = "<group>"; };
-		24C7E24119193F660068EAC8 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
+		24C7E24319195C8D0068EAC8 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		8087A714E27A4A5B80C64237 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E74836C07DD49A2BC3BE7EB /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		A00402BB177F4F7300B998CF /* ECProfileHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECProfileHeader.h; sourceTree = "<group>"; };
@@ -659,7 +659,7 @@
 				245BBDD218A5FD7B00B80781 /* CFNetwork.framework in Frameworks */,
 				245BBDD018A5FD7300B80781 /* AdSupport.framework in Frameworks */,
 				245BBDC418A5F9A100B80781 /* libApptentiveConnect.a in Frameworks */,
-				24C7E24219193F660068EAC8 /* FacebookSDK.framework in Frameworks */,
+				24C7E24419195C8D0068EAC8 /* FacebookSDK.framework in Frameworks */,
 				245BBDBF18A5F94600B80781 /* Accelerate.framework in Frameworks */,
 				D97836161805A0080061C203 /* MessageUI.framework in Frameworks */,
 				D4AA34FD17A0699F0015D79A /* AVFoundation.framework in Frameworks */,
@@ -1078,7 +1078,7 @@
 		D4AA4CF11766B374009B0635 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				24C7E24119193F660068EAC8 /* FacebookSDK.framework */,
+				24C7E24319195C8D0068EAC8 /* FacebookSDK.framework */,
 				241C7F65190876EC0026A8EA /* Crashlytics.framework */,
 				245BBDE318A5FE0D00B80781 /* CoreMotion.framework */,
 				245BBDE118A5FDE600B80781 /* Twitter.framework */,

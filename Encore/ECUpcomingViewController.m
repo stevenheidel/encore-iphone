@@ -82,7 +82,7 @@
     }
     else {
         flag = @"failed";
-        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Sorry, no tickets link was found." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Not found" message:@"Sorry, no tickets link was found." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
         [self.getTicketsActivityIndicator stopAnimating];
         [Flurry logEvent:@"Tapped_Grab_Tickets" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:self.concert.ticketsURL, @"URL", flag, @"success_flag", nil]];

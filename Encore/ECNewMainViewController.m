@@ -65,7 +65,7 @@ typedef enum {
 @property (assign) BOOL shouldReload;
 @property (nonatomic,weak) UIActivityIndicatorView* loadMoreActivityIndicator;
 @property (nonatomic,weak) UIButton* loadMoreButton;
-@property (nonatomic,strong) NSMutableArray* suggestions;
+@property (nonatomic,strong) NSArray* suggestions;
 
 @property (nonatomic, strong) ECLoadStatusManager* loadStatusManager;
 
@@ -93,6 +93,15 @@ typedef enum {
     [self setupBarButtons];
     [self setNavBarAppearance];
     [self setSegmentedControlAppearance];
+    //set to current search location?
+    id barButtonAppearanceInSearchBar = [UIBarButtonItem appearanceWhenContainedIn:[UISearchBar class], nil];
+    
+    [barButtonAppearanceInSearchBar setTitleTextAttributes:@{
+                                                             UITextAttributeFont : [UIFont heroFontWithSize:18],
+                                                             UITextAttributeTextColor : [UIColor whiteColor]
+                                                             } forState:UIControlStateNormal];
+    [barButtonAppearanceInSearchBar setTitle:@"CANCEL"];
+
     [self setDateLabel];
     [self setupHUD];
     [self setupSearchBar];
@@ -122,13 +131,25 @@ typedef enum {
     self.view.clipsToBounds = YES;
     self.futureConcerts = [[NSMutableArray alloc] init];
     
-    self.suggestions = [NSArray arrayWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"ArtistAutocomplete" ofType:@"plist"]];
-    [self.searchBar setAutoCompleteRegularFontName:@"Hero"];
-    [self.searchBar setAutoCompleteFontSize:12.0];
-    [self.searchBar setAutoCompleteTableAppearsAsKeyboardAccessory:YES];
-    [self.searchBar setAutoCompleteTableBackgroundColor:[UIColor whiteColor]];
+    [self setupSuggestions];
 }
 
+-(void) setupSuggestions {
+    NSString *path = [[ApplicationDelegate applicationDocumentsDirectory].path stringByAppendingPathComponent:@"SavedAutocompletions.plist"];
+    
+    self.suggestions = [NSArray arrayWithContentsOfFile:path];
+    [ECJSONFetcher fetchAutocompletions:^(NSArray *suggestions) {
+        if (suggestions.count > 0) {
+            self.suggestions = suggestions;
+        }
+    }];
+    
+    [self.searchBar setAutoCompleteRegularFontName:@"Hero"];
+    [self.searchBar setAutoCompleteFontSize:17.0];
+    [self.searchBar setAutoCompleteTableAppearsAsKeyboardAccessory:YES];
+    [self.searchBar setAutoCompleteTableBackgroundColor:[UIColor whiteColor]];
+
+}
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     self.originalCentre = self.view.center;
@@ -1326,9 +1347,14 @@ BOOL dateIsPast (NSDate* date) {
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0);
     dispatch_async(queue, ^{
         
+
+
         NSMutableArray *completions = [NSMutableArray new];
         for (NSString* artist in self.suggestions) {
-            if ([[artist lowercaseString] hasPrefix:[self.searchBar.text lowercaseString]]) {
+            NSRange result = [artist
+                              rangeOfString:string
+                              options:NSCaseInsensitiveSearch];
+            if (result.location != NSNotFound) {
                 [completions addObject:artist];
             }
         }

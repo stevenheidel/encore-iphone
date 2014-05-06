@@ -47,4 +47,5 @@
 
 @property BOOL isNavigating;
 -(void) showWalktrhoughView;
+-(NSURL *) applicationDocumentsDirectory;
 @end

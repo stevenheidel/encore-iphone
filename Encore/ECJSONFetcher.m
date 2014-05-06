@@ -120,10 +120,6 @@ NSString* stringForSearchType(ECSearchType searchType) {
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"ERROR fetching popular concerts: %@...",[[error description] substringToIndex:MAX_ERROR_LEN]);
-        if (searchType == ECSearchTypePast) { // so you don't get 3 error messages
-            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Sorry, something went wrong. Please try again later." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            [alert show];
-        }
         if(completion)
             completion(NO,nil,0,searchType);
     }];
@@ -352,5 +348,33 @@ NSString* stringForSearchType(ECSearchType searchType) {
     [operation start];
     
 }
+
++(void) fetchAutocompletions: (void(^) (NSArray* suggestions)) completion {
+    NSURL* url = [NSURL URLWithString:AutocompletionsURL];
+    NSURLRequest* request = [NSURLRequest requestWithURL:url];
+    [AFPropertyListRequestOperation addAcceptableContentTypes:[NSSet setWithObject:@"text/plain"]];
+    AFPropertyListRequestOperation* operation = [AFPropertyListRequestOperation propertyListRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id propertyList) {
+        NSArray* array = (NSArray*) propertyList;
+        if (completion) {
+            completion(array);
+        }
+        NSString *path = [applicationDocumentsDirectory().path stringByAppendingPathComponent:@"SavedAutocompletions.plist"];
+        [array writeToFile:path atomically:YES];
+        NSLog(@"%@: Fetched autocompletions",NSStringFromClass([ECJSONFetcher class]));
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id propertyList) {
+        if (completion) {
+            completion(nil);
+        }
+        NSLog(@"%@: Failed to get autocompletions %@",NSStringFromClass([ECJSONFetcher class]), [error.description substringToIndex:MAX_ERROR_LEN]);
+    }];
+    [operation start];
+}
+
+NSURL * applicationDocumentsDirectory() {
+    return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory
+                                                   inDomains:NSUserDomainMask] lastObject];
+}
+
+
 
 @end

@@ -54,7 +54,7 @@
 
 @interface ECEventTableViewController ()
 @property (nonatomic,strong) UIBarButtonItem* navAddbutton;
-
+@property (nonatomic,strong) UIView* friendCountView;
 @end
 
 @implementation ECEventTableViewController
@@ -468,12 +468,12 @@
 }
 
 -(void) addToProfile {
+    [self.navAddbutton setEnabled:NO];
     if (ApplicationDelegate.isLoggedIn) {
         [[NSNotificationCenter defaultCenter] removeObserver:self.statusManager name:ECLoginCompletedNotification object:nil];
         
         [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
         [self.statusManager toggleProfileState];
-        
     }
     else {
         UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login", nil) message:NSLocalizedString(@"To add this concert to your profile, you must first login", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Login", nil), nil];
@@ -494,6 +494,7 @@
     if (isOnProfile) {
         [self openFacebookPicker];
     }
+    [self.navAddbutton setEnabled: YES];
 }
 
 -(void) concertStateChangedHUD {
@@ -521,7 +522,6 @@
     if (self.friendPickerController == nil) {
         // Create friend picker, and get data loaded into it.
         self.friendPickerController = [[FBFriendPickerViewController alloc] init];
-        
         NSString* titleForPicker = @"Who's coming?"; //TODO: move to subclasses?
         if (self.tense == ECSearchTypePast) {
             titleForPicker = @"Who else went?";
@@ -529,12 +529,11 @@
         self.friendPickerController.title = titleForPicker;
         self.friendPickerController.delegate = self;
     }
-
     [self.friendPickerController loadData];
     
     [self.friendPickerController clearSelection];
     
-    self.friendPickerController.userID = [NSUserDefaults userID];
+//    self.friendPickerController.userID = [NSUserDefaults userID];
     [self presentViewController:self.friendPickerController animated:YES completion:^{
         [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
         [self addSearchBarToFriendPickerView];
@@ -577,6 +576,31 @@
     [self handlePickerDone];
 }
 
+-(void) friendPickerViewControllerSelectionDidChange:(FBFriendPickerViewController *)friendPicker {
+    if (!self.friendCountView) {
+        self.friendCountView = [[UIView alloc] initWithFrame:CGRectMake(0, friendPicker.view.frame.size. height - 40, friendPicker.view.frame.size.width, 40)];
+        UILabel* countLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 3, friendPicker.view.frame.size.width, 35)];
+        countLabel.tag = 45;
+        countLabel.textColor = [UIColor whiteColor];
+        countLabel.font = [UIFont heroFontWithSize:17.0];
+        [self.friendCountView addSubview: countLabel];
+        self.friendCountView.backgroundColor = [UIColor blueArtistTextColor];
+        [friendPicker.view addSubview:self.friendCountView];
+        [friendPicker.view bringSubviewToFront:self.friendCountView];
+        
+    }
+    
+    NSInteger count = friendPicker.selection.count;
+    if (count == 0) {
+        self.friendCountView.hidden = YES;
+        return;
+    }
+    else {
+        self.friendCountView.hidden = NO;
+    }
+    [(UILabel*)[self.friendCountView viewWithTag: 45] setText: [NSString stringWithFormat:@"%d friend%@ selected", count,count > 1 ? @"s" : @""]];
+}
+
 - (void)addSearchBarToFriendPickerView
 {
     if (self.searchBar == nil) {
@@ -590,13 +614,15 @@
         self.searchBar.autoresizingMask = self.searchBar.autoresizingMask |
         UIViewAutoresizingFlexibleWidth;
         self.searchBar.delegate = self;
-        self.searchBar.showsCancelButton = YES;
+        self.searchBar.showsCancelButton = NO;
         
-        [self.friendPickerController.canvasView addSubview:self.searchBar];
+        self.friendPickerController.tableView.tableHeaderView = self.searchBar;
+
+        //HACK because Facebook SDK is messed up
         CGRect newFrame = self.friendPickerController.view.bounds;
-        newFrame.size.height -= searchBarHeight;
-        newFrame.origin.y = searchBarHeight;
+        newFrame.size.height = newFrame.size.height + 1;
         self.friendPickerController.tableView.frame = newFrame;
+        self.friendPickerController.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 120)];
     }
 }
 
@@ -606,14 +632,30 @@
     [self.friendPickerController updateView];
 }
 
+-(BOOL) searchBarShouldBeginEditing:(UISearchBar *)searchBar {
+    [searchBar setShowsCancelButton:YES animated:YES];
+    return YES;
+}
+
+-(BOOL) searchBarShouldEndEditing:(UISearchBar *)searchBar {
+    [searchBar setShowsCancelButton:NO animated:YES];
+    return YES;
+}
 - (void)searchBarSearchButtonClicked:(UISearchBar*)searchBar
 {
     [self handleSearch:searchBar];
 }
 
+-(void) searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    self.searchText = searchBar.text;
+    [self.friendPickerController updateView];
+}
+
 - (void)searchBarCancelButtonClicked:(UISearchBar *) searchBar {
     self.searchText = nil;
+    searchBar.text = nil;
     [searchBar resignFirstResponder];
+    [self.friendPickerController updateView];
 }
 
 - (BOOL)friendPickerViewController:(FBFriendPickerViewController *)friendPicker
@@ -632,6 +674,11 @@
         return YES;
     }
     return YES;
+}
+
+- (void)friendPickerViewController:(FBFriendPickerViewController *)friendPicker
+                       handleError:(NSError *)error {
+    NSLog(@"FBFriendPickerViewController error: %@",error);
 }
 
 -(NSString*) shareTextPrefix {
@@ -699,8 +746,10 @@
 
 
 -(void) alertError {
-    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"Sorry, an error occured and your request was not processed.", nil) delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alert show];
+    if ([self.navigationController.visibleViewController isEqual:self])  {
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Try again", nil) message:NSLocalizedString(@"Sorry, an error occured. Please try again later.", nil) delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    }
 }
 
 
@@ -744,8 +793,8 @@
         if (buttonIndex == alertView.firstOtherButtonIndex) {
             [ApplicationDelegate beginFacebookAuthorization];
             [[NSNotificationCenter defaultCenter] addObserver:self.statusManager selector:@selector(checkProfileState) name:ECLoginCompletedNotification object:nil];
-            
         }
+        [self.navAddbutton setEnabled:YES];
     }else if (alertView.tag == ECInviteFriendsTag)
     {
         if (buttonIndex == alertView.firstOtherButtonIndex) {

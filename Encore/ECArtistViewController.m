@@ -83,7 +83,7 @@ typedef enum {
 	[hud show:YES];
     hud.labelText = [NSString stringWithFormat:@"Loading events"];
     self.hud = hud;
-    alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Sorry, something went wrong. No events were found." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    alert = [[UIAlertView alloc] initWithTitle:@"Nothing found" message:@"Sorry, something went wrong and no events were found." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     self.infoOperation = [ECJSONFetcher fetchInfoForArtist:self.artist completion:^(NSDictionary *artistInfo) {
         self.events = [artistInfo objectForKey:@"events"];
         UISegmentedControl* control = self.sectionHeaderView.segmentedControl;
@@ -117,6 +117,7 @@ typedef enum {
             [self.artistImageView setImageWithURLRequest:[NSURLRequest requestWithURL:imageURL] placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
                 self.artistImage = image;
                 self.artistImageView.image = self.artistImage;
+                [self setBackgroundImage];
             } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
                 self.artistImage = [UIImage imageNamed:@"placeholder"];
                 self.artistImageView.image = self.artistImage;

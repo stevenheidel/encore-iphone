@@ -70,5 +70,5 @@ static NSString* const PopulateEventURL = @BASE_URL_DEF "events/%@/populate.json
 static NSString* const SaveFriendsURL = @BASE_URL_DEF "users/%@/events/%@/add_facebook_friends"; //,userID,eventID
 static NSString* const GetFriendsURL = @BASE_URL_DEF "users/%@/events/%@/facebook_friends"; //
 
-
+static  NSString* const AutocompletionsURL = @"https://dl.dropboxusercontent.com/u/21137857/ArtistAutocomplete.plist";
 #endif

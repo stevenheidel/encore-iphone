@@ -77,14 +77,6 @@
     [self.cancelButton.titleLabel setFont:[UIFont heroFontWithSize:17.0]];
     [self.saveButton.titleLabel setFont:[UIFont heroFontWithSize:17.0]];
 //
-    //set to current search location?
-    id barButtonAppearanceInSearchBar = [UIBarButtonItem appearanceWhenContainedIn:[UISearchBar class], nil];
-    
-    [barButtonAppearanceInSearchBar setTitleTextAttributes:@{
-                                                             UITextAttributeFont : [UIFont heroFontWithSize:18],
-                                                             UITextAttributeTextColor : [UIColor whiteColor]
-                                                             } forState:UIControlStateNormal];
-    [barButtonAppearanceInSearchBar setTitle:@"CANCEL"];
     self.searchDisplayController.searchBar.backgroundImage = [UIImage imageNamed:@"navbar"];
 }
 -(void) viewWillAppear:(BOOL)animated {

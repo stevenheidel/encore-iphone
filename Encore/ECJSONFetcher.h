@@ -52,5 +52,7 @@
 +(void) fetchFriendsForUser: (NSString*) userID atEvent: (NSString*) eventID completion: (void (^) (NSArray* friends)) completion;
 
 +(void) fetchSeatgeekURLForEvent: (NSString*) eventID completion: (void(^) (NSString* seatgeek_url)) completion;
+
++(void) fetchAutocompletions: (void(^) (NSArray* suggestions)) completion;
 @end
 
