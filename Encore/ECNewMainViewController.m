@@ -34,6 +34,8 @@
 #import "SPGooglePlacesAutocompleteViewController.h"
 #import "ECLoginViewController.h"
 #import "MLPAutoCompleteTextField.h"
+#import "ECLoadStatus.h"
+#import "ECArtistViewController.h"
 
 #define SearchCellIdentifier @"ECSearchResultCell"
 #define ConcertCellIdentifier @"ECConcertCellView"
@@ -51,8 +53,11 @@ typedef enum {
     BOOL showingSearchBar;
     UIView* lastFMView;
     NSDictionary* abbrvDic;
-    
+    CGSize keyboardSize;
 }
+
+@property (nonatomic,strong) NSString* selectedAutocompletion;
+@property (nonatomic,assign) CGPoint originalCentre;
 @property (assign) NSInteger page;
 @property (assign) NSInteger totalUpcoming;
 @property (assign) BOOL viewLoaded;
@@ -62,6 +67,8 @@ typedef enum {
 @property (nonatomic,weak) UIButton* loadMoreButton;
 @property (nonatomic,strong) NSMutableArray* suggestions;
 
+@property (nonatomic, strong) ECLoadStatusManager* loadStatusManager;
+
 @property (weak, nonatomic) IBOutlet MLPAutoCompleteTextField *searchBar;
 @end
 
@@ -70,7 +77,6 @@ typedef enum {
 #pragma mark - View loading
 - (void)viewDidLoad {
     [super viewDidLoad];
-
     //Initializations;
     abbrvDic = nil;
     self.searchHeaderView = nil;
@@ -125,6 +131,7 @@ typedef enum {
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+    self.originalCentre = self.view.center;
     if(!self.viewLoaded) {
         self.viewLoaded= YES;
         //If walkthough finished animating
@@ -226,13 +233,52 @@ typedef enum {
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationSlide];
     
     [[ATAppRatingFlow sharedRatingFlow] showRatingFlowFromViewControllerIfConditionsAreMet:self];
+    
+    if ([[UIScreen mainScreen] bounds].size.height != 568.0) {
+        [self registerNotifications];
+    }
+}
 
+-(void) registerNotifications {
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
+}
+
+-(BOOL) isVerticallyShifted {
+    return self.originalCentre.y != self.view.center.y;
+}
+
+- (void)keyboardWillShow:(NSNotification *)notification {
+    keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    if (![self isVerticallyShifted]) {
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:0.25];
+ 
+        CGRect refRect = self.segmentedControl.frame;
+        
+        self.view.center = CGPointMake(self.originalCentre.x, self.originalCentre.y - refRect.origin.y - refRect.size.height);
+        [UIView commitAnimations];
+    }
+}
+
+-(void)keyboardWillHide: (NSNotification*) notification {
+    if ([self isVerticallyShifted]) {
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:0.25];
+        self.view.center = self.originalCentre;
+        [UIView commitAnimations];
+    }
 }
 
 -(void) viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [NSUserDefaults setLastSearchType: self.currentSearchType];
-    [NSUserDefaults synchronize];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 -(void) initializeSearchLocation {
@@ -307,24 +353,42 @@ typedef enum {
     [self.hud show:YES];
 }
 
+-(ECSearchType) nextSearchTypeForType:(ECSearchType) type {
+    return type == ECSearchTypeFuture ? ECSearchTypePast : type + 1;
+}
 -(void) fetchConcerts {
+    self.loadStatusManager = nil;
+    self.loadStatusManager = [[ECLoadStatusManager alloc] init];
+    
     NSLog(@"fetch concerts called");
-    [self fetchPopularConcertsWithSearchType:ECSearchTypeToday];
-    [self fetchPopularConcertsWithSearchType:ECSearchTypePast];
-    [self fetchPopularConcertsWithSearchType:ECSearchTypeFuture];
+    [self fetchPopularConcertsWithSearchType:self.currentSearchType completion: ^(ECSearchType lastType) {
+                ECSearchType next = [self nextSearchTypeForType:lastType];
+                [self fetchPopularConcertsWithSearchType:next completion:^(ECSearchType lastType){
+                    ECSearchType next = [self nextSearchTypeForType:lastType];
+                    [self fetchPopularConcertsWithSearchType:next completion:nil];
+                }];
+            }];
+//    [self fetchPopularConcertsWithSearchType:ECSearchTypePast];
+//    [self fetchPopularConcertsWithSearchType:ECSearchTypeToday];
+//    [self fetchPopularConcertsWithSearchType:ECSearchTypeFuture];
 }
 
--(void) fetchPopularConcertsWithSearchType: (ECSearchType) type {
+-(void) fetchPopularConcertsWithSearchType: (ECSearchType) type completion: (void(^)(ECSearchType lastType)) completion {
+    [self.loadStatusManager updateLaunchState:YES forType:type];
     if(self.currentSearchType == type) {
         if( !(self.currentSearchType == ECSearchTypeFuture && self.showLoadMore))
             [self showLoadingHUD];
     }
-    [ECJSONFetcher fetchPopularConcertsWithSearchType:type location:self.currentSearchLocation radius:[NSNumber numberWithFloat:self.currentSearchRadius] page:self.page completion:^(NSArray *concerts, NSInteger total,ECSearchType searchType) {
+    [ECJSONFetcher fetchPopularConcertsWithSearchType:type location:self.currentSearchLocation radius:[NSNumber numberWithFloat:self.currentSearchRadius] page:self.page completion:^(BOOL success, NSArray *concerts, NSInteger total,ECSearchType searchType) {
         if(searchType == ECSearchTypeFuture && concerts.count > 0) {
             self.page++;
             self.totalUpcoming = total;
         }
         [self fetchedPopularConcerts:concerts forType:searchType];
+        [self.loadStatusManager updateTag:success ? StatusSuccess : StatusFailed ForType:searchType];
+        if (completion) {
+            completion(type);
+        }
     }];
 }
 
@@ -376,16 +440,21 @@ typedef enum {
 
 -(void) setupRefreshControl {
     self.refreshControl = [UIRefreshControl new];
-    [self.refreshControl addTarget:self action:@selector(reloadData)
+    [self.refreshControl addTarget:self action:@selector(refreshControlPulled)
                   forControlEvents:UIControlEventValueChanged];
     [self.tableView addSubview:self.refreshControl];
     self.refreshControl.tintColor = [UIColor lightBlueNavBarColor];
 }
--(void) reloadData {
+
+-(void) refreshControlPulled {
     [Flurry logEvent:@"Used_Refresh_Control_Main_View" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[self currentSearchTypeString], @"search_type", nil]];
+    [self reloadData];
+}
+-(void) reloadData {
     self.page = 1;
-    
-    [ECJSONFetcher fetchPopularConcertsWithSearchType:self.currentSearchType location: self.currentSearchLocation radius: [NSNumber numberWithFloat:self.currentSearchRadius] page:self.page completion:^(NSArray *concerts,NSInteger total,ECSearchType searchType) {
+    [self.loadStatusManager updateLaunchState:YES forType:self.currentSearchType];
+    [ECJSONFetcher fetchPopularConcertsWithSearchType:self.currentSearchType location: self.currentSearchLocation radius: [NSNumber numberWithFloat:self.currentSearchRadius] page:self.page completion:^(BOOL success, NSArray *concerts,NSInteger total,ECSearchType searchType) {
+        [self.loadStatusManager updateTag:success ? StatusSuccess : StatusFailed ForType:searchType];
         if(searchType == ECSearchTypeFuture){
             [self.futureConcerts removeAllObjects];
             self.totalUpcoming = total;
@@ -407,7 +476,9 @@ typedef enum {
         
         [self.hud hide:YES];
         [self setBackgroundImage];
-        [self.refreshControl endRefreshing];
+        if ([self.refreshControl isRefreshing]) {
+            [self.refreshControl endRefreshing];
+        }
     }];
 }
 -(void) setupSearchBar {
@@ -679,7 +750,7 @@ typedef enum {
     if (self.hasSearched) {
         //redo search with new location
         [ECJSONFetcher fetchArtistsForString:self.searchBar.text withSearchType:self.currentSearchType forLocation:self.currentSearchLocation radius:[NSNumber numberWithFloat:self.currentSearchRadius] completion:^(NSDictionary *artists) {
-            [self fetchedConcertsForSearch:artists];
+            [self fetchedConcertsForSearch:artists wasAutocomplete:NO];
             [self.hud hide:YES];
         }];
     }
@@ -715,6 +786,14 @@ typedef enum {
             }
         }
     }
+    else if (alertView.tag == ECMainShouldGoToArtistPageAlert && buttonIndex == alertView.firstOtherButtonIndex) {
+        UIStoryboard* sb = [UIStoryboard storyboardWithName:@"ECArtistView" bundle:nil];
+        ECArtistViewController * vc = [sb instantiateInitialViewController];
+        vc.artist = self.selectedAutocompletion;
+//        vc.artistImage = ;
+        [self.navigationController pushViewController:vc animated:YES];
+
+    }
 }
 
 -(void) showLogin {
@@ -727,6 +806,7 @@ typedef enum {
     }
     return _switchingHUD;
 }
+
 #pragma mark Segmented Control
 
 -(IBAction) switchedSelection: (id) sender {
@@ -742,15 +822,31 @@ typedef enum {
     
     UISegmentedControl* control = self.segmentedControl;
     self.currentSearchType = [ECNewMainViewController searchTypeForSegmentIndex:control.selectedSegmentIndex];
+    [NSUserDefaults setLastSearchType: self.currentSearchType];
+    [NSUserDefaults synchronize];
     self.hasSearched = FALSE; //TODO this flagging system is prone to human error, clean it up.
     
     [self resetTableHeaderView]; //remove artist image that appears during search results
+    [self displayViewsAccordingToSearchType];
     
+    [Flurry logEvent:@"Switched_Selection" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[self currentSearchTypeString], @"Search_Type",nil]];
+    [self.switchingHUD hide:YES];
+    BOOL launchState = [self.loadStatusManager launchStateForType:self.currentSearchType];
+    ECLoadStatusTag statusTag = [self.loadStatusManager statusTagForType:self.currentSearchType];
+    if (launchState == YES && statusTag == StatusNothingYet) { //launched but no response yet, let it load
+        [self showLoadingHUD];
+        return;
+    }
+    
+    if (statusTag == StatusFailed) { //switched to a segmented controller with a previously failed loading, try it again 
+        [self showLoadingHUD];
+        [self reloadData];
+        return;
+    }
     //reload data/images
     [self.tableView reloadData];
     
     [self setBackgroundImage];
-    [self displayViewsAccordingToSearchType];
     
     if ([self currentEventArray].count != 0) {
         self.tableView.tableFooterView = lastFMView;
@@ -759,30 +855,35 @@ typedef enum {
         self.tableView.tableFooterView = self.noConcertsFooterView;
     }
     
-    [Flurry logEvent:@"Switched_Selection" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[self currentSearchTypeString], @"Search_Type",nil]];
-    [self.switchingHUD hide:YES];
+    
 }
 //return a string based on the current search type for logging to Flurry etc
+
 -(NSString*) currentSearchTypeString {
-    switch (self.currentSearchType) {
+   return [ECNewMainViewController stringForSearchType:self.currentSearchType];
+}
+
++(NSString*) stringForSearchType: (ECSearchType) type {
+    switch (type) {
+        case ECSearchTypePast:
+            return @"Past";
         case ECSearchTypeToday:
             return @"Today";
         case ECSearchTypeFuture:
             return @"Future";
-        case ECSearchTypePast:
-            return @"Past";
         default:
             return nil;
     }
 }
+
 +(NSInteger) segmentIndexForSearchType:(ECSearchType) searchType {
     switch (searchType) {
         case ECSearchTypePast:
             return 0;
-        case ECSearchTypeFuture:
-            return 2;
         case ECSearchTypeToday:
             return 1;
+        case ECSearchTypeFuture:
+            return 2;
         default:
             break;
     }
@@ -914,7 +1015,7 @@ typedef enum {
     NSLog(@"%@: Load More tapped. Currently showing %i concerts. Total remaining: %i Page: %i",NSStringFromClass(self.class),(int)self.futureConcerts.count,(int)self.totalUpcoming,(int)(self.page-1));
     if (self.totalUpcoming > self.futureConcerts.count) {
         [self.loadMoreActivityIndicator startAnimating];
-        [self fetchPopularConcertsWithSearchType:ECSearchTypeFuture];
+        [self fetchPopularConcertsWithSearchType:ECSearchTypeFuture completion:nil];
     }
     [Flurry logEvent:@"LoadMoreTapped" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[self currentSearchTypeString],@"CurrentSearchType", [NSNumber numberWithInteger:self.page],@"Page",self.currentSearchAreaString,@"SearchArea", nil]];
 }
@@ -1112,17 +1213,17 @@ BOOL dateIsPast (NSDate* date) {
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [self doSearchOnText:textField.text];
+    [self doSearchOnText:textField.text wasAutocomplete: NO];
     [self.view removeGestureRecognizer:self.tap];
     [textField resignFirstResponder];
     return YES;
 }
 
--(void) doSearchOnText: (NSString*) text {
+-(void) doSearchOnText: (NSString*) text wasAutocomplete: (BOOL) autocomplete {
     [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
     if ([text length] > 0) { //don't search empty searches
         [ECJSONFetcher fetchArtistsForString:text withSearchType:self.currentSearchType forLocation:self.currentSearchLocation radius: [NSNumber numberWithFloat:self.currentSearchRadius] completion:^(NSDictionary * comboDic) {
-            [self fetchedConcertsForSearch:comboDic];
+            [self fetchedConcertsForSearch:comboDic wasAutocomplete: autocomplete];
         }];
         
         self.hud.labelText = NSLocalizedString(@"Searching", nil);
@@ -1137,7 +1238,7 @@ BOOL dateIsPast (NSDate* date) {
     [self.view addGestureRecognizer:self.tap]; //for dismissing the keyboard if tap outside
 }
 
-- (void)fetchedConcertsForSearch:(NSDictionary *)comboDic {
+- (void)fetchedConcertsForSearch:(NSDictionary *)comboDic wasAutocomplete: (BOOL) autocomplete {
     [self.hud hide:YES];
     [self resetTableHeaderView];
     self.tableView.tableFooterView = lastFMView;
@@ -1147,6 +1248,13 @@ BOOL dateIsPast (NSDate* date) {
         if (!self.searchResultsEvents.count > 0) {
             self.hasSearched = FALSE;
             self.comboSearchResultsDic = nil;
+            if (autocomplete) {
+                UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"No events found for your location" message:@"Want to check out recent and upcoming shows in other cities?" delegate:self cancelButtonTitle:@"No way!" otherButtonTitles:@"Party on!", nil];
+                alert.tag = ECMainShouldGoToArtistPageAlert;
+                [alert show];
+                return;
+            }
+            
             MBProgressHUD* alert = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
             alert.labelText = NSLocalizedString(@"No events found", nil);
             alert.mode = MBProgressHUDModeText;
@@ -1158,6 +1266,12 @@ BOOL dateIsPast (NSDate* date) {
         }
     }
     else { //failed to find anything
+        if (autocomplete) {
+            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"No events found for your location" message:@"Want to check out recent and upcoming shows in other cities?" delegate:self cancelButtonTitle:@"No way!" otherButtonTitles:@"Party on!", nil];
+            alert.tag = ECMainShouldGoToArtistPageAlert;
+            [alert show];
+            return;
+        }
         self.hasSearched = FALSE;
         self.comboSearchResultsDic = nil;
         MBProgressHUD* alert = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
@@ -1228,8 +1342,9 @@ BOOL dateIsPast (NSDate* date) {
        withAutoCompleteObject:(id<MLPAutoCompletionObject>)selectedObject
             forRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    self.selectedAutocompletion = selectedString;
     self.searchBar.text = [selectedString uppercaseString];
-    [self doSearchOnText:selectedString];
+    [self doSearchOnText:selectedString wasAutocomplete: YES];
     
 }
 

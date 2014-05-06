@@ -22,7 +22,8 @@ typedef enum {
     ECChangeStateNotLoggedInAlert,
     ECNoNetworkAlertTag,
     ECInviteFriendsTag,
-    ECShareOpenGraphTag
+    ECShareOpenGraphTag,
+    ECMainShouldGoToArtistPageAlert
 }ECAlertTags;
 
 #endif

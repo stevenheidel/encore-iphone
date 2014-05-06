@@ -134,6 +134,10 @@ typedef enum {
 }
 
 -(void) navTap {
+    if (self.posts.count == 0) {
+        return;
+    }
+    
     if (self.isSingleColumn) {
         if (!threeColVersion) {
             threeColVersion = [[UIStoryboard storyboardWithName:@"ECPastStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"ECGridViewController2"];
@@ -315,7 +319,12 @@ typedef enum {
 
 -(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (alertView.tag == NoPostsAlertTag && buttonIndex == alertView.cancelButtonIndex) {
-        [self.navigationController popViewControllerAnimated:YES];
+        if (self.concertDetailPage) {
+            [self.navigationController popToViewController:self.concertDetailPage animated:YES];
+        }
+        else {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
     }
 }
 

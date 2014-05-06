@@ -85,7 +85,7 @@
 		24B0D8E017E15C9100B30612 /* shareiconbutton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24B0D8DE17E15C9100B30612 /* shareiconbutton@2x.png */; };
 		24B3840218A5E24C00E5C714 /* removeConcert@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24B3840118A5E24C00E5C714 /* removeConcert@2x.png */; };
 		24B3840518A5E4E300E5C714 /* addConcert@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24B3840418A5E4E200E5C714 /* addConcert@2x.png */; };
-		255A9AF4A1C64F71B97704C8 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 918A85E0EEDE48F3BEFD223A /* libPods.a */; };
+		24C7E23F1918B4E90068EAC8 /* ECLoadStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 24C7E23E1918B4E90068EAC8 /* ECLoadStatus.m */; };
 		A00402BD177F4F7300B998CF /* ECProfileHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = A00402BC177F4F7300B998CF /* ECProfileHeader.m */; };
 		A00402C4177F6B0900B998CF /* backButton.png in Resources */ = {isa = PBXBuildFile; fileRef = A00402C2177F6B0900B998CF /* backButton.png */; };
 		A00402C5177F6B0900B998CF /* backButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A00402C3177F6B0900B998CF /* backButton@2x.png */; };
@@ -114,6 +114,7 @@
 		A0A2B0DB177E333900518B6C /* ECProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0A2B0D9177E333900518B6C /* ECProfileViewController.xib */; };
 		A0A2B0DD177E3B5A00518B6C /* ECProfileHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0A2B0DC177E3B5A00518B6C /* ECProfileHeader.xib */; };
 		A0FF1C53176CC88000433768 /* LoginInfoPages.plist in Resources */ = {isa = PBXBuildFile; fileRef = A0FF1C52176CC88000433768 /* LoginInfoPages.plist */; };
+		BEC901516553422CA5351467 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8087A714E27A4A5B80C64237 /* libPods.a */; };
 		D401054917A20E6C006078D0 /* playbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = D401054717A20E6C006078D0 /* playbutton.png */; };
 		D401054A17A20E6C006078D0 /* playbutton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D401054817A20E6C006078D0 /* playbutton@2x.png */; };
 		D411CBE517B358FF006AF0C2 /* ECGridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D411CBE417B358FF006AF0C2 /* ECGridViewController.m */; };
@@ -405,7 +406,10 @@
 		24B0D8DE17E15C9100B30612 /* shareiconbutton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shareiconbutton@2x.png"; sourceTree = "<group>"; };
 		24B3840118A5E24C00E5C714 /* removeConcert@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "removeConcert@2x.png"; sourceTree = "<group>"; };
 		24B3840418A5E4E200E5C714 /* addConcert@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "addConcert@2x.png"; sourceTree = "<group>"; };
-		918A85E0EEDE48F3BEFD223A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		24C7E23D1918B4E90068EAC8 /* ECLoadStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECLoadStatus.h; sourceTree = "<group>"; };
+		24C7E23E1918B4E90068EAC8 /* ECLoadStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECLoadStatus.m; sourceTree = "<group>"; };
+		8087A714E27A4A5B80C64237 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E74836C07DD49A2BC3BE7EB /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		A00402BB177F4F7300B998CF /* ECProfileHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECProfileHeader.h; sourceTree = "<group>"; };
 		A00402BC177F4F7300B998CF /* ECProfileHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECProfileHeader.m; sourceTree = "<group>"; };
 		A00402C2177F6B0900B998CF /* backButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backButton.png; sourceTree = "<group>"; };
@@ -439,7 +443,6 @@
 		A0A2B0D9177E333900518B6C /* ECProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECProfileViewController.xib; sourceTree = "<group>"; };
 		A0A2B0DC177E3B5A00518B6C /* ECProfileHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECProfileHeader.xib; sourceTree = "<group>"; };
 		A0FF1C52176CC88000433768 /* LoginInfoPages.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = LoginInfoPages.plist; sourceTree = "<group>"; };
-		B56B831D22E04C90BC664348 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		D401054717A20E6C006078D0 /* playbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playbutton.png; sourceTree = "<group>"; };
 		D401054817A20E6C006078D0 /* playbutton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "playbutton@2x.png"; sourceTree = "<group>"; };
 		D411CBE317B358FF006AF0C2 /* ECGridViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECGridViewController.h; sourceTree = "<group>"; };
@@ -674,7 +677,7 @@
 				245BBDCE18A5FD5700B80781 /* Tapjoy.framework in Frameworks */,
 				D4AA4CF51766B374009B0635 /* Foundation.framework in Frameworks */,
 				D4AA4CF71766B374009B0635 /* CoreGraphics.framework in Frameworks */,
-				255A9AF4A1C64F71B97704C8 /* libPods.a in Frameworks */,
+				BEC901516553422CA5351467 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1059,7 +1062,7 @@
 				D4AA4D161766B374009B0635 /* EncoreTests */,
 				D4AA4CF11766B374009B0635 /* Frameworks */,
 				D4AA4CF01766B374009B0635 /* Products */,
-				B56B831D22E04C90BC664348 /* Pods.xcconfig */,
+				8E74836C07DD49A2BC3BE7EB /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1105,7 +1108,7 @@
 				D4AA4CF41766B374009B0635 /* Foundation.framework */,
 				D4AA4CF61766B374009B0635 /* CoreGraphics.framework */,
 				D4AA4D101766B374009B0635 /* SenTestingKit.framework */,
-				918A85E0EEDE48F3BEFD223A /* libPods.a */,
+				8087A714E27A4A5B80C64237 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1207,6 +1210,8 @@
 		D4AA632C1780BAFB008111C6 /* Main View */ = {
 			isa = PBXGroup;
 			children = (
+				24C7E23D1918B4E90068EAC8 /* ECLoadStatus.h */,
+				24C7E23E1918B4E90068EAC8 /* ECLoadStatus.m */,
 				D491F80B178B57C1002E00E5 /* Main.storyboard */,
 				D491F80D178B595D002E00E5 /* ECNewMainViewController.h */,
 				D491F80E178B595D002E00E5 /* ECNewMainViewController.m */,
@@ -1428,12 +1433,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D4AA4D211766B374009B0635 /* Build configuration list for PBXNativeTarget "Encore" */;
 			buildPhases = (
-				7F48833E90A8476FABBA2047 /* Check Pods Manifest.lock */,
+				4D270BF192834BC4811BA0C0 /* Check Pods Manifest.lock */,
 				D4AA4CEB1766B374009B0635 /* Sources */,
 				D4AA4CEC1766B374009B0635 /* Frameworks */,
 				D4AA4CED1766B374009B0635 /* Resources */,
-				6ED2426A9A5940A7960A5FC6 /* Copy Pods Resources */,
 				241C7F64190876780026A8EA /* ShellScript */,
+				E330301B40794982932D1F5C /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1738,21 +1743,7 @@
 			shellPath = /bin/sh;
 			shellScript = "./Crashlytics.framework/run c12b678409321970d5cec21099c268564caa15c1 89d1337b41d35c89269b8c1f8954b5fb27bedd453438223839ca7f512e1cc581";
 		};
-		6ED2426A9A5940A7960A5FC6 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
-		};
-		7F48833E90A8476FABBA2047 /* Check Pods Manifest.lock */ = {
+		4D270BF192834BC4811BA0C0 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1765,6 +1756,7 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
 		};
 		D4AA4D0D1766B374009B0635 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1778,6 +1770,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+		E330301B40794982932D1F5C /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1807,6 +1814,7 @@
 				A00402BD177F4F7300B998CF /* ECProfileHeader.m in Sources */,
 				D428A45B1781085500101F12 /* UIColor+EncoreUI.m in Sources */,
 				D4AB1B0A178213FF002A29B9 /* UIFont+Encore.m in Sources */,
+				24C7E23F1918B4E90068EAC8 /* ECLoadStatus.m in Sources */,
 				D491F80F178B595D002E00E5 /* ECNewMainViewController.m in Sources */,
 				A02661E0178C937200741C9A /* ECSearchResultCell.m in Sources */,
 				D4AC2DFF178FA64E00F292CA /* ECProfileConcertCell.m in Sources */,
@@ -1956,7 +1964,7 @@
 		};
 		D4AA4D221766B374009B0635 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B56B831D22E04C90BC664348 /* Pods.xcconfig */;
+			baseConfigurationReference = 8E74836C07DD49A2BC3BE7EB /* Pods.xcconfig */;
 			buildSettings = {
 				ARCHS = (
 					armv7,
@@ -2014,7 +2022,7 @@
 		};
 		D4AA4D231766B374009B0635 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B56B831D22E04C90BC664348 /* Pods.xcconfig */;
+			baseConfigurationReference = 8E74836C07DD49A2BC3BE7EB /* Pods.xcconfig */;
 			buildSettings = {
 				ARCHS = (
 					armv7,

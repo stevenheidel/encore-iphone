@@ -81,7 +81,7 @@ typedef enum {
     hud.color = [UIColor lightBlueHUDConfirmationColor];
     hud.userInteractionEnabled = NO;
 	[hud show:YES];
-    hud.labelText = [NSString stringWithFormat:@"Loading recent events"];
+    hud.labelText = [NSString stringWithFormat:@"Loading events"];
     self.hud = hud;
     alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Sorry, something went wrong. No events were found." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     self.infoOperation = [ECJSONFetcher fetchInfoForArtist:self.artist completion:^(NSDictionary *artistInfo) {

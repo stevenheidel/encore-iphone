@@ -1,960 +1,958 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-    <array>
-        <string>N Sync</string>
-        <string>2 Chainz</string>
-        <string>2Pac</string>
-        <string>3 Doors Down</string>
-        <string>30 Seconds to Mars</string>
-        <string>3OH!3</string>
-        <string>5 Seconds of Summer</string>
-        <string>50 Cent</string>
-        <string>A Day to Remember</string>
-        <string>A Great Big World</string>
-        <string>A Perfect Circle</string>
-        <string>A Tribe Called Quest</string>
-        <string>A-ha</string>
-        <string>A$AP Rocky</string>
-        <string>Aaliyah</string>
-        <string>ABBA</string>
-        <string>AC/DC</string>
-        <string>Ace Hood</string>
-        <string>Ace Of Base</string>
-        <string>Adam Lambert</string>
-        <string>Adam Levine</string>
-        <string>Adele</string>
-        <string>Aerosmith</string>
-        <string>AFI</string>
-        <string>Air</string>
-        <string>Akon</string>
-        <string>Al Green</string>
-        <string>Alabama Shakes</string>
-        <string>Alanis Morissette</string>
-        <string>Albert Hammond, Jr.</string>
-        <string>Albert King</string>
-        <string>Alex Clare</string>
-        <string>Alexisonfire</string>
-        <string>Alice Cooper</string>
-        <string>Alice in Chains</string>
-        <string>Alicia Keys </string>
-        <string>All Time Low</string>
-        <string>Aloe Blacc</string>
-        <string>Alpine</string>
-        <string>alt-J</string>
-        <string>American Authors</string>
-        <string>Amy Grant</string>
-        <string>Amy Winehouse</string>
-        <string>Anathema</string>
-        <string>Anberlin</string>
-        <string>Andy Stott</string>
-        <string>Angel Haze</string>
-        <string>Angus and Julia Stone</string>
-        <string>Animal Collective</string>
-        <string>Anna Kendrick</string>
-        <string>Antony and The Johnsons</string>
-        <string>Aphex Twin</string>
-        <string>Arcade Fire</string>
-        <string>Arctic Monkeys</string>
-        <string>Aretha Franklin</string>
-        <string>Ariana Grande</string>
-        <string>Ariel Pink's Haunted Graffiti</string>
-        <string>Armin Van Buuren</string>
-        <string>Arrested Development</string>
-        <string>Asher Roth</string>
-        <string>At the Drive-In</string>
-        <string>Atlas Sound</string>
-        <string>Audioslave</string>
-        <string>Austin Mahone</string>
-        <string>Avenged Sevenfold</string>
-        <string>Avicii</string>
-        <string>Avril Lavigne</string>
-        <string>AWOLNATION</string>
-        <string>Azealia Banks</string>
-        <string>B.B. King</string>
-        <string>B.o.B.</string>
-        <string>B2K</string>
-        <string>Baauer</string>
-        <string>Backstreet Boys</string>
-        <string>Bad Grammar</string>
-        <string>Band of Horses</string>
-        <string>Band of Skulls</string>
-        <string>Banks</string>
-        <string>Barbra Streisand</string>
-        <string>Barenaked Ladies</string>
-        <string>Barry White</string>
-        <string>Basement Jaxx</string>
-        <string>Bastille</string>
-        <string>Bat for Lashes</string>
-        <string>Battles</string>
-        <string>Bauhaus</string>
-        <string>Beach House</string>
-        <string>Beastie Boys</string>
-        <string>Beck</string>
-        <string>Bee Gees</string>
-        <string>Beirut</string>
-        <string>Belle and Sebastian</string>
-        <string>Ben Harper</string>
-        <string>Ben Howard</string>
-        <string>Best Coast</string>
-        <string>Bette Midler</string>
-        <string>Betty Davis</string>
-        <string>Betty Who</string>
-        <string>Beyoncé</string>
-        <string>Biffy Clyro</string>
-        <string>Big Boi</string>
-        <string>Big Sean</string>
-        <string>Billie Holiday</string>
-        <string>Billy Bragg</string>
-        <string>Billy Idol</string>
-        <string>Billy Joel</string>
-        <string>Billy Ray Cyrus</string>
-        <string>Billy Talent</string>
-        <string>Billy Taylor</string>
-        <string>Björk</string>
-        <string>Black Eyed Peas</string>
-        <string>Black Sabbath</string>
-        <string>Blake Shelton</string>
-        <string>Blink-182</string>
-        <string>Bloc Party</string>
-        <string>Blondie</string>
-        <string>Blood Orange</string>
-        <string>Blue Rodeo</string>
-        <string>Blur</string>
-        <string>Boards of Canada</string>
-        <string>Bob Dylan</string>
-        <string>Bob Marley</string>
-        <string>Bombay Bicycle Club</string>
-        <string>Bon Iver</string>
-        <string>Bon Jovi</string>
-        <string>Bonobo</string>
-        <string>Boy</string>
-        <string>Boys Noize</string>
-        <string>Boyz II Men</string>
-        <string>Brad Paisley</string>
-        <string>Brand New</string>
-        <string>Brandy</string>
-        <string>Brian Eno</string>
-        <string>Bright Eyes</string>
-        <string>Bring Me to the Horizon</string>
-        <string>Britney Spears</string>
-        <string>Broken Bells</string>
-        <string>Broken Social Scene</string>
-        <string>Broods</string>
-        <string>Bruce Springsteen</string>
-        <string>Bruno Mars</string>
-        <string>Bryan Adams</string>
-        <string>Built to Spill</string>
-        <string>Burial</string>
-        <string>Busta Rhymes</string>
-        <string>Cage the Elephant</string>
-        <string>Cake</string>
-        <string>Cali Swag District</string>
-        <string>Calvin Harris</string>
-        <string>Capital Cities</string>
-        <string>Carly Rae Jepsen</string>
-        <string>Carpenters</string>
-        <string>Carrie Underwood</string>
-        <string>Cascada</string>
-        <string>Cat Power</string>
-        <string>Cee Lo Green</string>
-        <string>Celine Dion</string>
-        <string>Chamillionaire</string>
-        <string>Charli XCX</string>
-        <string>Cher</string>
-        <string>Cher Lloyd</string>
-        <string>Chet Faker</string>
-        <string>Childish Gambino</string>
-        <string>Chris Brown</string>
-        <string>Christina Aguilera</string>
-        <string>Christina Perri</string>
-        <string>Chromatics</string>
-        <string>Chromeo</string>
-        <string>Chrystal Castles</string>
-        <string>Chuck Berry</string>
-        <string>Chvrches</string>
-        <string>Ciara</string>
-        <string>City and Colour</string>
-        <string>Clipse</string>
-        <string>Cloud Nothings</string>
-        <string>Cobra Starship</string>
-        <string>Coldplay</string>
-        <string>Constantines</string>
-        <string>Cornershop</string>
-        <string>Counting Crows</string>
-        <string>Cream</string>
-        <string>Creed </string>
-        <string>Creedence Clearwater Revival</string>
-        <string>Crystal Castles</string>
-        <string>Crystal Fighters</string>
-        <string>Cut Copy</string>
-        <string>Cyndi Lauper</string>
-        <string>Cypress Hill</string>
-        <string>D'Angelo</string>
-        <string>Daft Punk</string>
-        <string>Damien Rice</string>
-        <string>Damon Albarn</string>
-        <string>Daniel Bedingfield</string>
-        <string>Darius Rucker</string>
-        <string>Das Racist</string>
-        <string>Daughter</string>
-        <string>Daughtry</string>
-        <string>Dave Matthews Band</string>
-        <string>David Archuleta</string>
-        <string>David Bowie</string>
-        <string>David Cook</string>
-        <string>David Guetta</string>
-        <string>David Lee Roth</string>
-        <string>David Sylvian</string>
-        <string>Dead Kennedys</string>
-        <string>Deadmau5</string>
-        <string>Death Cab for Cutie</string>
-        <string>Deep Purple</string>
-        <string>Deerhunter</string>
-        <string>Def Leppard</string>
-        <string>Deftones</string>
-        <string>Demi Lovato</string>
-        <string>Depeche Mode</string>
-        <string>Destiny's Child</string>
-        <string>Destroyer</string>
-        <string>Dev</string>
-        <string>Devandra Banhart</string>
-        <string>Devo</string>
-        <string>Diana Ross</string>
-        <string>Die Antwoord</string>
-        <string>DIIV</string>
-        <string>Dire Straits</string>
-        <string>Dirty Projectors</string>
-        <string>Disclosure</string>
-        <string>Disturbed</string>
-        <string>Dixie Chicks</string>
-        <string>Dizzee Rascal</string>
-        <string>DJ Earworm</string>
-        <string>DJ Shadow</string>
-        <string>Django Django</string>
-        <string>DMX</string>
-        <string>Dolly Parton</string>
-        <string>Donna Summer</string>
-        <string>Dr. Dog</string>
-        <string>Dr. Dre</string>
-        <string>Dr. John</string>
-        <string>Drake</string>
-        <string>Dream Theater</string>
-        <string>Dropkick Murpheys</string>
-        <string>Duke Dumont</string>
-        <string>Duran Duran</string>
-        <string>Dustin Lynch</string>
-        <string>Eagles</string>
-        <string>Ed Sheeran</string>
-        <string>Editors</string>
-        <string>Edward Maya and Vika Jigulina</string>
-        <string>Edward Sharpe and the Magnetic Zeros</string>
-        <string>Eels</string>
-        <string>Elastica</string>
-        <string>Elbow</string>
-        <string>Eli Young Band</string>
-        <string>Ellie Goulding</string>
-        <string>Elliott Smith</string>
-        <string>Elton John</string>
-        <string>Elvis Costello</string>
-        <string>Elvis Presley</string>
-        <string>EMA</string>
-        <string>Emblem3</string>
-        <string>Emeli Sande</string>
-        <string>Eminem</string>
-        <string>Empire of the Sun</string>
-        <string>Enrique Iglesias</string>
-        <string>Enya</string>
-        <string>Eric Church</string>
-        <string>Eric Clapton</string>
-        <string>Eurythmics</string>
-        <string>Evanescence </string>
-        <string>Everclear</string>
-        <string>Explosions in the Sky</string>
-        <string>Fall Out Boy</string>
-        <string>Far East Movement</string>
-        <string>Fatboy Slim</string>
-        <string>Faust</string>
-        <string>Fefe Dobson</string>
-        <string>Feist</string>
-        <string>Fergie</string>
-        <string>Fiona Apple</string>
-        <string>First Aid Kit</string>
-        <string>Fitz and the Tantrums</string>
-        <string>Five Fingers Death Punch</string>
-        <string>Five For Fighting</string>
-        <string>Fleet Foxes</string>
-        <string>Fleetwood Mac</string>
-        <string>Flo Rida</string>
-        <string>Flogging Molly</string>
-        <string>Florence + The Machine</string>
-        <string>Florida Georgia Line</string>
-        <string>Flume</string>
-        <string>Flying Lotus</string>
-        <string>Foals</string>
-        <string>Foo Fighters</string>
-        <string>Foster the People</string>
-        <string>Four Tet</string>
-        <string>Frank Ocean</string>
-        <string>Frank Sinatra</string>
-        <string>Frank Zappa</string>
-        <string>Franz Ferdinand</string>
-        <string>Fuck Buttons</string>
-        <string>Fucked Up</string>
-        <string>Fugazi</string>
-        <string>Fugees</string>
-        <string>fun.</string>
-        <string>Future</string>
-        <string>Future Islands</string>
-        <string>Garbage</string>
-        <string>Garth Brooks</string>
-        <string>Gavin Degraw</string>
-        <string>Genesis</string>
-        <string>Geographer</string>
-        <string>George Michael</string>
-        <string>Get Well Soon</string>
-        <string>Ghostface Killah</string>
-        <string>Girl Talk</string>
-        <string>Girls</string>
-        <string>Gnarls Barkley</string>
-        <string>Godspeed You! Black Emperor</string>
-        <string>Gold Panda</string>
-        <string>Goldfrapp</string>
-        <string>Goldie</string>
-        <string>Goo Goo Dolls</string>
-        <string>Good Charlotte</string>
-        <string>Gorillaz</string>
-        <string>Gotan Project</string>
-        <string>Gotye</string>
-        <string>Grandmaster Flash and The Furious Five</string>
-        <string>Grateful Dead</string>
-        <string>Green Day</string>
-        <string>Grimes</string>
-        <string>Grinderman</string>
-        <string>Grizzly Bear</string>
-        <string>Grouplove</string>
-        <string>Guided by Voices</string>
-        <string>Guns N' Roses</string>
-        <string>Guy</string>
-        <string>Gwen Stefani</string>
-        <string>Gym Class Heroes</string>
-        <string>HAIM</string>
-        <string>Hammock</string>
-        <string>Hans Zimmer</string>
-        <string>Hanson</string>
-        <string>Happy Mondays</string>
-        <string>Havana Brown</string>
-        <string>Heart</string>
-        <string>Hellogoodbye</string>
-        <string>Hercules and Love Affair</string>
-        <string>Hole</string>
-        <string>Holy Ghost!</string>
-        <string>Hot Chelle Rae</string>
-        <string>Hot Chip</string>
-        <string>Hot Hot Heat</string>
-        <string>Hunter Hayes</string>
-        <string>Hüsker Dü</string>
-        <string>Ice Cube</string>
-        <string>Ice-T</string>
-        <string>Icona Pop</string>
-        <string>Iggy Azalea</string>
-        <string>Iggy Pop</string>
-        <string>Imagine Dragons</string>
-        <string>Incubus</string>
-        <string>Infected Mushroom</string>
-        <string>Ingrid Michaelson</string>
-        <string>Interpol</string>
-        <string>INXS</string>
-        <string>Iron and Wine</string>
-        <string>Iron Maiden</string>
-        <string>Isis</string>
-        <string>Islands</string>
-        <string>Iyaz</string>
-        <string>J. Cole</string>
-        <string>Jack Johnson</string>
-        <string>Jack White</string>
-        <string>Jai Paul</string>
-        <string>Jake Bugg</string>
-        <string>Jake Owen</string>
-        <string>James Arthur</string>
-        <string>James Blake</string>
-        <string>James Blunt</string>
-        <string>James Brown</string>
-        <string>James Vincent McMorrow</string>
-        <string>Jamiroquai</string>
-        <string>Jane's Addiction</string>
-        <string>Janelle Monáe</string>
-        <string>Janet Jackson</string>
-        <string>Japandroids</string>
-        <string>Jason Aldean</string>
-        <string>Jason Derulo</string>
-        <string>Jason Mraz</string>
-        <string>Jay Z</string>
-        <string>Jeff Buckley</string>
-        <string>Jefferson Airplane</string>
-        <string>Jennifer Lopez</string>
-        <string>Jeremih</string>
-        <string>Jerrod Niemann</string>
-        <string>Jesse McCartney</string>
-        <string>Jessie J</string>
-        <string>Jessie Ware</string>
-        <string>Jimi Hendrix</string>
-        <string>Jimmy Cliff</string>
-        <string>Jimmy Eat World</string>
-        <string>Joanna Newsom</string>
-        <string>John Coltrane</string>
-        <string>John Cougar Mellencamp</string>
-        <string>John Grant</string>
-        <string>John Legend</string>
-        <string>John Lennon</string>
-        <string>John Mayer</string>
-        <string>John Mellencamp</string>
-        <string>John Newman</string>
-        <string>John Talabot</string>
-        <string>Johnny Cash</string>
-        <string>Johnnyswim</string>
-        <string>JoJo</string>
-        <string>Jonas Brothers</string>
-        <string>Joni Mitchell</string>
-        <string>Jordin Sparks</string>
-        <string>Jose Gonzalez</string>
-        <string>Journey</string>
-        <string>Joy Division</string>
-        <string>Judas Priest</string>
-        <string>Julia Holter</string>
-        <string>Junior Boys</string>
-        <string>Justice</string>
-        <string>Justin Bieber</string>
-        <string>Justin Timberlake</string>
-        <string>k.d. Lang</string>
-        <string>Kaiser Chiefs</string>
-        <string>Kanye West</string>
-        <string>Karmin</string>
-        <string>Kasabian</string>
-        <string>Kat Deluna</string>
-        <string>Kate Bush</string>
-        <string>Kate Nash</string>
-        <string>Katy Perry</string>
-        <string>Kavinsky</string>
-        <string>Ke$ha</string>
-        <string>Keane</string>
-        <string>Keith Richards</string>
-        <string>Keith Urban</string>
-        <string>Keith Urban </string>
-        <string>Kelis</string>
-        <string>Kelly Clarkson</string>
-        <string>Kendrick Lamar</string>
-        <string>Kenny Chesney</string>
-        <string>Kenny Chesney </string>
-        <string>Keri Hilson</string>
-        <string>Kevin Rudolf</string>
-        <string>Khaled</string>
-        <string>Kid Cudi</string>
-        <string>Kid Ink</string>
-        <string>Kid Rock</string>
-        <string>Kiesza</string>
-        <string>Killer Mike</string>
-        <string>King Crimson</string>
-        <string>King Krule</string>
-        <string>Kings of Convenience</string>
-        <string>Kings of Leon</string>
-        <string>Kip Moore</string>
-        <string>Kirko Bangz</string>
-        <string>Kiss</string>
-        <string>Klingande</string>
-        <string>Kodaline</string>
-        <string>Korn</string>
-        <string>Kraftwerk</string>
-        <string>Kris Allen</string>
-        <string>KT Tunstall</string>
-        <string>Kurt Vile</string>
-        <string>Kylie Minogue</string>
-        <string>La Roux</string>
-        <string>Lady Antebellum</string>
-        <string>Lady Gaga</string>
-        <string>Lambchop</string>
-        <string>Lana Del Rey</string>
-        <string>Lauryn Hill</string>
-        <string>LCD Soundsystem</string>
-        <string>Led Zeppelin</string>
-        <string>Lee Brice</string>
-        <string>Leftfield</string>
-        <string>Lenny Kravitz</string>
-        <string>Leonard Cohen</string>
-        <string>Lifehouse</string>
-        <string>Lil Wayne</string>
-        <string>Lil' Kim</string>
-        <string>Lil' Wayne</string>
-        <string>Lilly Allen</string>
-        <string>Limp Biskit</string>
-        <string>Lindstrøm</string>
-        <string>Linkin Park</string>
-        <string>Lionel Richie</string>
-        <string>Little Big Town</string>
-        <string>Little Dragon</string>
-        <string>Living Colour</string>
-        <string>Liz Phair</string>
-        <string>LL Cool J</string>
-        <string>LMFAO</string>
-        <string>Lo-Fang</string>
-        <string>Local Natives</string>
-        <string>Lord Huron</string>
-        <string>Lorde</string>
-        <string>Loretta Lynn</string>
-        <string>Lou Reed</string>
-        <string>Lucinda Williams</string>
-        <string>Ludacris</string>
-        <string>Ludovico Einaudi</string>
-        <string>Luke Bryan</string>
-        <string>Lumineers</string>
-        <string>Lupe Fiasco</string>
-        <string>Lykke Li</string>
-        <string>Lynyrd Skynyrd</string>
-        <string>M.I.A.</string>
-        <string>M83</string>
-        <string>Mac DeMarco</string>
-        <string>Macklemore and Ryan Lewis</string>
-        <string>Macy Gray</string>
-        <string>Madonna</string>
-        <string>Madvillain</string>
-        <string>MAGIC!</string>
-        <string>Major Lazer</string>
-        <string>Manic Street Preachers</string>
-        <string>Marc Anthony</string>
-        <string>Mariah Carey</string>
-        <string>Marilyn Manson</string>
-        <string>Marina and the Diamonds</string>
-        <string>Maroon 5</string>
-        <string>Martin Garrix</string>
-        <string>Marvin Gaye</string>
-        <string>Mary J. Blige</string>
-        <string>Massive Attack</string>
-        <string>Mastodon</string>
-        <string>Matchbox Twenty</string>
-        <string>Mates of State</string>
-        <string>Meat Loaf</string>
-        <string>Megadeth</string>
-        <string>Mercury Rev</string>
-        <string>Metallica</string>
-        <string>Metric</string>
-        <string>Metronomy</string>
-        <string>MGMT</string>
-        <string>Michael Buble</string>
-        <string>Michael Jackson</string>
-        <string>Michelle Branch</string>
-        <string>Mick Jagger</string>
-        <string>Miguel</string>
-        <string>Miike Snow</string>
-        <string>Mike Posner</string>
-        <string>Miles Davis</string>
-        <string>Miley Cyrus</string>
-        <string>Milky Chance</string>
-        <string>Minutemen</string>
-        <string>Miranda Lambert</string>
-        <string>Missy Elliott</string>
-        <string>Missy Misdemeanor Elliott</string>
-        <string>MKTO</string>
-        <string>MO</string>
-        <string>Mobb Deep</string>
-        <string>Moby</string>
-        <string>Moderat</string>
-        <string>Modest Mouse</string>
-        <string>Mogwai</string>
-        <string>Morrissey</string>
-        <string>Motley Crue</string>
-        <string>Mötley Crüe</string>
-        <string>Ms Mr</string>
-        <string>Mumford and Sons</string>
-        <string>Muse</string>
-        <string>My Bloody Valentine</string>
-        <string>My Chemical Romance</string>
-        <string>My Morning Jacket</string>
-        <string>N.E.R.D.</string>
-        <string>N.W.A</string>
-        <string>Nas</string>
-        <string>Natasha Bedingfield</string>
-        <string>Naughty Boy</string>
-        <string>Ne-Yo</string>
-        <string>Needtobreathe</string>
-        <string>Neil Young</string>
-        <string>Neko Case</string>
-        <string>Nelly</string>
-        <string>Nelly Furtado</string>
-        <string>Neon Trees</string>
-        <string>Nero</string>
-        <string>Neutral Milk Hotel</string>
-        <string>New Kids on the Block</string>
-        <string>New Order</string>
-        <string>Nick Cave</string>
-        <string>Nick Drake</string>
-        <string>Nickelback</string>
-        <string>Nicki Minaj</string>
-        <string>Nicky Romero</string>
-        <string>Nico and Vinz</string>
-        <string>Nicolas Jaar</string>
-        <string>Nightwish</string>
-        <string>Nina Simone</string>
-        <string>Nine Inch Nails</string>
-        <string>Nirvana</string>
-        <string>NKOTB</string>
-        <string>No Doubt</string>
-        <string>Noah and the Whale</string>
-        <string>NoFX</string>
-        <string>Norah Jones</string>
-        <string>O-Town</string>
-        <string>Oasis</string>
-        <string>Odesza</string>
-        <string>Of Mice and Men</string>
-        <string>Of Monsters And Men</string>
-        <string>Of Montreal</string>
-        <string>Oh Land</string>
-        <string>Olly Murs</string>
-        <string>One Direction</string>
-        <string>OneRepublic</string>
-        <string>Opeth</string>
-        <string>Orianthi</string>
-        <string>Otis Redding</string>
-        <string>OutKast</string>
-        <string>Owl City</string>
-        <string>Ozzy Osbourne</string>
-        <string>P!nk</string>
-        <string>Panda Bear</string>
-        <string>Panic! At The Disco</string>
-        <string>Pantera</string>
-        <string>Paolo Nutini</string>
-        <string>Papa Roach</string>
-        <string>Paramore</string>
-        <string>Parov Stelar</string>
-        <string>Passenger</string>
-        <string>Passion</string>
-        <string>Passion Pit</string>
-        <string>Patti Smith</string>
-        <string>Paul McCartney</string>
-        <string>Paul Simon</string>
-        <string>Paula Abdul</string>
-        <string>Pavement</string>
-        <string>Peaches</string>
-        <string>Pearl Jam</string>
-        <string>Pendulum</string>
-        <string>Pet Shop Boys</string>
-        <string>Peter Bjorn and John</string>
-        <string>Peter Doherty</string>
-        <string>Peter Gabriel</string>
-        <string>Phantogram</string>
-        <string>Pharrell</string>
-        <string>Phil Collins</string>
-        <string>Phillip Phillips</string>
-        <string>Phish</string>
-        <string>Phoenix</string>
-        <string>Pink</string>
-        <string>Pink Floyd</string>
-        <string>Pitbull</string>
-        <string>Pixies</string>
-        <string>PJ Harvey</string>
-        <string>Placebo</string>
-        <string>Poison</string>
-        <string>Portishead</string>
-        <string>Primal Scream</string>
-        <string>Primus</string>
-        <string>Prince</string>
-        <string>Psy</string>
-        <string>Public Enemy</string>
-        <string>Pulp</string>
-        <string>Purity Ring</string>
-        <string>Pussycat Dolls</string>
-        <string>Queen</string>
-        <string>Queen Latifah</string>
-        <string>Queens of the Stone Age</string>
-        <string>R. Kelly</string>
-        <string>R.E.M.</string>
-        <string>Ra Ra Riot</string>
-        <string>Radiohead</string>
-        <string>Rage Against the Machine</string>
-        <string>Rammstein</string>
-        <string>Ramones</string>
-        <string>Randy Houser</string>
-        <string>Randy Newman</string>
-        <string>Rascal Flatts</string>
-        <string>Ratatat</string>
-        <string>Ray LaMontagne</string>
-        <string>Real Estate</string>
-        <string>Red Hot Chili Peppers</string>
-        <string>Regina Spektor</string>
-        <string>Regina Spktor</string>
-        <string>Rhythm and Sound</string>
-        <string>Rick James</string>
-        <string>Rick Ross</string>
-        <string>Ricky Martin</string>
-        <string>Rihanna</string>
-        <string>Ringo Starr</string>
-        <string>Rise Against</string>
-        <string>Rob Thomas</string>
-        <string>Robbie Williams</string>
-        <string>Robin Thicke</string>
-        <string>Robyn</string>
-        <string>Rocko</string>
-        <string>Rod Stewart</string>
-        <string>Rodney Atkins</string>
-        <string>Route 94</string>
-        <string>Roxy Music</string>
-        <string>Röyksopp</string>
-        <string>Rudimental</string>
-        <string>Run-D.M.C.</string>
-        <string>Rush</string>
-        <string>Ryan Adams</string>
-        <string>S Club 7</string>
-        <string>Salem</string>
-        <string>Salt 'n' Pepa</string>
-        <string>Sam Roberts</string>
-        <string>Sam Smith</string>
-        <string>Santana</string>
-        <string>Santigold</string>
-        <string>Sara Bareilles</string>
-        <string>Sarah McLachlan</string>
-        <string>SBTRKT</string>
-        <string>ScHoolboy Q</string>
-        <string>Scissor Sisters</string>
-        <string>Scorpions</string>
-        <string>Seal</string>
-        <string>Sean Kingston</string>
-        <string>Sean Paul</string>
-        <string>Seether</string>
-        <string>Selena Gomez</string>
-        <string>September</string>
-        <string>Sex Pistols</string>
-        <string>Shabazz Palaces</string>
-        <string>Shakira</string>
-        <string>Shania Twain</string>
-        <string>Sharon Van Etten</string>
-        <string>Shaun Reynolds</string>
-        <string>She and Him</string>
-        <string>Sheryl Crow</string>
-        <string>Shinedown</string>
-        <string>Shontelle</string>
-        <string>Sia</string>
-        <string>Sigur Rós</string>
-        <string>Simon and Garfunkel</string>
-        <string>Simple Plan</string>
-        <string>Sinéad O'Connor</string>
-        <string>Skillet</string>
-        <string>Skrillex</string>
-        <string>Sky Ferreira</string>
-        <string>Slayer</string>
-        <string>Sleater-Kinney</string>
-        <string>Sleigh Bells</string>
-        <string>Slint</string>
-        <string>Slipknot</string>
-        <string>Sloan</string>
-        <string>Smash Mouth</string>
-        <string>Smashing Pumpkins</string>
-        <string>Smokey Robinson and The Miracles</string>
-        <string>Snoop Dogg</string>
-        <string>Snow Patrol</string>
-        <string>Social Club</string>
-        <string>SOHN</string>
-        <string>Solange</string>
-        <string>Sonic Youth</string>
-        <string>Soul II Soul</string>
-        <string>Soundgarden</string>
-        <string>Spice Girls</string>
-        <string>Spiritualized</string>
-        <string>Spoon</string>
-        <string>St Vincent</string>
-        <string>Starfucker</string>
-        <string>Stars</string>
-        <string>Stereolab</string>
-        <string>Stereophonics</string>
-        <string>Steve Aoki</string>
-        <string>Stevie Nicks</string>
-        <string>Stevie Wonder</string>
-        <string>Sting</string>
-        <string>Stomae</string>
-        <string>Stone Sour</string>
-        <string>Stone Temple Pilots</string>
-        <string>Strange Talk</string>
-        <string>Sublime</string>
-        <string>Suede</string>
-        <string>Sufjan Stevens</string>
-        <string>Sugarland</string>
-        <string>Sum 41</string>
-        <string>Sun Ra</string>
-        <string>Supergrass</string>
-        <string>Swans</string>
-        <string>Swedish House Mafia</string>
-        <string>Sweet Sensation</string>
-        <string>Switchfoot</string>
-        <string>System of a Down</string>
-        <string>T-Pain</string>
-        <string>T. Rex</string>
-        <string>T.I.</string>
-        <string>Taio Cruz</string>
-        <string>Take That</string>
-        <string>Talking Heads</string>
-        <string>Tame Impala</string>
-        <string>Taylor Swift</string>
-        <string>Teen Daze</string>
-        <string>Teenage Fanclub</string>
-        <string>Tegan and Sara</string>
-        <string>Television</string>
-        <string>The 1975</string>
-        <string>The All-American Rejects</string>
-        <string>The Antlers</string>
-        <string>The Avalanches</string>
-        <string>The B-52's</string>
-        <string>The Band</string>
-        <string>The Band Perry</string>
-        <string>The Beach Boys</string>
-        <string>The Beatles</string>
-        <string>The Black Eyed Peas</string>
-        <string>The Black Keys</string>
-        <string>The Blues Brothers</string>
-        <string>The Breeders</string>
-        <string>The Byrds</string>
-        <string>The Cardigans</string>
-        <string>The Chemical Brothers</string>
-        <string>The Clash</string>
-        <string>The Cranberries</string>
-        <string>The Cure</string>
-        <string>The Darcys</string>
-        <string>The Decemberists</string>
-        <string>The Dodos</string>
-        <string>The Doors</string>
-        <string>The Flaming Lips</string>
-        <string>The Fratellis</string>
-        <string>The Fray</string>
-        <string>The Glitch Mob</string>
-        <string>The Hives</string>
-        <string>The Hold Steady</string>
-        <string>The Horrors</string>
-        <string>The Hotelier</string>
-        <string>The Jacksons</string>
-        <string>The Killers</string>
-        <string>The Kinks</string>
-        <string>The Knife</string>
-        <string>The Kooks</string>
-        <string>The Libertines</string>
-        <string>The Lumineers</string>
-        <string>The Magnetic Fields</string>
-        <string>The Naked and the Famous</string>
-        <string>The National</string>
-        <string>The Neighbourhood</string>
-        <string>The New Pornographers</string>
-        <string>The Notorious B.I.G.</string>
-        <string>The Offspring</string>
-        <string>The Orb</string>
-        <string>The Police</string>
-        <string>The Postal Service</string>
-        <string>The Pretty Reckless</string>
-        <string>The Prodigy</string>
-        <string>The Rapture</string>
-        <string>The Replacements</string>
-        <string>The Rolling Stones</string>
-        <string>The Roots</string>
-        <string>The Script</string>
-        <string>The Shins</string>
-        <string>The Smashing Pumpkins</string>
-        <string>The Smiths</string>
-        <string>The Specials</string>
-        <string>The Stone Roses</string>
-        <string>The Streets</string>
-        <string>The Strokes</string>
-        <string>The Supremes</string>
-        <string>The Temper Trap</string>
-        <string>The Temptations</string>
-        <string>The Ting Tings</string>
-        <string>The Tragically Hip</string>
-        <string>The Vaccines</string>
-        <string>The Velvet Underground</string>
-        <string>The Veronicas</string>
-        <string>The Verve</string>
-        <string>The Wanted</string>
-        <string>The War on Drugs</string>
-        <string>The Weeknd</string>
-        <string>The White Stripes</string>
-        <string>The Who</string>
-        <string>The Wombats</string>
-        <string>The xx</string>
-        <string>Theory Of A Deadman</string>
-        <string>These New Puritans</string>
-        <string>They Might Be Giants</string>
-        <string>Thievery Corporation</string>
-        <string>Third Eye Blind</string>
-        <string>Thirty Seconds to Mars</string>
-        <string>Thomas Rhett</string>
-        <string>Thompson Square</string>
-        <string>Three Days Grace</string>
-        <string>Tiesto</string>
-        <string>Tim Hecker</string>
-        <string>Tim McGraw</string>
-        <string>Timbaland</string>
-        <string>Timber Timbre</string>
-        <string>Tina Turner</string>
-        <string>Tinie Tempah</string>
-        <string>TLC</string>
-        <string>Toby Keith </string>
-        <string>Todd Terje</string>
-        <string>Tom Petty</string>
-        <string>Tom Waits</string>
-        <string>Tool</string>
-        <string>Tori Amos</string>
-        <string>Tortoise</string>
-        <string>Toto</string>
-        <string>Tove Lo</string>
-        <string>TOY</string>
-        <string>Tracy Chapman</string>
-        <string>Train</string>
-        <string>Trey Songz</string>
-        <string>Tricky</string>
-        <string>tUnE-yArDs</string>
-        <string>TV on the Radio</string>
-        <string>Twin Shadow</string>
-        <string>Two Door Cinema Club</string>
-        <string>Tycho</string>
-        <string>Tyga</string>
-        <string>Tyler, The Creator</string>
-        <string>U2</string>
-        <string>Uncle Kraker</string>
-        <string>Underworld</string>
-        <string>Usher</string>
-        <string>Vampire Weekend</string>
-        <string>Van Halen</string>
-        <string>Van Morrison</string>
-        <string>Vance Joy</string>
-        <string>Vanessa Carlton</string>
-        <string>Vanessa Williams</string>
-        <string>Vanilla Ice</string>
-        <string>Wale</string>
-        <string>Warpaint</string>
-        <string>We Are Scientists</string>
-        <string>Weezer</string>
-        <string>White Lies</string>
-        <string>Whitney Houston</string>
-        <string>Wilco</string>
-        <string>Wild Beasts</string>
-        <string>Wildcat! Wildcat!</string>
-        <string>Wiley</string>
-        <string>Will Smith</string>
-        <string>will.i.am</string>
-        <string>Willie Nelson</string>
-        <string>Wiz Khalifa</string>
-        <string>Wolfmother</string>
-        <string>Woodkid</string>
-        <string>Wu-Tang Clan</string>
-        <string>Xiu Xiu</string>
-        <string>Yann Tiersen</string>
-        <string>Yeah Yeah Yeahs</string>
-        <string>Yeasayer</string>
-        <string>Ylvis</string>
-        <string>Yo La Tengo</string>
-        <string>Yoko Ono</string>
-        <string>Young Guns</string>
-        <string>Young Money</string>
-        <string>Young the Giant</string>
-        <string>Yuck</string>
-        <string>Yuna</string>
-        <string>Zac Brown Band</string>
-        <string>Zedd</string>
-        <string>Zola Jesus</string>
-        <string>ZZ Top</string>
-    </array>
+<array>
+	<string>N Sync</string>
+	<string>2 Chainz</string>
+	<string>2Pac</string>
+	<string>3 Doors Down</string>
+	<string>30 Seconds to Mars</string>
+	<string>3OH!3</string>
+	<string>5 Seconds of Summer</string>
+	<string>50 Cent</string>
+	<string>A Day to Remember</string>
+	<string>A Great Big World</string>
+	<string>A Perfect Circle</string>
+	<string>A Tribe Called Quest</string>
+	<string>A-ha</string>
+	<string>A$AP Rocky</string>
+	<string>Aaliyah</string>
+	<string>ABBA</string>
+	<string>AC/DC</string>
+	<string>Ace Hood</string>
+	<string>Ace Of Base</string>
+	<string>Adam Lambert</string>
+	<string>Adam Levine</string>
+	<string>Adele</string>
+	<string>Aerosmith</string>
+	<string>AFI</string>
+	<string>Air</string>
+	<string>Akon</string>
+	<string>Al Green</string>
+	<string>Alabama Shakes</string>
+	<string>Alanis Morissette</string>
+	<string>Albert Hammond, Jr.</string>
+	<string>Albert King</string>
+	<string>Alex Clare</string>
+	<string>Alexisonfire</string>
+	<string>Alice Cooper</string>
+	<string>Alice in Chains</string>
+	<string>Alicia Keys</string>
+	<string>All Time Low</string>
+	<string>Aloe Blacc</string>
+	<string>Alpine</string>
+	<string>alt-J</string>
+	<string>American Authors</string>
+	<string>Amy Grant</string>
+	<string>Amy Winehouse</string>
+	<string>Anathema</string>
+	<string>Anberlin</string>
+	<string>Andy Stott</string>
+	<string>Angel Haze</string>
+	<string>Angus and Julia Stone</string>
+	<string>Animal Collective</string>
+	<string>Anna Kendrick</string>
+	<string>Antony and The Johnsons</string>
+	<string>Aphex Twin</string>
+	<string>Arcade Fire</string>
+	<string>Arctic Monkeys</string>
+	<string>Aretha Franklin</string>
+	<string>Ariana Grande</string>
+	<string>Ariel Pink&apos;s Haunted Graffiti</string>
+	<string>Armin Van Buuren</string>
+	<string>Arrested Development</string>
+	<string>Asher Roth</string>
+	<string>At the Drive-In</string>
+	<string>Atlas Sound</string>
+	<string>Audioslave</string>
+	<string>Austin Mahone</string>
+	<string>Avenged Sevenfold</string>
+	<string>Avicii</string>
+	<string>Avril Lavigne</string>
+	<string>AWOLNATION</string>
+	<string>Azealia Banks</string>
+	<string>B.B. King</string>
+	<string>B.o.B.</string>
+	<string>B2K</string>
+	<string>Baauer</string>
+	<string>Backstreet Boys</string>
+	<string>Bad Grammar</string>
+	<string>Band of Horses</string>
+	<string>Band of Skulls</string>
+	<string>Banks</string>
+	<string>Barbra Streisand</string>
+	<string>Barenaked Ladies</string>
+	<string>Barry White</string>
+	<string>Basement Jaxx</string>
+	<string>Bastille</string>
+	<string>Bat for Lashes</string>
+	<string>Battles</string>
+	<string>Bauhaus</string>
+	<string>Beach House</string>
+	<string>Beastie Boys</string>
+	<string>Beck</string>
+	<string>Bee Gees</string>
+	<string>Beirut</string>
+	<string>Belle and Sebastian</string>
+	<string>Ben Harper</string>
+	<string>Ben Howard</string>
+	<string>Best Coast</string>
+	<string>Bette Midler</string>
+	<string>Betty Davis</string>
+	<string>Betty Who</string>
+	<string>Beyoncé</string>
+	<string>Biffy Clyro</string>
+	<string>Big Boi</string>
+	<string>Big Sean</string>
+	<string>Billie Holiday</string>
+	<string>Billy Bragg</string>
+	<string>Billy Idol</string>
+	<string>Billy Joel</string>
+	<string>Billy Ray Cyrus</string>
+	<string>Billy Talent</string>
+	<string>Billy Taylor</string>
+	<string>Björk</string>
+	<string>Black Eyed Peas</string>
+	<string>Black Sabbath</string>
+	<string>Blake Shelton</string>
+	<string>Blink-182</string>
+	<string>Bloc Party</string>
+	<string>Blondie</string>
+	<string>Blood Orange</string>
+	<string>Blue Rodeo</string>
+	<string>Blur</string>
+	<string>Boards of Canada</string>
+	<string>Bob Dylan</string>
+	<string>Bob Marley</string>
+	<string>Bombay Bicycle Club</string>
+	<string>Bon Iver</string>
+	<string>Bon Jovi</string>
+	<string>Bonobo</string>
+	<string>Boy</string>
+	<string>Boys Noize</string>
+	<string>Boyz II Men</string>
+	<string>Brad Paisley</string>
+	<string>Brand New</string>
+	<string>Brandy</string>
+	<string>Brian Eno</string>
+	<string>Bright Eyes</string>
+	<string>Bring Me to the Horizon</string>
+	<string>Britney Spears</string>
+	<string>Broken Bells</string>
+	<string>Broken Social Scene</string>
+	<string>Broods</string>
+	<string>Bruce Springsteen</string>
+	<string>Bruno Mars</string>
+	<string>Bryan Adams</string>
+	<string>Built to Spill</string>
+	<string>Burial</string>
+	<string>Busta Rhymes</string>
+	<string>Cage the Elephant</string>
+	<string>Cake</string>
+	<string>Cali Swag District</string>
+	<string>Calvin Harris</string>
+	<string>Capital Cities</string>
+	<string>Carly Rae Jepsen</string>
+	<string>Carpenters</string>
+	<string>Carrie Underwood</string>
+	<string>Cascada</string>
+	<string>Cat Power</string>
+	<string>Cee Lo Green</string>
+	<string>Celine Dion</string>
+	<string>Chamillionaire</string>
+	<string>Charli XCX</string>
+	<string>Cher</string>
+	<string>Cher Lloyd</string>
+	<string>Chet Faker</string>
+	<string>Childish Gambino</string>
+	<string>Chris Brown</string>
+	<string>Christina Aguilera</string>
+	<string>Christina Perri</string>
+	<string>Chromatics</string>
+	<string>Chromeo</string>
+	<string>Chrystal Castles</string>
+	<string>Chuck Berry</string>
+	<string>Chvrches</string>
+	<string>Ciara</string>
+	<string>City and Colour</string>
+	<string>Clipse</string>
+	<string>Cloud Nothings</string>
+	<string>Cobra Starship</string>
+	<string>Coldplay</string>
+	<string>Constantines</string>
+	<string>Cornershop</string>
+	<string>Counting Crows</string>
+	<string>Cream</string>
+	<string>Creed</string>
+	<string>Creedence Clearwater Revival</string>
+	<string>Crystal Castles</string>
+	<string>Crystal Fighters</string>
+	<string>Cut Copy</string>
+	<string>Cyndi Lauper</string>
+	<string>Cypress Hill</string>
+	<string>D&apos;Angelo</string>
+	<string>Daft Punk</string>
+	<string>Damien Rice</string>
+	<string>Damon Albarn</string>
+	<string>Daniel Bedingfield</string>
+	<string>Darius Rucker</string>
+	<string>Das Racist</string>
+	<string>Daughter</string>
+	<string>Daughtry</string>
+	<string>Dave Matthews Band</string>
+	<string>David Archuleta</string>
+	<string>David Bowie</string>
+	<string>David Cook</string>
+	<string>David Guetta</string>
+	<string>David Lee Roth</string>
+	<string>David Sylvian</string>
+	<string>Dead Kennedys</string>
+	<string>Deadmau5</string>
+	<string>Death Cab for Cutie</string>
+	<string>Deep Purple</string>
+	<string>Deerhunter</string>
+	<string>Def Leppard</string>
+	<string>Deftones</string>
+	<string>Demi Lovato</string>
+	<string>Depeche Mode</string>
+	<string>Destiny&apos;s Child</string>
+	<string>Destroyer</string>
+	<string>Dev</string>
+	<string>Devandra Banhart</string>
+	<string>Devo</string>
+	<string>Diana Ross</string>
+	<string>Die Antwoord</string>
+	<string>DIIV</string>
+	<string>Dire Straits</string>
+	<string>Dirty Projectors</string>
+	<string>Disclosure</string>
+	<string>Disturbed</string>
+	<string>Dixie Chicks</string>
+	<string>Dizzee Rascal</string>
+	<string>DJ Earworm</string>
+	<string>DJ Shadow</string>
+	<string>Django Django</string>
+	<string>DMX</string>
+	<string>Dolly Parton</string>
+	<string>Donna Summer</string>
+	<string>Dr. Dog</string>
+	<string>Dr. Dre</string>
+	<string>Dr. John</string>
+	<string>Drake</string>
+	<string>Dream Theater</string>
+	<string>Dropkick Murpheys</string>
+	<string>Duke Dumont</string>
+	<string>Duran Duran</string>
+	<string>Dustin Lynch</string>
+	<string>Eagles</string>
+	<string>Ed Sheeran</string>
+	<string>Editors</string>
+	<string>Edward Maya and Vika Jigulina</string>
+	<string>Edward Sharpe and the Magnetic Zeros</string>
+	<string>Eels</string>
+	<string>Elastica</string>
+	<string>Elbow</string>
+	<string>Eli Young Band</string>
+	<string>Ellie Goulding</string>
+	<string>Elliott Smith</string>
+	<string>Elton John</string>
+	<string>Elvis Costello</string>
+	<string>Elvis Presley</string>
+	<string>EMA</string>
+	<string>Emblem3</string>
+	<string>Emeli Sande</string>
+	<string>Eminem</string>
+	<string>Empire of the Sun</string>
+	<string>Enrique Iglesias</string>
+	<string>Enya</string>
+	<string>Eric Church</string>
+	<string>Eric Clapton</string>
+	<string>Eurythmics</string>
+	<string>Evanescence</string>
+	<string>Everclear</string>
+	<string>Explosions in the Sky</string>
+	<string>Fall Out Boy</string>
+	<string>Far East Movement</string>
+	<string>Fatboy Slim</string>
+	<string>Faust</string>
+	<string>Fefe Dobson</string>
+	<string>Feist</string>
+	<string>Fergie</string>
+	<string>Fiona Apple</string>
+	<string>First Aid Kit</string>
+	<string>Fitz and the Tantrums</string>
+	<string>Five Fingers Death Punch</string>
+	<string>Five For Fighting</string>
+	<string>Fleet Foxes</string>
+	<string>Fleetwood Mac</string>
+	<string>Flo Rida</string>
+	<string>Flogging Molly</string>
+	<string>Florence + The Machine</string>
+	<string>Florida Georgia Line</string>
+	<string>Flume</string>
+	<string>Flying Lotus</string>
+	<string>Foals</string>
+	<string>Foo Fighters</string>
+	<string>Foster the People</string>
+	<string>Four Tet</string>
+	<string>Frank Ocean</string>
+	<string>Frank Sinatra</string>
+	<string>Frank Zappa</string>
+	<string>Franz Ferdinand</string>
+	<string>Fuck Buttons</string>
+	<string>Fucked Up</string>
+	<string>Fugazi</string>
+	<string>Fugees</string>
+	<string>fun.</string>
+	<string>Future</string>
+	<string>Future Islands</string>
+	<string>Garbage</string>
+	<string>Garth Brooks</string>
+	<string>Gavin Degraw</string>
+	<string>Genesis</string>
+	<string>Geographer</string>
+	<string>George Michael</string>
+	<string>Get Well Soon</string>
+	<string>Ghostface Killah</string>
+	<string>Girl Talk</string>
+	<string>Girls</string>
+	<string>Gnarls Barkley</string>
+	<string>Godspeed You! Black Emperor</string>
+	<string>Gold Panda</string>
+	<string>Goldfrapp</string>
+	<string>Goldie</string>
+	<string>Goo Goo Dolls</string>
+	<string>Good Charlotte</string>
+	<string>Gorillaz</string>
+	<string>Gotan Project</string>
+	<string>Gotye</string>
+	<string>Grandmaster Flash and The Furious Five</string>
+	<string>Grateful Dead</string>
+	<string>Green Day</string>
+	<string>Grimes</string>
+	<string>Grinderman</string>
+	<string>Grizzly Bear</string>
+	<string>Grouplove</string>
+	<string>Guided by Voices</string>
+	<string>Guns N&apos; Roses</string>
+	<string>Guy</string>
+	<string>Gwen Stefani</string>
+	<string>Gym Class Heroes</string>
+	<string>HAIM</string>
+	<string>Hammock</string>
+	<string>Hans Zimmer</string>
+	<string>Hanson</string>
+	<string>Happy Mondays</string>
+	<string>Havana Brown</string>
+	<string>Heart</string>
+	<string>Hellogoodbye</string>
+	<string>Hercules and Love Affair</string>
+	<string>Hole</string>
+	<string>Holy Ghost!</string>
+	<string>Hot Chelle Rae</string>
+	<string>Hot Chip</string>
+	<string>Hot Hot Heat</string>
+	<string>Hunter Hayes</string>
+	<string>Hüsker Dü</string>
+	<string>Ice Cube</string>
+	<string>Ice-T</string>
+	<string>Icona Pop</string>
+	<string>Iggy Azalea</string>
+	<string>Iggy Pop</string>
+	<string>Imagine Dragons</string>
+	<string>Incubus</string>
+	<string>Infected Mushroom</string>
+	<string>Ingrid Michaelson</string>
+	<string>Interpol</string>
+	<string>INXS</string>
+	<string>Iron and Wine</string>
+	<string>Iron Maiden</string>
+	<string>Isis</string>
+	<string>Islands</string>
+	<string>Iyaz</string>
+	<string>J. Cole</string>
+	<string>Jack Johnson</string>
+	<string>Jack White</string>
+	<string>Jai Paul</string>
+	<string>Jake Bugg</string>
+	<string>Jake Owen</string>
+	<string>James Arthur</string>
+	<string>James Blake</string>
+	<string>James Blunt</string>
+	<string>James Brown</string>
+	<string>James Vincent McMorrow</string>
+	<string>Jamiroquai</string>
+	<string>Jane&apos;s Addiction</string>
+	<string>Janelle Monáe</string>
+	<string>Janet Jackson</string>
+	<string>Japandroids</string>
+	<string>Jason Aldean</string>
+	<string>Jason Derulo</string>
+	<string>Jason Mraz</string>
+	<string>Jay Z</string>
+	<string>Jeff Buckley</string>
+	<string>Jefferson Airplane</string>
+	<string>Jennifer Lopez</string>
+	<string>Jeremih</string>
+	<string>Jerrod Niemann</string>
+	<string>Jesse McCartney</string>
+	<string>Jessie J</string>
+	<string>Jessie Ware</string>
+	<string>Jimi Hendrix</string>
+	<string>Jimmy Cliff</string>
+	<string>Jimmy Eat World</string>
+	<string>Joanna Newsom</string>
+	<string>John Coltrane</string>
+	<string>John Cougar Mellencamp</string>
+	<string>John Grant</string>
+	<string>John Legend</string>
+	<string>John Lennon</string>
+	<string>John Mayer</string>
+	<string>John Mellencamp</string>
+	<string>John Newman</string>
+	<string>John Talabot</string>
+	<string>Johnny Cash</string>
+	<string>Johnnyswim</string>
+	<string>JoJo</string>
+	<string>Jonas Brothers</string>
+	<string>Joni Mitchell</string>
+	<string>Jordin Sparks</string>
+	<string>Jose Gonzalez</string>
+	<string>Journey</string>
+	<string>Joy Division</string>
+	<string>Judas Priest</string>
+	<string>Julia Holter</string>
+	<string>Junior Boys</string>
+	<string>Justice</string>
+	<string>Justin Bieber</string>
+	<string>Justin Timberlake</string>
+	<string>k.d. Lang</string>
+	<string>Kaiser Chiefs</string>
+	<string>Kanye West</string>
+	<string>Karmin</string>
+	<string>Kasabian</string>
+	<string>Kat Deluna</string>
+	<string>Kate Bush</string>
+	<string>Kate Nash</string>
+	<string>Katy Perry</string>
+	<string>Kavinsky</string>
+	<string>Ke$ha</string>
+	<string>Keane</string>
+	<string>Keith Richards</string>
+	<string>Keith Urban</string>
+	<string>Kelis</string>
+	<string>Kelly Clarkson</string>
+	<string>Kendrick Lamar</string>
+	<string>Kenny Chesney</string>
+	<string>Keri Hilson</string>
+	<string>Kevin Rudolf</string>
+	<string>Khaled</string>
+	<string>Kid Cudi</string>
+	<string>Kid Ink</string>
+	<string>Kid Rock</string>
+	<string>Kiesza</string>
+	<string>Killer Mike</string>
+	<string>King Crimson</string>
+	<string>King Krule</string>
+	<string>Kings of Convenience</string>
+	<string>Kings of Leon</string>
+	<string>Kip Moore</string>
+	<string>Kirko Bangz</string>
+	<string>Kiss</string>
+	<string>Klingande</string>
+	<string>Kodaline</string>
+	<string>Korn</string>
+	<string>Kraftwerk</string>
+	<string>Kris Allen</string>
+	<string>KT Tunstall</string>
+	<string>Kurt Vile</string>
+	<string>Kylie Minogue</string>
+	<string>La Roux</string>
+	<string>Lady Antebellum</string>
+	<string>Lady Gaga</string>
+	<string>Lambchop</string>
+	<string>Lana Del Rey</string>
+	<string>Lauryn Hill</string>
+	<string>LCD Soundsystem</string>
+	<string>Led Zeppelin</string>
+	<string>Lee Brice</string>
+	<string>Leftfield</string>
+	<string>Lenny Kravitz</string>
+	<string>Leonard Cohen</string>
+	<string>Lifehouse</string>
+	<string>Lil Wayne</string>
+	<string>Lil&apos; Kim</string>
+	<string>Lil&apos; Wayne</string>
+	<string>Lilly Allen</string>
+	<string>Limp Biskit</string>
+	<string>Lindstrøm</string>
+	<string>Linkin Park</string>
+	<string>Lionel Richie</string>
+	<string>Little Big Town</string>
+	<string>Little Dragon</string>
+	<string>Living Colour</string>
+	<string>Liz Phair</string>
+	<string>LL Cool J</string>
+	<string>LMFAO</string>
+	<string>Lo-Fang</string>
+	<string>Local Natives</string>
+	<string>Lord Huron</string>
+	<string>Lorde</string>
+	<string>Loretta Lynn</string>
+	<string>Lou Reed</string>
+	<string>Lucinda Williams</string>
+	<string>Ludacris</string>
+	<string>Ludovico Einaudi</string>
+	<string>Luke Bryan</string>
+	<string>Lumineers</string>
+	<string>Lupe Fiasco</string>
+	<string>Lykke Li</string>
+	<string>Lynyrd Skynyrd</string>
+	<string>M.I.A.</string>
+	<string>M83</string>
+	<string>Mac DeMarco</string>
+	<string>Macklemore and Ryan Lewis</string>
+	<string>Macy Gray</string>
+	<string>Madonna</string>
+	<string>Madvillain</string>
+	<string>MAGIC!</string>
+	<string>Major Lazer</string>
+	<string>Manic Street Preachers</string>
+	<string>Marc Anthony</string>
+	<string>Mariah Carey</string>
+	<string>Marilyn Manson</string>
+	<string>Marina and the Diamonds</string>
+	<string>Maroon 5</string>
+	<string>Martin Garrix</string>
+	<string>Marvin Gaye</string>
+	<string>Mary J. Blige</string>
+	<string>Massive Attack</string>
+	<string>Mastodon</string>
+	<string>Matchbox Twenty</string>
+	<string>Mates of State</string>
+	<string>Meat Loaf</string>
+	<string>Megadeth</string>
+	<string>Mercury Rev</string>
+	<string>Metallica</string>
+	<string>Metric</string>
+	<string>Metronomy</string>
+	<string>MGMT</string>
+	<string>Michael Buble</string>
+	<string>Michael Jackson</string>
+	<string>Michelle Branch</string>
+	<string>Mick Jagger</string>
+	<string>Miguel</string>
+	<string>Miike Snow</string>
+	<string>Mike Posner</string>
+	<string>Miles Davis</string>
+	<string>Miley Cyrus</string>
+	<string>Milky Chance</string>
+	<string>Minutemen</string>
+	<string>Miranda Lambert</string>
+	<string>Missy Elliott</string>
+	<string>Missy Misdemeanor Elliott</string>
+	<string>MKTO</string>
+	<string>MO</string>
+	<string>Mobb Deep</string>
+	<string>Moby</string>
+	<string>Moderat</string>
+	<string>Modest Mouse</string>
+	<string>Mogwai</string>
+	<string>Morrissey</string>
+	<string>Motley Crue</string>
+	<string>Mötley Crüe</string>
+	<string>Ms Mr</string>
+	<string>Mumford and Sons</string>
+	<string>Muse</string>
+	<string>My Bloody Valentine</string>
+	<string>My Chemical Romance</string>
+	<string>My Morning Jacket</string>
+	<string>N.E.R.D.</string>
+	<string>N.W.A</string>
+	<string>Nas</string>
+	<string>Natasha Bedingfield</string>
+	<string>Naughty Boy</string>
+	<string>Ne-Yo</string>
+	<string>Needtobreathe</string>
+	<string>Neil Young</string>
+	<string>Neko Case</string>
+	<string>Nelly</string>
+	<string>Nelly Furtado</string>
+	<string>Neon Trees</string>
+	<string>Nero</string>
+	<string>Neutral Milk Hotel</string>
+	<string>New Kids on the Block</string>
+	<string>New Order</string>
+	<string>Nick Cave</string>
+	<string>Nick Drake</string>
+	<string>Nickelback</string>
+	<string>Nicki Minaj</string>
+	<string>Nicky Romero</string>
+	<string>Nico and Vinz</string>
+	<string>Nicolas Jaar</string>
+	<string>Nightwish</string>
+	<string>Nina Simone</string>
+	<string>Nine Inch Nails</string>
+	<string>Nirvana</string>
+	<string>NKOTB</string>
+	<string>No Doubt</string>
+	<string>Noah and the Whale</string>
+	<string>NoFX</string>
+	<string>Norah Jones</string>
+	<string>O-Town</string>
+	<string>Oasis</string>
+	<string>Odesza</string>
+	<string>Of Mice and Men</string>
+	<string>Of Monsters And Men</string>
+	<string>Of Montreal</string>
+	<string>Oh Land</string>
+	<string>Olly Murs</string>
+	<string>One Direction</string>
+	<string>OneRepublic</string>
+	<string>Opeth</string>
+	<string>Orianthi</string>
+	<string>Otis Redding</string>
+	<string>OutKast</string>
+	<string>Owl City</string>
+	<string>Ozzy Osbourne</string>
+	<string>P!nk</string>
+	<string>Panda Bear</string>
+	<string>Panic! At The Disco</string>
+	<string>Pantera</string>
+	<string>Paolo Nutini</string>
+	<string>Papa Roach</string>
+	<string>Paramore</string>
+	<string>Parov Stelar</string>
+	<string>Passenger</string>
+	<string>Passion</string>
+	<string>Passion Pit</string>
+	<string>Patti Smith</string>
+	<string>Paul McCartney</string>
+	<string>Paul Simon</string>
+	<string>Paula Abdul</string>
+	<string>Pavement</string>
+	<string>Peaches</string>
+	<string>Pearl Jam</string>
+	<string>Pendulum</string>
+	<string>Pet Shop Boys</string>
+	<string>Peter Bjorn and John</string>
+	<string>Peter Doherty</string>
+	<string>Peter Gabriel</string>
+	<string>Phantogram</string>
+	<string>Pharrell</string>
+	<string>Phil Collins</string>
+	<string>Phillip Phillips</string>
+	<string>Phish</string>
+	<string>Phoenix</string>
+	<string>Pink</string>
+	<string>Pink Floyd</string>
+	<string>Pitbull</string>
+	<string>Pixies</string>
+	<string>PJ Harvey</string>
+	<string>Placebo</string>
+	<string>Poison</string>
+	<string>Portishead</string>
+	<string>Primal Scream</string>
+	<string>Primus</string>
+	<string>Prince</string>
+	<string>Psy</string>
+	<string>Public Enemy</string>
+	<string>Pulp</string>
+	<string>Purity Ring</string>
+	<string>Pussycat Dolls</string>
+	<string>Queen</string>
+	<string>Queen Latifah</string>
+	<string>Queens of the Stone Age</string>
+	<string>R. Kelly</string>
+	<string>R.E.M.</string>
+	<string>Ra Ra Riot</string>
+	<string>Radiohead</string>
+	<string>Rage Against the Machine</string>
+	<string>Rammstein</string>
+	<string>Ramones</string>
+	<string>Randy Houser</string>
+	<string>Randy Newman</string>
+	<string>Rascal Flatts</string>
+	<string>Ratatat</string>
+	<string>Ray LaMontagne</string>
+	<string>Real Estate</string>
+	<string>Red Hot Chili Peppers</string>
+	<string>Regina Spektor</string>
+	<string>Regina Spktor</string>
+	<string>Rhythm and Sound</string>
+	<string>Rick James</string>
+	<string>Rick Ross</string>
+	<string>Ricky Martin</string>
+	<string>Rihanna</string>
+	<string>Ringo Starr</string>
+	<string>Rise Against</string>
+	<string>Rob Thomas</string>
+	<string>Robbie Williams</string>
+	<string>Robin Thicke</string>
+	<string>Robyn</string>
+	<string>Rocko</string>
+	<string>Rod Stewart</string>
+	<string>Rodney Atkins</string>
+	<string>Route 94</string>
+	<string>Roxy Music</string>
+	<string>Röyksopp</string>
+	<string>Rudimental</string>
+	<string>Run-D.M.C.</string>
+	<string>Rush</string>
+	<string>Ryan Adams</string>
+	<string>S Club 7</string>
+	<string>Salem</string>
+	<string>Salt &apos;n&apos; Pepa</string>
+	<string>Sam Roberts</string>
+	<string>Sam Smith</string>
+	<string>Santana</string>
+	<string>Santigold</string>
+	<string>Sara Bareilles</string>
+	<string>Sarah McLachlan</string>
+	<string>SBTRKT</string>
+	<string>ScHoolboy Q</string>
+	<string>Scissor Sisters</string>
+	<string>Scorpions</string>
+	<string>Seal</string>
+	<string>Sean Kingston</string>
+	<string>Sean Paul</string>
+	<string>Seether</string>
+	<string>Selena Gomez</string>
+	<string>September</string>
+	<string>Sex Pistols</string>
+	<string>Shabazz Palaces</string>
+	<string>Shakira</string>
+	<string>Shania Twain</string>
+	<string>Sharon Van Etten</string>
+	<string>Shaun Reynolds</string>
+	<string>She and Him</string>
+	<string>Sheryl Crow</string>
+	<string>Shinedown</string>
+	<string>Shontelle</string>
+	<string>Sia</string>
+	<string>Sigur Rós</string>
+	<string>Simon and Garfunkel</string>
+	<string>Simple Plan</string>
+	<string>Sinéad O&apos;Connor</string>
+	<string>Skillet</string>
+	<string>Skrillex</string>
+	<string>Sky Ferreira</string>
+	<string>Slayer</string>
+	<string>Sleater-Kinney</string>
+	<string>Sleigh Bells</string>
+	<string>Slint</string>
+	<string>Slipknot</string>
+	<string>Sloan</string>
+	<string>Smash Mouth</string>
+	<string>Smashing Pumpkins</string>
+	<string>Smokey Robinson and The Miracles</string>
+	<string>Snoop Dogg</string>
+	<string>Snow Patrol</string>
+	<string>Social Club</string>
+	<string>SOHN</string>
+	<string>Solange</string>
+	<string>Sonic Youth</string>
+	<string>Soul II Soul</string>
+	<string>Soundgarden</string>
+	<string>Spice Girls</string>
+	<string>Spiritualized</string>
+	<string>Spoon</string>
+	<string>St Vincent</string>
+	<string>Starfucker</string>
+	<string>Stars</string>
+	<string>Stereolab</string>
+	<string>Stereophonics</string>
+	<string>Steve Aoki</string>
+	<string>Stevie Nicks</string>
+	<string>Stevie Wonder</string>
+	<string>Sting</string>
+	<string>Stomae</string>
+	<string>Stone Sour</string>
+	<string>Stone Temple Pilots</string>
+	<string>Strange Talk</string>
+	<string>Sublime</string>
+	<string>Suede</string>
+	<string>Sufjan Stevens</string>
+	<string>Sugarland</string>
+	<string>Sum 41</string>
+	<string>Sun Ra</string>
+	<string>Supergrass</string>
+	<string>Swans</string>
+	<string>Swedish House Mafia</string>
+	<string>Sweet Sensation</string>
+	<string>Switchfoot</string>
+	<string>System of a Down</string>
+	<string>T-Pain</string>
+	<string>T. Rex</string>
+	<string>T.I.</string>
+	<string>Taio Cruz</string>
+	<string>Take That</string>
+	<string>Talking Heads</string>
+	<string>Tame Impala</string>
+	<string>Taylor Swift</string>
+	<string>Teen Daze</string>
+	<string>Teenage Fanclub</string>
+	<string>Tegan and Sara</string>
+	<string>Television</string>
+	<string>The 1975</string>
+	<string>The All-American Rejects</string>
+	<string>The Antlers</string>
+	<string>The Avalanches</string>
+	<string>The B-52&apos;s</string>
+	<string>The Band</string>
+	<string>The Band Perry</string>
+	<string>The Beach Boys</string>
+	<string>The Beatles</string>
+	<string>The Black Eyed Peas</string>
+	<string>The Black Keys</string>
+	<string>The Blues Brothers</string>
+	<string>The Breeders</string>
+	<string>The Byrds</string>
+	<string>The Cardigans</string>
+	<string>The Chemical Brothers</string>
+	<string>The Clash</string>
+	<string>The Cranberries</string>
+	<string>The Cure</string>
+	<string>The Darcys</string>
+	<string>The Decemberists</string>
+	<string>The Dodos</string>
+	<string>The Doors</string>
+	<string>The Flaming Lips</string>
+	<string>The Fratellis</string>
+	<string>The Fray</string>
+	<string>The Glitch Mob</string>
+	<string>The Hives</string>
+	<string>The Hold Steady</string>
+	<string>The Horrors</string>
+	<string>The Hotelier</string>
+	<string>The Jacksons</string>
+	<string>The Killers</string>
+	<string>The Kinks</string>
+	<string>The Knife</string>
+	<string>The Kooks</string>
+	<string>The Libertines</string>
+	<string>The Lumineers</string>
+	<string>The Magnetic Fields</string>
+	<string>The Naked and the Famous</string>
+	<string>The National</string>
+	<string>The Neighbourhood</string>
+	<string>The New Pornographers</string>
+	<string>The Notorious B.I.G.</string>
+	<string>The Offspring</string>
+	<string>The Orb</string>
+	<string>The Police</string>
+	<string>The Postal Service</string>
+	<string>The Pretty Reckless</string>
+	<string>The Prodigy</string>
+	<string>The Rapture</string>
+	<string>The Replacements</string>
+	<string>The Rolling Stones</string>
+	<string>The Roots</string>
+	<string>The Script</string>
+	<string>The Shins</string>
+	<string>The Smashing Pumpkins</string>
+	<string>The Smiths</string>
+	<string>The Specials</string>
+	<string>The Stone Roses</string>
+	<string>The Streets</string>
+	<string>The Strokes</string>
+	<string>The Supremes</string>
+	<string>The Temper Trap</string>
+	<string>The Temptations</string>
+	<string>The Ting Tings</string>
+	<string>The Tragically Hip</string>
+	<string>The Vaccines</string>
+	<string>The Velvet Underground</string>
+	<string>The Veronicas</string>
+	<string>The Verve</string>
+	<string>The Wanted</string>
+	<string>The War on Drugs</string>
+	<string>The Weeknd</string>
+	<string>The White Stripes</string>
+	<string>The Who</string>
+	<string>The Wombats</string>
+	<string>The xx</string>
+	<string>Theory Of A Deadman</string>
+	<string>These New Puritans</string>
+	<string>They Might Be Giants</string>
+	<string>Thievery Corporation</string>
+	<string>Third Eye Blind</string>
+	<string>Thirty Seconds to Mars</string>
+	<string>Thomas Rhett</string>
+	<string>Thompson Square</string>
+	<string>Three Days Grace</string>
+	<string>Tiesto</string>
+	<string>Tim Hecker</string>
+	<string>Tim McGraw</string>
+	<string>Timbaland</string>
+	<string>Timber Timbre</string>
+	<string>Tina Turner</string>
+	<string>Tinie Tempah</string>
+	<string>TLC</string>
+	<string>Toby Keith</string>
+	<string>Todd Terje</string>
+	<string>Tom Petty</string>
+	<string>Tom Waits</string>
+	<string>Tool</string>
+	<string>Tori Amos</string>
+	<string>Tortoise</string>
+	<string>Toto</string>
+	<string>Tove Lo</string>
+	<string>TOY</string>
+	<string>Tracy Chapman</string>
+	<string>Train</string>
+	<string>Trey Songz</string>
+	<string>Tricky</string>
+	<string>tUnE-yArDs</string>
+	<string>TV on the Radio</string>
+	<string>Twin Shadow</string>
+	<string>Two Door Cinema Club</string>
+	<string>Tycho</string>
+	<string>Tyga</string>
+	<string>Tyler, The Creator</string>
+	<string>U2</string>
+	<string>Uncle Kraker</string>
+	<string>Underworld</string>
+	<string>Usher</string>
+	<string>Vampire Weekend</string>
+	<string>Van Halen</string>
+	<string>Van Morrison</string>
+	<string>Vance Joy</string>
+	<string>Vanessa Carlton</string>
+	<string>Vanessa Williams</string>
+	<string>Vanilla Ice</string>
+	<string>Wale</string>
+	<string>Warpaint</string>
+	<string>We Are Scientists</string>
+	<string>Weezer</string>
+	<string>White Lies</string>
+	<string>Whitney Houston</string>
+	<string>Wilco</string>
+	<string>Wild Beasts</string>
+	<string>Wildcat! Wildcat!</string>
+	<string>Wiley</string>
+	<string>Will Smith</string>
+	<string>will.i.am</string>
+	<string>Willie Nelson</string>
+	<string>Wiz Khalifa</string>
+	<string>Wolfmother</string>
+	<string>Woodkid</string>
+	<string>Wu-Tang Clan</string>
+	<string>Xiu Xiu</string>
+	<string>Yann Tiersen</string>
+	<string>Yeah Yeah Yeahs</string>
+	<string>Yeasayer</string>
+	<string>Ylvis</string>
+	<string>Yo La Tengo</string>
+	<string>Yoko Ono</string>
+	<string>Young Guns</string>
+	<string>Young Money</string>
+	<string>Young the Giant</string>
+	<string>Yuck</string>
+	<string>Yuna</string>
+	<string>Zac Brown Band</string>
+	<string>Zedd</string>
+	<string>Zola Jesus</string>
+	<string>ZZ Top</string>
+</array>
 </plist>
