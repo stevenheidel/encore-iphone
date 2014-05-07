@@ -24,6 +24,7 @@
 #define ALERT_HIDE_DELAY 2.0
 
 #import "UIColor+EncoreUI.h"
+#import "MLPAutoCompleteTextField.h"
 
 typedef enum {
     ECSearchResultSection,
@@ -31,9 +32,10 @@ typedef enum {
     ECNumberOfSearchSections //always have this one last
 }ECSearchSection;
 
-@interface ECSearchConcertViewController ()<UITextFieldDelegate>
+@interface ECSearchConcertViewController ()<UITextFieldDelegate,MLPAutoCompleteTextFieldDataSource, MLPAutoCompleteTextFieldDelegate>
 {
     UIView* lastFMView;
+    CGSize keyboardSize;
 }
 @property (nonatomic, assign) CGFloat currentSearchRadius;
 @property (nonatomic, strong) CLLocation* currentSearchLocation;
@@ -50,6 +52,10 @@ typedef enum {
 @property (strong, nonatomic) UITapGestureRecognizer *tap;
 @property (assign) BOOL tappedOnConcert;
 
+@property (weak, nonatomic) IBOutlet MLPAutoCompleteTextField *searchbar;
+@property (nonatomic,strong) NSArray* suggestions;
+@property (nonatomic,strong) NSString* selectedAutocompletion;
+@property (nonatomic,assign) CGPoint originalCentre;
 
 @end
 
@@ -60,15 +66,6 @@ typedef enum {
         return [self.comboSearchResultsDic objectForKey:@"events"];
     }
     return nil;
-}
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
 }
 
 - (void)viewDidLoad
@@ -105,6 +102,12 @@ typedef enum {
             [self fetchPopularConcertsWithSearchType:ECSearchTypePast];
         }
     }
+    [self setupSuggestions];
+}
+
+-(void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    self.originalCentre = self.view.center;
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -114,8 +117,62 @@ typedef enum {
         [self.btnSkip setImage:[UIImage imageNamed:@"nextbuttom.png"] forState:UIControlStateHighlighted];
     }
     [self.navigationController setNavigationBarHidden:YES animated:YES];
+
+    if ([[UIScreen mainScreen] bounds].size.height != 568.0) {
+        [self registerNotifications];
+    }
+}
+
+-(void) registerNotifications {
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
+}
+
+-(BOOL) isVerticallyShifted {
+    return self.originalCentre.y != self.view.center.y;
+}
+
+- (void)keyboardWillShow:(NSNotification *)notification {
+    keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    if (![self isVerticallyShifted]) {
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:0.25];
+        
+        CGRect refRect = [self.view viewWithTag:57].frame; //encore logo
+        
+        self.view.center = CGPointMake(self.originalCentre.x, self.originalCentre.y - refRect.origin.y - refRect.size.height);
+        [UIView commitAnimations];
+    }
+}
+
+-(void)keyboardWillHide: (NSNotification*) notification {
+    if ([self isVerticallyShifted]) {
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:0.25];
+        self.view.center = self.originalCentre;
+        [UIView commitAnimations];
+    }
+}
+
+
+-(void) setupSuggestions {
+    NSString *path = [[ApplicationDelegate applicationDocumentsDirectory].path stringByAppendingPathComponent:@"SavedAutocompletions.plist"];
+    
+    self.suggestions = [NSArray arrayWithContentsOfFile:path];
+
+    [self.searchbar setAutoCompleteRegularFontName:@"Hero"];
+    [self.searchbar setAutoCompleteFontSize:17.0];
+    [self.searchbar setAutoCompleteTableAppearsAsKeyboardAccessory:YES];
+    [self.searchbar setAutoCompleteTableBackgroundColor:[UIColor whiteColor]];
     
 }
+
 - (void) setApperance
 {
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"background"]]];
@@ -245,7 +302,7 @@ typedef enum {
     }
     
     UILabel* label = (UILabel*)[_noConcertsFooterView viewWithTag:213];
-    label.text = [NSString stringWithFormat:@"No one has added a show in your area recently.\n\nSearch for a show above"];
+    label.text = [NSString stringWithFormat:@"An error occured or no one has added a show in your area recently.\n\nSearch for a show above"];
     
     return _noConcertsFooterView;
 }
@@ -308,6 +365,7 @@ typedef enum {
     [self.view removeGestureRecognizer:self.tap];
     
 }
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [self.searchbar resignFirstResponder];
     
@@ -330,6 +388,7 @@ typedef enum {
 }
 
 - (void)fetchedConcertsForSearch:(NSDictionary *)comboDic {
+    [self.searchbar resignFirstResponder];
     [self.hud hide:YES];
     [self resetTableHeaderView];
     self.tableview.tableFooterView = lastFMView;
@@ -479,6 +538,43 @@ typedef enum {
         
     }
     self.tappedOnConcert = YES;
+}
+
+#pragma mark - MLPAutoCompleteTextField
+- (void)autoCompleteTextField:(MLPAutoCompleteTextField *)textField
+ possibleCompletionsForString:(NSString *)string
+            completionHandler:(void (^)(NSArray *))handler
+{
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0);
+    dispatch_async(queue, ^{
+        NSMutableArray *completions = [NSMutableArray new];
+        for (NSString* artist in self.suggestions) {
+            NSRange result = [artist
+                              rangeOfString:string
+                              options:NSCaseInsensitiveSearch];
+            if (result.location != NSNotFound) {
+                [completions addObject:artist];
+            }
+        }
+        
+        handler(completions);
+    });
+}
+
+- (void)autoCompleteTextField:(MLPAutoCompleteTextField *)textField
+  didSelectAutoCompleteString:(NSString *)selectedString
+       withAutoCompleteObject:(id<MLPAutoCompletionObject>)selectedObject
+            forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    self.selectedAutocompletion = selectedString;
+    self.searchbar.text = [selectedString uppercaseString];
+    [self.hud show:YES];
+    [ECJSONFetcher fetchArtistsForString:textField.text withSearchType:ECSearchTypePast
+                                 forLocation:self.currentSearchLocation
+                                      radius: [NSNumber numberWithFloat:self.currentSearchRadius]
+                                  completion:^(NSDictionary * comboDic) {
+                                      [self fetchedConcertsForSearch:comboDic];
+                                  }];
 }
 
 

@@ -148,8 +148,8 @@ typedef enum {
     [self.searchBar setAutoCompleteFontSize:17.0];
     [self.searchBar setAutoCompleteTableAppearsAsKeyboardAccessory:YES];
     [self.searchBar setAutoCompleteTableBackgroundColor:[UIColor whiteColor]];
-
 }
+
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     self.originalCentre = self.view.center;

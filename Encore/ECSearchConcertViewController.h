@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface ECSearchConcertViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
-@property (weak, nonatomic) IBOutlet UITextField *searchbar;
 @property (weak, nonatomic) IBOutlet UILabel *lblSearchConcert;
 - (IBAction)dismissKeyboard:(id)sender;
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
