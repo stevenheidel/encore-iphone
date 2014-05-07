@@ -262,7 +262,7 @@ typedef enum {
 }
 
 -(void) doTooltip {
-    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"GridViewControllerShownBefore"]) {
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"GridViewControllerShownBefore"] && SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
         CMPopTipView *tooltip = [[CMPopTipView alloc] initWithMessage:@"Double tap the logo to see more photos at once"];
         tooltip.delegate = self;
         tooltip.backgroundColor = [UIColor blueArtistTextColor];

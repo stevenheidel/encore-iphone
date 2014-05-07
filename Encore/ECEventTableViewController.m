@@ -443,7 +443,13 @@
     NSString* name = isOnProfile ? @"removeConcertBorder" : @"addConcertBorder";
     UIImage* image = [UIImage imageNamed:name];
     if (!self.navAddbutton) {
-        self.navAddbutton = [[UIBarButtonItem alloc] initWithImage:image style:UIBarButtonItemStylePlain target:self action:@selector(addToProfile)];
+//        self.navAddbutton = [[UIBarButtonItem alloc] initWithImage:image style:UIBarButtonItemStylePlain target:self action:@selector(addToProfile)];
+        UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
+        [button addTarget:self action:@selector(addToProfile) forControlEvents:UIControlEventTouchUpInside];
+        button.frame = CGRectMake(0, 0, image.size.width, image.size.height);
+        [button setBackgroundImage:image forState:UIControlStateNormal];
+        
+        self.navAddbutton = [[UIBarButtonItem alloc] initWithCustomView:button];
         self.navAddbutton.tintColor = [UIColor whiteColor];
         self.navigationItem.rightBarButtonItem = self.navAddbutton;
     }

@@ -82,11 +82,15 @@
 -(void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self centerMapToLocation:self.initialLocation];
+    if (SYSTEM_VERSION_LESS_THAN(@"7.0")) {
+        self.cancelButton.titleLabel.textColor = [UIColor blackColor];
+        self.saveButton.titleLabel.textColor = [UIColor blackColor];
+    }
 }
 -(void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
-    
+
 }
 
 -(void) viewDidDisappear:(BOOL)animated {
@@ -104,9 +108,14 @@
 }
 
 -(void) showSaveButton {
+    if (SYSTEM_VERSION_LESS_THAN(@"7.0")) {
+        self.saveButton.titleLabel.textColor = [UIColor blackColor];
+    }
+
     self.saveButton.hidden = NO;
     self.saveButton.enabled = YES;
 }
+
 - (void) centerMapToLocation: (CLLocation*) location {
     MKCoordinateRegion region;
     MKCoordinateSpan span;
