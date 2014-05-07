@@ -137,7 +137,6 @@ typedef enum {
     if (self.posts.count == 0) {
         return;
     }
-    
     if (self.isSingleColumn) {
         if (!threeColVersion) {
             threeColVersion = [[UIStoryboard storyboardWithName:@"ECPastStoryboard" bundle:nil] instantiateViewControllerWithIdentifier:@"ECGridViewController2"];
@@ -231,6 +230,7 @@ typedef enum {
         hud.color = [UIColor blueArtistTextColor];
     }
 }
+
 -(void)loadConcertImages: (BOOL) shouldAsk {
     [self performSelector:@selector(checkStatus) withObject:nil afterDelay:0.8];
     [ECJSONFetcher fetchPostsForConcertWithID:self.concert.eventID completion:^(NSArray *fetchedPosts) {
@@ -340,10 +340,12 @@ typedef enum {
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     __weak ECPostCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"post" forIndexPath:indexPath];
     cell.postImageView.image = nil;
-    NSDictionary* post = [self.posts objectAtIndex:indexPath.row];
+    NSInteger row = indexPath.row;
+    if (row >= self.posts.count) {
+        return nil;
+    }
+    NSDictionary* post = [self.posts objectAtIndex:row];
     [cell.activityIndicator startAnimating];
-    
-    //why is it necessary to set placeholder to empty image?
     [cell.postImageView setImageWithURLRequest:[NSURLRequest requestWithURL:[post imageURL]] placeholderImage:[[UIImage alloc] init] success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
         cell.postImageView.image = image;
         [cell.activityIndicator stopAnimating];
@@ -359,7 +361,8 @@ typedef enum {
     return cell;
 }
 -(void) deletePostAtIndexPath: (NSIndexPath*) indexPath {
-    [self.posts removeObjectAtIndex:indexPath.row];
+    NSInteger row = indexPath.row;
+    [self.posts removeObjectAtIndex:row];
 }
 
 -(UICollectionReusableView*) collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
