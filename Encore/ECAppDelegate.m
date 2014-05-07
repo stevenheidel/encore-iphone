@@ -5,7 +5,7 @@
 //  Created by Shimmy on 2013-06-10.
 //  Copyright (c) 2013 Encore. All rights reserved.
 //
-#import <Tapjoy/Tapjoy.h>
+//#import <Tapjoy/Tapjoy.h>
 #import <Crashlytics/Crashlytics.h>
 #import "ECAppDelegate.h"
 #import "ECNewMainViewController.h"
@@ -88,7 +88,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [Tapjoy requestTapjoyConnect:@"8a67e52a-3769-4ab5-bf9a-7984d94706d4" secretKey:@"CmtwVtjY6QnBL9y9qKLU" options:@{ TJC_OPTION_ENABLE_LOGGING : @(YES) } ];
+//    [Tapjoy requestTapjoyConnect:@"8a67e52a-3769-4ab5-bf9a-7984d94706d4" secretKey:@"CmtwVtjY6QnBL9y9qKLU" options:@{ TJC_OPTION_ENABLE_LOGGING : @(YES) } ];
 
 
     [self startAnalytics];
@@ -160,10 +160,10 @@
     sharedFlow.appID = kApptentiveAppID;
 //#endif 
     
-#if IN_BETA
+//#if IN_BETA
      //   [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
         [TestFlight takeOff:@"019687e0-0d30-4959-bf90-f52ba008c834"];
-#endif
+//#endif
 
 }
 

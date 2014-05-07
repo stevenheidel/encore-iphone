@@ -15,8 +15,6 @@
 		245BBDBF18A5F94600B80781 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 245BBDBE18A5F94600B80781 /* Accelerate.framework */; };
 		245BBDC418A5F9A100B80781 /* libApptentiveConnect.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 245BBDB918A5F91A00B80781 /* libApptentiveConnect.a */; };
 		245BBDC518A5FA3500B80781 /* ApptentiveResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 245BBDBD18A5F91A00B80781 /* ApptentiveResources.bundle */; };
-		245BBDCD18A5FD5700B80781 /* TapjoyResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 245BBDCB18A5FD5700B80781 /* TapjoyResources.bundle */; };
-		245BBDCE18A5FD5700B80781 /* Tapjoy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 245BBDCC18A5FD5700B80781 /* Tapjoy.framework */; };
 		245BBDD018A5FD7300B80781 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 245BBDCF18A5FD7300B80781 /* AdSupport.framework */; };
 		245BBDD218A5FD7B00B80781 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 245BBDD118A5FD7B00B80781 /* CFNetwork.framework */; };
 		245BBDD418A5FD8700B80781 /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 245BBDD318A5FD8600B80781 /* EventKitUI.framework */; };
@@ -327,8 +325,6 @@
 		245BBDBE18A5F94600B80781 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		245BBDC618A5FA6E00B80781 /* ATConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATConnect.h; sourceTree = "<group>"; };
 		245BBDC718A5FA9400B80781 /* ATAppRatingFlow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATAppRatingFlow.h; sourceTree = "<group>"; };
-		245BBDCB18A5FD5700B80781 /* TapjoyResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TapjoyResources.bundle; sourceTree = "<group>"; };
-		245BBDCC18A5FD5700B80781 /* Tapjoy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Tapjoy.framework; sourceTree = "<group>"; };
 		245BBDCF18A5FD7300B80781 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		245BBDD118A5FD7B00B80781 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		245BBDD318A5FD8600B80781 /* EventKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKitUI.framework; path = System/Library/Frameworks/EventKitUI.framework; sourceTree = SDKROOT; };
@@ -674,7 +670,6 @@
 				D4A8DDD5176AAA99005E9847 /* QuartzCore.framework in Frameworks */,
 				D4AA4CF31766B374009B0635 /* UIKit.framework in Frameworks */,
 				241C7F66190876EC0026A8EA /* Crashlytics.framework in Frameworks */,
-				245BBDCE18A5FD5700B80781 /* Tapjoy.framework in Frameworks */,
 				D4AA4CF51766B374009B0635 /* Foundation.framework in Frameworks */,
 				D4AA4CF71766B374009B0635 /* CoreGraphics.framework in Frameworks */,
 				BEC901516553422CA5351467 /* libPods.a in Frameworks */,
@@ -702,31 +697,6 @@
 				245BBDBD18A5F91A00B80781 /* ApptentiveResources.bundle */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		245BBDC818A5FD5600B80781 /* Libraries */ = {
-			isa = PBXGroup;
-			children = (
-				245BBDC918A5FD5700B80781 /* Tapjoy.embeddedframework */,
-			);
-			path = Libraries;
-			sourceTree = "<group>";
-		};
-		245BBDC918A5FD5700B80781 /* Tapjoy.embeddedframework */ = {
-			isa = PBXGroup;
-			children = (
-				245BBDCA18A5FD5700B80781 /* Resources */,
-				245BBDCC18A5FD5700B80781 /* Tapjoy.framework */,
-			);
-			path = Tapjoy.embeddedframework;
-			sourceTree = "<group>";
-		};
-		245BBDCA18A5FD5700B80781 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				245BBDCB18A5FD5700B80781 /* TapjoyResources.bundle */,
-			);
-			path = Resources;
 			sourceTree = "<group>";
 		};
 		24A4BBDD182A232B00667209 /* Placeholders */ = {
@@ -1055,7 +1025,6 @@
 		D4AA4CE61766B373009B0635 = {
 			isa = PBXGroup;
 			children = (
-				245BBDC818A5FD5600B80781 /* Libraries */,
 				245BBDB218A5F91900B80781 /* ApptentiveConnect.xcodeproj */,
 				D4AA4CF81766B374009B0635 /* Encore */,
 				D4A8DDB2176A133B005E9847 /* en.lproj */,
@@ -1603,7 +1572,6 @@
 				2459110518A76D310016B07F /* addConcertBorder@2x.png in Resources */,
 				D4A9B30D178DDABD008B5504 /* divideractiveright.png in Resources */,
 				D4A9B30E178DDABD008B5504 /* divideractiveright@2x.png in Resources */,
-				245BBDCD18A5FD5700B80781 /* TapjoyResources.bundle in Resources */,
 				D4A9B30F178DDABD008B5504 /* dividerdefault.png in Resources */,
 				D4A9B310178DDABD008B5504 /* dividerdefault@2x.png in Resources */,
 				247C114617ECE6D500B7F401 /* GooglePlacesAutocompleteView.storyboard in Resources */,
@@ -1976,7 +1944,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
-					"$(SRCROOT)/Libraries/Tapjoy.embeddedframework",
 					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -2033,7 +2000,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
-					"$(SRCROOT)/Libraries/Tapjoy.embeddedframework",
 					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
