@@ -351,10 +351,13 @@ typedef enum {
         [cell.activityIndicator stopAnimating];
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
         [cell.activityIndicator stopAnimating];
-        [self deletePostAtIndexPath: indexPath];
-        NSArray* indexPaths = [NSArray arrayWithObject:indexPath];
-        [collectionView deleteItemsAtIndexPaths:indexPaths];
         cell.postImageView.image = [UIImage imageNamed:@"placeholderimg2"];
+        [collectionView performBatchUpdates:^{
+            [self deletePostAtIndexPath: indexPath];
+            NSArray* indexPaths = [NSArray arrayWithObject:indexPath];
+            [collectionView deleteItemsAtIndexPaths:indexPaths];
+
+        } completion:nil];
     }];
     
     cell.postType = [post postType];
