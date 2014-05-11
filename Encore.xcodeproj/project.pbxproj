@@ -1977,7 +1977,6 @@
 					Security,
 					"-weak_framework",
 					Social,
-					"-lTestFlight",
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2033,7 +2032,6 @@
 					Security,
 					"-weak_framework",
 					Social,
-					"-lTestFlight",
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";

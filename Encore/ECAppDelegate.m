@@ -22,7 +22,7 @@
 #import "NSUserDefaults+Encore.h"
 #import "MBProgressHUD.h"
 
-#import "TestFlight.h"
+//#import "TestFlight.h"
 
 #import "AFNetworking.h"
 
@@ -162,7 +162,7 @@
     
 //#if IN_BETA
      //   [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
-        [TestFlight takeOff:@"019687e0-0d30-4959-bf90-f52ba008c834"];
+//        [TestFlight takeOff:@"019687e0-0d30-4959-bf90-f52ba008c834"];
 //#endif
 
 }

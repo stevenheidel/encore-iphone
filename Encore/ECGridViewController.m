@@ -353,7 +353,7 @@ typedef enum {
         [cell.activityIndicator stopAnimating];
         cell.postImageView.image = [UIImage imageNamed:@"placeholderimg2"];
         [collectionView performBatchUpdates:^{
-            [self deletePostAtIndexPath: indexPath];
+            [self deletePostWithID: post.postID];
             NSArray* indexPaths = [NSArray arrayWithObject:indexPath];
             [collectionView deleteItemsAtIndexPaths:indexPaths];
 
@@ -363,9 +363,15 @@ typedef enum {
     cell.postType = [post postType];
     return cell;
 }
--(void) deletePostAtIndexPath: (NSIndexPath*) indexPath {
-    NSInteger row = indexPath.row;
-    [self.posts removeObjectAtIndex:row];
+
+-(void) deletePostWithID: (NSString*) postID {
+    for (NSInteger i = 0; i < self.posts.count; i++){
+        NSDictionary* post = [self.posts objectAtIndex:i];
+        if ([post.postID isEqualToString:postID]) {
+            [self.posts removeObjectAtIndex:i];
+            return;
+        }
+    }
 }
 
 -(UICollectionReusableView*) collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
