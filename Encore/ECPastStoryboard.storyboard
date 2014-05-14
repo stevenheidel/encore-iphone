@@ -581,12 +581,23 @@
                                     <constraint firstItem="Cvf-kh-lB5" firstAttribute="leading" secondItem="bNr-nN-xjG" secondAttribute="leading" constant="30" id="aE7-Gh-CaR"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No posts found!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="xq0-bH-fOS" userLabel="no posts">
+                                <rect key="frame" x="20" y="274" width="280" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="bNr-nN-xjG" secondAttribute="bottom" id="I7x-h2-e2T"/>
+                            <constraint firstAttribute="centerY" secondItem="xq0-bH-fOS" secondAttribute="centerY" id="LtF-3k-Tcb"/>
+                            <constraint firstAttribute="centerX" secondItem="xq0-bH-fOS" secondAttribute="centerX" id="NjQ-zm-urI"/>
                             <constraint firstItem="bNr-nN-xjG" firstAttribute="trailing" secondItem="zRa-sd-kUO" secondAttribute="trailing" id="OWF-2e-GYO"/>
+                            <constraint firstAttribute="trailing" secondItem="xq0-bH-fOS" secondAttribute="trailing" constant="20" symbolic="YES" id="RBH-d9-72J"/>
                             <constraint firstItem="4nW-7X-Iq4" firstAttribute="bottom" secondItem="zRa-sd-kUO" secondAttribute="bottom" id="Uha-6A-oKD"/>
                             <constraint firstItem="bNr-nN-xjG" firstAttribute="leading" secondItem="zRa-sd-kUO" secondAttribute="leading" id="dDK-ge-eAz"/>
+                            <constraint firstItem="xq0-bH-fOS" firstAttribute="leading" secondItem="zRa-sd-kUO" secondAttribute="leading" constant="20" symbolic="YES" id="gbM-9O-vtr"/>
                             <constraint firstItem="4nW-7X-Iq4" firstAttribute="trailing" secondItem="zRa-sd-kUO" secondAttribute="trailing" id="hPK-DX-wmh"/>
                             <constraint firstItem="4nW-7X-Iq4" firstAttribute="leading" secondItem="zRa-sd-kUO" secondAttribute="leading" id="hPd-dk-PAp"/>
                             <constraint firstItem="4nW-7X-Iq4" firstAttribute="top" secondItem="Mbp-W1-nv5" secondAttribute="bottom" id="xCT-dJ-fzU"/>
@@ -597,6 +608,7 @@
                     <size key="freeformSize" width="320" height="568"/>
                     <connections>
                         <outlet property="footerView" destination="bNr-nN-xjG" id="Gdt-4M-dLP"/>
+                        <outlet property="noPostsLabel" destination="xq0-bH-fOS" id="6w5-7U-CWT"/>
                         <outlet property="postsCollectionView" destination="4nW-7X-Iq4" id="PWA-S7-6Jd"/>
                     </connections>
                 </viewController>
@@ -613,7 +625,7 @@
                         <viewControllerLayoutGuide type="bottom" id="yIP-n3-Odm"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="s3D-w9-0TB">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Av-HW-8j1" userLabel="Post">
@@ -625,7 +637,7 @@
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SOU-UE-yhE" userLabel="Container">
-                                <rect key="frame" x="0.0" y="412" width="320" height="92"/>
+                                <rect key="frame" x="0.0" y="476" width="320" height="92"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="218" translatesAutoresizingMaskIntoConstraints="NO" id="kqE-T6-mKV" userLabel="Caption">
                                         <rect key="frame" x="82" y="31" width="218" height="48"/>
@@ -931,6 +943,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="LW3-sE-y7H"/>
+        <segue reference="RMJ-57-IrX"/>
     </inferredMetricsTieBreakers>
 </document>

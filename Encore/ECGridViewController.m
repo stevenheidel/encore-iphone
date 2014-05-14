@@ -207,7 +207,7 @@ typedef enum {
         if(isPopulating){
             //Show the footer
             [self showFooter];
-//            [self hideNoPostsLabel];
+            [self hideNoPostsLabel];
         
         }
         else {
@@ -239,7 +239,7 @@ typedef enum {
             self.posts = [NSMutableArray arrayWithArray:fetchedPosts];
             [self.postsCollectionView reloadData];
             [self doTooltip];
-//            [self hideNoPostsLabel];
+            [self hideNoPostsLabel];
         }else{
             if (!_isPopulating && !shouldAsk) {
                 [self alertNoPosts];
@@ -303,12 +303,15 @@ typedef enum {
 
 }
 -(void)alertNoPosts{
-    if ([self.navigationController.visibleViewController isEqual:self]) {
-        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"No posts found" message:@"Unfortunately we could not find any posts for this show." delegate:self cancelButtonTitle:@"Back" otherButtonTitles: nil];
-        alert.tag = NoPostsAlertTag;
-    
-        [alert show];
-    }
+//    if ([self.navigationController.visibleViewController isEqual:self]) {
+//        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"No posts found" message:@"Unfortunately we could not find any posts for this show." delegate:self cancelButtonTitle:@"Back" otherButtonTitles: nil];
+//        alert.tag = NoPostsAlertTag;
+//    
+//        [alert show];
+//    }
+    [UIView animateWithDuration:0.3 animations:^{
+        [self.noPostsLabel setAlpha:1];
+    }];
 }
 
 -(void)hideNoPostsLabel{
