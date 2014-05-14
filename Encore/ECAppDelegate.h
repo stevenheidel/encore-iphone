@@ -46,6 +46,6 @@
 @property (strong, nonatomic) CLLocationManager *locationManager;
 
 @property BOOL isNavigating;
--(void) showWalktrhoughView;
+-(void) showWalkthroughView;
 -(NSURL *) applicationDocumentsDirectory;
 @end

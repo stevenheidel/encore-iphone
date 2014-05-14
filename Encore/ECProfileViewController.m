@@ -442,7 +442,7 @@ typedef enum {
             [[NSUserDefaults standardUserDefaults] setBool: NO forKey:@"GridViewControllerShownBefore"];
             [[NSUserDefaults standardUserDefaults] synchronize];
             [self dismissViewControllerAnimated:YES completion:^{
-                [ApplicationDelegate showWalktrhoughView];
+                [ApplicationDelegate showWalkthroughView];
                 [Flurry logEvent:@"Tapped_Repeat_Walkthrough" withParameters:nil];
             }];
         }

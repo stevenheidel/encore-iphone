@@ -92,7 +92,6 @@
 
 
     [self startAnalytics];
-    [Crashlytics startWithAPIKey:@"c12b678409321970d5cec21099c268564caa15c1"];
     
     [self setupUnreachableIndicatorView];
     [self checkReachability];
@@ -109,7 +108,7 @@
     [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     if([NSUserDefaults shouldShowWalkthrough] || TESTING_WALKTHROUGH){
-        [self showWalktrhoughView];
+        [self showWalkthroughView];
     }else{
         [self setUpLocationManager];
         [Flurry setUserID:[NSUserDefaults userID]];
@@ -145,7 +144,7 @@
 
 -(void) startAnalytics
 {
-    
+    [Crashlytics startWithAPIKey:@"c12b678409321970d5cec21099c268564caa15c1"];
 //#if DO_ANALYTICS
     [Flurry setDebugLogEnabled:FLURRY_LOGGING];
     [Flurry setAppVersion:[NSString stringWithFormat:@"%@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]]];
@@ -287,7 +286,7 @@
 
 #pragma mark - Walktrhough management
 
--(void) showWalktrhoughView{
+-(void) showWalkthroughView{
     UIViewController *topViewController = [self.navigationController topViewController];    
     UIStoryboard* walkthroughStoryboard = [UIStoryboard storyboardWithName:@"ECWalkthrough" bundle:nil];
 
