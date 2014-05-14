@@ -46,6 +46,10 @@
 
 +(void) clearLoginDetails;
 
++(NSInteger) autocompletionsVersion;
++(void) setAutocompletionsVersion: (NSInteger) version;
+
++(void) registerDefaults;
 //+(BOOL) postsLayout;
 //+(void) setPostsLayout: (BOOL) isSingleColumn;
 @end

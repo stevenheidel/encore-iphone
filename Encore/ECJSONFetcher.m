@@ -10,6 +10,7 @@
 #import "EncoreURL.h"
 #import "AFNetworking.h"
 #import <CoreLocation/CoreLocation.h>
+#import "NSUserDefaults+Encore.h"
 
 //TODO could change to use blocks instead of delegates to return success
 @implementation ECJSONFetcher
@@ -350,6 +351,42 @@ NSString* stringForSearchType(ECSearchType searchType) {
 }
 
 +(void) fetchAutocompletions: (void(^) (NSArray* suggestions)) completion {
+    [ECJSONFetcher fetchAutocompletionVersion:^(NSInteger version) {
+        NSLog(@"Fetched autocompletion version %d",version);
+        if (version == [NSUserDefaults autocompletionsVersion]) {
+            if (completion) {
+                completion(nil);
+            }
+            NSLog(@"fetchAutocompletions: already up to date");
+        }
+        else {
+            [ECJSONFetcher fetchAutocompletionsForRealsies:completion];
+            [NSUserDefaults setAutocompletionsVersion:version];
+            [NSUserDefaults synchronize];
+        }
+    }];
+   }
+
+
++(void) fetchAutocompletionVersion:(void (^)(NSInteger version))completion {
+    NSURL* versionURL = [NSURL URLWithString:AutocompletionsVersionURL];
+    NSURLRequest* versionReq = [NSURLRequest requestWithURL:versionURL];
+    [AFPropertyListRequestOperation addAcceptableContentTypes:[NSSet setWithObject:@"text/plain"]];
+    AFPropertyListRequestOperation * operation = [AFPropertyListRequestOperation propertyListRequestOperationWithRequest:versionReq success:^(NSURLRequest *request, NSHTTPURLResponse *response, id propertyList) {
+        NSDictionary* dic = (NSDictionary*) propertyList;
+        NSInteger version = [dic[@"version"] integerValue];
+        if (completion) {
+            completion(version);
+        }
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id propertyList) {
+        if (completion)
+            completion(-1);
+        NSLog(@"Failed fetching autocompletion version %@",error.description);
+    }];
+    [operation start];
+}
+
++(void) fetchAutocompletionsForRealsies: (void(^) (NSArray* suggestions)) completion {
     NSURL* url = [NSURL URLWithString:AutocompletionsURL];
     NSURLRequest* request = [NSURLRequest requestWithURL:url];
     [AFPropertyListRequestOperation addAcceptableContentTypes:[NSSet setWithObject:@"text/plain"]];
@@ -368,6 +405,7 @@ NSString* stringForSearchType(ECSearchType searchType) {
         NSLog(@"%@: Failed to get autocompletions %@",NSStringFromClass([ECJSONFetcher class]), [error.description substringToIndex:MAX_ERROR_LEN]);
     }];
     [operation start];
+
 }
 
 NSURL * applicationDocumentsDirectory() {

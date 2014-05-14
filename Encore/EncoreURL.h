@@ -71,4 +71,6 @@ static NSString* const SaveFriendsURL = @BASE_URL_DEF "users/%@/events/%@/add_fa
 static NSString* const GetFriendsURL = @BASE_URL_DEF "users/%@/events/%@/facebook_friends"; //
 
 static  NSString* const AutocompletionsURL = @"https://dl.dropboxusercontent.com/u/21137857/ArtistAutocomplete.plist";
+static  NSString* const AutocompletionsVersionURL = @"https://dl.dropboxusercontent.com/u/21137857/ArtistAutocompleteVersion.plist";
+
 #endif

@@ -95,6 +95,7 @@
     
     [self setupUnreachableIndicatorView];
     [self checkReachability];
+    [NSUserDefaults registerDefaults];
     self.navigationController = (UINavigationController*)self.window.rootViewController;
     self.mainViewController = (ECNewMainViewController*)[[self.navigationController viewControllers] objectAtIndex:0];
     

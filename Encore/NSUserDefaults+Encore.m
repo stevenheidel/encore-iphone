@@ -149,4 +149,15 @@
 //+(void) setPostsLayout: (BOOL) isSingleColumn {
 //    [[NSUserDefaults standardUserDefaults] setBool:isSingleColumn forKey:@"GridisSingleColumn"];
 //}
+
++(NSInteger) autocompletionsVersion {
+    return [[NSUserDefaults standardUserDefaults] integerForKey:@"ArtistAutocompletionsVersion"];
+}
++(void) setAutocompletionsVersion: (NSInteger) version {
+    [[NSUserDefaults standardUserDefaults] setInteger:version forKey:@"ArtistAutocompletionsVersion"];
+}
+
++(void) registerDefaults {
+    [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"ArtistAutocompletionsVersion": @1}];
+}
 @end
