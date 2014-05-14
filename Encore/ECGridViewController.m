@@ -321,14 +321,14 @@ typedef enum {
 }
 
 -(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (alertView.tag == NoPostsAlertTag && buttonIndex == alertView.cancelButtonIndex) {
-        if (self.concertDetailPage) {
-            [self.navigationController popToViewController:self.concertDetailPage animated:YES];
-        }
-        else {
-            [self.navigationController popViewControllerAnimated:YES];
-        }
-    }
+//    if (alertView.tag == NoPostsAlertTag && buttonIndex == alertView.cancelButtonIndex) {
+//        if (self.concertDetailPage) {
+//            [self.navigationController popToViewController:self.concertDetailPage animated:YES];
+//        }
+//        else {
+//            [self.navigationController popViewControllerAnimated:YES];
+//        }
+//    }
 }
 
 #pragma mark - collection view
@@ -352,15 +352,14 @@ typedef enum {
     [cell.postImageView setImageWithURLRequest:[NSURLRequest requestWithURL:[post imageURL]] placeholderImage:[[UIImage alloc] init] success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
         cell.postImageView.image = image;
         [cell.activityIndicator stopAnimating];
+        cell.postImageView.contentMode = UIViewContentModeScaleAspectFit;
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
         [cell.activityIndicator stopAnimating];
         cell.postImageView.image = [UIImage imageNamed:@"placeholderimg2"];
-        [collectionView performBatchUpdates:^{
-            [self deletePostWithID: post.postID];
-            NSArray* indexPaths = [NSArray arrayWithObject:indexPath];
-            [collectionView deleteItemsAtIndexPaths:indexPaths];
-
-        } completion:nil];
+        cell.postImageView.contentMode = UIViewContentModeCenter;
+//        [self deletePostWithID: post.postID];
+//        NSArray* indexPaths = [NSArray arrayWithObject:indexPath];
+//        [collectionView deleteItemsAtIndexPaths:indexPaths];
     }];
     
     cell.postType = [post postType];
