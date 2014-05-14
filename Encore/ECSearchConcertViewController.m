@@ -123,6 +123,10 @@ typedef enum {
     }
 }
 
+-(void) viewWillDisappear:(BOOL)animated {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 -(void) registerNotifications {
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow:)
@@ -250,17 +254,15 @@ typedef enum {
     }
 }
 
--(void)LocationAcquired
-{
+-(void)LocationAcquired {
     NSLog(@"Location acquired");
     [self initializeSearchLocation];// automatically figures out if there's a saved one and if not returns the user coordinate
     [self fetchPopularConcertsWithSearchType:ECSearchTypePast];
 }
--(void)LocationFailed
-{
-    
+
+-(void)LocationFailed {
     NSLog(@"Location failed");
-    [self performSegueWithIdentifier:@"ECSkipButtonTapped" sender:Nil];
+    [self performSegueWithIdentifier:@"ECSkipButtonTapped" sender:nil];
     
 }
 
