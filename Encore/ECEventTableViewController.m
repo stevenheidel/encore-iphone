@@ -120,6 +120,7 @@
         self.statusManager = nil;
     }
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[NSNotificationCenter defaultCenter] removeObserver:self.statusManager];
     [self stopPlaying];
     [super viewWillDisappear:animated];
 }
