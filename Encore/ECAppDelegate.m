@@ -15,6 +15,7 @@
 #import "ECJSONPoster.h"
 
 #import "ATConnect.h"
+
 #import "ATAppRatingFlow.h"
 #import "defines.h"
 
@@ -155,7 +156,6 @@
 
     ATConnect * connection = [ATConnect sharedConnection];
     connection.apiKey = kApptentiveAPIKey;
-    
     ATAppRatingFlow *sharedFlow = [ATAppRatingFlow sharedRatingFlow];
     sharedFlow.appID = kApptentiveAppID;
 //#endif 

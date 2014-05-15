@@ -100,8 +100,6 @@ typedef enum {
                                                              UITextAttributeFont : [UIFont heroFontWithSize:18],
                                                              UITextAttributeTextColor : [UIColor whiteColor]
                                                              } forState:UIControlStateNormal];
-    [barButtonAppearanceInSearchBar setTitle:@"CANCEL"];
-
     [self setDateLabel];
     [self setupHUD];
     [self setupSearchBar];
@@ -987,7 +985,10 @@ typedef enum {
     if (self.hasSearched) {
         if (indexPath.section == ECSearchResultSection) {
             ECSearchResultCell *cell = [tableView dequeueReusableCellWithIdentifier:SearchCellIdentifier forIndexPath:indexPath];
-            NSDictionary * eventDic = [self.searchResultsEvents objectAtIndex:indexPath.row];
+            NSDictionary* eventDic = nil;
+            if (indexPath.row < self.searchResultsEvents.count) {
+                eventDic = [self.searchResultsEvents objectAtIndex:indexPath.row];
+            }
             [cell setupCellForEvent:eventDic];
             return cell;
         }
