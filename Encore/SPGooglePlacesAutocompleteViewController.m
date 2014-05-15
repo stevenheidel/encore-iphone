@@ -71,14 +71,60 @@
 //        self.edgesForExtendedLayout = UIRectEdgeNone;
 //        self.automaticallyAdjustsScrollViewInsets = NO;
     }
-    self.searchDisplayController.searchBar.placeholder = NSLocalizedString(@"Change city", @"placeholder text for search bar on top of map");
+    self.searchDisplayController.searchBar.placeholder = NSLocalizedString(@"Search for city or drop a pin on the map", @"placeholder text for search bar on top of map");
     [self hideSaveButton];
     
     [self.cancelButton.titleLabel setFont:[UIFont heroFontWithSize:17.0]];
     [self.saveButton.titleLabel setFont:[UIFont heroFontWithSize:17.0]];
 //
     self.searchDisplayController.searchBar.backgroundImage = [UIImage imageNamed:@"navbar"];
+    
+    UILongPressGestureRecognizer* longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressMap:)];
+    [self.mapView addGestureRecognizer:longPress];
+    
+    
+    UIView* view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 60)];
+    UIImageView* pbg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"powered-by-google-on-white"]];
+    pbg.contentMode = UIViewContentModeCenter;
+    pbg.center = view.center;
+    [view addSubview:pbg];
+    self.searchDisplayController.searchResultsTableView.tableFooterView = view;
+    
 }
+
+-(void) longPressMap: (UIGestureRecognizer*) sender {
+    if (sender.state == UIGestureRecognizerStateChanged || sender.state == UIGestureRecognizerStateEnded) {
+        return;
+    }
+    else {
+        [self.mapView removeAnnotation:selectedPlaceAnnotation];
+        CGPoint point = [sender locationInView:self.mapView];
+        CLLocationCoordinate2D locCoord = [self.mapView convertPoint:point toCoordinateFromView:self.mapView];
+        // Then all you have to do is create the annotation and add it to the map
+        selectedPlaceAnnotation = [[MKPointAnnotation alloc] init];
+        selectedPlaceAnnotation.title = @"Dropped pin";
+        selectedPlaceAnnotation.coordinate = locCoord;
+        [self.mapView addAnnotation:selectedPlaceAnnotation];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self centerMapToCoordinate:locCoord];
+            [self showSaveButton];
+        });
+        
+        CLGeocoder* geocoder = [CLGeocoder new];
+        [geocoder reverseGeocodeLocation:[[CLLocation alloc] initWithLatitude:locCoord.latitude longitude:locCoord.longitude] completionHandler:^(NSArray *placemarks, NSError *error) {
+            if (error) {
+                NSLog(@"Error reverse geocoding for dropped pin: %@", error.description);
+            }
+            
+            else {
+                CLPlacemark* placemark = [placemarks objectAtIndex:0];
+                selectedPlaceAnnotation.title = placemark.locality;
+                self.savedPlacemark = placemark;
+            }
+        }];
+    }
+}
+
 -(void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self centerMapToLocation:self.initialLocation];
@@ -116,7 +162,8 @@
     self.saveButton.enabled = YES;
 }
 
-- (void) centerMapToLocation: (CLLocation*) location {
+
+-(void) centerMapToCoordinate: (CLLocationCoordinate2D) coord {
     MKCoordinateRegion region;
     MKCoordinateSpan span;
     
@@ -124,11 +171,16 @@
     span.longitudeDelta = 0.02;
     
     region.span = span;
-
-    CLLocationCoordinate2D location2D = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude);
-    region.center = location2D;
+    
+    region.center = coord;
     [self.mapView setRegion:region];
 }
+
+- (void) centerMapToLocation: (CLLocation*) location {
+    CLLocationCoordinate2D location2D = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude);
+    [self centerMapToCoordinate:location2D];
+}
+
 - (IBAction)recenterMapToUserLocation:(id)sender {
     MKCoordinateRegion region;
     MKCoordinateSpan span;
@@ -247,7 +299,8 @@
     
     [searchQuery fetchPlaces:^(NSArray *places, NSError *error) {
         if (error) {
-            SPPresentAlertViewWithErrorAndTitle(error, @"Could not fetch Places");
+            NSLog(@"%@: could not fetch places: %@",NSStringFromClass(self.class),error.description);
+//            SPPresentAlertViewWithErrorAndTitle(error, @"Could not fetch Places");
         } else {
             searchResultPlaces = places;
             [self.searchDisplayController.searchResultsTableView reloadData];

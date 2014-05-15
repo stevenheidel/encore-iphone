@@ -82,6 +82,8 @@
 		24B0D8E017E15C9100B30612 /* shareiconbutton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24B0D8DE17E15C9100B30612 /* shareiconbutton@2x.png */; };
 		24B3840218A5E24C00E5C714 /* removeConcert@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24B3840118A5E24C00E5C714 /* removeConcert@2x.png */; };
 		24B3840518A5E4E300E5C714 /* addConcert@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24B3840418A5E4E200E5C714 /* addConcert@2x.png */; };
+		24B7EBDA192340EC00BCC793 /* powered-by-google-on-white.png in Resources */ = {isa = PBXBuildFile; fileRef = 24B7EBD8192340EC00BCC793 /* powered-by-google-on-white.png */; };
+		24B7EBDB192340EC00BCC793 /* powered-by-google-on-white@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24B7EBD9192340EC00BCC793 /* powered-by-google-on-white@2x.png */; };
 		24C7E23F1918B4E90068EAC8 /* ECLoadStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 24C7E23E1918B4E90068EAC8 /* ECLoadStatus.m */; };
 		24C7E24419195C8D0068EAC8 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24C7E24319195C8D0068EAC8 /* FacebookSDK.framework */; };
 		A00402BD177F4F7300B998CF /* ECProfileHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = A00402BC177F4F7300B998CF /* ECProfileHeader.m */; };
@@ -401,6 +403,8 @@
 		24B0D8DE17E15C9100B30612 /* shareiconbutton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shareiconbutton@2x.png"; sourceTree = "<group>"; };
 		24B3840118A5E24C00E5C714 /* removeConcert@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "removeConcert@2x.png"; sourceTree = "<group>"; };
 		24B3840418A5E4E200E5C714 /* addConcert@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "addConcert@2x.png"; sourceTree = "<group>"; };
+		24B7EBD8192340EC00BCC793 /* powered-by-google-on-white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "powered-by-google-on-white.png"; sourceTree = "<group>"; };
+		24B7EBD9192340EC00BCC793 /* powered-by-google-on-white@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "powered-by-google-on-white@2x.png"; sourceTree = "<group>"; };
 		24C7E23D1918B4E90068EAC8 /* ECLoadStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECLoadStatus.h; sourceTree = "<group>"; };
 		24C7E23E1918B4E90068EAC8 /* ECLoadStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECLoadStatus.m; sourceTree = "<group>"; };
 		24C7E24319195C8D0068EAC8 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
@@ -1544,6 +1548,7 @@
 				D4AA63301780BBB1008111C6 /* logout@2x.png in Resources */,
 				D4AB1B0D17827050002A29B9 /* flag.png in Resources */,
 				D4AB1B0E17827050002A29B9 /* flag@2x.png in Resources */,
+				24B7EBDB192340EC00BCC793 /* powered-by-google-on-white@2x.png in Resources */,
 				D45DBD5D1783C57D000ED3C1 /* Icon@2x.png in Resources */,
 				D45DBD5F1783C5C5000ED3C1 /* Icon-Small@2x.png in Resources */,
 				2459110618A76D310016B07F /* removeConcertBorder@2x.png in Resources */,
@@ -1627,6 +1632,7 @@
 				D4E16CA917973BF100A9DC99 /* locationmakerwhite@2x.png in Resources */,
 				D4E16CAD1797419100A9DC99 /* searchbar.png in Resources */,
 				D4E16CAE1797419100A9DC99 /* searchbar@2x.png in Resources */,
+				24B7EBDA192340EC00BCC793 /* powered-by-google-on-white.png in Resources */,
 				D4B7A8B41799EA4B001C14BE /* magnifyingglass.png in Resources */,
 				D4B7A8B51799EA4B001C14BE /* magnifyingglass@2x.png in Resources */,
 				D4B7A8BA1799F7AF001C14BE /* ProvinceStateAbbrv.plist in Resources */,

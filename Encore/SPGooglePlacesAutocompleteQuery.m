@@ -59,9 +59,9 @@
     if (language) {
         [url appendFormat:@"&language=%@", language];
     }
-    if (types != -1) {
-        [url appendFormat:@"&types=%@", SPPlaceTypeStringForPlaceType(types)];
-    }
+//    if (types != -1) {
+        [url appendFormat:@"&types=(cities)"];//, SPPlaceTypeStringForPlaceType(types)];
+//    }
     
 //    NSLog(@"googleURLString : %@",url);
     
