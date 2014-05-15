@@ -54,6 +54,7 @@
 
 @interface ECEventTableViewController ()
 @property (nonatomic,strong) UIBarButtonItem* navAddbutton;
+@property (nonatomic,strong) UIBarButtonItem* navRemovebutton;
 @property (nonatomic,strong) UIView* friendCountView;
 @end
 
@@ -91,8 +92,6 @@
             [self.tableView reloadData];
         }
     }];
-    
-    
 }
 
 -(NSInteger) rowIndexForRowType:(ECEventRow) rowID {
@@ -442,8 +441,7 @@
     [self.changeConcertStateButton setButtonIsOnProfile:isOnProfile];
     NSString* name = isOnProfile ? @"removeConcertBorder" : @"addConcertBorder";
     UIImage* image = [UIImage imageNamed:name];
-    if (!self.navAddbutton) {
-//        self.navAddbutton = [[UIBarButtonItem alloc] initWithImage:image style:UIBarButtonItemStylePlain target:self action:@selector(addToProfile)];
+    if (!isOnProfile && !self.navAddbutton) {
         UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
         [button addTarget:self action:@selector(addToProfile) forControlEvents:UIControlEventTouchUpInside];
         button.frame = CGRectMake(0, 0, image.size.width, image.size.height);
@@ -451,11 +449,17 @@
         
         self.navAddbutton = [[UIBarButtonItem alloc] initWithCustomView:button];
         self.navAddbutton.tintColor = [UIColor whiteColor];
-        self.navigationItem.rightBarButtonItem = self.navAddbutton;
     }
-    else {
-        self.navAddbutton.image = image;
+    if (isOnProfile && !self.navRemovebutton) {
+        UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
+        [button addTarget:self action:@selector(addToProfile) forControlEvents:UIControlEventTouchUpInside];
+        button.frame = CGRectMake(0, 0, image.size.width, image.size.height);
+        [button setBackgroundImage:image forState:UIControlStateNormal];
+        
+        self.navRemovebutton = [[UIBarButtonItem alloc] initWithCustomView:button];
+        self.navRemovebutton.tintColor = [UIColor whiteColor];
     }
+    self.navigationItem.rightBarButtonItem = isOnProfile ? self.navRemovebutton : self.navAddbutton;
     
     //if user has this concert in his account
     if(isOnProfile)
@@ -475,6 +479,7 @@
 
 -(void) addToProfile {
     [self.navAddbutton setEnabled:NO];
+    
     if (ApplicationDelegate.isLoggedIn) {
         [[NSNotificationCenter defaultCenter] removeObserver:self.statusManager name:ECLoginCompletedNotification object:nil];
         
