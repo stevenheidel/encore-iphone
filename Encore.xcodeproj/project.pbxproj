@@ -13,8 +13,6 @@
 		2459110518A76D310016B07F /* addConcertBorder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2459110318A76D310016B07F /* addConcertBorder@2x.png */; };
 		2459110618A76D310016B07F /* removeConcertBorder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2459110418A76D310016B07F /* removeConcertBorder@2x.png */; };
 		245BBDBF18A5F94600B80781 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 245BBDBE18A5F94600B80781 /* Accelerate.framework */; };
-		245BBDC418A5F9A100B80781 /* libApptentiveConnect.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 245BBDB918A5F91A00B80781 /* libApptentiveConnect.a */; };
-		245BBDC518A5FA3500B80781 /* ApptentiveResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 245BBDBD18A5F91A00B80781 /* ApptentiveResources.bundle */; };
 		245BBDD018A5FD7300B80781 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 245BBDCF18A5FD7300B80781 /* AdSupport.framework */; };
 		245BBDD218A5FD7B00B80781 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 245BBDD118A5FD7B00B80781 /* CFNetwork.framework */; };
 		245BBDD418A5FD8700B80781 /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 245BBDD318A5FD8600B80781 /* EventKitUI.framework */; };
@@ -86,6 +84,8 @@
 		24B7EBDB192340EC00BCC793 /* powered-by-google-on-white@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24B7EBD9192340EC00BCC793 /* powered-by-google-on-white@2x.png */; };
 		24C7E23F1918B4E90068EAC8 /* ECLoadStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 24C7E23E1918B4E90068EAC8 /* ECLoadStatus.m */; };
 		24C7E24419195C8D0068EAC8 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24C7E24319195C8D0068EAC8 /* FacebookSDK.framework */; };
+		24F3668A192518B700F04D92 /* libApptentiveConnect.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24F366851925182F00F04D92 /* libApptentiveConnect.a */; };
+		24F3668C1925196000F04D92 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24F3668B1925196000F04D92 /* AssetsLibrary.framework */; };
 		A00402BD177F4F7300B998CF /* ECProfileHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = A00402BC177F4F7300B998CF /* ECProfileHeader.m */; };
 		A00402C4177F6B0900B998CF /* backButton.png in Resources */ = {isa = PBXBuildFile; fileRef = A00402C2177F6B0900B998CF /* backButton.png */; };
 		A00402C5177F6B0900B998CF /* backButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A00402C3177F6B0900B998CF /* backButton@2x.png */; };
@@ -272,39 +272,25 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		245BBDB818A5F91A00B80781 /* PBXContainerItemProxy */ = {
+		24F366841925182F00F04D92 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 245BBDB218A5F91900B80781 /* ApptentiveConnect.xcodeproj */;
+			containerPortal = 24F3667E1925182E00F04D92 /* ApptentiveConnect.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 496DC37F1333D35600743F65;
 			remoteInfo = ApptentiveConnect;
 		};
-		245BBDBA18A5F91A00B80781 /* PBXContainerItemProxy */ = {
+		24F366861925182F00F04D92 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 245BBDB218A5F91900B80781 /* ApptentiveConnect.xcodeproj */;
+			containerPortal = 24F3667E1925182E00F04D92 /* ApptentiveConnect.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 496DC38C1333D35600743F65;
 			remoteInfo = ApptentiveConnectTests;
 		};
-		245BBDBC18A5F91A00B80781 /* PBXContainerItemProxy */ = {
+		24F366881925182F00F04D92 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 245BBDB218A5F91900B80781 /* ApptentiveConnect.xcodeproj */;
+			containerPortal = 24F3667E1925182E00F04D92 /* ApptentiveConnect.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 49D1118C13341A7C00603373;
-			remoteInfo = ApptentiveResources;
-		};
-		245BBDC018A5F99300B80781 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 245BBDB218A5F91900B80781 /* ApptentiveConnect.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 496DC37E1333D35600743F65;
-			remoteInfo = ApptentiveConnect;
-		};
-		245BBDC218A5F99600B80781 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 245BBDB218A5F91900B80781 /* ApptentiveConnect.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 49D1118B13341A7C00603373;
 			remoteInfo = ApptentiveResources;
 		};
 		D4AA4D141766B374009B0635 /* PBXContainerItemProxy */ = {
@@ -323,7 +309,6 @@
 		241C7F65190876EC0026A8EA /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		2459110318A76D310016B07F /* addConcertBorder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "addConcertBorder@2x.png"; sourceTree = "<group>"; };
 		2459110418A76D310016B07F /* removeConcertBorder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "removeConcertBorder@2x.png"; sourceTree = "<group>"; };
-		245BBDB218A5F91900B80781 /* ApptentiveConnect.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ApptentiveConnect.xcodeproj; path = "apptentive-ios/ApptentiveConnect/ApptentiveConnect.xcodeproj"; sourceTree = "<group>"; };
 		245BBDBE18A5F94600B80781 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		245BBDC618A5FA6E00B80781 /* ATConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATConnect.h; sourceTree = "<group>"; };
 		245BBDC718A5FA9400B80781 /* ATAppRatingFlow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATAppRatingFlow.h; sourceTree = "<group>"; };
@@ -408,6 +393,8 @@
 		24C7E23D1918B4E90068EAC8 /* ECLoadStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECLoadStatus.h; sourceTree = "<group>"; };
 		24C7E23E1918B4E90068EAC8 /* ECLoadStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECLoadStatus.m; sourceTree = "<group>"; };
 		24C7E24319195C8D0068EAC8 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
+		24F3667E1925182E00F04D92 /* ApptentiveConnect.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ApptentiveConnect.xcodeproj; path = "apptentive-ios/ApptentiveConnect/ApptentiveConnect.xcodeproj"; sourceTree = "<group>"; };
+		24F3668B1925196000F04D92 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		8087A714E27A4A5B80C64237 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E74836C07DD49A2BC3BE7EB /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		A00402BB177F4F7300B998CF /* ECProfileHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECProfileHeader.h; sourceTree = "<group>"; };
@@ -646,6 +633,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				24F3668C1925196000F04D92 /* AssetsLibrary.framework in Frameworks */,
+				24F3668A192518B700F04D92 /* libApptentiveConnect.a in Frameworks */,
 				245BBDE418A5FE0D00B80781 /* CoreMotion.framework in Frameworks */,
 				245BBDE218A5FDE600B80781 /* Twitter.framework in Frameworks */,
 				D4A7980B17921BD20029F469 /* SystemConfiguration.framework in Frameworks */,
@@ -658,7 +647,6 @@
 				245BBDD418A5FD8700B80781 /* EventKitUI.framework in Frameworks */,
 				245BBDD218A5FD7B00B80781 /* CFNetwork.framework in Frameworks */,
 				245BBDD018A5FD7300B80781 /* AdSupport.framework in Frameworks */,
-				245BBDC418A5F9A100B80781 /* libApptentiveConnect.a in Frameworks */,
 				24C7E24419195C8D0068EAC8 /* FacebookSDK.framework in Frameworks */,
 				245BBDBF18A5F94600B80781 /* Accelerate.framework in Frameworks */,
 				D97836161805A0080061C203 /* MessageUI.framework in Frameworks */,
@@ -693,16 +681,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		245BBDB318A5F91900B80781 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				245BBDB918A5F91A00B80781 /* libApptentiveConnect.a */,
-				245BBDBB18A5F91A00B80781 /* ApptentiveConnectTests.xctest */,
-				245BBDBD18A5F91A00B80781 /* ApptentiveResources.bundle */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		24A4BBDD182A232B00667209 /* Placeholders */ = {
 			isa = PBXGroup;
 			children = (
@@ -751,6 +729,16 @@
 				24A7C1AA17E8E77100A7302B /* profilepreview@2x.png */,
 			);
 			name = newloginscreen;
+			sourceTree = "<group>";
+		};
+		24F3667F1925182E00F04D92 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				24F366851925182F00F04D92 /* libApptentiveConnect.a */,
+				24F366871925182F00F04D92 /* ApptentiveConnectTests.xctest */,
+				24F366891925182F00F04D92 /* ApptentiveResources.bundle */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		D45DBD621783EDF4000ED3C1 /* App Icons */ = {
@@ -864,6 +852,8 @@
 		D4A8DDD1176A44A0005E9847 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				24B7EBD8192340EC00BCC793 /* powered-by-google-on-white.png */,
+				24B7EBD9192340EC00BCC793 /* powered-by-google-on-white@2x.png */,
 				241C7F61190871340026A8EA /* orangeBackButton@2x.png */,
 				24B3840118A5E24C00E5C714 /* removeConcert@2x.png */,
 				24B3840418A5E4E200E5C714 /* addConcert@2x.png */,
@@ -1029,7 +1019,7 @@
 		D4AA4CE61766B373009B0635 = {
 			isa = PBXGroup;
 			children = (
-				245BBDB218A5F91900B80781 /* ApptentiveConnect.xcodeproj */,
+				24F3667E1925182E00F04D92 /* ApptentiveConnect.xcodeproj */,
 				D4AA4CF81766B374009B0635 /* Encore */,
 				D4A8DDB2176A133B005E9847 /* en.lproj */,
 				D4AA4D161766B374009B0635 /* EncoreTests */,
@@ -1051,6 +1041,7 @@
 		D4AA4CF11766B374009B0635 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				24F3668B1925196000F04D92 /* AssetsLibrary.framework */,
 				24C7E24319195C8D0068EAC8 /* FacebookSDK.framework */,
 				241C7F65190876EC0026A8EA /* Crashlytics.framework */,
 				245BBDE318A5FE0D00B80781 /* CoreMotion.framework */,
@@ -1416,8 +1407,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				245BBDC318A5F99600B80781 /* PBXTargetDependency */,
-				245BBDC118A5F99300B80781 /* PBXTargetDependency */,
 			);
 			name = Encore;
 			productName = Encore;
@@ -1471,8 +1460,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 245BBDB318A5F91900B80781 /* Products */;
-					ProjectRef = 245BBDB218A5F91900B80781 /* ApptentiveConnect.xcodeproj */;
+					ProductGroup = 24F3667F1925182E00F04D92 /* Products */;
+					ProjectRef = 24F3667E1925182E00F04D92 /* ApptentiveConnect.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -1484,25 +1473,25 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		245BBDB918A5F91A00B80781 /* libApptentiveConnect.a */ = {
+		24F366851925182F00F04D92 /* libApptentiveConnect.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libApptentiveConnect.a;
-			remoteRef = 245BBDB818A5F91A00B80781 /* PBXContainerItemProxy */;
+			remoteRef = 24F366841925182F00F04D92 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		245BBDBB18A5F91A00B80781 /* ApptentiveConnectTests.xctest */ = {
+		24F366871925182F00F04D92 /* ApptentiveConnectTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = ApptentiveConnectTests.xctest;
-			remoteRef = 245BBDBA18A5F91A00B80781 /* PBXContainerItemProxy */;
+			remoteRef = 24F366861925182F00F04D92 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		245BBDBD18A5F91A00B80781 /* ApptentiveResources.bundle */ = {
+		24F366891925182F00F04D92 /* ApptentiveResources.bundle */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = ApptentiveResources.bundle;
-			remoteRef = 245BBDBC18A5F91A00B80781 /* PBXContainerItemProxy */;
+			remoteRef = 24F366881925182F00F04D92 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -1512,7 +1501,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				245BBDC518A5FA3500B80781 /* ApptentiveResources.bundle in Resources */,
 				D4AA4CFD1766B374009B0635 /* InfoPlist.strings in Resources */,
 				D4AA4D311766BA8C009B0635 /* ECLoginViewController.xib in Resources */,
 				D4AA4D391766F3D0009B0635 /* Localizable.strings in Resources */,
@@ -1829,16 +1817,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		245BBDC118A5F99300B80781 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = ApptentiveConnect;
-			targetProxy = 245BBDC018A5F99300B80781 /* PBXContainerItemProxy */;
-		};
-		245BBDC318A5F99600B80781 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = ApptentiveResources;
-			targetProxy = 245BBDC218A5F99600B80781 /* PBXContainerItemProxy */;
-		};
 		D4AA4D151766B374009B0635 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = D4AA4CEE1766B374009B0635 /* Encore */;
