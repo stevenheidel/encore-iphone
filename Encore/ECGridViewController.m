@@ -345,7 +345,7 @@ typedef enum {
     cell.postImageView.image = nil;
     NSInteger row = indexPath.row;
     if (row >= self.posts.count) {
-        return nil;
+        return cell;
     }
     NSDictionary* post = [self.posts objectAtIndex:row];
     [cell.activityIndicator startAnimating];
