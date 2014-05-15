@@ -7,7 +7,6 @@ PODS:
   - MBProgressHUD (0.8)
   - MLPAutoCompleteTextField (1.5)
   - Reachability (3.1.1)
-  - TestFlightSDK (3.0.0)
   - XCDYouTubeVideoPlayerViewController (1.1.2)
 
 DEPENDENCIES:
@@ -17,7 +16,6 @@ DEPENDENCIES:
   - MBProgressHUD
   - MLPAutoCompleteTextField (~> 1.5)
   - Reachability
-  - TestFlightSDK
   - XCDYouTubeVideoPlayerViewController
 
 SPEC CHECKSUMS:
@@ -27,7 +25,6 @@ SPEC CHECKSUMS:
   MBProgressHUD: 2bbc6f470111daf7f3eaa4eb12b8cbf01c4c0622
   MLPAutoCompleteTextField: 8baf7b9a78cbc6022a50f985c1c56784248821fe
   Reachability: be4883bb93f31e38266ae3365e5600a317aae735
-  TestFlightSDK: fe0567a897456b6f65b180541892ef0154986e01
   XCDYouTubeVideoPlayerViewController: 7b8c4787c246a36b9858a8a348f4c163d152cff7
 
 COCOAPODS: 0.32.1
