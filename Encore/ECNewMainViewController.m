@@ -349,13 +349,13 @@ typedef enum {
     NSString* message = nil;
     switch (self.currentSearchType) {
         case ECSearchTypePast:
-            message = @"No one has added a show in your area recently.\n\nSearch for a show above or try changing your location";
+            message = @"No one has added a show in your area recently.\n\nTry refreshing or changing your location";
             break;
         case ECSearchTypeToday:
-            message = @"We couldn't find any shows in %@ today\n\nRoadtrip? Try changing your location to a city nearby";
+            message = @"We couldn't find any shows in %@ today\n\n Try refreshing or changing your location to a city nearby";
             break;
         case ECSearchTypeFuture:
-            message = @"We couldn't find any upcoming shows in %@.\n\nTry changing your location or check back later.";
+            message = @"We couldn't find any upcoming shows in %@.\n\nTry refreshing or changing your location.";
             break;
         default:
             break;
