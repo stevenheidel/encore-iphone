@@ -49,7 +49,11 @@
 +(NSInteger) autocompletionsVersion;
 +(void) setAutocompletionsVersion: (NSInteger) version;
 
++(BOOL) firstDetailPostsView;
++(void) setFirstDetailPostsView: (BOOL) shown;
+
 +(void) registerDefaults;
+
 //+(BOOL) postsLayout;
 //+(void) setPostsLayout: (BOOL) isSingleColumn;
 @end

@@ -78,10 +78,13 @@ typedef enum {
     self.venueAndDateLabel.alpha = 0.0;
     self.flagPostButton.enabled = NO;
     self.youtubeShowing = NO;
-    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
-        self.edgesForExtendedLayout = UIRectEdgeNone;
-    }
     
+    if (![NSUserDefaults firstDetailPostsView]) {
+        [self tapPost];
+        [self performSelector:@selector(tapPost) withObject:nil afterDelay:3.0];
+        [NSUserDefaults setFirstDetailPostsView:YES];
+        [NSUserDefaults synchronize];
+    }
 }
 
 -(BOOL)shouldAutorotate{

@@ -157,6 +157,14 @@
     [[NSUserDefaults standardUserDefaults] setInteger:version forKey:@"ArtistAutocompletionsVersion"];
 }
 
++(BOOL) firstDetailPostsView {
+    return [[NSUserDefaults standardUserDefaults] boolForKey:@"FirstDetailPostsView"];
+}
+
++(void) setFirstDetailPostsView: (BOOL) shown {
+    [[NSUserDefaults standardUserDefaults] setBool:shown forKey:@"FirstDetailPostsView"];
+}
+
 +(void) registerDefaults {
     [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"ArtistAutocompletionsVersion": @1}];
 }
