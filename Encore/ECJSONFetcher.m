@@ -35,7 +35,8 @@
 +(void) fetchConcertsForUserID: (NSString *) fbID  completion: (void (^)(NSDictionary* concerts)) completion {
     __block NSDictionary * concertList;
     NSString *  fullConcertsUrl = [NSString stringWithFormat:UserConcertsURL,fbID];
-    NSURL * url = [NSURL URLWithString:fullConcertsUrl];
+    NSString* date = [[self dateStringForFetch] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSURL * url = [NSURL URLWithString:[NSString stringWithFormat:@"%@?date=%@",fullConcertsUrl,date]];
     NSURLRequest * request = [NSURLRequest requestWithURL:url];
     AFJSONRequestOperation * operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         
@@ -46,24 +47,10 @@
         }
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         NSLog(@"ERROR fetching concerts for userID %@: %@...",fbID,[[error description] substringToIndex:MAX_ERROR_LEN]);
-        if (RETURN_TEST_DATA) {
-            NSDictionary * past1 = [NSDictionary dictionaryWithObjectsAndKeys:@"2013-06-12", @"date", @"%ldst Venue 1", @"venue_name", @"My Artist", @"name", @"11", @"server_id", nil];
-            NSDictionary * past2 = [NSDictionary dictionaryWithObjectsAndKeys:@"2012-05-11", @"date", @"Test Venue 2", @"venue_name", @"Go Artist", @"name", @"22", @"server_id", nil];
-            NSDictionary * future1 = [NSDictionary dictionaryWithObjectsAndKeys:@"2013-09-11", @"date", @"Test Venue 3", @"venue_name", @"Artist2013", @"name", @"33", @"server_id", nil];
-            NSDictionary * future2 = [NSDictionary dictionaryWithObjectsAndKeys:@"2013-12-22", @"date", @"Test Venue 4", @"venue_name", @"Cool Artist", @"name", @"44", @"server_id", nil];
-            
-            NSArray * past = [NSArray arrayWithObjects: past1, past2, nil];
-            NSArray * future = [NSArray arrayWithObjects: future1, future2, nil];
-            NSDictionary * concertList = [NSDictionary dictionaryWithObjectsAndKeys:past,@"past",future,@"future", nil];
-            if (completion) {
-                completion(concertList);
-            }
-        }
-        else if (completion){
+        if (completion){
             completion(nil);
         }
     }];
-        
     
     [operation start];
 }
@@ -90,26 +77,41 @@ NSString* stringForSearchType(ECSearchType searchType) {
     }
     return nil;
 }
+
++(NSString*) dateStringForFetch {
+    NSDateFormatter* formatter = [NSDateFormatter new];
+    [formatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZZZ"];
+    return [formatter stringFromDate:[NSDate date]];
+}
+
 +(void)fetchPopularConcertsWithSearchType:(ECSearchType)searchType location: (CLLocation*) location radius: (NSNumber*) radius page:(NSInteger) page completion: (void (^)(BOOL success, NSArray* concerts,NSInteger total,ECSearchType searchType)) completion {
     __block NSArray * concertList;
     NSNumber* latitude = [NSNumber numberWithDouble:location.coordinate.latitude];
     NSNumber* longitude = [NSNumber numberWithDouble:location.coordinate.longitude];
-    NSDictionary * parameters ;
-    if(searchType == ECSearchTypeFuture)
-        parameters = [NSDictionary dictionaryWithObjectsAndKeys:latitude,@"latitude", longitude, @"longitude", radius, @"radius",[NSString stringWithFormat:@"%d",(int)page],@"page",@"50",@"limit",nil];
-    else
-        parameters = [NSDictionary dictionaryWithObjectsAndKeys:latitude,@"latitude", longitude, @"longitude", radius, @"radius",nil];
+    NSDictionary * parameters;
 
+    NSString* sendDate = [self dateStringForFetch];
     
+    if(searchType == ECSearchTypeFuture)
+        parameters = [NSDictionary dictionaryWithObjectsAndKeys:latitude,@"latitude", longitude, @"longitude", radius, @"radius",[NSString stringWithFormat:@"%d",(int)page],@"page",@"50",@"limit",sendDate, @"date",nil];
+    else
+        parameters = [NSDictionary dictionaryWithObjectsAndKeys:latitude,@"latitude", longitude, @"longitude", radius, @"radius",sendDate, @"date",nil];
+
     NSURL * url = [NSURL URLWithString:BaseURL];
     AFHTTPClient * client = [[AFHTTPClient alloc] initWithBaseURL:url];
     [client registerHTTPOperationClass:[AFJSONRequestOperation class]];
     [client setDefaultHeader:@"Accept" value:@"application/json"];
     
     NSString *  artistConcertsPath = pathForSearchType(searchType);
-    
+    NSLog(@"%@",artistConcertsPath);
     [client getPath:artistConcertsPath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-
+        if (![responseObject respondsToSelector:@selector(objectForKey:)]) {
+            if (completion) {
+                completion(NO,nil,0,searchType);
+            }
+            NSLog(@"ERROR fetching popular concerts: invalid response object");
+            return;
+        }
         concertList = (NSArray*) [(NSDictionary*)responseObject objectForKey:@"events"];
         if(page > 10)
             concertList = nil;
