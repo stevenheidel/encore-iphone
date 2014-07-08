@@ -71,7 +71,7 @@
 }
 
 +(void) addConcert: (NSString *) concertID toUser: (NSString *) userID completion: (void (^)(BOOL success)) completion{
-    //POST /users/:uuid/concerts     {'songkick_id': '1234578'}
+    //POST /users/:uuid/concerts
     NSString * urlString = [NSString stringWithFormat:AddConcertToUserURL,userID];
     NSDictionary * parameters = [NSDictionary dictionaryWithObject:concertID forKey:@"lastfm_id"];
     AFHTTPClient * client = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:BaseURL]];
