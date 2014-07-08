@@ -13,7 +13,6 @@
 #import "NSDictionary+ConcertList.h"
 #import <QuartzCore/QuartzCore.h>
 #import <FacebookSDK/FacebookSDK.h>
-#import "UIImageView+AFNetworking.h"
 #import "UIColor+EncoreUI.h"
 #import "UIFont+Encore.h"
 
@@ -53,7 +52,28 @@ typedef enum {
     InviteIndex
 } SettingsActionSheetButtonIndices;
 
-@interface ECProfileViewController ()<ECEventViewControllerDelegate>
+@interface ECProfileViewController ()<ECEventViewControllerDelegate,UIAlertViewDelegate, UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate> {
+    NSString* userID;
+}
+
+@property (nonatomic,weak) IBOutlet UIImageView* gradientView;
+@property (nonatomic, strong) UIRefreshControl* refreshControl;
+@property(nonatomic, strong) IBOutlet UITableView *tableView;
+
+@property (weak, nonatomic) IBOutlet UIImageView *imgBackground;
+@property (weak, nonatomic) IBOutlet FBProfilePictureView *imgProfile;
+
+@property (weak, nonatomic) IBOutlet UILabel *lblName;
+@property (weak, nonatomic) IBOutlet UILabel *lblLocation;
+@property (weak, nonatomic) IBOutlet UILabel *lblConcerts;
+@property (weak, nonatomic) IBOutlet UIImageView *imgLocationMarker;
+@property (weak, nonatomic) IBOutlet UIImageView *imgStubs;
+
+@property (nonatomic, readonly) NSArray* pastEvents;
+@property (nonatomic, readonly) NSArray* futureEvents;
+@property (nonatomic, strong) NSDictionary* events;
+
+@property(assign) BOOL shouldUpdateView;
 
 @property (strong,atomic) MBProgressHUD* hud;
 @end
@@ -68,6 +88,7 @@ typedef enum {
     }
     return self;
 }
+
 
 #pragma mark - view setup
 - (void)viewDidLoad {
@@ -120,7 +141,7 @@ typedef enum {
 }
 - (void) setUpBackButton {
     UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    UIImage *leftButImage = [UIImage imageNamed:@"backButton.png"];
+    UIImage *leftButImage = [UIImage imageNamed:@"backButton"];
     [leftButton setBackgroundImage:leftButImage forState:UIControlStateNormal];
     [leftButton addTarget:self action:@selector(backButtonWasPressed) forControlEvents:UIControlEventTouchUpInside];
     leftButton.frame = CGRectMake(0, 0, leftButImage.size.width, leftButImage.size.height);
@@ -139,24 +160,12 @@ typedef enum {
 }
 -(void) setupLogoutButton {
     UIButton* logoutButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    UIImage* image = [UIImage imageNamed:@"logout.png"];
+    UIImage* image = [UIImage imageNamed:@"logout"];
     [logoutButton setBackgroundImage:image forState:UIControlStateNormal];
     [logoutButton addTarget:self action:@selector(logoutTapped) forControlEvents:UIControlEventTouchUpInside];
     logoutButton.frame = CGRectMake(0,0,image.size.width, image.size.height);
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:logoutButton];
-}
-
-- (UIView *) footerView {
-    // Who needs songkick when you have lastFm!!!
-    UIImage *footerImage = [UIImage imageNamed:@"songkick"];
-    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, footerImage.size.height)];
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, footerImage.size.width, footerImage.size.height)];
-    imageView.center = footerView.center;
-    imageView.image = footerImage;
-    footerView.backgroundColor = [UIColor lightGrayHeaderColor];
-    [footerView addSubview:imageView];
-    return footerView;
 }
 
 -(void) tappedProfilePhoto {
@@ -173,9 +182,10 @@ typedef enum {
     self.lblName.textColor = [UIColor whiteColor];
     self.lblConcerts.font = [UIFont heroFontWithSize: 12.0];
     self.lblConcerts.textColor = [UIColor whiteColor];
-        
     userID = [NSUserDefaults userID];
     self.imgProfile.profileID = userID;
+    self.gradientView.hidden = YES;
+    [self getImageForBackground];
     self.imgProfile.layer.cornerRadius = self.imgProfile.frame.size.width/2;
     self.imgProfile.layer.masksToBounds = YES;
     
@@ -185,13 +195,30 @@ typedef enum {
     tapRecognizer.numberOfTouchesRequired = 1;
     [self.imgProfile addGestureRecognizer:tapRecognizer];
     
-    NSURL *imageURL = [NSUserDefaults facebookProfileImageURL];
-    UIImage *profileImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL]];
-    self.imgBackground.image = [profileImage imageWithGaussianBlur];
-    
     self.lblName.text = [[NSUserDefaults userName] uppercaseString];
     
     self.lblLocation.text = [NSUserDefaults userCity];
+}
+
+-(void) getImageForBackground {
+    UIImage *img = nil;
+    
+    for (NSObject *obj in [self.imgProfile subviews]) {
+        if ([obj isMemberOfClass:[UIImageView class]]) {
+            UIImageView *objImg = (UIImageView *)obj;
+            img = objImg.image;
+            break;
+        }
+    }
+    if (img == nil) {
+        self.imgBackground.image = nil;
+        [self performSelector:@selector(getImageForBackground) withObject:nil afterDelay:0.1];
+    }
+    else {
+        self.gradientView.hidden = NO;
+        self.
+        self.imgBackground.image = [img imageWithGaussianBlur];
+    }
 }
 
 -(void) setupRefreshControl {

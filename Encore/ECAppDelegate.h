@@ -11,9 +11,9 @@
 #import <FacebookSDK/FacebookSDK.h>
 
 #define ApplicationDelegate ((ECAppDelegate *)[UIApplication sharedApplication].delegate)
-#define ECLocationAcquiredNotification  @"com.encoretheapp.Encore:ECLocationAcquiredNotification"
-#define ECLocationFailedNotification  @"com.encoretheapp.Encore:ECLocationFailed"
-#define ECLoginCompletedNotification  @"com.encoretheapp.Encore:ECLoginCompletedNotification"
+static NSString* const ECLocationAcquiredNotification = @"com.encoretheapp.Encore:ECLocationAcquiredNotification";
+static NSString* const ECLocationFailedNotification = @"com.encoretheapp.Encore:ECLocationFailed";
+static NSString* const ECLoginCompletedNotification = @"com.encoretheapp.Encore:ECLoginCompletedNotification";
 
 @class ECLoginViewController;
 @class ECNewMainViewController;
