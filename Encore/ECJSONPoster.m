@@ -46,7 +46,7 @@
     [client registerHTTPOperationClass:[AFJSONRequestOperation class]];
     [client setDefaultHeader:@"Accept" value:@"application/json"];
     
-    [client postPath:@"users" parameters:parameters
+    [client postPath:@"users.json" parameters:parameters
              success:^(AFHTTPRequestOperation *operation, id responseObject) {
                  NSLog(@"%@: Successfully posted user %@",NSStringFromClass([self class]),facebookID);
                  NSDictionary *userDic = [responseObject objectForKey:@"user"];
