@@ -37,10 +37,12 @@
 #import "ECLoadStatus.h"
 #import "ECArtistViewController.h"
 
-#define SearchCellIdentifier @"ECSearchResultCell"
-#define ConcertCellIdentifier @"ECConcertCellView"
-#define ALERT_HIDE_DELAY 2.0
-#define SEARCH_HEADER_HEIGHT 98.0f
+#import "ECConstKeys.h"
+
+static NSString* const SearchCellIdentifier = @"ECSearchResultCell";
+static NSString* const ConcertCellIdentifier = @"ECConcertCellView";
+static NSTimeInterval ALERT_HIDE_DELAY = 2.0;
+static CGFloat SEARCH_HEADER_HEIGHT = 98.0f;
 
 typedef enum {
     ECSearchResultSection,
@@ -1252,7 +1254,7 @@ BOOL dateIsPast (NSDate* date) {
         self.hud.detailsLabelText = [NSString stringWithFormat:NSLocalizedString(@"hudSearchArtist", nil), text];
         [self.hud show:YES];
         
-        [Flurry logEvent:@"Searched_Artist" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:text, @"search_text", [self currentSearchTypeString], @"Search_Type", [NSNumber numberWithDouble:self.currentSearchLocation.coordinate.latitude], @"latitude", [NSNumber numberWithDouble:self.currentSearchLocation.coordinate.longitude],@"longitude", [NSNumber numberWithFloat:self.currentSearchRadius], @"radius", self.currentSearchAreaString, @"area_string", nil]];
+        [Flurry logEvent:@"Searched_Artist" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:text, @"search_text", [self currentSearchTypeString], @"Search_Type", [NSNumber numberWithDouble:self.currentSearchLocation.coordinate.latitude], KeyLatitude, [NSNumber numberWithDouble:self.currentSearchLocation.coordinate.longitude],KeyLongitude, [NSNumber numberWithFloat:self.currentSearchRadius], @"radius", self.currentSearchAreaString, @"area_string", nil]];
     }
 }
 

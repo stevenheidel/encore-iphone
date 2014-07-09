@@ -84,6 +84,8 @@
 		24B7EBDB192340EC00BCC793 /* powered-by-google-on-white@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24B7EBD9192340EC00BCC793 /* powered-by-google-on-white@2x.png */; };
 		24C7E23F1918B4E90068EAC8 /* ECLoadStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 24C7E23E1918B4E90068EAC8 /* ECLoadStatus.m */; };
 		24C7E24419195C8D0068EAC8 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24C7E24319195C8D0068EAC8 /* FacebookSDK.framework */; };
+		24D01713196BB365005373B0 /* ApptentiveResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 24F366891925182F00F04D92 /* ApptentiveResources.bundle */; };
+		24D01716196CD348005373B0 /* ECConstKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D01715196CD348005373B0 /* ECConstKeys.m */; };
 		24F3668A192518B700F04D92 /* libApptentiveConnect.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24F366851925182F00F04D92 /* libApptentiveConnect.a */; };
 		24F3668C1925196000F04D92 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24F3668B1925196000F04D92 /* AssetsLibrary.framework */; };
 		A00402BD177F4F7300B998CF /* ECProfileHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = A00402BC177F4F7300B998CF /* ECProfileHeader.m */; };
@@ -272,6 +274,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		24D0170B196BB18C005373B0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 24F3667E1925182E00F04D92 /* ApptentiveConnect.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 496DC37E1333D35600743F65;
+			remoteInfo = ApptentiveConnect;
+		};
+		24D01710196BB190005373B0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 24F3667E1925182E00F04D92 /* ApptentiveConnect.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 49D1118B13341A7C00603373;
+			remoteInfo = ApptentiveResources;
+		};
 		24F366841925182F00F04D92 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 24F3667E1925182E00F04D92 /* ApptentiveConnect.xcodeproj */;
@@ -393,6 +409,8 @@
 		24C7E23D1918B4E90068EAC8 /* ECLoadStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECLoadStatus.h; sourceTree = "<group>"; };
 		24C7E23E1918B4E90068EAC8 /* ECLoadStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECLoadStatus.m; sourceTree = "<group>"; };
 		24C7E24319195C8D0068EAC8 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
+		24D01714196CD348005373B0 /* ECConstKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECConstKeys.h; sourceTree = "<group>"; };
+		24D01715196CD348005373B0 /* ECConstKeys.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECConstKeys.m; sourceTree = "<group>"; };
 		24F3667E1925182E00F04D92 /* ApptentiveConnect.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ApptentiveConnect.xcodeproj; path = "apptentive-ios/ApptentiveConnect/ApptentiveConnect.xcodeproj"; sourceTree = "<group>"; };
 		24F3668B1925196000F04D92 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		8087A714E27A4A5B80C64237 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1102,6 +1120,8 @@
 		D4AA4CF91766B374009B0635 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				24D01714196CD348005373B0 /* ECConstKeys.h */,
+				24D01715196CD348005373B0 /* ECConstKeys.m */,
 				24675F5C191770D700B86AF9 /* ArtistAutocomplete.plist */,
 				D9D95CF517E8420500061DAF /* featured.json */,
 				D4C9C08C177A51CC00F864FC /* Post+Fetch */,
@@ -1407,6 +1427,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				24D01711196BB190005373B0 /* PBXTargetDependency */,
+				24D0170C196BB18C005373B0 /* PBXTargetDependency */,
 			);
 			name = Encore;
 			productName = Encore;
@@ -1501,6 +1523,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				24D01713196BB365005373B0 /* ApptentiveResources.bundle in Resources */,
 				D4AA4CFD1766B374009B0635 /* InfoPlist.strings in Resources */,
 				D4AA4D311766BA8C009B0635 /* ECLoginViewController.xib in Resources */,
 				D4AA4D391766F3D0009B0635 /* Localizable.strings in Resources */,
@@ -1788,6 +1811,7 @@
 				D4B2DDC217B01B0900836F53 /* ECLineupViewController.m in Sources */,
 				247C116917ED398900B7F401 /* ECNextConcertViewController.m in Sources */,
 				D4A9A71317B03D65007E8A80 /* ECUpcomingViewController.m in Sources */,
+				24D01716196CD348005373B0 /* ECConstKeys.m in Sources */,
 				D9963FD017B0D4E9003C3CC1 /* UIImage+Merge.m in Sources */,
 				D4719BA717B322250077AB46 /* ECPastViewController.m in Sources */,
 				D4719BAC17B340D20077AB46 /* ECRowCells.m in Sources */,
@@ -1817,6 +1841,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		24D0170C196BB18C005373B0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ApptentiveConnect;
+			targetProxy = 24D0170B196BB18C005373B0 /* PBXContainerItemProxy */;
+		};
+		24D01711196BB190005373B0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ApptentiveResources;
+			targetProxy = 24D01710196BB190005373B0 /* PBXContainerItemProxy */;
+		};
 		D4AA4D151766B374009B0635 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = D4AA4CEE1766B374009B0635 /* Encore */;

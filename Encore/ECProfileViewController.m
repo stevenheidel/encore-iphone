@@ -268,17 +268,9 @@ typedef enum {
 
 -(void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-//    [self setupFeedback];
     
-    //TODO: set shoudlupdateview to true when concert state change
     if(self.shouldUpdateView)
         [self fetchEvents];
-    
-    // if the list is empty show HUD
-    if(self.events.count == 0)
-    {
-        [self.hud show:YES];
-    }
 }
 
 //Custom getters
@@ -290,6 +282,10 @@ typedef enum {
 }
 
 -(void) fetchEvents {
+    if(self.events.count == 0)
+    {
+        [self.hud show:YES];
+    }
     [ECJSONFetcher fetchConcertsForUserID:userID completion:^(NSDictionary *concerts) {
         //NSLog(@"%@: User Concerts response = %@", NSStringFromClass([self class]), concerts);
         self.events = concerts;
@@ -529,15 +525,6 @@ typedef enum {
 }
 
 #pragma mark - Feedback solicitation
--(void) setupFeedback {
-    //    UIButton* feedback = [[UIButton alloc] initWithFrame:self.navigationItem.titleView.frame];
-    UIButton* feedback = [UIButton buttonWithType:UIButtonTypeCustom];
-    UIImage* image = [UIImage imageNamed:@"feedback.png"];
-    [feedback setBackgroundImage:image forState:UIControlStateNormal];
-    [feedback addTarget:self action:@selector(openFeedback) forControlEvents:UIControlEventTouchUpInside];
-    feedback.frame = CGRectMake(0.0, 0.0, image.size.width, image.size.height);
-    self.navigationItem.titleView = feedback;
-}
 
 -(void) openFeedback {
     [Flurry logEvent:@"Opened_Feedback" withParameters:[NSDictionary dictionaryWithObject:@"Profile" forKey:@"source"]];

@@ -7,10 +7,10 @@
 //
 
 #import "NSDictionary+Posts.h"
-
+#import "ECConstKeys.h"
 @implementation NSDictionary (Posts)
 -(NSURL *) imageURL {
-    NSString *url = [self objectForKey:@"image_url"];
+    NSString *url = [self objectForKey:KeyImageURL];
     if (![url isKindOfClass:[NSNull class]] && url.length > 0) {
         return [NSURL URLWithString:url];
     } else {
@@ -19,7 +19,7 @@
 }
 
 -(NSString *) userName {
-    return [self objectForKey:@"user_name"];
+    return [self objectForKey:KeyUsername];
 }
 
 -(NSURL *) profilePictureURL {

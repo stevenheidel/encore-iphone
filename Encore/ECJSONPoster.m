@@ -15,6 +15,8 @@
 #import "ECAppDelegate.h"
 #import "ECFacebookManger.h"
 
+#import "ECConstKeys.h"
+
 @implementation ECJSONPoster
 
 +(int) ageFromFBBdayString: (NSString*) bday {
@@ -73,12 +75,11 @@
 +(void) addConcert: (NSString *) concertID toUser: (NSString *) userID completion: (void (^)(BOOL success)) completion{
     //POST /users/:uuid/concerts
     NSString * urlString = [NSString stringWithFormat:AddConcertToUserURL,userID];
-    NSDictionary * parameters = [NSDictionary dictionaryWithObject:concertID forKey:@"lastfm_id"];
+    NSDictionary * parameters = [NSDictionary dictionaryWithObject:concertID forKey:KeyLastFMId];
     AFHTTPClient * client = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:BaseURL]];
     
     [client registerHTTPOperationClass:[AFJSONRequestOperation class]];
     [client setDefaultHeader:@"Accept" value:@"application/json"];
-
     [client postPath:urlString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"%@: Success adding concert %@ to profile %@. Response: %@", NSStringFromClass([self class]),concertID,userID, [responseObject description]);
         BOOL response = [[responseObject objectForKey:@"response"] isEqualToString:@"success"];

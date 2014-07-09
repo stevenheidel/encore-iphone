@@ -31,6 +31,8 @@
 #import "Reachability.h"
 #import "ECWelcomeViewController.h"
 
+#import "ECConstKeys.h"
+
 @implementation ECAppDelegate
 
 
@@ -183,8 +185,8 @@
             //Post to Encore server
             [ECJSONPoster postUser:user completion:^(NSDictionary *response) {
                     NSURL* defaultURL = [NSUserDefaults facebookProfileImageURL];
-                    if (!defaultURL || ![defaultURL isEqual:[response objectForKey:@"facebook_image_url"]]) {
-                        [NSUserDefaults setFacebookProfileImageURL:[response objectForKey:@"facebook_image_url"]]; //expecting a string -- converts to URL inside nsuserdefaults
+                    if (!defaultURL || ![defaultURL isEqual:[response objectForKey:KeyFacebookImageURL]]) {
+                        [NSUserDefaults setFacebookProfileImageURL:[response objectForKey:KeyFacebookImageURL]]; //expecting a string -- converts to URL inside nsuserdefaults
                         [NSUserDefaults synchronize];
                     }
                     [self.navigationController dismissViewControllerAnimated:YES completion:^{

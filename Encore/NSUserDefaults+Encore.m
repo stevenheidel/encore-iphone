@@ -8,11 +8,24 @@
 
 #import "NSUserDefaults+Encore.h"
 #import <CoreLocation/CoreLocation.h>
+#import "ECConstKeys.h"
+
+static NSString* const KeyUserCity = @"user_city";
+static NSString* const KeyUserID = @"user_id";
+static NSString* const KeyWalkthroughShown = @"walkthrough_showen";
+static NSString* const KeyLastSearchType = @"Last_Search_Type";
+static NSString* const KeySearchCity = @"search_city";
+static NSString* const KeyArtistAutocompletionsVersion = @"ArtistAutocompletionsVersion";
+static NSString* const KeyFirstDetailPostsView = @"FirstDetailPostsView";
+static NSString* const KeyLastSearchLatitude = @"last_search_latitude";
+static NSString* const KeyLastSearchLongitude = @"last_search_longitude";
+static NSString* const KeyLastSearchArea = @"last_search_area";
+static NSString* const KeyLastSearchRadius = @"last_search_radius";
 
 @implementation NSUserDefaults (Encore)
 +(BOOL)shouldShowWalkthrough
 {
-    if([[NSUserDefaults standardUserDefaults] boolForKey:@"walkthrough_showen"]){
+    if([[NSUserDefaults standardUserDefaults] boolForKey:KeyWalkthroughShown]){
         return NO;
     }else{
         return YES;
@@ -20,43 +33,43 @@
 }
 -(void)setWalkthoughFinished
 {
-    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"walkthrough_showen"];
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:KeyWalkthroughShown];
 }
 
 +(NSString*) userName {
-   return [[NSUserDefaults standardUserDefaults] stringForKey:@"user_name"];
+   return [[NSUserDefaults standardUserDefaults] stringForKey:KeyUsername];
 }
 +(void) setUsername: (NSString*) username {
-   [[NSUserDefaults standardUserDefaults] setObject:username forKey:@"user_name"];
+   [[NSUserDefaults standardUserDefaults] setObject:username forKey:KeyUsername];
 }
 
 +(NSString*) userID {
-    return [[NSUserDefaults standardUserDefaults] stringForKey:@"user_id"];
+    return [[NSUserDefaults standardUserDefaults] stringForKey:KeyUserID];
 }
 +(void) setUserID: (NSString*) userID {
-   [[NSUserDefaults standardUserDefaults] setObject:userID forKey:@"user_id"];
+   [[NSUserDefaults standardUserDefaults] setObject:userID forKey:KeyUserID];
 }
 
 +(NSURL*) facebookProfileImageURL {
-    return [[NSUserDefaults standardUserDefaults] URLForKey:@"facebook_image_url"];
+    return [[NSUserDefaults standardUserDefaults] URLForKey:KeyFacebookImageURL];
 }
 +(void) setFacebookProfileImageURL: (NSString*) url {
-    [[NSUserDefaults standardUserDefaults] setURL: [NSURL URLWithString:url] forKey:@"facebook_image_url"];
+    [[NSUserDefaults standardUserDefaults] setURL: [NSURL URLWithString:url] forKey:KeyFacebookImageURL];
 }
 
 +(NSString*) userCity {
-    return [[NSUserDefaults standardUserDefaults] stringForKey:@"user_city"];
+    return [[NSUserDefaults standardUserDefaults] stringForKey:KeyUserCity];
 }
 +(void) setUserCity: (NSString*) city {
-    [[NSUserDefaults standardUserDefaults] setObject:city forKey:@"user_city"];
+    [[NSUserDefaults standardUserDefaults] setObject:city forKey:KeyUserCity];
 }
 
 #pragma mark - Location
 +(double) latitude {
-    return [[NSUserDefaults standardUserDefaults] doubleForKey:@"latitude"];
+    return [[NSUserDefaults standardUserDefaults] doubleForKey:KeyLatitude];
 }
 +(double) longitude {
-    return [[NSUserDefaults standardUserDefaults] doubleForKey:@"longitude"];
+    return [[NSUserDefaults standardUserDefaults] doubleForKey:KeyLongitude];
 }
 
 +(CLLocation*) userCoordinate {
@@ -64,8 +77,8 @@
 }
             
 +(void) setLongitude:(double)longitude latitude: (double) latitude{
-    [[NSUserDefaults standardUserDefaults] setDouble:longitude forKey:@"longitude"];
-    [[NSUserDefaults standardUserDefaults] setDouble:latitude forKey:@"latitude"];
+    [[NSUserDefaults standardUserDefaults] setDouble:longitude forKey:KeyLongitude];
+    [[NSUserDefaults standardUserDefaults] setDouble:latitude forKey:KeyLatitude];
 }
 
 +(void) setUserCoordinate: (CLLocation*) location {
@@ -78,7 +91,7 @@
 }
 
 +(float) lastSearchRadius {
-//    float retVal = [[NSUserDefaults standardUserDefaults] floatForKey:@"last_search_radius"];
+//    float retVal = [[NSUserDefaults standardUserDefaults] floatForKey:KeyLastSearchRadius];
 //    if (retVal == 0.0f) { //defaults to 0 if nothing saved
 //        return 1.0f;
 //    }
@@ -87,30 +100,30 @@
 }
 
 +(void) setLastSearchRadius: (float) searchRadius {
-    [[NSUserDefaults standardUserDefaults] setFloat:searchRadius forKey:@"last_search_radius"];
+    [[NSUserDefaults standardUserDefaults] setFloat:searchRadius forKey:KeyLastSearchRadius];
 }
 
 +(NSString*) searchCity {
-    NSString* city = [[NSUserDefaults standardUserDefaults] objectForKey:@"search_city"];
+    NSString* city = [[NSUserDefaults standardUserDefaults] objectForKey:KeySearchCity];
 //    if (city == nil) {
 //        city = [NSUserDefaults userCity];
 //    }
     return city;
 }
 +(void) setSearchCity: (NSString*) city {
-    [[NSUserDefaults standardUserDefaults] setObject:city forKey:@"search_city"];
+    [[NSUserDefaults standardUserDefaults] setObject:city forKey:KeySearchCity];
 }
 //save the geocoded string for reference
 +(void) setLastSearchArea: (NSString*) area {
-    [[NSUserDefaults standardUserDefaults] setObject:area forKey:@"last_search_area"];
+    [[NSUserDefaults standardUserDefaults] setObject:area forKey:KeyLastSearchArea];
 }
 +(NSString*) lastSearchArea {
-    return [[NSUserDefaults standardUserDefaults] objectForKey:@"last_search_area"];
+    return [[NSUserDefaults standardUserDefaults] objectForKey:KeyLastSearchArea];
 }
 
 +(CLLocation*) lastSearchLocation {
-    double latitude = [[NSUserDefaults standardUserDefaults] doubleForKey:@"last_search_latitude"];
-    double longitude = [[NSUserDefaults standardUserDefaults] doubleForKey:@"last_search_longitude"];
+    double latitude = [[NSUserDefaults standardUserDefaults] doubleForKey:KeyLastSearchLatitude];
+    double longitude = [[NSUserDefaults standardUserDefaults] doubleForKey:KeyLastSearchLongitude];
     if (latitude == 0 || longitude == 0) {
         return [NSUserDefaults userCoordinate];
     }
@@ -118,16 +131,16 @@
 }
 
 +(void) setLastSearchLocation: (CLLocation*) lastSearchLocation {
-    [[NSUserDefaults standardUserDefaults] setDouble:lastSearchLocation.coordinate.latitude forKey:@"last_search_latitude"];
-    [[NSUserDefaults standardUserDefaults] setDouble:lastSearchLocation.coordinate.longitude  forKey:@"last_search_longitude"];
+    [[NSUserDefaults standardUserDefaults] setDouble:lastSearchLocation.coordinate.latitude forKey:KeyLastSearchLatitude];
+    [[NSUserDefaults standardUserDefaults] setDouble:lastSearchLocation.coordinate.longitude  forKey:KeyLastSearchLongitude];
 }
 
 +(ECSearchType) lastSearchType {
-    return (ECSearchType)[[NSUserDefaults standardUserDefaults] integerForKey:@"Last_Search_Type"];
+    return (ECSearchType)[[NSUserDefaults standardUserDefaults] integerForKey:KeyLastSearchType];
 }
 
 +(void) setLastSearchType:(ECSearchType)searchType {
-    [[NSUserDefaults standardUserDefaults] setInteger:searchType forKey:@"Last_Search_Type"];
+    [[NSUserDefaults standardUserDefaults] setInteger:searchType forKey:KeyLastSearchType];
 }
 
 #pragma mark -
@@ -151,21 +164,21 @@
 //}
 
 +(NSInteger) autocompletionsVersion {
-    return [[NSUserDefaults standardUserDefaults] integerForKey:@"ArtistAutocompletionsVersion"];
+    return [[NSUserDefaults standardUserDefaults] integerForKey:KeyArtistAutocompletionsVersion];
 }
 +(void) setAutocompletionsVersion: (NSInteger) version {
-    [[NSUserDefaults standardUserDefaults] setInteger:version forKey:@"ArtistAutocompletionsVersion"];
+    [[NSUserDefaults standardUserDefaults] setInteger:version forKey:KeyArtistAutocompletionsVersion];
 }
 
-+(BOOL) firstDetailPostsView {
-    return [[NSUserDefaults standardUserDefaults] boolForKey:@"FirstDetailPostsView"];
++(BOOL) firstDetailPostsView { //show details on posts the first time it appears so they know it's there
+    return [[NSUserDefaults standardUserDefaults] boolForKey:KeyFirstDetailPostsView];
 }
 
 +(void) setFirstDetailPostsView: (BOOL) shown {
-    [[NSUserDefaults standardUserDefaults] setBool:shown forKey:@"FirstDetailPostsView"];
+    [[NSUserDefaults standardUserDefaults] setBool:shown forKey:KeyFirstDetailPostsView];
 }
 
 +(void) registerDefaults {
-    [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"ArtistAutocompletionsVersion": @1}];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:@{KeyArtistAutocompletionsVersion: @2}];
 }
 @end

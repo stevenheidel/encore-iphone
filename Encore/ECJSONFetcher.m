@@ -12,6 +12,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import "NSUserDefaults+Encore.h"
 
+#import "ECConstKeys.h"
 //TODO could change to use blocks instead of delegates to return success
 @implementation ECJSONFetcher
 
@@ -93,9 +94,9 @@ NSString* stringForSearchType(ECSearchType searchType) {
     NSString* sendDate = [self dateStringForFetch];
     
     if(searchType == ECSearchTypeFuture)
-        parameters = [NSDictionary dictionaryWithObjectsAndKeys:latitude,@"latitude", longitude, @"longitude", radius, @"radius",[NSString stringWithFormat:@"%d",(int)page],@"page",@"50",@"limit",sendDate, @"date",nil];
+        parameters = [NSDictionary dictionaryWithObjectsAndKeys:latitude,KeyLatitude, longitude, KeyLongitude, radius, @"radius",[NSString stringWithFormat:@"%d",(int)page],@"page",@"50",@"limit",sendDate, @"date",nil];
     else
-        parameters = [NSDictionary dictionaryWithObjectsAndKeys:latitude,@"latitude", longitude, @"longitude", radius, @"radius",sendDate, @"date",nil];
+        parameters = [NSDictionary dictionaryWithObjectsAndKeys:latitude,KeyLatitude, longitude, KeyLongitude, radius, @"radius",sendDate, @"date",nil];
 
     NSURL * url = [NSURL URLWithString:BaseURL];
     AFHTTPClient * client = [[AFHTTPClient alloc] initWithBaseURL:url];
@@ -147,7 +148,7 @@ NSString* stringForSearchType(ECSearchType searchType) {
     
     NSNumber* latitude = [NSNumber numberWithDouble:location.coordinate.latitude];
     NSNumber* longitude = [NSNumber numberWithDouble:location.coordinate.longitude];
-    NSDictionary * parameters = [NSDictionary dictionaryWithObjectsAndKeys:latitude,@"latitude",longitude, @"longitude", searchStr, @"term", tenseString, @"tense",radius, @"radius",nil];
+    NSDictionary * parameters = [NSDictionary dictionaryWithObjectsAndKeys:latitude,KeyLatitude,longitude, KeyLongitude, searchStr, @"term", tenseString, @"tense",radius, @"radius",nil];
     
     [client getPath:ArtistCombinedSearchURL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
 
@@ -172,7 +173,7 @@ NSString* stringForSearchType(ECSearchType searchType) {
     NSURL * url = [NSURL URLWithString:fullArtistPicURL];
     NSURLRequest * request = [NSURLRequest requestWithURL:url];
     AFJSONRequestOperation * operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-        NSURL* imageURL = [NSURL URLWithString:[(NSDictionary*) JSON objectForKey:@"image_url"]];
+        NSURL* imageURL = [NSURL URLWithString:[(NSDictionary*) JSON objectForKey:KeyImageURL]];
         if (completion) {
             NSLog(@"%@:Fetched picture for artist %@",NSStringFromClass([ECJSONFetcher class]),artist);
             completion(imageURL);
@@ -234,7 +235,7 @@ NSString* stringForSearchType(ECSearchType searchType) {
 
 +(void) checkIfConcert: (NSString*) concertID isOnProfile: (NSString *) userID completion: (void (^)(BOOL isOnProfile)) completion  {
     
-    NSDictionary * parameters = [NSDictionary dictionaryWithObjectsAndKeys:concertID, @"lastfm_id",nil];
+    NSDictionary * parameters = [NSDictionary dictionaryWithObjectsAndKeys:concertID, KeyLastFMId,nil];
     
     NSURL * url = [NSURL URLWithString:BaseURL];
     AFHTTPClient * client = [[AFHTTPClient alloc] initWithBaseURL:url];

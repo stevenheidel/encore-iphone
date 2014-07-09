@@ -15,7 +15,7 @@
 #import "UIColor+EncoreUI.h"
 #import <AFNetworking/UIImageView+AFNetworking.h>
 
-
+#import "ECConstKeys.h"
 @implementation LocationCell
 -(void) awakeFromNib {
     self.locationTitleLabel.font = [UIFont heroFontWithSize:ROW_TITLE_SIZE];
@@ -209,7 +209,7 @@
     
 __weak FriendCollectionCell *cell = (FriendCollectionCell*)[collectionView dequeueReusableCellWithReuseIdentifier:@"FriendCell" forIndexPath:indexPath];
     [cell.activityIndicator startAnimating];
-    NSURL* imageURL = [NSURL URLWithString:[friend objectForKey:@"facebook_image_url"]];
+    NSURL* imageURL = [NSURL URLWithString:[friend objectForKey:KeyFacebookImageURL]];
     [cell.friendImage setImageWithURLRequest:[NSURLRequest requestWithURL:imageURL]
                             placeholderImage:[[UIImage alloc] init]
                                      success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {

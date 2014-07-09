@@ -35,6 +35,8 @@
 #import "ECRowCells.h"
 
 #import "defines.h"
+#import "ECConstKeys.h"
+
 @interface MapViewAnnotation : NSObject <MKAnnotation>
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, assign) CLLocationCoordinate2D coordinate;
@@ -278,7 +280,7 @@
     }
     if ([self.uninvitedFriends count] > 0) {
         NSString* alertMessage = [NSString stringWithFormat:@"%d of your friends haven't joined Encore. Invite them to share this concert with them.",self.uninvitedFriends.count];
-        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil message:alertMessage delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Invite", nil];
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil message:alertMessage delegate:self cancelButtonTitle:@"Skip" otherButtonTitles:@"Invite", nil];
         alert.tag = ECInviteFriendsTag;
         [alert show];        
     }
@@ -828,8 +830,8 @@
         object[@"date"] = self.concert[@"date"];
         object[@"city"] = self.concert.city;
         id<FBGraphObject> location = [FBGraphObject graphObject];
-        location[@"latitude"] = [NSNumber numberWithFloat:self.concert.coordinates.coordinate.latitude];
-        location[@"longitude"] = [NSNumber numberWithFloat:self.concert.coordinates.coordinate.longitude];
+        location[KeyLatitude] = [NSNumber numberWithFloat:self.concert.coordinates.coordinate.latitude];
+        location[KeyLongitude] = [NSNumber numberWithFloat:self.concert.coordinates.coordinate.longitude];
         object[@"coordinates"] = location;
         action[@"concert"] = object;
 //        // Check if the Facebook app is installed and we can present the share dialog

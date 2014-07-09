@@ -8,6 +8,8 @@
 
 #import "NSDictionary+ConcertList.h"
 #import <CoreLocation/CoreLocation.h>
+#import "ECConstKeys.h"
+
 static NSString * const kDateFormat = @"yyyy-MM-dd";
 
 @implementation NSDictionary (ConcertList)
@@ -104,8 +106,8 @@ static NSString * const kDateFormat = @"yyyy-MM-dd";
 
 -(CLLocation*) coordinates {
     NSDictionary* venueDeets = [self venueDetails];
-    double latitude = [(NSString*)[venueDeets objectForKey:@"latitude"] doubleValue];
-    double longitude = [(NSString*)[venueDeets objectForKey:@"longitude"] doubleValue];
+    double latitude = [(NSString*)[venueDeets objectForKey:KeyLatitude] doubleValue];
+    double longitude = [(NSString*)[venueDeets objectForKey:KeyLongitude] doubleValue];
     return [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
 }
 -(NSString*) venueAndDate {
@@ -116,11 +118,11 @@ static NSString * const kDateFormat = @"yyyy-MM-dd";
 }
 
 -(NSString*) eventID {
-    return [self objectForKey:@"lastfm_id"];
+    return [self objectForKey:KeyLastFMId];
 }
 
 -(NSURL *) imageURL {
-    NSString *url = [self objectForKey:@"image_url"];
+    NSString *url = [self objectForKey:KeyImageURL];
     if (![url isKindOfClass:[NSNull class]] && url.length > 0) {
         return [NSURL URLWithString:url];
     } else {
