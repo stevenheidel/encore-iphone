@@ -754,7 +754,7 @@
     if (tense == ECSearchTypeToday) {
         return @"Today";
     }
-    else return tense == ECSearchTypePast ? @"Past" : @"Future";
+    else return tense == ECSearchTypePast ? TenseStrPast : TenseStrFuture;
     return nil;
 }
 

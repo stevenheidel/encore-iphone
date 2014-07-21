@@ -169,7 +169,7 @@ typedef enum {
 }
 
 -(void) tappedProfilePhoto {
-    [Flurry logEvent:@"Tapped_Profile_Photo"];
+    [Flurry logEvent:FETappedProfilePhoto];
 }
 - (void) setUpHeaderView {
     
@@ -230,7 +230,7 @@ typedef enum {
 }
 
 -(void) reloadConcerts {
-    [Flurry logEvent:@"Used_Refresh_On_Profile"];
+    [Flurry logEvent:FEUsedRefreshOnProfile];
     [self fetchEvents];
 }
 
@@ -252,16 +252,6 @@ typedef enum {
     NSInteger total = nFut + nPas;
     NSString* suffix = total == 1 ? @"" : @"s";
     NSString* text = nil;
-//    if (total == 1) {
-//        NSString* temp = @"Past";
-//        if (nFut == 1) {
-//            temp = @"Upcoming";
-//        }
-//        text = [NSString stringWithFormat:@"%d %@ Concert",total,temp];
-//    }
-//    else {
-//        text = [NSString stringWithFormat:@"%d Concert%@ (%d Upcoming)",total,suffix,nFut];
-//    }
     text = [NSString stringWithFormat:@"%i Concert%@",(int)total,suffix];
     self.lblConcerts.text = text;
 }
@@ -421,12 +411,12 @@ typedef enum {
     vc.eventStateDelegate = self;
     [self.navigationController pushViewController:vc animated:YES];
     
-    [Flurry logEvent:@"Selected_Event_On_Profile" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:concert.eventID, @"eventID",concert.eventName,@"eventName",[NSNumber numberWithInteger:indexPath.row],@"row",[ECProfileViewController tenseStringForSection:section],@"Tense", nil]];
+    [Flurry logEvent:FESelectedEventOnProfile withParameters:[NSDictionary dictionaryWithObjectsAndKeys:concert.eventID, @"eventID",concert.eventName,@"eventName",[NSNumber numberWithInteger:indexPath.row],@"row",[ECProfileViewController tenseStringForSection:section],TenseStr, nil]];
 
 }
 
 +(NSString*) tenseStringForSection: (NSUInteger) section {
-    return section == PastSection ? @"Past": @"Future";
+    return section == PastSection ? TenseStrPast: TenseStrFuture;
 }
 // Let concert detail know which kind of 
 +(ECSearchType) searchTypeForSection: (NSUInteger) section {
@@ -466,7 +456,7 @@ typedef enum {
             [[NSUserDefaults standardUserDefaults] synchronize];
             [self dismissViewControllerAnimated:YES completion:^{
                 [ApplicationDelegate showWalkthroughView];
-                [Flurry logEvent:@"Tapped_Repeat_Walkthrough" withParameters:nil];
+                [Flurry logEvent:FETappedRepeatWalkthrough withParameters:nil];
             }];
         }
         else if (buttonIndex == InviteIndex){
@@ -483,11 +473,11 @@ typedef enum {
                                                                   if (result == FBWebDialogResultDialogNotCompleted) {
                                                                       // Case B: User clicked the "x" icon
                                                                       NSLog(@"User canceled request.");
-                                                                      [Flurry logEvent:@"Canceled_Inviting_Friends_On_Dialog"];
+                                                                      [Flurry logEvent:FECanceledInviteOnDialog];
                                                                       
                                                                   } else {
                                                                       NSLog(@"Request Sent.");
-                                                                      [Flurry logEvent:@"Successfully_Invited_Friends_From_Profile" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:resultURL, @"resultURL",nil]]; //TODO figure out how many friends were invited
+                                                                      [Flurry logEvent:FESuccessInviteFromProfile withParameters:[NSDictionary dictionaryWithObjectsAndKeys:resultURL, @"resultURL",nil]]; //TODO figure out how many friends were invited
                                                                       NSLog(@"result url %@",resultURL);
                                                                   }
                                                               }}];
@@ -504,7 +494,7 @@ typedef enum {
     alertView.tag = LogoutTag;
     [alertView show];
     
-    [Flurry logEvent:@"Logout_Tapped_Profile"];
+    [Flurry logEvent:FELogoutTappedProfile];
 }
 
 -(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
@@ -512,12 +502,12 @@ typedef enum {
         [self logout];  
     }
     else {
-        [Flurry logEvent:@"Canceled_Logout"];
+        [Flurry logEvent:FECanceledLogout];
     }
 }
 
 -(void) logout {
-    [Flurry logEvent: @"Logged_out_facebook"];
+    [Flurry logEvent: FELoggedOutFacebook];
     [self dismissViewControllerAnimated:NO completion:nil]; //necessary to get rid of the profile modal view controller first
     [ApplicationDelegate logout];
 //    [FBSession.activeSession closeAndClearTokenInformation];
@@ -527,7 +517,7 @@ typedef enum {
 #pragma mark - Feedback solicitation
 
 -(void) openFeedback {
-    [Flurry logEvent:@"Opened_Feedback" withParameters:[NSDictionary dictionaryWithObject:@"Profile" forKey:@"source"]];
+    [Flurry logEvent:FEOpenedFeedback withParameters:[NSDictionary dictionaryWithObject:@"Profile" forKey:@"source"]];
     ATConnect *connection = [ATConnect sharedConnection];
     [connection presentMessageCenterFromViewController: self];
 }

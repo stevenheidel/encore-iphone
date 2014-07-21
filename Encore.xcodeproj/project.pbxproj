@@ -86,6 +86,7 @@
 		24C7E24419195C8D0068EAC8 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24C7E24319195C8D0068EAC8 /* FacebookSDK.framework */; };
 		24D01713196BB365005373B0 /* ApptentiveResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 24F366891925182F00F04D92 /* ApptentiveResources.bundle */; };
 		24D01716196CD348005373B0 /* ECConstKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D01715196CD348005373B0 /* ECConstKeys.m */; };
+		24E939B9196E46CA001F208F /* FlurryEvents.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E939B8196E46CA001F208F /* FlurryEvents.m */; };
 		24F3668A192518B700F04D92 /* libApptentiveConnect.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24F366851925182F00F04D92 /* libApptentiveConnect.a */; };
 		24F3668C1925196000F04D92 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24F3668B1925196000F04D92 /* AssetsLibrary.framework */; };
 		A00402BD177F4F7300B998CF /* ECProfileHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = A00402BC177F4F7300B998CF /* ECProfileHeader.m */; };
@@ -411,6 +412,8 @@
 		24C7E24319195C8D0068EAC8 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		24D01714196CD348005373B0 /* ECConstKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECConstKeys.h; sourceTree = "<group>"; };
 		24D01715196CD348005373B0 /* ECConstKeys.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECConstKeys.m; sourceTree = "<group>"; };
+		24E939B7196E46CA001F208F /* FlurryEvents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlurryEvents.h; sourceTree = "<group>"; };
+		24E939B8196E46CA001F208F /* FlurryEvents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlurryEvents.m; sourceTree = "<group>"; };
 		24F3667E1925182E00F04D92 /* ApptentiveConnect.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ApptentiveConnect.xcodeproj; path = "apptentive-ios/ApptentiveConnect/ApptentiveConnect.xcodeproj"; sourceTree = "<group>"; };
 		24F3668B1925196000F04D92 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		8087A714E27A4A5B80C64237 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -747,6 +750,17 @@
 				24A7C1AA17E8E77100A7302B /* profilepreview@2x.png */,
 			);
 			name = newloginscreen;
+			sourceTree = "<group>";
+		};
+		24E939BB196E46D2001F208F /* Strings */ = {
+			isa = PBXGroup;
+			children = (
+				24E939B7196E46CA001F208F /* FlurryEvents.h */,
+				24E939B8196E46CA001F208F /* FlurryEvents.m */,
+				24D01714196CD348005373B0 /* ECConstKeys.h */,
+				24D01715196CD348005373B0 /* ECConstKeys.m */,
+			);
+			name = Strings;
 			sourceTree = "<group>";
 		};
 		24F3667F1925182E00F04D92 /* Products */ = {
@@ -1120,8 +1134,7 @@
 		D4AA4CF91766B374009B0635 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				24D01714196CD348005373B0 /* ECConstKeys.h */,
-				24D01715196CD348005373B0 /* ECConstKeys.m */,
+				24E939BB196E46D2001F208F /* Strings */,
 				24675F5C191770D700B86AF9 /* ArtistAutocomplete.plist */,
 				D9D95CF517E8420500061DAF /* featured.json */,
 				D4C9C08C177A51CC00F864FC /* Post+Fetch */,
@@ -1790,6 +1803,7 @@
 				D4A8DDCA176A39BA005E9847 /* NSDate+JSON.m in Sources */,
 				D4A8DDCE176A405D005E9847 /* ECPostViewController.m in Sources */,
 				A022AAA617779BB50009244C /* ECConcertCellView.m in Sources */,
+				24E939B9196E46CA001F208F /* FlurryEvents.m in Sources */,
 				A022AABF1779E8380009244C /* UIImage+GaussBlur.m in Sources */,
 				D4A7BEA8177B2F3B00C22D91 /* UIImage+Orientation.m in Sources */,
 				D4AA9779177CF82A008F4E31 /* ECPostCollectionHeaderView.m in Sources */,

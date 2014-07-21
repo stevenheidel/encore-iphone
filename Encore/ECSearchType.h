@@ -15,4 +15,8 @@ typedef enum {
     ECSearchTypeFuture
 } ECSearchType;
 
+static NSString* const TenseStrPast = @"Past";
+static NSString* const TenseStrFuture = @"Future";
+static NSString* const TenseStrToday = @"Today";
+static NSString* const TenseStr = @"Tense";
 #endif
