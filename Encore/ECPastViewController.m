@@ -60,13 +60,17 @@ static NSString * const kDateFormat = @"yyyy-MM-dd";
     return [NSURL URLWithString:[NSString stringWithFormat:ShareConcertURL,self.concert.eventID]];
 }
 
--(NSString*) shareText {
+-(NSString*) shareTextForActivityType: (NSString*) activityType {
     NSString * dateStr = [self.concert objectForKey:@"date"];
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:kDateFormat];
     NSDate *date = [dateFormat dateFromString:dateStr];
     
     [dateFormat setDateFormat:@"dd/MM/yy"];
+    
+    if ([activityType isEqualToString:UIActivityTypePostToTwitter]) {
+        return [NSString stringWithFormat: @"Photos from the %@ %@ show via @encoretheapp",[dateFormat stringFromDate:date],[self.concert eventName]];
+    }
     
     return [NSString stringWithFormat: @"Check out these photos and videos from the %@ %@ show",[dateFormat stringFromDate:date],[self.concert eventName]];
 }

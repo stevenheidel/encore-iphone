@@ -108,7 +108,14 @@
     NSLog(@"Good!");
     return self.ticketsURL;
 }
--(NSString*) shareText {
+-(NSString*) shareTextForActivityType: (NSString*) activityType {
+    if ([activityType isEqualToString:UIActivityTypePostToFacebook]) {
+        return [NSString stringWithFormat: @"Who wants to come to %@%@ show at %@, %@?",[self shareTextPrefix],[self.concert eventName],[self.concert venueName],[self.concert smallDateNoYear]];
+    }
+    if ([activityType isEqualToString:UIActivityTypePostToTwitter]) {
+        return [NSString stringWithFormat: @"Who wants to come to %@%@ show at %@, %@? via @encoretheapp",[self shareTextPrefix],[self.concert eventName],[self.concert venueName],[self.concert smallDateNoYear]];
+    }
+    
     return [NSString stringWithFormat: @"Want to come to %@%@ show at %@, %@?",[self shareTextPrefix],[self.concert eventName],[self.concert venueName],[self.concert smallDateNoYear]];
 }
 

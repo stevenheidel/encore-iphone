@@ -713,7 +713,7 @@ static NSString* const ActivityTypeOpenURL = @"com.encore.activityTypeOpenURL";
     return the;
 }
 
--(NSString*) shareText {
+-(NSString*) shareTextForActivityType: (NSString*) activityType  {
     NSLog(@"Warning: %@ subclass has not overidden shareText.",NSStringFromClass(self.class));
     return [NSString stringWithFormat: @"Want to come to %@%@ show at %@, %@?",[self shareTextPrefix],[self.concert eventName],[self.concert venueName],[self.concert niceDateNotUppercase]];
 }
@@ -725,10 +725,10 @@ static NSString* const ActivityTypeOpenURL = @"com.encore.activityTypeOpenURL";
 
 -(NSArray*) activityViewController:(NSArray *)activityViewController itemsForActivityType:(NSString *)activityType {
     NSURL* url = [self shareURL];
-    NSString* text = [self shareText];
+    NSString* text = [self shareTextForActivityType:activityType];
     UIImage* image = self.eventImage.image;
     if ([activityType isEqualToString:UIActivityTypePostToFacebook]) {
-        return @[text,url,image];
+        return @[text,url];
     }
     
     if ([activityType isEqualToString:UIActivityTypeCopyToPasteboard]) {
