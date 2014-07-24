@@ -26,6 +26,8 @@
 #import "ARChromeActivity.h"
 #import "RDActivityViewController.h"
 
+static const NSTimeInterval kInitialCheckConcertDelay = 5.0;
+static const NSTimeInterval kSubsequentCheckConcertPopulatingDelay = 2.0;
 typedef enum {
     NoPostsAlertTag
 }GridVcAlertTags;
@@ -190,9 +192,11 @@ typedef enum {
 -(void) askServerToPopulateConcert{
     [ECJSONPoster populateConcert:self.concert.eventID completion:^(BOOL success) {
         //Check If concert finished Populating
-        [self checkConcertIfPopulating];
+//        [self checkConcertIfPopulating];
         //Fire timer
-        [self startTimer];
+//        [self startTimer];
+        [self showFooter];
+        [self performSelector:@selector(checkConcertIfPopulating) withObject:nil afterDelay:kInitialCheckConcertDelay];
     }];
 }
 
@@ -203,15 +207,12 @@ typedef enum {
             //Show the footer
             [self showFooter];
             [self hideNoPostsLabel];
+            [self performSelector:@selector(checkConcertIfPopulating) withObject:nil afterDelay:kSubsequentCheckConcertPopulatingDelay];
         
         }
         else {
-            //Call get images method
-            
             [self loadConcertImages: NO];
-            //Stop timer
-            [self stopTimer];
-            //Remove the footer once timer finished
+//            [self stopTimer];
             [self hideFooter];
 
         }
@@ -250,13 +251,13 @@ typedef enum {
 }
 
 #pragma mark - Timer (repeatedly checking populating/loading)
--(void) startTimer {
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:2.0
-                                                  target:self
-                                                selector:@selector(checkConcertIfPopulating)
-                                                userInfo:nil
-                                                 repeats:YES];
-}
+//-(void) startTimer {
+//    self.timer = [NSTimer scheduledTimerWithTimeInterval:2.0
+//                                                  target:self
+//                                                selector:@selector(checkConcertIfPopulating)
+//                                                userInfo:nil
+//                                                 repeats:YES];
+//}
 
 -(void) doTooltip {
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"GridViewControllerShownBefore"] && SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
@@ -282,11 +283,11 @@ typedef enum {
     }
 }
 
--(void) stopTimer {
-    [self.timer invalidate];
-    self.timer = nil;
-}
-#pragma mark - Footer 
+//-(void) stopTimer {
+//    [self.timer invalidate];
+//    self.timer = nil;
+//}
+#pragma mark - Footer
 -(void)showFooter{
     [UIView animateWithDuration:0.3 animations:^{
         [self.footerView setAlpha:1];
