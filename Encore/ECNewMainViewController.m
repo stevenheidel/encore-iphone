@@ -253,7 +253,7 @@ typedef enum {
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationSlide];
     
-    [[ATAppRatingFlow sharedRatingFlow] showRatingFlowFromViewControllerIfConditionsAreMet:self];
+    [[ATConnect sharedConnection] engage:@"init" fromViewController:self];
     
     if ([[UIScreen mainScreen] bounds].size.height != 568.0) {
         [self registerNotifications];
