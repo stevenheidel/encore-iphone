@@ -19,3 +19,5 @@ NSString* const FETappedRepeatWalkthrough = @"Tapped_Repeat_Walkthrough";
 NSString* const FECanceledInviteOnDialog = @"Canceled_Inviting_Friends_On_Dialog";
 NSString* const FESuccessInviteFromProfile = @"Successfully_Invited_Friends_From_Profile";
 NSString* const FECanceledLogout = @"Canceled_Logout";
+
+NSString* const FEShareTapped = @"Share_Tapped";

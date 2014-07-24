@@ -37,6 +37,12 @@
 #import "defines.h"
 #import "ECConstKeys.h"
 
+#import "TUSafariActivity.h"
+#import "ARChromeActivity.h"
+
+#import "RDActivityViewController.h"
+
+static NSString* const ActivityTypeOpenURL = @"com.encore.activityTypeOpenURL";
 @interface MapViewAnnotation : NSObject <MKAnnotation>
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, assign) CLLocationCoordinate2D coordinate;
@@ -54,7 +60,7 @@
 }
 @end
 
-@interface ECEventTableViewController ()
+@interface ECEventTableViewController () <RDActivityViewControllerDelegate>
 @property (nonatomic,strong) UIBarButtonItem* navAddbutton;
 @property (nonatomic,strong) UIBarButtonItem* navRemovebutton;
 @property (nonatomic,strong) UIView* friendCountView;
@@ -695,6 +701,8 @@
     NSLog(@"FBFriendPickerViewController error: %@",error);
 }
 
+
+#pragma mark - Sharing
 -(NSString*) shareTextPrefix {
     NSString* eventName = [self.concert eventName];
     NSString* the = @"the ";
@@ -706,23 +714,43 @@
 }
 
 -(NSString*) shareText {
-       return [NSString stringWithFormat: @"Want to come to %@%@ show at %@, %@?",[self shareTextPrefix],[self.concert eventName],[self.concert venueName],[self.concert niceDateNotUppercase]];
-    //meant to be overrided
+    NSLog(@"Warning: %@ subclass has not overidden shareText.",NSStringFromClass(self.class));
+    return [NSString stringWithFormat: @"Want to come to %@%@ show at %@, %@?",[self shareTextPrefix],[self.concert eventName],[self.concert venueName],[self.concert niceDateNotUppercase]];
 }
+
 -(NSURL*) shareURL {
     NSLog(@"Warning: %@ subclass has not overidden shareURL. Returning nil share URL",NSStringFromClass(self.class));
     return nil;
 }
 
-#pragma mark FB Sharing
--(void) shareTapped {
-    
-    NSString* shareText = [self shareText];
-    
+-(NSArray*) activityViewController:(NSArray *)activityViewController itemsForActivityType:(NSString *)activityType {
     NSURL* url = [self shareURL];
-    NSArray *activityItems = [NSArray arrayWithObjects:shareText,url, self.eventImage.image, nil];
+    NSString* text = [self shareText];
+    UIImage* image = self.eventImage.image;
+    if ([activityType isEqualToString:UIActivityTypePostToFacebook]) {
+        return @[text,url,image];
+    }
     
-    UIActivityViewController* shareDrawer = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
+    if ([activityType isEqualToString:UIActivityTypeCopyToPasteboard]) {
+        return @[url];
+    }
+    if ([activityType isEqualToString:UIActivityTypePostToTwitter]) {
+        return @[text,url];
+    }
+    
+    if ([activityType isEqualToString:NSStringFromClass([TUSafariActivity class])] || [activityType isEqualToString:NSStringFromClass([ARChromeActivity class])]) {
+        return @[url];
+    }
+    
+    return @[text,url,image];
+}
+
+-(void) shareTapped {
+    TUSafariActivity* safariActivity = [TUSafariActivity new];
+    ARChromeActivity* chromeActivity = [ARChromeActivity new];
+//    UIActivityViewController* shareDrawer = [[UIActivityViewController alloc] initWithActivityItems:[self activityViewController:nil itemsForActivityType:nil] applicationActivities:@[safariActivity]];
+    
+    RDActivityViewController* shareDrawer = [[RDActivityViewController alloc] initWithDelegate:self maximumNumberOfItems:3 applicationActivities:@[safariActivity,chromeActivity] placeholderItem:nil];
     shareDrawer.excludedActivityTypes = @[UIActivityTypePostToWeibo,UIActivityTypeAssignToContact,UIActivityTypeSaveToCameraRoll,UIActivityTypePrint];
 
     shareDrawer.completionHandler = ^(NSString *activityType, BOOL completed){
@@ -739,7 +767,7 @@
         if (activityType == NULL) {
             result = @"dismissed";
         }
-        [Flurry logEvent:@"Share_Tapped" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:activityType,@"ActivityType", result, @"result", self.concert.eventID,@"eventID",self.concert.headliner,@"headliner",[self tenseString],@"PageType",nil]];
+        [Flurry logEvent:FEShareTapped withParameters:[NSDictionary dictionaryWithObjectsAndKeys:activityType,@"ActivityType", result, @"result", self.concert.eventID,@"eventID",self.concert.headliner,@"headliner",[self tenseString],@"PageType",nil]];
     };
     [self presentViewController:shareDrawer animated:YES completion:nil];
 }
@@ -968,4 +996,5 @@
 }
 
 @end
+
 

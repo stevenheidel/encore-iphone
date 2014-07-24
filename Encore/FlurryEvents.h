@@ -17,3 +17,5 @@ extern NSString* const FETappedRepeatWalkthrough;
 extern NSString* const FECanceledInviteOnDialog;
 extern NSString* const FESuccessInviteFromProfile;
 extern NSString* const FECanceledLogout;
+
+extern NSString* const FEShareTapped;

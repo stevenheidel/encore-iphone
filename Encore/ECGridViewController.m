@@ -22,6 +22,10 @@
 #import "MBProgressHUD.h"
 #import "CMPopTipView.h"
 
+#import "TUSafariActivity.h"
+#import "ARChromeActivity.h"
+#import "RDActivityViewController.h"
+
 typedef enum {
     NoPostsAlertTag
 }GridVcAlertTags;
@@ -203,6 +207,7 @@ typedef enum {
         }
         else {
             //Call get images method
+            
             [self loadConcertImages: NO];
             //Stop timer
             [self stopTimer];
@@ -232,6 +237,7 @@ typedef enum {
             [self doTooltip];
             [self hideNoPostsLabel];
         }else{
+            NSLog(@"%@: no posts returned",NSStringFromClass(self.class));
             if (!_isPopulating && !shouldAsk) {
                 [self alertNoPosts];
             }
@@ -245,7 +251,7 @@ typedef enum {
 
 #pragma mark - Timer (repeatedly checking populating/loading)
 -(void) startTimer {
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:10.0
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:2.0
                                                   target:self
                                                 selector:@selector(checkConcertIfPopulating)
                                                 userInfo:nil
@@ -401,22 +407,78 @@ typedef enum {
 }
 
 #pragma mark FB Sharing
--(void) shareTapped {
-    if([ApplicationDelegate isLoggedIn]) {
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:ECLoginCompletedNotification object:nil];
-        [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
-        [Flurry logEvent:@"Share_Tapped_Concert" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"past_grid_vc",@"source",self.concert.eventID,@"eventID", self.concert.eventName, @"eventName", nil]];
-        [self share];
+//-(void) shareTapped {
+//    if([ApplicationDelegate isLoggedIn]) {
+//        [[NSNotificationCenter defaultCenter] removeObserver:self name:ECLoginCompletedNotification object:nil];
+//        [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
+//        [Flurry logEvent:@"Share_Tapped_Concert" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"past_grid_vc",@"source",self.concert.eventID,@"eventID", self.concert.eventName, @"eventName", nil]];
+//        [self share];
+//    }
+//    else {
+//        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login", nil) message:NSLocalizedString(@"To share this concert, you must first login", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Login", nil), nil];
+//        alert.tag = ECShareNotLoggedInAlert;
+//        [alert show];
+//    }
+//}
+
+-(NSArray*) activityViewController:(NSArray *)activityViewController itemsForActivityType:(NSString *)activityType {
+    NSURL* url = [self shareURL];
+    NSString* text = [self shareText];
+    if ([activityType isEqualToString:UIActivityTypePostToFacebook]) {
+        return @[url,[NSString stringWithFormat:@"%@ via #encore",text]];
     }
-    else {
-        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login", nil) message:NSLocalizedString(@"To share this concert, you must first login", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Login", nil), nil];
-        alert.tag = ECShareNotLoggedInAlert;
-        [alert show];
+    
+    if ([activityType isEqualToString:UIActivityTypeCopyToPasteboard]) {
+        return @[url];
     }
+    if ([activityType isEqualToString:UIActivityTypePostToTwitter]) {
+        return @[url,[NSString stringWithFormat:@"%@ via @encoretheapp",text]];
+    }
+    
+    if ([activityType isEqualToString:NSStringFromClass([TUSafariActivity class])] || [activityType isEqualToString:NSStringFromClass([ARChromeActivity class])]) {
+        return @[url];
+    }
+    
+    return @[text,url];
 }
+
+-(void) shareTapped {
+    TUSafariActivity* safariActivity = [TUSafariActivity new];
+    ARChromeActivity* chromeActivity = [ARChromeActivity new];
+    
+    RDActivityViewController* shareDrawer = [[RDActivityViewController alloc] initWithDelegate:self maximumNumberOfItems:3 applicationActivities:@[safariActivity,chromeActivity] placeholderItem:nil];
+    shareDrawer.excludedActivityTypes = @[UIActivityTypePostToWeibo,UIActivityTypeAssignToContact,UIActivityTypeSaveToCameraRoll,UIActivityTypePrint];
+    
+    shareDrawer.completionHandler = ^(NSString *activityType, BOOL completed){
+        if (completed) {
+            NSLog(@"Selected activity was performed.");
+        } else {
+            if (activityType == NULL) {
+                NSLog(@"User dismissed the view controller without making a selection.");
+            } else {
+                NSLog(@"Activity was not performed.");
+            }
+        }
+        NSString* result = completed ? @"success" : @"fail";
+        if (activityType == NULL) {
+            result = @"dismissed";
+        }
+        [Flurry logEvent:@"Share_Tapped_Concert" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"past_grid_vc",@"source",self.concert.eventID,@"eventID", self.concert.eventName, @"eventName", nil]];
+    };
+    [self presentViewController:shareDrawer animated:YES completion:nil];
+}
+
 
 -(void) share {
     [self shareWithTaggedFriends:nil];
+}
+
+-(NSString*) shareText {
+    return [NSString stringWithFormat:@"%@ in %@",self.concert.eventName,self.concert.city];
+}
+
+-(NSURL*) shareURL {
+    return [NSURL URLWithString:[NSString stringWithFormat:ShareConcertURL,self.concert.eventID]];
 }
 
 -(void) shareWithTaggedFriends: (NSArray*) taggedFriends {

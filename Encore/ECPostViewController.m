@@ -24,7 +24,11 @@
 #import "ECAppDelegate.h"
 #define FLAG_HUD_DELAY 1.0
 #import "ECFacebookManger.h"
-#import "XCDYouTubeVideoPlayerViewController.h"
+//#import "XCDYouTubeVideoPlayerViewController.h"
+#import <XCDYouTubeKit/XCDYouTubeKit.h>
+#import "TUSafariActivity.h"
+#import "ARChromeActivity.h"
+#import "RDActivityViewController.h"
 
 typedef enum {
     FlagPhoto
@@ -221,7 +225,7 @@ typedef enum {
                                 self.postImageView.image = [UIImage imageNamed:@"placeholderimg2"];
                             }];
 
-                            [self.profilePicture setImageWithURL:[self.post profilePictureURL] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+                            [self.profilePicture setImageWithURL:[self.post profilePictureURL] placeholderImage:nil];
                             [UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
                                 self.postImageView.alpha = 1.0;
                                 self.playButton.alpha = 1.0;
@@ -323,71 +327,132 @@ typedef enum {
     }
 }
 
+//-(void) shareTapped {
+//    [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
+//    
+//    //baseurl + /posts/:Id
+//    NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:SharePostURL,self.postID]];
+//    // if ([FBDialogs canPresentShareDialogWithParams:nil]) {
+//    FBShareDialogParams* params = [[FBShareDialogParams alloc] init];
+//    params.link = url;
+//     if ([FBDialogs canPresentShareDialogWithParams:params]) {
+//         [FBDialogs presentShareDialogWithLink:url
+//                                       handler:^(FBAppCall *call, NSDictionary *results, NSError *error) {
+//                                           if(error) {
+//                                               NSLog(@"Error posting to FB: %@", error.description);
+//                                               [Flurry logEvent:@"Post_Share_To_FB_Fail" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:url.absoluteString, @"url",error.description,@"error",nil]];
+//                                           } else {
+//                                               [Flurry logEvent:@"Post_Share_To_FB_Success" withParameters:[NSDictionary dictionaryWithObject:url.absoluteString forKey:@"url"]];
+//                                           }
+//                                       }];
+//    //    }
+//     }
+//     else {
+//         NSMutableDictionary *params2 =
+//         [NSMutableDictionary dictionaryWithObjectsAndKeys:
+//          [NSString stringWithFormat:@"%@ on Encore",self.artist], @"name",
+//           [NSString stringWithFormat:@"Check out this %@ from %@'s show (%@) on Encore.",[self.post postType] == ECPhotoPost ? @"photo" : @"video", self.artist, self.venueAndDate], @"caption",
+//          @"Encore is a free iPhone concert app that collects photos and videos from live shows and helps you keep track of upcoming shows in your area.",@"description",
+//          [NSString stringWithFormat:SharePostURL,self.postID], @"link",
+//          [NSString stringWithFormat:@"%@",[self.post imageURL].absoluteString], @"picture",
+//          nil];
+//         [FBWebDialogs presentFeedDialogModallyWithSession:[FBSession activeSession]
+//                                                parameters:params2
+//                                                   handler:
+//          ^(FBWebDialogResult result, NSURL *resultURL, NSError *error) {
+//              if (error) {
+//                  // Error launching the dialog or publishing a story.
+//                  NSLog(@"Error publishing story.");
+//              } else {
+//                  if (result == FBWebDialogResultDialogNotCompleted) {
+//                      // User clicked the "x" icon
+//                      NSLog(@"User canceled story publishing.");
+//                  } else {
+//                      // Handle the publish feed callback
+//                      NSDictionary *urlParams = [self parseURLParams:[resultURL query]];
+//                      if (![urlParams valueForKey:@"post_id"]) {
+//                          // User clicked the Cancel button
+//                          NSLog(@"User canceled story publishing.");
+//                      } else {
+//                          // User clicked the Share button
+//                          NSString *msg = @"Posted to facebook";
+//                          NSLog(@"%@", msg);
+//                          [Flurry logEvent:@"Successfully_Posted_To_Facebook_With_Feed_Dialog" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"post",@"type", nil]]; //TODO update so merges flurry events together
+//                          
+//                          // Show the result in an alert
+//                          [[[UIAlertView alloc] initWithTitle:@"Result"  //TODO: replace with HUD
+//                                                      message:msg
+//                                                     delegate:nil
+//                                            cancelButtonTitle:@"OK!"
+//                                            otherButtonTitles:nil]
+//                           show];
+//                      }
+//                  }
+//              }
+//          }];
+//
+//     }
+//}
+
+-(NSArray*) activityViewController:(NSArray *)activityViewController itemsForActivityType:(NSString *)activityType {
+    NSURL* url = [self shareURL];
+    NSString* text = [self shareText];
+    if ([activityType isEqualToString:UIActivityTypePostToFacebook]) {
+        return @[url,[NSString stringWithFormat:@"%@ via #encore",text]];
+    }
+    
+    if ([activityType isEqualToString:UIActivityTypeCopyToPasteboard]) {
+        return @[url];
+    }
+    if ([activityType isEqualToString:UIActivityTypePostToTwitter]) {
+        return @[url,[NSString stringWithFormat:@"%@ via @encoretheapp",text]];
+    }
+    
+    if ([activityType isEqualToString:NSStringFromClass([TUSafariActivity class])] || [activityType isEqualToString:NSStringFromClass([ARChromeActivity class])]) {
+        return @[url];
+    }
+    
+    return @[text,url];
+}
+
 -(void) shareTapped {
     [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
+    TUSafariActivity* safariActivity = [TUSafariActivity new];
+    ARChromeActivity* chromeActivity = [ARChromeActivity new];
     
-    //baseurl + /posts/:Id
-    NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:SharePostURL,self.postID]];
-    // if ([FBDialogs canPresentShareDialogWithParams:nil]) {
-    FBShareDialogParams* params = [[FBShareDialogParams alloc] init];
-    params.link = url;
-     if ([FBDialogs canPresentShareDialogWithParams:params]) {
-         [FBDialogs presentShareDialogWithLink:url
-                                       handler:^(FBAppCall *call, NSDictionary *results, NSError *error) {
-                                           if(error) {
-                                               NSLog(@"Error posting to FB: %@", error.description);
-                                               [Flurry logEvent:@"Post_Share_To_FB_Fail" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:url.absoluteString, @"url",error.description,@"error",nil]];
-                                           } else {
-                                               [Flurry logEvent:@"Post_Share_To_FB_Success" withParameters:[NSDictionary dictionaryWithObject:url.absoluteString forKey:@"url"]];
-                                           }
-                                       }];
-    //    }
-     }
-     else {
-         NSMutableDictionary *params2 =
-         [NSMutableDictionary dictionaryWithObjectsAndKeys:
-          [NSString stringWithFormat:@"%@ on Encore",self.artist], @"name",
-           [NSString stringWithFormat:@"Check out this %@ from %@'s show (%@) on Encore.",[self.post postType] == ECPhotoPost ? @"photo" : @"video", self.artist, self.venueAndDate], @"caption",
-          @"Encore is a free iPhone concert app that collects photos and videos from live shows and helps you keep track of upcoming shows in your area.",@"description",
-          [NSString stringWithFormat:SharePostURL,self.postID], @"link",
-          [NSString stringWithFormat:@"%@",[self.post imageURL].absoluteString], @"picture",
-          nil];
-         [FBWebDialogs presentFeedDialogModallyWithSession:[FBSession activeSession]
-                                                parameters:params2
-                                                   handler:
-          ^(FBWebDialogResult result, NSURL *resultURL, NSError *error) {
-              if (error) {
-                  // Error launching the dialog or publishing a story.
-                  NSLog(@"Error publishing story.");
-              } else {
-                  if (result == FBWebDialogResultDialogNotCompleted) {
-                      // User clicked the "x" icon
-                      NSLog(@"User canceled story publishing.");
-                  } else {
-                      // Handle the publish feed callback
-                      NSDictionary *urlParams = [self parseURLParams:[resultURL query]];
-                      if (![urlParams valueForKey:@"post_id"]) {
-                          // User clicked the Cancel button
-                          NSLog(@"User canceled story publishing.");
-                      } else {
-                          // User clicked the Share button
-                          NSString *msg = @"Posted to facebook";
-                          NSLog(@"%@", msg);
-                          [Flurry logEvent:@"Successfully_Posted_To_Facebook_With_Feed_Dialog" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"post",@"type", nil]]; //TODO update so merges flurry events together
-                          
-                          // Show the result in an alert
-                          [[[UIAlertView alloc] initWithTitle:@"Result"  //TODO: replace with HUD
-                                                      message:msg
-                                                     delegate:nil
-                                            cancelButtonTitle:@"OK!"
-                                            otherButtonTitles:nil]
-                           show];
-                      }
-                  }
-              }
-          }];
+    RDActivityViewController* shareDrawer = [[RDActivityViewController alloc] initWithDelegate:self maximumNumberOfItems:3 applicationActivities:@[safariActivity,chromeActivity] placeholderItem:nil];
+    shareDrawer.excludedActivityTypes = @[UIActivityTypePostToWeibo,UIActivityTypeAssignToContact,UIActivityTypeSaveToCameraRoll,UIActivityTypePrint];
+    
+    shareDrawer.completionHandler = ^(NSString *activityType, BOOL completed){
+        if (completed) {
+            NSLog(@"Selected activity was performed.");
+        } else {
+            if (activityType == NULL) {
+                NSLog(@"User dismissed the view controller without making a selection.");
+            } else {
+                NSLog(@"Activity was not performed.");
+            }
+        }
+        NSString* result = completed ? @"success" : @"fail";
+        if (activityType == NULL) {
+            result = @"dismissed";
+        }
+        [Flurry logEvent:@"Share_Tapped_Post" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"past_grid_vc",@"source",self.artist,@"artist",self.postID,@"postID", nil]];
+    };
+    [self presentViewController:shareDrawer animated:YES completion:nil];
+}
 
-     }
+
+
+-(NSString*) postType {
+    return [self.post postType] == ECPhotoPost ? @"photo" : @"video";
+}
+-(NSString*) shareText {
+    return [NSString stringWithFormat:@"%@ from %@, %@",[self postType],self.artist,self.venueAndDate];
+}
+
+-(NSURL*) shareURL {
+    return [NSURL URLWithString:[NSString stringWithFormat:SharePostURL,self.postID]];
 }
 
 /**

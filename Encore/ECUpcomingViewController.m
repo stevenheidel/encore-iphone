@@ -105,6 +105,7 @@
 
 #pragma mark - sharing
 -(NSURL*) shareURL {
+    NSLog(@"Good!");
     return self.ticketsURL;
 }
 -(NSString*) shareText {

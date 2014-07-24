@@ -12,6 +12,12 @@
 #define COCOAPODS_VERSION_MINOR_AFNetworking 3
 #define COCOAPODS_VERSION_PATCH_AFNetworking 4
 
+// ARChromeActivity
+#define COCOAPODS_POD_AVAILABLE_ARChromeActivity
+#define COCOAPODS_VERSION_MAJOR_ARChromeActivity 1
+#define COCOAPODS_VERSION_MINOR_ARChromeActivity 0
+#define COCOAPODS_VERSION_PATCH_ARChromeActivity 1
+
 // CMPopTipView
 #define COCOAPODS_POD_AVAILABLE_CMPopTipView
 #define COCOAPODS_VERSION_MAJOR_CMPopTipView 2
@@ -20,14 +26,14 @@
 
 // FlurrySDK
 #define COCOAPODS_POD_AVAILABLE_FlurrySDK
-#define COCOAPODS_VERSION_MAJOR_FlurrySDK 4
-#define COCOAPODS_VERSION_MINOR_FlurrySDK 4
+#define COCOAPODS_VERSION_MAJOR_FlurrySDK 5
+#define COCOAPODS_VERSION_MINOR_FlurrySDK 2
 #define COCOAPODS_VERSION_PATCH_FlurrySDK 0
 
 // FlurrySDK/FlurrySDK
 #define COCOAPODS_POD_AVAILABLE_FlurrySDK_FlurrySDK
-#define COCOAPODS_VERSION_MAJOR_FlurrySDK_FlurrySDK 4
-#define COCOAPODS_VERSION_MINOR_FlurrySDK_FlurrySDK 4
+#define COCOAPODS_VERSION_MAJOR_FlurrySDK_FlurrySDK 5
+#define COCOAPODS_VERSION_MINOR_FlurrySDK_FlurrySDK 2
 #define COCOAPODS_VERSION_PATCH_FlurrySDK_FlurrySDK 0
 
 // MBProgressHUD
@@ -42,15 +48,27 @@
 #define COCOAPODS_VERSION_MINOR_MLPAutoCompleteTextField 5
 #define COCOAPODS_VERSION_PATCH_MLPAutoCompleteTextField 0
 
+// RDActivityViewController
+#define COCOAPODS_POD_AVAILABLE_RDActivityViewController
+#define COCOAPODS_VERSION_MAJOR_RDActivityViewController 0
+#define COCOAPODS_VERSION_MINOR_RDActivityViewController 0
+#define COCOAPODS_VERSION_PATCH_RDActivityViewController 1
+
 // Reachability
 #define COCOAPODS_POD_AVAILABLE_Reachability
 #define COCOAPODS_VERSION_MAJOR_Reachability 3
 #define COCOAPODS_VERSION_MINOR_Reachability 1
 #define COCOAPODS_VERSION_PATCH_Reachability 1
 
-// XCDYouTubeVideoPlayerViewController
-#define COCOAPODS_POD_AVAILABLE_XCDYouTubeVideoPlayerViewController
-#define COCOAPODS_VERSION_MAJOR_XCDYouTubeVideoPlayerViewController 1
-#define COCOAPODS_VERSION_MINOR_XCDYouTubeVideoPlayerViewController 1
-#define COCOAPODS_VERSION_PATCH_XCDYouTubeVideoPlayerViewController 2
+// TUSafariActivity
+#define COCOAPODS_POD_AVAILABLE_TUSafariActivity
+#define COCOAPODS_VERSION_MAJOR_TUSafariActivity 1
+#define COCOAPODS_VERSION_MINOR_TUSafariActivity 0
+#define COCOAPODS_VERSION_PATCH_TUSafariActivity 0
+
+// XCDYouTubeKit
+#define COCOAPODS_POD_AVAILABLE_XCDYouTubeKit
+#define COCOAPODS_VERSION_MAJOR_XCDYouTubeKit 2
+#define COCOAPODS_VERSION_MINOR_XCDYouTubeKit 0
+#define COCOAPODS_VERSION_PATCH_XCDYouTubeKit 2
 
