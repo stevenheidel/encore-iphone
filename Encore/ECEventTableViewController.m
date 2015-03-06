@@ -13,7 +13,6 @@
 #import "ECUpcomingViewController.h"
 
 #import "UIimageView+AFNetworking.h"
-#import "ATAppRatingFlow.h"
 #import <MapKit/MapKit.h>
 #import <QuartzCore/QuartzCore.h>
 
@@ -492,7 +491,6 @@ static NSString* const ActivityTypeOpenURL = @"com.encore.activityTypeOpenURL";
     if (ApplicationDelegate.isLoggedIn) {
         [[NSNotificationCenter defaultCenter] removeObserver:self.statusManager name:ECLoginCompletedNotification object:nil];
         
-        [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
         [self.statusManager toggleProfileState];
     }
     else {

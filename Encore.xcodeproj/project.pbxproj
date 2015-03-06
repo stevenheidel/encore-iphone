@@ -85,10 +85,8 @@
 		24C7E23F1918B4E90068EAC8 /* ECLoadStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 24C7E23E1918B4E90068EAC8 /* ECLoadStatus.m */; };
 		24C7E24419195C8D0068EAC8 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24C7E24319195C8D0068EAC8 /* FacebookSDK.framework */; };
 		24CEE615197E1A75007A00DA /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24CEE614197E1A75007A00DA /* JavaScriptCore.framework */; };
-		24D01713196BB365005373B0 /* ApptentiveResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 24F366891925182F00F04D92 /* ApptentiveResources.bundle */; };
 		24D01716196CD348005373B0 /* ECConstKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D01715196CD348005373B0 /* ECConstKeys.m */; };
 		24E939B9196E46CA001F208F /* FlurryEvents.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E939B8196E46CA001F208F /* FlurryEvents.m */; };
-		24F3668A192518B700F04D92 /* libApptentiveConnect.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24F366851925182F00F04D92 /* libApptentiveConnect.a */; };
 		24F3668C1925196000F04D92 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24F3668B1925196000F04D92 /* AssetsLibrary.framework */; };
 		A00402BD177F4F7300B998CF /* ECProfileHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = A00402BC177F4F7300B998CF /* ECProfileHeader.m */; };
 		A00402C4177F6B0900B998CF /* backButton.png in Resources */ = {isa = PBXBuildFile; fileRef = A00402C2177F6B0900B998CF /* backButton.png */; };
@@ -276,41 +274,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		24D0170B196BB18C005373B0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 24F3667E1925182E00F04D92 /* ApptentiveConnect.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 496DC37E1333D35600743F65;
-			remoteInfo = ApptentiveConnect;
-		};
-		24D01710196BB190005373B0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 24F3667E1925182E00F04D92 /* ApptentiveConnect.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 49D1118B13341A7C00603373;
-			remoteInfo = ApptentiveResources;
-		};
-		24F366841925182F00F04D92 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 24F3667E1925182E00F04D92 /* ApptentiveConnect.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 496DC37F1333D35600743F65;
-			remoteInfo = ApptentiveConnect;
-		};
-		24F366861925182F00F04D92 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 24F3667E1925182E00F04D92 /* ApptentiveConnect.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 496DC38C1333D35600743F65;
-			remoteInfo = ApptentiveConnectTests;
-		};
-		24F366881925182F00F04D92 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 24F3667E1925182E00F04D92 /* ApptentiveConnect.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 49D1118C13341A7C00603373;
-			remoteInfo = ApptentiveResources;
-		};
 		D4AA4D141766B374009B0635 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D4AA4CE71766B373009B0635 /* Project object */;
@@ -328,8 +291,6 @@
 		2459110318A76D310016B07F /* addConcertBorder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "addConcertBorder@2x.png"; sourceTree = "<group>"; };
 		2459110418A76D310016B07F /* removeConcertBorder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "removeConcertBorder@2x.png"; sourceTree = "<group>"; };
 		245BBDBE18A5F94600B80781 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
-		245BBDC618A5FA6E00B80781 /* ATConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATConnect.h; sourceTree = "<group>"; };
-		245BBDC718A5FA9400B80781 /* ATAppRatingFlow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATAppRatingFlow.h; sourceTree = "<group>"; };
 		245BBDCF18A5FD7300B80781 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		245BBDD118A5FD7B00B80781 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		245BBDD318A5FD8600B80781 /* EventKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKitUI.framework; path = System/Library/Frameworks/EventKitUI.framework; sourceTree = SDKROOT; };
@@ -416,10 +377,9 @@
 		24D01715196CD348005373B0 /* ECConstKeys.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECConstKeys.m; sourceTree = "<group>"; };
 		24E939B7196E46CA001F208F /* FlurryEvents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlurryEvents.h; sourceTree = "<group>"; };
 		24E939B8196E46CA001F208F /* FlurryEvents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlurryEvents.m; sourceTree = "<group>"; };
-		24F3667E1925182E00F04D92 /* ApptentiveConnect.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ApptentiveConnect.xcodeproj; path = "apptentive-ios/ApptentiveConnect/ApptentiveConnect.xcodeproj"; sourceTree = "<group>"; };
 		24F3668B1925196000F04D92 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		57AEEE4B27F2CA025C615B2A /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		8087A714E27A4A5B80C64237 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		8E74836C07DD49A2BC3BE7EB /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		A00402BB177F4F7300B998CF /* ECProfileHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECProfileHeader.h; sourceTree = "<group>"; };
 		A00402BC177F4F7300B998CF /* ECProfileHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECProfileHeader.m; sourceTree = "<group>"; };
 		A00402C2177F6B0900B998CF /* backButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backButton.png; sourceTree = "<group>"; };
@@ -647,6 +607,7 @@
 		D9963FCE17B0D4E9003C3CC1 /* UIImage+Merge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Merge.h"; sourceTree = "<group>"; };
 		D9963FCF17B0D4E9003C3CC1 /* UIImage+Merge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Merge.m"; sourceTree = "<group>"; };
 		D9D95CF517E8420500061DAF /* featured.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = featured.json; sourceTree = "<group>"; };
+		EF2B34560AD0582C6D7B2AA3 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		FC4990E9182E51B000B1FFF2 /* artist_placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = artist_placeholder.png; sourceTree = "<group>"; };
 		FC4990EA182E51B000B1FFF2 /* artist_placeholder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "artist_placeholder@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -658,7 +619,6 @@
 			files = (
 				24CEE615197E1A75007A00DA /* JavaScriptCore.framework in Frameworks */,
 				24F3668C1925196000F04D92 /* AssetsLibrary.framework in Frameworks */,
-				24F3668A192518B700F04D92 /* libApptentiveConnect.a in Frameworks */,
 				245BBDE418A5FE0D00B80781 /* CoreMotion.framework in Frameworks */,
 				245BBDE218A5FDE600B80781 /* Twitter.framework in Frameworks */,
 				D4A7980B17921BD20029F469 /* SystemConfiguration.framework in Frameworks */,
@@ -764,16 +724,6 @@
 				24D01715196CD348005373B0 /* ECConstKeys.m */,
 			);
 			name = Strings;
-			sourceTree = "<group>";
-		};
-		24F3667F1925182E00F04D92 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				24F366851925182F00F04D92 /* libApptentiveConnect.a */,
-				24F366871925182F00F04D92 /* ApptentiveConnectTests.xctest */,
-				24F366891925182F00F04D92 /* ApptentiveResources.bundle */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		D45DBD621783EDF4000ED3C1 /* App Icons */ = {
@@ -1054,13 +1004,12 @@
 		D4AA4CE61766B373009B0635 = {
 			isa = PBXGroup;
 			children = (
-				24F3667E1925182E00F04D92 /* ApptentiveConnect.xcodeproj */,
 				D4AA4CF81766B374009B0635 /* Encore */,
 				D4A8DDB2176A133B005E9847 /* en.lproj */,
 				D4AA4D161766B374009B0635 /* EncoreTests */,
 				D4AA4CF11766B374009B0635 /* Frameworks */,
 				D4AA4CF01766B374009B0635 /* Products */,
-				8E74836C07DD49A2BC3BE7EB /* Pods.xcconfig */,
+				F5893BB6AA22281090EFB2A6 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1156,8 +1105,6 @@
 				D4A7BEAA177B731F00C22D91 /* Staging.h */,
 				D4A7BEA9177B713400C22D91 /* EncoreURL.h */,
 				D4A7BEAB177BFF3700C22D91 /* ECSearchType.h */,
-				245BBDC618A5FA6E00B80781 /* ATConnect.h */,
-				245BBDC718A5FA9400B80781 /* ATAppRatingFlow.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1427,6 +1374,15 @@
 			path = SDURLCache;
 			sourceTree = "<group>";
 		};
+		F5893BB6AA22281090EFB2A6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				EF2B34560AD0582C6D7B2AA3 /* Pods.debug.xcconfig */,
+				57AEEE4B27F2CA025C615B2A /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1444,8 +1400,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				24D01711196BB190005373B0 /* PBXTargetDependency */,
-				24D0170C196BB18C005373B0 /* PBXTargetDependency */,
 			);
 			name = Encore;
 			productName = Encore;
@@ -1469,7 +1423,7 @@
 			name = EncoreTests;
 			productName = EncoreTests;
 			productReference = D4AA4D0F1766B374009B0635 /* EncoreTests.octest */;
-			productType = "com.apple.product-type.bundle";
+			productType = "com.apple.product-type.bundle.ocunit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -1479,7 +1433,7 @@
 			attributes = {
 				CLASSPREFIX = EC;
 				LastTestingUpgradeCheck = 0510;
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = Encore;
 				TargetAttributes = {
 					D4AA4CEE1766B374009B0635 = {
@@ -1497,12 +1451,6 @@
 			mainGroup = D4AA4CE61766B373009B0635;
 			productRefGroup = D4AA4CF01766B374009B0635 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 24F3667F1925182E00F04D92 /* Products */;
-					ProjectRef = 24F3667E1925182E00F04D92 /* ApptentiveConnect.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				D4AA4CEE1766B374009B0635 /* Encore */,
@@ -1511,36 +1459,11 @@
 		};
 /* End PBXProject section */
 
-/* Begin PBXReferenceProxy section */
-		24F366851925182F00F04D92 /* libApptentiveConnect.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libApptentiveConnect.a;
-			remoteRef = 24F366841925182F00F04D92 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		24F366871925182F00F04D92 /* ApptentiveConnectTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = ApptentiveConnectTests.xctest;
-			remoteRef = 24F366861925182F00F04D92 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		24F366891925182F00F04D92 /* ApptentiveResources.bundle */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = ApptentiveResources.bundle;
-			remoteRef = 24F366881925182F00F04D92 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
-
 /* Begin PBXResourcesBuildPhase section */
 		D4AA4CED1766B374009B0635 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				24D01713196BB365005373B0 /* ApptentiveResources.bundle in Resources */,
 				D4AA4CFD1766B374009B0635 /* InfoPlist.strings in Resources */,
 				D4AA4D311766BA8C009B0635 /* ECLoginViewController.xib in Resources */,
 				D4AA4D391766F3D0009B0635 /* Localizable.strings in Resources */,
@@ -1785,7 +1708,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1859,16 +1782,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		24D0170C196BB18C005373B0 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = ApptentiveConnect;
-			targetProxy = 24D0170B196BB18C005373B0 /* PBXContainerItemProxy */;
-		};
-		24D01711196BB190005373B0 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = ApptentiveResources;
-			targetProxy = 24D01710196BB190005373B0 /* PBXContainerItemProxy */;
-		};
 		D4AA4D151766B374009B0635 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = D4AA4CEE1766B374009B0635 /* Encore */;
@@ -1931,7 +1844,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				PROVISIONING_PROFILE = "DC8C6572-B462-45D6-9A68-4988B3089FCC";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DC8C6572-B462-45D6-9A68-4988B3089FCC";
 				SDKROOT = iphoneos;
@@ -1968,12 +1881,8 @@
 		};
 		D4AA4D221766B374009B0635 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8E74836C07DD49A2BC3BE7EB /* Pods.xcconfig */;
+			baseConfigurationReference = EF2B34560AD0582C6D7B2AA3 /* Pods.debug.xcconfig */;
 			buildSettings = {
-				ARCHS = (
-					armv7,
-					armv7s,
-				);
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer: Simon E Bromberg (45D382XW56)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Simon E Bromberg (45D382XW56)";
@@ -1987,34 +1896,8 @@
 				INFOPLIST_FILE = "Encore/Encore-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				ONLY_ACTIVE_ARCH = YES;
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-lFlurry_5.2.0",
-					"-lsqlite3.0",
-					"-lz",
-					"-framework",
-					CoreGraphics,
-					"-framework",
-					CoreLocation,
-					"-framework",
-					MobileCoreServices,
-					"-framework",
-					Security,
-					"-framework",
-					SystemConfiguration,
-					"-framework",
-					UIKit,
-					"-weak_framework",
-					Accounts,
-					"-weak_framework",
-					AdSupport,
-					"-weak_framework",
-					Security,
-					"-weak_framework",
-					Social,
-					"-all_load",
-				);
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "1BF9A9DA-DAD1-49A4-8F37-303A6F7D8151";
 				VALID_ARCHS = "$(ARCHS_STANDARD)";
@@ -2024,12 +1907,8 @@
 		};
 		D4AA4D231766B374009B0635 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8E74836C07DD49A2BC3BE7EB /* Pods.xcconfig */;
+			baseConfigurationReference = 57AEEE4B27F2CA025C615B2A /* Pods.release.xcconfig */;
 			buildSettings = {
-				ARCHS = (
-					armv7,
-					armv7s,
-				);
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Simon E Bromberg (7289C5AAFZ)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Simon E Bromberg (7289C5AAFZ)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2042,34 +1921,8 @@
 				INFOPLIST_FILE = "Encore/Encore-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				ONLY_ACTIVE_ARCH = YES;
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-lFlurry_5.2.0",
-					"-lsqlite3.0",
-					"-lz",
-					"-framework",
-					CoreGraphics,
-					"-framework",
-					CoreLocation,
-					"-framework",
-					MobileCoreServices,
-					"-framework",
-					Security,
-					"-framework",
-					SystemConfiguration,
-					"-framework",
-					UIKit,
-					"-weak_framework",
-					Accounts,
-					"-weak_framework",
-					AdSupport,
-					"-weak_framework",
-					Security,
-					"-weak_framework",
-					Social,
-					"-all_load",
-				);
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "6272A694-5E7C-43C2-B796-11C6BE4326F0";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "6272A694-5E7C-43C2-B796-11C6BE4326F0";

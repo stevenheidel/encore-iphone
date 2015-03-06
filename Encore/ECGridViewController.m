@@ -17,7 +17,6 @@
 #import "ECPostViewController.h"
 #import "ECAppDelegate.h"
 #import "ECAlertTags.h"
-#import "ATAppRatingFlow.h"
 #import "EncoreURL.h"
 #import "MBProgressHUD.h"
 #import "CMPopTipView.h"

@@ -106,6 +106,9 @@ static NSString * const kDateFormat = @"yyyy-MM-dd";
 
 -(CLLocation*) coordinates {
     NSDictionary* venueDeets = [self venueDetails];
+    if (venueDeets[KeyLatitude] == [NSNull null] || venueDeets[KeyLongitude] == [NSNull null]) {
+        return nil;
+    }
     double latitude = [(NSString*)[venueDeets objectForKey:KeyLatitude] doubleValue];
     double longitude = [(NSString*)[venueDeets objectForKey:KeyLongitude] doubleValue];
     return [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];

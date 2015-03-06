@@ -14,9 +14,6 @@
 
 #import "ECJSONPoster.h"
 
-#import "ATConnect.h"
-
-#import "ATAppRatingFlow.h"
 #import "defines.h"
 
 #import "UIFont+Encore.h"
@@ -155,12 +152,7 @@
     [Flurry startSession:@"GM2TRR7TWT9DRX9N9PG9"];
 
     [Flurry setEventLoggingEnabled:YES];
-
-    ATConnect * connection = [ATConnect sharedConnection];
-    connection.apiKey = kApptentiveAPIKey;
-    ATAppRatingFlow *sharedFlow = [ATAppRatingFlow sharedRatingFlow];
-    sharedFlow.appID = kApptentiveAppID;
-//#endif 
+//#endif
     
 //#if IN_BETA
      //   [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
@@ -234,8 +226,6 @@
 
 -(void)beginFacebookAuthorization
 {
-    [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
-
     [[ECFacebookManger sharedFacebookManger] loginUserWithCompletionHandler:^(NSError* error) {
         if(error)
             [self handleAuthError:error];
@@ -308,8 +298,6 @@
     [self setUpLocationManager];
 
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-    
-    [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
 }
 -(void) showLoginView: (BOOL) animated {
     UIViewController *topViewController = [self.navigationController topViewController];

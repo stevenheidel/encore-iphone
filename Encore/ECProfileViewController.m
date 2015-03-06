@@ -19,9 +19,6 @@
 #import "UIImage+GaussBlur.h"
 #import "NSUserDefaults+Encore.h"
 
-#import "ATConnect.h"
-#import "ATAppRatingFlow.h"
-
 #import "ECJSONFetcher.h"
 #import "MBProgressHUD.h"
 
@@ -110,8 +107,6 @@ typedef enum {
     self.view.clipsToBounds = YES;
     [self.tableView setIndicatorStyle:UIScrollViewIndicatorStyleWhite];
 
-    [[ATAppRatingFlow sharedRatingFlow] showRatingFlowFromViewControllerIfConditionsAreMet:self];
-    
     self.tableView.sectionHeaderHeight = 0;
     self.tableView.sectionFooterHeight = 0;
     
@@ -489,7 +484,6 @@ typedef enum {
 }
 
 -(void) logoutTapped {
-    [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"logout_alert_title",nil) message:NSLocalizedString(@"logout_alert_message", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"cancel", nil) otherButtonTitles:NSLocalizedString(@"logout", nil), nil];
     alertView.tag = LogoutTag;
     [alertView show];
@@ -518,8 +512,6 @@ typedef enum {
 
 -(void) openFeedback {
     [Flurry logEvent:FEOpenedFeedback withParameters:[NSDictionary dictionaryWithObject:@"Profile" forKey:@"source"]];
-    ATConnect *connection = [ATConnect sharedConnection];
-    [connection presentMessageCenterFromViewController: self];
 }
 
 

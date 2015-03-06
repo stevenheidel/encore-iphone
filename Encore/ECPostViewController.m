@@ -12,7 +12,6 @@
 #import <QuartzCore/QuartzCore.h>
 #import "EncoreURL.h"
 #import <FacebookSDK/FacebookSDK.h>
-#import "ATAppRatingFlow.h"
 
 #import "MBProgressHUD.h"
 
@@ -186,7 +185,6 @@ typedef enum {
 
 
 -(void) tapPost {
-    [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
     NSString* logKey = self.containerView.alpha == 1.0 ? @"Hide" : @"Show";
     [Flurry logEvent:[NSString stringWithFormat:@"Tapped_Post_To_%@_Details",logKey]];
     
@@ -271,7 +269,6 @@ typedef enum {
 }
 
 -(void) gesture: (NSInteger) direction {
-    [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
     
     NSDictionary* dic = [self.delegate requestPost: direction currentIndex: self.itemNumber];
     if(dic) {
@@ -286,7 +283,6 @@ typedef enum {
 }
 
 -(IBAction) flagPhoto {
-    [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
     
     NSString* flagPhotoTitle = NSLocalizedString(@"flag_post_title", nil);
     NSString* cancel = NSLocalizedString(@"cancel", nil);
@@ -416,7 +412,6 @@ typedef enum {
 }
 
 -(void) shareTapped {
-    [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
     TUSafariActivity* safariActivity = [TUSafariActivity new];
     ARChromeActivity* chromeActivity = [ARChromeActivity new];
     

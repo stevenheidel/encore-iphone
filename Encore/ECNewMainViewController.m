@@ -9,9 +9,6 @@
 #import "UIColor+EncoreUI.h"
 #import "UIFont+Encore.h"
 
-#import "ATConnect.h"
-#import "ATAppRatingFlow.h"
-
 #import "ECNewMainViewController.h"
 #import "ECJSONFetcher.h"
 
@@ -252,8 +249,6 @@ typedef enum {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationSlide];
-    
-    [[ATConnect sharedConnection] engage:@"init" fromViewController:self];
     
     if ([[UIScreen mainScreen] bounds].size.height != 568.0) {
         [self registerNotifications];
@@ -546,8 +541,6 @@ typedef enum {
 
 -(void) feedbackTapped {
     [Flurry logEvent:@"Opened_Feedback" withParameters:[NSDictionary dictionaryWithObject:@"MainView" forKey:@"source"]];
-    ATConnect *connection = [ATConnect sharedConnection];
-    [connection presentMessageCenterFromViewController: self];
 }
 
 -(void) setNavBarAppearance {
@@ -693,7 +686,6 @@ typedef enum {
 #pragma mark - Buttons
 -(void)profileTapped {
     [self showLoadingHUD];
-    [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
     [Flurry logEvent:@"Profile_Button_Pressed" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:self.isLoggedIn ? @"Logged_In" : @"Not_Logged_In",@"Logged_In_State",[self currentSearchTypeString],@"Search_Type", nil]];
     if (self.isLoggedIn){
         [[NSNotificationCenter defaultCenter] removeObserver:self name:ECLoginCompletedNotification object:nil];
@@ -837,8 +829,6 @@ typedef enum {
 }
 
 -(void) reloadTableViewForSwitchedSelection {
-    [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
-    
     [self.searchBar resignFirstResponder]; //hide keyboard in case it was visible
     
     UISegmentedControl* control = self.segmentedControl;
@@ -1116,7 +1106,6 @@ BOOL dateIsPast (NSDate* date) {
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent]; 
     [Flurry logEvent:@"Main_Selected_Row" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:[self currentSearchTypeString], @"Search_Type", [NSNumber numberWithInteger:indexPath.row], @"row", self.hasSearched ? @"post_search" : @"not_post_search", @"is_post_search", nil]];
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -1178,7 +1167,6 @@ BOOL dateIsPast (NSDate* date) {
 #pragma mark - Search Text Field
 
 -(void) clearSearchBar {
-    [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
     self.searchBar.text = @"";
     self.hasSearched = FALSE;
     
@@ -1244,7 +1232,6 @@ BOOL dateIsPast (NSDate* date) {
 }
 
 -(void) doSearchOnText: (NSString*) text wasAutocomplete: (BOOL) autocomplete {
-    [[ATAppRatingFlow sharedRatingFlow] logSignificantEvent];
     if ([text length] > 0) { //don't search empty searches
         [ECJSONFetcher fetchArtistsForString:text withSearchType:self.currentSearchType forLocation:self.currentSearchLocation radius: [NSNumber numberWithFloat:self.currentSearchRadius] completion:^(NSDictionary * comboDic) {
             [self fetchedConcertsForSearch:comboDic wasAutocomplete: autocomplete];
